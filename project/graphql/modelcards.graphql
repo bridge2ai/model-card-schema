@@ -1,0 +1,50 @@
+type Dataset
+  {
+    name: String
+    link: String
+    sensitive: Boolean
+    graphics: Graphics
+  }
+
+type Graphic
+  {
+    name: String
+    image: String
+  }
+
+type Graphics
+  {
+    description: String
+    collection: [String]
+  }
+
+type ModelCard
+  {
+    schemaVersion: String
+    modelDetails: String!
+    modelParameters: String
+    quantitativeAnalysis: String
+    considerations: String
+  }
+
+type Owner
+  {
+    name: String
+    contact: String
+  }
+
+type PerformanceMetric
+  {
+    type: String!
+    value: String
+    confidenceInterval: String
+    threshold: Float
+    slice: String
+  }
+
+type Risk
+  {
+    name: String
+    mitigationStrategy: String
+  }
+

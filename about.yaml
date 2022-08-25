@@ -1,0 +1,3 @@
+name: modelcards
+description: modelcards linkml rendering
+source_schema_path: src/linkml/modelcards.yaml

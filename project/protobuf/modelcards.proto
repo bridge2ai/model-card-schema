@@ -1,0 +1,43 @@
+message Dataset
+ {
+  string name = 0
+  string link = 0
+  boolean sensitive = 0
+  graphics graphics = 0
+ }
+message Graphic
+ {
+  string name = 0
+  string image = 0
+ }
+message Graphics
+ {
+  string description = 0
+ repeated  string collection = 0
+ }
+message ModelCard
+ {
+  string schemaVersion = 0
+  string modelDetails = 0
+  string modelParameters = 0
+  string quantitativeAnalysis = 0
+  string considerations = 0
+ }
+message Owner
+ {
+  string name = 0
+  string contact = 0
+ }
+message PerformanceMetric
+ {
+  string type = 0
+  string value = 0
+  string confidenceInterval = 0
+  float threshold = 0
+  string slice = 0
+ }
+message Risk
+ {
+  string name = 0
+  string mitigationStrategy = 0
+ }

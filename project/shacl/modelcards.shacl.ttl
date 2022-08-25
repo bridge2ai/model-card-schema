@@ -1,0 +1,129 @@
+@prefix Model_Card: <https://example.org/Model-Card> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+Model_Card:Dataset a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Does this dataset contain human or other sensitive data?" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path Model_Card:sensitive ],
+        [ sh:class Model_Card:Graphics ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path Model_Card:graphics ],
+        [ sh:description "A link to the dataset." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path Model_Card:link ],
+        [ sh:description "The name of the risk." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:name ] ;
+    sh:targetClass Model_Card:Dataset .
+
+Model_Card:Graphic a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The graphic, encoded as a base64 string." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path Model_Card:image ],
+        [ sh:description "The name of the risk." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:name ] ;
+    sh:targetClass Model_Card:Graphic .
+
+Model_Card:ModelCard a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A quantitative analysis of the model" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path Model_Card:quantitative_analysis ],
+        [ sh:description "What considerations should be taken into account regarding the model's construction, training, and application?" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path Model_Card:considerations ],
+        [ sh:description "Parameters for construction of the model." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path Model_Card:model_parameters ],
+        [ sh:description "The version of the schema." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:schema_version ],
+        [ sh:description "Metadata about the model." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path Model_Card:model_details ] ;
+    sh:targetClass Model_Card:ModelCard .
+
+Model_Card:Owner a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The name of the risk." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:name ],
+        [ sh:description "The contact information of the owner." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path Model_Card:contact ] ;
+    sh:targetClass Model_Card:Owner .
+
+Model_Card:PerformanceMetric a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The name of the slice this metric was computed on. By default, assume this metric is not sliced." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path Model_Card:slice ],
+        [ sh:description "The type of performance metric." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:type ],
+        [ sh:description "The confidence interval of the metric." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path Model_Card:confidence_interval ],
+        [ sh:description "The value of the performance metric." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path Model_Card:value ],
+        [ sh:description "The decision threshold the metric was computed on." ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path Model_Card:threshold ] ;
+    sh:targetClass Model_Card:PerformanceMetric .
+
+Model_Card:Risk a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Strategy used to address this risk." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path Model_Card:mitigation_strategy ],
+        [ sh:description "The name of the risk." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:name ] ;
+    sh:targetClass Model_Card:Risk .
+
+Model_Card:Graphics a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A description of this collection of graphics." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path Model_Card:description ],
+        [ sh:order 1 ;
+            sh:path Model_Card:collection ] ;
+    sh:targetClass Model_Card:Graphics .
+

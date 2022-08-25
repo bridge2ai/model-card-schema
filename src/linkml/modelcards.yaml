@@ -1,0 +1,140 @@
+id: https://example.org/Model-Card
+name: Model_Card
+imports:
+- linkml:types
+prefixes:
+  Model_Card: https://example.org/Model-Card
+  linkml: https://w3id.org/linkml/
+default_prefix: Model_Card
+slots:
+  name:
+    description: The name of the risk.
+  contact:
+    description: The contact information of the owner.
+  link:
+    description: A link to the dataset.
+  sensitive:
+    description: Does this dataset contain human or other sensitive data?
+    range: boolean
+  graphics:
+    range: graphics
+  type:
+    description: The type of performance metric.
+    required: true
+  value:
+    description: The value of the performance metric.
+  confidence_interval:
+    description: The confidence interval of the metric.
+  threshold:
+    description: The decision threshold the metric was computed on.
+    range: float
+  slice:
+    description: The name of the slice this metric was computed on. By default, assume
+      this metric is not sliced.
+  description:
+    description: A description of this collection of graphics.
+  collection:
+    multivalued: true
+  image:
+    description: The graphic, encoded as a base64 string.
+  mitigation_strategy:
+    description: Strategy used to address this risk.
+  schema_version:
+    description: The version of the schema.
+  model_details:
+    description: Metadata about the model.
+    required: true
+  model_parameters:
+    description: Parameters for construction of the model.
+  quantitative_analysis:
+    description: A quantitative analysis of the model
+  considerations:
+    description: What considerations should be taken into account regarding the model's
+      construction, training, and application?
+classes:
+  owner:
+    slots:
+    - name
+    - contact
+    slot_usage:
+      contact:
+        description: The contact information of the owner.
+  dataset:
+    slots:
+    - name
+    - link
+    - sensitive
+    - graphics
+    slot_usage:
+      link:
+        description: A link to the dataset.
+      sensitive:
+        description: Does this dataset contain human or other sensitive data?
+        range: boolean
+      graphics:
+        range: graphics
+  performance_metric:
+    slots:
+    - type
+    - value
+    - confidence_interval
+    - threshold
+    - slice
+    slot_usage:
+      type:
+        description: The type of performance metric.
+        required: true
+      value:
+        description: The value of the performance metric.
+      confidence_interval:
+        description: The confidence interval of the metric.
+      threshold:
+        description: The decision threshold the metric was computed on.
+        range: float
+      slice:
+        description: The name of the slice this metric was computed on. By default,
+          assume this metric is not sliced.
+  graphics:
+    slots:
+    - description
+    - collection
+    slot_usage:
+      description:
+        description: A description of this collection of graphics.
+      collection:
+        multivalued: true
+  graphic:
+    slots:
+    - name
+    - image
+    slot_usage:
+      image:
+        description: The graphic, encoded as a base64 string.
+  risk:
+    slots:
+    - name
+    - mitigation_strategy
+    slot_usage:
+      mitigation_strategy:
+        description: Strategy used to address this risk.
+  Model Card:
+    slots:
+    - schema_version
+    - model_details
+    - model_parameters
+    - quantitative_analysis
+    - considerations
+    slot_usage:
+      schema_version:
+        description: The version of the schema.
+      model_details:
+        description: Metadata about the model.
+        required: true
+      model_parameters:
+        description: Parameters for construction of the model.
+      quantitative_analysis:
+        description: A quantitative analysis of the model
+      considerations:
+        description: What considerations should be taken into account regarding the
+          model's construction, training, and application?
+
