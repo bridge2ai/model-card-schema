@@ -1,14 +1,19 @@
-id: https://example.org/Model-Card
+id: https://w3id.org/linkml/modelcard
 name: Model_Card
+description: |-
+  An EXPERIMENTAL rendering of the model card schema in LinkML
+
+  This is not the official model card schema!
+
 imports:
 - linkml:types
 prefixes:
-  Model_Card: https://example.org/Model-Card
+  modelcard: https://w3id.org/linkml/modelcard/
   linkml: https://w3id.org/linkml/
-default_prefix: Model_Card
+default_prefix: modelcard
 slots:
   name:
-    description: The name of the risk.
+    range: string
   contact:
     description: The contact information of the owner.
   link:
@@ -57,6 +62,8 @@ classes:
     - name
     - contact
     slot_usage:
+      name:
+        description: The name of the owner.
       contact:
         description: The contact information of the owner.
   dataset:
@@ -66,6 +73,8 @@ classes:
     - sensitive
     - graphics
     slot_usage:
+      name:
+        description: The name of the dataset.
       link:
         description: A link to the dataset.
       sensitive:
@@ -117,7 +126,8 @@ classes:
     slot_usage:
       mitigation_strategy:
         description: Strategy used to address this risk.
-  Model Card:
+  ModelCard:
+    tree_root: true
     slots:
     - schema_version
     - model_details

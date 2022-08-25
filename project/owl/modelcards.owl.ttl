@@ -1,27 +1,11 @@
 @prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
-@prefix Model_Card: <https://example.org/Model-Card> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
+@prefix modelcard: <https://w3id.org/linkml/modelcard/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-Model_Card: a owl:Ontology ;
-    rdfs:label "Model_Card" ;
-    IAO:0000700 Model_Card:Dataset,
-        Model_Card:Graphic,
-        Model_Card:Graphics,
-        Model_Card:ModelCard,
-        Model_Card:Owner,
-        Model_Card:PerformanceMetric,
-        Model_Card:Risk ;
-    dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
-    linkml:generation_date "2022-08-24T19:22:24" ;
-    linkml:metamodel_version "1.7.0" ;
-    linkml:source_file "modelcards.yaml" ;
-    linkml:source_file_date "2022-08-24T18:55:47" ;
-    linkml:source_file_size 3876 .
 
 linkml:SubsetDefinition a owl:Class ;
     rdfs:label "subset_definition" .
@@ -29,235 +13,250 @@ linkml:SubsetDefinition a owl:Class ;
 linkml:TypeDefinition a owl:Class ;
     rdfs:label "type_definition" .
 
+linkml:modelcard a owl:Ontology ;
+    rdfs:label "Model_Card" ;
+    IAO:0000700 modelcard:Dataset,
+        modelcard:Graphic,
+        modelcard:Graphics,
+        modelcard:ModelCard,
+        modelcard:Owner,
+        modelcard:PerformanceMetric,
+        modelcard:Risk ;
+    dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    linkml:generation_date "2022-08-24T19:28:47" ;
+    linkml:metamodel_version "1.7.0" ;
+    linkml:source_file "modelcards.yaml" ;
+    linkml:source_file_date "2022-08-24T19:28:39" ;
+    linkml:source_file_size 4120 .
+
 linkml:topValue a owl:DatatypeProperty ;
     rdfs:label "value" .
 
-Model_Card:Dataset a owl:Class,
+modelcard:Dataset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "dataset" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass modelcard:Graphics ;
+            owl:onProperty modelcard:graphics ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty modelcard:link ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
-            owl:onProperty Model_Card:sensitive ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty Model_Card:name ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty Model_Card:link ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass Model_Card:Graphics ;
-            owl:onProperty Model_Card:graphics ] .
+            owl:onProperty modelcard:sensitive ] .
 
-Model_Card:Graphic a owl:Class,
+modelcard:Graphic a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "graphic" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:name ],
+            owl:onProperty modelcard:name ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:image ] .
+            owl:onProperty modelcard:image ] .
 
-Model_Card:ModelCard a owl:Class,
+modelcard:ModelCard a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "Model Card" ;
+    rdfs:label "ModelCard" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:model_parameters ],
+            owl:onProperty modelcard:model_parameters ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty modelcard:quantitative_analysis ],
         [ a owl:Restriction ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:model_details ;
+            owl:onProperty modelcard:model_details ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:schema_version ],
+            owl:onProperty modelcard:schema_version ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:considerations ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty Model_Card:quantitative_analysis ] .
+            owl:onProperty modelcard:considerations ] .
 
-Model_Card:Owner a owl:Class,
+modelcard:Owner a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "owner" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:name ],
+            owl:onProperty modelcard:contact ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:contact ] .
+            owl:onProperty modelcard:name ] .
 
-Model_Card:PerformanceMetric a owl:Class,
+modelcard:PerformanceMetric a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "performance_metric" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty modelcard:slice ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Float ;
-            owl:onProperty Model_Card:threshold ],
+            owl:onProperty modelcard:threshold ],
         [ a owl:Restriction ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:type ;
+            owl:onProperty modelcard:type ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:confidence_interval ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty Model_Card:value ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty Model_Card:slice ] .
+            owl:onProperty modelcard:confidence_interval ] .
 
-Model_Card:Risk a owl:Class,
+modelcard:Risk a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "risk" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:mitigation_strategy ],
+            owl:onProperty modelcard:mitigation_strategy ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:name ] .
+            owl:onProperty modelcard:name ] .
 
-Model_Card:collection a owl:ObjectProperty,
+modelcard:collection a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "collection" ;
     rdfs:range linkml:String .
 
-Model_Card:confidence_interval a owl:ObjectProperty,
+modelcard:confidence_interval a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "confidence_interval" ;
     rdfs:range linkml:String ;
     skos:definition "The confidence interval of the metric." .
 
-Model_Card:considerations a owl:ObjectProperty,
+modelcard:considerations a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "considerations" ;
     rdfs:range linkml:String ;
     skos:definition "What considerations should be taken into account regarding the model's construction, training, and application?" .
 
-Model_Card:contact a owl:ObjectProperty,
+modelcard:contact a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "contact" ;
     rdfs:range linkml:String ;
     skos:definition "The contact information of the owner." .
 
-Model_Card:description a owl:ObjectProperty,
+modelcard:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "description" ;
     rdfs:range linkml:String ;
     skos:definition "A description of this collection of graphics." .
 
-Model_Card:graphics a owl:ObjectProperty,
+modelcard:graphics a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "graphics" ;
-    rdfs:range Model_Card:Graphics .
+    rdfs:range modelcard:Graphics .
 
-Model_Card:image a owl:ObjectProperty,
+modelcard:image a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "image" ;
     rdfs:range linkml:String ;
     skos:definition "The graphic, encoded as a base64 string." .
 
-Model_Card:link a owl:ObjectProperty,
+modelcard:link a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "link" ;
     rdfs:range linkml:String ;
     skos:definition "A link to the dataset." .
 
-Model_Card:mitigation_strategy a owl:ObjectProperty,
+modelcard:mitigation_strategy a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "mitigation_strategy" ;
     rdfs:range linkml:String ;
     skos:definition "Strategy used to address this risk." .
 
-Model_Card:model_details a owl:ObjectProperty,
+modelcard:model_details a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "model_details" ;
     rdfs:range linkml:String ;
     skos:definition "Metadata about the model." .
 
-Model_Card:model_parameters a owl:ObjectProperty,
+modelcard:model_parameters a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "model_parameters" ;
     rdfs:range linkml:String ;
     skos:definition "Parameters for construction of the model." .
 
-Model_Card:quantitative_analysis a owl:ObjectProperty,
+modelcard:quantitative_analysis a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "quantitative_analysis" ;
     rdfs:range linkml:String ;
     skos:definition "A quantitative analysis of the model" .
 
-Model_Card:schema_version a owl:ObjectProperty,
+modelcard:schema_version a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "schema_version" ;
     rdfs:range linkml:String ;
     skos:definition "The version of the schema." .
 
-Model_Card:sensitive a owl:ObjectProperty,
+modelcard:sensitive a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "sensitive" ;
     rdfs:range linkml:Boolean ;
     skos:definition "Does this dataset contain human or other sensitive data?" .
 
-Model_Card:slice a owl:ObjectProperty,
+modelcard:slice a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "slice" ;
     rdfs:range linkml:String ;
     skos:definition "The name of the slice this metric was computed on. By default, assume this metric is not sliced." .
 
-Model_Card:threshold a owl:ObjectProperty,
+modelcard:threshold a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "threshold" ;
     rdfs:range linkml:Float ;
     skos:definition "The decision threshold the metric was computed on." .
 
-Model_Card:type a owl:ObjectProperty,
+modelcard:type a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "type" ;
     rdfs:range linkml:String ;
     skos:definition "The type of performance metric." .
 
-Model_Card:value a owl:ObjectProperty,
+modelcard:value a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "value" ;
     rdfs:range linkml:String ;
     skos:definition "The value of the performance metric." .
 
-Model_Card:Graphics a owl:Class,
+modelcard:Graphics a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "graphics" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:collection ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty Model_Card:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty Model_Card:collection ] .
+            owl:onProperty modelcard:description ] .
 
-Model_Card:name a owl:ObjectProperty,
+modelcard:name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "name" ;
-    rdfs:range linkml:String ;
-    skos:definition "The name of the risk." .
+    rdfs:range linkml:String .
 
 linkml:ClassDefinition a owl:Class ;
     rdfs:label "class_definition" .

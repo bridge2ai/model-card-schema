@@ -20,7 +20,7 @@ CREATE TABLE graphics (
 	PRIMARY KEY (description, collection)
 );
 
-CREATE TABLE "Model_Card" (
+CREATE TABLE "ModelCard" (
 	schema_version TEXT, 
 	model_details TEXT NOT NULL, 
 	model_parameters TEXT, 

@@ -12,7 +12,7 @@
                "type": "string"
             },
             "name": {
-               "description": "The name of the risk.",
+               "description": "The name of the dataset.",
                "type": "string"
             },
             "sensitive": {
@@ -33,7 +33,6 @@
                "type": "string"
             },
             "name": {
-               "description": "The name of the risk.",
                "type": "string"
             }
          },
@@ -100,7 +99,7 @@
                "type": "string"
             },
             "name": {
-               "description": "The name of the risk.",
+               "description": "The name of the owner.",
                "type": "string"
             }
          },
@@ -148,7 +147,6 @@
                "type": "string"
             },
             "name": {
-               "description": "The name of the risk.",
                "type": "string"
             }
          },
@@ -157,12 +155,35 @@
          "type": "object"
       }
    },
-   "$id": "https://example.org/Model-Card",
+   "$id": "https://w3id.org/linkml/modelcard",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "additionalProperties": true,
    "metamodel_version": "1.7.0",
-   "properties": {},
-   "required": [],
+   "properties": {
+      "considerations": {
+         "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
+         "type": "string"
+      },
+      "model_details": {
+         "description": "Metadata about the model.",
+         "type": "string"
+      },
+      "model_parameters": {
+         "description": "Parameters for construction of the model.",
+         "type": "string"
+      },
+      "quantitative_analysis": {
+         "description": "A quantitative analysis of the model",
+         "type": "string"
+      },
+      "schema_version": {
+         "description": "The version of the schema.",
+         "type": "string"
+      }
+   },
+   "required": [
+      "model_details"
+   ],
    "title": "Model_Card",
    "type": "object",
    "version": null

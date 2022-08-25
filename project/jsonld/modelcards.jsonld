@@ -1,21 +1,22 @@
 {
   "name": "Model_Card",
-  "id": "https://example.org/Model-Card",
+  "description": "An EXPERIMENTAL rendering of the model card schema in LinkML\n\nThis is not the official model card schema!",
+  "id": "https://w3id.org/linkml/modelcard",
   "imports": [
     "linkml:types"
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "prefixes": [
     {
-      "prefix_prefix": "Model_Card",
-      "prefix_reference": "https://example.org/Model-Card"
+      "prefix_prefix": "modelcard",
+      "prefix_reference": "https://w3id.org/linkml/modelcard/"
     },
     {
       "prefix_prefix": "linkml",
       "prefix_reference": "https://w3id.org/linkml/"
     }
   ],
-  "default_prefix": "Model_Card",
+  "default_prefix": "modelcard",
   "default_range": "string",
   "types": [
     {
@@ -191,10 +192,9 @@
   "slots": [
     {
       "name": "name",
-      "definition_uri": "https://example.org/Model-Cardname",
-      "description": "The name of the risk.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardname",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
       "owner": "Risk",
       "domain_of": [
         "Owner",
@@ -207,10 +207,10 @@
     },
     {
       "name": "contact",
-      "definition_uri": "https://example.org/Model-Cardcontact",
+      "definition_uri": "https://w3id.org/linkml/modelcard/contact",
       "description": "The contact information of the owner.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardcontact",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/contact",
       "owner": "Owner",
       "domain_of": [
         "Owner"
@@ -220,10 +220,10 @@
     },
     {
       "name": "link",
-      "definition_uri": "https://example.org/Model-Cardlink",
+      "definition_uri": "https://w3id.org/linkml/modelcard/link",
       "description": "A link to the dataset.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardlink",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/link",
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
@@ -233,10 +233,10 @@
     },
     {
       "name": "sensitive",
-      "definition_uri": "https://example.org/Model-Cardsensitive",
+      "definition_uri": "https://w3id.org/linkml/modelcard/sensitive",
       "description": "Does this dataset contain human or other sensitive data?",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardsensitive",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/sensitive",
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
@@ -246,9 +246,9 @@
     },
     {
       "name": "graphics",
-      "definition_uri": "https://example.org/Model-Cardgraphics",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardgraphics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/graphics",
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
@@ -259,10 +259,10 @@
     },
     {
       "name": "type",
-      "definition_uri": "https://example.org/Model-Cardtype",
+      "definition_uri": "https://w3id.org/linkml/modelcard/type",
       "description": "The type of performance metric.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardtype",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/type",
       "owner": "PerformanceMetric",
       "domain_of": [
         "PerformanceMetric"
@@ -273,10 +273,10 @@
     },
     {
       "name": "value",
-      "definition_uri": "https://example.org/Model-Cardvalue",
+      "definition_uri": "https://w3id.org/linkml/modelcard/value",
       "description": "The value of the performance metric.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardvalue",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/value",
       "owner": "PerformanceMetric",
       "domain_of": [
         "PerformanceMetric"
@@ -286,10 +286,10 @@
     },
     {
       "name": "confidence_interval",
-      "definition_uri": "https://example.org/Model-Cardconfidence_interval",
+      "definition_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
       "description": "The confidence interval of the metric.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardconfidence_interval",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
       "owner": "PerformanceMetric",
       "domain_of": [
         "PerformanceMetric"
@@ -299,10 +299,10 @@
     },
     {
       "name": "threshold",
-      "definition_uri": "https://example.org/Model-Cardthreshold",
+      "definition_uri": "https://w3id.org/linkml/modelcard/threshold",
       "description": "The decision threshold the metric was computed on.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardthreshold",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/threshold",
       "owner": "PerformanceMetric",
       "domain_of": [
         "PerformanceMetric"
@@ -312,10 +312,10 @@
     },
     {
       "name": "slice",
-      "definition_uri": "https://example.org/Model-Cardslice",
+      "definition_uri": "https://w3id.org/linkml/modelcard/slice",
       "description": "The name of the slice this metric was computed on. By default, assume this metric is not sliced.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardslice",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/slice",
       "owner": "PerformanceMetric",
       "domain_of": [
         "PerformanceMetric"
@@ -325,10 +325,10 @@
     },
     {
       "name": "description",
-      "definition_uri": "https://example.org/Model-Carddescription",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
       "description": "A description of this collection of graphics.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Carddescription",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
       "owner": "Graphics",
       "domain_of": [
         "Graphics"
@@ -338,9 +338,9 @@
     },
     {
       "name": "collection",
-      "definition_uri": "https://example.org/Model-Cardcollection",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardcollection",
+      "definition_uri": "https://w3id.org/linkml/modelcard/collection",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/collection",
       "multivalued": true,
       "owner": "Graphics",
       "domain_of": [
@@ -351,10 +351,10 @@
     },
     {
       "name": "image",
-      "definition_uri": "https://example.org/Model-Cardimage",
+      "definition_uri": "https://w3id.org/linkml/modelcard/image",
       "description": "The graphic, encoded as a base64 string.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardimage",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/image",
       "owner": "Graphic",
       "domain_of": [
         "Graphic"
@@ -364,10 +364,10 @@
     },
     {
       "name": "mitigation_strategy",
-      "definition_uri": "https://example.org/Model-Cardmitigation_strategy",
+      "definition_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
       "description": "Strategy used to address this risk.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardmitigation_strategy",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
       "owner": "Risk",
       "domain_of": [
         "Risk"
@@ -377,10 +377,10 @@
     },
     {
       "name": "schema_version",
-      "definition_uri": "https://example.org/Model-Cardschema_version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/schema_version",
       "description": "The version of the schema.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardschema_version",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/schema_version",
       "owner": "ModelCard",
       "domain_of": [
         "ModelCard"
@@ -390,10 +390,10 @@
     },
     {
       "name": "model_details",
-      "definition_uri": "https://example.org/Model-Cardmodel_details",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_details",
       "description": "Metadata about the model.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardmodel_details",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_details",
       "owner": "ModelCard",
       "domain_of": [
         "ModelCard"
@@ -404,10 +404,10 @@
     },
     {
       "name": "model_parameters",
-      "definition_uri": "https://example.org/Model-Cardmodel_parameters",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_parameters",
       "description": "Parameters for construction of the model.",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardmodel_parameters",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_parameters",
       "owner": "ModelCard",
       "domain_of": [
         "ModelCard"
@@ -417,10 +417,10 @@
     },
     {
       "name": "quantitative_analysis",
-      "definition_uri": "https://example.org/Model-Cardquantitative_analysis",
+      "definition_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
       "description": "A quantitative analysis of the model",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardquantitative_analysis",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
       "owner": "ModelCard",
       "domain_of": [
         "ModelCard"
@@ -430,10 +430,10 @@
     },
     {
       "name": "considerations",
-      "definition_uri": "https://example.org/Model-Cardconsiderations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/considerations",
       "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
-      "from_schema": "https://example.org/Model-Card",
-      "slot_uri": "https://example.org/Model-Cardconsiderations",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/considerations",
       "owner": "ModelCard",
       "domain_of": [
         "ModelCard"
@@ -442,13 +442,31 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "owner_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "The name of the owner.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "Owner",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "Owner",
+      "domain_of": [
+        "Owner"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "owner_contact",
-      "definition_uri": "https://example.org/Model-Cardcontact",
+      "definition_uri": "https://w3id.org/linkml/modelcard/contact",
       "description": "The contact information of the owner.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "contact",
       "domain": "Owner",
-      "slot_uri": "https://example.org/Model-Cardcontact",
+      "slot_uri": "https://w3id.org/linkml/modelcard/contact",
       "alias": "contact",
       "owner": "Owner",
       "domain_of": [
@@ -460,13 +478,31 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "dataset_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "The name of the dataset.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "Dataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "dataset_link",
-      "definition_uri": "https://example.org/Model-Cardlink",
+      "definition_uri": "https://w3id.org/linkml/modelcard/link",
       "description": "A link to the dataset.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "link",
       "domain": "Dataset",
-      "slot_uri": "https://example.org/Model-Cardlink",
+      "slot_uri": "https://w3id.org/linkml/modelcard/link",
       "alias": "link",
       "owner": "Dataset",
       "domain_of": [
@@ -479,12 +515,12 @@
     },
     {
       "name": "dataset_sensitive",
-      "definition_uri": "https://example.org/Model-Cardsensitive",
+      "definition_uri": "https://w3id.org/linkml/modelcard/sensitive",
       "description": "Does this dataset contain human or other sensitive data?",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "sensitive",
       "domain": "Dataset",
-      "slot_uri": "https://example.org/Model-Cardsensitive",
+      "slot_uri": "https://w3id.org/linkml/modelcard/sensitive",
       "alias": "sensitive",
       "owner": "Dataset",
       "domain_of": [
@@ -497,11 +533,11 @@
     },
     {
       "name": "dataset_graphics",
-      "definition_uri": "https://example.org/Model-Cardgraphics",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "graphics",
       "domain": "Dataset",
-      "slot_uri": "https://example.org/Model-Cardgraphics",
+      "slot_uri": "https://w3id.org/linkml/modelcard/graphics",
       "alias": "graphics",
       "owner": "Dataset",
       "domain_of": [
@@ -515,12 +551,12 @@
     },
     {
       "name": "performance_metric_type",
-      "definition_uri": "https://example.org/Model-Cardtype",
+      "definition_uri": "https://w3id.org/linkml/modelcard/type",
       "description": "The type of performance metric.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "type",
       "domain": "PerformanceMetric",
-      "slot_uri": "https://example.org/Model-Cardtype",
+      "slot_uri": "https://w3id.org/linkml/modelcard/type",
       "alias": "type",
       "owner": "PerformanceMetric",
       "domain_of": [
@@ -534,12 +570,12 @@
     },
     {
       "name": "performance_metric_value",
-      "definition_uri": "https://example.org/Model-Cardvalue",
+      "definition_uri": "https://w3id.org/linkml/modelcard/value",
       "description": "The value of the performance metric.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "value",
       "domain": "PerformanceMetric",
-      "slot_uri": "https://example.org/Model-Cardvalue",
+      "slot_uri": "https://w3id.org/linkml/modelcard/value",
       "alias": "value",
       "owner": "PerformanceMetric",
       "domain_of": [
@@ -552,12 +588,12 @@
     },
     {
       "name": "performance_metric_confidence_interval",
-      "definition_uri": "https://example.org/Model-Cardconfidence_interval",
+      "definition_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
       "description": "The confidence interval of the metric.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "confidence_interval",
       "domain": "PerformanceMetric",
-      "slot_uri": "https://example.org/Model-Cardconfidence_interval",
+      "slot_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
       "alias": "confidence_interval",
       "owner": "PerformanceMetric",
       "domain_of": [
@@ -570,12 +606,12 @@
     },
     {
       "name": "performance_metric_threshold",
-      "definition_uri": "https://example.org/Model-Cardthreshold",
+      "definition_uri": "https://w3id.org/linkml/modelcard/threshold",
       "description": "The decision threshold the metric was computed on.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "threshold",
       "domain": "PerformanceMetric",
-      "slot_uri": "https://example.org/Model-Cardthreshold",
+      "slot_uri": "https://w3id.org/linkml/modelcard/threshold",
       "alias": "threshold",
       "owner": "PerformanceMetric",
       "domain_of": [
@@ -588,12 +624,12 @@
     },
     {
       "name": "performance_metric_slice",
-      "definition_uri": "https://example.org/Model-Cardslice",
+      "definition_uri": "https://w3id.org/linkml/modelcard/slice",
       "description": "The name of the slice this metric was computed on. By default, assume this metric is not sliced.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "slice",
       "domain": "PerformanceMetric",
-      "slot_uri": "https://example.org/Model-Cardslice",
+      "slot_uri": "https://w3id.org/linkml/modelcard/slice",
       "alias": "slice",
       "owner": "PerformanceMetric",
       "domain_of": [
@@ -606,12 +642,12 @@
     },
     {
       "name": "graphics_description",
-      "definition_uri": "https://example.org/Model-Carddescription",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
       "description": "A description of this collection of graphics.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "description",
       "domain": "Graphics",
-      "slot_uri": "https://example.org/Model-Carddescription",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
       "alias": "description",
       "owner": "Graphics",
       "domain_of": [
@@ -624,11 +660,11 @@
     },
     {
       "name": "graphics_collection",
-      "definition_uri": "https://example.org/Model-Cardcollection",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/collection",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "collection",
       "domain": "Graphics",
-      "slot_uri": "https://example.org/Model-Cardcollection",
+      "slot_uri": "https://w3id.org/linkml/modelcard/collection",
       "multivalued": true,
       "alias": "collection",
       "owner": "Graphics",
@@ -642,12 +678,12 @@
     },
     {
       "name": "graphic_image",
-      "definition_uri": "https://example.org/Model-Cardimage",
+      "definition_uri": "https://w3id.org/linkml/modelcard/image",
       "description": "The graphic, encoded as a base64 string.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "image",
       "domain": "Graphic",
-      "slot_uri": "https://example.org/Model-Cardimage",
+      "slot_uri": "https://w3id.org/linkml/modelcard/image",
       "alias": "image",
       "owner": "Graphic",
       "domain_of": [
@@ -660,12 +696,12 @@
     },
     {
       "name": "risk_mitigation_strategy",
-      "definition_uri": "https://example.org/Model-Cardmitigation_strategy",
+      "definition_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
       "description": "Strategy used to address this risk.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "mitigation_strategy",
       "domain": "Risk",
-      "slot_uri": "https://example.org/Model-Cardmitigation_strategy",
+      "slot_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
       "alias": "mitigation_strategy",
       "owner": "Risk",
       "domain_of": [
@@ -677,13 +713,13 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Model_Card_schema_version",
-      "definition_uri": "https://example.org/Model-Cardschema_version",
+      "name": "ModelCard_schema_version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/schema_version",
       "description": "The version of the schema.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "schema_version",
       "domain": "ModelCard",
-      "slot_uri": "https://example.org/Model-Cardschema_version",
+      "slot_uri": "https://w3id.org/linkml/modelcard/schema_version",
       "alias": "schema_version",
       "owner": "ModelCard",
       "domain_of": [
@@ -695,13 +731,13 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Model_Card_model_details",
-      "definition_uri": "https://example.org/Model-Cardmodel_details",
+      "name": "ModelCard_model_details",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_details",
       "description": "Metadata about the model.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "model_details",
       "domain": "ModelCard",
-      "slot_uri": "https://example.org/Model-Cardmodel_details",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_details",
       "alias": "model_details",
       "owner": "ModelCard",
       "domain_of": [
@@ -714,13 +750,13 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Model_Card_model_parameters",
-      "definition_uri": "https://example.org/Model-Cardmodel_parameters",
+      "name": "ModelCard_model_parameters",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_parameters",
       "description": "Parameters for construction of the model.",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "model_parameters",
       "domain": "ModelCard",
-      "slot_uri": "https://example.org/Model-Cardmodel_parameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_parameters",
       "alias": "model_parameters",
       "owner": "ModelCard",
       "domain_of": [
@@ -732,13 +768,13 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Model_Card_quantitative_analysis",
-      "definition_uri": "https://example.org/Model-Cardquantitative_analysis",
+      "name": "ModelCard_quantitative_analysis",
+      "definition_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
       "description": "A quantitative analysis of the model",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "quantitative_analysis",
       "domain": "ModelCard",
-      "slot_uri": "https://example.org/Model-Cardquantitative_analysis",
+      "slot_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
       "alias": "quantitative_analysis",
       "owner": "ModelCard",
       "domain_of": [
@@ -750,13 +786,13 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Model_Card_considerations",
-      "definition_uri": "https://example.org/Model-Cardconsiderations",
+      "name": "ModelCard_considerations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/considerations",
       "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
-      "from_schema": "https://example.org/Model-Card",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "considerations",
       "domain": "ModelCard",
-      "slot_uri": "https://example.org/Model-Cardconsiderations",
+      "slot_uri": "https://w3id.org/linkml/modelcard/considerations",
       "alias": "considerations",
       "owner": "ModelCard",
       "domain_of": [
@@ -771,34 +807,34 @@
   "classes": [
     {
       "name": "Owner",
-      "definition_uri": "https://example.org/Model-CardOwner",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Owner",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "name",
+        "owner_name",
         "owner_contact"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardOwner",
+      "class_uri": "https://w3id.org/linkml/modelcard/Owner",
       "@type": "ClassDefinition"
     },
     {
       "name": "Dataset",
-      "definition_uri": "https://example.org/Model-CardDataset",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Dataset",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "name",
+        "dataset_name",
         "dataset_link",
         "dataset_sensitive",
         "dataset_graphics"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardDataset",
+      "class_uri": "https://w3id.org/linkml/modelcard/Dataset",
       "@type": "ClassDefinition"
     },
     {
       "name": "PerformanceMetric",
-      "definition_uri": "https://example.org/Model-CardPerformanceMetric",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
         "performance_metric_type",
         "performance_metric_value",
@@ -807,72 +843,73 @@
         "performance_metric_slice"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardPerformanceMetric",
+      "class_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
       "@type": "ClassDefinition"
     },
     {
       "name": "Graphics",
-      "definition_uri": "https://example.org/Model-CardGraphics",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Graphics",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
         "graphics_description",
         "graphics_collection"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardGraphics",
+      "class_uri": "https://w3id.org/linkml/modelcard/Graphics",
       "@type": "ClassDefinition"
     },
     {
       "name": "Graphic",
-      "definition_uri": "https://example.org/Model-CardGraphic",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Graphic",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
         "name",
         "graphic_image"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardGraphic",
+      "class_uri": "https://w3id.org/linkml/modelcard/Graphic",
       "@type": "ClassDefinition"
     },
     {
       "name": "Risk",
-      "definition_uri": "https://example.org/Model-CardRisk",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Risk",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
         "name",
         "risk_mitigation_strategy"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardRisk",
+      "class_uri": "https://w3id.org/linkml/modelcard/Risk",
       "@type": "ClassDefinition"
     },
     {
       "name": "ModelCard",
-      "definition_uri": "https://example.org/Model-CardModelCard",
-      "from_schema": "https://example.org/Model-Card",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ModelCard",
+      "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "Model_Card_schema_version",
-        "Model_Card_model_details",
-        "Model_Card_model_parameters",
-        "Model_Card_quantitative_analysis",
-        "Model_Card_considerations"
+        "ModelCard_schema_version",
+        "ModelCard_model_details",
+        "ModelCard_model_parameters",
+        "ModelCard_quantitative_analysis",
+        "ModelCard_considerations"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/Model-CardModelCard",
+      "class_uri": "https://w3id.org/linkml/modelcard/ModelCard",
+      "tree_root": true,
       "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "modelcards.yaml",
-  "source_file_date": "2022-08-24T18:55:47",
-  "source_file_size": 3876,
-  "generation_date": "2022-08-24T19:22:23",
+  "source_file_date": "2022-08-24T19:28:39",
+  "source_file_size": 4120,
+  "generation_date": "2022-08-24T19:28:45",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/modelcards.context.jsonld",
     "https://w3id.org/linkml/types.context.jsonld",
     {
-      "@base": "https://example.org/Model-Card"
+      "@base": "https://w3id.org/linkml/modelcard/"
     }
   ]
 }

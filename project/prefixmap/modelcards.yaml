@@ -1,4 +1,4 @@
 {
-   "Model_Card": "https://example.org/Model-Card",
-   "linkml": "https://w3id.org/linkml/"
+   "linkml": "https://w3id.org/linkml/",
+   "modelcard": "https://w3id.org/linkml/modelcard/"
 }

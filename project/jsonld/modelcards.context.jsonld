@@ -1,12 +1,9 @@
 {
-   "_comments": "Auto generated from modelcards.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-08-24T19:22:23\n    Schema: Model_Card\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://example.org/Model-Card\n    description: \n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
+   "_comments": "Auto generated from modelcards.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-08-24T19:28:45\n    Schema: Model_Card\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://w3id.org/linkml/modelcard\n    description: An EXPERIMENTAL rendering of the model card schema in LinkML\n\nThis is not the official model card schema!\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
    "@context": {
-      "Model_Card": {
-         "@id": "https://example.org/Model-Card",
-         "@prefix": true
-      },
       "linkml": "https://w3id.org/linkml/",
-      "@vocab": "https://example.org/Model-Card",
+      "modelcard": "https://w3id.org/linkml/modelcard/",
+      "@vocab": "https://w3id.org/linkml/modelcard/",
       "graphics": {
          "@type": "@id"
       },
