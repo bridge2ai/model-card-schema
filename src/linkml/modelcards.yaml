@@ -18,8 +18,8 @@ slots:
     description: The contact information of the owner.
   link:
     description: A link to the dataset.
-  sensitive:
-    description: Does this dataset contain human or other sensitive data?
+  protected:
+    description: Does this dataset contain human or other protected data?
     range: boolean
   graphics:
     range: graphics
@@ -28,6 +28,8 @@ slots:
     required: true
   value:
     description: The value of the performance metric.
+  value_error:
+    description: The estimated error for the performance metric.
   confidence_interval:
     description: The confidence interval of the metric.
   threshold:
@@ -42,10 +44,18 @@ slots:
     multivalued: true
   image:
     description: The graphic, encoded as a base64 string.
+  bias_input:
+    description: Known bias in input data (enum from AIO).
+  bias_model:
+    description: known bias in model that was applied to input data (enum from AIO).
+  bias_output:
+    description: known bias in output of model that was applied to input data (enum from AIO).  
   mitigation_strategy:
     description: Strategy used to address this risk.
   schema_version:
     description: The version of the schema.
+  model_category:
+    description: The category or parent class of the model (enum from AIO)
   model_details:
     description: Metadata about the model.
     required: true
@@ -70,18 +80,21 @@ classes:
     slots:
     - name
     - link
-    - sensitive
+    - protected
     - graphics
+    - bias_input
     slot_usage:
       name:
         description: The name of the dataset.
       link:
         description: A link to the dataset.
-      sensitive:
-        description: Does this dataset contain human or other sensitive data?
+      protected:
+        description: Does this dataset contain human or other protected data?
         range: boolean
       graphics:
         range: graphics
+      bias_input:
+        description: Known bias in input data (enum from AIO).
   performance_metric:
     slots:
     - type
@@ -97,6 +110,8 @@ classes:
         description: The value of the performance metric.
       confidence_interval:
         description: The confidence interval of the metric.
+      value_error:
+        description: The estimated error for the performance metric.
       threshold:
         description: The decision threshold the metric was computed on.
         range: float
