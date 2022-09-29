@@ -165,4 +165,3 @@ classes:
           model's construction, training, and application?
       model_category:
         description: The category or parent class of the model.
-
