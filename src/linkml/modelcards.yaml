@@ -18,8 +18,8 @@ slots:
     description: The contact information of the owner.
   link:
     description: A link to the dataset.
-  protected:
-    description: Does this dataset contain human or other protected data?
+  sensitive:
+    description: Does this dataset contain human or other sensitive data?
     range: boolean
   graphics:
     range: graphics
@@ -80,7 +80,7 @@ classes:
     slots:
     - name
     - link
-    - protected
+    - sensitive
     - graphics
     - bias_input
     slot_usage:
@@ -88,8 +88,8 @@ classes:
         description: The name of the dataset.
       link:
         description: A link to the dataset.
-      protected:
-        description: Does this dataset contain human or other protected data?
+      sensitive:
+        description: Does this dataset contain human or other sensitive data?
         range: boolean
       graphics:
         range: graphics
