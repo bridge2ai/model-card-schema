@@ -45,11 +45,11 @@ slots:
   image:
     description: The graphic, encoded as a base64 string.
   bias_input:
-    description: Known bias in input data.
+    description: A known bias in the input data.
   bias_model:
-    description: Kknown bias in model that was applied to input data.
+    description: A known bias in the model that was applied to the input data.
   bias_output:
-    description: Known bias in output of model that was applied to input data.  
+    description: A known bias in the output of the model that was applied to the input data.  
   mitigation_strategy:
     description: Strategy used to address this risk.
   schema_version:
@@ -94,7 +94,7 @@ classes:
       graphics:
         range: graphics
       bias_input:
-        description: Known bias in input data.
+        description: A known bias in the input data.
   performance_metric:
     slots:
     - type
@@ -150,6 +150,8 @@ classes:
     - quantitative_analysis
     - considerations
     - model_category
+    - bias_model
+    - bias_output
     slot_usage:
       schema_version:
         description: The version of the schema.
@@ -165,3 +167,7 @@ classes:
           model's construction, training, and application?
       model_category:
         description: The category or parent class of the model.
+      bias_model:
+        description: A known bias in the model that was applied to the input data.  
+      bias_output:
+        description: A known bias in the output of the model that was applied to the input data.  
