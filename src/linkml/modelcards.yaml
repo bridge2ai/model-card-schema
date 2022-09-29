@@ -45,17 +45,17 @@ slots:
   image:
     description: The graphic, encoded as a base64 string.
   bias_input:
-    description: Known bias in input data (enum from AIO).
+    description: Known bias in input data.
   bias_model:
-    description: known bias in model that was applied to input data (enum from AIO).
+    description: Kknown bias in model that was applied to input data.
   bias_output:
-    description: known bias in output of model that was applied to input data (enum from AIO).  
+    description: Known bias in output of model that was applied to input data.  
   mitigation_strategy:
     description: Strategy used to address this risk.
   schema_version:
     description: The version of the schema.
   model_category:
-    description: The category or parent class of the model (enum from AIO)
+    description: The category or parent class of the model.
   model_details:
     description: Metadata about the model.
     required: true
@@ -94,7 +94,7 @@ classes:
       graphics:
         range: graphics
       bias_input:
-        description: Known bias in input data (enum from AIO).
+        description: Known bias in input data.
   performance_metric:
     slots:
     - type
@@ -149,6 +149,7 @@ classes:
     - model_parameters
     - quantitative_analysis
     - considerations
+    - model_category
     slot_usage:
       schema_version:
         description: The version of the schema.
@@ -162,4 +163,6 @@ classes:
       considerations:
         description: What considerations should be taken into account regarding the
           model's construction, training, and application?
+      model_category:
+        description: The category or parent class of the model.
 
