@@ -4,6 +4,7 @@ type Dataset
     link: String
     sensitive: Boolean
     graphics: Graphics
+    biasInput: String
   }
 
 type Graphic
@@ -25,6 +26,9 @@ type ModelCard
     modelParameters: String
     quantitativeAnalysis: String
     considerations: String
+    modelCategory: String
+    biasModel: String
+    biasOutput: String
   }
 
 type Owner
@@ -40,6 +44,7 @@ type PerformanceMetric
     confidenceInterval: String
     threshold: Float
     slice: String
+    valueError: String
   }
 
 type Risk

@@ -1,5 +1,5 @@
 # Auto generated from modelcards.yaml by pythongen.py version: 0.9.0
-# Generation date: 2022-08-24T19:28:50
+# Generation date: 2022-10-04T16:30:09
 # Schema: Model_Card
 #
 # id: https://w3id.org/linkml/modelcard
@@ -79,6 +79,7 @@ class Dataset(YAMLRoot):
     link: Optional[str] = None
     sensitive: Optional[Union[bool, Bool]] = None
     graphics: Optional[Union[dict, "Graphics"]] = None
+    bias_input: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.name is not None and not isinstance(self.name, str):
@@ -92,6 +93,9 @@ class Dataset(YAMLRoot):
 
         if self.graphics is not None and not isinstance(self.graphics, Graphics):
             self.graphics = Graphics(**as_dict(self.graphics))
+
+        if self.bias_input is not None and not isinstance(self.bias_input, str):
+            self.bias_input = str(self.bias_input)
 
         super().__post_init__(**kwargs)
 
@@ -110,6 +114,7 @@ class PerformanceMetric(YAMLRoot):
     confidence_interval: Optional[str] = None
     threshold: Optional[float] = None
     slice: Optional[str] = None
+    value_error: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.type):
@@ -128,6 +133,9 @@ class PerformanceMetric(YAMLRoot):
 
         if self.slice is not None and not isinstance(self.slice, str):
             self.slice = str(self.slice)
+
+        if self.value_error is not None and not isinstance(self.value_error, str):
+            self.value_error = str(self.value_error)
 
         super().__post_init__(**kwargs)
 
@@ -213,6 +221,9 @@ class ModelCard(YAMLRoot):
     model_parameters: Optional[str] = None
     quantitative_analysis: Optional[str] = None
     considerations: Optional[str] = None
+    model_category: Optional[str] = None
+    bias_model: Optional[str] = None
+    bias_output: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.model_details):
@@ -231,6 +242,15 @@ class ModelCard(YAMLRoot):
 
         if self.considerations is not None and not isinstance(self.considerations, str):
             self.considerations = str(self.considerations)
+
+        if self.model_category is not None and not isinstance(self.model_category, str):
+            self.model_category = str(self.model_category)
+
+        if self.bias_model is not None and not isinstance(self.bias_model, str):
+            self.bias_model = str(self.bias_model)
+
+        if self.bias_output is not None and not isinstance(self.bias_output, str):
+            self.bias_output = str(self.bias_output)
 
         super().__post_init__(**kwargs)
 
@@ -263,6 +283,9 @@ slots.type = Slot(uri=MODELCARD.type, name="type", curie=MODELCARD.curie('type')
 slots.value = Slot(uri=MODELCARD.value, name="value", curie=MODELCARD.curie('value'),
                    model_uri=MODELCARD.value, domain=None, range=Optional[str])
 
+slots.value_error = Slot(uri=MODELCARD.value_error, name="value_error", curie=MODELCARD.curie('value_error'),
+                   model_uri=MODELCARD.value_error, domain=None, range=Optional[str])
+
 slots.confidence_interval = Slot(uri=MODELCARD.confidence_interval, name="confidence_interval", curie=MODELCARD.curie('confidence_interval'),
                    model_uri=MODELCARD.confidence_interval, domain=None, range=Optional[str])
 
@@ -281,11 +304,23 @@ slots.collection = Slot(uri=MODELCARD.collection, name="collection", curie=MODEL
 slots.image = Slot(uri=MODELCARD.image, name="image", curie=MODELCARD.curie('image'),
                    model_uri=MODELCARD.image, domain=None, range=Optional[str])
 
+slots.bias_input = Slot(uri=MODELCARD.bias_input, name="bias_input", curie=MODELCARD.curie('bias_input'),
+                   model_uri=MODELCARD.bias_input, domain=None, range=Optional[str])
+
+slots.bias_model = Slot(uri=MODELCARD.bias_model, name="bias_model", curie=MODELCARD.curie('bias_model'),
+                   model_uri=MODELCARD.bias_model, domain=None, range=Optional[str])
+
+slots.bias_output = Slot(uri=MODELCARD.bias_output, name="bias_output", curie=MODELCARD.curie('bias_output'),
+                   model_uri=MODELCARD.bias_output, domain=None, range=Optional[str])
+
 slots.mitigation_strategy = Slot(uri=MODELCARD.mitigation_strategy, name="mitigation_strategy", curie=MODELCARD.curie('mitigation_strategy'),
                    model_uri=MODELCARD.mitigation_strategy, domain=None, range=Optional[str])
 
 slots.schema_version = Slot(uri=MODELCARD.schema_version, name="schema_version", curie=MODELCARD.curie('schema_version'),
                    model_uri=MODELCARD.schema_version, domain=None, range=Optional[str])
+
+slots.model_category = Slot(uri=MODELCARD.model_category, name="model_category", curie=MODELCARD.curie('model_category'),
+                   model_uri=MODELCARD.model_category, domain=None, range=Optional[str])
 
 slots.model_details = Slot(uri=MODELCARD.model_details, name="model_details", curie=MODELCARD.curie('model_details'),
                    model_uri=MODELCARD.model_details, domain=None, range=str)
@@ -317,6 +352,9 @@ slots.dataset_sensitive = Slot(uri=MODELCARD.sensitive, name="dataset_sensitive"
 slots.dataset_graphics = Slot(uri=MODELCARD.graphics, name="dataset_graphics", curie=MODELCARD.curie('graphics'),
                    model_uri=MODELCARD.dataset_graphics, domain=Dataset, range=Optional[Union[dict, "Graphics"]])
 
+slots.dataset_bias_input = Slot(uri=MODELCARD.bias_input, name="dataset_bias_input", curie=MODELCARD.curie('bias_input'),
+                   model_uri=MODELCARD.dataset_bias_input, domain=Dataset, range=Optional[str])
+
 slots.performance_metric_type = Slot(uri=MODELCARD.type, name="performance_metric_type", curie=MODELCARD.curie('type'),
                    model_uri=MODELCARD.performance_metric_type, domain=PerformanceMetric, range=str)
 
@@ -325,6 +363,9 @@ slots.performance_metric_value = Slot(uri=MODELCARD.value, name="performance_met
 
 slots.performance_metric_confidence_interval = Slot(uri=MODELCARD.confidence_interval, name="performance_metric_confidence_interval", curie=MODELCARD.curie('confidence_interval'),
                    model_uri=MODELCARD.performance_metric_confidence_interval, domain=PerformanceMetric, range=Optional[str])
+
+slots.performance_metric_value_error = Slot(uri=MODELCARD.value_error, name="performance_metric_value_error", curie=MODELCARD.curie('value_error'),
+                   model_uri=MODELCARD.performance_metric_value_error, domain=PerformanceMetric, range=Optional[str])
 
 slots.performance_metric_threshold = Slot(uri=MODELCARD.threshold, name="performance_metric_threshold", curie=MODELCARD.curie('threshold'),
                    model_uri=MODELCARD.performance_metric_threshold, domain=PerformanceMetric, range=Optional[float])
@@ -358,3 +399,12 @@ slots.ModelCard_quantitative_analysis = Slot(uri=MODELCARD.quantitative_analysis
 
 slots.ModelCard_considerations = Slot(uri=MODELCARD.considerations, name="ModelCard_considerations", curie=MODELCARD.curie('considerations'),
                    model_uri=MODELCARD.ModelCard_considerations, domain=ModelCard, range=Optional[str])
+
+slots.ModelCard_model_category = Slot(uri=MODELCARD.model_category, name="ModelCard_model_category", curie=MODELCARD.curie('model_category'),
+                   model_uri=MODELCARD.ModelCard_model_category, domain=ModelCard, range=Optional[str])
+
+slots.ModelCard_bias_model = Slot(uri=MODELCARD.bias_model, name="ModelCard_bias_model", curie=MODELCARD.curie('bias_model'),
+                   model_uri=MODELCARD.ModelCard_bias_model, domain=ModelCard, range=Optional[str])
+
+slots.ModelCard_bias_output = Slot(uri=MODELCARD.bias_output, name="ModelCard_bias_output", curie=MODELCARD.curie('bias_output'),
+                   model_uri=MODELCARD.ModelCard_bias_output, domain=ModelCard, range=Optional[str])
