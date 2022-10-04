@@ -22,7 +22,7 @@ slots:
     description: Does this dataset contain human or other sensitive data?
     range: boolean
   graphics:
-    range: graphics
+    range: Graphics
   type:
     description: The type of performance metric.
     required: true
@@ -92,7 +92,7 @@ classes:
         description: Does this dataset contain human or other sensitive data?
         range: boolean
       graphics:
-        range: graphics
+        range: Graphics
       bias_input:
         description: A known bias in the input data.
   performance_metric:
@@ -118,7 +118,7 @@ classes:
       slice:
         description: The name of the slice this metric was computed on. By default,
           assume this metric is not sliced.
-  graphics:
+  Graphics:
     slots:
     - description
     - collection
