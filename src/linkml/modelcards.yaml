@@ -22,12 +22,14 @@ slots:
     description: Does this dataset contain human or other sensitive data?
     range: boolean
   graphics:
-    range: graphics
+    range: Graphics
   type:
     description: The type of performance metric.
     required: true
   value:
     description: The value of the performance metric.
+  value_error:
+    description: The estimated error for the performance metric.
   confidence_interval:
     description: The confidence interval of the metric.
   threshold:
@@ -42,10 +44,18 @@ slots:
     multivalued: true
   image:
     description: The graphic, encoded as a base64 string.
+  bias_input:
+    description: A known bias in the input data.
+  bias_model:
+    description: A known bias in the model that was applied to the input data.
+  bias_output:
+    description: A known bias in the output of the model that was applied to the input data.  
   mitigation_strategy:
     description: Strategy used to address this risk.
   schema_version:
     description: The version of the schema.
+  model_category:
+    description: The category or parent class of the model.
   model_details:
     description: Metadata about the model.
     required: true
@@ -72,6 +82,7 @@ classes:
     - link
     - sensitive
     - graphics
+    - bias_input
     slot_usage:
       name:
         description: The name of the dataset.
@@ -81,7 +92,9 @@ classes:
         description: Does this dataset contain human or other sensitive data?
         range: boolean
       graphics:
-        range: graphics
+        range: Graphics
+      bias_input:
+        description: A known bias in the input data.
   performance_metric:
     slots:
     - type
@@ -97,13 +110,15 @@ classes:
         description: The value of the performance metric.
       confidence_interval:
         description: The confidence interval of the metric.
+      value_error:
+        description: The estimated error for the performance metric.
       threshold:
         description: The decision threshold the metric was computed on.
         range: float
       slice:
         description: The name of the slice this metric was computed on. By default,
           assume this metric is not sliced.
-  graphics:
+  Graphics:
     slots:
     - description
     - collection
@@ -134,6 +149,9 @@ classes:
     - model_parameters
     - quantitative_analysis
     - considerations
+    - model_category
+    - bias_model
+    - bias_output
     slot_usage:
       schema_version:
         description: The version of the schema.
@@ -147,4 +165,9 @@ classes:
       considerations:
         description: What considerations should be taken into account regarding the
           model's construction, training, and application?
-
+      model_category:
+        description: The category or parent class of the model.
+      bias_model:
+        description: A known bias in the model that was applied to the input data.  
+      bias_output:
+        description: A known bias in the output of the model that was applied to the input data.  

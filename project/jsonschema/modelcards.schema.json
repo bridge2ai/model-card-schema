@@ -4,6 +4,10 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "bias_input": {
+               "description": "A known bias in the input data.",
+               "type": "string"
+            },
             "graphics": {
                "$ref": "#/$defs/Graphics"
             },
@@ -63,8 +67,20 @@
          "additionalProperties": false,
          "description": "",
          "properties": {
+            "bias_model": {
+               "description": "A known bias in the model that was applied to the input data.",
+               "type": "string"
+            },
+            "bias_output": {
+               "description": "A known bias in the output of the model that was applied to the input data.",
+               "type": "string"
+            },
             "considerations": {
                "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
+               "type": "string"
+            },
+            "model_category": {
+               "description": "The category or parent class of the model.",
                "type": "string"
             },
             "model_details": {
@@ -130,6 +146,10 @@
             "value": {
                "description": "The value of the performance metric.",
                "type": "string"
+            },
+            "value_error": {
+               "description": "The estimated error for the performance metric.",
+               "type": "string"
             }
          },
          "required": [
@@ -160,8 +180,20 @@
    "additionalProperties": true,
    "metamodel_version": "1.7.0",
    "properties": {
+      "bias_model": {
+         "description": "A known bias in the model that was applied to the input data.",
+         "type": "string"
+      },
+      "bias_output": {
+         "description": "A known bias in the output of the model that was applied to the input data.",
+         "type": "string"
+      },
       "considerations": {
          "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
+         "type": "string"
+      },
+      "model_category": {
+         "description": "The category or parent class of the model.",
          "type": "string"
       },
       "model_details": {

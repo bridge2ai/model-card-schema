@@ -285,6 +285,15 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "value_error",
+      "definition_uri": "https://w3id.org/linkml/modelcard/value_error",
+      "description": "The estimated error for the performance metric.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/value_error",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "confidence_interval",
       "definition_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
       "description": "The confidence interval of the metric.",
@@ -363,6 +372,45 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "bias_input",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_input",
+      "description": "A known bias in the input data.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_input",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bias_model",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_model",
+      "description": "A known bias in the model that was applied to the input data.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_model",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bias_output",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_output",
+      "description": "A known bias in the output of the model that was applied to the input data.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_output",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "mitigation_strategy",
       "definition_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
       "description": "Strategy used to address this risk.",
@@ -381,6 +429,19 @@
       "description": "The version of the schema.",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/schema_version",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "model_category",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_category",
+      "description": "The category or parent class of the model.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_category",
       "owner": "ModelCard",
       "domain_of": [
         "ModelCard"
@@ -550,6 +611,24 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "dataset_bias_input",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_input",
+      "description": "A known bias in the input data.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "bias_input",
+      "domain": "Dataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_input",
+      "alias": "bias_input",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "bias_input",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "performance_metric_type",
       "definition_uri": "https://w3id.org/linkml/modelcard/type",
       "description": "The type of performance metric.",
@@ -601,6 +680,24 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "confidence_interval",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "performance_metric_value_error",
+      "definition_uri": "https://w3id.org/linkml/modelcard/value_error",
+      "description": "The estimated error for the performance metric.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "value_error",
+      "domain": "PerformanceMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/value_error",
+      "alias": "value_error",
+      "owner": "PerformanceMetric",
+      "domain_of": [
+        "PerformanceMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "value_error",
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -802,6 +899,60 @@
       "usage_slot_name": "considerations",
       "range": "string",
       "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelCard_model_category",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_category",
+      "description": "The category or parent class of the model.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "model_category",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_category",
+      "alias": "model_category",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "model_category",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelCard_bias_model",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_model",
+      "description": "A known bias in the model that was applied to the input data.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "bias_model",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_model",
+      "alias": "bias_model",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "bias_model",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelCard_bias_output",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_output",
+      "description": "A known bias in the output of the model that was applied to the input data.",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "bias_output",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_output",
+      "alias": "bias_output",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "bias_output",
+      "range": "string",
+      "@type": "SlotDefinition"
     }
   ],
   "classes": [
@@ -825,7 +976,8 @@
         "dataset_name",
         "dataset_link",
         "dataset_sensitive",
-        "dataset_graphics"
+        "dataset_graphics",
+        "dataset_bias_input"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml/modelcard/Dataset",
@@ -840,7 +992,8 @@
         "performance_metric_value",
         "performance_metric_confidence_interval",
         "performance_metric_threshold",
-        "performance_metric_slice"
+        "performance_metric_slice",
+        "performance_metric_value_error"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
@@ -891,7 +1044,10 @@
         "ModelCard_model_details",
         "ModelCard_model_parameters",
         "ModelCard_quantitative_analysis",
-        "ModelCard_considerations"
+        "ModelCard_considerations",
+        "ModelCard_model_category",
+        "ModelCard_bias_model",
+        "ModelCard_bias_output"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml/modelcard/ModelCard",
@@ -901,9 +1057,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "modelcards.yaml",
-  "source_file_date": "2022-08-24T19:28:39",
-  "source_file_size": 4120,
-  "generation_date": "2022-08-24T19:28:45",
+  "source_file_date": "2022-10-04T16:19:56",
+  "source_file_size": 5082,
+  "generation_date": "2022-10-04T16:30:04",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/modelcards.context.jsonld",

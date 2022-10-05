@@ -5,7 +5,8 @@ CREATE TABLE dataset (
 	link TEXT, 
 	sensitive BOOLEAN, 
 	graphics TEXT, 
-	PRIMARY KEY (name, link, sensitive, graphics)
+	bias_input TEXT, 
+	PRIMARY KEY (name, link, sensitive, graphics, bias_input)
 );
 
 CREATE TABLE graphic (
@@ -26,7 +27,10 @@ CREATE TABLE "ModelCard" (
 	model_parameters TEXT, 
 	quantitative_analysis TEXT, 
 	considerations TEXT, 
-	PRIMARY KEY (schema_version, model_details, model_parameters, quantitative_analysis, considerations)
+	model_category TEXT, 
+	bias_model TEXT, 
+	bias_output TEXT, 
+	PRIMARY KEY (schema_version, model_details, model_parameters, quantitative_analysis, considerations, model_category, bias_model, bias_output)
 );
 
 CREATE TABLE owner (
@@ -41,7 +45,8 @@ CREATE TABLE performance_metric (
 	confidence_interval TEXT, 
 	threshold FLOAT, 
 	slice TEXT, 
-	PRIMARY KEY (type, value, confidence_interval, threshold, slice)
+	value_error TEXT, 
+	PRIMARY KEY (type, value, confidence_interval, threshold, slice, value_error)
 );
 
 CREATE TABLE risk (
