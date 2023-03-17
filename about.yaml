@@ -1,3 +1,7 @@
-name: modelcards
+---
+name: model_card_schema
+author: marcin p. joachimiak <marcinjoachimiak@gmail.com>
 description: modelcards linkml rendering
-source_schema_path: src/linkml/modelcards.yaml
+source_schema_path: src/model_card_schema/schema/model_card_schema.yaml
+google_sheet_id: 1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ
+google_sheet_tabs: personinfo enums
