@@ -17,9 +17,9 @@ slots:
   contact:
     description: The contact information of the owner.
   link:
-    description: A link to the dataset.
+    description: A link to the dataSet.
   sensitive:
-    description: Does this dataset contain human or other sensitive data?
+    description: Does this dataSet contain human or other sensitive data?
     range: boolean
   graphics:
     range: Graphics
@@ -78,7 +78,7 @@ classes:
         description: The name of the owner.
       contact:
         description: The contact information of the owner.
-  dataset:
+  dataSet:
     slots:
     - name
     - link
@@ -87,17 +87,17 @@ classes:
     - bias_input
     slot_usage:
       name:
-        description: The name of the dataset.
+        description: The name of the dataSet.
       link:
-        description: A link to the dataset.
+        description: A link to the dataSet.
       sensitive:
-        description: Does this dataset contain human or other sensitive data?
+        description: Does this dataSet contain human or other sensitive data?
         range: boolean
       graphics:
         range: Graphics
       bias_input:
         description: A known bias in the input data.
-  performance_metric:
+  performanceMetric:
     slots:
     - type
     - value
@@ -122,7 +122,7 @@ classes:
       slice:
         description: The name of the slice this metric was computed on. By default,
           assume this metric is not sliced.
-  Graphics:
+  graphics:
     slots:
     - description
     - collection
@@ -145,7 +145,7 @@ classes:
     slot_usage:
       mitigation_strategy:
         description: Strategy used to address this risk.
-  ModelCard:
+  modelCard:
     tree_root: true
     slots:
     - schema_version
