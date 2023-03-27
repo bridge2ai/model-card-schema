@@ -85,6 +85,7 @@ classes:
     - sensitive
     - graphics
     - bias_input
+    - unit
     slot_usage:
       name:
         description: The name of the dataSet.
@@ -98,6 +99,8 @@ classes:
         range: Graphics
       bias_input:
         description: A known bias in the input data.
+      unit:
+        description: the unit for values in this dataset
   performanceMetric:
     slots:
     - type
@@ -105,6 +108,7 @@ classes:
     - confidence_interval
     - threshold
     - slice
+    - unit
     slot_usage:
       type:
         description: The type of performance metric.
@@ -123,6 +127,8 @@ classes:
       slice:
         description: The name of the slice this metric was computed on. By default,
           assume this metric is not sliced.
+      unit:
+        description: the unit for the performance metric, if applicable
   graphics:
     slots:
     - description
