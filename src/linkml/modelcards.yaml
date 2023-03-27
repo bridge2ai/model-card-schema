@@ -28,8 +28,10 @@ slots:
     required: true
   value:
     description: The value of the performance metric.
+    range: float
   value_error:
     description: The estimated error for the performance metric.
+    range: float
   confidence_interval:
     description: The confidence interval of the metric.
   threshold:
@@ -108,10 +110,12 @@ classes:
         required: true
       value:
         description: The value of the performance metric.
+        range: float
       confidence_interval:
         description: The confidence interval of the metric.
       value_error:
         description: The estimated error for the performance metric.
+        range: float
       threshold:
         description: The decision threshold the metric was computed on.
         range: float
