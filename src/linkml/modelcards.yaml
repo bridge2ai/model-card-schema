@@ -90,6 +90,7 @@ classes:
         description: The name of the dataSet.
       link:
         description: A link to the dataSet.
+        required: True
       sensitive:
         description: Does this dataSet contain human or other sensitive data?
         range: boolean
