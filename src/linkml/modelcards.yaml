@@ -1,0 +1,184 @@
+id: https://w3id.org/linkml/modelcard
+name: Model_Card
+description: |-
+  An EXPERIMENTAL rendering of the model card schema in LinkML
+
+  This is not the official model card schema!
+
+imports:
+- linkml:types
+prefixes:
+  modelcard: https://w3id.org/linkml/modelcard/
+  linkml: https://w3id.org/linkml/
+default_prefix: modelcard
+slots:
+  name:
+    range: string
+  contact:
+    description: The contact information of the owner.
+  link:
+    description: A link to the dataSet.
+  sensitive:
+    description: Does this dataSet contain human or other sensitive data?
+    range: boolean
+  graphics:
+    range: Graphics
+  type:
+    description: The type of performance metric.
+    required: true
+  value:
+    description: The value of the performance metric.
+    range: float
+  value_error:
+    description: The estimated error for the performance metric.
+    range: float
+  confidence_interval:
+    description: The confidence interval of the metric.
+  threshold:
+    description: The decision threshold the metric was computed on.
+    range: float
+  slice:
+    description: The name of the slice this metric was computed on. By default, assume
+      this metric is not sliced.
+  description:
+    description: A description of this collection of graphics.
+  collection:
+    multivalued: true
+  image:
+    description: The graphic, encoded as a base64 string.
+  bias_input:
+    description: A known bias in the input data.
+  bias_model:
+    description: A known bias in the model that was applied to the input data.
+  bias_output:
+    description: A known bias in the output of the model that was applied to the input data.  
+  mitigation_strategy:
+    description: Strategy used to address this risk.
+  schema_version:
+    description: The version of the schema.
+  model_category:
+    description: The category or parent class of the model.
+  model_details:
+    description: Metadata about the model.
+    required: true
+  model_parameters:
+    description: Parameters for construction of the model.
+  quantitative_analysis:
+    description: A quantitative analysis of the model
+  considerations:
+    description: What considerations should be taken into account regarding the model's
+      construction, training, and application?
+classes:
+  owner:
+    slots:
+    - name
+    - contact
+    slot_usage:
+      name:
+        description: The name of the owner.
+      contact:
+        description: The contact information of the owner.
+  dataSet:
+    slots:
+    - name
+    - link
+    - sensitive
+    - graphics
+    - bias_input
+    - unit
+    slot_usage:
+      name:
+        description: The name of the dataSet.
+      link:
+        description: A link to the dataSet.
+        required: True
+      sensitive:
+        description: Does this dataSet contain human or other sensitive data?
+        range: boolean
+      graphics:
+        range: Graphics
+      bias_input:
+        description: A known bias in the input data.
+      unit:
+        description: the unit for values in this dataset
+  performanceMetric:
+    slots:
+    - type
+    - value
+    - confidence_interval
+    - threshold
+    - slice
+    - unit
+    slot_usage:
+      type:
+        description: The type of performance metric.
+        required: true
+      value:
+        description: The value of the performance metric.
+        range: float
+      confidence_interval:
+        description: The confidence interval of the metric.
+      value_error:
+        description: The estimated error for the performance metric.
+        range: float
+      threshold:
+        description: The decision threshold the metric was computed on.
+        range: float
+      slice:
+        description: The name of the slice this metric was computed on. By default,
+          assume this metric is not sliced.
+      unit:
+        description: the unit for the performance metric, if applicable
+  graphics:
+    slots:
+    - description
+    - collection
+    slot_usage:
+      description:
+        description: A description of this collection of graphics.
+      collection:
+        multivalued: true
+  graphic:
+    slots:
+    - name
+    - image
+    slot_usage:
+      image:
+        description: The graphic, encoded as a base64 string.
+  risk:
+    slots:
+    - name
+    - mitigation_strategy
+    slot_usage:
+      mitigation_strategy:
+        description: Strategy used to address this risk.
+  modelCard:
+    tree_root: true
+    slots:
+    - schema_version
+    - model_details
+    - model_parameters
+    - quantitative_analysis
+    - considerations
+    - model_category
+    - bias_model
+    - bias_output
+    slot_usage:
+      schema_version:
+        description: The version of the schema.
+      model_details:
+        description: Metadata about the model.
+        required: true
+      model_parameters:
+        description: Parameters for construction of the model.
+      quantitative_analysis:
+        description: A quantitative analysis of the model
+      considerations:
+        description: What considerations should be taken into account regarding the
+          model's construction, training, and application?
+      model_category:
+        description: The category or parent class of the model.
+      bias_model:
+        description: A known bias in the model that was applied to the input data.  
+      bias_output:
+        description: A known bias in the output of the model that was applied to the input data.  
