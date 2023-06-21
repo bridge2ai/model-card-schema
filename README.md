@@ -2,10 +2,6 @@
 
 modelcards linkml rendering
 
-## Website
-
-[https://bbop.github.io/model-card-schema](https://bbop.github.io/model-card-schema)
-
 ## Repository Structure
 
 * [examples/](examples/) - example data
