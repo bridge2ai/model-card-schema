@@ -1,0 +1,23 @@
+---
+id: https://w3id.org/bbop/model-card-schema
+name: model-card-schema
+title: model-card-schema
+description: |-
+  modelcards linkml rendering
+license: MIT
+see_also:
+  - https://bbop.github.io/model-card-schema
+
+prefixes:
+  model_card_schema: https://w3id.org/bbop/model-card-schema/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: https://example.org/
+default_prefix: model_card_schema
+default_range: string
+
+imports:
+  - linkml:types
+  - personinfo_enums
