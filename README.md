@@ -1,3 +1,5 @@
+Executive Order 14168: This repository is under review for potential modification in compliance with Administration directives.
+
 # model-card-schema
 
 
