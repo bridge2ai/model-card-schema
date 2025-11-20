@@ -1,0 +1,1210 @@
+{
+    "$defs": {
+        "BenchmarkDataset": {
+            "additionalProperties": false,
+            "description": "Dataset used for benchmarking",
+            "properties": {
+                "args": {
+                    "description": "Additional arguments for dataset loading",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "config": {
+                    "description": "Dataset configuration",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Dataset name",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "revision": {
+                    "description": "Dataset version or revision",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "split": {
+                    "description": "Dataset split (train, test, validation)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "Dataset type identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BenchmarkDataset",
+            "type": "object"
+        },
+        "BenchmarkMetric": {
+            "additionalProperties": false,
+            "description": "Benchmark metric result",
+            "properties": {
+                "args": {
+                    "description": "Additional metric arguments",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "config": {
+                    "description": "Metric configuration",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Metric name",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "Metric type identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "description": "Metric value",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BenchmarkMetric",
+            "type": "object"
+        },
+        "BenchmarkResult": {
+            "additionalProperties": false,
+            "description": "Benchmark result entry with task, dataset, and metrics",
+            "properties": {
+                "dataset": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BenchmarkDataset"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Dataset used for evaluation"
+                },
+                "metrics": {
+                    "description": "Metrics reported for this benchmark",
+                    "items": {
+                        "$ref": "#/$defs/BenchmarkMetric"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BenchmarkSource"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Source of the benchmark results"
+                },
+                "task": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Task"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Task that was evaluated"
+                }
+            },
+            "title": "BenchmarkResult",
+            "type": "object"
+        },
+        "BenchmarkSource": {
+            "additionalProperties": false,
+            "description": "Source of benchmark results",
+            "properties": {
+                "name": {
+                    "description": "Source name (e.g., 'Open LLM Leaderboard', 'GLUE Benchmark')",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the source",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BenchmarkSource",
+            "type": "object"
+        },
+        "Citation": {
+            "additionalProperties": false,
+            "description": "Citation information for the model",
+            "properties": {
+                "citation": {
+                    "description": "Formatted citation text",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "style": {
+                    "$ref": "#/$defs/CitationStyleEnum",
+                    "description": "Citation format style"
+                }
+            },
+            "title": "Citation",
+            "type": "object"
+        },
+        "CitationStyleEnum": {
+            "description": "Citation format styles",
+            "enum": [
+                "MLA",
+                "APA",
+                "Chicago",
+                "IEEE"
+            ],
+            "title": "CitationStyleEnum",
+            "type": "string"
+        },
+        "ConfidenceInterval": {
+            "additionalProperties": false,
+            "description": "Confidence interval for a metric value",
+            "properties": {
+                "lower_bound": {
+                    "description": "Lower bound of the confidence interval",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "upper_bound": {
+                    "description": "Upper bound of the confidence interval",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ConfidenceInterval",
+            "type": "object"
+        },
+        "Considerations": {
+            "additionalProperties": false,
+            "description": "Considerations for model usage including limitations and ethical concerns",
+            "properties": {
+                "ethical_considerations": {
+                    "description": "Ethical considerations and identified risks",
+                    "items": {
+                        "$ref": "#/$defs/Risk"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "limitations": {
+                    "description": "Known limitations and constraints",
+                    "items": {
+                        "$ref": "#/$defs/Limitation"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tradeoffs": {
+                    "description": "Performance tradeoffs to consider",
+                    "items": {
+                        "$ref": "#/$defs/Tradeoff"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "use_cases": {
+                    "description": "Intended use cases and application scenarios",
+                    "items": {
+                        "$ref": "#/$defs/UseCase"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "users": {
+                    "description": "Intended user types",
+                    "items": {
+                        "$ref": "#/$defs/User"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Considerations",
+            "type": "object"
+        },
+        "DataSet": {
+            "additionalProperties": false,
+            "description": "Information about a dataset used for training or evaluation",
+            "properties": {
+                "bias_input": {
+                    "description": "Known biases present in the input data",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Dataset overview and characteristics",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "graphics": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GraphicsCollection"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Visualizations of the dataset"
+                },
+                "link": {
+                    "description": "URL to the dataset",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Dataset name or identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sensitive": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SensitiveData"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Sensitive data information"
+                },
+                "unit": {
+                    "description": "Unit for values in this dataset",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "link"
+            ],
+            "title": "DataSet",
+            "type": "object"
+        },
+        "Graphic": {
+            "additionalProperties": false,
+            "description": "A single graphic or visualization",
+            "properties": {
+                "image": {
+                    "description": "Base64-encoded PNG image",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name or title of the graphic",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Graphic",
+            "type": "object"
+        },
+        "GraphicsCollection": {
+            "additionalProperties": false,
+            "description": "Collection of graphics and visualizations",
+            "properties": {
+                "collection": {
+                    "description": "Graphics in this collection",
+                    "items": {
+                        "$ref": "#/$defs/Graphic"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Description of this graphics collection",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "GraphicsCollection",
+            "type": "object"
+        },
+        "KeyVal": {
+            "additionalProperties": false,
+            "description": "Key-value pair for format mappings",
+            "properties": {
+                "key": {
+                    "description": "Key identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "description": "Value associated with the key",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "KeyVal",
+            "type": "object"
+        },
+        "License": {
+            "additionalProperties": false,
+            "description": "License information (use SPDX identifier OR custom text, not both)",
+            "properties": {
+                "custom_text": {
+                    "description": "Custom license text (use when SPDX identifier is not applicable)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "identifier": {
+                    "description": "SPDX license identifier (e.g., 'Apache-2.0', 'MIT', 'CC-BY-4.0')",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "License",
+            "type": "object"
+        },
+        "Limitation": {
+            "additionalProperties": false,
+            "description": "A known limitation or constraint of the model",
+            "properties": {
+                "description": {
+                    "description": "Description of the limitation or constraint",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Limitation",
+            "type": "object"
+        },
+        "ModelCard": {
+            "additionalProperties": false,
+            "description": "Complete model card with metadata, performance, and considerations",
+            "properties": {
+                "base_model": {
+                    "description": "Parent model identifier (for fine-tuned or derived models)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "bias_model": {
+                    "description": "Known biases in the model itself",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "bias_output": {
+                    "description": "Known biases in the model's outputs",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "considerations": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Considerations"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Usage considerations, limitations, and ethical concerns"
+                },
+                "datasets": {
+                    "description": "Training dataset identifiers or names",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "framework": {
+                    "description": "ML framework used (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "framework_version": {
+                    "description": "Version of the ML framework",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "language": {
+                    "description": "Natural language(s) processed by the model",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "library_name": {
+                    "description": "Library name for loading the model (e.g., transformers, diffusers, timm)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "metrics": {
+                    "description": "Evaluation metrics used for this model",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "model_category": {
+                    "description": "Category or parent class of the model",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "model_details": {
+                    "$ref": "#/$defs/ModelDetails",
+                    "description": "Comprehensive model metadata and details"
+                },
+                "model_index": {
+                    "description": "Benchmark results following Papers with Code model-index format",
+                    "items": {
+                        "$ref": "#/$defs/ModelIndex"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "model_parameters": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ModelParameters"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Model construction and architecture parameters"
+                },
+                "pipeline_tag": {
+                    "description": "Task type for pipeline usage",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quantitative_analysis": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/QuantitativeAnalysis"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Quantitative analysis and performance evaluation"
+                },
+                "schema_version": {
+                    "description": "Version of the model card schema being used",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Searchable keywords and tags for discovery",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "model_details"
+            ],
+            "title": "ModelCard",
+            "type": "object"
+        },
+        "ModelDetails": {
+            "additionalProperties": false,
+            "description": "Comprehensive metadata about the model",
+            "properties": {
+                "citations": {
+                    "description": "How to cite this model",
+                    "items": {
+                        "$ref": "#/$defs/Citation"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "documentation": {
+                    "description": "Detailed documentation and usage guide",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "licenses": {
+                    "description": "Licensing information",
+                    "items": {
+                        "$ref": "#/$defs/License"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Model name or identifier",
+                    "type": "string"
+                },
+                "overview": {
+                    "description": "High-level description of what the model does",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "owners": {
+                    "description": "Model owners or maintainers",
+                    "items": {
+                        "$ref": "#/$defs/Owner"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "path": {
+                    "description": "Storage location or path to model artifacts",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "references": {
+                    "description": "References to related resources",
+                    "items": {
+                        "$ref": "#/$defs/Reference"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Version"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Version information"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "ModelDetails",
+            "type": "object"
+        },
+        "ModelIndex": {
+            "additionalProperties": false,
+            "description": "Papers with Code model-index structure for benchmark tracking",
+            "properties": {
+                "name": {
+                    "description": "Model name for this benchmark entry",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "results": {
+                    "description": "Benchmark results",
+                    "items": {
+                        "$ref": "#/$defs/BenchmarkResult"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ModelIndex",
+            "type": "object"
+        },
+        "ModelParameters": {
+            "additionalProperties": false,
+            "description": "Parameters and specifications for model construction",
+            "properties": {
+                "data": {
+                    "description": "Training and evaluation datasets",
+                    "items": {
+                        "$ref": "#/$defs/DataSet"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "input_format": {
+                    "description": "Plain text description of input format",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "input_format_map": {
+                    "description": "Structured mapping of input format fields",
+                    "items": {
+                        "$ref": "#/$defs/KeyVal"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "model_architecture": {
+                    "description": "Model architecture specification and description",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "output_format": {
+                    "description": "Plain text description of output format",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "output_format_map": {
+                    "description": "Structured mapping of output format fields",
+                    "items": {
+                        "$ref": "#/$defs/KeyVal"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ModelParameters",
+            "type": "object"
+        },
+        "Owner": {
+            "additionalProperties": false,
+            "description": "Model owner or maintainer information",
+            "properties": {
+                "contact": {
+                    "description": "Contact information (email, website, etc.)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of the owner (individual or organization)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Owner",
+            "type": "object"
+        },
+        "PerformanceMetric": {
+            "additionalProperties": false,
+            "description": "A performance metric with optional confidence interval",
+            "properties": {
+                "confidence_interval": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ConfidenceInterval"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Confidence interval for the metric"
+                },
+                "slice": {
+                    "description": "Data slice or subset this metric was computed on",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "threshold": {
+                    "description": "Decision threshold used when computing this metric",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "Type of performance metric (e.g., 'accuracy', 'F1', 'AUC', 'precision')",
+                    "type": "string"
+                },
+                "unit": {
+                    "description": "Unit for the metric value, if applicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "description": "Metric value",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "value_error": {
+                    "description": "Estimated error for the metric value",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "PerformanceMetric",
+            "type": "object"
+        },
+        "QuantitativeAnalysis": {
+            "additionalProperties": false,
+            "description": "Quantitative analysis and performance evaluation of the model",
+            "properties": {
+                "graphics": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GraphicsCollection"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Performance visualizations and plots"
+                },
+                "performance_metrics": {
+                    "description": "Performance metrics and evaluation results",
+                    "items": {
+                        "$ref": "#/$defs/PerformanceMetric"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "QuantitativeAnalysis",
+            "type": "object"
+        },
+        "Reference": {
+            "additionalProperties": false,
+            "description": "Reference to related resources",
+            "properties": {
+                "reference": {
+                    "description": "URL or citation string for related resource",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Reference",
+            "type": "object"
+        },
+        "Risk": {
+            "additionalProperties": false,
+            "description": "An ethical, environmental, or operational risk",
+            "properties": {
+                "mitigation_strategy": {
+                    "description": "Strategy used to address or mitigate this risk",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name or type of the risk",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Risk",
+            "type": "object"
+        },
+        "SensitiveData": {
+            "additionalProperties": false,
+            "description": "Information about sensitive data in a dataset",
+            "properties": {
+                "sensitive_data": {
+                    "description": "Types of PII or sensitive information (e.g., names, addresses, medical records)",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SensitiveData",
+            "type": "object"
+        },
+        "Task": {
+            "additionalProperties": false,
+            "description": "ML task specification for benchmarking",
+            "properties": {
+                "name": {
+                    "description": "Human-readable task name",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "Task type identifier (e.g., 'text-generation', 'image-classification')",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Task",
+            "type": "object"
+        },
+        "Tradeoff": {
+            "additionalProperties": false,
+            "description": "A performance tradeoff consideration",
+            "properties": {
+                "description": {
+                    "description": "Description of the performance tradeoff",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Tradeoff",
+            "type": "object"
+        },
+        "UseCase": {
+            "additionalProperties": false,
+            "description": "Description of a use case or application scenario",
+            "properties": {
+                "description": {
+                    "description": "Description of the application scenario",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "UseCase",
+            "type": "object"
+        },
+        "User": {
+            "additionalProperties": false,
+            "description": "Description of an intended user type",
+            "properties": {
+                "description": {
+                    "description": "Description of the intended user type or role",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "User",
+            "type": "object"
+        },
+        "Version": {
+            "additionalProperties": false,
+            "description": "Version information for a model",
+            "properties": {
+                "date": {
+                    "description": "Release date of this version",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "diff": {
+                    "description": "Changes from the previous version",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Version identifier (e.g., '1.0.0', 'v2', 'beta')",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Version",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/linkml/modelcard",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Complete model card with metadata, performance, and considerations",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "base_model": {
+            "description": "Parent model identifier (for fine-tuned or derived models)",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "bias_model": {
+            "description": "Known biases in the model itself",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "bias_output": {
+            "description": "Known biases in the model's outputs",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "considerations": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/Considerations"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Usage considerations, limitations, and ethical concerns"
+        },
+        "datasets": {
+            "description": "Training dataset identifiers or names",
+            "items": {
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "framework": {
+            "description": "ML framework used (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "framework_version": {
+            "description": "Version of the ML framework",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "language": {
+            "description": "Natural language(s) processed by the model",
+            "items": {
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "library_name": {
+            "description": "Library name for loading the model (e.g., transformers, diffusers, timm)",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "metrics": {
+            "description": "Evaluation metrics used for this model",
+            "items": {
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "model_category": {
+            "description": "Category or parent class of the model",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "model_details": {
+            "$ref": "#/$defs/ModelDetails",
+            "description": "Comprehensive model metadata and details"
+        },
+        "model_index": {
+            "description": "Benchmark results following Papers with Code model-index format",
+            "items": {
+                "$ref": "#/$defs/ModelIndex"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "model_parameters": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/ModelParameters"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Model construction and architecture parameters"
+        },
+        "pipeline_tag": {
+            "description": "Task type for pipeline usage",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "quantitative_analysis": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/QuantitativeAnalysis"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Quantitative analysis and performance evaluation"
+        },
+        "schema_version": {
+            "description": "Version of the model card schema being used",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "tags": {
+            "description": "Searchable keywords and tags for discovery",
+            "items": {
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "required": [
+        "model_details"
+    ],
+    "title": "Model_Card",
+    "type": "object",
+    "version": null
+}

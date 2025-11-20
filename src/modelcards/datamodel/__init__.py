@@ -1,1 +1,1 @@
-from .model_card_schema import *
+from .modelcards import *

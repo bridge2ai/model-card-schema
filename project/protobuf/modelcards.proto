@@ -1,0 +1,215 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// Dataset used for benchmarking
+message BenchmarkDataset
+ {
+  string type = 0
+  string name = 0
+  string config = 0
+  string split = 0
+  string revision = 0
+  string args = 0
+ }
+// Benchmark metric result
+message BenchmarkMetric
+ {
+  string type = 0
+  float value = 0
+  string name = 0
+  string config = 0
+  string args = 0
+ }
+// Benchmark result entry with task, dataset, and metrics
+message BenchmarkResult
+ {
+  task task = 0
+  benchmarkDataset dataset = 0
+ repeated  benchmarkMetric metrics = 0
+  benchmarkSource source = 0
+ }
+// Source of benchmark results
+message BenchmarkSource
+ {
+  string name = 0
+  uri url = 0
+ }
+// Citation information for the model
+message Citation
+ {
+  citationStyleEnum style = 0
+  string citation = 0
+ }
+// Confidence interval for a metric value
+message ConfidenceInterval
+ {
+  float lowerBound = 0
+  float upperBound = 0
+ }
+// Considerations for model usage including limitations and ethical concerns
+message Considerations
+ {
+ repeated  user users = 0
+ repeated  useCase useCases = 0
+ repeated  limitation limitations = 0
+ repeated  tradeoff tradeoffs = 0
+ repeated  risk ethicalConsiderations = 0
+ }
+// Information about a dataset used for training or evaluation
+message DataSet
+ {
+  string name = 0
+  string description = 0
+  uri link = 0
+  sensitiveData sensitive = 0
+  graphicsCollection graphics = 0
+  string biasInput = 0
+  string unit = 0
+ }
+// A single graphic or visualization
+message Graphic
+ {
+  string name = 0
+  string image = 0
+ }
+// Collection of graphics and visualizations
+message GraphicsCollection
+ {
+  string description = 0
+ repeated  graphic collection = 0
+ }
+// Key-value pair for format mappings
+message KeyVal
+ {
+  string key = 0
+  string value = 0
+ }
+// License information (use SPDX identifier OR custom text, not both)
+message License
+ {
+  string identifier = 0
+  string customText = 0
+ }
+// A known limitation or constraint of the model
+message Limitation
+ {
+  string description = 0
+ }
+// Complete model card with metadata, performance, and considerations
+message ModelCard
+ {
+  string schemaVersion = 0
+  modelDetails modelDetails = 0
+  modelParameters modelParameters = 0
+  quantitativeAnalysis quantitativeAnalysis = 0
+  considerations considerations = 0
+  string modelCategory = 0
+  string biasModel = 0
+  string biasOutput = 0
+  string framework = 0
+  string frameworkVersion = 0
+  string libraryName = 0
+  string pipelineTag = 0
+ repeated  string language = 0
+  string baseModel = 0
+ repeated  string tags = 0
+ repeated  string datasets = 0
+ repeated  string metrics = 0
+ repeated  modelIndex modelIndex = 0
+ }
+// Comprehensive metadata about the model
+message ModelDetails
+ {
+  string name = 0
+  string overview = 0
+  string documentation = 0
+ repeated  owner owners = 0
+  version version = 0
+ repeated  license licenses = 0
+ repeated  reference references = 0
+ repeated  citation citations = 0
+  string path = 0
+ }
+// Papers with Code model-index structure for benchmark tracking
+message ModelIndex
+ {
+  string name = 0
+ repeated  benchmarkResult results = 0
+ }
+// Parameters and specifications for model construction
+message ModelParameters
+ {
+  string modelArchitecture = 0
+ repeated  dataSet data = 0
+  string inputFormat = 0
+ repeated  keyVal inputFormatMap = 0
+  string outputFormat = 0
+ repeated  keyVal outputFormatMap = 0
+ }
+// Model owner or maintainer information
+message Owner
+ {
+  string name = 0
+  string contact = 0
+ }
+// A performance metric with optional confidence interval
+message PerformanceMetric
+ {
+  string type = 0
+  float value = 0
+  float valueError = 0
+  confidenceInterval confidenceInterval = 0
+  float threshold = 0
+  string slice = 0
+  string unit = 0
+ }
+// Quantitative analysis and performance evaluation of the model
+message QuantitativeAnalysis
+ {
+ repeated  performanceMetric performanceMetrics = 0
+  graphicsCollection graphics = 0
+ }
+// Reference to related resources
+message Reference
+ {
+  string reference = 0
+ }
+// An ethical, environmental, or operational risk
+message Risk
+ {
+  string name = 0
+  string mitigationStrategy = 0
+ }
+// Information about sensitive data in a dataset
+message SensitiveData
+ {
+ repeated  string sensitiveData = 0
+ }
+// ML task specification for benchmarking
+message Task
+ {
+  string type = 0
+  string name = 0
+ }
+// A performance tradeoff consideration
+message Tradeoff
+ {
+  string description = 0
+ }
+// Description of a use case or application scenario
+message UseCase
+ {
+  string description = 0
+ }
+// Description of an intended user type
+message User
+ {
+  string description = 0
+ }
+// Version information for a model
+message Version
+ {
+  string name = 0
+  date date = 0
+  string diff = 0
+ }
