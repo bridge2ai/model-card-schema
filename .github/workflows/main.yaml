@@ -28,13 +28,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       #----------------------------------------------
-      #          install & configure poetry
+      #          configure poetry (pre-installed on runner)
       #----------------------------------------------
-      - name: Install Poetry
-        uses: snok/install-poetry@v1.3
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+      - name: Configure Poetry
+        run: |
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
 
       #----------------------------------------------
       #       load cached venv if cache exists
