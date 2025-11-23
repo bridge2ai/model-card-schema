@@ -28,10 +28,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       #----------------------------------------------
-      #          configure poetry (pre-installed on runner)
+      #          install & configure poetry via pip
       #----------------------------------------------
-      - name: Configure Poetry
+      - name: Install Poetry
         run: |
+          python -m pip install --upgrade pip
+          pip install poetry
           poetry config virtualenvs.create true
           poetry config virtualenvs.in-project true
 
