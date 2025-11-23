@@ -275,9 +275,9 @@ quantitative_analysis:
       - "Spatial coverage: Global, all seasons"
       - "Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts"
 
-    baselines: |
-      - ClimateNet-v1 (ResNet-34, single-task): IoU 0.78 (TC), 0.72 (AR)
-      - Traditional methods (TECA): IoU 0.61 (TC), 0.58 (AR)
+    baselines:
+      - "ClimateNet-v1 (ResNet-34, single-task): IoU 0.78 (TC), 0.72 (AR)"
+      - "Traditional methods (TECA): IoU 0.61 (TC), 0.58 (AR)"
 
     sota_comparison: |
       ClimateNet-v2 achieves state-of-the-art performance for automated extreme
