@@ -365,7 +365,13 @@ slots:
     description: URL reference
     range: uri
 
-  # KOGUT Template Extension Slots
+  # ===========================
+  # End of Base Slots
+  # ===========================
+
+  # ===========================
+  # Model Card Extended Template Slots
+  # ===========================
 
   # License slots (extended)
   license_name:
@@ -717,7 +723,7 @@ classes:
         range: string
         required: true
       short_description:
-        description: Brief one-line description of the model (for KOGUT template)
+        description: Brief one-line description of the model (for extended template)
         range: string
       overview:
         description: High-level description of what the model does
@@ -730,7 +736,7 @@ classes:
         range: owner
         multivalued: true
       contributors:
-        description: Model contributors with role-based attribution (KOGUT)
+        description: Model contributors with role-based attribution (extended template)
         range: Contributor
         multivalued: true
       version:
@@ -874,10 +880,10 @@ classes:
         range: KeyVal
         multivalued: true
       compute_infrastructure:
-        description: Compute infrastructure used for training (KOGUT)
+        description: Compute infrastructure used for training (extended template)
         range: ComputeInfrastructure
       training_procedure:
-        description: Training procedure and methodology (KOGUT)
+        description: Training procedure and methodology (extended template)
         range: TrainingProcedure
 
   # ========== Performance & Quantitative Analysis ==========
@@ -944,7 +950,7 @@ classes:
         description: Performance visualizations and plots
         range: GraphicsCollection
       evaluation_procedure:
-        description: Detailed evaluation procedure (KOGUT)
+        description: Detailed evaluation procedure (extended template)
         range: EvaluationProcedure
 
   # ========== Considerations ==========
@@ -1029,7 +1035,7 @@ classes:
         range: risk
         multivalued: true
       out_of_scope_uses:
-        description: Explicitly discouraged or prohibited uses (KOGUT)
+        description: Explicitly discouraged or prohibited uses (extended template)
         range: OutOfScopeUse
         multivalued: true
 
@@ -1149,7 +1155,7 @@ classes:
         range: BenchmarkResult
         multivalued: true
 
-  # ========== KOGUT Extensions ==========
+  # ========== Model Card Extended Template Classes ==========
 
   Contributor:
     description: Contributor information with role-based attribution
@@ -1431,7 +1437,7 @@ classes:
       # Benchmark integration (Papers with Code)
       - model_index
 
-      # KOGUT extensions
+      # Extended template fields
       - mission_relevance
       - usage_documentation
 
@@ -1502,10 +1508,10 @@ classes:
         range: ModelIndex
         multivalued: true
 
-      # KOGUT extensions
+      # Extended template fields
       mission_relevance:
-        description: Relevance to DOE mission and facilities (KOGUT)
+        description: Relevance to DOE mission and facilities (extended template)
         range: MissionRelevance
       usage_documentation:
-        description: Comprehensive usage documentation with examples (KOGUT)
+        description: Comprehensive usage documentation with examples (extended template)
         range: UsageDocumentation
