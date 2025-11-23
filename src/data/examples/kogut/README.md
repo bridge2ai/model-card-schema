@@ -83,7 +83,7 @@ This example demonstrates **100% coverage** of KOGUT template fields:
 | Model Details → License | `model_details.licenses` | Lines 70-73 |
 | Compute Infrastructure → Hardware | `model_parameters.compute_infrastructure.hardware_list` | Lines 142-145 |
 | Compute Infrastructure → Software | `model_parameters.compute_infrastructure.software_dependencies` | Lines 151-165 |
-| Training → Dataset | `model_parameters.data` | Lines 117-131 |
+| Training → Dataset | `model_parameters.data` | Lines 112-123 |
 | Training → Procedure | `model_parameters.training_procedure` | Lines 172-246 |
 | Training → Reproducibility | `training_procedure.reproducibility_info` | Lines 222-246 |
 | Evaluation → Metrics | `quantitative_analysis.performance_metrics` | Lines 254-283 |
