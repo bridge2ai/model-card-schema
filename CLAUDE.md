@@ -8,25 +8,38 @@ This is a LinkML schema repository for Model Cards as described in the paper "Mo
 
 The project uses the LinkML (Linked Data Modeling Language) framework to define schemas that can be automatically compiled into multiple target formats (JSON Schema, Python datamodels, SQL, GraphQL, OWL, etc.).
 
+**Current Status**: The schema has been comprehensively enhanced to 100% Google Model Card Toolkit v0.0.2 coverage plus HuggingFace and Papers with Code integration. A harmonization analysis with the Datasheets for Datasets schema has been completed, with a proposed harmonized schema available.
+
 ## Architecture
 
 ### Schema Source Files
 
-**Primary Schema**: **`src/linkml/modelcards.yaml`** - Comprehensive LinkML schema incorporating:
-- **Google Model Card Toolkit v0.0.2** - Complete implementation with all core classes
-- **HuggingFace Model Cards** - Community metadata fields (framework, pipeline_tag, base_model, etc.)
+**Primary Schema**: **`src/linkml/modelcards.yaml`** (967 lines, 27 classes)
+- **Google Model Card Toolkit v0.0.2** - Complete 100% implementation
+- **HuggingFace Model Cards** - Community metadata (framework, pipeline_tag, base_model, tags, datasets, metrics)
 - **Papers with Code** - Benchmark integration (model-index structure)
 
-The schema includes 27 classes organized into functional groups:
+The schema includes 27 classes organized into 8 functional groups:
 
-**Core Metadata**: Version, License, owner, Reference, Citation
-**Model Details**: ModelDetails (with overview, documentation, owners, version, licenses, references, citations)
-**Datasets**: dataSet, SensitiveData, GraphicsCollection, graphic
-**Model Parameters**: ModelParameters, KeyVal
-**Performance**: performanceMetric, ConfidenceInterval, QuantitativeAnalysis
-**Considerations**: User, UseCase, Limitation, Tradeoff, risk, Considerations
-**Benchmarking**: Task, BenchmarkDataset, BenchmarkMetric, BenchmarkSource, BenchmarkResult, ModelIndex
-**Root**: modelCard
+1. **Core Metadata** (5): Version, License, owner, Reference, Citation
+2. **Model Details** (1): ModelDetails (overview, documentation, owners, version, licenses, references, citations, path)
+3. **Datasets** (4): dataSet, SensitiveData, GraphicsCollection, graphic
+4. **Model Parameters** (2): ModelParameters, KeyVal
+5. **Performance** (3): performanceMetric, ConfidenceInterval, QuantitativeAnalysis
+6. **Considerations** (6): User, UseCase, Limitation, Tradeoff, risk, Considerations
+7. **Benchmarking** (5): Task, BenchmarkDataset, BenchmarkMetric, BenchmarkSource, BenchmarkResult, ModelIndex
+8. **Root** (1): modelCard
+
+**Harmonized Schema**: **`src/linkml/modelcards_harmonized.yaml`** (1,200+ lines)
+- Proposed schema integrating with Datasheets for Datasets
+- Imports datasheets schema for comprehensive dataset documentation (60+ classes)
+- Replaces simple `owner` with datasheets Creator/Person/Organization (ORCID, CRediT roles)
+- Replaces simple `dataSet` with datasheets Dataset reference (most critical change)
+- Adds provenance tracking (created_by, modified_by, timestamps, was_derived_from)
+- Adds funding and maintainer references
+- Enhanced ethics with datasheets PrivacyAndSecurity
+- Includes comprehensive migration guide and inline documentation
+- See `ALIGNMENT_ANALYSIS.md` for detailed rationale
 
 **Legacy Schema**: `src/modelcards/schema/modelcards.yaml` exists but is a minimal stub version.
 
@@ -161,6 +174,44 @@ The enhanced schema provides comprehensive model card capabilities:
 - Source attribution
 - Leaderboard compatibility
 
+## Harmonization with Datasheets for Datasets
+
+### Documentation
+
+**ALIGNMENT_ANALYSIS.md** (50,000+ words) - Comprehensive analysis documenting:
+- Element-by-element comparison between model cards and datasheets schemas
+- 9 category alignment analysis (metadata, creators, licensing, datasets, privacy, ethics, uses, versioning, file formats)
+- Overall alignment: ~25% (excluding model-specific elements)
+- Critical gap: Model cards has minimal dataset documentation (1 class, 7 fields) vs datasheets' comprehensive framework (60+ classes, 200+ fields)
+
+### Seven Harmonization Actions
+
+1. **Replace `owner` → datasheets `Creator`** - Use Person/Organization with ORCID, CRediT roles
+2. **Replace `dataSet` → datasheets `Dataset`** - Most critical: leverage comprehensive dataset documentation
+3. **Enhanced Licensing** - Add datasheets LicensingAndIntellectualProperty for IP/regulatory controls
+4. **Enhanced Ethics** - Reference datasheets PrivacyAndSecurity for GDPR/CCPA compliance
+5. **Provenance Tracking** - Add created_by, modified_by, timestamps, was_derived_from
+6. **Funding Information** - Reference datasheets Grant for transparency
+7. **Maintainer Information** - Distinguish creators from current maintainers
+
+### Implementation Roadmap
+
+- **Phase 1** (Months 1-2): Foundation - Import datasheets, add new slots
+- **Phase 2** (Months 3-6): Core harmonization - Implement creator/dataset replacements
+- **Phase 3** (Months 7-8): Advanced features - Ethics, provenance, funding integration
+- **Phase 4** (Month 9): Ecosystem integration - Release v2.0
+
+### Key Benefit
+
+Single source of truth: Datasets documented once with datasheets (comprehensive 60+ class framework), referenced by many model cards. Eliminates duplication while maintaining model-specific focus.
+
+## Related Repository
+
+**Datasheets for Datasets Schema**: `/Users/marcin/Documents/VIMSS/ontology/bridge2ai/data-sheets-schema/`
+- Schema location: `src/data_sheets_schema/schema/data_sheets_schema_all.yaml`
+- 22,459 lines, 60+ classes for comprehensive dataset documentation
+- Based on "Datasheets for Datasets" framework (Gebru et al., 2018)
+
 ## Important Notes
 
 - The project follows the LinkML project cookiecutter structure
@@ -169,3 +220,4 @@ The enhanced schema provides comprehensive model card capabilities:
 - Generated Python datamodels must be manually copied to `src/modelcards/datamodel/` after generation
 - The schema passes linting with minor naming convention warnings (stylistic only, not functional)
 - Runtime dependencies (linkml-runtime, jsonasobj2) required for Python datamodel usage
+- Two schema versions available: `modelcards.yaml` (current production) and `modelcards_harmonized.yaml` (proposed with datasheets integration)
