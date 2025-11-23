@@ -1386,6 +1386,7 @@ classes:
       benchmarks:
         description: Benchmark datasets and tasks
         range: string
+        multivalued: true
       baselines:
         description: Baseline models compared against
         range: string
