@@ -270,10 +270,10 @@ quantitative_analysis:
       Evaluated on held-out climate model simulations not seen during training.
       Metrics: Intersection over Union (IoU) for segmentation, mean Average Precision (mAP) for detection.
 
-    benchmarks: |
-      - Test set: 3 climate models (E3SM v2, MPAS-A, GFDL CM4) × 10 years
-      - Spatial coverage: Global, all seasons
-      - Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts
+    benchmarks:
+      - "Test set: 3 climate models (E3SM v2, MPAS-A, GFDL CM4) × 10 years"
+      - "Spatial coverage: Global, all seasons"
+      - "Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts"
 
     baselines: |
       - ClimateNet-v1 (ResNet-34, single-task): IoU 0.78 (TC), 0.72 (AR)
