@@ -212,23 +212,63 @@ Single source of truth: Datasets documented once with datasheets (comprehensive 
 - 22,459 lines, 60+ classes for comprehensive dataset documentation
 - Based on "Datasheets for Datasets" framework (Gebru et al., 2018)
 
-## Integration Examples
+## Datasheets Integration Implementation
 
-**Location**: `src/data/examples/harmonized/`
+### Documentation Suite
 
-Practical examples demonstrating Model Cards + Datasheets integration:
+**Primary Guides**:
+- **MIGRATION_GUIDE.md** - Step-by-step migration guide for users (start here)
+- **INTEGRATION_GUIDE.md** - Technical integration patterns and roadmap
+- **ALIGNMENT_ANALYSIS.md** - Comprehensive 50,000+ word schema analysis
 
-1. **sentiment-classifier-with-datasheet-refs.yaml** - Complete model card using Pattern 1 (external references)
-2. **imdb-sentiment-datasheet-v1.yaml** - Complete datasheet showing comprehensive dataset documentation
-3. **README.md** - Usage guide for integration examples
+### Utilities (`utils/`)
 
-**Integration Approach (Phase 1 - Current)**:
-- Uses external references to avoid schema naming conflicts
-- Model cards reference datasheets via URL
-- Datasets documented separately with full Datasheets schema
-- Clean separation of concerns, no breaking changes
+**Migration Tool** - `utils/migrate_to_harmonized.py`:
+- Automates conversion of existing model cards
+- Creates datasheet stubs for each dataset
+- Handles `language` → `model_language` renaming
+- Preserves backward compatibility
+- Usage: `python utils/migrate_to_harmonized.py input.yaml output.yaml`
 
-See `INTEGRATION_GUIDE.md` for detailed integration patterns and roadmap.
+**Validation Tool** - `utils/validate_integration.py`:
+- Validates model cards and datasheet references
+- Checks datasheet completeness (TODO markers)
+- Verifies migration status
+- Usage: `python utils/validate_integration.py model_card.yaml`
+
+See `utils/README.md` for complete tool documentation.
+
+### Integration Examples (`src/data/examples/harmonized/`)
+
+**sentiment-classifier-with-datasheet-refs.yaml**:
+- Complete model card using Pattern 1 (external references)
+- Shows how to reference datasheets without schema imports
+- Demonstrates backward compatibility
+
+**imdb-sentiment-datasheet-v1.yaml**:
+- Complete dataset documentation using Datasheets format
+- Shows all major sections (60+ fields)
+- Referenced by the model card example
+
+**README.md**:
+- Usage guide and integration workflows
+- Pattern comparisons
+- Validation instructions
+
+### Integration Approach (Implemented)
+
+**Phase 1** (COMPLETED):
+- ✅ External references pattern (no schema conflicts)
+- ✅ Migration and validation utilities
+- ✅ Complete examples and documentation
+- ✅ Naming conflicts identified and documented
+
+**Phase 2-4** (Future):
+- Resolve remaining naming conflicts (language slot)
+- Full schema import support
+- Advanced tooling and validation
+
+**Current Recommendation**: Use Pattern 1 (external references) for immediate adoption.
 
 ## Important Notes
 

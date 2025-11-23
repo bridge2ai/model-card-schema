@@ -386,7 +386,7 @@ slots:
     description: Task type (text-generation, image-classification, etc.)
     range: string
 
-  language:
+  model_language:
     description: Natural language(s) processed by the model
     multivalued: true
     range: string
@@ -1068,7 +1068,7 @@ classes:
       - framework_version
       - library_name
       - pipeline_tag
-      - language
+      - model_language
       - base_model
       - tags
       - datasets
@@ -1128,7 +1128,7 @@ classes:
       pipeline_tag:
         description: Task type for pipeline usage
         range: string
-      language:
+      model_language:
         description: Natural language(s) processed by the model
         multivalued: true
         range: string
