@@ -1,0 +1,549 @@
+# Model Card Extended Template Example
+# Demonstrates all extended template features for DOE scientific models
+# Schema: src/linkml/modelcards.yaml (extended)
+
+schema_version: "2.0.0-extended"
+
+# ========== MODEL DETAILS ==========
+
+model_details:
+  name: "ClimateNet-v2"
+
+  short_description: "Deep learning model for extreme weather event detection in climate simulation data"
+
+  overview: |
+    ClimateNet-v2 is a deep convolutional neural network trained to identify and segment
+    extreme weather events (tropical cyclones, atmospheric rivers, weather fronts) in high-resolution
+    climate model output. The model processes multi-variable atmospheric data to produce pixel-wise
+    classifications and bounding boxes for weather phenomena.
+
+    This model supports DOE's climate science mission by enabling automated analysis of
+    petabyte-scale climate simulation datasets generated at DOE supercomputing facilities.
+
+  documentation: |
+    ## Model Architecture
+    - Base: ResNet-50 backbone with Feature Pyramid Network (FPN)
+    - Task heads: Semantic segmentation + object detection
+    - Input: 768x768 patches, 16 atmospheric variables
+    - Output: Pixel-wise labels (4 classes) + bounding boxes
+
+    ## Training Details
+    See model_parameters section for complete training configuration.
+
+    ## Citation
+    See citations section below.
+
+  # Extended template: Role-based contributor attribution
+  contributors:
+    - name: "Jane Doe"
+      role: developed_by
+      email: "jane.doe@lbl.gov"
+      orcid: "https://orcid.org/0000-0002-1234-5678"
+      affiliation: "Lawrence Berkeley National Laboratory"
+
+    - name: "John Smith"
+      role: contributed_by
+      email: "jsmith@anl.gov"
+      orcid: "https://orcid.org/0000-0003-9876-5432"
+      affiliation: "Argonne National Laboratory"
+
+    - name: "Climate AI Team"
+      role: maintained_by
+      email: "climate-ai@lbl.gov"
+      affiliation: "LBNL Climate & Ecosystem Sciences Division"
+
+    - name: "DOE Office of Science"
+      role: funded_by
+      affiliation: "U.S. Department of Energy"
+
+  version:
+    name: "v2.0.0"
+    date: "2024-11-15"
+    diff: |
+      - Upgraded to ResNet-50 from ResNet-34
+      - Added atmospheric river detection capability
+      - Improved tropical cyclone boundary accuracy by 15%
+      - Trained on 3x more data (12 vs 4 climate models)
+    last_updated: "2024-11-20T14:30:00Z"
+
+  licenses:
+    - identifier: "BSD-3-Clause"
+      license_name: "BSD 3-Clause License"
+      license_link: "https://opensource.org/licenses/BSD-3-Clause"
+
+  citations:
+    - style: IEEE
+      citation: |
+        J. Doe, J. Smith, et al., "ClimateNet-v2: Deep Learning for Extreme Weather
+        Event Detection in Climate Simulations," in Proc. SC24: International Conference
+        for High Performance Computing, Networking, Storage and Analysis, 2024, pp. 1-12.
+
+  references:
+    - reference: "https://github.com/lbnl-climate/climatenet-v2"
+    - reference: "https://climatenet.lbl.gov"
+
+# ========== MODEL PARAMETERS ==========
+
+model_parameters:
+  model_architecture: |
+    ResNet-50 Feature Pyramid Network (FPN) with dual-head architecture:
+
+    Backbone:
+    - ResNet-50 pretrained on ImageNet
+    - Modified first conv layer: 16 input channels (atmospheric variables)
+    - Feature maps at 5 scales: C2, C3, C4, C5
+
+    FPN:
+    - Top-down pathway with lateral connections
+    - Output: P2 (1/4), P3 (1/8), P4 (1/16), P5 (1/32)
+
+    Segmentation Head:
+    - 4x upsampling from P2
+    - 3x3 conv → ReLU → 1x1 conv → 4-way softmax
+    - Output: (H, W, 4) segmentation mask
+
+    Detection Head:
+    - Region Proposal Network (RPN) on P3-P5
+    - ROI Align + Fast R-CNN classifier
+    - Output: Bounding boxes + confidence scores
+
+    Total parameters: 38.5M
+
+  data:
+    - name: "CAM5.1 High-Resolution"
+      description: "Community Atmosphere Model v5.1, 0.25° resolution"
+      link: "https://www.cesm.ucar.edu/models/cam"
+
+    - name: "E3SM v2 High-Resolution"
+      description: "Energy Exascale Earth System Model v2, 0.25° resolution"
+      link: "https://e3sm.org"
+
+    - name: "MPAS-A 15km"
+      description: "Model for Prediction Across Scales - Atmosphere, 15km mesh"
+      link: "https://mpas-dev.github.io"
+
+  input_format: |
+    Multi-channel atmospheric state patches:
+    - Shape: (768, 768, 16)
+    - Channels (16 pressure levels): T, U, V, Q, Z, PSL, TMQ, PRECT
+    - Normalization: Z-score per variable using training set statistics
+    - Format: HDF5 with chunking optimized for patch extraction
+
+  output_format: |
+    Segmentation + Detection:
+    - Segmentation mask: (768, 768) uint8, values: {0: background, 1: TC, 2: AR, 3: front}
+    - Bounding boxes: List of (x1, y1, x2, y2, class_id, confidence)
+    - Format: HDF5 or GeoTIFF for spatial data
+
+  # Extended template: Compute infrastructure
+  compute_infrastructure:
+    hardware: "NERSC Perlmutter GPU nodes"
+    hardware_list:
+      - "64 nodes × 4 NVIDIA A100 40GB GPUs = 256 GPUs total"
+      - "AMD EPYC 7763 (Milan) CPUs, 512 GB RAM per node"
+      - "Slingshot-11 interconnect"
+
+    software: |
+      - PyTorch 2.1.0 with CUDA 12.1
+      - Horovod 0.28.1 for distributed training
+      - NVIDIA Apex for mixed precision
+      - Python 3.10, conda environment
+
+    software_dependencies: |
+      # Full environment (conda list):
+      pytorch=2.1.0=py310_cuda12.1_cudnn8.9.0_0
+      torchvision=0.16.0
+      horovod=0.28.1
+      nvidia-apex (git+https://github.com/NVIDIA/apex.git@23.08)
+      h5py=3.9.0
+      xarray=2023.8.0
+      dask=2023.9.0
+      pandas=2.1.0
+      numpy=1.24.3
+      scikit-learn=1.3.0
+
+      # See environment.yml for complete specification
+
+    training_speed: |
+      - Throughput: ~2,100 patches/second (global batch size 512)
+      - Epoch time: 3.2 hours (1.5M training patches)
+      - Total training time: 128 hours (40 epochs) on 256 A100 GPUs
+      - Effective: 32,768 GPU-hours
+
+  # Extended template: Training procedure
+  training_procedure:
+    description: |
+      Supervised training on labeled climate simulation data with standard SGD optimization.
+      Data augmentation: random crops, flips, rotations. Mixed precision (FP16) training.
+
+    methodology: |
+      1. Data Preparation:
+         - Extract 768x768 patches from global climate model output
+         - Expert-labeled masks for TC, AR, front events
+         - Train/val/test split: 70/15/15 by simulation year
+
+      2. Distributed Training:
+         - Data-parallel training across 256 GPUs using Horovod
+         - Gradient accumulation: 2 steps (effective batch size 512)
+         - Learning rate scaling: base_lr × sqrt(world_size)
+
+      3. Loss Function:
+         - Segmentation: Weighted cross-entropy (class balancing)
+         - Detection: RPN classification + regression losses
+         - Total loss: λ_seg × L_seg + λ_det × L_det (λ_seg=1.0, λ_det=0.5)
+
+      4. Regularization:
+         - Weight decay: 1e-4
+         - Dropout: 0.1 in detection head
+         - Label smoothing: 0.1
+
+      5. Validation:
+         - Evaluate every 2 epochs
+         - Early stopping: patience=5 epochs (no improvement in val IoU)
+
+    reproducibility_info:
+      random_seed: 42
+
+      environment_config: |
+        # Conda environment specification
+        See software_dependencies above and environment.yml in repository.
+
+      pipeline_url: "https://github.com/lbnl-climate/climatenet-v2/blob/main/training/train.py"
+
+      hyperparameters:
+        model_initialization: "ResNet-50 ImageNet pretrained (modified first layer)"
+
+        optimizer: "AdamW"
+        learning_rate: 0.0001
+        batch_size: 2  # per-GPU batch size
+        training_epochs: 40
+        training_steps: 24000  # 600 steps/epoch × 40 epochs
+
+        stopping_criterion: "Early stopping: 5 epochs no improvement in validation IoU"
+
+        optimization_techniques:
+          - "Mixed precision (FP16) with NVIDIA Apex"
+          - "Gradient clipping: max_norm=1.0"
+          - "Cosine annealing learning rate schedule (T_max=40 epochs)"
+          - "Warmup: 2 epochs linear ramp from 0 to base_lr"
+
+        loss_function: |
+          Segmentation: Weighted cross-entropy
+          Detection: RPN classification (cross-entropy) + regression (smooth L1)
+
+# ========== QUANTITATIVE ANALYSIS ==========
+
+quantitative_analysis:
+  performance_metrics:
+    - type: "IoU (Tropical Cyclones)"
+      value: 0.847
+      confidence_interval:
+        lower_bound: 0.841
+        upper_bound: 0.853
+      slice: "Test set (E3SM v2)"
+
+    - type: "IoU (Atmospheric Rivers)"
+      value: 0.782
+      confidence_interval:
+        lower_bound: 0.774
+        upper_bound: 0.790
+      slice: "Test set (E3SM v2)"
+
+    - type: "IoU (Weather Fronts)"
+      value: 0.691
+      confidence_interval:
+        lower_bound: 0.681
+        upper_bound: 0.701
+      slice: "Test set (E3SM v2)"
+
+    - type: "Detection mAP@0.5"
+      value: 0.823
+      slice: "Test set (all events)"
+
+    - type: "Inference throughput"
+      value: 125.3
+      unit: "patches/second (single A100 GPU)"
+
+  # Extended template: Evaluation procedure
+  evaluation_procedure:
+    description: |
+      Evaluated on held-out climate model simulations not seen during training.
+      Metrics: Intersection over Union (IoU) for segmentation, mean Average Precision (mAP) for detection.
+
+    benchmarks:
+      - "Test set: 3 climate models (E3SM v2, MPAS-A, GFDL CM4) × 10 years"
+      - "Spatial coverage: Global, all seasons"
+      - "Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts"
+
+    baselines:
+      - "ClimateNet-v1 (ResNet-34, single-task): IoU 0.78 (TC), 0.72 (AR)"
+      - "Traditional methods (TECA): IoU 0.61 (TC), 0.58 (AR)"
+
+    sota_comparison: |
+      ClimateNet-v2 achieves state-of-the-art performance for automated extreme
+      weather detection in climate simulations, improving upon:
+      - ClimateNet-v1 (Prabhat et al., 2021): +8.6% IoU for TC, +8.6% for AR
+      - WeatherBench baselines: +15% IoU across all event types
+
+    uncertainty_quantification: |
+      Confidence intervals computed via bootstrap resampling (10,000 iterations).
+      Model ensemble (5 runs with different random seeds) shows σ=0.012 in mean IoU.
+
+    evaluation_data_separate: true
+
+# ========== CONSIDERATIONS ==========
+
+considerations:
+  users:
+    - description: "Climate scientists analyzing extreme weather in climate model output"
+    - description: "DOE researchers studying climate change impacts"
+    - description: "Machine learning researchers developing weather/climate AI models"
+
+  use_cases:
+    - description: "Automated tropical cyclone tracking in multi-decadal climate simulations"
+    - description: "Atmospheric river detection for water resource management studies"
+    - description: "Weather front identification for weather pattern analysis"
+    - description: "Extreme event frequency analysis under different climate scenarios"
+
+  limitations:
+    - description: |
+        Model trained on coarse-resolution climate models (≥15km). May not generalize
+        well to convection-permitting scales (<4km).
+
+    - description: |
+        Limited to atmospheric phenomena. Does not detect ocean or land surface extremes
+        (marine heatwaves, droughts, wildfires).
+
+    - description: |
+        Detection accuracy degrades in polar regions due to limited training data
+        at high latitudes (>70°).
+
+  tradeoffs:
+    - description: |
+        Segmentation accuracy vs. inference speed: Higher resolution (1536×1536) improves
+        IoU by 3% but reduces throughput to 45 patches/second.
+
+    - description: |
+        Model size vs. accuracy: Lighter backbone (ResNet-34) is 40% faster but
+        IoU drops by 5%.
+
+  ethical_considerations:
+    - name: "Climate justice implications"
+      mitigation_strategy: |
+        Ensure detection performance is equitable across different geographic regions,
+        including underrepresented areas. Validate on regional models for Global South.
+
+    - name: "Model uncertainty communication"
+      mitigation_strategy: |
+        Always report confidence intervals. Clearly communicate that model is trained
+        on simulations, not observations.
+
+  # Extended template: Out-of-scope uses
+  out_of_scope_uses:
+    - description: |
+        Real-time weather forecasting: Model is designed for climate model analysis,
+        not operational weather prediction. Use specialized forecast models instead.
+
+    - description: |
+        Direct application to satellite imagery: Model trained on climate model output,
+        not satellite observations. Requires domain adaptation/retraining for satellite data.
+
+    - description: |
+        Attribution of individual extreme events to climate change: This model detects
+        events but does not perform attribution. Use dedicated attribution frameworks.
+
+# ========== HUGGINGFACE / COMMUNITY METADATA ==========
+
+framework: "PyTorch"
+framework_version: "2.1.0"
+library_name: "climatenet"
+pipeline_tag: "image-segmentation"
+
+tags:
+  - "climate"
+  - "extreme-weather"
+  - "segmentation"
+  - "object-detection"
+  - "scientific-ml"
+  - "doe"
+  - "nersc"
+
+# ========== Extended Template: DOE MISSION RELEVANCE ==========
+
+mission_relevance:
+  doe_project: "Climate Model Development and Validation (CMDV)"
+
+  doe_facility: "NERSC Perlmutter"
+
+  funding_source: |
+    DOE Office of Science, Biological and Environmental Research (BER)
+    Grant: DE-AC02-05CH11231
+
+  description: |
+    This work directly supports DOE's mission to advance climate science and
+    high-performance computing. ClimateNet-v2 enables analysis of multi-petabyte
+    climate datasets generated by DOE's Energy Exascale Earth System Model (E3SM)
+    on leadership computing facilities (NERSC, ALCF, OLCF).
+
+    Impact areas:
+    - Accelerates scientific discovery in climate extremes research
+    - Reduces computational burden for climate model analysis (1000× speedup vs. manual)
+    - Demonstrates AI for Science at DOE facilities
+    - Supports DOE's commitment to open science and reproducible research
+
+# ========== Extended Template: USAGE DOCUMENTATION ==========
+
+usage_documentation:
+  installation_instructions: |
+    ## Installation
+
+    ### Option 1: Conda (Recommended)
+    ```bash
+    # Clone repository
+    git clone https://github.com/lbnl-climate/climatenet-v2.git
+    cd climatenet-v2
+
+    # Create conda environment
+    conda env create -f environment.yml
+    conda activate climatenet-v2
+
+    # Install package
+    pip install -e .
+    ```
+
+    ### Option 2: Docker
+    ```bash
+    docker pull ghcr.io/lbnl-climate/climatenet-v2:latest
+    docker run -it --gpus all ghcr.io/lbnl-climate/climatenet-v2:latest
+    ```
+
+    ### Option 3: NERSC Module
+    ```bash
+    module load climatenet/2.0.0
+    ```
+
+    ## Model Checkpoint
+    ```bash
+    # Download pretrained weights (650 MB)
+    wget https://climatenet.lbl.gov/models/climatenet-v2.0.0.pth
+    ```
+
+  training_configuration: |
+    ## Training Configuration
+
+    Reproduce training on NERSC Perlmutter:
+
+    ```bash
+    # Request GPU nodes
+    salloc -N 64 -C gpu -q regular -t 4:00:00 -A m1234
+
+    # Launch training
+    srun -N 64 --ntasks-per-node=4 --gpus-per-task=1 \
+      python training/train.py \
+        --config configs/resnet50_fpn.yaml \
+        --data-path /pscratch/sd/u/user/climatenet_data \
+        --output-dir /pscratch/sd/u/user/climatenet_output \
+        --seed 42
+    ```
+
+    See `configs/resnet50_fpn.yaml` for all hyperparameters.
+
+  inference_configuration: |
+    ## Inference Configuration
+
+    Run inference on climate model output:
+
+    ```bash
+    python inference/predict.py \
+      --model-checkpoint climatenet-v2.0.0.pth \
+      --input-file /path/to/climate_model_output.nc \
+      --output-file /path/to/predictions.h5 \
+      --batch-size 32 \
+      --device cuda:0
+    ```
+
+    ### Batch Processing
+    ```bash
+    # Process all files in directory
+    python inference/batch_predict.py \
+      --model-checkpoint climatenet-v2.0.0.pth \
+      --input-dir /path/to/climate_data/ \
+      --output-dir /path/to/predictions/ \
+      --num-workers 8
+    ```
+
+  code_examples:
+    - code: |
+        import torch
+        from climatenet.models import ClimateNetV2
+        from climatenet.data import load_climate_patch
+
+        # Load model
+        model = ClimateNetV2.from_pretrained('climatenet-v2.0.0.pth')
+        model.eval()
+        model.cuda()
+
+        # Load data patch
+        patch = load_climate_patch('sample_data.nc')  # shape: (16, 768, 768)
+        patch = torch.from_numpy(patch).unsqueeze(0).cuda()
+
+        # Run inference
+        with torch.no_grad():
+            outputs = model(patch)
+
+        # Extract results
+        segmentation_mask = outputs['segmentation'].argmax(dim=1)  # (1, 768, 768)
+        bounding_boxes = outputs['detections']  # List of (x1, y1, x2, y2, class, conf)
+
+        print(f"Detected {len(bounding_boxes)} events")
+        print(f"Segmentation shape: {segmentation_mask.shape}")
+      code_language: "python"
+      description: "Basic inference example: Load model and run prediction on a single patch"
+
+    - code: |
+        from climatenet.evaluation import compute_metrics
+        from climatenet.data import ClimateDataset
+
+        # Load test dataset
+        test_dataset = ClimateDataset(
+            data_path='/path/to/test_data',
+            split='test'
+        )
+
+        # Compute metrics
+        metrics = compute_metrics(
+            model=model,
+            dataset=test_dataset,
+            device='cuda',
+            num_workers=4
+        )
+
+        print(f"Tropical Cyclone IoU: {metrics['tc_iou']:.3f}")
+        print(f"Atmospheric River IoU: {metrics['ar_iou']:.3f}")
+        print(f"Weather Front IoU: {metrics['front_iou']:.3f}")
+        print(f"Detection mAP@0.5: {metrics['map_050']:.3f}")
+      code_language: "python"
+      description: "Evaluation example: Compute metrics on test dataset"
+
+    - code: |
+        #!/bin/bash
+        # Batch processing script for NERSC
+
+        #SBATCH -N 1
+        #SBATCH -C gpu
+        #SBATCH -q regular
+        #SBATCH -t 02:00:00
+        #SBATCH -A m1234
+
+        module load climatenet/2.0.0
+
+        # Process all files in directory
+        for file in /pscratch/sd/u/user/climate_data/*.nc; do
+            srun -n 1 python inference/predict.py \
+                --model-checkpoint $SCRATCH/climatenet-v2.0.0.pth \
+                --input-file "$file" \
+                --output-file "${file%.nc}_predictions.h5" \
+                --device cuda:0
+        done
+      code_language: "bash"
+      description: "Batch processing script for SLURM (NERSC Perlmutter)"
