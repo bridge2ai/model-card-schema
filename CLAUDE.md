@@ -212,6 +212,24 @@ Single source of truth: Datasets documented once with datasheets (comprehensive 
 - 22,459 lines, 60+ classes for comprehensive dataset documentation
 - Based on "Datasheets for Datasets" framework (Gebru et al., 2018)
 
+## Integration Examples
+
+**Location**: `src/data/examples/harmonized/`
+
+Practical examples demonstrating Model Cards + Datasheets integration:
+
+1. **sentiment-classifier-with-datasheet-refs.yaml** - Complete model card using Pattern 1 (external references)
+2. **imdb-sentiment-datasheet-v1.yaml** - Complete datasheet showing comprehensive dataset documentation
+3. **README.md** - Usage guide for integration examples
+
+**Integration Approach (Phase 1 - Current)**:
+- Uses external references to avoid schema naming conflicts
+- Model cards reference datasheets via URL
+- Datasets documented separately with full Datasheets schema
+- Clean separation of concerns, no breaking changes
+
+See `INTEGRATION_GUIDE.md` for detailed integration patterns and roadmap.
+
 ## Important Notes
 
 - The project follows the LinkML project cookiecutter structure
@@ -220,4 +238,7 @@ Single source of truth: Datasets documented once with datasheets (comprehensive 
 - Generated Python datamodels must be manually copied to `src/modelcards/datamodel/` after generation
 - The schema passes linting with minor naming convention warnings (stylistic only, not functional)
 - Runtime dependencies (linkml-runtime, jsonasobj2) required for Python datamodel usage
-- Two schema versions available: `modelcards.yaml` (current production) and `modelcards_harmonized.yaml` (proposed with datasheets integration)
+- Three versions available:
+  - `modelcards.yaml` - Current production schema
+  - `modelcards_harmonized.yaml` - Proposed harmonized schema (conceptual, has naming conflicts)
+  - External reference pattern (recommended) - See examples in `src/data/examples/harmonized/`

@@ -26,12 +26,12 @@ imports:
 - linkml:types
 # HARMONIZATION ACTION 1: Import datasheets schema to access 60+ classes
 # This provides comprehensive dataset, creator, ethics, and provenance documentation
-- ../../data-sheets-schema/src/data_sheets_schema/schema/data_sheets_schema_all
+- ../../../data-sheets-schema/src/data_sheets_schema/schema/data_sheets_schema_all
 
 prefixes:
   modelcard: https://w3id.org/linkml/modelcard/
   linkml: https://w3id.org/linkml/
-  datasheets: https://w3id.org/linkml/datasheets/
+  data_sheets_schema: https://w3id.org/bridge2ai/data-sheets-schema/
 
 default_prefix: modelcard
 default_range: string
@@ -74,7 +74,7 @@ slots:
   # HARMONIZATION ACTION 6: Provenance tracking (from datasheets)
   created_by:
     description: Creator(s) who created this model card (references datasheets Person/Organization)
-    range: datasheets:Creator
+    range: Creator
     multivalued: true
     comments:
       - "Use datasheets Person or Organization classes for full creator attribution"
@@ -82,7 +82,7 @@ slots:
 
   modified_by:
     description: Person(s) who last modified this model card
-    range: datasheets:Person
+    range: Person
     multivalued: true
 
   created_on:
@@ -102,7 +102,7 @@ slots:
   # HARMONIZATION ACTION 7: Funding information (from datasheets)
   funded_by:
     description: Funding sources for model development (references datasheets Grant)
-    range: datasheets:Grant
+    range: Grant
     multivalued: true
     comments:
       - "Use datasheets Grant class for comprehensive funding documentation"
@@ -111,7 +111,7 @@ slots:
   # Maintainer information
   maintainer:
     description: Current maintainer(s) of the model (references datasheets Person/Organization)
-    range: datasheets:Creator
+    range: Creator
     multivalued: true
     comments:
       - "May differ from original creators"
@@ -166,7 +166,7 @@ slots:
   # HARMONIZATION ACTION 2: Replace 'owners' with 'creators' using datasheets classes
   creators:
     description: Model creators and contributors (references datasheets Creator/Person/Organization)
-    range: datasheets:Creator
+    range: Creator
     multivalued: true
     comments:
       - "Replaces the simple 'owner' class"
@@ -225,7 +225,7 @@ slots:
   # HARMONIZATION ACTION 3: Dataset references use datasheets Dataset class
   training_data:
     description: Training datasets (references datasheets Dataset)
-    range: datasheets:Dataset
+    range: Dataset
     multivalued: true
     comments:
       - "Replaces simple 'data' slot with references to comprehensive datasheets Dataset"
@@ -233,7 +233,7 @@ slots:
 
   evaluation_data:
     description: Evaluation/test datasets (references datasheets Dataset)
-    range: datasheets:Dataset
+    range: Dataset
     multivalued: true
     comments:
       - "Separate tracking for evaluation datasets"
@@ -329,7 +329,7 @@ slots:
   # HARMONIZATION ACTION 5: Enhanced ethics with datasheets references
   privacy_security:
     description: Privacy and security considerations (references datasheets PrivacyAndSecurity)
-    range: datasheets:PrivacyAndSecurity
+    range: Ethics
     comments:
       - "Comprehensive privacy documentation from datasheets"
       - "Includes PII analysis, anonymization, consent, regulatory compliance"
@@ -479,8 +479,8 @@ classes:
 
       HARMONIZATION NOTE: For comprehensive licensing including IP restrictions,
       regulatory controls, and export regulations, consider using:
-      - datasheets:LicensingAndIntellectualProperty class
-      - datasheets:RegulatoryRestrictions class
+      - data_sheets_schema:LicensingAndIntellectualProperty class
+      - data_sheets_schema:RegulatoryRestrictions class
     slots:
       - identifier
       - custom_text
@@ -500,7 +500,7 @@ classes:
   #   description: |-
   #     DEPRECATED - Use datasheets Person or Organization classes instead
   #
-  #     Migration: Replace references to 'owner' with datasheets:Person or datasheets:Organization
+  #     Migration: Replace references to 'owner' with data_sheets_schema:Person or data_sheets_schema:Organization
   #     Example:
   #       Old: owners: [{name: "John Doe", contact: "john@example.com"}]
   #       New: creators: [{given_name: "John", family_name: "Doe", email: "john@example.com", orcid: "0000-0001-..."}]
@@ -567,15 +567,15 @@ classes:
         range: string
       creators:
         description: Model creators and contributors (datasheets Person/Organization)
-        range: datasheets:Creator
+        range: Creator
         multivalued: true
         comments:
-          - "Use datasheets:Person for individuals with ORCID, roles, affiliations"
-          - "Use datasheets:Organization for institutions"
+          - "Use data_sheets_schema:Person for individuals with ORCID, roles, affiliations"
+          - "Use data_sheets_schema:Organization for institutions"
           - "Supports CRediT taxonomy for contributor roles"
       maintainer:
         description: Current model maintainer(s)
-        range: datasheets:Creator
+        range: Creator
         multivalued: true
       version:
         description: Version information
@@ -585,7 +585,7 @@ classes:
         range: License
         multivalued: true
         comments:
-          - "For comprehensive IP/regulatory licensing, also reference datasheets:LicensingAndIntellectualProperty"
+          - "For comprehensive IP/regulatory licensing, also reference data_sheets_schema:LicensingAndIntellectualProperty"
       references:
         description: References to related resources
         range: Reference
@@ -599,11 +599,11 @@ classes:
         range: string
       created_by:
         description: Who created this model card
-        range: datasheets:Creator
+        range: Creator
         multivalued: true
       modified_by:
         description: Who last modified this model card
-        range: datasheets:Person
+        range: Person
         multivalued: true
       created_on:
         description: When this model card was created
@@ -616,7 +616,7 @@ classes:
         range: string
       funded_by:
         description: Funding sources for model development
-        range: datasheets:Grant
+        range: Grant
         multivalued: true
 
   # ========== Dataset Classes ==========
@@ -667,7 +667,7 @@ classes:
   #   description: |-
   #     DEPRECATED - Use datasheets Dataset class instead
   #
-  #     Migration: Replace dataSet references with datasheets:Dataset
+  #     Migration: Replace dataSet references with data_sheets_schema:Dataset
   #
   #     The datasheets Dataset class provides comprehensive documentation:
   #     - Motivation section: Purpose, tasks, funding
@@ -736,7 +736,7 @@ classes:
         range: string
       training_data:
         description: Training datasets (references datasheets Dataset)
-        range: datasheets:Dataset
+        range: Dataset
         multivalued: true
         comments:
           - "Each dataset should be a complete datasheets Dataset instance"
@@ -744,7 +744,7 @@ classes:
           - "Replaces the simple 'dataSet' class"
       evaluation_data:
         description: Evaluation/test datasets (references datasheets Dataset)
-        range: datasheets:Dataset
+        range: Dataset
         multivalued: true
         comments:
           - "Separate from training data for clarity"
@@ -910,7 +910,7 @@ classes:
         multivalued: true
       privacy_security:
         description: Privacy and security considerations (from datasheets)
-        range: datasheets:PrivacyAndSecurity
+        range: Ethics
         comments:
           - "Comprehensive privacy/security documentation"
           - "Includes PII analysis, anonymization, consent, GDPR/CCPA compliance"
@@ -918,7 +918,7 @@ classes:
 
   # ========== Benchmark Integration (HuggingFace/Papers with Code) ==========
 
-  Task:
+  BenchmarkTask:
     description: ML task specification for benchmarking
     slots:
       - type
@@ -1006,7 +1006,7 @@ classes:
     slot_usage:
       task:
         description: Task that was evaluated
-        range: Task
+        range: BenchmarkTask
       dataset:
         description: Dataset used for evaluation
         range: BenchmarkDataset
@@ -1157,11 +1157,11 @@ classes:
       # Provenance tracking
       created_by:
         description: Creator(s) of this model card document
-        range: datasheets:Creator
+        range: Creator
         multivalued: true
       modified_by:
         description: Person(s) who last modified this model card
-        range: datasheets:Person
+        range: Person
         multivalued: true
       created_on:
         description: Creation timestamp
@@ -1176,7 +1176,7 @@ classes:
       # Funding
       funded_by:
         description: Funding sources for model development
-        range: datasheets:Grant
+        range: Grant
         multivalued: true
 
 # ============================================
@@ -1217,8 +1217,8 @@ classes:
 #          # ... full datasheets documentation
 #
 # 3. ADD provenance tracking:
-#    created_by: [datasheets:Person reference]
-#    modified_by: [datasheets:Person reference]
+#    created_by: [data_sheets_schema:Person reference]
+#    modified_by: [data_sheets_schema:Person reference]
 #    created_on: "2025-11-20T10:00:00Z"
 #    modified_on: "2025-11-20T15:30:00Z"
 #    was_derived_from: "modelcard-v1.0.0"
@@ -1226,8 +1226,8 @@ classes:
 # 4. ADD funding information (if applicable):
 #    funded_by:
 #      - grant_number: "NSF-1234567"
-#        funder: [datasheets:Organization]
-#        principal_investigator: [datasheets:Person]
+#        funder: [data_sheets_schema:Organization]
+#        principal_investigator: [data_sheets_schema:Person]
 #
 # 5. REPLACE SensitiveData with datasheets PrivacyAndSecurity:
 #    Old:
@@ -1243,12 +1243,12 @@ classes:
 # 6. UPDATE License references (if using detailed IP controls):
 #    Basic licensing can continue using the License class
 #    For detailed IP/regulatory controls, add:
-#      licensing_ip: [datasheets:LicensingAndIntellectualProperty]
+#      licensing_ip: [data_sheets_schema:LicensingAndIntellectualProperty]
 #
 # 7. VERIFY import path:
 #    Ensure the datasheets schema import path is correct for your installation:
 #    imports:
-#      - ../../data-sheets-schema/src/data_sheets_schema/schema/data_sheets_schema_all
+#      - ../../../data-sheets-schema/src/data_sheets_schema/schema/data_sheets_schema_all
 #
 # ============================================
 # END OF HARMONIZED SCHEMA
