@@ -282,3 +282,221 @@ See `utils/README.md` for complete tool documentation.
   - `modelcards.yaml` - Current production schema
   - `modelcards_harmonized.yaml` - Proposed harmonized schema (conceptual, has naming conflicts)
   - External reference pattern (recommended) - See examples in `src/data/examples/harmonized/`
+
+## KOGUT Template Extensions
+
+### Branch: `schema-extend`
+
+The schema has been extended on the `schema-extend` branch to provide **100% KOGUT template coverage** for DOE scientific models. KOGUT (Knowledge Organization for Generative and Understanding Technologies) is a DOE-specific model card template emphasizing compute infrastructure, reproducibility, and mission relevance.
+
+### Extensions Overview
+
+**Schema Size**: ~1,500 lines (from 967 baseline)
+**New Classes**: 10 KOGUT-specific classes
+**Enhanced Classes**: 6 existing classes
+**New Slots**: ~40 new fields
+**New Enums**: 1 (ContributorRoleEnum)
+
+### New Classes (10)
+
+1. **Contributor** - Role-based contributor attribution
+   - Fields: name, role (ContributorRoleEnum), email, orcid, affiliation
+   - Replaces/enhances simple `owner` class
+   - Example: `{name: "Jane Doe", role: developed_by, orcid: "https://orcid.org/0000-0002-1234-5678"}`
+
+2. **ComputeInfrastructure** - Hardware/software used for training
+   - Fields: hardware, hardware_list, software, software_dependencies, training_speed
+   - Captures DOE facility information (NERSC, ALCF, OLCF)
+   - Example: `hardware_list: ["64 nodes × 4 NVIDIA A100 GPUs", "NERSC Perlmutter"]`
+
+3. **Hyperparameters** - Complete training hyperparameters
+   - Fields: optimizer, learning_rate, batch_size, training_epochs, training_steps, etc.
+   - Supports LLM-specific fields (prompting_template, fine_tuning_method)
+   - Example: `{optimizer: AdamW, learning_rate: 0.0001, batch_size: 512}`
+
+4. **ReproducibilityInfo** - Reproducibility documentation
+   - Fields: random_seed, environment_config, pipeline_url, hyperparameters
+   - Example: `{random_seed: 42, hyperparameters: {...}}`
+
+5. **CodeExample** - Code snippets with language
+   - Fields: code, code_language, description
+   - Example: `{code: "import torch...", code_language: python}`
+
+6. **UsageDocumentation** - Installation and usage
+   - Fields: installation_instructions, training_configuration, inference_configuration, code_examples
+   - Supports conda/docker/SLURM workflows
+
+7. **MissionRelevance** - DOE mission alignment
+   - Fields: doe_project, doe_facility, funding_source, description
+   - Example: `{doe_facility: "NERSC Perlmutter", doe_project: "Climate Model Development"}`
+
+8. **OutOfScopeUse** - Prohibited uses
+   - Fields: description
+   - Example: `{description: "Not for real-time weather forecasting"}`
+
+9. **TrainingProcedure** - Training methodology
+   - Fields: description, methodology, reproducibility_info, pre_training_info, training_data_separate
+   - Nested hyperparameters and reproducibility info
+
+10. **EvaluationProcedure** - Evaluation methodology
+    - Fields: description, benchmarks, baselines, sota_comparison, uncertainty_quantification, evaluation_data_separate
+    - Example: Benchmark comparisons, SOTA references, uncertainty analysis
+
+### Enhanced Classes (6)
+
+1. **Version** - Added `last_updated`, `superseded_by`
+2. **License** - Added `license_name`, `license_link` for custom licenses
+3. **ModelDetails** - Added `short_description`, `contributors` (role-based)
+4. **ModelParameters** - Added `compute_infrastructure`, `training_procedure`
+5. **QuantitativeAnalysis** - Added `evaluation_procedure`
+6. **Considerations** - Added `out_of_scope_uses`
+
+### New Root-Level Fields (2)
+
+Added to `modelCard` class:
+- `mission_relevance` (MissionRelevance)
+- `usage_documentation` (UsageDocumentation)
+
+### KOGUT Template Coverage
+
+| KOGUT Section | Schema Mapping | Coverage |
+|---------------|----------------|----------|
+| Model Details → Description | `model_details.short_description` | ✅ 100% |
+| Model Details → Developed By | `model_details.contributors` (role: developed_by) | ✅ 100% |
+| Model Details → Shared By | `model_details.contributors` (role: contributed_by) | ✅ 100% |
+| Model Details → Version | `model_details.version` (enhanced) | ✅ 100% |
+| Model Details → License | `model_details.licenses` (enhanced) | ✅ 100% |
+| Compute Infrastructure → Hardware | `compute_infrastructure.hardware_list` | ✅ 100% |
+| Compute Infrastructure → Software | `compute_infrastructure.software_dependencies` | ✅ 100% |
+| Training → Dataset | `model_parameters.data` | ✅ 100% |
+| Training → Procedure | `model_parameters.training_procedure` | ✅ 100% |
+| Training → Reproducibility | `training_procedure.reproducibility_info` | ✅ 100% |
+| Training → Hyperparameters | `reproducibility_info.hyperparameters` | ✅ 100% |
+| Evaluation → Metrics | `quantitative_analysis.performance_metrics` | ✅ 100% |
+| Evaluation → Procedure | `quantitative_analysis.evaluation_procedure` | ✅ 100% |
+| Uses → Intended Uses | `considerations.use_cases` | ✅ 100% |
+| Uses → Out-of-Scope | `considerations.out_of_scope_uses` | ✅ 100% |
+| Limitations | `considerations.limitations` | ✅ 100% |
+| Ethical Considerations | `considerations.ethical_considerations` | ✅ 100% |
+| DOE Mission Relevance | `mission_relevance` | ✅ 100% |
+| Usage Documentation | `usage_documentation` | ✅ 100% |
+
+**Overall KOGUT Coverage**: ✅ **100%**
+
+### Examples
+
+**KOGUT Example**: `src/data/examples/kogut/climate-model-kogut.yaml`
+- Complete ClimateNet-v2 model card
+- Demonstrates all KOGUT extensions
+- Realistic DOE scientific model (climate AI)
+- Includes:
+  - Role-based contributors with ORCID
+  - NERSC Perlmutter compute infrastructure
+  - Complete hyperparameters (optimizer, learning rate, batch size, etc.)
+  - Reproducibility info (random seed, environment)
+  - DOE mission relevance (BER funding, NERSC facility)
+  - Complete usage documentation (conda/docker/SLURM)
+  - Code examples in Python and Bash
+
+**Example Documentation**: `src/data/examples/kogut/README.md`
+- Complete KOGUT feature documentation
+- Before/after migration examples
+- Coverage table
+- Validation instructions
+
+### Validation
+
+Schema validates successfully with linkml-lint:
+```bash
+poetry run linkml-lint src/linkml/modelcards.yaml
+```
+
+Only non-blocking naming convention warnings (same as baseline).
+
+### Use Cases
+
+KOGUT extensions are ideal for:
+
+1. **DOE Scientific Models**
+   - Climate models (E3SM, CESM, MPAS)
+   - Materials science, fusion, bioinformatics
+   - Any model trained at DOE facilities
+
+2. **HPC/Supercomputing Applications**
+   - Models trained on NERSC Perlmutter, ALCF Polaris/Aurora, OLCF Frontier
+   - Large-scale distributed training
+   - Petabyte-scale datasets
+
+3. **Reproducible Science**
+   - Complete environment specifications
+   - Random seeds and hyperparameters
+   - Training pipeline URLs
+   - Detailed methodology
+
+4. **DOE Mission-Aligned Projects**
+   - Office of Science grants (BER, ASCR, NP, HEP)
+   - Facility-specific documentation
+   - Funding transparency
+
+### Backward Compatibility
+
+All KOGUT extensions are **fully backward compatible**:
+- Existing model cards remain valid
+- KOGUT fields are optional
+- Legacy `owner` class preserved (alongside new `contributors`)
+- No breaking changes to existing schema
+
+### Migration Path
+
+To upgrade an existing model card to KOGUT:
+
+1. **Add contributors** (optional, recommended):
+   ```yaml
+   model_details:
+     contributors:
+       - name: "Jane Doe"
+         role: developed_by
+         orcid: "https://orcid.org/0000-0002-1234-5678"
+   ```
+
+2. **Add compute infrastructure** (optional):
+   ```yaml
+   model_parameters:
+     compute_infrastructure:
+       hardware_list: ["64 × NVIDIA A100 GPUs"]
+       software_dependencies: "pytorch=2.1.0\nhorovod=0.28.1"
+   ```
+
+3. **Add reproducibility info** (optional):
+   ```yaml
+   model_parameters:
+     training_procedure:
+       reproducibility_info:
+         random_seed: 42
+         hyperparameters:
+           optimizer: AdamW
+           learning_rate: 0.0001
+   ```
+
+4. **Add DOE mission relevance** (optional):
+   ```yaml
+   mission_relevance:
+     doe_facility: "NERSC Perlmutter"
+     doe_project: "My DOE Project"
+   ```
+
+5. **Add usage documentation** (optional):
+   ```yaml
+   usage_documentation:
+     installation_instructions: "pip install my-model"
+     code_examples:
+       - code: "import my_model"
+         code_language: "python"
+   ```
+
+### Related Files
+
+- **Schema**: `src/linkml/modelcards.yaml` (on `schema-extend` branch)
+- **KOGUT Template**: `data/input_docs/KOGUT/model-card.md`
+- **Example**: `src/data/examples/kogut/climate-model-kogut.yaml`
+- **Example Docs**: `src/data/examples/kogut/README.md`
