@@ -561,14 +561,12 @@ slots:
     range: string
 
   training_data_separate:
-    description: Training datasets (explicitly separated from evaluation)
-    multivalued: true
-    range: dataSet
+    description: Whether training data is separate/external
+    range: boolean
 
   evaluation_data_separate:
-    description: Evaluation/test datasets (explicitly separated from training)
-    multivalued: true
-    range: dataSet
+    description: Whether evaluation data is separate/external
+    range: boolean
 
   # Training/Evaluation Procedure slots
   methodology:
