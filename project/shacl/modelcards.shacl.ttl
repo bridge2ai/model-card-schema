@@ -1,0 +1,754 @@
+@prefix modelcard: <https://w3id.org/linkml/modelcard/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+modelcard:ModelCard a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Complete model card with metadata, performance, and considerations" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Parent model identifier (for fine-tuned or derived models)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path modelcard:base_model ],
+        [ sh:class modelcard:ModelParameters ;
+            sh:description "Model construction and architecture parameters" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path modelcard:model_parameters ],
+        [ sh:datatype xsd:string ;
+            sh:description "ML framework used (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path modelcard:framework ],
+        [ sh:datatype xsd:string ;
+            sh:description "Known biases in the model itself" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path modelcard:bias_model ],
+        [ sh:class modelcard:ModelDetails ;
+            sh:description "Comprehensive model metadata and details" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:model_details ],
+        [ sh:datatype xsd:string ;
+            sh:description "Natural language(s) processed by the model" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path modelcard:language ],
+        [ sh:datatype xsd:string ;
+            sh:description "Evaluation metrics used for this model" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path modelcard:metrics ],
+        [ sh:class modelcard:QuantitativeAnalysis ;
+            sh:description "Quantitative analysis and performance evaluation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:quantitative_analysis ],
+        [ sh:datatype xsd:string ;
+            sh:description "Library name for loading the model (e.g., transformers, diffusers, timm)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path modelcard:library_name ],
+        [ sh:class modelcard:Considerations ;
+            sh:description "Usage considerations, limitations, and ethical concerns" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path modelcard:considerations ],
+        [ sh:datatype xsd:string ;
+            sh:description "Task type for pipeline usage" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path modelcard:pipeline_tag ],
+        [ sh:class modelcard:ModelIndex ;
+            sh:description "Benchmark results following Papers with Code model-index format" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 17 ;
+            sh:path modelcard:model_index ],
+        [ sh:datatype xsd:string ;
+            sh:description "Category or parent class of the model" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path modelcard:model_category ],
+        [ sh:datatype xsd:string ;
+            sh:description "Training dataset identifiers or names" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path modelcard:datasets ],
+        [ sh:datatype xsd:string ;
+            sh:description "Searchable keywords and tags for discovery" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path modelcard:tags ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version of the model card schema being used" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:schema_version ],
+        [ sh:datatype xsd:string ;
+            sh:description "Known biases in the model's outputs" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path modelcard:bias_output ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version of the ML framework" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path modelcard:framework_version ] ;
+    sh:targetClass modelcard:ModelCard .
+
+modelcard:BenchmarkDataset a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Dataset used for benchmarking" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Dataset type identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Dataset split (train, test, validation)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path modelcard:split ],
+        [ sh:datatype xsd:string ;
+            sh:description "Dataset version or revision" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path modelcard:revision ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional arguments for dataset loading" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path modelcard:args ],
+        [ sh:datatype xsd:string ;
+            sh:description "Dataset name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Dataset configuration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:config ] ;
+    sh:targetClass modelcard:BenchmarkDataset .
+
+modelcard:BenchmarkMetric a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Benchmark metric result" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Metric name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:float ;
+            sh:description "Metric value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Metric configuration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path modelcard:config ],
+        [ sh:datatype xsd:string ;
+            sh:description "Metric type identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional metric arguments" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path modelcard:args ] ;
+    sh:targetClass modelcard:BenchmarkMetric .
+
+modelcard:BenchmarkResult a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Benchmark result entry with task, dataset, and metrics" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:BenchmarkDataset ;
+            sh:description "Dataset used for evaluation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:dataset ],
+        [ sh:class modelcard:BenchmarkMetric ;
+            sh:description "Metrics reported for this benchmark" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path modelcard:metrics ],
+        [ sh:class modelcard:Task ;
+            sh:description "Task that was evaluated" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path modelcard:task ],
+        [ sh:class modelcard:BenchmarkSource ;
+            sh:description "Source of the benchmark results" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:source ] ;
+    sh:targetClass modelcard:BenchmarkResult .
+
+modelcard:BenchmarkSource a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Source of benchmark results" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Source name (e.g., 'Open LLM Leaderboard', 'GLUE Benchmark')" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URL to the source" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:url ] ;
+    sh:targetClass modelcard:BenchmarkSource .
+
+modelcard:Citation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Citation information for the model" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Formatted citation text" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:citation ],
+        [ sh:description "Citation format style" ;
+            sh:in ( "MLA" "APA" "Chicago" "IEEE" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path modelcard:style ] ;
+    sh:targetClass modelcard:Citation .
+
+modelcard:ConfidenceInterval a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Confidence interval for a metric value" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Lower bound of the confidence interval" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:lower_bound ],
+        [ sh:datatype xsd:float ;
+            sh:description "Upper bound of the confidence interval" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:upper_bound ] ;
+    sh:targetClass modelcard:ConfidenceInterval .
+
+modelcard:Considerations a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Considerations for model usage including limitations and ethical concerns" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:Tradeoff ;
+            sh:description "Performance tradeoffs to consider" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:tradeoffs ],
+        [ sh:class modelcard:Limitation ;
+            sh:description "Known limitations and constraints" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path modelcard:limitations ],
+        [ sh:class modelcard:User ;
+            sh:description "Intended user types" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path modelcard:users ],
+        [ sh:class modelcard:Risk ;
+            sh:description "Ethical considerations and identified risks" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path modelcard:ethical_considerations ],
+        [ sh:class modelcard:UseCase ;
+            sh:description "Intended use cases and application scenarios" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:use_cases ] ;
+    sh:targetClass modelcard:Considerations .
+
+modelcard:DataSet a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Information about a dataset used for training or evaluation" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Unit for values in this dataset" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path modelcard:unit ],
+        [ sh:class modelcard:SensitiveData ;
+            sh:description "Sensitive data information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:sensitive ],
+        [ sh:datatype xsd:string ;
+            sh:description "Known biases present in the input data" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path modelcard:bias_input ],
+        [ sh:class modelcard:GraphicsCollection ;
+            sh:description "Visualizations of the dataset" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path modelcard:graphics ],
+        [ sh:datatype xsd:string ;
+            sh:description "Dataset overview and characteristics" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:description ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URL to the dataset" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:link ],
+        [ sh:datatype xsd:string ;
+            sh:description "Dataset name or identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ] ;
+    sh:targetClass modelcard:DataSet .
+
+modelcard:Graphic a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single graphic or visualization" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name or title of the graphic" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Base64-encoded PNG image" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:image ] ;
+    sh:targetClass modelcard:Graphic .
+
+modelcard:License a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "License information (use SPDX identifier OR custom text, not both)" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Custom license text (use when SPDX identifier is not applicable)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:custom_text ],
+        [ sh:datatype xsd:string ;
+            sh:description "SPDX license identifier (e.g., 'Apache-2.0', 'MIT', 'CC-BY-4.0')" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:identifier ] ;
+    sh:targetClass modelcard:License .
+
+modelcard:Limitation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A known limitation or constraint of the model" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Description of the limitation or constraint" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:description ] ;
+    sh:targetClass modelcard:Limitation .
+
+modelcard:ModelDetails a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Comprehensive metadata about the model" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:License ;
+            sh:description "Licensing information" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path modelcard:licenses ],
+        [ sh:class modelcard:Citation ;
+            sh:description "How to cite this model" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path modelcard:citations ],
+        [ sh:class modelcard:Owner ;
+            sh:description "Model owners or maintainers" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:owners ],
+        [ sh:datatype xsd:string ;
+            sh:description "Model name or identifier" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "High-level description of what the model does" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:overview ],
+        [ sh:class modelcard:Version ;
+            sh:description "Version information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path modelcard:version ],
+        [ sh:datatype xsd:string ;
+            sh:description "Storage location or path to model artifacts" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path modelcard:path ],
+        [ sh:datatype xsd:string ;
+            sh:description "Detailed documentation and usage guide" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:documentation ],
+        [ sh:class modelcard:Reference ;
+            sh:description "References to related resources" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path modelcard:references ] ;
+    sh:targetClass modelcard:ModelDetails .
+
+modelcard:ModelIndex a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Papers with Code model-index structure for benchmark tracking" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:BenchmarkResult ;
+            sh:description "Benchmark results" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:results ],
+        [ sh:datatype xsd:string ;
+            sh:description "Model name for this benchmark entry" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ] ;
+    sh:targetClass modelcard:ModelIndex .
+
+modelcard:ModelParameters a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Parameters and specifications for model construction" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:KeyVal ;
+            sh:description "Structured mapping of output format fields" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path modelcard:output_format_map ],
+        [ sh:class modelcard:DataSet ;
+            sh:description "Training and evaluation datasets" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:data ],
+        [ sh:datatype xsd:string ;
+            sh:description "Plain text description of input format" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:input_format ],
+        [ sh:datatype xsd:string ;
+            sh:description "Model architecture specification and description" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:model_architecture ],
+        [ sh:datatype xsd:string ;
+            sh:description "Plain text description of output format" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path modelcard:output_format ],
+        [ sh:class modelcard:KeyVal ;
+            sh:description "Structured mapping of input format fields" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:input_format_map ] ;
+    sh:targetClass modelcard:ModelParameters .
+
+modelcard:Owner a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Model owner or maintainer information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Contact information (email, website, etc.)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:contact ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the owner (individual or organization)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ] ;
+    sh:targetClass modelcard:Owner .
+
+modelcard:PerformanceMetric a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A performance metric with optional confidence interval" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Estimated error for the metric value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:value_error ],
+        [ sh:datatype xsd:float ;
+            sh:description "Metric value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Data slice or subset this metric was computed on" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path modelcard:slice ],
+        [ sh:class modelcard:ConfidenceInterval ;
+            sh:description "Confidence interval for the metric" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path modelcard:confidence_interval ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of performance metric (e.g., 'accuracy', 'F1', 'AUC', 'precision')" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:type ],
+        [ sh:datatype xsd:float ;
+            sh:description "Decision threshold used when computing this metric" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path modelcard:threshold ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit for the metric value, if applicable" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path modelcard:unit ] ;
+    sh:targetClass modelcard:PerformanceMetric .
+
+modelcard:QuantitativeAnalysis a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Quantitative analysis and performance evaluation of the model" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:GraphicsCollection ;
+            sh:description "Performance visualizations and plots" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:graphics ],
+        [ sh:class modelcard:PerformanceMetric ;
+            sh:description "Performance metrics and evaluation results" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path modelcard:performance_metrics ] ;
+    sh:targetClass modelcard:QuantitativeAnalysis .
+
+modelcard:Reference a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Reference to related resources" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "URL or citation string for related resource" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:reference ] ;
+    sh:targetClass modelcard:Reference .
+
+modelcard:Risk a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "An ethical, environmental, or operational risk" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name or type of the risk" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Strategy used to address or mitigate this risk" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:mitigation_strategy ] ;
+    sh:targetClass modelcard:Risk .
+
+modelcard:SensitiveData a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Information about sensitive data in a dataset" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Types of PII or sensitive information (e.g., names, addresses, medical records)" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:sensitive_data ] ;
+    sh:targetClass modelcard:SensitiveData .
+
+modelcard:Task a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "ML task specification for benchmarking" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable task name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Task type identifier (e.g., 'text-generation', 'image-classification')" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:type ] ;
+    sh:targetClass modelcard:Task .
+
+modelcard:Tradeoff a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A performance tradeoff consideration" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Description of the performance tradeoff" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:description ] ;
+    sh:targetClass modelcard:Tradeoff .
+
+modelcard:UseCase a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Description of a use case or application scenario" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Description of the application scenario" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:description ] ;
+    sh:targetClass modelcard:UseCase .
+
+modelcard:User a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Description of an intended user type" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Description of the intended user type or role" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:description ] ;
+    sh:targetClass modelcard:User .
+
+modelcard:Version a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Version information for a model" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:date ;
+            sh:description "Release date of this version" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version identifier (e.g., '1.0.0', 'v2', 'beta')" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Changes from the previous version" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path modelcard:diff ] ;
+    sh:targetClass modelcard:Version .
+
+modelcard:GraphicsCollection a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Collection of graphics and visualizations" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class modelcard:Graphic ;
+            sh:description "Graphics in this collection" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path modelcard:collection ],
+        [ sh:datatype xsd:string ;
+            sh:description "Description of this graphics collection" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:description ] ;
+    sh:targetClass modelcard:GraphicsCollection .
+
+modelcard:KeyVal a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Key-value pair for format mappings" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value associated with the key" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path modelcard:value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Key identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path modelcard:key ] ;
+    sh:targetClass modelcard:KeyVal .
+

@@ -1,0 +1,1544 @@
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix modelcard: <https://w3id.org/linkml/modelcard/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+modelcard:ModelCard a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "modelCard" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:framework_version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:schema_version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:bias_model ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:library_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:considerations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:framework ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:bias_model ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:bias_output ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:model_parameters ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:schema_version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:datasets ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:ModelDetails ;
+            owl:onProperty modelcard:model_details ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:model_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty modelcard:model_details ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:bias_output ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:model_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:bias_output ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:framework ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:ModelParameters ;
+            owl:onProperty modelcard:model_parameters ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:metrics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:base_model ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:pipeline_tag ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:schema_version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:model_category ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:ModelIndex ;
+            owl:onProperty modelcard:model_index ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Considerations ;
+            owl:onProperty modelcard:considerations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:framework_version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:language ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:framework ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:base_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:datasets ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:metrics ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:considerations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:pipeline_tag ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:language ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:library_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:model_index ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:quantitative_analysis ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:quantitative_analysis ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:model_parameters ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:bias_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:library_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:base_model ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:framework_version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:model_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:QuantitativeAnalysis ;
+            owl:onProperty modelcard:quantitative_analysis ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:pipeline_tag ] ;
+    skos:definition "Complete model card with metadata, performance, and considerations" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:BenchmarkDataset a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "BenchmarkDataset" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:config ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:split ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:args ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:args ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:revision ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:revision ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:config ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:split ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:split ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:args ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:config ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:revision ] ;
+    skos:definition "Dataset used for benchmarking" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:BenchmarkMetric a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "BenchmarkMetric" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:args ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:args ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:config ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:config ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:args ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:config ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ] ;
+    skos:definition "Benchmark metric result" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:BenchmarkResult a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "BenchmarkResult" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:dataset ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:dataset ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Task ;
+            owl:onProperty modelcard:task ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:source ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:source ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:task ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:BenchmarkDataset ;
+            owl:onProperty modelcard:dataset ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:BenchmarkSource ;
+            owl:onProperty modelcard:source ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:metrics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:BenchmarkMetric ;
+            owl:onProperty modelcard:metrics ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:task ] ;
+    skos:definition "Benchmark result entry with task, dataset, and metrics" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:BenchmarkSource a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "BenchmarkSource" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uri ;
+            owl:onProperty modelcard:url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:url ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ] ;
+    skos:definition "Source of benchmark results" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Citation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Citation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:citation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:citation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:style ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:CitationStyleEnum ;
+            owl:onProperty modelcard:style ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:style ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:citation ] ;
+    skos:definition "Citation information for the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:ConfidenceInterval a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ConfidenceInterval" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:upper_bound ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:lower_bound ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty modelcard:upper_bound ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty modelcard:lower_bound ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:upper_bound ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:lower_bound ] ;
+    skos:definition "Confidence interval for a metric value" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Considerations a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Considerations" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:UseCase ;
+            owl:onProperty modelcard:use_cases ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Limitation ;
+            owl:onProperty modelcard:limitations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:limitations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:tradeoffs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Risk ;
+            owl:onProperty modelcard:ethical_considerations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:User ;
+            owl:onProperty modelcard:users ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:use_cases ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:users ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:ethical_considerations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Tradeoff ;
+            owl:onProperty modelcard:tradeoffs ] ;
+    skos:definition "Considerations for model usage including limitations and ethical concerns" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:DataSet a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "dataSet" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:bias_input ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:bias_input ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:SensitiveData ;
+            owl:onProperty modelcard:sensitive ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:graphics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:GraphicsCollection ;
+            owl:onProperty modelcard:graphics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:sensitive ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty modelcard:link ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:bias_input ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:link ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:sensitive ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uri ;
+            owl:onProperty modelcard:link ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:graphics ] ;
+    skos:definition "Information about a dataset used for training or evaluation" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Graphic a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "graphic" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:image ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:image ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:image ] ;
+    skos:definition "A single graphic or visualization" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:License a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "License" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:custom_text ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:custom_text ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:custom_text ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:identifier ] ;
+    skos:definition "License information (use SPDX identifier OR custom text, not both)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Limitation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Limitation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:description ] ;
+    skos:definition "A known limitation or constraint of the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:ModelDetails a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ModelDetails" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:overview ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:owners ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:overview ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:licenses ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:License ;
+            owl:onProperty modelcard:licenses ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:documentation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:documentation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Owner ;
+            owl:onProperty modelcard:owners ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:documentation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Reference ;
+            owl:onProperty modelcard:references ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:references ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:citations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:path ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Citation ;
+            owl:onProperty modelcard:citations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Version ;
+            owl:onProperty modelcard:version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:overview ] ;
+    skos:definition "Comprehensive metadata about the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:ModelIndex a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ModelIndex" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:BenchmarkResult ;
+            owl:onProperty modelcard:results ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:results ] ;
+    skos:definition "Papers with Code model-index structure for benchmark tracking" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:ModelParameters a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ModelParameters" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:output_format ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:KeyVal ;
+            owl:onProperty modelcard:input_format_map ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:input_format ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:input_format ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:input_format_map ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:DataSet ;
+            owl:onProperty modelcard:data ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:input_format ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:data ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:model_architecture ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:model_architecture ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:model_architecture ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:output_format_map ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:output_format ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:KeyVal ;
+            owl:onProperty modelcard:output_format_map ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:output_format ] ;
+    skos:definition "Parameters and specifications for model construction" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Owner a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "owner" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:contact ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:contact ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:contact ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ] ;
+    skos:definition "Model owner or maintainer information" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:PerformanceMetric a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "performanceMetric" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:threshold ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:value_error ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:slice ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty modelcard:value_error ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:ConfidenceInterval ;
+            owl:onProperty modelcard:confidence_interval ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty modelcard:threshold ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:confidence_interval ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:threshold ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:confidence_interval ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:value_error ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:slice ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:slice ] ;
+    skos:definition "A performance metric with optional confidence interval" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:QuantitativeAnalysis a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuantitativeAnalysis" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:GraphicsCollection ;
+            owl:onProperty modelcard:graphics ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:performance_metrics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:PerformanceMetric ;
+            owl:onProperty modelcard:performance_metrics ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:graphics ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:graphics ] ;
+    skos:definition "Quantitative analysis and performance evaluation of the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Reference a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Reference" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:reference ] ;
+    skos:definition "Reference to related resources" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Risk a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "risk" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:mitigation_strategy ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:mitigation_strategy ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:mitigation_strategy ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ] ;
+    skos:definition "An ethical, environmental, or operational risk" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:SensitiveData a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SensitiveData" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:sensitive_data ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:sensitive_data ] ;
+    skos:definition "Information about sensitive data in a dataset" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Task a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Task" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:type ] ;
+    skos:definition "ML task specification for benchmarking" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Tradeoff a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Tradeoff" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:description ] ;
+    skos:definition "A performance tradeoff consideration" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:UseCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "UseCase" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:description ] ;
+    skos:definition "Description of a use case or application scenario" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:User a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "User" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:description ] ;
+    skos:definition "Description of an intended user type" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:Version a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Version" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:diff ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:date ;
+            owl:onProperty modelcard:date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:diff ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:diff ] ;
+    skos:definition "Version information for a model" ;
+    skos:inScheme linkml:modelcard .
+
+<https://w3id.org/linkml/modelcard/CitationStyleEnum#APA> a owl:Class,
+        modelcard:CitationStyleEnum ;
+    rdfs:label "APA" ;
+    rdfs:subClassOf modelcard:CitationStyleEnum .
+
+<https://w3id.org/linkml/modelcard/CitationStyleEnum#Chicago> a owl:Class,
+        modelcard:CitationStyleEnum ;
+    rdfs:label "Chicago" ;
+    rdfs:subClassOf modelcard:CitationStyleEnum .
+
+<https://w3id.org/linkml/modelcard/CitationStyleEnum#IEEE> a owl:Class,
+        modelcard:CitationStyleEnum ;
+    rdfs:label "IEEE" ;
+    rdfs:subClassOf modelcard:CitationStyleEnum .
+
+<https://w3id.org/linkml/modelcard/CitationStyleEnum#MLA> a owl:Class,
+        modelcard:CitationStyleEnum ;
+    rdfs:label "MLA" ;
+    rdfs:subClassOf modelcard:CitationStyleEnum .
+
+modelcard:GraphicsCollection a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "GraphicsCollection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom modelcard:Graphic ;
+            owl:onProperty modelcard:collection ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:collection ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:description ] ;
+    skos:definition "Collection of graphics and visualizations" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:KeyVal a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "KeyVal" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:key ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:key ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:key ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty modelcard:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty modelcard:value ] ;
+    skos:definition "Key-value pair for format mappings" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:citations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "citations" ;
+    skos:definition "Citation information for the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:collection a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "collection" ;
+    skos:definition "Collection of items" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:data a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "data" ;
+    skos:definition "Training and evaluation datasets" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:datasets a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "datasets" ;
+    rdfs:range linkml:String ;
+    skos:definition "Training dataset identifiers" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:ethical_considerations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "ethical_considerations" ;
+    skos:definition "Ethical considerations and risks" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:input_format_map a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "input_format_map" ;
+    skos:definition "Structured input format mapping" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:language a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "language" ;
+    rdfs:range linkml:String ;
+    skos:definition "Natural language(s) processed by the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:licenses a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "licenses" ;
+    skos:definition "License information" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:limitations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "limitations" ;
+    skos:definition "Known limitations and constraints" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:model_index a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "model_index" ;
+    skos:definition "Papers with Code model-index for benchmark tracking" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:output_format_map a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "output_format_map" ;
+    skos:definition "Structured output format mapping" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:owners a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "owners" ;
+    skos:definition "Model owners or maintainers" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:performance_metrics a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "performance_metrics" ;
+    skos:definition "Performance metrics and evaluation results" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:references a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "references" ;
+    skos:definition "Related resources and references" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:results a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "results" ;
+    skos:definition "Benchmark or evaluation results" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:sensitive_data a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "sensitive_data" ;
+    rdfs:range linkml:String ;
+    skos:definition "Types of PII or sensitive information present" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:tags a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "tags" ;
+    rdfs:range linkml:String ;
+    skos:definition "Searchable keywords and tags" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:tradeoffs a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "tradeoffs" ;
+    skos:definition "Performance tradeoffs and considerations" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:use_cases a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "use_cases" ;
+    skos:definition "Intended use cases and application scenarios" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:users a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "users" ;
+    skos:definition "Intended users or user types" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:base_model a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "base_model" ;
+    rdfs:range linkml:String ;
+    skos:definition "Parent model identifier (for fine-tuned models)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:bias_input a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "bias_input" ;
+    rdfs:range linkml:String ;
+    skos:definition "Known biases in the input data" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:bias_model a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "bias_model" ;
+    rdfs:range linkml:String ;
+    skos:definition "Known biases in the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:bias_output a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "bias_output" ;
+    rdfs:range linkml:String ;
+    skos:definition "Known biases in the model output" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:citation a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "citation" ;
+    rdfs:range linkml:String ;
+    skos:definition "Formatted citation text" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:confidence_interval a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "confidence_interval" ;
+    skos:definition "Confidence interval for the metric" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:considerations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "considerations" ;
+    skos:definition "Usage considerations, limitations, and ethical concerns" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:contact a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "contact" ;
+    rdfs:range linkml:String ;
+    skos:definition "Contact information (email, URL, etc.)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:custom_text a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "custom_text" ;
+    rdfs:range linkml:String ;
+    skos:definition "Custom license text (when not using SPDX identifier)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:dataset a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "dataset" ;
+    skos:definition "Dataset information" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:date a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "date" ;
+    rdfs:range linkml:date ;
+    skos:definition "Date value" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:diff a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "diff" ;
+    rdfs:range linkml:String ;
+    skos:definition "Difference or changelog from previous version" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:documentation a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "documentation" ;
+    rdfs:range linkml:String ;
+    skos:definition "Detailed usage guide and documentation" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:framework a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "framework" ;
+    rdfs:range linkml:String ;
+    skos:definition "ML framework (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:framework_version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "framework_version" ;
+    rdfs:range linkml:String ;
+    skos:definition "Version of the ML framework" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:identifier a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "identifier" ;
+    rdfs:range linkml:String ;
+    skos:definition "SPDX license identifier (e.g., 'Apache-2.0', 'MIT')" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:image a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "image" ;
+    rdfs:range linkml:String ;
+    skos:definition "Base64-encoded image (PNG format)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:input_format a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "input_format" ;
+    rdfs:range linkml:String ;
+    skos:definition "Plain text input format specification" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:key a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "key" ;
+    rdfs:range linkml:String ;
+    skos:definition "Key in key-value pair" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:library_name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "library_name" ;
+    rdfs:range linkml:String ;
+    skos:definition "Library name for loading the model (e.g., transformers, diffusers)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:link a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "link" ;
+    rdfs:range linkml:Uri ;
+    skos:definition "URL to dataset" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:lower_bound a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "lower_bound" ;
+    rdfs:range linkml:Float ;
+    skos:definition "Lower bound of confidence interval" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:mitigation_strategy a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "mitigation_strategy" ;
+    rdfs:range linkml:String ;
+    skos:definition "Strategy to address or mitigate this risk" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:model_architecture a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "model_architecture" ;
+    rdfs:range linkml:String ;
+    skos:definition "Model architecture specification" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:model_category a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "model_category" ;
+    rdfs:range linkml:String ;
+    skos:definition "Category or parent class of the model" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:model_details a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "model_details" ;
+    skos:definition "Comprehensive model metadata" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:model_parameters a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "model_parameters" ;
+    skos:definition "Model construction and architecture parameters" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:output_format a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "output_format" ;
+    rdfs:range linkml:String ;
+    skos:definition "Plain text output format specification" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:overview a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "overview" ;
+    rdfs:range linkml:String ;
+    skos:definition "High-level model description" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:path a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "path" ;
+    rdfs:range linkml:String ;
+    skos:definition "Storage location or path to model artifacts" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:pipeline_tag a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "pipeline_tag" ;
+    rdfs:range linkml:String ;
+    skos:definition "Task type (text-generation, image-classification, etc.)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:quantitative_analysis a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "quantitative_analysis" ;
+    skos:definition "Quantitative analysis and performance evaluation" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:reference a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "reference" ;
+    rdfs:range linkml:String ;
+    skos:definition "Reference URL or citation string" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:revision a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "revision" ;
+    rdfs:range linkml:String ;
+    skos:definition "Dataset or model revision/version" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:schema_version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "schema_version" ;
+    rdfs:range linkml:String ;
+    skos:definition "Version of the model card schema" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:sensitive a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "sensitive" ;
+    skos:definition "Sensitive data information" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:slice a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "slice" ;
+    rdfs:range linkml:String ;
+    skos:definition "Data slice identifier this metric was computed on" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:source a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "source" ;
+    skos:definition "Source of information or results" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:split a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "split" ;
+    rdfs:range linkml:String ;
+    skos:definition "Dataset split (train, test, validation)" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:style a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "style" ;
+    rdfs:range modelcard:CitationStyleEnum ;
+    skos:definition "Citation format style" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:task a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "task" ;
+    skos:definition "ML task specification" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:threshold a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "threshold" ;
+    rdfs:range linkml:Float ;
+    skos:definition "Decision threshold the metric was computed on" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:upper_bound a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "upper_bound" ;
+    rdfs:range linkml:Float ;
+    skos:definition "Upper bound of confidence interval" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:url a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "url" ;
+    rdfs:range linkml:Uri ;
+    skos:definition "URL reference" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:value_error a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "value_error" ;
+    rdfs:range linkml:Float ;
+    skos:definition "Estimated error for the metric" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "version" ;
+    skos:definition "Version information" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:metrics a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "metrics" ;
+    rdfs:range linkml:String ;
+    skos:definition "Evaluation metrics used" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:args a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "args" ;
+    skos:definition "Additional arguments or parameters" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:config a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "config" ;
+    rdfs:range linkml:String ;
+    skos:definition "Configuration specification" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:graphics a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "graphics" ;
+    skos:definition "Visualizations and graphics" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:unit a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "unit" ;
+    rdfs:range linkml:String ;
+    skos:definition "Unit of measurement" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "value" ;
+    skos:definition "Value in key-value pair or metric value" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:CitationStyleEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/linkml/modelcard/CitationStyleEnum#MLA> <https://w3id.org/linkml/modelcard/CitationStyleEnum#APA> <https://w3id.org/linkml/modelcard/CitationStyleEnum#Chicago> <https://w3id.org/linkml/modelcard/CitationStyleEnum#IEEE> ) ;
+    linkml:permissible_values <https://w3id.org/linkml/modelcard/CitationStyleEnum#APA>,
+        <https://w3id.org/linkml/modelcard/CitationStyleEnum#Chicago>,
+        <https://w3id.org/linkml/modelcard/CitationStyleEnum#IEEE>,
+        <https://w3id.org/linkml/modelcard/CitationStyleEnum#MLA> .
+
+modelcard:type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "type" ;
+    rdfs:range linkml:String ;
+    skos:definition "Type or category" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:description a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "description" ;
+    rdfs:range linkml:String ;
+    skos:definition "Textual description" ;
+    skos:inScheme linkml:modelcard .
+
+modelcard:name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "name" ;
+    rdfs:range linkml:String ;
+    skos:definition "Name or identifier" ;
+    skos:inScheme linkml:modelcard .
+
+linkml:modelcard a owl:Ontology ;
+    rdfs:label "Model_Card" ;
+    skos:definition """A comprehensive LinkML rendering of model card schemas,
+incorporating Google Model Card Toolkit v0.0.2, HuggingFace,
+and Papers with Code specifications.
+
+This schema provides structured metadata for documenting machine learning models
+including model details, training data, performance metrics, ethical considerations,
+and deployment specifications.""" .
+

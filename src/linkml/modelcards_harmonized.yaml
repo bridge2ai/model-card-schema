@@ -1,20 +1,37 @@
 id: https://w3id.org/linkml/modelcard
-name: Model_Card
+name: Model_Card_Harmonized
 description: |-
-  A comprehensive LinkML rendering of model card schemas,
-  incorporating Google Model Card Toolkit v0.0.2, HuggingFace,
-  and Papers with Code specifications.
+  HARMONIZED VERSION: LinkML model card schema integrated with Datasheets for Datasets
 
-  This schema provides structured metadata for documenting machine learning models
-  including model details, training data, performance metrics, ethical considerations,
-  and deployment specifications.
+  This harmonized schema demonstrates how to align the model cards schema with the
+  datasheets for datasets schema (data_sheets_schema_all.yaml) to avoid duplication
+  and leverage comprehensive dataset documentation.
+
+  KEY CHANGES FROM modelcards.yaml:
+  1. Imports datasheets schema for comprehensive dataset and creator documentation
+  2. Replaces simple 'owner' class with datasheets Creator/Person/Organization
+  3. Replaces simple 'dataSet' class with reference to datasheets Dataset
+  4. Adds provenance tracking (created_by, modified_by, was_derived_from)
+  5. Adds funding and maintainer references from datasheets
+  6. Enhances ethics with datasheets PrivacyAndSecurity references
+  7. Uses datasheets licensing classes for IP and regulatory restrictions
+
+  MIGRATION NOTES:
+  - Existing 'owner' instances should be migrated to datasheets Person/Organization
+  - Existing 'dataSet' instances should be migrated to datasheets Dataset
+  - The 'SensitiveData' class is deprecated in favor of datasheets PrivacyAndSecurity
+  - All datasheets classes are available via the import
 
 imports:
 - linkml:types
+# HARMONIZATION ACTION 1: Import datasheets schema to access 60+ classes
+# This provides comprehensive dataset, creator, ethics, and provenance documentation
+- ../../../data-sheets-schema/src/data_sheets_schema/schema/data_sheets_schema_all
 
 prefixes:
   modelcard: https://w3id.org/linkml/modelcard/
   linkml: https://w3id.org/linkml/
+  data_sheets_schema: https://w3id.org/bridge2ai/data-sheets-schema/
 
 default_prefix: modelcard
 default_range: string
@@ -53,6 +70,52 @@ slots:
   contact:
     description: Contact information (email, URL, etc.)
     range: string
+
+  # HARMONIZATION ACTION 6: Provenance tracking (from datasheets)
+  created_by:
+    description: Creator(s) who created this model card (references datasheets Person/Organization)
+    range: Creator
+    multivalued: true
+    comments:
+      - "Use datasheets Person or Organization classes for full creator attribution"
+      - "Supports ORCID, CRediT roles, institutional affiliations"
+
+  modified_by:
+    description: Person(s) who last modified this model card
+    range: Person
+    multivalued: true
+
+  created_on:
+    description: Timestamp when this model card was created
+    range: datetime
+
+  modified_on:
+    description: Timestamp when this model card was last modified
+    range: datetime
+
+  was_derived_from:
+    description: Previous version or source model card this was derived from
+    range: string
+    comments:
+      - "Can be a URL, identifier, or free text reference"
+
+  # HARMONIZATION ACTION 7: Funding information (from datasheets)
+  funded_by:
+    description: Funding sources for model development (references datasheets Grant)
+    range: Grant
+    multivalued: true
+    comments:
+      - "Use datasheets Grant class for comprehensive funding documentation"
+      - "Includes grant number, funder, amount, investigator information"
+
+  # Maintainer information
+  maintainer:
+    description: Current maintainer(s) of the model (references datasheets Person/Organization)
+    range: Creator
+    multivalued: true
+    comments:
+      - "May differ from original creators"
+      - "Use for active maintenance and support contact"
 
   # Version slots
   date:
@@ -95,9 +158,21 @@ slots:
     description: Detailed usage guide and documentation
     range: string
 
-  owners:
-    description: Model owners or maintainers
+  # DEPRECATED: Use 'creators' instead of 'owners'
+  # owners:
+  #   description: DEPRECATED - Use 'creators' with datasheets Person/Organization
+  #   multivalued: true
+
+  # HARMONIZATION ACTION 2: Replace 'owners' with 'creators' using datasheets classes
+  creators:
+    description: Model creators and contributors (references datasheets Creator/Person/Organization)
+    range: Creator
     multivalued: true
+    comments:
+      - "Replaces the simple 'owner' class"
+      - "Use datasheets Person for individuals (with ORCID, roles)"
+      - "Use datasheets Organization for institutions"
+      - "Supports CRediT contributor roles"
 
   version:
     description: Version information
@@ -118,13 +193,14 @@ slots:
     description: Storage location or path to model artifacts
     range: string
 
-  # Dataset slots
+  # Dataset slots - NOTE: Most dataset documentation now handled by datasheets Dataset class
   link:
     description: URL to dataset
     range: uri
 
-  sensitive:
-    description: Sensitive data information
+  # DEPRECATED: Use datasheets PrivacyAndSecurity instead
+  # sensitive:
+  #   description: DEPRECATED - Use datasheets PrivacyAndSecurity class
 
   graphics:
     description: Visualizations and graphics
@@ -137,20 +213,30 @@ slots:
     description: Unit of measurement
     range: string
 
-  # SensitiveData slots
-  sensitive_data:
-    description: Types of PII or sensitive information present
-    multivalued: true
-    range: string
+  # DEPRECATED: Use datasheets PrivacyAndSecurity class
+  # sensitive_data:
+  #   description: DEPRECATED - Use datasheets PrivacyAndSecurity
 
   # ModelParameters slots
   model_architecture:
     description: Model architecture specification
     range: string
 
-  data:
-    description: Training and evaluation datasets
+  # HARMONIZATION ACTION 3: Dataset references use datasheets Dataset class
+  training_data:
+    description: Training datasets (references datasheets Dataset)
+    range: Dataset
     multivalued: true
+    comments:
+      - "Replaces simple 'data' slot with references to comprehensive datasheets Dataset"
+      - "Each dataset gets full datasheets documentation: motivation, composition, collection, preprocessing, uses, distribution, maintenance"
+
+  evaluation_data:
+    description: Evaluation/test datasets (references datasheets Dataset)
+    range: Dataset
+    multivalued: true
+    comments:
+      - "Separate tracking for evaluation datasets"
 
   input_format:
     description: Plain text input format specification
@@ -240,6 +326,14 @@ slots:
     description: Ethical considerations and risks
     multivalued: true
 
+  # HARMONIZATION ACTION 5: Enhanced ethics with datasheets references
+  privacy_security:
+    description: Privacy and security considerations (references datasheets PrivacyAndSecurity)
+    range: Ethics
+    comments:
+      - "Comprehensive privacy documentation from datasheets"
+      - "Includes PII analysis, anonymization, consent, regulatory compliance"
+
   # Risk slots
   mitigation_strategy:
     description: Strategy to address or mitigate this risk
@@ -292,7 +386,7 @@ slots:
     description: Task type (text-generation, image-classification, etc.)
     range: string
 
-  language:
+  model_language:
     description: Natural language(s) processed by the model
     multivalued: true
     range: string
@@ -378,8 +472,15 @@ classes:
         description: Changes from the previous version
         range: string
 
+  # HARMONIZATION ACTION 4: Enhanced licensing with datasheets classes
   License:
-    description: License information (use SPDX identifier OR custom text, not both)
+    description: |-
+      License information (use SPDX identifier OR custom text, not both)
+
+      HARMONIZATION NOTE: For comprehensive licensing including IP restrictions,
+      regulatory controls, and export regulations, consider using:
+      - data_sheets_schema:LicensingAndIntellectualProperty class
+      - data_sheets_schema:RegulatoryRestrictions class
     slots:
       - identifier
       - custom_text
@@ -390,19 +491,22 @@ classes:
       custom_text:
         description: Custom license text (use when SPDX identifier is not applicable)
         range: string
+    comments:
+      - "For basic licensing, this class is sufficient"
+      - "For detailed IP restrictions, export controls, or regulatory compliance, import and use datasheets LicensingAndIntellectualProperty"
 
-  owner:
-    description: Model owner or maintainer information
-    slots:
-      - name
-      - contact
-    slot_usage:
-      name:
-        description: Name of the owner (individual or organization)
-        range: string
-      contact:
-        description: Contact information (email, website, etc.)
-        range: string
+  # DEPRECATED CLASS - Use datasheets Person/Organization instead
+  # owner:
+  #   description: |-
+  #     DEPRECATED - Use datasheets Person or Organization classes instead
+  #
+  #     Migration: Replace references to 'owner' with data_sheets_schema:Person or data_sheets_schema:Organization
+  #     Example:
+  #       Old: owners: [{name: "John Doe", contact: "john@example.com"}]
+  #       New: creators: [{given_name: "John", family_name: "Doe", email: "john@example.com", orcid: "0000-0001-..."}]
+  #   slots:
+  #     - name
+  #     - contact
 
   Reference:
     description: Reference to related resources
@@ -434,12 +538,22 @@ classes:
       - name
       - overview
       - documentation
-      - owners
+      # CHANGED: 'owners' replaced with 'creators' using datasheets classes
+      - creators
+      - maintainer
       - version
       - licenses
       - references
       - citations
       - path
+      # NEW: Provenance tracking
+      - created_by
+      - modified_by
+      - created_on
+      - modified_on
+      - was_derived_from
+      # NEW: Funding information
+      - funded_by
     slot_usage:
       name:
         description: Model name or identifier
@@ -451,9 +565,17 @@ classes:
       documentation:
         description: Detailed documentation and usage guide
         range: string
-      owners:
-        description: Model owners or maintainers
-        range: owner
+      creators:
+        description: Model creators and contributors (datasheets Person/Organization)
+        range: Creator
+        multivalued: true
+        comments:
+          - "Use data_sheets_schema:Person for individuals with ORCID, roles, affiliations"
+          - "Use data_sheets_schema:Organization for institutions"
+          - "Supports CRediT taxonomy for contributor roles"
+      maintainer:
+        description: Current model maintainer(s)
+        range: Creator
         multivalued: true
       version:
         description: Version information
@@ -462,6 +584,8 @@ classes:
         description: Licensing information
         range: License
         multivalued: true
+        comments:
+          - "For comprehensive IP/regulatory licensing, also reference data_sheets_schema:LicensingAndIntellectualProperty"
       references:
         description: References to related resources
         range: Reference
@@ -473,18 +597,43 @@ classes:
       path:
         description: Storage location or path to model artifacts
         range: string
+      created_by:
+        description: Who created this model card
+        range: Creator
+        multivalued: true
+      modified_by:
+        description: Who last modified this model card
+        range: Person
+        multivalued: true
+      created_on:
+        description: When this model card was created
+        range: datetime
+      modified_on:
+        description: When this model card was last modified
+        range: datetime
+      was_derived_from:
+        description: Previous version or source model card
+        range: string
+      funded_by:
+        description: Funding sources for model development
+        range: Grant
+        multivalued: true
 
   # ========== Dataset Classes ==========
+  # NOTE: Most dataset documentation now delegated to datasheets Dataset class
 
-  SensitiveData:
-    description: Information about sensitive data in a dataset
-    slots:
-      - sensitive_data
-    slot_usage:
-      sensitive_data:
-        description: Types of PII or sensitive information (e.g., names, addresses, medical records)
-        multivalued: true
-        range: string
+  # DEPRECATED CLASS - Use datasheets PrivacyAndSecurity instead
+  # SensitiveData:
+  #   description: |-
+  #     DEPRECATED - Use datasheets PrivacyAndSecurity class instead
+  #
+  #     The datasheets schema provides comprehensive privacy and security documentation:
+  #     - PII categories and anonymization
+  #     - Consent mechanisms
+  #     - Regulatory compliance (GDPR, CCPA, HIPAA)
+  #     - Access controls and security measures
+  #   slots:
+  #     - sensitive_data
 
   GraphicsCollection:
     description: Collection of graphics and visualizations
@@ -513,39 +662,47 @@ classes:
         description: Base64-encoded PNG image
         range: string
 
-  dataSet:
-    description: Information about a dataset used for training or evaluation
-    slots:
-      - name
-      - description
-      - link
-      - sensitive
-      - graphics
-      - bias_input
-      - unit
-    slot_usage:
-      name:
-        description: Dataset name or identifier
-        range: string
-      description:
-        description: Dataset overview and characteristics
-        range: string
-      link:
-        description: URL to the dataset
-        range: uri
-        required: true
-      sensitive:
-        description: Sensitive data information
-        range: SensitiveData
-      graphics:
-        description: Visualizations of the dataset
-        range: GraphicsCollection
-      bias_input:
-        description: Known biases present in the input data
-        range: string
-      unit:
-        description: Unit for values in this dataset
-        range: string
+  # DEPRECATED CLASS - Use datasheets Dataset instead
+  # dataSet:
+  #   description: |-
+  #     DEPRECATED - Use datasheets Dataset class instead
+  #
+  #     Migration: Replace dataSet references with data_sheets_schema:Dataset
+  #
+  #     The datasheets Dataset class provides comprehensive documentation:
+  #     - Motivation section: Purpose, tasks, funding
+  #     - Composition: Instance counts, missing data, confidentiality
+  #     - Collection: Acquisition mechanisms, sampling, timeframes
+  #     - Preprocessing: Cleaning, transformations, raw data availability
+  #     - Uses: Tasks, impact considerations, inappropriate uses
+  #     - Distribution: Licensing, IP restrictions, export controls
+  #     - Maintenance: Support, updates, contribution mechanisms
+  #
+  #     Old usage:
+  #       data:
+  #         - name: "IMDb"
+  #           link: "https://example.com"
+  #           description: "Movie reviews"
+  #
+  #     New usage:
+  #       training_data:
+  #         - name: "IMDb Sentiment Dataset"
+  #           homepage: "https://example.com"
+  #           motivation:
+  #             purpose: "Sentiment analysis training"
+  #             creators: [{...}]
+  #           composition:
+  #             instance_count: 50000
+  #             ...
+  #           # ... full datasheets documentation
+  #   slots:
+  #     - name
+  #     - description
+  #     - link
+  #     - sensitive
+  #     - graphics
+  #     - bias_input
+  #     - unit
 
   # ========== Model Parameters ==========
 
@@ -566,7 +723,9 @@ classes:
     description: Parameters and specifications for model construction
     slots:
       - model_architecture
-      - data
+      # CHANGED: 'data' split into 'training_data' and 'evaluation_data' using datasheets Dataset
+      - training_data
+      - evaluation_data
       - input_format
       - input_format_map
       - output_format
@@ -575,10 +734,20 @@ classes:
       model_architecture:
         description: Model architecture specification and description
         range: string
-      data:
-        description: Training and evaluation datasets
-        range: dataSet
+      training_data:
+        description: Training datasets (references datasheets Dataset)
+        range: Dataset
         multivalued: true
+        comments:
+          - "Each dataset should be a complete datasheets Dataset instance"
+          - "Provides comprehensive dataset documentation (motivation, composition, collection, etc.)"
+          - "Replaces the simple 'dataSet' class"
+      evaluation_data:
+        description: Evaluation/test datasets (references datasheets Dataset)
+        range: Dataset
+        multivalued: true
+        comments:
+          - "Separate from training data for clarity"
       input_format:
         description: Plain text description of input format
         range: string
@@ -716,6 +885,8 @@ classes:
       - limitations
       - tradeoffs
       - ethical_considerations
+      # NEW: Privacy and security considerations from datasheets
+      - privacy_security
     slot_usage:
       users:
         description: Intended user types
@@ -737,10 +908,17 @@ classes:
         description: Ethical considerations and identified risks
         range: risk
         multivalued: true
+      privacy_security:
+        description: Privacy and security considerations (from datasheets)
+        range: Ethics
+        comments:
+          - "Comprehensive privacy/security documentation"
+          - "Includes PII analysis, anonymization, consent, GDPR/CCPA compliance"
+          - "Replaces the simple 'SensitiveData' class"
 
   # ========== Benchmark Integration (HuggingFace/Papers with Code) ==========
 
-  Task:
+  BenchmarkTask:
     description: ML task specification for benchmarking
     slots:
       - type
@@ -828,7 +1006,7 @@ classes:
     slot_usage:
       task:
         description: Task that was evaluated
-        range: Task
+        range: BenchmarkTask
       dataset:
         description: Dataset used for evaluation
         range: BenchmarkDataset
@@ -858,7 +1036,22 @@ classes:
 
   modelCard:
     tree_root: true
-    description: Complete model card with metadata, performance, and considerations
+    description: |-
+      Complete model card with metadata, performance, and considerations
+
+      HARMONIZATION SUMMARY:
+      This harmonized version integrates with datasheets for datasets schema to:
+      1. Use datasheets Creator classes for comprehensive author/contributor documentation
+      2. Reference datasheets Dataset for comprehensive dataset documentation (60+ fields)
+      3. Leverage datasheets PrivacyAndSecurity for ethics/privacy considerations
+      4. Include provenance tracking (created_by, modified_by, timestamps)
+      5. Add funding and maintainer references
+
+      BACKWARD COMPATIBILITY:
+      - The 'owner' class is deprecated (use datasheets Person/Organization)
+      - The 'dataSet' class is deprecated (use datasheets Dataset)
+      - The 'SensitiveData' class is deprecated (use datasheets PrivacyAndSecurity)
+      - All other model card fields remain compatible
     slots:
       # Core sections (Google Model Card Toolkit)
       - schema_version
@@ -875,7 +1068,7 @@ classes:
       - framework_version
       - library_name
       - pipeline_tag
-      - language
+      - model_language
       - base_model
       - tags
       - datasets
@@ -884,10 +1077,20 @@ classes:
       # Benchmark integration (Papers with Code)
       - model_index
 
+      # NEW: Provenance tracking
+      - created_by
+      - modified_by
+      - created_on
+      - modified_on
+      - was_derived_from
+
+      # NEW: Funding
+      - funded_by
+
     slot_usage:
       # Core sections
       schema_version:
-        description: Version of the model card schema being used
+        description: Version of the model card schema being used (recommend '0.0.2-harmonized')
         range: string
       model_details:
         description: Comprehensive model metadata and details
@@ -925,7 +1128,7 @@ classes:
       pipeline_tag:
         description: Task type for pipeline usage
         range: string
-      language:
+      model_language:
         description: Natural language(s) processed by the model
         multivalued: true
         range: string
@@ -950,3 +1153,103 @@ classes:
         description: Benchmark results following Papers with Code model-index format
         range: ModelIndex
         multivalued: true
+
+      # Provenance tracking
+      created_by:
+        description: Creator(s) of this model card document
+        range: Creator
+        multivalued: true
+      modified_by:
+        description: Person(s) who last modified this model card
+        range: Person
+        multivalued: true
+      created_on:
+        description: Creation timestamp
+        range: datetime
+      modified_on:
+        description: Last modification timestamp
+        range: datetime
+      was_derived_from:
+        description: Previous version or source model card
+        range: string
+
+      # Funding
+      funded_by:
+        description: Funding sources for model development
+        range: Grant
+        multivalued: true
+
+# ============================================
+# MIGRATION GUIDE
+# ============================================
+#
+# To migrate from modelcards.yaml to modelcards_harmonized.yaml:
+#
+# 1. REPLACE 'owner' with datasheets Person/Organization:
+#    Old:
+#      owners:
+#        - name: "Jane Doe"
+#          contact: "jane@example.com"
+#    New:
+#      creators:
+#        - given_name: "Jane"
+#          family_name: "Doe"
+#          email: "jane@example.com"
+#          orcid: "0000-0002-1234-5678"  # Optional but recommended
+#          roles: ["Conceptualization", "Software"]  # CRediT roles
+#
+# 2. REPLACE 'dataSet' with datasheets Dataset:
+#    Old:
+#      data:
+#        - name: "IMDb"
+#          link: "https://example.com"
+#          description: "Movie reviews"
+#    New:
+#      training_data:
+#        - name: "IMDb Sentiment Dataset"
+#          homepage: "https://example.com"
+#          motivation:
+#            purpose: "Sentiment analysis training for movie reviews"
+#            creators: [...]
+#          composition:
+#            instance_count: 50000
+#            instance_type: "Text reviews with binary sentiment labels"
+#          # ... full datasheets documentation
+#
+# 3. ADD provenance tracking:
+#    created_by: [data_sheets_schema:Person reference]
+#    modified_by: [data_sheets_schema:Person reference]
+#    created_on: "2025-11-20T10:00:00Z"
+#    modified_on: "2025-11-20T15:30:00Z"
+#    was_derived_from: "modelcard-v1.0.0"
+#
+# 4. ADD funding information (if applicable):
+#    funded_by:
+#      - grant_number: "NSF-1234567"
+#        funder: [data_sheets_schema:Organization]
+#        principal_investigator: [data_sheets_schema:Person]
+#
+# 5. REPLACE SensitiveData with datasheets PrivacyAndSecurity:
+#    Old:
+#      sensitive:
+#        sensitive_data: ["names", "emails"]
+#    New:
+#      privacy_security:
+#        pii_categories: ["names", "email_addresses"]
+#        anonymization_applied: true
+#        consent_mechanism: "Opt-in during data collection"
+#        regulatory_restrictions: ["GDPR", "CCPA"]
+#
+# 6. UPDATE License references (if using detailed IP controls):
+#    Basic licensing can continue using the License class
+#    For detailed IP/regulatory controls, add:
+#      licensing_ip: [data_sheets_schema:LicensingAndIntellectualProperty]
+#
+# 7. VERIFY import path:
+#    Ensure the datasheets schema import path is correct for your installation:
+#    imports:
+#      - ../../../data-sheets-schema/src/data_sheets_schema/schema/data_sheets_schema_all
+#
+# ============================================
+# END OF HARMONIZED SCHEMA
+# ============================================
