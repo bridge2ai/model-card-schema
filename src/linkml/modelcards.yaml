@@ -726,7 +726,7 @@ classes:
         description: Detailed documentation and usage guide
         range: string
       owners:
-        description: Model owners or maintainers (legacy field, prefer contributors)
+        description: Model owners or maintainers (use contributors for role-based attribution)
         range: owner
         multivalued: true
       contributors:
