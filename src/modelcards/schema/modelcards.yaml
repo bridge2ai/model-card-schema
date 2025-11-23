@@ -1,23 +1,1507 @@
----
-id: https://w3id.org/bbop/model-card-schema
-name: model-card-schema
-title: model-card-schema
+id: https://w3id.org/linkml/modelcard
+name: Model_Card
 description: |-
-  modelcards linkml rendering
-license: MIT
-see_also:
-  - https://bbop.github.io/model-card-schema
+  A comprehensive LinkML rendering of model card schemas,
+  incorporating Google Model Card Toolkit v0.0.2, HuggingFace,
+  and Papers with Code specifications.
 
-prefixes:
-  model_card_schema: https://w3id.org/bbop/model-card-schema/
-  linkml: https://w3id.org/linkml/
-  biolink: https://w3id.org/biolink/
-  schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
-  example: https://example.org/
-default_prefix: model_card_schema
-default_range: string
+  This schema provides structured metadata for documenting machine learning models
+  including model details, training data, performance metrics, ethical considerations,
+  and deployment specifications.
 
 imports:
-  - linkml:types
-  - personinfo_enums
+- linkml:types
+
+prefixes:
+  modelcard: https://w3id.org/linkml/modelcard/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: modelcard
+default_range: string
+
+# ============================================
+# ENUMS
+# ============================================
+
+enums:
+  CitationStyleEnum:
+    description: Citation format styles
+    permissible_values:
+      MLA:
+        description: Modern Language Association style
+      APA:
+        description: American Psychological Association style
+      Chicago:
+        description: Chicago Manual of Style
+      IEEE:
+        description: Institute of Electrical and Electronics Engineers style
+
+  ContributorRoleEnum:
+    description: Types of contributor roles for model development
+    permissible_values:
+      developed_by:
+        description: Primary developers/designers of the model
+      contributed_by:
+        description: Supporting contributors to model development
+      maintained_by:
+        description: Current maintainers of the model
+      funded_by:
+        description: Funding sources or sponsors
+
+# ============================================
+# SLOTS (Global slot definitions)
+# ============================================
+
+slots:
+  # Basic metadata
+  name:
+    description: Name or identifier
+    range: string
+
+  description:
+    description: Textual description
+    range: string
+
+  contact:
+    description: Contact information (email, URL, etc.)
+    range: string
+
+  # Version slots
+  date:
+    description: Date value
+    range: date
+
+  diff:
+    description: Difference or changelog from previous version
+    range: string
+
+  # License slots
+  identifier:
+    description: SPDX license identifier (e.g., 'Apache-2.0', 'MIT')
+    range: string
+
+  custom_text:
+    description: Custom license text (when not using SPDX identifier)
+    range: string
+
+  # Reference slots
+  reference:
+    description: Reference URL or citation string
+    range: string
+
+  # Citation slots
+  style:
+    description: Citation format style
+    range: CitationStyleEnum
+
+  citation:
+    description: Formatted citation text
+    range: string
+
+  # ModelDetails slots
+  overview:
+    description: High-level model description
+    range: string
+
+  documentation:
+    description: Detailed usage guide and documentation
+    range: string
+
+  owners:
+    description: Model owners or maintainers
+    multivalued: true
+
+  version:
+    description: Version information
+
+  licenses:
+    description: License information
+    multivalued: true
+
+  references:
+    description: Related resources and references
+    multivalued: true
+
+  citations:
+    description: Citation information for the model
+    multivalued: true
+
+  path:
+    description: Storage location or path to model artifacts
+    range: string
+
+  # Dataset slots
+  link:
+    description: URL to dataset
+    range: uri
+
+  sensitive:
+    description: Sensitive data information
+
+  graphics:
+    description: Visualizations and graphics
+
+  bias_input:
+    description: Known biases in the input data
+    range: string
+
+  unit:
+    description: Unit of measurement
+    range: string
+
+  # SensitiveData slots
+  sensitive_data:
+    description: Types of PII or sensitive information present
+    multivalued: true
+    range: string
+
+  # ModelParameters slots
+  model_architecture:
+    description: Model architecture specification
+    range: string
+
+  data:
+    description: Training and evaluation datasets
+    multivalued: true
+
+  input_format:
+    description: Plain text input format specification
+    range: string
+
+  input_format_map:
+    description: Structured input format mapping
+    multivalued: true
+
+  output_format:
+    description: Plain text output format specification
+    range: string
+
+  output_format_map:
+    description: Structured output format mapping
+    multivalued: true
+
+  # KeyVal slots
+  key:
+    description: Key in key-value pair
+    range: string
+
+  value:
+    description: Value in key-value pair or metric value
+
+  # Performance metric slots
+  type:
+    description: Type or category
+    range: string
+
+  value_error:
+    description: Estimated error for the metric
+    range: float
+
+  confidence_interval:
+    description: Confidence interval for the metric
+
+  threshold:
+    description: Decision threshold the metric was computed on
+    range: float
+
+  slice:
+    description: Data slice identifier this metric was computed on
+    range: string
+
+  # ConfidenceInterval slots
+  lower_bound:
+    description: Lower bound of confidence interval
+    range: float
+
+  upper_bound:
+    description: Upper bound of confidence interval
+    range: float
+
+  # Graphics slots
+  collection:
+    description: Collection of items
+    multivalued: true
+
+  image:
+    description: Base64-encoded image (PNG format)
+    range: string
+
+  # QuantitativeAnalysis slots
+  performance_metrics:
+    description: Performance metrics and evaluation results
+    multivalued: true
+
+  # Considerations slots
+  users:
+    description: Intended users or user types
+    multivalued: true
+
+  use_cases:
+    description: Intended use cases and application scenarios
+    multivalued: true
+
+  limitations:
+    description: Known limitations and constraints
+    multivalued: true
+
+  tradeoffs:
+    description: Performance tradeoffs and considerations
+    multivalued: true
+
+  ethical_considerations:
+    description: Ethical considerations and risks
+    multivalued: true
+
+  # Risk slots
+  mitigation_strategy:
+    description: Strategy to address or mitigate this risk
+    range: string
+
+  # ModelCard root slots
+  schema_version:
+    description: Version of the model card schema
+    range: string
+
+  model_category:
+    description: Category or parent class of the model
+    range: string
+
+  model_details:
+    description: Comprehensive model metadata
+    required: true
+
+  model_parameters:
+    description: Model construction and architecture parameters
+
+  quantitative_analysis:
+    description: Quantitative analysis and performance evaluation
+
+  considerations:
+    description: Usage considerations, limitations, and ethical concerns
+
+  bias_model:
+    description: Known biases in the model
+    range: string
+
+  bias_output:
+    description: Known biases in the model output
+    range: string
+
+  # HuggingFace/Community slots
+  framework:
+    description: ML framework (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)
+    range: string
+
+  framework_version:
+    description: Version of the ML framework
+    range: string
+
+  library_name:
+    description: Library name for loading the model (e.g., transformers, diffusers)
+    range: string
+
+  pipeline_tag:
+    description: Task type (text-generation, image-classification, etc.)
+    range: string
+
+  language:
+    description: Natural language(s) processed by the model
+    multivalued: true
+    range: string
+
+  base_model:
+    description: Parent model identifier (for fine-tuned models)
+    range: string
+
+  tags:
+    description: Searchable keywords and tags
+    multivalued: true
+    range: string
+
+  datasets:
+    description: Training dataset identifiers
+    multivalued: true
+    range: string
+
+  metrics:
+    description: Evaluation metrics used
+    multivalued: true
+    range: string
+
+  # Benchmark integration slots
+  task:
+    description: ML task specification
+
+  dataset:
+    description: Dataset information
+
+  source:
+    description: Source of information or results
+
+  results:
+    description: Benchmark or evaluation results
+    multivalued: true
+
+  model_index:
+    description: Papers with Code model-index for benchmark tracking
+    multivalued: true
+
+  config:
+    description: Configuration specification
+    range: string
+
+  split:
+    description: Dataset split (train, test, validation)
+    range: string
+
+  revision:
+    description: Dataset or model revision/version
+    range: string
+
+  args:
+    description: Additional arguments or parameters
+
+  url:
+    description: URL reference
+    range: uri
+
+  # KOGUT Template Extension Slots
+
+  # License slots (extended)
+  license_name:
+    description: Name of custom license (for non-SPDX licenses)
+    range: string
+
+  license_link:
+    description: URL to custom license file
+    range: uri
+
+  # Version slots (extended)
+  last_updated:
+    description: Last update timestamp
+    range: datetime
+
+  superseded_by:
+    description: Identifier of superseding/newer version
+    range: string
+
+  # Contributor slots
+  role:
+    description: Contributor role type
+    range: ContributorRoleEnum
+
+  email:
+    description: Email address
+    range: string
+
+  orcid:
+    description: ORCID identifier
+    range: string
+
+  affiliation:
+    description: Institutional affiliation
+    range: string
+
+  # Compute Infrastructure slots
+  hardware:
+    description: Description of compute hardware used
+    range: string
+
+  hardware_list:
+    description: List of compute resources (GPUs, clusters, DOE facilities)
+    multivalued: true
+    range: string
+
+  software:
+    description: Software stack description
+    range: string
+
+  software_dependencies:
+    description: Detailed dependencies (pip freeze, conda list, spack lock, docker)
+    range: string
+
+  training_speed:
+    description: Training performance metrics (tokens/sec, batches/hour, etc.)
+    range: string
+
+  # Reproducibility slots
+  random_seed:
+    description: Random seed for reproducibility
+    range: integer
+
+  environment_config:
+    description: Link to environment configuration files
+    range: string
+
+  pipeline_url:
+    description: URL to training pipeline or workflow
+    range: uri
+
+  hyperparameters:
+    description: Training hyperparameters
+    range: Hyperparameters
+
+  # Hyperparameters slots
+  model_initialization:
+    description: Model initialization method
+    range: string
+
+  optimizer:
+    description: Optimizer used for training
+    range: string
+
+  loss_function:
+    description: Loss function used
+    range: string
+
+  stopping_criterion:
+    description: Training stopping criterion
+    range: string
+
+  training_epochs:
+    description: Number of training epochs
+    range: integer
+
+  training_steps:
+    description: Number of training steps
+    range: integer
+
+  batch_size:
+    description: Training batch size
+    range: integer
+
+  learning_rate:
+    description: Learning rate
+    range: float
+
+  prompting_template:
+    description: Prompting template used (for LLMs)
+    range: string
+
+  optimization_techniques:
+    description: Model optimization techniques (distillation, quantization, pruning, sparsity)
+    multivalued: true
+    range: string
+
+  fine_tuning_method:
+    description: Fine-tuning method (chain_of_thought, n_shot_learning, etc.)
+    range: string
+
+  # Usage Documentation slots
+  installation_instructions:
+    description: Installation instructions (markdown format)
+    range: string
+
+  training_configuration:
+    description: Training configuration code or settings
+    range: string
+
+  inference_configuration:
+    description: Inference configuration code or settings
+    range: string
+
+  code_examples:
+    description: Code examples for using the model
+    multivalued: true
+    range: CodeExample
+
+  # CodeExample slots
+  code:
+    description: Code snippet
+    range: string
+
+  code_language:
+    description: Programming language of code snippet
+    range: string
+
+  # Mission Relevance slots
+  doe_project:
+    description: DOE project identifier or name
+    range: string
+
+  doe_facility:
+    description: DOE facility used (ALCF Polaris, OLCF Frontier, etc.)
+    range: string
+
+  funding_source:
+    description: Funding source description
+    range: string
+
+  # ModelDetails slots (extended)
+  short_description:
+    description: Brief one-line description of the model
+    range: string
+
+  contributors:
+    description: Model contributors with roles
+    multivalued: true
+    range: Contributor
+
+  compute_infrastructure:
+    description: Compute infrastructure used
+    range: ComputeInfrastructure
+
+  mission_relevance:
+    description: DOE mission relevance
+    range: MissionRelevance
+
+  # ModelParameters slots (extended)
+  training_procedure:
+    description: Detailed training procedure
+    range: TrainingProcedure
+
+  pre_training_info:
+    description: Pre-training information and details
+    range: string
+
+  training_data_separate:
+    description: Whether training data is separate/external
+    range: boolean
+
+  evaluation_data_separate:
+    description: Whether evaluation data is separate/external
+    range: boolean
+
+  # Training/Evaluation Procedure slots
+  methodology:
+    description: Training or evaluation methodology
+    range: string
+
+  reproducibility_info:
+    description: Reproducibility information
+    range: ReproducibilityInfo
+
+  benchmarks:
+    description: Benchmarks used for evaluation
+    multivalued: true
+    range: string
+
+  baselines:
+    description: Baseline models compared against
+    multivalued: true
+    range: string
+
+  sota_comparison:
+    description: State-of-the-art comparison results
+    range: string
+
+  uncertainty_quantification:
+    description: Uncertainty quantification methodology
+    range: string
+
+  # Considerations slots (extended)
+  out_of_scope_uses:
+    description: Explicit out-of-scope or prohibited uses
+    multivalued: true
+    range: OutOfScopeUse
+
+  usage_documentation:
+    description: Usage documentation and examples
+    range: UsageDocumentation
+
+  # QuantitativeAnalysis slots (extended)
+  evaluation_procedure:
+    description: Evaluation procedure details
+    range: EvaluationProcedure
+
+# ============================================
+# CLASSES
+# ============================================
+
+classes:
+
+  # ========== Core Metadata Classes ==========
+
+  Version:
+    description: Version information for a model
+    slots:
+      - name
+      - date
+      - diff
+      - last_updated
+      - superseded_by
+    slot_usage:
+      name:
+        description: Version identifier (e.g., '1.0.0', 'v2', 'beta')
+        range: string
+      date:
+        description: Release date of this version
+        range: date
+      diff:
+        description: Changes from the previous version
+        range: string
+      last_updated:
+        description: Last update timestamp for this version
+        range: datetime
+      superseded_by:
+        description: Identifier of the version that supersedes this one
+        range: string
+
+  License:
+    description: License information (use SPDX identifier OR custom text, not both)
+    slots:
+      - identifier
+      - custom_text
+      - license_name
+      - license_link
+    slot_usage:
+      identifier:
+        description: SPDX license identifier (e.g., 'Apache-2.0', 'MIT', 'CC-BY-4.0')
+        range: string
+      custom_text:
+        description: Custom license text (use when SPDX identifier is not applicable)
+        range: string
+      license_name:
+        description: Name of custom license (for non-SPDX licenses)
+        range: string
+      license_link:
+        description: URL to custom license file or terms
+        range: uri
+
+  owner:
+    description: Model owner or maintainer information
+    slots:
+      - name
+      - contact
+    slot_usage:
+      name:
+        description: Name of the owner (individual or organization)
+        range: string
+      contact:
+        description: Contact information (email, website, etc.)
+        range: string
+
+  Reference:
+    description: Reference to related resources
+    slots:
+      - reference
+    slot_usage:
+      reference:
+        description: URL or citation string for related resource
+        range: string
+
+  Citation:
+    description: Citation information for the model
+    slots:
+      - style
+      - citation
+    slot_usage:
+      style:
+        description: Citation format style
+        range: CitationStyleEnum
+      citation:
+        description: Formatted citation text
+        range: string
+
+  # ========== Model Details ==========
+
+  ModelDetails:
+    description: Comprehensive metadata about the model
+    slots:
+      - name
+      - short_description
+      - overview
+      - documentation
+      - owners
+      - contributors
+      - version
+      - licenses
+      - references
+      - citations
+      - path
+    slot_usage:
+      name:
+        description: Model name or identifier
+        range: string
+        required: true
+      short_description:
+        description: Brief one-line description of the model (for KOGUT template)
+        range: string
+      overview:
+        description: High-level description of what the model does
+        range: string
+      documentation:
+        description: Detailed documentation and usage guide
+        range: string
+      owners:
+        description: Model owners or maintainers (use contributors for role-based attribution)
+        range: owner
+        multivalued: true
+      contributors:
+        description: Model contributors with role-based attribution (KOGUT)
+        range: Contributor
+        multivalued: true
+      version:
+        description: Version information
+        range: Version
+      licenses:
+        description: Licensing information
+        range: License
+        multivalued: true
+      references:
+        description: References to related resources
+        range: Reference
+        multivalued: true
+      citations:
+        description: How to cite this model
+        range: Citation
+        multivalued: true
+      path:
+        description: Storage location or path to model artifacts
+        range: string
+
+  # ========== Dataset Classes ==========
+
+  SensitiveData:
+    description: Information about sensitive data in a dataset
+    slots:
+      - sensitive_data
+    slot_usage:
+      sensitive_data:
+        description: Types of PII or sensitive information (e.g., names, addresses, medical records)
+        multivalued: true
+        range: string
+
+  GraphicsCollection:
+    description: Collection of graphics and visualizations
+    slots:
+      - description
+      - collection
+    slot_usage:
+      description:
+        description: Description of this graphics collection
+        range: string
+      collection:
+        description: Graphics in this collection
+        range: graphic
+        multivalued: true
+
+  graphic:
+    description: A single graphic or visualization
+    slots:
+      - name
+      - image
+    slot_usage:
+      name:
+        description: Name or title of the graphic
+        range: string
+      image:
+        description: Base64-encoded PNG image
+        range: string
+
+  dataSet:
+    description: Information about a dataset used for training or evaluation
+    slots:
+      - name
+      - description
+      - link
+      - sensitive
+      - graphics
+      - bias_input
+      - unit
+    slot_usage:
+      name:
+        description: Dataset name or identifier
+        range: string
+      description:
+        description: Dataset overview and characteristics
+        range: string
+      link:
+        description: URL to the dataset
+        range: uri
+        required: true
+      sensitive:
+        description: Sensitive data information
+        range: SensitiveData
+      graphics:
+        description: Visualizations of the dataset
+        range: GraphicsCollection
+      bias_input:
+        description: Known biases present in the input data
+        range: string
+      unit:
+        description: Unit for values in this dataset
+        range: string
+
+  # ========== Model Parameters ==========
+
+  KeyVal:
+    description: Key-value pair for format mappings
+    slots:
+      - key
+      - value
+    slot_usage:
+      key:
+        description: Key identifier
+        range: string
+      value:
+        description: Value associated with the key
+        range: string
+
+  ModelParameters:
+    description: Parameters and specifications for model construction
+    slots:
+      - model_architecture
+      - data
+      - input_format
+      - input_format_map
+      - output_format
+      - output_format_map
+      - compute_infrastructure
+      - training_procedure
+    slot_usage:
+      model_architecture:
+        description: Model architecture specification and description
+        range: string
+      data:
+        description: Training and evaluation datasets
+        range: dataSet
+        multivalued: true
+      input_format:
+        description: Plain text description of input format
+        range: string
+      input_format_map:
+        description: Structured mapping of input format fields
+        range: KeyVal
+        multivalued: true
+      output_format:
+        description: Plain text description of output format
+        range: string
+      output_format_map:
+        description: Structured mapping of output format fields
+        range: KeyVal
+        multivalued: true
+      compute_infrastructure:
+        description: Compute infrastructure used for training (KOGUT)
+        range: ComputeInfrastructure
+      training_procedure:
+        description: Training procedure and methodology (KOGUT)
+        range: TrainingProcedure
+
+  # ========== Performance & Quantitative Analysis ==========
+
+  ConfidenceInterval:
+    description: Confidence interval for a metric value
+    slots:
+      - lower_bound
+      - upper_bound
+    slot_usage:
+      lower_bound:
+        description: Lower bound of the confidence interval
+        range: float
+      upper_bound:
+        description: Upper bound of the confidence interval
+        range: float
+
+  performanceMetric:
+    description: A performance metric with optional confidence interval
+    slots:
+      - type
+      - value
+      - value_error
+      - confidence_interval
+      - threshold
+      - slice
+      - unit
+    slot_usage:
+      type:
+        description: Type of performance metric (e.g., 'accuracy', 'F1', 'AUC', 'precision')
+        range: string
+        required: true
+      value:
+        description: Metric value
+        range: float
+      value_error:
+        description: Estimated error for the metric value
+        range: float
+      confidence_interval:
+        description: Confidence interval for the metric
+        range: ConfidenceInterval
+      threshold:
+        description: Decision threshold used when computing this metric
+        range: float
+      slice:
+        description: Data slice or subset this metric was computed on
+        range: string
+      unit:
+        description: Unit for the metric value, if applicable
+        range: string
+
+  QuantitativeAnalysis:
+    description: Quantitative analysis and performance evaluation of the model
+    slots:
+      - performance_metrics
+      - graphics
+      - evaluation_procedure
+    slot_usage:
+      performance_metrics:
+        description: Performance metrics and evaluation results
+        range: performanceMetric
+        multivalued: true
+      graphics:
+        description: Performance visualizations and plots
+        range: GraphicsCollection
+      evaluation_procedure:
+        description: Detailed evaluation procedure (KOGUT)
+        range: EvaluationProcedure
+
+  # ========== Considerations ==========
+
+  User:
+    description: Description of an intended user type
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Description of the intended user type or role
+        range: string
+
+  UseCase:
+    description: Description of a use case or application scenario
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Description of the application scenario
+        range: string
+
+  Limitation:
+    description: A known limitation or constraint of the model
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Description of the limitation or constraint
+        range: string
+
+  Tradeoff:
+    description: A performance tradeoff consideration
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Description of the performance tradeoff
+        range: string
+
+  risk:
+    description: An ethical, environmental, or operational risk
+    slots:
+      - name
+      - mitigation_strategy
+    slot_usage:
+      name:
+        description: Name or type of the risk
+        range: string
+      mitigation_strategy:
+        description: Strategy used to address or mitigate this risk
+        range: string
+
+  Considerations:
+    description: Considerations for model usage including limitations and ethical concerns
+    slots:
+      - users
+      - use_cases
+      - limitations
+      - tradeoffs
+      - ethical_considerations
+      - out_of_scope_uses
+    slot_usage:
+      users:
+        description: Intended user types
+        range: User
+        multivalued: true
+      use_cases:
+        description: Intended use cases and application scenarios
+        range: UseCase
+        multivalued: true
+      limitations:
+        description: Known limitations and constraints
+        range: Limitation
+        multivalued: true
+      tradeoffs:
+        description: Performance tradeoffs to consider
+        range: Tradeoff
+        multivalued: true
+      ethical_considerations:
+        description: Ethical considerations and identified risks
+        range: risk
+        multivalued: true
+      out_of_scope_uses:
+        description: Explicitly discouraged or prohibited uses (KOGUT)
+        range: OutOfScopeUse
+        multivalued: true
+
+  # ========== Benchmark Integration (HuggingFace/Papers with Code) ==========
+
+  Task:
+    description: ML task specification for benchmarking
+    slots:
+      - type
+      - name
+    slot_usage:
+      type:
+        description: Task type identifier (e.g., 'text-generation', 'image-classification')
+        range: string
+      name:
+        description: Human-readable task name
+        range: string
+
+  BenchmarkDataset:
+    description: Dataset used for benchmarking
+    slots:
+      - type
+      - name
+      - config
+      - split
+      - revision
+      - args
+    slot_usage:
+      type:
+        description: Dataset type identifier
+        range: string
+      name:
+        description: Dataset name
+        range: string
+      config:
+        description: Dataset configuration
+        range: string
+      split:
+        description: Dataset split (train, test, validation)
+        range: string
+      revision:
+        description: Dataset version or revision
+        range: string
+      args:
+        description: Additional arguments for dataset loading
+
+  BenchmarkMetric:
+    description: Benchmark metric result
+    slots:
+      - type
+      - value
+      - name
+      - config
+      - args
+    slot_usage:
+      type:
+        description: Metric type identifier
+        range: string
+      value:
+        description: Metric value
+        range: float
+      name:
+        description: Metric name
+        range: string
+      config:
+        description: Metric configuration
+        range: string
+      args:
+        description: Additional metric arguments
+
+  BenchmarkSource:
+    description: Source of benchmark results
+    slots:
+      - name
+      - url
+    slot_usage:
+      name:
+        description: Source name (e.g., 'Open LLM Leaderboard', 'GLUE Benchmark')
+        range: string
+      url:
+        description: URL to the source
+        range: uri
+
+  BenchmarkResult:
+    description: Benchmark result entry with task, dataset, and metrics
+    slots:
+      - task
+      - dataset
+      - metrics
+      - source
+    slot_usage:
+      task:
+        description: Task that was evaluated
+        range: Task
+      dataset:
+        description: Dataset used for evaluation
+        range: BenchmarkDataset
+      metrics:
+        description: Metrics reported for this benchmark
+        range: BenchmarkMetric
+        multivalued: true
+      source:
+        description: Source of the benchmark results
+        range: BenchmarkSource
+
+  ModelIndex:
+    description: Papers with Code model-index structure for benchmark tracking
+    slots:
+      - name
+      - results
+    slot_usage:
+      name:
+        description: Model name for this benchmark entry
+        range: string
+      results:
+        description: Benchmark results
+        range: BenchmarkResult
+        multivalued: true
+
+  # ========== KOGUT Extensions ==========
+
+  Contributor:
+    description: Contributor information with role-based attribution
+    slots:
+      - name
+      - role
+      - email
+      - orcid
+      - affiliation
+    slot_usage:
+      name:
+        description: Contributor name (individual or organization)
+        range: string
+        required: true
+      role:
+        description: Type of contribution
+        range: ContributorRoleEnum
+      email:
+        description: Contact email address
+        range: string
+      orcid:
+        description: ORCID identifier (https://orcid.org/)
+        range: uri
+      affiliation:
+        description: Institutional affiliation
+        range: string
+
+  ComputeInfrastructure:
+    description: Compute infrastructure and resources used for training
+    slots:
+      - hardware
+      - hardware_list
+      - software
+      - software_dependencies
+      - training_speed
+    slot_usage:
+      hardware:
+        description: General description of compute hardware
+        range: string
+      hardware_list:
+        description: Specific compute resources (e.g., '8x NVIDIA A100 80GB', 'OLCF Frontier', 'ALCF Polaris')
+        multivalued: true
+        range: string
+      software:
+        description: Software framework and environment
+        range: string
+      software_dependencies:
+        description: Detailed dependencies (pip freeze, conda list, spack lock, docker image)
+        range: string
+      training_speed:
+        description: Training speed metrics (e.g., 'tokens/second', 'images/second', 'wall time')
+        range: string
+
+  Hyperparameters:
+    description: Training hyperparameters for reproducibility
+    slots:
+      - model_initialization
+      - optimizer
+      - loss_function
+      - stopping_criterion
+      - training_epochs
+      - training_steps
+      - batch_size
+      - learning_rate
+      - prompting_template
+      - optimization_techniques
+      - fine_tuning_method
+    slot_usage:
+      model_initialization:
+        description: Model initialization strategy
+        range: string
+      optimizer:
+        description: Optimizer used (e.g., 'Adam', 'SGD', 'AdamW')
+        range: string
+      loss_function:
+        description: Loss function used for training
+        range: string
+      stopping_criterion:
+        description: Criteria for stopping training
+        range: string
+      training_epochs:
+        description: Number of training epochs
+        range: integer
+      training_steps:
+        description: Total number of training steps
+        range: integer
+      batch_size:
+        description: Training batch size
+        range: integer
+      learning_rate:
+        description: Learning rate
+        range: float
+      prompting_template:
+        description: Prompting template used (for LLMs)
+        range: string
+      optimization_techniques:
+        description: Additional optimization techniques (e.g., 'gradient clipping', 'mixed precision')
+        range: string
+      fine_tuning_method:
+        description: Fine-tuning method (e.g., 'full', 'LoRA', 'adapter')
+        range: string
+
+  ReproducibilityInfo:
+    description: Information needed to reproduce model training
+    slots:
+      - random_seed
+      - environment_config
+      - pipeline_url
+      - hyperparameters
+    slot_usage:
+      random_seed:
+        description: Random seed used for reproducibility
+        range: integer
+      environment_config:
+        description: Complete environment configuration (YAML, JSON, or text)
+        range: string
+      pipeline_url:
+        description: URL to training pipeline or workflow
+        range: uri
+      hyperparameters:
+        description: Training hyperparameters
+        range: Hyperparameters
+
+  CodeExample:
+    description: Code example for model usage
+    slots:
+      - code
+      - code_language
+      - description
+    slot_usage:
+      code:
+        description: Code snippet
+        range: string
+        required: true
+      code_language:
+        description: Programming language (e.g., 'python', 'bash', 'R')
+        range: string
+      description:
+        description: Description of what this code does
+        range: string
+
+  UsageDocumentation:
+    description: Comprehensive usage documentation with examples
+    slots:
+      - installation_instructions
+      - training_configuration
+      - inference_configuration
+      - code_examples
+    slot_usage:
+      installation_instructions:
+        description: Installation instructions (markdown format)
+        range: string
+      training_configuration:
+        description: Training configuration examples and instructions
+        range: string
+      inference_configuration:
+        description: Inference configuration examples and instructions
+        range: string
+      code_examples:
+        description: Code examples for common use cases
+        range: CodeExample
+        multivalued: true
+
+  MissionRelevance:
+    description: Relevance to DOE mission and facilities
+    slots:
+      - doe_project
+      - doe_facility
+      - funding_source
+      - description
+    slot_usage:
+      doe_project:
+        description: DOE project identifier or name
+        range: string
+      doe_facility:
+        description: DOE facility used (e.g., 'ALCF Polaris', 'OLCF Frontier', 'NERSC Perlmutter')
+        range: string
+      funding_source:
+        description: Funding source or grant information
+        range: string
+      description:
+        description: Description of mission relevance
+        range: string
+
+  OutOfScopeUse:
+    description: Explicitly discouraged or out-of-scope uses
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Description of prohibited or out-of-scope use
+        range: string
+        required: true
+
+  TrainingProcedure:
+    description: Detailed training procedure and methodology
+    slots:
+      - description
+      - methodology
+      - reproducibility_info
+      - pre_training_info
+      - training_data_separate
+    slot_usage:
+      description:
+        description: Overview of training procedure
+        range: string
+      methodology:
+        description: Detailed training methodology
+        range: string
+      reproducibility_info:
+        description: Reproducibility information
+        range: ReproducibilityInfo
+      pre_training_info:
+        description: Pre-training information (if applicable)
+        range: string
+      training_data_separate:
+        description: Whether training data is separate/external
+        range: boolean
+
+  EvaluationProcedure:
+    description: Detailed evaluation procedure and benchmarks
+    slots:
+      - description
+      - benchmarks
+      - baselines
+      - sota_comparison
+      - uncertainty_quantification
+      - evaluation_data_separate
+    slot_usage:
+      description:
+        description: Overview of evaluation procedure
+        range: string
+      benchmarks:
+        description: Benchmark datasets and tasks
+        range: string
+      baselines:
+        description: Baseline models compared against
+        range: string
+        multivalued: true
+      sota_comparison:
+        description: Comparison with state-of-the-art models
+        range: string
+      uncertainty_quantification:
+        description: Uncertainty quantification methodology
+        range: string
+      evaluation_data_separate:
+        description: Whether evaluation data is separate/external
+        range: boolean
+
+  # ========== Root Model Card ==========
+
+  modelCard:
+    tree_root: true
+    description: Complete model card with metadata, performance, and considerations
+    slots:
+      # Core sections (Google Model Card Toolkit)
+      - schema_version
+      - model_details
+      - model_parameters
+      - quantitative_analysis
+      - considerations
+      - model_category
+      - bias_model
+      - bias_output
+
+      # HuggingFace/Community metadata
+      - framework
+      - framework_version
+      - library_name
+      - pipeline_tag
+      - language
+      - base_model
+      - tags
+      - datasets
+      - metrics
+
+      # Benchmark integration (Papers with Code)
+      - model_index
+
+      # KOGUT extensions
+      - mission_relevance
+      - usage_documentation
+
+    slot_usage:
+      # Core sections
+      schema_version:
+        description: Version of the model card schema being used
+        range: string
+      model_details:
+        description: Comprehensive model metadata and details
+        range: ModelDetails
+        required: true
+      model_parameters:
+        description: Model construction and architecture parameters
+        range: ModelParameters
+      quantitative_analysis:
+        description: Quantitative analysis and performance evaluation
+        range: QuantitativeAnalysis
+      considerations:
+        description: Usage considerations, limitations, and ethical concerns
+        range: Considerations
+      model_category:
+        description: Category or parent class of the model
+        range: string
+      bias_model:
+        description: Known biases in the model itself
+        range: string
+      bias_output:
+        description: Known biases in the model's outputs
+        range: string
+
+      # HuggingFace/Community metadata
+      framework:
+        description: ML framework used (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)
+        range: string
+      framework_version:
+        description: Version of the ML framework
+        range: string
+      library_name:
+        description: Library name for loading the model (e.g., transformers, diffusers, timm)
+        range: string
+      pipeline_tag:
+        description: Task type for pipeline usage
+        range: string
+      language:
+        description: Natural language(s) processed by the model
+        multivalued: true
+        range: string
+      base_model:
+        description: Parent model identifier (for fine-tuned or derived models)
+        range: string
+      tags:
+        description: Searchable keywords and tags for discovery
+        multivalued: true
+        range: string
+      datasets:
+        description: Training dataset identifiers or names
+        multivalued: true
+        range: string
+      metrics:
+        description: Evaluation metrics used for this model
+        multivalued: true
+        range: string
+
+      # Benchmark integration
+      model_index:
+        description: Benchmark results following Papers with Code model-index format
+        range: ModelIndex
+        multivalued: true
+
+      # KOGUT extensions
+      mission_relevance:
+        description: Relevance to DOE mission and facilities (KOGUT)
+        range: MissionRelevance
+      usage_documentation:
+        description: Comprehensive usage documentation with examples (KOGUT)
+        range: UsageDocumentation
