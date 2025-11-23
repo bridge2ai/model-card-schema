@@ -396,7 +396,7 @@ slots:
 
   orcid:
     description: ORCID identifier
-    range: string
+    range: uri
 
   affiliation:
     description: Institutional affiliation
