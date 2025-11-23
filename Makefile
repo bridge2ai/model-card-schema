@@ -131,7 +131,7 @@ examples/%.ttl: src/data/examples/%.yaml
 
 test-examples: examples/output
 
-examples/output: src/model_card_schema/schema/model_card_schema.yaml
+examples/output: $(SOURCE_SCHEMA_PATH)
 	mkdir -p $@
 	$(RUN) linkml-run-examples \
 		--output-formats json \
@@ -167,7 +167,7 @@ git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/model_card_schema/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
+	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/linkml/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
 	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
 git-commit:
 	git commit -m 'chore: initial commit' -a
