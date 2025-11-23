@@ -497,6 +497,6 @@ To upgrade an existing model card with extended template features:
 ### Related Files
 
 - **Schema**: `src/linkml/modelcards.yaml` (on `schema-extend` branch)
-- **Template Source**: `data/input_docs/KOGUT/model-card.md` (original LBNL DOE template)
+- **Template Source**: `data/input_docs/KOGUT/model-card.md` (original LBNL DOE KOGUT template - path preserved for historical reference)
 - **Example**: `src/data/examples/extended/climate-model-extended.yaml`
 - **Example Docs**: `src/data/examples/extended/README.md`
