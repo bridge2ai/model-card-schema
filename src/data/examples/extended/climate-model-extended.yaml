@@ -1,8 +1,8 @@
-# KOGUT-style Model Card Example
-# Demonstrates all KOGUT template extensions for DOE scientific models
+# Model Card Extended Template Example
+# Demonstrates all extended template features for DOE scientific models
 # Schema: src/linkml/modelcards.yaml (extended)
 
-schema_version: "2.0.0-kogut"
+schema_version: "2.0.0-extended"
 
 # ========== MODEL DETAILS ==========
 
@@ -33,7 +33,7 @@ model_details:
     ## Citation
     See citations section below.
 
-  # KOGUT: Role-based contributor attribution
+  # Extended template: Role-based contributor attribution
   contributors:
     - name: "Jane Doe"
       role: developed_by
@@ -135,7 +135,7 @@ model_parameters:
     - Bounding boxes: List of (x1, y1, x2, y2, class_id, confidence)
     - Format: HDF5 or GeoTIFF for spatial data
 
-  # KOGUT: Compute infrastructure
+  # Extended template: Compute infrastructure
   compute_infrastructure:
     hardware: "NERSC Perlmutter GPU nodes"
     hardware_list:
@@ -170,7 +170,7 @@ model_parameters:
       - Total training time: 128 hours (40 epochs) on 256 A100 GPUs
       - Effective: 32,768 GPU-hours
 
-  # KOGUT: Training procedure
+  # Extended template: Training procedure
   training_procedure:
     description: |
       Supervised training on labeled climate simulation data with standard SGD optimization.
@@ -264,7 +264,7 @@ quantitative_analysis:
       value: 125.3
       unit: "patches/second (single A100 GPU)"
 
-  # KOGUT: Evaluation procedure
+  # Extended template: Evaluation procedure
   evaluation_procedure:
     description: |
       Evaluated on held-out climate model simulations not seen during training.
@@ -338,7 +338,7 @@ considerations:
         Always report confidence intervals. Clearly communicate that model is trained
         on simulations, not observations.
 
-  # KOGUT: Out-of-scope uses
+  # Extended template: Out-of-scope uses
   out_of_scope_uses:
     - description: |
         Real-time weather forecasting: Model is designed for climate model analysis,
@@ -368,7 +368,7 @@ tags:
   - "doe"
   - "nersc"
 
-# ========== KOGUT: DOE MISSION RELEVANCE ==========
+# ========== Extended Template: DOE MISSION RELEVANCE ==========
 
 mission_relevance:
   doe_project: "Climate Model Development and Validation (CMDV)"
@@ -391,7 +391,7 @@ mission_relevance:
     - Demonstrates AI for Science at DOE facilities
     - Supports DOE's commitment to open science and reproducible research
 
-# ========== KOGUT: USAGE DOCUMENTATION ==========
+# ========== Extended Template: USAGE DOCUMENTATION ==========
 
 usage_documentation:
   installation_instructions: |

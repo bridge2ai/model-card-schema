@@ -283,16 +283,16 @@ See `utils/README.md` for complete tool documentation.
   - `modelcards_harmonized.yaml` - Proposed harmonized schema (conceptual, has naming conflicts)
   - External reference pattern (recommended) - See examples in `src/data/examples/harmonized/`
 
-## KOGUT Template Extensions
+## Model Card Extended Template
 
 ### Branch: `schema-extend`
 
-The schema has been extended on the `schema-extend` branch to provide **100% KOGUT template coverage** for DOE scientific models. KOGUT (Knowledge Organization for Generative and Understanding Technologies) is a DOE-specific model card template emphasizing compute infrastructure, reproducibility, and mission relevance.
+The schema has been extended on the `schema-extend` branch to provide **100% coverage** for DOE scientific models through an extended template. This extended template emphasizes compute infrastructure, reproducibility, and mission relevance for scientific computing applications.
 
 ### Extensions Overview
 
 **Schema Size**: ~1,500 lines (from 967 baseline)
-**New Classes**: 10 KOGUT-specific classes
+**New Classes**: 10 extended template classes
 **Enhanced Classes**: 6 existing classes
 **New Slots**: ~40 new fields
 **New Enums**: 1 (ContributorRoleEnum)
@@ -357,9 +357,9 @@ Added to `modelCard` class:
 - `mission_relevance` (MissionRelevance)
 - `usage_documentation` (UsageDocumentation)
 
-### KOGUT Template Coverage
+### Extended Template Coverage
 
-| KOGUT Section | Schema Mapping | Coverage |
+| Template Section | Schema Mapping | Coverage |
 |---------------|----------------|----------|
 | Model Details → Description | `model_details.short_description` | ✅ 100% |
 | Model Details → Developed By | `model_details.contributors` (role: developed_by) | ✅ 100% |
@@ -381,13 +381,13 @@ Added to `modelCard` class:
 | DOE Mission Relevance | `mission_relevance` | ✅ 100% |
 | Usage Documentation | `usage_documentation` | ✅ 100% |
 
-**Overall KOGUT Coverage**: ✅ **100%**
+**Overall Coverage**: ✅ **100%**
 
 ### Examples
 
-**KOGUT Example**: `src/data/examples/kogut/climate-model-kogut.yaml`
+**Extended Template Example**: `src/data/examples/extended/climate-model-extended.yaml`
 - Complete ClimateNet-v2 model card
-- Demonstrates all KOGUT extensions
+- Demonstrates all extended template features
 - Realistic DOE scientific model (climate AI)
 - Includes:
   - Role-based contributors with ORCID
@@ -398,8 +398,8 @@ Added to `modelCard` class:
   - Complete usage documentation (conda/docker/SLURM)
   - Code examples in Python and Bash
 
-**Example Documentation**: `src/data/examples/kogut/README.md`
-- Complete KOGUT feature documentation
+**Example Documentation**: `src/data/examples/extended/README.md`
+- Complete extended template feature documentation
 - Before/after migration examples
 - Coverage table
 - Validation instructions
@@ -415,7 +415,7 @@ Only non-blocking naming convention warnings (same as baseline).
 
 ### Use Cases
 
-KOGUT extensions are ideal for:
+The extended template is ideal for:
 
 1. **DOE Scientific Models**
    - Climate models (E3SM, CESM, MPAS)
@@ -440,15 +440,15 @@ KOGUT extensions are ideal for:
 
 ### Backward Compatibility
 
-All KOGUT extensions are **fully backward compatible**:
+All extended template features are **fully backward compatible**:
 - Existing model cards remain valid
-- KOGUT fields are optional
+- Extended fields are optional
 - Legacy `owner` class preserved (alongside new `contributors`)
 - No breaking changes to existing schema
 
 ### Migration Path
 
-To upgrade an existing model card to KOGUT:
+To upgrade an existing model card with extended template features:
 
 1. **Add contributors** (optional, recommended):
    ```yaml
@@ -497,6 +497,6 @@ To upgrade an existing model card to KOGUT:
 ### Related Files
 
 - **Schema**: `src/linkml/modelcards.yaml` (on `schema-extend` branch)
-- **KOGUT Template**: `data/input_docs/KOGUT/model-card.md`
-- **Example**: `src/data/examples/kogut/climate-model-kogut.yaml`
-- **Example Docs**: `src/data/examples/kogut/README.md`
+- **Template Source**: `data/input_docs/KOGUT/model-card.md` (original LBNL DOE template)
+- **Example**: `src/data/examples/extended/climate-model-extended.yaml`
+- **Example Docs**: `src/data/examples/extended/README.md`

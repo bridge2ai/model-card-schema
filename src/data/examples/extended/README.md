@@ -1,14 +1,14 @@
-# KOGUT Template Examples
+# Model Card Extended Template Examples
 
-This directory contains examples demonstrating the KOGUT template extensions to the Model Cards schema.
+This directory contains examples demonstrating the model card extended template extensions to the Model Cards schema.
 
 ## Files
 
-### `climate-model-kogut.yaml`
+### `climate-model-extended.yaml`
 
-Complete model card demonstrating all KOGUT template features for a DOE scientific model (ClimateNet-v2).
+Complete model card demonstrating all extended template features for a DOE scientific model (ClimateNet-v2).
 
-**Key KOGUT Extensions Demonstrated:**
+**Key Extended Template Features Demonstrated:**
 
 1. **Enhanced Contributor Attribution** (`contributors` in `model_details`)
    - Role-based attribution (developed_by, contributed_by, maintained_by, funded_by)
@@ -71,9 +71,9 @@ Complete model card demonstrating all KOGUT template features for a DOE scientif
 
 ## Schema Coverage
 
-This example demonstrates **100% coverage** of KOGUT template fields:
+This example demonstrates **100% coverage** of Model Card Extended Template template fields:
 
-| KOGUT Section | Schema Mapping | Example Location |
+| Model Card Extended Template Section | Schema Mapping | Example Location |
 |---------------|----------------|------------------|
 | Model Details → Description | `model_details.short_description` | Line 12 |
 | Model Details → Developed By | `model_details.contributors` (role: developed_by) | Lines 38-42 |
@@ -105,7 +105,7 @@ model_details:
       contact: "jane.doe@lbl.gov"
 ```
 
-### After (KOGUT Extended)
+### After (Model Card Extended Template Extended)
 ```yaml
 model_details:
   contributors:
@@ -122,7 +122,7 @@ model_parameters:
   model_architecture: "ResNet-50"
 ```
 
-### After (KOGUT with compute infrastructure)
+### After (Model Card Extended Template with compute infrastructure)
 ```yaml
 model_parameters:
   model_architecture: "ResNet-50"
@@ -144,12 +144,12 @@ Validate this example against the schema:
 poetry run linkml-lint src/linkml/modelcards.yaml
 
 # Generate datamodel (validates schema)
-poetry run gen-project -d src/data/examples/kogut src/linkml/modelcards.yaml
+poetry run gen-project -d src/data/examples/extended src/linkml/modelcards.yaml
 ```
 
 ## Use Cases
 
-This KOGUT example is appropriate for:
+This Model Card Extended Template example is appropriate for:
 
 1. **DOE Scientific Models**
    - Climate models (E3SM, CESM, MPAS)
@@ -175,7 +175,7 @@ This KOGUT example is appropriate for:
 
 ## Migration from Standard Model Cards
 
-To migrate an existing model card to KOGUT format:
+To migrate an existing model card to Model Card Extended Template format:
 
 1. **Add contributor information:**
    ```yaml
@@ -216,7 +216,7 @@ To migrate an existing model card to KOGUT format:
 
 ## References
 
-- **KOGUT Template:** `/data/input_docs/KOGUT/model-card.md`
+- **Model Card Extended Template Template:** `/data/input_docs/Model Card Extended Template/model-card.md`
 - **Schema:** `/src/linkml/modelcards.yaml`
 - **Gap Analysis:** See commit message for detailed analysis
 
