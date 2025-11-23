@@ -11,7 +11,7 @@ DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
 # Find model card example files (excluding Person example from template)
 EXAMPLE_FILES = [
     f for f in glob.glob(os.path.join(DATA_DIR, '**/*.yaml'), recursive=True)
-    if 'Person' not in f and 'kogut' in f  # Only test KOGUT examples
+    if 'Person' not in f and 'extended' in f  # Only test extended template examples
 ]
 
 
