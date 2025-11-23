@@ -221,11 +221,11 @@ model_parameters:
 
         stopping_criterion: "Early stopping: 5 epochs no improvement in validation IoU"
 
-        optimization_techniques: |
-          - Mixed precision (FP16) with NVIDIA Apex
-          - Gradient clipping: max_norm=1.0
-          - Cosine annealing learning rate schedule (T_max=40 epochs)
-          - Warmup: 2 epochs linear ramp from 0 to base_lr
+        optimization_techniques:
+          - "Mixed precision (FP16) with NVIDIA Apex"
+          - "Gradient clipping: max_norm=1.0"
+          - "Cosine annealing learning rate schedule (T_max=40 epochs)"
+          - "Warmup: 2 epochs linear ramp from 0 to base_lr"
 
         loss_function: |
           Segmentation: Weighted cross-entropy
