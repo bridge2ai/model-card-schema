@@ -77,7 +77,7 @@ This example demonstrates **100% coverage** of KOGUT template fields:
 |---------------|----------------|------------------|
 | Model Details → Description | `model_details.short_description` | Line 12 |
 | Model Details → Developed By | `model_details.contributors` (role: developed_by) | Lines 36-40 |
-| Model Details → Shared By | `model_details.contributors` (role: contributed_by) | Lines 42-46 |
+| Model Details → Shared By | `model_details.contributors` (role: contributed_by) | Lines 44-48 |
 | Model Details → Model Type | `model_parameters.model_architecture` | Lines 89-115 |
 | Model Details → Version | `model_details.version` | Lines 60-68 |
 | Model Details → License | `model_details.licenses` | Lines 70-73 |
