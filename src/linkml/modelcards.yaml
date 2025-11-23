@@ -1388,6 +1388,7 @@ classes:
       baselines:
         description: Baseline models compared against
         range: string
+        multivalued: true
       sota_comparison:
         description: Comparison with state-of-the-art models
         range: string
