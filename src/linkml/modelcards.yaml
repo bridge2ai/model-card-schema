@@ -1248,6 +1248,7 @@ classes:
       optimization_techniques:
         description: Additional optimization techniques (e.g., 'gradient clipping', 'mixed precision')
         range: string
+        multivalued: true
       fine_tuning_method:
         description: Fine-tuning method (e.g., 'full', 'LoRA', 'adapter')
         range: string
