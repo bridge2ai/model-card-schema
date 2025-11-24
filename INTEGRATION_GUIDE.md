@@ -1,16 +1,18 @@
 # Model Cards + Datasheets Integration Guide
 
-**Version**: 1.0
-**Date**: November 22, 2025
-**Status**: Phase 1 Implementation
+**Version**: 2.0
+**Date**: November 23, 2025
+**Status**: Phase 1 COMPLETED - D4D Harmonization Implemented
 
 ---
 
 ## Executive Summary
 
-This guide provides a practical approach to integrating Model Cards with Datasheets for Datasets. While the `modelcards_harmonized.yaml` schema demonstrates the conceptual design, technical challenges require a phased implementation approach.
+This guide documents the successful integration of Model Cards with Datasheets for Datasets (D4D) using the **external reference pattern**. This approach provides comprehensive dataset and creator documentation while avoiding schema import conflicts.
 
-**Key Finding**: Direct schema merge via LinkML imports encounters naming conflicts that require careful resolution.
+**Implementation Status**: The D4D harmonized schema (`model_card_schema_d4dharmonized.yaml`) is complete and ready for use, with comprehensive examples in `src/data/examples/d4d_integration/`.
+
+**Key Achievement**: Upgraded from simple dataset documentation (7 fields) to comprehensive Datasheets coverage (60+ classes, 200+ fields) through external references.
 
 ---
 
@@ -68,41 +70,61 @@ language:
 
 ---
 
-## Recommended Integration Patterns
+## D4D Harmonization: External Reference Pattern (IMPLEMENTED)
 
-### Pattern 1: External References (Recommended for Phase 1)
+### Pattern Overview
 
-Instead of importing the entire datasheets schema, use external references:
+The D4D harmonized schema (`model_card_schema_d4dharmonized.yaml`) implements the external reference pattern, providing three new reference structure classes:
 
-**Model Card with Dataset References**:
+1. **CreatorReference**: References to D4D Creator instances (replaces `owner` and `Contributor`)
+2. **DatasetReference**: References to D4D Dataset instances (replaces `dataSet`)
+3. **GrantReference**: References to D4D Grant instances (replaces `funding_source`)
+
+**Model Card with D4D References** (Actual Implementation):
 ```yaml
-# modelcard_example.yaml
-schema_version: "0.0.2"
+# climate-forecasting-model-card.yaml
+schema_version: d4d-1.0
+
+# NEW: Provenance metadata
+created_by: Jane Smith
+modified_by: Jane Smith
+created_on: 2025-01-15T10:00:00Z
+modified_on: 2025-01-20T14:30:00Z
 
 model_details:
-  name: "bert-sentiment-classifier"
-  overview: "BERT-based sentiment analysis model"
+  name: "Climate Forecasting Transformer v2.1"
+
+  # NEW: References to D4D Creator instances
+  creator_references:
+    - url: file://./creators/jane-smith-creator.yaml
+      description: Principal Investigator and Lead Developer
+    - url: file://./creators/climate-ai-lab-creator.yaml
+      description: Research organization
 
 model_parameters:
-  model_architecture: "BERT-base with classification head"
+  # NEW: References to D4D Dataset instances
+  training_datasets:
+    - url: file://./datasets/noaa-historical-climate-dataset.yaml
+      description: Primary training data - 50 years of NOAA climate observations
 
-  # REFERENCE to external datasheets documentation
-  training_dataset_refs:
-    - dataset_id: "imdb-reviews-v1"
-      dataset_url: "https://example.org/datasheets/imdb-reviews-v1.yaml"
-      dataset_type: "datasheets-for-datasets"
+  evaluation_datasets:
+    - url: file://./datasets/noaa-test-dataset.yaml
+      description: Held-out test set - 2020-2024 observations
 
-  evaluation_dataset_refs:
-    - dataset_id: "sst2-v1"
-      dataset_url: "https://example.org/datasheets/sst2-v1.yaml"
-      dataset_type: "datasheets-for-datasets"
+mission_relevance:
+  # NEW: References to D4D Grant instances
+  funding_grants:
+    - url: file://./grants/doe-scidac-grant.yaml
+      description: Primary funding - DOE SciDAC Climate Modeling
 ```
 
 **Benefits**:
-- No schema conflicts
-- Datasets documented once, referenced many times
+- No schema conflicts or imports required
+- Datasets/creators/grants documented once using full D4D schema, referenced many times
 - Clean separation of concerns
 - Works with current tooling
+- Backward compatible migration path
+- Comprehensive documentation (7 fields → 200+ fields for datasets)
 
 ### Pattern 2: Embedded Minimal Dataset Info (Backward Compatible)
 
@@ -141,22 +163,36 @@ classes:
 
 ---
 
-## Practical Implementation Steps
+## Implementation Status
 
-### Phase 1: Foundation (Current - Month 2)
+### Phase 1: Foundation and D4D Harmonization - COMPLETED ✅
 
-**Status**: IN PROGRESS
+**Status**: COMPLETED (November 23, 2025)
 
-**Completed**:
-- ✅ Created `ALIGNMENT_ANALYSIS.md` (comprehensive analysis)
-- ✅ Created `modelcards_harmonized.yaml` (conceptual design)
-- ✅ Identified naming conflicts (Task, language)
-- ✅ Tested import mechanisms
+**Completed Tasks**:
+- ✅ Created `ALIGNMENT_ANALYSIS.md` (comprehensive schema comparison)
+- ✅ Created `model_card_schema_d4dharmonized.yaml` (production-ready D4D harmonized schema)
+- ✅ Identified and documented naming conflicts (Task, language, etc.)
+- ✅ Implemented external reference pattern (no schema imports)
+- ✅ Created comprehensive D4D integration examples:
+  - `src/data/examples/d4d_integration/climate-forecasting-model-card.yaml`
+  - `src/data/examples/d4d_integration/creators/` (2 Creator examples)
+  - `src/data/examples/d4d_integration/datasets/` (1 Dataset example)
+  - `src/data/examples/d4d_integration/grants/` (1 Grant example)
+  - `src/data/examples/d4d_integration/README.md` (comprehensive usage guide)
+- ✅ Added provenance metadata support (created_by, modified_by, created_on, modified_on)
+- ✅ Replaced deprecated classes:
+  - `owner` → `CreatorReference`
+  - `Contributor` → `CreatorReference` (with D4D CRediT roles)
+  - `dataSet` → `DatasetReference`
+  - `SensitiveData` → Part of D4D Dataset
+  - `funding_source` → `GrantReference`
 
-**Remaining**:
-- [ ] Document all naming conflicts
-- [ ] Create reference examples using Pattern 1 (external references)
-- [ ] Update `CLAUDE.md` with integration guidance
+**Schema Changes**:
+- Removed: `owner`, `Contributor`, `ContributorRoleEnum`, `dataSet`, `SensitiveData` classes
+- Added: `CreatorReference`, `DatasetReference`, `GrantReference` classes
+- Added: Provenance metadata slots
+- Updated: `ModelDetails`, `ModelParameters`, `MissionRelevance`, `modelCard` root
 
 ### Phase 2: Practical Integration (Months 3-6)
 
@@ -409,12 +445,32 @@ The integration of Model Cards with Datasheets for Datasets is **highly valuable
 
 ## References
 
-- **ALIGNMENT_ANALYSIS.md**: Comprehensive 50,000+ word analysis of schema alignment
-- **modelcards_harmonized.yaml**: Proposed harmonized schema (conceptual design)
+### Documentation
+
+- **D4D_HARMONIZATION.md**: Comprehensive guide to D4D harmonization (to be created)
+- **ALIGNMENT_ANALYSIS.md**: Detailed schema comparison analysis
+- **CLAUDE.md**: Repository guide with D4D harmonization section
+- **src/data/examples/d4d_integration/README.md**: Complete usage guide for D4D integration
+
+### Schemas
+
+- **model_card_schema_d4dharmonized.yaml**: Production D4D harmonized schema (`src/model_card_schema/schema/`)
+- **model_card_schema.yaml**: Base schema without D4D integration (`src/model_card_schema/schema/`)
+- **Datasheets Schema**: https://github.com/bridge2ai/data-sheets-schema
+
+### Examples
+
+- **Climate Forecasting Model Card**: `src/data/examples/d4d_integration/climate-forecasting-model-card.yaml`
+- **Creator Examples**: `src/data/examples/d4d_integration/creators/`
+- **Dataset Example**: `src/data/examples/d4d_integration/datasets/noaa-historical-climate-dataset.yaml`
+- **Grant Example**: `src/data/examples/d4d_integration/grants/doe-scidac-grant.yaml`
+
+### Papers
+
 - **Model Cards Paper**: Mitchell et al., 2019 - https://arxiv.org/abs/1810.03993
-- **Datasheets for Datasets Paper**: Gebru et al., 2018
+- **Datasheets for Datasets Paper**: Gebru et al., 2018 - https://arxiv.org/abs/1803.09010
 - **LinkML Documentation**: https://linkml.io/
 
 ---
 
-**Document Status**: Living document, will be updated as implementation progresses.
+**Document Status**: Phase 1 COMPLETED. Updated November 23, 2025.

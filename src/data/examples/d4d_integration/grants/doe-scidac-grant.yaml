@@ -1,0 +1,165 @@
+# Example Datasheets for Datasets Grant instance
+# This is referenced by the model card's funding_grants field
+#
+# Note: This is a simplified example showing key fields.
+# Full D4D Grant schema includes more fields for comprehensive documentation.
+# See: https://github.com/bridge2ai/data-sheets-schema
+
+grant_information:
+  grant_id: DE-SC0012345
+  grant_title: "Scientific Discovery through Advanced Computing: Climate AI at Exascale"
+
+  program: DOE Office of Science - SciDAC (Scientific Discovery through Advanced Computing)
+  program_url: https://www.scidac.gov/
+
+funder:
+  organization: U.S. Department of Energy
+  division: Office of Science
+  subdivision: Advanced Scientific Computing Research (ASCR)
+  country: United States
+  funder_url: https://www.energy.gov/science/office-science
+
+principal_investigator:
+  name: Dr. Jane Smith
+  orcid: https://orcid.org/0000-0001-2345-6789
+  affiliation: Climate AI Research Laboratory
+  email: jane.smith@climatelab.org
+
+co_investigators:
+  - name: Dr. John Doe
+    orcid: https://orcid.org/0000-0002-3456-7890
+    affiliation: Climate AI Research Laboratory
+    role: Co-PI
+
+  - name: Dr. Alice Johnson
+    orcid: https://orcid.org/0000-0003-4567-8901
+    affiliation: National Center for Atmospheric Research
+    role: Senior Personnel
+
+funding_details:
+  amount: 2500000
+  currency: USD
+  duration: 3 years
+
+  period:
+    start_date: 2023-10-01
+    end_date: 2026-09-30
+
+  budget_categories:
+    - category: Personnel
+      amount: 1200000
+      description: Salaries for research scientists and postdocs
+
+    - category: Computing
+      amount: 800000
+      description: Allocation on DOE Leadership Computing Facilities (Frontier, Polaris)
+
+    - category: Travel
+      amount: 150000
+      description: Conference presentations and collaborations
+
+    - category: Equipment
+      amount: 200000
+      description: GPU workstations and storage
+
+    - category: Other
+      amount: 150000
+      description: Publication costs, software licenses, cloud computing
+
+project_details:
+  abstract: |-
+    This project develops next-generation AI models for climate prediction using
+    exascale computing resources at DOE Leadership Computing Facilities. Focus areas
+    include transformer architectures for spatiotemporal climate modeling, extreme
+    weather event detection, and uncertainty quantification. The project leverages
+    Frontier (OLCF) and Polaris (ALCF) supercomputers to train models on 50+ years
+    of climate observations, enabling 7-day regional forecasts with unprecedented
+    accuracy and uncertainty estimates.
+
+  objectives:
+    - Develop transformer-based climate models optimized for exascale systems
+    - Achieve 20% improvement over current SOTA in regional climate forecasting
+    - Implement uncertainty quantification for extreme weather prediction
+    - Deploy models for operational use by NOAA and emergency management agencies
+
+  deliverables:
+    - Open-source climate forecasting model (GitHub)
+    - Peer-reviewed publications (3-5 papers)
+    - Training datasets and benchmarks
+    - Model cards and documentation
+    - Workshops and tutorials for climate science community
+
+doe_relevance:
+  mission_area:
+    - Climate and environmental sciences
+    - Advanced scientific computing
+    - AI for science
+
+  doe_facilities_used:
+    - OLCF Frontier (Oak Ridge Leadership Computing Facility)
+    - ALCF Polaris (Argonne Leadership Computing Facility)
+    - NERSC Perlmutter (National Energy Research Scientific Computing Center)
+
+  doe_programs:
+    - SciDAC (Scientific Discovery through Advanced Computing)
+    - ASCR (Advanced Scientific Computing Research)
+    - BER (Biological and Environmental Research)
+
+related_projects:
+  - name: E3SM (Energy Exascale Earth System Model)
+    url: https://e3sm.org/
+    relationship: Complementary DOE climate modeling effort
+
+  - name: ExaLearn
+    url: https://exalearn.anl.gov/
+    relationship: DOE exascale machine learning initiative
+
+publications:
+  - title: "Climate Forecasting Transformer: Spatiotemporal Attention for Regional Weather Prediction"
+    authors: Smith, J., et al.
+    year: 2025
+    journal: Journal of Climate AI
+    doi: https://doi.org/10.1234/climate-ai-2025
+    acknowledgment: "This research was supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, SciDAC program under Award Number DE-SC0012345."
+
+data_products:
+  - name: NOAA Historical Climate Dataset (processed)
+    url: file://../datasets/noaa-historical-climate-dataset.yaml
+    description: Quality-controlled training dataset
+
+  - name: Climate Forecasting Transformer v2.1
+    url: file://../climate-forecasting-model-card.yaml
+    description: Trained model with full documentation
+
+software_products:
+  - name: climate-transformer
+    url: https://github.com/climate-ai-lab/climate-transformer
+    license: Apache-2.0
+    description: Open-source implementation of Climate Forecasting Transformer
+
+acknowledgments:
+  acknowledgment_text: |-
+    This research used resources of the Oak Ridge Leadership Computing Facility
+    at Oak Ridge National Laboratory and the Argonne Leadership Computing Facility
+    at Argonne National Laboratory, which are DOE Office of Science User Facilities
+    supported under Contracts DE-AC05-00OR22725 and DE-AC02-06CH11357, respectively.
+
+provenance:
+  created_by: Jane Smith
+  created_on: 2023-10-01T00:00:00Z
+  modified_by: Jane Smith
+  modified_on: 2025-01-15T10:00:00Z
+
+contacts:
+  administrative_contact:
+    name: Sarah Williams
+    role: Grants Administrator
+    organization: Climate AI Research Laboratory
+    email: grants@climatelab.org
+    phone: +1-510-555-0100
+
+  technical_contact:
+    name: Dr. Jane Smith
+    role: Principal Investigator
+    organization: Climate AI Research Laboratory
+    email: jane.smith@climatelab.org
