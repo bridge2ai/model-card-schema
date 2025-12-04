@@ -8,42 +8,45 @@ This is a LinkML schema repository for Model Cards as described in the paper "Mo
 
 The project uses the LinkML (Linked Data Modeling Language) framework to define schemas that can be automatically compiled into multiple target formats (JSON Schema, Python datamodels, SQL, GraphQL, OWL, etc.).
 
-**Current Status**: The schema has been comprehensively enhanced to 100% Google Model Card Toolkit v0.0.2 coverage plus HuggingFace and Papers with Code integration. A harmonization analysis with the Datasheets for Datasets schema has been completed, with a proposed harmonized schema available.
+**Current Status**: The schema has been comprehensively enhanced to 100% Google Model Card Toolkit v0.0.2 coverage plus HuggingFace and Papers with Code integration. **Phase 1 D4D harmonization is COMPLETED** with the external reference pattern implemented in `model_card_schema_d4dharmonized.yaml` and comprehensive examples provided.
 
 ## Architecture
 
 ### Schema Source Files
 
-**Primary Schema**: **`src/linkml/modelcards.yaml`** (967 lines, 27 classes)
+#### Production Schemas (LinkML Cookiecutter Standard Paths)
+
+**Primary Schema**: **`src/model_card_schema/schema/model_card_schema.yaml`** (~1,515 lines, 34 classes)
 - **Google Model Card Toolkit v0.0.2** - Complete 100% implementation
 - **HuggingFace Model Cards** - Community metadata (framework, pipeline_tag, base_model, tags, datasets, metrics)
 - **Papers with Code** - Benchmark integration (model-index structure)
+- **DOE Extended Template** - Complete coverage for scientific models (compute infrastructure, reproducibility, mission relevance)
 
-The schema includes 27 classes organized into 8 functional groups:
+The schema includes 34 classes organized into 8 functional groups:
 
-1. **Core Metadata** (5): Version, License, owner, Reference, Citation
-2. **Model Details** (1): ModelDetails (overview, documentation, owners, version, licenses, references, citations, path)
+1. **Core Metadata** (7): Version, License, owner, Reference, Citation, Contributor, ContributorRoleEnum
+2. **Model Details** (1): ModelDetails (with extended template: short_description, contributors, compute_infrastructure, mission_relevance)
 3. **Datasets** (4): dataSet, SensitiveData, GraphicsCollection, graphic
 4. **Model Parameters** (2): ModelParameters, KeyVal
 5. **Performance** (3): performanceMetric, ConfidenceInterval, QuantitativeAnalysis
-6. **Considerations** (6): User, UseCase, Limitation, Tradeoff, risk, Considerations
-7. **Benchmarking** (5): Task, BenchmarkDataset, BenchmarkMetric, BenchmarkSource, BenchmarkResult, ModelIndex
-8. **Root** (1): modelCard
+6. **Considerations** (7): User, UseCase, Limitation, Tradeoff, risk, Considerations, OutOfScopeUse
+7. **Benchmarking** (6): Task, BenchmarkDataset, BenchmarkMetric, BenchmarkSource, BenchmarkResult, ModelIndex
+8. **Extended Template** (8): Contributor, ComputeInfrastructure, Hyperparameters, ReproducibilityInfo, CodeExample, UsageDocumentation, MissionRelevance, TrainingProcedure, EvaluationProcedure
 
-**Harmonized Schema**: **`src/linkml/modelcards_harmonized.yaml`** (1,200+ lines)
-- Proposed schema integrating with Datasheets for Datasets
-- Imports datasheets schema for comprehensive dataset documentation (60+ classes)
-- Replaces simple `owner` with datasheets Creator/Person/Organization (ORCID, CRediT roles)
-- Replaces simple `dataSet` with datasheets Dataset reference (most critical change)
-- Adds provenance tracking (created_by, modified_by, timestamps, was_derived_from)
-- Adds funding and maintainer references
-- Enhanced ethics with datasheets PrivacyAndSecurity
-- Includes comprehensive migration guide and inline documentation
-- See `ALIGNMENT_ANALYSIS.md` for detailed rationale
+**D4D Harmonized Schema**: **`src/model_card_schema/schema/model_card_schema_d4dharmonized.yaml`** (~1,500 lines, 31 classes)
+- **PRODUCTION-READY** implementation using external reference pattern
+- **NO schema imports** - avoids naming conflicts
+- Replaces simple classes with D4D references:
+  - `owner` → `CreatorReference` (links to D4D Creator instances)
+  - `Contributor` → `CreatorReference` (with D4D CRediT roles)
+  - `dataSet` → `DatasetReference` (links to D4D Dataset instances with 60+ classes, 200+ fields)
+  - `funding_source` → `GrantReference` (links to D4D Grant instances)
+- Adds provenance tracking (created_by, modified_by, created_on, modified_on) at modelCard and ModelDetails levels
+- **Preserves ALL extended template features** (compute infrastructure, reproducibility, DOE mission relevance)
+- See `src/data/examples/d4d_integration/` for complete examples
+- See `INTEGRATION_GUIDE.md` for implementation details
 
-**Legacy Schema**: `src/modelcards/schema/modelcards.yaml` exists but is a minimal stub version.
-
-**IMPORTANT**: The `about.yaml` configuration references `src/model_card_schema/schema/model_card_schema.yaml` but this path does NOT exist. The actual schema paths use `modelcards` (not `model_card_schema`). This discrepancy means some make targets may not work correctly.
+**Configuration**: The `about.yaml` file correctly points to `src/model_card_schema/schema/model_card_schema.yaml` (LinkML cookiecutter standard path).
 
 ### Generated Artifacts
 
@@ -194,12 +197,15 @@ The enhanced schema provides comprehensive model card capabilities:
 6. **Funding Information** - Reference datasheets Grant for transparency
 7. **Maintainer Information** - Distinguish creators from current maintainers
 
-### Implementation Roadmap
+### Implementation Status
 
-- **Phase 1** (Months 1-2): Foundation - Import datasheets, add new slots
-- **Phase 2** (Months 3-6): Core harmonization - Implement creator/dataset replacements
-- **Phase 3** (Months 7-8): Advanced features - Ethics, provenance, funding integration
-- **Phase 4** (Month 9): Ecosystem integration - Release v2.0
+- **Phase 1** (COMPLETED ✅): D4D harmonization using external reference pattern
+  - Created `model_card_schema_d4dharmonized.yaml` production schema
+  - Implemented CreatorReference, DatasetReference, GrantReference classes
+  - Added provenance metadata (created_by, modified_by, timestamps)
+  - Created comprehensive examples in `src/data/examples/d4d_integration/`
+  - Updated INTEGRATION_GUIDE.md with implementation details
+- **Phase 2-4** (Future): Full schema import approach (after resolving remaining naming conflicts)
 
 ### Key Benefit
 
@@ -255,33 +261,38 @@ See `utils/README.md` for complete tool documentation.
 - Pattern comparisons
 - Validation instructions
 
-### Integration Approach (Implemented)
+### D4D Harmonization (COMPLETED ✅)
 
-**Phase 1** (COMPLETED):
-- ✅ External references pattern (no schema conflicts)
-- ✅ Migration and validation utilities
-- ✅ Complete examples and documentation
-- ✅ Naming conflicts identified and documented
+**Phase 1 COMPLETED** (November 23, 2025):
+- ✅ Production D4D harmonized schema (`model_card_schema_d4dharmonized.yaml`)
+- ✅ External reference pattern implemented (no schema imports/conflicts)
+- ✅ Three new reference classes: CreatorReference, DatasetReference, GrantReference
+- ✅ Provenance metadata support (created_by, modified_by, created_on, modified_on)
+- ✅ Comprehensive examples (`src/data/examples/d4d_integration/`):
+  - Climate forecasting model card
+  - D4D Creator instances (Person, Organization)
+  - D4D Dataset instance (comprehensive 60+ fields)
+  - D4D Grant instance (DOE SciDAC example)
+  - Complete README with usage guide
+- ✅ Updated documentation (INTEGRATION_GUIDE.md)
+- ✅ Preserved ALL extended template features
 
-**Phase 2-4** (Future):
-- Resolve remaining naming conflicts (language slot)
-- Full schema import support
-- Advanced tooling and validation
+**Available Schemas**:
+- **`model_card_schema.yaml`** - Base schema without D4D integration
+- **`model_card_schema_d4dharmonized.yaml`** - D4D harmonized schema (recommended for new projects)
 
-**Current Recommendation**: Use Pattern 1 (external references) for immediate adoption.
+**Current Recommendation**: Use `model_card_schema_d4dharmonized.yaml` for new projects requiring comprehensive dataset/creator documentation. Use `model_card_schema.yaml` for simpler use cases.
 
 ## Important Notes
 
 - The project follows the LinkML project cookiecutter structure
 - Never edit files in `project/` directory - they are auto-generated
-- The schema name discrepancy (`model_card_schema` in config vs `modelcards` in actual files) may cause issues with some make targets
-- Generated Python datamodels must be manually copied to `src/modelcards/datamodel/` after generation
+- Generated Python datamodels must be manually copied to `src/model_card_schema/datamodel/` after generation
 - The schema passes linting with minor naming convention warnings (stylistic only, not functional)
 - Runtime dependencies (linkml-runtime, jsonasobj2) required for Python datamodel usage
-- Three versions available:
-  - `modelcards.yaml` - Current production schema
-  - `modelcards_harmonized.yaml` - Proposed harmonized schema (conceptual, has naming conflicts)
-  - External reference pattern (recommended) - See examples in `src/data/examples/harmonized/`
+- **Two production schemas available**:
+  - **`model_card_schema.yaml`** - Base schema (Google MCT + HuggingFace + Papers with Code + DOE Extended Template)
+  - **`model_card_schema_d4dharmonized.yaml`** - D4D harmonized schema (external reference pattern, comprehensive dataset/creator docs)
 
 ## Model Card Extended Template
 
