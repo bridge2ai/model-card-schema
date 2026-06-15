@@ -108,11 +108,13 @@ slots:
     range: string
 
   owners:
-    description: Model owners or maintainers
+    description: List of model owners or maintainers (individuals or organizations)
+    range: owner
     multivalued: true
 
   version:
-    description: Version information
+    description: Version information for the model
+    range: Version
 
   licenses:
     description: License information
@@ -137,9 +139,11 @@ slots:
 
   sensitive:
     description: Sensitive data information
+    range: SensitiveData
 
   graphics:
     description: Visualizations and graphics
+    range: GraphicsCollection
 
   bias_input:
     description: Known biases in the input data
@@ -162,6 +166,7 @@ slots:
 
   data:
     description: Training and evaluation datasets
+    range: dataSet
     multivalued: true
 
   input_format:
@@ -169,7 +174,8 @@ slots:
     range: string
 
   input_format_map:
-    description: Structured input format mapping
+    description: List of key/value pairs describing input format fields
+    range: KeyVal
     multivalued: true
 
   output_format:
@@ -177,7 +183,8 @@ slots:
     range: string
 
   output_format_map:
-    description: Structured output format mapping
+    description: List of key/value pairs describing output format fields
+    range: KeyVal
     multivalued: true
 
   # KeyVal slots
@@ -186,11 +193,15 @@ slots:
     range: string
 
   value:
-    description: Value in key-value pair or metric value
+    description: |
+      Generic value field; the range is refined per class
+      (string for KeyVal, float for performanceMetric and BenchmarkMetric).
 
   # Performance metric slots
   type:
-    description: Type or category
+    description: |
+      Type identifier (semantics depend on owning class —
+      e.g., performance metric type, ML task type, dataset type).
     range: string
 
   value_error:
@@ -198,7 +209,8 @@ slots:
     range: float
 
   confidence_interval:
-    description: Confidence interval for the metric
+    description: Confidence interval for the metric value
+    range: ConfidenceInterval
 
   threshold:
     description: Decision threshold the metric was computed on
@@ -268,16 +280,20 @@ slots:
 
   model_details:
     description: Comprehensive model metadata
+    range: ModelDetails
     required: true
 
   model_parameters:
     description: Model construction and architecture parameters
+    range: ModelParameters
 
   quantitative_analysis:
     description: Quantitative analysis and performance evaluation
+    range: QuantitativeAnalysis
 
   considerations:
     description: Usage considerations, limitations, and ethical concerns
+    range: Considerations
 
   bias_model:
     description: Known biases in the model
@@ -330,24 +346,29 @@ slots:
 
   # Benchmark integration slots
   task:
-    description: ML task specification
+    description: ML task being evaluated
+    range: Task
 
   dataset:
-    description: Dataset information
+    description: Benchmark dataset reference
+    range: BenchmarkDataset
 
   source:
-    description: Source of information or results
+    description: Source of benchmark results
+    range: BenchmarkSource
 
   results:
     description: Benchmark or evaluation results
+    range: BenchmarkResult
     multivalued: true
 
   model_index:
-    description: Papers with Code model-index for benchmark tracking
+    description: List of Papers with Code model-index entries, one per benchmark configuration
+    range: ModelIndex
     multivalued: true
 
   config:
-    description: Configuration specification
+    description: Configuration name or identifier (e.g., HuggingFace dataset config name)
     range: string
 
   split:
@@ -436,7 +457,7 @@ slots:
     range: integer
 
   environment_config:
-    description: Link to environment configuration files
+    description: Environment configuration — inline content (YAML/JSON/text) or URL to config file
     range: string
 
   pipeline_url:
@@ -485,7 +506,10 @@ slots:
     range: string
 
   optimization_techniques:
-    description: Model optimization techniques (distillation, quantization, pruning, sparsity)
+    description: |
+      Optimization techniques applied during or after training
+      (e.g., quantization, pruning, distillation, sparsity,
+      gradient clipping, mixed precision).
     multivalued: true
     range: string
 
@@ -678,7 +702,7 @@ classes:
         range: string
 
   Reference:
-    description: Reference to related resources
+    description: A reference to a related resource (URL or citation string)
     slots:
       - reference
     slot_usage:
@@ -687,7 +711,7 @@ classes:
         range: string
 
   Citation:
-    description: Citation information for the model
+    description: A single citation entry (style + formatted citation text)
     slots:
       - style
       - citation

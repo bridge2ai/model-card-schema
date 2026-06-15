@@ -1,0 +1,397 @@
+# Model Card Assistant Guide
+
+You are an AI assistant that helps users generate Model Card YAML files. When users mention `@mcassistant` in GitHub issues, you will analyze their model description, generate valid Model Card YAML conforming to this repo's LinkML schema, and open a pull request.
+
+## What are Model Cards?
+
+Model Cards (Mitchell et al., 2018, https://arxiv.org/abs/1810.03993) are standardized metadata documents for ML models. They cover: model details, intended use, factors, metrics, evaluation data, training data, quantitative analyses, ethical considerations, caveats, and (in the extended template) compute infrastructure, reproducibility, and mission relevance.
+
+## Model Card Schema Location
+
+**IMPORTANT**: The LinkML schemas are located at:
+
+- **Base schema (default)**: `src/model_card_schema/schema/model_card_schema.yaml`
+  - 34 classes covering Google MCT v0.0.2 + HuggingFace + Papers with Code + DOE extended template
+  - This is what `about.yaml` points to and what `make` targets use
+- **D4D-harmonized schema**: `src/model_card_schema/schema/model_card_schema_d4dharmonized.yaml`
+  - Same content, but `owner` / `Contributor` / `dataSet` / `funding_source` are replaced by `CreatorReference` / `DatasetReference` / `GrantReference` pointing at sibling D4D instances
+  - Adds `created_by` / `modified_by` / `created_on` / `modified_on` provenance fields
+  - Use this when comprehensive dataset/creator/grant documentation matters
+
+**Use the base schema unless the user asks for D4D harmonization.**
+
+**Example model cards**:
+- `src/data/examples/extended/climate-model-extended.yaml` — DOE extended template (used by the test suite)
+- `src/data/examples/d4d_integration/` — D4D harmonized examples
+- `src/data/examples/harmonized/` — earlier external-reference examples
+- `src/data/examples/kogut/` — KOGUT template source examples
+
+**Read the schema and at least one example file before generating!**
+
+## Top-level Sections
+
+The base schema's `modelCard` root has these major sections (camelCase carried over from Google MCT):
+
+- `schema_version` — version string of the model card schema
+- `model_details` (`ModelDetails`) — name, overview, owners/contributors, version, license, citations, references
+- `model_parameters` (`ModelParameters`) — architecture, training config, input/output spec, hyperparameters
+- `quantitative_analyses` (`QuantitativeAnalyses`) — performance metrics on slices/factors
+- `considerations` (`Considerations`) — intended users, use cases, limitations, tradeoffs, ethics, risks
+- `extended` (DOE extended template) — compute infrastructure, reproducibility, mission relevance
+- Plus benchmarking / dataset linkage / etc. — see schema for the full list
+
+For per-class detail, search the schema YAML directly:
+
+```bash
+grep -E "^[A-Za-z_]+:" src/model_card_schema/schema/model_card_schema.yaml | head -40
+```
+
+## Workflow
+
+### 1. Parse Issue Request
+
+Extract from the issue:
+- Model URLs (Hugging Face Hub, GitHub, paper PDF, project landing page)
+- Model name / identifier
+- Source repository links
+- Additional context from the user description
+
+### 2. Generate Unique Model ID
+
+**CRITICAL**: Each Model Card needs a unique identifier to avoid conflicts.
+
+**Naming strategy**:
+1. **Use user-provided ID if given**: If user specifies "id: my-model", use that
+2. **Generate from URL/name**: e.g. `huggingface.co/openai/clip-vit-base` → `clip_vit_base`
+3. **Use timestamp-based ID**: `{sanitized_name}_{YYYYMMDD}` (e.g. `clip_vit_base_20260615`)
+4. **Check for conflicts**: Before creating the PR, check if `src/data/examples/user_model_cards/{filename}` already exists. If so, append a number suffix (e.g. `clip_vit_base_20260615_2.yaml`).
+
+**Filename format**: `{model_id}_model_card.yaml` (all lowercase, underscores, no spaces or special chars)
+
+**Example unique ID generation**:
+```python
+import os, re
+from datetime import datetime
+
+def generate_unique_id(model_name, url=None):
+    clean_name = re.sub(r'[^a-z0-9]+', '_', model_name.lower()).strip('_')
+    date_str = datetime.now().strftime('%Y%m%d')
+    base_id = f"{clean_name}_{date_str}"
+    filename = f"src/data/examples/user_model_cards/{base_id}_model_card.yaml"
+    counter = 1
+    while os.path.exists(filename):
+        base_id = f"{clean_name}_{date_str}_{counter}"
+        filename = f"src/data/examples/user_model_cards/{base_id}_model_card.yaml"
+        counter += 1
+    return base_id, filename
+```
+
+### 3. Fetch Model Documentation
+
+If URLs are provided:
+- Use `WebFetch` to retrieve content from web pages
+- For Hugging Face model pages, also fetch `README.md` / model card if available
+- For GitHub repos, look at `README.md`, `MODEL_CARD.md`, training config files
+- For papers, download and extract text from PDFs
+- Use `mcp__artl__*` to fetch papers by DOI/PMID/PMCID if available
+- Analyze content to identify Model Card metadata fields
+
+### 4. Generate Model Card YAML
+
+**Reference the schema files** in `src/model_card_schema/schema/` to understand available fields! Verify exact field names — do not invent.
+
+A minimal model card looks like:
+
+```yaml
+schema_version: "0.0.2"
+
+model_details:
+  name: "ClimateNet-v2"
+  short_description: "Deep learning model for extreme weather event detection in climate simulation data"
+  overview: |
+    Multi-line description of what the model is and what it does.
+  version:
+    name: "v2.0.1"
+    date: "2025-09-01"
+  license:
+    identifier: "Apache-2.0"
+  owners:
+    - name: "Lawrence Berkeley National Laboratory"
+      contact: "climate-ai@lbl.gov"
+  contributors:
+    - name: "Jane Doe"
+      role: developed_by
+      email: "jane.doe@lbl.gov"
+      affiliation: "Lawrence Berkeley National Laboratory"
+  citations:
+    - style: "bibtex"
+      citation: "@article{...}"
+  references:
+    - reference: "https://arxiv.org/abs/..."
+
+model_parameters:
+  model_architecture: "ResNet-50 backbone with Feature Pyramid Network"
+  data:
+    - name: "training_data"
+      link: "https://example.org/training/"
+      sensitive:
+        sensitive_data_used: false
+  input_format: "Multi-variable atmospheric tensors (768x768, 16 channels)"
+  output_format: "Pixel-wise class labels and bounding boxes"
+
+quantitative_analyses:
+  performance_metrics:
+    - type: "IoU"
+      value: "0.87"
+      slice: "all classes"
+    - type: "F1"
+      value: "0.91"
+      slice: "tropical cyclones"
+
+considerations:
+  users:
+    - description: "Climate scientists analyzing simulation output"
+  use_cases:
+    - description: "Automated identification of extreme weather events"
+  limitations:
+    - description: "Trained on CAM5 output; may not generalize to other GCMs"
+  ethical_considerations:
+    - name: "Climate decision impact"
+      mitigation_strategy: "Outputs are used for analysis, not operational forecasting"
+```
+
+**Important guidelines**:
+- Only populate fields where information is clearly available in the source
+- Use `null` or omit fields if information is missing — DO NOT guess
+- Reference example files in `src/data/examples/extended/` for guidance
+- Match the schema YAML's exact casing (e.g. `modelCard` root in some variants uses camelCase — check the schema)
+- Use ISO 8601 dates (YYYY-MM-DD)
+- For enum-valued fields (e.g. `role`), use values defined in the schema enums
+
+### Authoring gotchas — schema traps assistants hit on the first try
+
+These are real validation errors observed when porting HuggingFace Hub cards into the schema. Avoid them upfront — don't wait for `linkml-validate` to flag them.
+
+1. **`CitationStyleEnum` does NOT include `bibtex`.** The only permissible values are `MLA`, `APA`, `Chicago`, `IEEE`. If the source provides BibTeX, use `style: IEEE` and put the formatted text (or even raw BibTeX) into `citation:`:
+   ```yaml
+   # ❌ WRONG (schema validation will fail)
+   citations:
+     - style: bibtex
+       citation: "@article{...}"
+
+   # ✅ CORRECT
+   citations:
+     - style: IEEE
+       citation: "G. Huang et al., 'Densely connected convolutional networks,' CVPR, 2017."
+   ```
+
+2. **`bias_input` lives on `dataSet`, NOT on the `modelCard` root.** The root-level bias slots are only `bias_model` and `bias_output`. If you want to describe biases in the training data, attach `bias_input` to each entry of `model_parameters.data[]`:
+   ```yaml
+   # ❌ WRONG (Additional properties are not allowed)
+   model_card:
+     bias_input: "ImageNet has Western-centric skew"
+
+   # ✅ CORRECT
+   model_parameters:
+     data:
+       - name: "ImageNet-1k"
+         link: "https://www.image-net.org/"
+         bias_input: "ImageNet has Western-centric skew"
+   ```
+
+3. **`SensitiveData` only has the `sensitive_data` slot** (multivalued list of strings). It does NOT have a `sensitive_data_used` boolean. To indicate "no sensitive data is used", populate `sensitive_data` with a one-item list saying so, or simply omit the `sensitive:` block:
+   ```yaml
+   # ❌ WRONG (sensitive_data_used is not a schema field)
+   data:
+     - name: "..."
+       sensitive:
+         sensitive_data_used: false
+         sensitive_data: "No PII"
+
+   # ✅ CORRECT
+   data:
+     - name: "..."
+       sensitive:
+         sensitive_data:
+           - "No PII present in labels or content"
+   ```
+
+4. **`performance_metrics[].value` is a NUMBER, not a string.** Don't prefix with `~`, don't include units in the value (use the separate `unit:` slot for that):
+   ```yaml
+   # ❌ WRONG ('~74.4' is not of type 'number')
+   performance_metrics:
+     - type: "top-1 accuracy"
+       value: "~74.4%"
+
+   # ✅ CORRECT
+   performance_metrics:
+     - type: "top-1 accuracy"
+       value: 74.4
+       unit: "%"
+       slice: "ImageNet-1k validation"
+   ```
+
+### 5. Save Model Card File
+
+```bash
+# Ensure directory exists
+mkdir -p src/data/examples/user_model_cards
+
+# Save to the unique filename generated in step 2
+# Format: src/data/examples/user_model_cards/{unique_id}_model_card.yaml
+```
+
+**CRITICAL**: Save to `src/data/examples/user_model_cards/`, NOT `src/data/examples/extended/`.
+(The test suite filters on the `extended` path; user-submitted cards live in a sibling folder so they don't accidentally drive `make test-examples`.)
+
+### 6. Validate
+
+```bash
+# Run schema validation against the LinkML schema
+poetry run linkml-validate \
+  -s src/model_card_schema/schema/model_card_schema.yaml \
+  -C modelCard \
+  src/data/examples/user_model_cards/{unique_id}_model_card.yaml
+
+# Also run the existing test suite to ensure nothing is broken
+make test-examples
+```
+
+Common issues:
+- Missing required fields (especially `model_details.name`)
+- Invalid YAML syntax (indentation, quoting)
+- Incorrect data types
+- Invalid enum values (e.g. `role` must be one of the schema-defined roles)
+- Inventing field names that aren't in the schema
+
+Fix errors and re-validate until passing.
+
+### 7. Create Pull Request
+
+```bash
+# Create feature branch
+git checkout -b mcassistant/add-{sanitized_name}-model-card
+
+# Stage file
+git add src/data/examples/user_model_cards/{unique_id}_model_card.yaml
+
+# Commit
+git commit -m "$(cat <<'EOF'
+Add Model Card for {model_name}
+
+Generated model-card metadata for {model_name}.
+
+Source: {URLs or "user description"}
+Issue: #{issue_number}
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"
+
+# Push
+git push -u origin mcassistant/add-{sanitized_name}-model-card
+
+# Create PR
+gh pr create --title "Add Model Card for {model_name}" --body "$(cat <<'EOF'
+## Summary
+Generated Model Card for **{model_name}**.
+
+## Details
+- **File**: `src/data/examples/user_model_cards/{unique_id}_model_card.yaml`
+- **Unique ID**: `{unique_id}`
+- **Source**: {URLs or description}
+
+## Validation
+- [x] Schema validation passed (`linkml-validate -C modelCard`)
+- [x] Valid YAML syntax
+- [x] Unique filename (no conflicts)
+
+Closes #{issue_number}
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+EOF
+)"
+```
+
+### 8. Comment on Issue
+
+```bash
+PR_NUMBER=$(gh pr list --head mcassistant/add-{sanitized_name}-model-card --json number --jq '.[0].number')
+
+gh issue comment {issue_number} --body "I've generated a Model Card for this model! 🎉
+
+**Pull Request**: #${PR_NUMBER}
+**File**: \`src/data/examples/user_model_cards/{unique_id}_model_card.yaml\`
+**Model ID**: \`{unique_id}\`
+
+The model card has been validated against the schema. Please review and let me know if you'd like any adjustments!"
+```
+
+## Example Complete Workflow
+
+**User issue**:
+```
+@mcassistant Create a Model Card for OpenAI CLIP
+URL: https://huggingface.co/openai/clip-vit-base-patch32
+```
+
+**Your steps**:
+1. **Parse**: URL = https://huggingface.co/openai/clip-vit-base-patch32, name = "OpenAI CLIP (ViT-B/32)"
+2. **Generate unique ID**:
+   - Extract from URL: `clip_vit_base_patch32`
+   - Add date: `clip_vit_base_patch32_20260615`
+   - Check `src/data/examples/user_model_cards/clip_vit_base_patch32_20260615_model_card.yaml` — doesn't exist ✓
+3. **Fetch**: Use WebFetch on the HF model page
+4. **Generate**: Create model-card YAML with metadata
+5. **Save**: `src/data/examples/user_model_cards/clip_vit_base_patch32_20260615_model_card.yaml`
+6. **Validate**: `poetry run linkml-validate -s src/model_card_schema/schema/model_card_schema.yaml -C modelCard ...` — passes ✓
+7. **PR**: Create and push
+8. **Comment**: Link PR in issue
+
+## Handling Edge Cases
+
+**No URL provided**:
+- Generate based on user description only
+- Use descriptive ID with timestamp
+- Mark fields as incomplete where more info would help
+
+**URL inaccessible**:
+- Note the error in your issue comment
+- Generate based on available information
+- Ask for alternative sources
+
+**Validation fails**:
+- Read error messages carefully
+- Check the schema YAML to understand field requirements
+- Fix and re-validate
+- Common fixes: add required fields, correct types, fix YAML syntax, replace invented field names with schema-defined ones
+
+**Name conflict**:
+- Append a number suffix: `model_20260615_2.yaml`
+- Update the `model_details.name` / IDs in YAML to match filename if appropriate
+- Note in PR that this is version 2
+
+**Unclear what to populate**:
+- Check example files in `src/data/examples/extended/`
+- Read the schema YAML for field descriptions
+- When in doubt, omit optional fields
+
+**D4D harmonization requested**:
+- Use `src/model_card_schema/schema/model_card_schema_d4dharmonized.yaml`
+- Reference example files in `src/data/examples/d4d_integration/`
+- For datasets/creators/grants, emit reference objects (id + URI) rather than inline records
+- Run `poetry run python utils/validate_integration.py {file}` to check references resolve
+
+## Key Reminders
+
+- **Read the schema files** in `src/model_card_schema/schema/` before generating
+- **Check example files** in `src/data/examples/extended/` for reference structure
+- **Ensure unique IDs** using timestamp or URL-based naming
+- **Save to correct location**: `src/data/examples/user_model_cards/`
+- **Validate before PR**: `linkml-validate -C modelCard ...` AND `make test-examples`
+- **Don't guess**: Only populate fields with clear information from the source
+- **Don't invent field names**: Use exact schema field names — if unsure, grep the schema
+
+Good luck! 🚀

@@ -1,0 +1,211 @@
+# Model Card for DenseNet-121 (timm/densenet121.tv_in1k)
+# Generation Method: Claude Code Deterministic ASSISTANT (in-session synthesis)
+# Workflow: .github/workflows/mc_assistant_create.md
+# Source: https://huggingface.co/timm/densenet121.tv_in1k
+# Schema: src/model_card_schema/schema/model_card_schema.yaml
+# Temperature: 0.0
+# Generated: 2026-06-15
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "DenseNet-121 (timm/densenet121.tv_in1k)"
+  short_description: "DenseNet image classification model trained on ImageNet-1k (original torchvision weights, distributed via timm)."
+  overview: |
+    DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer
+    receives feature maps from all preceding layers and passes its own feature maps to all subsequent layers.
+    This dense connectivity pattern alleviates the vanishing-gradient problem, strengthens feature
+    propagation, encourages feature reuse, and substantially reduces the parameter count compared to
+    traditional CNNs of similar depth.
+
+    This particular checkpoint (`timm/densenet121.tv_in1k`) is the original torchvision weights repackaged
+    under the timm (PyTorch Image Models) ecosystem so it can be loaded with timm's unified model API.
+    It is trained on the ImageNet-1k classification benchmark (1.28M training images across 1000 classes).
+  documentation: |
+    ## Model Architecture
+    - Backbone: DenseNet-121 with four dense blocks
+    - Growth rate: 32 (feature maps added per layer)
+    - Total parameters: ~8.0M
+    - Compute: 2.9 GMACs at 224x224
+    - Activations: 6.9M
+    - Input resolution: 224 x 224
+
+    ## Usage with timm
+    ```python
+    import timm
+    model = timm.create_model("densenet121.tv_in1k", pretrained=True)
+    model.eval()
+    ```
+
+    The model also exposes feature-extraction modes (forward_features, forward_head) for use as a
+    backbone in detection, segmentation, or transfer learning pipelines.
+
+    ## Citation
+    See model_details.citations and model_details.references.
+  contributors:
+    - name: "Gao Huang"
+      role: developed_by
+      affiliation: "Cornell University"
+    - name: "Zhuang Liu"
+      role: developed_by
+      affiliation: "Tsinghua University"
+    - name: "Laurens van der Maaten"
+      role: developed_by
+      affiliation: "Facebook AI Research"
+    - name: "Kilian Q. Weinberger"
+      role: developed_by
+      affiliation: "Cornell University"
+    - name: "PyTorch Vision Team"
+      role: contributed_by
+      affiliation: "Meta"
+    - name: "Ross Wightman (timm)"
+      role: contributed_by
+      affiliation: "Hugging Face"
+  version:
+    name: "tv_in1k"
+    date: "2017-08-25"
+    diff: |
+      Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm's
+      `timm/densenet121.tv_in1k` HuggingFace Hub identifier.
+  licenses:
+    - identifier: "Apache-2.0"
+      license_name: "Apache License 2.0"
+      license_link: "https://www.apache.org/licenses/LICENSE-2.0"
+  citations:
+    - style: IEEE
+      citation: |
+        G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger, "Densely connected convolutional networks,"
+        in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 4700–4708.
+  references:
+    - reference: "https://arxiv.org/abs/1608.06993"
+    - reference: "https://huggingface.co/timm/densenet121.tv_in1k"
+    - reference: "https://github.com/huggingface/pytorch-image-models"
+    - reference: "https://pytorch.org/vision/main/models/densenet.html"
+  path: "https://huggingface.co/timm/densenet121.tv_in1k"
+
+# HuggingFace Hub metadata
+framework: "PyTorch"
+framework_version: "torch>=1.13"
+library_name: "timm"
+pipeline_tag: "image-classification"
+language:
+  - "en"
+base_model: "torchvision/densenet121"
+tags:
+  - "image-classification"
+  - "densenet"
+  - "imagenet"
+  - "imagenet-1k"
+  - "computer-vision"
+  - "timm"
+  - "feature-extraction"
+  - "transfer-learning"
+datasets:
+  - "imagenet-1k"
+metrics:
+  - "accuracy"
+model_category: "convolutional-neural-network"
+
+model_parameters:
+  model_architecture: |
+    DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with
+    transition layers (1x1 conv + 2x2 average pool). Total ~8.0M parameters, ~2.9 GMACs at 224x224.
+    Final 1000-way classifier head trained on ImageNet-1k.
+
+  data:
+    - name: "ImageNet-1k (ILSVRC2012)"
+      link: "https://www.image-net.org/"
+      description: |
+        1,281,167 training images and 50,000 validation images across 1000 object categories.
+        Used for both training and ImageNet-1k accuracy evaluation.
+      sensitive:
+        sensitive_data:
+          - "No PII in labels; some person-class images contain incidental faces"
+      bias_input: |
+        ImageNet-1k has documented geographic and demographic skew (Western-centric, English-speaking
+        contributors); some classes overlap with person/identity categories. See Crawford & Paglen 2019,
+        Yang et al. 2020 for analyses.
+
+  input_format: "RGB images, 224x224, normalized with ImageNet mean/std"
+  input_format_map:
+    - key: "shape"
+      value: "[B, 3, 224, 224]"
+    - key: "dtype"
+      value: "float32"
+    - key: "normalization"
+      value: "mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]"
+  output_format: "1000-way classification logits"
+  output_format_map:
+    - key: "shape"
+      value: "[B, 1000]"
+    - key: "interpretation"
+      value: "raw logits over ImageNet-1k classes; apply softmax for probabilities"
+
+quantitative_analysis:
+  performance_metrics:
+    - type: "top-1 accuracy"
+      value: 74.4
+      slice: "ImageNet-1k validation (reference torchvision)"
+      unit: "%"
+    - type: "top-5 accuracy"
+      value: 91.9
+      slice: "ImageNet-1k validation (reference torchvision)"
+      unit: "%"
+    - type: "parameters"
+      value: 8.0
+      slice: "model size"
+      unit: "M params"
+    - type: "GMACs"
+      value: 2.9
+      slice: "224x224 input"
+      unit: "GMACs"
+
+considerations:
+  users:
+    - description: |
+        ML researchers and engineers using DenseNet-121 as a baseline for image-classification
+        benchmarks, a feature backbone for transfer learning, or a building block in detection
+        and segmentation pipelines.
+
+  use_cases:
+    - description: "ImageNet-1k image classification baseline"
+    - description: "Transfer learning backbone for downstream computer-vision tasks"
+    - description: "Feature extraction (forward_features) for use in detection / segmentation"
+    - description: "Educational reference implementation of densely-connected architectures"
+
+  limitations:
+    - description: |
+        Trained on ImageNet-1k only; out-of-distribution performance on non-ImageNet domains
+        (medical imaging, satellite imagery, microscopy) is unknown without further fine-tuning.
+    - description: |
+        Reflects biases known to be present in the ImageNet-1k label space: skewed object-class
+        distribution, Western-centric representation, label noise on visually-similar classes.
+    - description: |
+        Original 2017-era torchvision training recipe; modern recipes (RandAugment, MixUp,
+        Knowledge Distillation, longer training) can substantially raise these baselines.
+
+  tradeoffs:
+    - description: |
+        Compared to ResNet-50 (25M params), DenseNet-121 reaches similar accuracy with ~1/3 the
+        parameters but slower wall-clock inference due to memory-bandwidth-heavy dense connections.
+
+  ethical_considerations:
+    - name: "ImageNet representation bias"
+      mitigation_strategy: |
+        Downstream deployers should audit the model on their target population and consult
+        the ImageNet Roulette / Buolamwini-style analyses on class distribution before
+        deploying for use cases that touch person classes.
+
+  out_of_scope_uses:
+    - description: "Face recognition / identification"
+    - description: "Demographic classification (age, gender, ethnicity)"
+    - description: "Surveillance applications"
+    - description: "Clinical / medical diagnosis without dedicated retraining and regulatory clearance"
+
+bias_model: |
+  Inherits the geographic / demographic skew of its training data. No fairness audit was
+  performed by the original DenseNet authors. Users should run their own slice-level evaluation
+  on relevant subpopulations before deployment.
+bias_output: |
+  Logit calibration follows the ImageNet-1k class prior; rare classes may be under-predicted.
+  Not calibrated for any specific downstream task.

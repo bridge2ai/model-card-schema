@@ -1,0 +1,443 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "densenet121_tv_in1k_model_card.yaml",
+  "model": "DenseNet-121 (timm/densenet121.tv_in1k)",
+  "method": "claudecode_assistant",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 43.0,
+    "max_points": 50,
+    "percentage": 86.0
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/timm/densenet121.tv_in1k'; model_details.references[1]: 'https://huggingface.co/timm/densenet121.tv_in1k'",
+          "quality_note": "HuggingFace Hub identifier present and resolvable; provides unique persistent identifier for model weights and landing page"
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: 'DenseNet-121 (timm/densenet121.tv_in1k)'; model_details.short_description: 132 chars; model_details.overview: 633 chars",
+          "quality_note": "Clear name, concise short_description, and comprehensive overview explaining architecture, provenance, and training data"
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: ['image-classification', 'densenet', 'imagenet', 'imagenet-1k', 'computer-vision', 'timm', 'feature-extraction', 'transfer-learning'] (8 tags); pipeline_tag: 'image-classification'; model_category: 'convolutional-neural-network'",
+          "quality_note": "Excellent tagging with 8 relevant tags covering task, architecture, dataset, ecosystem, and use cases; clear pipeline_tag"
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references: ['https://arxiv.org/abs/1608.06993', 'https://huggingface.co/timm/densenet121.tv_in1k', 'https://github.com/huggingface/pytorch-image-models', 'https://pytorch.org/vision/main/models/densenet.html']",
+          "quality_note": "Multiple accessible URLs including HF Hub model page, GitHub repo, original paper, and torchvision docs"
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: 'torch>=1.13'; library_name: 'timm'",
+          "quality_note": "Framework, version constraint, and library ecosystem clearly specified"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/timm/densenet121.tv_in1k'; documentation includes timm loading example",
+          "quality_note": "Clear weight hosting location on HuggingFace Hub with programmatic access via timm library"
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references[2]: 'https://github.com/huggingface/pytorch-image-models'",
+          "quality_note": "GitHub repository for pytorch-image-models (timm) provides full implementation code"
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "model_details.documentation: contains runnable Python snippet using timm.create_model('densenet121.tv_in1k', pretrained=True)",
+          "quality_note": "Concise, runnable usage example with clear API calls; mentions feature extraction modes (forward_features, forward_head)"
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format: 'RGB images, 224x224, normalized with ImageNet mean/std'; input_format_map: shape, dtype, normalization details; output_format: '1000-way classification logits'; output_format_map: shape and interpretation",
+          "quality_note": "Explicit input shape/dtype/normalization and output schema with interpretation guidance"
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "No explicit file format mentioned (safetensors, ONNX, PyTorch state_dict)",
+          "quality_note": "Implicit PyTorch format through timm ecosystem but not explicitly stated; would benefit from explicit mention of checkpoint format"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: 'Apache-2.0'; license_name: 'Apache License 2.0'; license_link: 'https://www.apache.org/licenses/LICENSE-2.0'",
+          "quality_note": "Clear SPDX-style Apache-2.0 license with link; permits commercial reuse with attribution"
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: 'torch>=1.13'; library_name: 'timm'",
+          "quality_note": "Standard PyTorch framework with version constraints and widely-adopted timm library ecosystem"
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "base_model: 'torchvision/densenet121'; model_details.version.diff mentions 'Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm'",
+          "quality_note": "Clear lineage to original torchvision weights; explains provenance and repackaging"
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: 'image-classification'; considerations.use_cases: 4 detailed use cases including ImageNet-1k classification, transfer learning, feature extraction, educational reference",
+          "quality_note": "Comprehensive task documentation with specific use cases and examples; mentions feature extraction modes"
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 0,
+          "evidence": "No training procedure, hyperparameters, seeds, or container specs documented",
+          "quality_note": "This is a pretrained checkpoint repackaged from torchvision; original training recipe not documented (would require torchvision 2017 training scripts)"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations[0]: name='ImageNet representation bias'; mitigation_strategy includes audit recommendations and references to ImageNet Roulette / Buolamwini analyses",
+          "quality_note": "Named ethical risk with concrete mitigation strategy; references established bias research"
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 1,
+          "evidence": "bias_model: 'Inherits the geographic / demographic skew of its training data. No fairness audit was performed...'; bias_output: 'Logit calibration follows the ImageNet-1k class prior; rare classes may be under-predicted'",
+          "quality_note": "Explicit bias disclosure covering both model biases (geographic/demographic skew) and output biases (class prior calibration); honest about lack of fairness audit"
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses: ['Face recognition / identification', 'Demographic classification (age, gender, ethnicity)', 'Surveillance applications', 'Clinical / medical diagnosis without dedicated retraining and regulatory clearance']",
+          "quality_note": "Four explicit out-of-scope uses covering high-risk applications; concrete and actionable"
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 1,
+          "evidence": "model_parameters.data[0].sensitive.sensitive_data: 'No PII in labels; some person-class images contain incidental faces'; bias_input mentions ImageNet-1k documented biases with references to Crawford & Paglen 2019, Yang et al. 2020",
+          "quality_note": "Honest disclosure of incidental faces in training data; references established critical analyses of ImageNet biases"
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users[0]: 'ML researchers and engineers using DenseNet-121 as a baseline...'; considerations.tradeoffs[0]: comparison with ResNet-50 on parameters vs wall-clock inference speed",
+          "quality_note": "Named user groups (ML researchers/engineers) with specific use contexts; explicit tradeoff between parameter efficiency and inference speed"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: '4 dense blocks, growth rate 32, 8.0M params, 2.9 GMACs at 224x224'; model_details.documentation: detailed breakdown of growth rate, parameters, compute, activations, input resolution",
+          "quality_note": "Comprehensive architectural detail including layer structure, growth rate, parameter count, and computational requirements"
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.data[0]: name='ImageNet-1k (ILSVRC2012)', link='https://www.image-net.org/', description includes 1.28M training images, 50k validation images, 1000 classes; sensitive and bias_input fields populated",
+          "quality_note": "Concrete dataset with link, composition (size, splits), and bias/sensitivity documentation"
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 0,
+          "evidence": "No model_parameters.training_procedure or hyperparameters field present",
+          "quality_note": "Original 2017 torchvision training recipe not documented; would require torchvision historical training scripts"
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "No model_parameters.compute_infrastructure field present",
+          "quality_note": "This is a repackaged checkpoint from torchvision; original compute infrastructure not documented"
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_parameters.data[0].description: '1,281,167 training images and 50,000 validation images'; quantitative_analysis.performance_metrics slices reference 'ImageNet-1k validation'",
+          "quality_note": "Clear train/val split sizes documented; evaluation metrics explicitly reference validation set"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: 'tv_in1k'",
+          "quality_note": "Version tag present; follows timm naming convention for torchvision ImageNet-1k weights"
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2017-08-25'",
+          "quality_note": "ISO 8601 release date provided"
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: 'Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm's timm/densenet121.tv_in1k HuggingFace Hub identifier'",
+          "quality_note": "Explains this is a repackaging of original torchvision weights; provides provenance context"
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.contributors: 6 contributors with names, roles (developed_by, contributed_by), and affiliations (Cornell University, Tsinghua University, Facebook AI Research, Meta, Hugging Face)",
+          "quality_note": "Comprehensive contributor list covering original DenseNet authors, torchvision team, and timm maintainer; roles and affiliations per CRediT-style taxonomy"
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0]: style='IEEE', citation includes full reference to Huang et al. CVPR 2017 DenseNet paper",
+          "quality_note": "Machine-readable IEEE-style citation with full bibliographic information"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: explains dense connectivity pattern alleviates vanishing-gradient problem, strengthens feature propagation, encourages feature reuse, reduces parameters; considerations.use_cases: 4 detailed use cases",
+          "quality_note": "Clear architectural motivation (addressing vanishing gradient, parameter efficiency) and practical use cases documented"
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases[0]: 'ImageNet-1k image classification baseline'; additional use cases for transfer learning, feature extraction, educational reference",
+          "quality_note": "Primary use as ImageNet-1k baseline clearly stated; secondary use cases well-articulated"
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "No mission_relevance field present",
+          "quality_note": "This is a community computer vision model; mission relevance field not applicable for non-DOE academic research"
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "No funding source or grant agency information in model_details or mission_relevance",
+          "quality_note": "Original DenseNet paper funding not documented in this model card"
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 0,
+          "evidence": "No compute infrastructure or platform acknowledgements present",
+          "quality_note": "Original training infrastructure not documented; this is a repackaged checkpoint"
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 0,
+          "evidence": "No model_parameters.training_procedure field present",
+          "quality_note": "Original 2017 torchvision training recipe not documented; limitations section acknowledges this ('Original 2017-era torchvision training recipe')"
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: top-1 and top-5 accuracy on 'ImageNet-1k validation (reference torchvision)'; model_parameters.data[0] identifies 50k validation images",
+          "quality_note": "Evaluation protocol implicit (standard ImageNet-1k validation set); metrics clearly sliced to validation set"
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "No reproducibility info (seeds, deterministic flags, environment pins, container hashes) present",
+          "quality_note": "This is a pretrained checkpoint; original training reproducibility artifacts not documented"
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references[2]: 'https://github.com/huggingface/pytorch-image-models'; documentation includes usage example with timm library",
+          "quality_note": "GitHub link to pytorch-image-models (timm) provides inference code; training code would require torchvision historical scripts"
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.references: arXiv paper, HF Hub, GitHub repo, torchvision docs; model_parameters.data[0].bias_input references Crawford & Paglen 2019, Yang et al. 2020",
+          "quality_note": "Multiple external references including original paper, standard benchmark (ImageNet-1k), and bias research literature"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: 4 metrics with type, value, slice, unit (top-1 accuracy: 74.4%, top-5 accuracy: 91.9%, parameters: 8.0M, GMACs: 2.9)",
+          "quality_note": "Multiple quantitative metrics covering accuracy, model size, and computational cost; all with slices and units"
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: all metrics explicitly sliced (e.g., 'ImageNet-1k validation (reference torchvision)', 'model size', '224x224 input')",
+          "quality_note": "Metrics clearly sliced; though focused on ImageNet-1k validation (no per-class or subgroup breakdowns), slicing is explicit"
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 0,
+          "evidence": "No confidence_interval or value_error fields present in performance_metrics",
+          "quality_note": "Point estimates only; no error bars or confidence intervals reported"
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: 3 concrete limitations (out-of-distribution performance, ImageNet biases, 2017-era training recipe)",
+          "quality_note": "Explicit limitations with concrete failure modes and caveats; acknowledges distribution shift risks and training recipe obsolescence"
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs[0]: 'Compared to ResNet-50 (25M params), DenseNet-121 reaches similar accuracy with ~1/3 the parameters but slower wall-clock inference due to memory-bandwidth-heavy dense connections'",
+          "quality_note": "Explicit tradeoff between parameter efficiency and inference speed; quantified comparison with alternative architecture"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/timm/densenet121.tv_in1k'; library_name: 'timm'",
+          "quality_note": "Published on HuggingFace Hub with timm ecosystem integration; widely recognized platform"
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references: arXiv link (https://arxiv.org/abs/1608.06993); base_model: 'torchvision/densenet121'",
+          "quality_note": "Cross-references to original paper (arXiv) and parent torchvision model; clear lineage"
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: top-1 accuracy 74.4%, top-5 accuracy 91.9% on ImageNet-1k validation; datasets: ['imagenet-1k']",
+          "quality_note": "Standard ImageNet-1k benchmark results with leaderboard-quality metrics (top-1/top-5 accuracy)"
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: '0.0.2' (line 9); comment header specifies 'Schema: src/model_card_schema/schema/model_card_schema.yaml'",
+          "quality_note": "Explicit schema version conformance to Google MCT v0.0.2 via LinkML model_card_schema"
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 1,
+          "evidence": "model_parameters.data[0]: name='ImageNet-1k (ILSVRC2012)', link='https://www.image-net.org/'; datasets: ['imagenet-1k']; bias_input references Crawford & Paglen 2019, Yang et al. 2020",
+          "quality_note": "Dataset named with link; bias research references provide datasheet-like documentation of known biases (though not formal D4D datasheet)"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Exceptional model discovery metadata: HF Hub identifier, 8 relevant tags, comprehensive overview, multiple landing page URLs",
+      "Outstanding ethical/responsible AI documentation: explicit bias disclosures (bias_model, bias_output), 4 out-of-scope uses, mitigation strategies with research references",
+      "Excellent provenance and versioning: 6 contributors with roles/affiliations, IEEE citation, version date, clear lineage to torchvision",
+      "Strong performance reporting: 4 quantitative metrics with explicit slices and units; 3 concrete limitations; explicit accuracy vs inference speed tradeoff",
+      "Comprehensive access/distribution info: HF Hub hosting, runnable usage example, explicit input/output specs with shape/dtype/normalization details",
+      "Excellent cross-platform integration: HF Hub + timm ecosystem, standard ImageNet-1k benchmark results, schema version conformance, dataset links with bias research"
+    ],
+    "weaknesses": [
+      "Missing training procedure documentation: no hyperparameters, optimizer, schedule, epochs (acknowledged in limitations as '2017-era torchvision training recipe')",
+      "No compute infrastructure details: GPU/TPU types, compute hours, energy use not documented for original training",
+      "No reproducibility artifacts: seeds, deterministic flags, environment pins, container specs not provided",
+      "No confidence intervals or error bars on performance metrics (point estimates only)",
+      "No explicit model file format specified (implicit PyTorch state_dict via timm)",
+      "Mission relevance and funding transparency not applicable for this academic/community model (score 2/5 in Element 7)",
+      "No formal datasheet links for ImageNet-1k (though bias research references partially compensate)"
+    ],
+    "recommendations": [
+      "Add explicit model file format in model_details.documentation (e.g., 'PyTorch state_dict, compatible with timm.load_checkpoint')",
+      "If available, document original 2017 torchvision training hyperparameters in model_parameters.training_procedure with note about recipe obsolescence",
+      "Consider adding confidence intervals for top-1/top-5 accuracy (multiple validation runs or bootstrap estimates)",
+      "For future cards documenting newly trained models (not repackaged checkpoints), populate model_parameters.compute_infrastructure with hardware/software/energy details",
+      "Consider adding per-class accuracy breakdown or pointing to external ImageNet-1k error analysis resources for slice-level evaluation guidance",
+      "If original training compute infrastructure can be reconstructed from torchvision/FAIR records, add to model_parameters.compute_infrastructure for historical completeness"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "rubric10-llm-as-judge-v1",
+    "rubric_version": "1.0.0",
+    "model_card_hash": "sha256-placeholder-densenet121-tv-in1k",
+    "evaluation_notes": "This is a high-quality Model Card for a repackaged pretrained checkpoint. Lower scores in Elements 5, 7, 8 reflect the inherent challenge of documenting training details for a 2017 torchvision model where original training artifacts may not be available. The card excels at ethical documentation, provenance, and practical usage information."
+  }
+}

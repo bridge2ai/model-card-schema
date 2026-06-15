@@ -1,0 +1,279 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "densenet121_tv_in1k_model_card.yaml",
+  "model": "DenseNet-121 (timm/densenet121.tv_in1k)",
+  "method": "Claude Code Deterministic ASSISTANT (in-session synthesis)",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 63,
+    "max_points": 84,
+    "percentage": 75.0
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 populated",
+          "evidence": "model_details.name='DenseNet-121 (timm/densenet121.tv_in1k)'; overview ~880 chars; licenses=[{identifier:'Apache-2.0'}]; version.name='tv_in1k'; model_parameters.model_architecture describes DenseNet-121 with 4 dense blocks, growth rate 32, ~8.0M params, ~2.9 GMACs",
+          "quality_note": "All five required fields populated with concrete, non-trivial content."
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Comprehensive narrative >500 chars with structure",
+          "evidence": "overview ~880 chars (architecture motivation + checkpoint provenance); documentation ~870 chars with structured sections (Model Architecture, Usage with timm, Citation); short_description ~100 chars",
+          "quality_note": "Combined narrative well over 500 chars with meaningful structure including code snippet and architecture details."
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">=4 tags AND pipeline_tag AND language/model_category",
+          "evidence": "tags=[image-classification, densenet, imagenet, imagenet-1k, computer-vision, timm, feature-extraction, transfer-learning] (8 tags); pipeline_tag='image-classification'; language=['en']; model_category='convolutional-neural-network'",
+          "quality_note": "Excellent tag diversity with pipeline_tag, language, and model_category all populated."
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "I/O specified with shape/type and *_format_map populated",
+          "evidence": "input_format='RGB images, 224x224, normalized with ImageNet mean/std'; input_format_map contains shape [B,3,224,224], dtype float32, normalization mean/std; output_format='1000-way classification logits'; output_format_map contains shape [B,1000] and interpretation",
+          "quality_note": "Both input and output fully specified with shape, dtype, and format maps."
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: '0.0.2'",
+          "quality_note": "Recognizable schema version string declared at top of file."
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 14,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_details.path='https://huggingface.co/timm/densenet121.tv_in1k'; references include HuggingFace Hub URL and arXiv:1608.06993",
+          "quality_note": "Persistent HuggingFace Hub URL serves as resolvable identifier; arXiv link adds a paper persistent identifier."
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 1,
+          "max_score": 5,
+          "score_label": "Poor — only affiliations, no funding agency or grant",
+          "evidence": "contributors list affiliations (Cornell University, Tsinghua University, Facebook AI Research, Meta, Hugging Face). No mission_relevance, no funding agency (NIH/NSF/DOE), no grant ID, no compute facility acknowledgement.",
+          "quality_note": "Author affiliations are listed but no funding source or acknowledgement section exists. Lacks both grant identification and compute facility acknowledgement."
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Excellent — ethics + multiple bias disclosures + out_of_scope_uses",
+          "evidence": "considerations.ethical_considerations includes 'ImageNet representation bias' with mitigation strategy; bias_model and bias_output populated with concrete content; bias_input on data discusses geographic/demographic skew citing Crawford & Paglen 2019 and Yang et al. 2020; out_of_scope_uses lists 4 concrete uses (face recognition, demographic classification, surveillance, clinical/medical)",
+          "quality_note": "Full coverage of ethics, multiple bias fields, and concrete out-of-scope uses with literature references."
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Very Good — SPDX identifier present; restrictions not explicitly elaborated",
+          "evidence": "licenses[0].identifier='Apache-2.0'; license_name='Apache License 2.0'; license_link to canonical Apache 2.0 text. No custom_text or explicit restriction discussion beyond standard Apache-2.0 terms.",
+          "quality_note": "Clear SPDX identifier with canonical link. Lacks explicit statement of restrictions or limitations specific to this model."
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Good — framework + library declared; version is a range; no model_index",
+          "evidence": "framework='PyTorch'; framework_version='torch>=1.13' (range, not pinned); library_name='timm'; pipeline_tag='image-classification'. No model_index field in Papers-with-Code shape.",
+          "quality_note": "Framework, library_name declared, but version is a constraint range rather than a pinned version and there is no Papers-with-Code model_index entry."
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 13,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Good — tools/libraries named with usage example",
+          "evidence": "Usage code example showing 'import timm; timm.create_model(...)'; framework_version='torch>=1.13'; library_name='timm'. No Dockerfile, no container image, no pinned environment file.",
+          "quality_note": "Names timm and PyTorch with a runnable snippet, but no reproducibility-level pinning (no Dockerfile, no environment lock)."
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 1,
+          "max_score": 5,
+          "score_label": "Poor — no optimizer/hyperparameters disclosed",
+          "evidence": "No model_parameters.training_procedure field present. The diff notes 'Original 2017-era torchvision training recipe' but does not disclose optimizer, learning rate, batch size, epochs, schedule, or regularization.",
+          "quality_note": "Training procedure is referenced only obliquely as 'original torchvision recipe'. No hyperparameters disclosed in the model card itself."
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Very Good — name + ISO date + descriptive diff (not semver)",
+          "evidence": "version.name='tv_in1k'; version.date='2017-08-25' (ISO); version.diff describes that this is the original torchvision DenseNet-121 ImageNet-1k weights repackaged under timm",
+          "quality_note": "Name, ISO-format date, and non-trivial diff are all present. Name is not semver (uses tag-style 'tv_in1k')."
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Excellent — formal citation plus multiple resolvable references",
+          "evidence": "citations: IEEE-style citation of Huang et al. CVPR 2017. references: arXiv:1608.06993, HuggingFace Hub URL, timm GitHub repo, PyTorch vision docs (4 references).",
+          "quality_note": "Includes a properly formatted citation plus four distinct external references including arXiv DOI-like URL."
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "Absent",
+          "evidence": "No model_parameters.compute_infrastructure section. No GPU/TPU disclosure, no training time, no energy or carbon estimate.",
+          "quality_note": "No compute infrastructure or energy reporting at all."
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 15,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_details.path and references include https://huggingface.co/timm/densenet121.tv_in1k (HF Hub) and https://github.com/huggingface/pytorch-image-models (GitHub)",
+          "quality_note": "Multiple resolvable landing URLs to HuggingFace Hub and GitHub."
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Excellent — runnable code + I/O spec + library hooks",
+          "evidence": "documentation includes runnable timm.create_model code snippet; input_format and output_format with format_maps; documentation references forward_features and forward_head hooks",
+          "quality_note": "Provides a copy-pasteable load snippet, full I/O specification, and notes feature-extraction API hooks."
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Good — 2 metrics with values but single slice and no CI",
+          "evidence": "quantitative_analysis.performance_metrics: top-1 accuracy 74.4%, top-5 accuracy 91.9% (both on ImageNet-1k validation slice), plus parameters (8.0 M) and GMACs (2.9). No confidence_interval, no value_error. Accuracy metrics all on same slice; no demographic or subset slices.",
+          "quality_note": "Multiple numeric metrics but only one evaluation slice for accuracy and no confidence intervals or error bars."
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Excellent — all three populated with concrete model-specific content",
+          "evidence": "limitations: 3 concrete items (OOD performance on non-ImageNet domains, ImageNet bias inheritance, 2017-era recipe vs modern improvements); tradeoffs: DenseNet-121 vs ResNet-50 parameter-vs-wall-clock comparison; out_of_scope_uses: 4 concrete uses (face recognition, demographic classification, surveillance, clinical diagnosis)",
+          "quality_note": "All three sections populated with model-specific, non-boilerplate content."
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "base_model='torchvision/densenet121' links the upstream model; datasets=['imagenet-1k'] and model_parameters.data link the training dataset; references include arXiv paper URL (https://arxiv.org/abs/1608.06993)",
+          "quality_note": "Multiple cross-platform links: upstream base_model, dataset reference, and DOI-equivalent arXiv URL for the publication."
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Excellent structural completeness — all 21 points across required fields, overview, tags, I/O spec, and schema version.",
+      "Strong responsible-AI documentation: ethics, multiple bias fields, and concrete out-of-scope uses with literature citations (Crawford & Paglen 2019, Yang et al. 2020).",
+      "Concrete model-specific limitations and tradeoffs (parameter count vs wall-clock vs ResNet-50).",
+      "Good cross-platform interlinking: base_model, dataset, arXiv paper, HF Hub, GitHub all referenced.",
+      "Clear SPDX license identifier (Apache-2.0) with canonical link.",
+      "Runnable timm.create_model code snippet plus full I/O format maps make the model immediately accessible."
+    ],
+    "weaknesses": [
+      "Compute infrastructure and energy reporting entirely absent (Q15 = 0).",
+      "Training procedure clarity is poor — no optimizer, learning rate, batch size, epochs, schedule, or regularization disclosed (Q12 = 1).",
+      "No funding agency, grant ID, or compute-facility acknowledgement (Q7 = 1).",
+      "Performance metrics lack confidence intervals/error bars and demographic or distributional slices (Q18 = 3).",
+      "Framework version specified as a range (torch>=1.13) rather than pinned; no Papers-with-Code model_index entry (Q10 = 3).",
+      "No Dockerfile or environment lock for full reproducibility (Q11 = 3)."
+    ],
+    "recommendations": [
+      "Add a model_parameters.compute_infrastructure section with the original torchvision training hardware (e.g., GPU type/count), wall-clock time, and an energy/carbon estimate.",
+      "Disclose the torchvision training recipe: optimizer (SGD with momentum), learning rate schedule (step decay), batch size, total epochs (90), and weight decay.",
+      "Add slice-level evaluation (per-class accuracy, ImageNet-A/R/Sketch robustness, ObjectNet) with confidence intervals.",
+      "Pin framework_version to specific torch and timm versions used for evaluation; consider providing a Dockerfile or requirements.txt.",
+      "Add a Papers-with-Code style model_index entry linking the ImageNet-1k benchmark and reported metrics.",
+      "Add an acknowledgements / funding section even if just stating 'No specific external funding; original work at Cornell/Tsinghua/FAIR'."
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "mc-rubric20-densenet121-tv-in1k-20260615",
+    "rubric_hash": "sha256:mc_rubric20_v1.0",
+    "model_card_hash": "sha256:densenet121_tv_in1k_model_card_assistant_20260615"
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/fixtures/minimal-viable-model-card.yaml",
+  "evaluation_timestamp": "2026-06-15T20:58:33.676715+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, model_details.path, base_model",
+          "quality_note": "Missing all of: model_details.references, model_details.path, base_model"
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "Name + comprehensive overview (208 chars)",
+          "quality_note": "Name + comprehensive overview (208 chars)"
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "Some tags (2) or pipeline tag present",
+          "quality_note": "Some tags (2) or pipeline tag present"
+        },
+        {
+          "name": "Landing Page or Repository URL",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, model_details.documentation",
+          "quality_note": "Missing all of: model_details.references, model_details.documentation"
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 0,
+          "evidence": "Missing all of: library_name, framework, framework_version",
+          "quality_note": "Missing all of: library_name, framework, framework_version"
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, model_details.path",
+          "quality_note": "Missing all of: model_details.references, model_details.path"
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, usage_documentation.code_examples",
+          "quality_note": "Missing all of: model_details.references, usage_documentation.code_examples"
+        },
+        {
+          "name": "Inference / Usage Example Provided",
+          "score": 0,
+          "evidence": "Missing all of: usage_documentation.code_examples, model_parameters.input_format, model_parameters.output_format",
+          "quality_note": "Missing all of: usage_documentation.code_examples, model_parameters.input_format, model_parameters.output_format"
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.input_format, model_parameters.output_format, model_parameters.input_format_map, model_parameters.output_format_map",
+          "quality_note": "Missing all of: model_parameters.input_format, model_parameters.output_format, model_parameters.input_format_map, model_parameters.output_format_map"
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "Missing all of: model_details.path, library_name",
+          "quality_note": "Missing all of: model_details.path, library_name"
+        }
+      ],
+      "element_score": 0,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "SPDX license identified: ['MIT']",
+          "quality_note": "SPDX license identified: ['MIT']"
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 0,
+          "evidence": "Missing all of: framework, framework_version, library_name",
+          "quality_note": "Missing all of: framework, framework_version, library_name"
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 0,
+          "evidence": "Missing all of: base_model, model_details.references",
+          "quality_note": "Missing all of: base_model, model_details.references"
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: text-classification",
+          "quality_note": "pipeline_tag: text-classification"
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation",
+          "quality_note": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation"
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the card document risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 0,
+          "evidence": "Missing all of: considerations.ethical_considerations",
+          "quality_note": "Missing all of: considerations.ethical_considerations"
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 0,
+          "evidence": "Missing all of: bias_model, bias_output, bias_input",
+          "quality_note": "Missing all of: bias_model, bias_output, bias_input"
+        },
+        {
+          "name": "Out-of-Scope / Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.limitations: list(1)",
+          "quality_note": "considerations.limitations: list(1)"
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 0,
+          "evidence": "No sensitive-data disclosure on any dataset",
+          "quality_note": "No sensitive-data disclosure on any dataset"
+        },
+        {
+          "name": "Intended Users and Stakeholder Tradeoffs",
+          "score": 0,
+          "evidence": "Missing all of: considerations.users, considerations.tradeoffs",
+          "quality_note": "Missing all of: considerations.users, considerations.tradeoffs"
+        }
+      ],
+      "element_score": 1,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the architecture and training composition be understood?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: Logistic regression on bag-of-words features (placeholder).",
+          "quality_note": "model_parameters.model_architecture: Logistic regression on bag-of-words features (placeholder)."
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "1 dataset(s), 1 with links/URIs",
+          "quality_note": "1 dataset(s), 1 with links/URIs"
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure",
+          "quality_note": "Missing all of: model_parameters.training_procedure"
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.compute_infrastructure",
+          "quality_note": "Missing all of: model_parameters.compute_infrastructure"
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 0,
+          "evidence": "Single or no dataset; no benchmark split",
+          "quality_note": "Single or no dataset; no benchmark split"
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine versions, owners, citations?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "Semver-shaped version: 0.1.0",
+          "quality_note": "Semver-shaped version: 0.1.0"
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "ISO date: 2026-06-15",
+          "quality_note": "ISO date: 2026-06-15"
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 0,
+          "evidence": "Missing all of: model_details.version.diff",
+          "quality_note": "Missing all of: model_details.version.diff"
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 0,
+          "evidence": "Missing all of: model_details.owners, model_details.contributors, model_details.creator_references",
+          "quality_note": "Missing all of: model_details.owners, model_details.contributors, model_details.creator_references"
+        },
+        {
+          "name": "Citation Provided",
+          "score": 0,
+          "evidence": "Missing all of: model_details.citations",
+          "quality_note": "Missing all of: model_details.citations"
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: This model card intentionally populates only the basics \u2014 name, short\ndescription, overview, license, and a pipeline tag\u2026",
+          "quality_note": "model_details.overview: This model card intentionally populates only the basics \u2014 name, short\ndescription, overview, license, and a pipeline tag\u2026"
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases: list(1)",
+          "quality_note": "considerations.use_cases: list(1)"
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: mission_relevance",
+          "quality_note": "Missing all of: mission_relevance"
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "Missing all of: model_details.contributors, mission_relevance, funding_grants",
+          "quality_note": "Missing all of: model_details.contributors, mission_relevance, funding_grants"
+        },
+        {
+          "name": "Compute / Platform Acknowledgement",
+          "score": 1,
+          "evidence": "model_details.overview: This model card intentionally populates only the basics \u2014 name, short\ndescription, overview, license, and a pipeline tag\u2026",
+          "quality_note": "model_details.overview: This model card intentionally populates only the basics \u2014 name, short\ndescription, overview, license, and a pipeline tag\u2026"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure",
+          "quality_note": "Missing all of: model_parameters.training_procedure"
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure, quantitative_analysis",
+          "quality_note": "Missing all of: model_parameters.training_procedure, quantitative_analysis"
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: mission_relevance, usage_documentation",
+          "quality_note": "Missing all of: mission_relevance, usage_documentation"
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, usage_documentation.code_examples",
+          "quality_note": "Missing all of: model_details.references, usage_documentation.code_examples"
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, model_details.citations",
+          "quality_note": "Missing all of: model_details.references, model_details.citations"
+        }
+      ],
+      "element_score": 0,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 0,
+          "evidence": "Missing all of: quantitative_analysis.performance_metrics",
+          "quality_note": "Missing all of: quantitative_analysis.performance_metrics"
+        },
+        {
+          "name": "Performance Across Slices / Subpopulations",
+          "score": 0,
+          "evidence": "Missing all of: quantitative_analysis.performance_metrics",
+          "quality_note": "Missing all of: quantitative_analysis.performance_metrics"
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 0,
+          "evidence": "Missing all of: quantitative_analysis.performance_metrics",
+          "quality_note": "Missing all of: quantitative_analysis.performance_metrics"
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: list(1)",
+          "quality_note": "considerations.limitations: list(1)"
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 0,
+          "evidence": "Missing all of: considerations.tradeoffs, considerations.ethical_considerations",
+          "quality_note": "Missing all of: considerations.tradeoffs, considerations.ethical_considerations"
+        }
+      ],
+      "element_score": 1,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the card connect to wider model ecosystems and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, library_name, model_details.path",
+          "quality_note": "Missing all of: model_details.references, library_name, model_details.path"
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 0,
+          "evidence": "Missing all of: model_details.references, base_model",
+          "quality_note": "Missing all of: model_details.references, base_model"
+        },
+        {
+          "name": "Benchmark Results (Papers with Code)",
+          "score": 0,
+          "evidence": "Missing all of: model_index",
+          "quality_note": "Missing all of: model_index"
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: 0.0.2",
+          "quality_note": "schema_version: 0.0.2"
+        },
+        {
+          "name": "Datasets Linked",
+          "score": 1,
+          "evidence": "1 dataset(s) with name+link",
+          "quality_note": "1 dataset(s) with name+link"
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    }
+  ],
+  "overall_score": {
+    "total_points": 15,
+    "max_points": 50,
+    "percentage": 30.0
+  },
+  "assessment": {
+    "strengths": [],
+    "weaknesses": [
+      "Weak Model Access and Distribution (0/5)",
+      "Weak Ethical Use and Responsible AI (1/5)",
+      "Weak Training and Evaluation Transparency (0/5)",
+      "Weak Performance Evaluation and Limitations Disclosure (1/5)"
+    ],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-evaluator",
+    "model_card_hash": "a7a071242f0459fe7a491bd900266e9f1e57c6aef0e0255b5bcbdeb8249017b3"
+  }
+}
