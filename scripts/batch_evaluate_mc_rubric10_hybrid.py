@@ -165,7 +165,7 @@ RUBRIC10_ELEMENTS: dict[int, dict[str, Any]] = {
             {"name": "Funding Source / Grant Agency Listed",
              "fields": ["model_details.contributors",
                         "mission_relevance",
-                        "funding_grants"]},  # harmonized
+                        "mission_relevance.funding_grants"]},  # harmonized
             {"name": "Compute / Platform Acknowledgement",
              "fields": ["model_parameters.compute_infrastructure", "model_details.overview"]},
         ],
@@ -279,8 +279,8 @@ SPDX_LICENSES = {
     "Unlicense", "ISC", "AGPL-3.0",
 }
 
-HF_HUB_RE = re.compile(r"^https?://(?:hf\.co|huggingface\.co)/[^/]+/[^/]+")
-DOI_RE = re.compile(r"^(?:https?://(?:dx\.)?doi\.org/|doi:)?10\.\d{4,9}/[^\s]+", re.IGNORECASE)
+HF_HUB_RE = re.compile(r"https?://(?:hf\.co|huggingface\.co)/[^/\s]+/[^/\s]+")
+DOI_RE = re.compile(r"(?:https?://(?:dx\.)?doi\.org/|doi:)?10\.\d{4,9}/\S+", re.IGNORECASE)
 SEMVER_RE = re.compile(r"^v?\d+\.\d+(?:\.\d+)?(?:[-+][\w.]+)?$")
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -420,22 +420,28 @@ def heuristic_score(data: dict, element_id: int, sub_idx: int) -> tuple[int, str
         if sub_idx == 3:  # owners/contributors with roles
             owners = get_nested(data, "model_details.owners") or []
             contribs = get_nested(data, "model_details.contributors") or []
+            creator_refs = get_nested(data, "model_details.creator_references") or []  # harmonized
             roled = [c for c in contribs if isinstance(c, dict) and c.get("role")]
-            if roled:
-                return 1, f"{len(roled)} contributor(s) with role"
-            if owners or contribs:
-                return 1, f"{len(owners) + len(contribs)} owner/contributor(s) (roles missing)"
+            roled_refs = [c for c in creator_refs if isinstance(c, dict) and c.get("role")]
+            if roled or roled_refs:
+                return 1, f"{len(roled) + len(roled_refs)} contributor(s)/reference(s) with role"
+            if owners or contribs or creator_refs:
+                total = len(owners) + len(contribs) + len(creator_refs)
+                return 1, f"{total} owner/contributor/reference(s) (roles missing)"
 
     # Element 7 — funding heuristic
     if element_id == 7 and sub_idx == 3:
         contribs = get_nested(data, "model_details.contributors") or []
         affils = [c.get("affiliation", "") for c in contribs if isinstance(c, dict)]
         mission = _string_of(data.get("mission_relevance"))
-        combined = " ".join(affils + [mission])
+        # In the harmonized schema, funding_grants is a slot on MissionRelevance.
+        funding_grants = get_nested(data, "mission_relevance.funding_grants") or []
+        grant_text = " ".join(_string_of(g) for g in funding_grants) if isinstance(funding_grants, list) else _string_of(funding_grants)
+        combined = " ".join(affils + [mission, grant_text])
         if re.search(r"\b(NIH|NSF|DOE|DARPA|NASA|EU|European Commission|Horizon)\b", combined, re.I):
-            return 1, "Funding agency mentioned in affiliations or mission_relevance"
-        if affils:
-            return 1, "Affiliations present (funding agency unclear)"
+            return 1, "Funding agency mentioned in affiliations / mission_relevance / funding_grants"
+        if affils or funding_grants:
+            return 1, "Affiliations or funding_grants present (funding agency unclear)"
 
     # Element 9 — metrics, slices, CI, limitations
     if element_id == 9:
@@ -477,10 +483,16 @@ def heuristic_score(data: dict, element_id: int, sub_idx: int) -> tuple[int, str
                 return 1, f"{len(results)} benchmark result(s)"
             return 0, "No model_index benchmark results"
         if sub_idx == 4:
-            datasets = get_nested(data, "model_parameters.data") or []
+            # Merge base (model_parameters.data) AND harmonized
+            # (training_datasets, evaluation_datasets) — element 5 sub_idx 1
+            # already does this; keep the two heuristics consistent.
+            base_ds = get_nested(data, "model_parameters.data") or []
+            train_ds = get_nested(data, "model_parameters.training_datasets") or []
+            eval_ds = get_nested(data, "model_parameters.evaluation_datasets") or []
+            all_ds = list(base_ds) + list(train_ds) + list(eval_ds)
             named_with_links = sum(
-                1 for d in datasets
-                if isinstance(d, dict) and d.get("name") and d.get("link")
+                1 for ds in all_ds
+                if isinstance(ds, dict) and ds.get("name") and (ds.get("link") or ds.get("url"))
             )
             if named_with_links >= 1:
                 return 1, f"{named_with_links} dataset(s) with name+link"
@@ -496,8 +508,14 @@ def heuristic_score(data: dict, element_id: int, sub_idx: int) -> tuple[int, str
 # Core eval
 # ---------------------------------------------------------------------------
 def evaluate_one(path: Path) -> dict[str, Any]:
+    # Read once: hash and parse from the same buffer so the recorded
+    # SHA-256 matches the bytes that were actually scored.
     try:
-        data = yaml.safe_load(path.read_text())
+        raw = path.read_bytes()
+    except Exception as e:
+        return {"error": f"Failed to read file: {e}", "model_card_file": str(path)}
+    try:
+        data = yaml.safe_load(raw)
     except Exception as e:
         return {"error": f"Failed to load YAML: {e}", "model_card_file": str(path)}
 
@@ -519,7 +537,7 @@ def evaluate_one(path: Path) -> dict[str, Any]:
         "assessment": {"strengths": [], "weaknesses": [], "recommendations": []},
         "metadata": {
             "evaluator_id": "batch-hybrid-evaluator",
-            "model_card_hash": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "model_card_hash": hashlib.sha256(raw).hexdigest(),
         },
     }
 

@@ -137,13 +137,13 @@ contributors:
 **Adding list items**:
 ```yaml
 # Before
-quantitative_analyses:
+quantitative_analysis:
   performance_metrics:
     - type: "accuracy"
       value: "0.91"
 
 # After
-quantitative_analyses:
+quantitative_analysis:
   performance_metrics:
     - type: "accuracy"
       value: "0.91"
@@ -203,10 +203,13 @@ python3 src/github/validate_mc_completeness.py <edited-file>.yaml
 
 Don't block edit PRs (edits are typically improvements). Warn in PR if quality dropped.
 
-### 7. Regenerate HTML Preview
+### 7. Regenerate HTML Preview (optional)
+
+> **Note**: `src/html/human_readable_renderer.py` is not yet implemented; skip this step.
 
 ```bash
-poetry run python src/html/human_readable_renderer.py <edited-file>.yaml
+# When the renderer exists:
+# poetry run python src/html/human_readable_renderer.py <edited-file>.yaml
 ```
 
 ### 8. Create Pull Request
@@ -277,8 +280,12 @@ EOF
 
 ### 9. Check Budget and Prepare Warning (If Needed)
 
+> **Note**: `scripts/check_budget.py` is not yet implemented; set `BUDGET_WARNING=""` for now.
+
 ```bash
-BUDGET_WARNING=$(python3 scripts/check_budget.py)
+# When the script exists:
+# BUDGET_WARNING=$(python3 scripts/check_budget.py)
+BUDGET_WARNING=""
 ```
 
 ### 10. Notify User in GitHub Issue

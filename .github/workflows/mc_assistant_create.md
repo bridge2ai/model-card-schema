@@ -138,7 +138,7 @@ Read validated reference examples:
 - `src/data/examples/harmonized/` — sentiment classifier + IMDb datasheet examples
 
 Observe:
-- How `model_details`, `model_parameters`, `quantitative_analyses`, `considerations` are structured
+- How `model_details`, `model_parameters`, `quantitative_analysis`, `considerations` are structured
 - Field naming patterns (most slots use snake_case; some Google-MCT-carryover slots use camelCase like `modelCard`, `dataSet`)
 - How multi-part information is merged
 - Proper use of enum values (e.g. `role`, license identifiers)
@@ -167,7 +167,7 @@ model_details:
   authors:                     # field is 'contributors' or 'owners'
     - author_name: "..."       # field is 'name'
       author_role: "..."       # field is 'role'
-quantitative_analyses:
+quantitative_analysis:
   metrics:                     # field is 'performance_metrics'
     - metric_type: "accuracy"  # field is 'type'
 
@@ -177,7 +177,7 @@ model_details:
   contributors:
     - name: "..."
       role: developed_by
-quantitative_analyses:
+quantitative_analysis:
   performance_metrics:
     - type: "accuracy"
       value: "0.87"
@@ -188,7 +188,7 @@ Key sections (base schema):
 - `schema_version` (string) — version of this card's schema
 - `model_details` (`ModelDetails`) — name, overview, contributors, version, license, citations, references
 - `model_parameters` (`ModelParameters`) — model_architecture, data (training/eval), input_format, output_format
-- `quantitative_analyses` (`QuantitativeAnalyses`) — performance_metrics, graphics
+- `quantitative_analysis` (`QuantitativeAnalysis`) — performance_metrics, graphics
 - `considerations` (`Considerations`) — users, use_cases, limitations, tradeoffs, ethical_considerations, risks
 - Extended template adds: compute_infrastructure, reproducibility, mission_relevance
 
@@ -238,8 +238,8 @@ model_details:
   version:
     name: "v1.0.0"
     date: "2026-01-15"
-  license:
-    identifier: "Apache-2.0"
+  licenses:
+    - identifier: "Apache-2.0"
 
 model_parameters:
   model_architecture: "Transformer encoder, 12 layers, 768 hidden dim"
@@ -322,7 +322,7 @@ python3 src/github/validate_mc_completeness.py ${OUTPUT_FILE}
 # Exit code 1 = fail (block PR)
 ```
 
-Checks number of populated sections (e.g. model_details, model_parameters, considerations, quantitative_analyses), number of populated slots, file size, and required fields.
+Checks number of populated sections (e.g. model_details, model_parameters, considerations, quantitative_analysis), number of populated slots, file size, and required fields.
 
 Quality levels (suggested thresholds — tune to fit MC schema):
 - **Comprehensive**: 8+ sections, 80+ slots, 200+ lines → ✅ Create PR
@@ -332,11 +332,15 @@ Quality levels (suggested thresholds — tune to fit MC schema):
 
 If completeness fails, comment on the issue explaining what's missing and do NOT create the PR.
 
-### 8. Generate HTML Preview
+### 8. Generate HTML Preview (optional)
+
+> **Note**: The HTML renderer at `src/html/human_readable_renderer.py` is not yet implemented in this repo.
+> When it lands, this step will produce `<model_name>_model_card.html` for reviewer convenience.
+> For now, skip this step — the PR can be reviewed from the YAML diff. See issue tracker.
 
 ```bash
-poetry run python src/html/human_readable_renderer.py ${OUTPUT_FILE}
-# Produces <model_name>_model_card.html for reviewer convenience
+# When the renderer exists:
+# poetry run python src/html/human_readable_renderer.py ${OUTPUT_FILE}
 ```
 
 ### 9. Create Pull Request
@@ -350,7 +354,7 @@ BRANCH_NAME="mcassistant/add-${MODEL_NAME}-model-card"
 git checkout -b ${BRANCH_NAME}
 git add ${OUTPUT_FILE}
 git add ${OUTPUT_FILE%.yaml}_metadata.yaml
-git add ${OUTPUT_FILE%.yaml}.html
+# git add ${OUTPUT_FILE%.yaml}.html  # uncomment once src/html/human_readable_renderer.py exists
 
 git commit -m "Add Model Card for ${MODEL_NAME}
 
@@ -404,13 +408,17 @@ EOF
 )"
 ```
 
-### 10. Check Budget and Prepare Warning (If Needed)
+### 10. Check Budget and Prepare Warning (optional)
+
+> **Note**: `scripts/check_budget.py` is not yet implemented in this repo.
+> When it lands, it will query the CBORG API and emit a warning if monthly spend > 75% of budget.
+> For now, skip this step — set `BUDGET_WARNING=""` so step 11's template renders correctly.
 
 ```bash
-BUDGET_WARNING=$(python3 scripts/check_budget.py)
+# When the script exists:
+# BUDGET_WARNING=$(python3 scripts/check_budget.py)
+BUDGET_WARNING=""
 ```
-
-If spending > 75% of the $500 budget, the script outputs a warning that gets appended to your issue comment.
 
 ### 11. Notify User in GitHub Issue
 

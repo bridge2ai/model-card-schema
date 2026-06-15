@@ -44,8 +44,8 @@ SPDX_LICENSES = {
     "CC-BY-NC-4.0", "CC-BY-NC-SA-4.0", "OpenRAIL", "OpenRAIL-M", "LLAMA2", "Gemma",
     "Unlicense", "ISC", "AGPL-3.0",
 }
-DOI_RE = re.compile(r"^(?:https?://(?:dx\.)?doi\.org/|doi:)?10\.\d{4,9}/[^\s]+", re.IGNORECASE)
-HF_HUB_RE = re.compile(r"^https?://(?:hf\.co|huggingface\.co)/[^/]+/[^/]+")
+DOI_RE = re.compile(r"(?:https?://(?:dx\.)?doi\.org/|doi:)?10\.\d{4,9}/\S+", re.IGNORECASE)
+HF_HUB_RE = re.compile(r"https?://(?:hf\.co|huggingface\.co)/[^/\s]+/[^/\s]+")
 SEMVER_RE = re.compile(r"^v?\d+\.\d+(?:\.\d+)?(?:[-+][\w.]+)?$")
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 GRANT_RE = re.compile(r"\b(?:DE-[A-Z0-9-]+|[A-Z]{1,3}\d{2}[A-Z]{1,3}\d{4,}|[A-Z]+-\d{6,}|R01[A-Z0-9]+)\b")
@@ -198,7 +198,8 @@ def q6_persistent_identifier(d: dict) -> tuple[int, int, str, str]:
 def q7_funding_completeness(d: dict) -> tuple[int, int, str, str]:
     contribs = get_nested(d, "model_details.contributors") or []
     creator_refs = get_nested(d, "model_details.creator_references") or []  # harmonized
-    funding_grants = get_nested(d, "funding_grants") or []  # harmonized
+    # In the harmonized schema, funding_grants is a slot on MissionRelevance.
+    funding_grants = get_nested(d, "mission_relevance.funding_grants") or []  # harmonized
     affils = [stringify(c.get("affiliation")) for c in contribs if isinstance(c, dict)]
     creator_text = [stringify(c) for c in creator_refs]
     grant_text = [stringify(g) for g in funding_grants]
@@ -250,8 +251,17 @@ def q9_license_clarity(d: dict) -> tuple[int, int, str, str]:
                 has_restrictions = True
         elif isinstance(lic, str) and lic in SPDX_LICENSES:
             spdx_ids.append(lic)
-    if spdx_ids and has_restrictions:
-        return 5, 5, "SPDX + restrictions stated", f"spdx={spdx_ids}, has custom_text"
+    # Permissive SPDX licenses (MIT, Apache-2.0, BSD-*, CC-BY-*) need no
+    # additional restrictions to clear the 5/5 bar — restrictions only
+    # matter for non-permissive identifiers (OpenRAIL-M, LLAMA2, etc.).
+    PERMISSIVE_SPDX = {
+        "MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC",
+        "Unlicense", "CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0", "MPL-2.0",
+    }
+    has_permissive = any(s in PERMISSIVE_SPDX for s in spdx_ids)
+    if spdx_ids and (has_restrictions or has_permissive):
+        note = "SPDX + restrictions stated" if has_restrictions else "SPDX permissive license (no additional restrictions needed)"
+        return 5, 5, note, f"spdx={spdx_ids}"
     if spdx_ids:
         return 4, 5, "SPDX identifier, no explicit restrictions text", f"spdx={spdx_ids}"
     return 3, 5, "License present but non-SPDX", f"identifiers={[l.get('identifier') if isinstance(l, dict) else l for l in licenses]}"
@@ -302,11 +312,24 @@ def q12_training_procedure(d: dict) -> tuple[int, int, str, str]:
         hp = tp.get("hyperparameters")
     if not isinstance(hp, dict):
         hp = {}
-    keys = {k.lower() for k in hp.keys()}
+    # str() guard handles non-string YAML keys (ints / floats / bools)
+    keys = {str(k).lower() for k in hp.keys()}
     must_have = {"optimizer", "learning_rate"}
-    nice_to_have = {"batch_size", "epochs", "training_epochs", "training_steps", "schedule"}
+    # Each nice-to-have category groups synonyms so multiple keys hitting
+    # the same category only count once (e.g. "epochs" and "training_epochs"
+    # are the same concept).
+    nice_to_have_groups = [
+        {"batch_size"},
+        {"epochs", "training_epochs", "num_epochs"},
+        {"training_steps", "max_steps"},
+        {"schedule", "lr_schedule", "scheduler", "warmup"},
+        {"weight_decay", "dropout", "regularization"},
+    ]
     have_must = sum(1 for m in must_have if any(m in k for k in keys))
-    have_nice = sum(1 for n in nice_to_have if any(n in k for k in keys))
+    have_nice = sum(
+        1 for group in nice_to_have_groups
+        if any(any(member in k for k in keys) for member in group)
+    )
     if have_must >= 2 and have_nice >= 3:
         return 5, 5, "Optimizer + LR + batch + epochs + schedule + regularization", "comprehensive hyperparameters"
     if have_must >= 1 and have_nice >= 2:
@@ -416,11 +439,25 @@ def q19_oos_limitations_tradeoffs(d: dict) -> tuple[int, int, str, str]:
     lim = get_nested(d, "considerations.limitations") or []
     to = get_nested(d, "considerations.tradeoffs") or []
     oos = get_nested(d, "considerations.out_of_scope_uses") or []
+
+    # Count only fields populated as non-empty LISTS — bare strings like
+    # "None known" don't count as enumerated items even though has_content()
+    # accepts them.
+    def _is_item_list(x):
+        return isinstance(x, list) and len(x) >= 1
+
     populated = sum(1 for x in (lim, to, oos) if has_content(x))
-    if populated == 3 and len(lim) >= 1 and len(to) >= 1 and len(oos) >= 1:
-        return 5, 5, "All three populated with concrete items", f"lim={len(lim)}, tradeoffs={len(to)}, oos={len(oos)}"
+    list_populated = sum(1 for x in (lim, to, oos) if _is_item_list(x))
+
+    if populated == 3 and list_populated == 3:
+        return 5, 5, "All three populated with concrete enumerated items", \
+            f"lim={len(lim)}, tradeoffs={len(to)}, oos={len(oos)}"
+    if populated == 3:
+        # All present, but at least one is a bare string instead of a list — cap at 4
+        return 4, 5, "All three populated, some as prose rather than enumerated lists", \
+            f"populated={populated}, lists={list_populated}"
     if populated >= 1:
-        return 3, 5, f"{populated} of 3 populated", f"lim={len(lim)}, tradeoffs={len(to)}, oos={len(oos)}"
+        return 3, 5, f"{populated} of 3 populated", f"populated={populated}, lists={list_populated}"
     return 0, 5, "None populated", "absent"
 
 
@@ -436,9 +473,11 @@ def q20_cross_platform(d: dict) -> tuple[int, int, str, str]:
     refs = get_nested(d, "model_details.references") or []
     ref_strs = [stringify(r) for r in refs] if isinstance(refs, list) else [stringify(refs)]
     has_doi = any(DOI_RE.search(s) for s in ref_strs)
-    datasets = get_nested(d, "model_parameters.data") or []
+    # Use the file-local _all_datasets helper so harmonized
+    # training_datasets / evaluation_datasets entries also count.
+    datasets = _all_datasets(d)
     has_dataset_link = any(
-        isinstance(ds, dict) and ds.get("link") for ds in datasets
+        isinstance(ds, dict) and (ds.get("link") or ds.get("url")) for ds in datasets
     )
     if has_benchmark or has_doi or (base and re.search(r"https?://", base)) or has_dataset_link:
         return 1, 1, "Cross-platform reference present", f"benchmark={has_benchmark}, doi={has_doi}, dataset_link={has_dataset_link}"
@@ -498,8 +537,13 @@ MAX_POINTS = 84
 # Core eval
 # ---------------------------------------------------------------------------
 def evaluate_one(path: Path) -> dict[str, Any]:
+    # Read once: hash and parse from the same buffer.
     try:
-        data = yaml.safe_load(path.read_text())
+        raw = path.read_bytes()
+    except Exception as e:
+        return {"error": f"Failed to read file: {e}", "model_card_file": str(path)}
+    try:
+        data = yaml.safe_load(raw)
     except Exception as e:
         return {"error": f"Failed to load YAML: {e}", "model_card_file": str(path)}
 
@@ -521,7 +565,7 @@ def evaluate_one(path: Path) -> dict[str, Any]:
         "assessment": {"strengths": [], "weaknesses": [], "recommendations": []},
         "metadata": {
             "evaluator_id": "batch-hybrid-rubric20",
-            "model_card_hash": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "model_card_hash": hashlib.sha256(raw).hexdigest(),
         },
     }
 

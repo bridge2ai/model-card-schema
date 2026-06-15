@@ -518,13 +518,14 @@ def _badge_text_width(s: str) -> int:
     return max(20, int(7 * len(s) + 10))
 
 
-def render_badge_svg(label: str, value: str, color_class: str) -> str:
+def render_badge_svg(label: str, value: str, color_band: str) -> str:
     """Render a single shields.io-style badge as an SVG string.
 
     `label` is the left (dark grey) text; `value` is the right (colored) text.
-    `color_class` is one of {good, ok, bad}.
+    `color_band` is one of {good, ok, bad} (named to avoid shadowing the
+    module-level color_class() helper).
     """
-    color = BADGE_COLORS.get(color_class, BADGE_COLORS["ok"])
+    color = BADGE_COLORS.get(color_band, BADGE_COLORS["ok"])
     label_w = _badge_text_width(label)
     value_w = _badge_text_width(value)
     total_w = label_w + value_w

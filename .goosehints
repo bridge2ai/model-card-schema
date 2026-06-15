@@ -35,7 +35,7 @@ The base schema's `modelCard` root has these major sections (camelCase carried o
 - `schema_version` — version string of the model card schema
 - `model_details` (`ModelDetails`) — name, overview, owners/contributors, version, license, citations, references
 - `model_parameters` (`ModelParameters`) — architecture, training config, input/output spec, hyperparameters
-- `quantitative_analyses` (`QuantitativeAnalyses`) — performance metrics on slices/factors
+- `quantitative_analysis` (`QuantitativeAnalysis`) — performance metrics on slices/factors
 - `considerations` (`Considerations`) — intended users, use cases, limitations, tradeoffs, ethics, risks
 - `extended` (DOE extended template) — compute infrastructure, reproducibility, mission relevance
 - Plus benchmarking / dataset linkage / etc. — see schema for the full list
@@ -64,7 +64,7 @@ Extract from the issue:
 1. **Use user-provided ID if given**: If user specifies "id: my-model", use that
 2. **Generate from URL/name**: e.g. `huggingface.co/openai/clip-vit-base` → `clip_vit_base`
 3. **Use timestamp-based ID**: `{sanitized_name}_{YYYYMMDD}` (e.g. `clip_vit_base_20260615`)
-4. **Check for conflicts**: Before creating the PR, check if `src/data/examples/user_model_cards/{filename}` already exists. If so, append a number suffix (e.g. `clip_vit_base_20260615_2.yaml`).
+4. **Check for conflicts**: Before creating the PR, check if `data/model_cards_assistant/{filename}` already exists. If so, append a number suffix (e.g. `clip_vit_base_20260615_2.yaml`).
 
 **Filename format**: `{model_id}_model_card.yaml` (all lowercase, underscores, no spaces or special chars)
 
@@ -77,11 +77,11 @@ def generate_unique_id(model_name, url=None):
     clean_name = re.sub(r'[^a-z0-9]+', '_', model_name.lower()).strip('_')
     date_str = datetime.now().strftime('%Y%m%d')
     base_id = f"{clean_name}_{date_str}"
-    filename = f"src/data/examples/user_model_cards/{base_id}_model_card.yaml"
+    filename = f"data/model_cards_assistant/{base_id}_model_card.yaml"
     counter = 1
     while os.path.exists(filename):
         base_id = f"{clean_name}_{date_str}_{counter}"
-        filename = f"src/data/examples/user_model_cards/{base_id}_model_card.yaml"
+        filename = f"data/model_cards_assistant/{base_id}_model_card.yaml"
         counter += 1
     return base_id, filename
 ```
@@ -113,8 +113,8 @@ model_details:
   version:
     name: "v2.0.1"
     date: "2025-09-01"
-  license:
-    identifier: "Apache-2.0"
+  licenses:
+    - identifier: "Apache-2.0"
   owners:
     - name: "Lawrence Berkeley National Laboratory"
       contact: "climate-ai@lbl.gov"
@@ -124,8 +124,8 @@ model_details:
       email: "jane.doe@lbl.gov"
       affiliation: "Lawrence Berkeley National Laboratory"
   citations:
-    - style: "bibtex"
-      citation: "@article{...}"
+    - style: "IEEE"
+      citation: "J. Doe et al., 'ClimateNet-v2,' SC, 2024."
   references:
     - reference: "https://arxiv.org/abs/..."
 
@@ -135,17 +135,18 @@ model_parameters:
     - name: "training_data"
       link: "https://example.org/training/"
       sensitive:
-        sensitive_data_used: false
+        sensitive_data:
+          - "No PII present"
   input_format: "Multi-variable atmospheric tensors (768x768, 16 channels)"
   output_format: "Pixel-wise class labels and bounding boxes"
 
-quantitative_analyses:
+quantitative_analysis:
   performance_metrics:
     - type: "IoU"
-      value: "0.87"
+      value: 0.87
       slice: "all classes"
     - type: "F1"
-      value: "0.91"
+      value: 0.91
       slice: "tropical cyclones"
 
 considerations:
@@ -235,13 +236,13 @@ These are real validation errors observed when porting HuggingFace Hub cards int
 
 ```bash
 # Ensure directory exists
-mkdir -p src/data/examples/user_model_cards
+mkdir -p data/model_cards_assistant
 
 # Save to the unique filename generated in step 2
-# Format: src/data/examples/user_model_cards/{unique_id}_model_card.yaml
+# Format: data/model_cards_assistant/{unique_id}_model_card.yaml
 ```
 
-**CRITICAL**: Save to `src/data/examples/user_model_cards/`, NOT `src/data/examples/extended/`.
+**CRITICAL**: Save to `data/model_cards_assistant/`, NOT `src/data/examples/extended/`.
 (The test suite filters on the `extended` path; user-submitted cards live in a sibling folder so they don't accidentally drive `make test-examples`.)
 
 ### 6. Validate
@@ -251,7 +252,7 @@ mkdir -p src/data/examples/user_model_cards
 poetry run linkml-validate \
   -s src/model_card_schema/schema/model_card_schema.yaml \
   -C modelCard \
-  src/data/examples/user_model_cards/{unique_id}_model_card.yaml
+  data/model_cards_assistant/{unique_id}_model_card.yaml
 
 # Also run the existing test suite to ensure nothing is broken
 make test-examples
@@ -273,7 +274,7 @@ Fix errors and re-validate until passing.
 git checkout -b mcassistant/add-{sanitized_name}-model-card
 
 # Stage file
-git add src/data/examples/user_model_cards/{unique_id}_model_card.yaml
+git add data/model_cards_assistant/{unique_id}_model_card.yaml
 
 # Commit
 git commit -m "$(cat <<'EOF'
@@ -299,7 +300,7 @@ gh pr create --title "Add Model Card for {model_name}" --body "$(cat <<'EOF'
 Generated Model Card for **{model_name}**.
 
 ## Details
-- **File**: `src/data/examples/user_model_cards/{unique_id}_model_card.yaml`
+- **File**: `data/model_cards_assistant/{unique_id}_model_card.yaml`
 - **Unique ID**: `{unique_id}`
 - **Source**: {URLs or description}
 
@@ -323,7 +324,7 @@ PR_NUMBER=$(gh pr list --head mcassistant/add-{sanitized_name}-model-card --json
 gh issue comment {issue_number} --body "I've generated a Model Card for this model! 🎉
 
 **Pull Request**: #${PR_NUMBER}
-**File**: \`src/data/examples/user_model_cards/{unique_id}_model_card.yaml\`
+**File**: \`data/model_cards_assistant/{unique_id}_model_card.yaml\`
 **Model ID**: \`{unique_id}\`
 
 The model card has been validated against the schema. Please review and let me know if you'd like any adjustments!"
@@ -342,10 +343,10 @@ URL: https://huggingface.co/openai/clip-vit-base-patch32
 2. **Generate unique ID**:
    - Extract from URL: `clip_vit_base_patch32`
    - Add date: `clip_vit_base_patch32_20260615`
-   - Check `src/data/examples/user_model_cards/clip_vit_base_patch32_20260615_model_card.yaml` — doesn't exist ✓
+   - Check `data/model_cards_assistant/clip_vit_base_patch32_20260615_model_card.yaml` — doesn't exist ✓
 3. **Fetch**: Use WebFetch on the HF model page
 4. **Generate**: Create model-card YAML with metadata
-5. **Save**: `src/data/examples/user_model_cards/clip_vit_base_patch32_20260615_model_card.yaml`
+5. **Save**: `data/model_cards_assistant/clip_vit_base_patch32_20260615_model_card.yaml`
 6. **Validate**: `poetry run linkml-validate -s src/model_card_schema/schema/model_card_schema.yaml -C modelCard ...` — passes ✓
 7. **PR**: Create and push
 8. **Comment**: Link PR in issue
@@ -389,7 +390,7 @@ URL: https://huggingface.co/openai/clip-vit-base-patch32
 - **Read the schema files** in `src/model_card_schema/schema/` before generating
 - **Check example files** in `src/data/examples/extended/` for reference structure
 - **Ensure unique IDs** using timestamp or URL-based naming
-- **Save to correct location**: `src/data/examples/user_model_cards/`
+- **Save to correct location**: `data/model_cards_assistant/`
 - **Validate before PR**: `linkml-validate -C modelCard ...` AND `make test-examples`
 - **Don't guess**: Only populate fields with clear information from the source
 - **Don't invent field names**: Use exact schema field names — if unsure, grep the schema
