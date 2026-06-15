@@ -1,0 +1,12 @@
+# Deliberately-minimal Model Card fixture
+#
+# Purpose: anchor the floor of the rubric10 / rubric20 hybrid evaluators.
+# This card populates ONLY the required field (`model_details.name`) — it
+# should validate against the schema but score as close to 0% as the
+# hybrid heuristics allow.
+#
+# DO NOT use as a real Model Card template. See
+# src/data/examples/extended/climate-model-extended.yaml for that.
+
+model_details:
+  name: "minimal-bad-fixture"

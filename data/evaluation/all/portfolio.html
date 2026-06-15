@@ -1,0 +1,2790 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Model Card portfolio: harmonized + HF Hub</title><style>
+:root {
+  --good: #16a34a; --ok: #ca8a04; --bad: #dc2626;
+  --bg: #fafafa; --card: #fff; --border: #e5e5e5; --muted: #6b7280;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: #111;
+  margin: 0; padding: 2rem 1.5rem; line-height: 1.5;
+}
+header {
+  max-width: 1200px; margin: 0 auto 2rem;
+}
+h1 { font-size: 1.75rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.35rem; margin: 2rem 0 .75rem; padding-bottom: .35rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.05rem; margin: 1.25rem 0 .5rem; }
+.meta { color: var(--muted); font-size: .9rem; }
+main { max-width: 1200px; margin: 0 auto; }
+
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem; margin-bottom: 1.5rem;
+}
+.summary-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem;
+}
+.summary-card h4 { margin: 0 0 .5rem; font-size: .95rem; font-weight: 600; }
+.summary-card .file { color: var(--muted); font-size: .8rem; word-break: break-all; }
+.score-big {
+  display: flex; align-items: baseline; gap: .5rem; margin-top: .5rem;
+}
+.score-big .pct { font-size: 1.5rem; font-weight: 700; }
+.score-big .raw { color: var(--muted); font-size: .9rem; }
+
+.bar { background: #f3f4f6; border-radius: 4px; height: 8px; overflow: hidden; margin-top: .4rem; }
+.bar > div { height: 100%; transition: width .2s; }
+.bar.good > div { background: var(--good); }
+.bar.ok   > div { background: var(--ok); }
+.bar.bad  > div { background: var(--bad); }
+
+details { margin: .75rem 0; background: var(--card); border: 1px solid var(--border); border-radius: 6px; }
+details > summary {
+  padding: .65rem .9rem; cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary { border-bottom: 1px solid var(--border); }
+.elem-name { font-weight: 600; }
+.elem-score { font-weight: 600; font-variant-numeric: tabular-nums; }
+.elem-score.good { color: var(--good); }
+.elem-score.ok   { color: var(--ok); }
+.elem-score.bad  { color: var(--bad); }
+
+table { width: 100%; border-collapse: collapse; margin: 0; }
+th, td { padding: .55rem .9rem; text-align: left; vertical-align: top; border-top: 1px solid var(--border); font-size: .9rem; }
+th { background: #f9fafb; font-weight: 600; }
+td.score, th.score { text-align: right; width: 70px; font-variant-numeric: tabular-nums; }
+td.score.good { color: var(--good); font-weight: 600; }
+td.score.bad  { color: var(--bad); font-weight: 600; }
+td.evidence { color: var(--muted); font-family: ui-monospace, "SF Mono", monospace; font-size: .8rem; }
+td .note { color: #374151; }
+
+.assessment {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.5rem 0;
+}
+@media (max-width: 800px) { .assessment { grid-template-columns: 1fr; } }
+.assessment .col {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+}
+.assessment h4 { margin: 0 0 .5rem; font-size: .95rem; }
+.assessment ul { margin: 0; padding-left: 1.25rem; font-size: .88rem; }
+.assessment li { margin-bottom: .35rem; }
+
+.section-tag {
+  display: inline-block; font-size: .75rem; font-weight: 600; padding: .15rem .5rem;
+  border-radius: 4px; background: #eff6ff; color: #1e3a8a; margin-right: .5rem;
+}
+.section-tag.semantic { background: #f3e8ff; color: #6b21a8; }
+.section-tag.r20 { background: #ecfeff; color: #155e75; }
+
+.semantic-analysis {
+  background: #faf5ff; border-left: 3px solid #a855f7;
+  margin: .35rem 0 0; padding: .5rem .75rem; font-size: .82rem; color: #4c1d95;
+  border-radius: 0 4px 4px 0;
+}
+.error {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;
+  padding: 1rem; color: #991b1b; margin: 1rem 0;
+}
+.error code { background: #fff1f2; padding: 0 .35rem; border-radius: 3px; }
+
+/* Comparison view */
+.compare-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.25rem; margin: 1.25rem 0;
+}
+.compare-card h3 { margin-top: 0; }
+.compare-matrix {
+  width: 100%; border-collapse: collapse; margin: .5rem 0 1rem;
+}
+.compare-matrix th, .compare-matrix td {
+  padding: .55rem .8rem; border: 1px solid var(--border); text-align: center;
+  font-size: .9rem; vertical-align: middle;
+}
+.compare-matrix th { background: #f9fafb; font-weight: 600; }
+.compare-matrix td.score-cell {
+  font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.compare-matrix td.score-cell .pct { font-size: 1.1rem; }
+.compare-matrix td.score-cell .raw { color: var(--muted); font-size: .75rem; display: block; }
+.compare-matrix td.empty { color: var(--muted); font-size: .8rem; background: #fafafa; }
+.delta {
+  font-size: .75rem; padding: .15rem .45rem; border-radius: 4px;
+  display: inline-block; margin-top: .2rem;
+}
+.delta.lenient { background: #fef3c7; color: #92400e; }
+.delta.strict  { background: #fce7f3; color: #9d174d; }
+.delta.match   { background: #dcfce7; color: #166534; }
+.element-diff {
+  background: #f9fafb; border: 1px solid var(--border); border-radius: 6px;
+  padding: .75rem 1rem; margin: 1rem 0;
+}
+.element-diff h4 { margin: 0 0 .5rem; font-size: .9rem; }
+.element-diff table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.element-diff th, .element-diff td {
+  padding: .35rem .6rem; border-top: 1px solid var(--border); text-align: left;
+}
+.element-diff th { background: #f3f4f6; }
+.element-diff td.score { text-align: right; font-variant-numeric: tabular-nums; }
+footer { color: var(--muted); font-size: .8rem; text-align: center; margin: 2rem 0 0; }
+</style></head><body><header><h1>Model Card portfolio: harmonized + HF Hub</h1><div class="meta">Generated 2026-06-15T20:41:16.845217+00:00 · 10 report(s)</div></header><main>
+<h2>Summary</h2>
+<div class="summary-grid">
+<div class="summary-card"><h4>climate-model-extended.yaml <span class="section-tag">mc_rubric10</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">94.0%</span><span class="raw">47/50</span></div><div class="bar good"><div style="width: 94.0%"></div></div></div>
+<div class="summary-card"><h4>climate-forecasting-model-card.yaml <span class="section-tag">mc_rubric10</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">96.0%</span><span class="raw">48/50</span></div><div class="bar good"><div style="width: 96.0%"></div></div></div>
+<div class="summary-card"><h4>sentiment-classifier-with-datasheet-refs.yaml <span class="section-tag">mc_rubric10</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">82.0%</span><span class="raw">41/50</span></div><div class="bar good"><div style="width: 82.0%"></div></div></div>
+<div class="summary-card"><h4>densenet121_tv_in1k_model_card.yaml <span class="section-tag">mc_rubric10</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">82.0%</span><span class="raw">41/50</span></div><div class="bar good"><div style="width: 82.0%"></div></div></div>
+<div class="summary-card"><h4>subcell_saprot_650m_model_card.yaml <span class="section-tag">mc_rubric10</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">88.0%</span><span class="raw">44/50</span></div><div class="bar good"><div style="width: 88.0%"></div></div></div>
+<div class="summary-card"><h4>climate-forecasting-model-card.yaml <span class="section-tag">mc_rubric20</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">89.3%</span><span class="raw">75/84</span></div><div class="bar good"><div style="width: 89.3%"></div></div></div>
+<div class="summary-card"><h4>sentiment-classifier-with-datasheet-refs.yaml <span class="section-tag">mc_rubric20</span></h4><div class="score-big"><span class="pct" style="color: var(--ok)">63.1%</span><span class="raw">53/84</span></div><div class="bar ok"><div style="width: 63.1%"></div></div></div>
+<div class="summary-card"><h4>densenet121_tv_in1k_model_card.yaml <span class="section-tag">mc_rubric20</span></h4><div class="score-big"><span class="pct" style="color: var(--ok)">70.2%</span><span class="raw">59/84</span></div><div class="bar ok"><div style="width: 70.2%"></div></div></div>
+<div class="summary-card"><h4>subcell_saprot_650m_model_card.yaml <span class="section-tag">mc_rubric20</span></h4><div class="score-big"><span class="pct" style="color: var(--ok)">77.4%</span><span class="raw">65/84</span></div><div class="bar ok"><div style="width: 77.4%"></div></div></div>
+<div class="summary-card"><h4>climate-model-extended.yaml <span class="section-tag">mc_rubric20</span></h4><div class="score-big"><span class="pct" style="color: var(--good)">86.9%</span><span class="raw">73/84</span></div><div class="bar good"><div style="width: 86.9%"></div></div></div>
+</div>
+<h2>Rubric10 — 10 elements / 50 points</h2>
+<details open><summary><span class="elem-name">densenet121_tv_in1k_model_card.yaml</span> <span class="section-tag">rubric10</span><span class="elem-score good">41/50 (82.0%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Element 1: Model Discovery and Identification</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user or system discover and uniquely identify this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Persistent Identifier</div><div class="note">Identifier-like field present but unverified: model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Identifier-like field present but unverified: model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model Name and Description Completeness</div><div class="note">Name + comprehensive overview (741 chars)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Name + comprehensive overview (741 chars)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tags / Pipeline Tag for Searchability</div><div class="note">8 tags + pipeline_tag/category</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">8 tags + pipeline_tag/category</td>
+</tr>
+<tr>
+<td><div class="elem-name">Landing Page or Repository URL</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Library / Framework Identification</div><div class="note">Framework PyTorch pinned to version torch&gt;=1.13</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Framework PyTorch pinned to version torch&gt;=1.13</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 2: Model Access and Distribution</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can model weights, code, and inference pipeline be located and used?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Weight Distribution Mechanism Defined</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Code Repository Available</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Inference / Usage Example Provided</div><div class="note">model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std</td>
+</tr>
+<tr>
+<td><div class="elem-name">Input / Output Specification</div><div class="note">model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model File Format Specified</div><div class="note">model_details.path: https://huggingface.co/timm/densenet121.tv_in1k</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.path: https://huggingface.co/timm/densenet121.tv_in1k</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 3: Model Reuse and Interoperability</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Is sufficient information provided to reuse and integrate this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">License Terms Allow Reuse</div><div class="note">SPDX license identified: [&#x27;Apache-2.0&#x27;]</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">SPDX license identified: [&#x27;Apache-2.0&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standard Framework / Format Used</div><div class="note">framework: PyTorch</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">framework: PyTorch</td>
+</tr>
+<tr>
+<td><div class="elem-name">Base Model or Foundation Lineage Stated</div><div class="note">base_model: torchvision/densenet121</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">base_model: torchvision/densenet121</td>
+</tr>
+<tr>
+<td><div class="elem-name">Supported Tasks Declared</div><div class="note">pipeline_tag: image-classification</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">pipeline_tag: image-classification</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Artifacts Provided</div><div class="note">Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 4: Ethical Use and Responsible AI</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card document risks, bias, and ethical oversight?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Ethical Considerations Documented</div><div class="note">considerations.ethical_considerations: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.ethical_considerations: list(1)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Known Model / Output Bias Disclosed</div><div class="note">bias_model: Inherits the geographic / demographic skew of its training data. No fairness audit was
+performed by the original DenseNe…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">bias_model: Inherits the geographic / demographic skew of its training data. No fairness audit was
+performed by the original DenseNe…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Out-of-Scope / Discouraged Uses</div><div class="note">considerations.out_of_scope_uses: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.out_of_scope_uses: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Sensitive Data Use Disclosed</div><div class="note">Sensitive-data disclosure present on at least one dataset</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Sensitive-data disclosure present on at least one dataset</td>
+</tr>
+<tr>
+<td><div class="elem-name">Intended Users and Stakeholder Tradeoffs</div><div class="note">considerations.users: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.users: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 5: Model Architecture and Training Composition</span><span class="elem-score bad">2/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can the architecture and training composition be understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Architecture Described in Detail</div><div class="note">model_parameters.model_architecture: DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with
+transition layers (1x1 conv + …</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.model_architecture: DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with
+transition layers (1x1 conv + …</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training Data Documented</div><div class="note">1 dataset(s), 1 with links/URIs</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 dataset(s), 1 with links/URIs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Hyperparameters Reported</div><div class="note">Missing all of: model_parameters.training_procedure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.training_procedure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute Infrastructure Reported (Extended)</div><div class="note">Missing all of: model_parameters.compute_infrastructure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.compute_infrastructure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training / Evaluation Split Defined</div><div class="note">Single or no dataset; no benchmark split</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Single or no dataset; no benchmark split</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 6: Model Provenance and Versioning</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user determine versions, owners, citations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Version Number Provided</div><div class="note">Version present but non-semver: tv_in1k</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Version present but non-semver: tv_in1k</td>
+</tr>
+<tr>
+<td><div class="elem-name">Version Date Documented</div><div class="note">ISO date: 2017-08-25</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">ISO date: 2017-08-25</td>
+</tr>
+<tr>
+<td><div class="elem-name">Change Description for This Version</div><div class="note">model_details.version.diff: Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm&#x27;s
+`timm/densenet121.tv_in1k` HuggingFace Hu…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.version.diff: Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm&#x27;s
+`timm/densenet121.tv_in1k` HuggingFace Hu…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Owners / Contributors Identified</div><div class="note">6 contributor(s) with role</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">6 contributor(s) with role</td>
+</tr>
+<tr>
+<td><div class="elem-name">Citation Provided</div><div class="note">model_details.citations: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.citations: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 7: Scientific Motivation and Funding Transparency</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata state why the model exists and who funded it?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Motivation / Use Case Rationale</div><div class="note">model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer
+receives feature m…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer
+receives feature m…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Primary Intended Use Articulated</div><div class="note">considerations.use_cases: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.use_cases: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Mission Relevance Stated (Extended)</div><div class="note">Missing all of: mission_relevance</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: mission_relevance</td>
+</tr>
+<tr>
+<td><div class="elem-name">Funding Source / Grant Agency Listed</div><div class="note">Affiliations present (funding agency unclear)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Affiliations present (funding agency unclear)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute / Platform Acknowledgement</div><div class="note">model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer
+receives feature m…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer
+receives feature m…</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 8: Training and Evaluation Transparency</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can training and evaluation procedures be replicated or understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Training Procedure Documented</div><div class="note">Missing all of: model_parameters.training_procedure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.training_procedure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Evaluation Procedure Documented</div><div class="note">quantitative_analysis: dict(keys=[&#x27;performance_metrics&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">quantitative_analysis: dict(keys=[&#x27;performance_metrics&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Information (Extended)</div><div class="note">Missing all of: mission_relevance, usage_documentation</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: mission_relevance, usage_documentation</td>
+</tr>
+<tr>
+<td><div class="elem-name">Open-Source Code Linked</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">External Standards or References Cited</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 9: Performance Evaluation and Limitations Disclosure</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata communicate performance and limitations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Quantitative Performance Metrics Reported</div><div class="note">4 metric(s) with numeric value</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">4 metric(s) with numeric value</td>
+</tr>
+<tr>
+<td><div class="elem-name">Performance Across Slices / Subpopulations</div><div class="note">3 distinct slice(s) reported</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">3 distinct slice(s) reported</td>
+</tr>
+<tr>
+<td><div class="elem-name">Confidence Intervals or Error Bars</div><div class="note">No confidence intervals or error bars</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">No confidence intervals or error bars</td>
+</tr>
+<tr>
+<td><div class="elem-name">Limitations Section Present</div><div class="note">considerations.limitations: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.limitations: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tradeoffs / Risks Acknowledged</div><div class="note">considerations.tradeoffs: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.tradeoffs: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 10: Cross-Platform and Community Integration</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card connect to wider model ecosystems and standards?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Published on a Recognized Platform</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Cross-referenced DOIs or Related Model Links</div><div class="note">model_details.references: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Benchmark Results (Papers with Code)</div><div class="note">Missing all of: model_index</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_index</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standards / Schema Conformance Stated</div><div class="note">schema_version: 0.0.2</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version: 0.0.2</td>
+</tr>
+<tr>
+<td><div class="elem-name">Datasets Linked</div><div class="note">1 dataset(s) with name+link</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 dataset(s) with name+link</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Model Discovery and Identification (5/5)</li>
+<li>Strong Model Access and Distribution (5/5)</li>
+<li>Strong Model Reuse and Interoperability (4/5)</li>
+<li>Strong Ethical Use and Responsible AI (5/5)</li>
+<li>Strong Model Provenance and Versioning (5/5)</li>
+<li>Strong Scientific Motivation and Funding Transparency (4/5)</li>
+<li>Strong Performance Evaluation and Limitations Disclosure (4/5)</li>
+<li>Strong Cross-Platform and Community Integration (4/5)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">subcell_saprot_650m_model_card.yaml</span> <span class="section-tag">rubric10</span><span class="elem-score good">44/50 (88.0%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Element 1: Model Discovery and Identification</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user or system discover and uniquely identify this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Persistent Identifier</div><div class="note">Resolvable identifier present (model_details.references: list(5))</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Resolvable identifier present (model_details.references: list(5))</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model Name and Description Completeness</div><div class="note">Name + comprehensive overview (697 chars)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Name + comprehensive overview (697 chars)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tags / Pipeline Tag for Searchability</div><div class="note">8 tags + pipeline_tag/category</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">8 tags + pipeline_tag/category</td>
+</tr>
+<tr>
+<td><div class="elem-name">Landing Page or Repository URL</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Library / Framework Identification</div><div class="note">Framework PyTorch pinned to version torch&gt;=2.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Framework PyTorch pinned to version torch&gt;=2.0</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 2: Model Access and Distribution</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can model weights, code, and inference pipeline be located and used?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Weight Distribution Mechanism Defined</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Code Repository Available</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Inference / Usage Example Provided</div><div class="note">model_parameters.input_format: Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens</td>
+</tr>
+<tr>
+<td><div class="elem-name">Input / Output Specification</div><div class="note">model_parameters.input_format: Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model File Format Specified</div><div class="note">model_details.path: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.path: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 3: Model Reuse and Interoperability</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Is sufficient information provided to reuse and integrate this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">License Terms Allow Reuse</div><div class="note">SPDX license identified: [&#x27;MIT&#x27;]</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">SPDX license identified: [&#x27;MIT&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standard Framework / Format Used</div><div class="note">framework: PyTorch</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">framework: PyTorch</td>
+</tr>
+<tr>
+<td><div class="elem-name">Base Model or Foundation Lineage Stated</div><div class="note">base_model: westlake-repl/SaProt_650M_AF2</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">base_model: westlake-repl/SaProt_650M_AF2</td>
+</tr>
+<tr>
+<td><div class="elem-name">Supported Tasks Declared</div><div class="note">pipeline_tag: text-classification</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">pipeline_tag: text-classification</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Artifacts Provided</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 4: Ethical Use and Responsible AI</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card document risks, bias, and ethical oversight?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Ethical Considerations Documented</div><div class="note">considerations.ethical_considerations: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.ethical_considerations: list(1)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Known Model / Output Bias Disclosed</div><div class="note">bias_model: Predictions reflect the species and protein-family distribution of the DeepLoc training set
+(SwissProt-biased toward ext…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">bias_model: Predictions reflect the species and protein-family distribution of the DeepLoc training set
+(SwissProt-biased toward ext…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Out-of-Scope / Discouraged Uses</div><div class="note">considerations.out_of_scope_uses: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.out_of_scope_uses: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Sensitive Data Use Disclosed</div><div class="note">Sensitive-data disclosure present on at least one dataset</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Sensitive-data disclosure present on at least one dataset</td>
+</tr>
+<tr>
+<td><div class="elem-name">Intended Users and Stakeholder Tradeoffs</div><div class="note">considerations.users: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.users: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 5: Model Architecture and Training Composition</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can the architecture and training composition be understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Architecture Described in Detail</div><div class="note">model_parameters.model_architecture: Transformer-based protein language model: 650M-parameter SaProt_650M_AF2 base (ESM-style encoder
+augmented with structur…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.model_architecture: Transformer-based protein language model: 650M-parameter SaProt_650M_AF2 base (ESM-style encoder
+augmented with structur…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training Data Documented</div><div class="note">1 dataset(s), 1 with links/URIs</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 dataset(s), 1 with links/URIs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Hyperparameters Reported</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute Infrastructure Reported (Extended)</div><div class="note">Missing all of: model_parameters.compute_infrastructure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.compute_infrastructure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training / Evaluation Split Defined</div><div class="note">Single or no dataset; no benchmark split</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Single or no dataset; no benchmark split</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 6: Model Provenance and Versioning</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user determine versions, owners, citations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Version Number Provided</div><div class="note">Semver-shaped version: 1.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Semver-shaped version: 1.0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Version Date Documented</div><div class="note">ISO date: 2024-08-01</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">ISO date: 2024-08-01</td>
+</tr>
+<tr>
+<td><div class="elem-name">Change Description for This Version</div><div class="note">model_details.version.diff: Initial release of the LoRA fine-tune on the DeepLoc subcellular-localization
+training split using AdamW for 100 epochs.</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.version.diff: Initial release of the LoRA fine-tune on the DeepLoc subcellular-localization
+training split using AdamW for 100 epochs.</td>
+</tr>
+<tr>
+<td><div class="elem-name">Owners / Contributors Identified</div><div class="note">2 contributor(s) with role</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 contributor(s) with role</td>
+</tr>
+<tr>
+<td><div class="elem-name">Citation Provided</div><div class="note">model_details.citations: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.citations: list(2)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 7: Scientific Motivation and Funding Transparency</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata state why the model exists and who funded it?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Motivation / Use Case Rationale</div><div class="note">model_details.overview: This model classifies protein sequences into one of ten subcellular localization classes:
+nucleus, cytoplasm, extracellu…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: This model classifies protein sequences into one of ten subcellular localization classes:
+nucleus, cytoplasm, extracellu…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Primary Intended Use Articulated</div><div class="note">considerations.use_cases: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.use_cases: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Mission Relevance Stated (Extended)</div><div class="note">Missing all of: mission_relevance</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: mission_relevance</td>
+</tr>
+<tr>
+<td><div class="elem-name">Funding Source / Grant Agency Listed</div><div class="note">Affiliations present (funding agency unclear)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Affiliations present (funding agency unclear)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute / Platform Acknowledgement</div><div class="note">model_details.overview: This model classifies protein sequences into one of ten subcellular localization classes:
+nucleus, cytoplasm, extracellu…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: This model classifies protein sequences into one of ten subcellular localization classes:
+nucleus, cytoplasm, extracellu…</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 8: Training and Evaluation Transparency</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can training and evaluation procedures be replicated or understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Training Procedure Documented</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Evaluation Procedure Documented</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Information (Extended)</div><div class="note">Missing all of: mission_relevance, usage_documentation</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: mission_relevance, usage_documentation</td>
+</tr>
+<tr>
+<td><div class="elem-name">Open-Source Code Linked</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+<tr>
+<td><div class="elem-name">External Standards or References Cited</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 9: Performance Evaluation and Limitations Disclosure</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata communicate performance and limitations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Quantitative Performance Metrics Reported</div><div class="note">1 metric(s) with numeric value</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 metric(s) with numeric value</td>
+</tr>
+<tr>
+<td><div class="elem-name">Performance Across Slices / Subpopulations</div><div class="note">Single slice reported: {&#x27;DeepLoc subcellular localization test set (10-way)&#x27;}</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Single slice reported: {&#x27;DeepLoc subcellular localization test set (10-way)&#x27;}</td>
+</tr>
+<tr>
+<td><div class="elem-name">Confidence Intervals or Error Bars</div><div class="note">No confidence intervals or error bars</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">No confidence intervals or error bars</td>
+</tr>
+<tr>
+<td><div class="elem-name">Limitations Section Present</div><div class="note">considerations.limitations: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.limitations: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tradeoffs / Risks Acknowledged</div><div class="note">considerations.tradeoffs: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.tradeoffs: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 10: Cross-Platform and Community Integration</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card connect to wider model ecosystems and standards?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Published on a Recognized Platform</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Cross-referenced DOIs or Related Model Links</div><div class="note">model_details.references: list(5)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(5)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Benchmark Results (Papers with Code)</div><div class="note">Missing all of: model_index</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_index</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standards / Schema Conformance Stated</div><div class="note">schema_version: 0.0.2</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version: 0.0.2</td>
+</tr>
+<tr>
+<td><div class="elem-name">Datasets Linked</div><div class="note">1 dataset(s) with name+link</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 dataset(s) with name+link</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Model Discovery and Identification (5/5)</li>
+<li>Strong Model Access and Distribution (5/5)</li>
+<li>Strong Model Reuse and Interoperability (5/5)</li>
+<li>Strong Ethical Use and Responsible AI (5/5)</li>
+<li>Strong Model Provenance and Versioning (5/5)</li>
+<li>Strong Scientific Motivation and Funding Transparency (4/5)</li>
+<li>Strong Training and Evaluation Transparency (4/5)</li>
+<li>Strong Performance Evaluation and Limitations Disclosure (4/5)</li>
+<li>Strong Cross-Platform and Community Integration (4/5)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">climate-forecasting-model-card.yaml</span> <span class="section-tag">rubric10</span><span class="elem-score good">48/50 (96.0%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Element 1: Model Discovery and Identification</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user or system discover and uniquely identify this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Persistent Identifier</div><div class="note">Identifier-like field present but unverified: model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Identifier-like field present but unverified: model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model Name and Description Completeness</div><div class="note">Name + comprehensive overview (248 chars)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Name + comprehensive overview (248 chars)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tags / Pipeline Tag for Searchability</div><div class="note">9 tags + pipeline_tag/category</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">9 tags + pipeline_tag/category</td>
+</tr>
+<tr>
+<td><div class="elem-name">Landing Page or Repository URL</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Library / Framework Identification</div><div class="note">Framework PyTorch pinned to version 2.1.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Framework PyTorch pinned to version 2.1.0</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 2: Model Access and Distribution</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can model weights, code, and inference pipeline be located and used?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Weight Distribution Mechanism Defined</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Code Repository Available</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Inference / Usage Example Provided</div><div class="note">usage_documentation.code_examples: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">usage_documentation.code_examples: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Input / Output Specification</div><div class="note">model_parameters.input_format: 3D tensor: [time_steps, lat_grid, lon_grid, variables]
+- time_steps: 168 (hourly data for 7 days)
+- lat_grid: 16 (coveri…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: 3D tensor: [time_steps, lat_grid, lon_grid, variables]
+- time_steps: 168 (hourly data for 7 days)
+- lat_grid: 16 (coveri…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model File Format Specified</div><div class="note">model_details.path: s3://climate-models/forecasting-transformer-v2.1/</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.path: s3://climate-models/forecasting-transformer-v2.1/</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 3: Model Reuse and Interoperability</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Is sufficient information provided to reuse and integrate this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">License Terms Allow Reuse</div><div class="note">SPDX license identified: [&#x27;Apache-2.0&#x27;]</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">SPDX license identified: [&#x27;Apache-2.0&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standard Framework / Format Used</div><div class="note">framework: PyTorch</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">framework: PyTorch</td>
+</tr>
+<tr>
+<td><div class="elem-name">Base Model or Foundation Lineage Stated</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Supported Tasks Declared</div><div class="note">pipeline_tag: climate-forecasting</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">pipeline_tag: climate-forecasting</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Artifacts Provided</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 4: Ethical Use and Responsible AI</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card document risks, bias, and ethical oversight?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Ethical Considerations Documented</div><div class="note">considerations.ethical_considerations: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.ethical_considerations: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Known Model / Output Bias Disclosed</div><div class="note">Missing all of: bias_model, bias_output, bias_input</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: bias_model, bias_output, bias_input</td>
+</tr>
+<tr>
+<td><div class="elem-name">Out-of-Scope / Discouraged Uses</div><div class="note">considerations.out_of_scope_uses: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.out_of_scope_uses: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Sensitive Data Use Disclosed</div><div class="note">Missing all of: model_parameters.data</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.data</td>
+</tr>
+<tr>
+<td><div class="elem-name">Intended Users and Stakeholder Tradeoffs</div><div class="note">considerations.users: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.users: list(3)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 5: Model Architecture and Training Composition</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can the architecture and training composition be understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Architecture Described in Detail</div><div class="note">model_parameters.model_architecture: Custom Transformer with Spatiotemporal Attention:
+- 12 encoder layers, 8 attention heads
+- Hidden dimension: 512
+- Spati…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.model_architecture: Custom Transformer with Spatiotemporal Attention:
+- 12 encoder layers, 8 attention heads
+- Hidden dimension: 512
+- Spati…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training Data Documented</div><div class="note">4 dataset(s), 4 with links/URIs</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">4 dataset(s), 4 with links/URIs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Hyperparameters Reported</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute Infrastructure Reported (Extended)</div><div class="note">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training / Evaluation Split Defined</div><div class="note">Distinct training_datasets and evaluation_datasets declared</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Distinct training_datasets and evaluation_datasets declared</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 6: Model Provenance and Versioning</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user determine versions, owners, citations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Version Number Provided</div><div class="note">Semver-shaped version: v2.1.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Semver-shaped version: v2.1.0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Version Date Documented</div><div class="note">ISO date: 2025-01-15</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">ISO date: 2025-01-15</td>
+</tr>
+<tr>
+<td><div class="elem-name">Change Description for This Version</div><div class="note">model_details.version.diff: - Improved extreme weather detection accuracy by 15%
+- Added uncertainty quantification for precipitation forecasts
+- Re…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.version.diff: - Improved extreme weather detection accuracy by 15%
+- Added uncertainty quantification for precipitation forecasts
+- Re…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Owners / Contributors Identified</div><div class="note">model_details.creator_references: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.creator_references: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Citation Provided</div><div class="note">model_details.citations: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.citations: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 7: Scientific Motivation and Funding Transparency</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata state why the model exists and who funded it?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Motivation / Use Case Rationale</div><div class="note">model_details.overview: A transformer-based deep learning model for predicting regional climate patterns
+including temperature, precipitation, a…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: A transformer-based deep learning model for predicting regional climate patterns
+including temperature, precipitation, a…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Primary Intended Use Articulated</div><div class="note">considerations.use_cases: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.use_cases: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Mission Relevance Stated (Extended)</div><div class="note">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_grants&#x27;, &#x27;description&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_grants&#x27;, &#x27;description&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Funding Source / Grant Agency Listed</div><div class="note">Funding agency mentioned in affiliations or mission_relevance</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Funding agency mentioned in affiliations or mission_relevance</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute / Platform Acknowledgement</div><div class="note">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 8: Training and Evaluation Transparency</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can training and evaluation procedures be replicated or understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Training Procedure Documented</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Evaluation Procedure Documented</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Information (Extended)</div><div class="note">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_grants&#x27;, &#x27;description&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_grants&#x27;, &#x27;description&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Open-Source Code Linked</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">External Standards or References Cited</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 9: Performance Evaluation and Limitations Disclosure</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata communicate performance and limitations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Quantitative Performance Metrics Reported</div><div class="note">3 metric(s) with numeric value</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">3 metric(s) with numeric value</td>
+</tr>
+<tr>
+<td><div class="elem-name">Performance Across Slices / Subpopulations</div><div class="note">2 distinct slice(s) reported</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 distinct slice(s) reported</td>
+</tr>
+<tr>
+<td><div class="elem-name">Confidence Intervals or Error Bars</div><div class="note">Confidence interval or value_error present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Confidence interval or value_error present</td>
+</tr>
+<tr>
+<td><div class="elem-name">Limitations Section Present</div><div class="note">considerations.limitations: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.limitations: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tradeoffs / Risks Acknowledged</div><div class="note">considerations.tradeoffs: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.tradeoffs: list(2)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 10: Cross-Platform and Community Integration</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card connect to wider model ecosystems and standards?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Published on a Recognized Platform</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Cross-referenced DOIs or Related Model Links</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Benchmark Results (Papers with Code)</div><div class="note">1 benchmark result(s)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 benchmark result(s)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standards / Schema Conformance Stated</div><div class="note">schema_version: d4d-1.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version: d4d-1.0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Datasets Linked</div><div class="note">Top-level datasets field populated</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Top-level datasets field populated</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Model Discovery and Identification (5/5)</li>
+<li>Strong Model Access and Distribution (5/5)</li>
+<li>Strong Model Reuse and Interoperability (5/5)</li>
+<li>Strong Model Architecture and Training Composition (5/5)</li>
+<li>Strong Model Provenance and Versioning (5/5)</li>
+<li>Strong Scientific Motivation and Funding Transparency (5/5)</li>
+<li>Strong Training and Evaluation Transparency (5/5)</li>
+<li>Strong Performance Evaluation and Limitations Disclosure (5/5)</li>
+<li>Strong Cross-Platform and Community Integration (5/5)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">climate-model-extended.yaml</span> <span class="section-tag">rubric10</span><span class="elem-score good">47/50 (94.0%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Element 1: Model Discovery and Identification</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user or system discover and uniquely identify this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Persistent Identifier</div><div class="note">Identifier-like field present but unverified: model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Identifier-like field present but unverified: model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model Name and Description Completeness</div><div class="note">Name + comprehensive overview (509 chars)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Name + comprehensive overview (509 chars)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tags / Pipeline Tag for Searchability</div><div class="note">7 tags + pipeline_tag/category</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">7 tags + pipeline_tag/category</td>
+</tr>
+<tr>
+<td><div class="elem-name">Landing Page or Repository URL</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Library / Framework Identification</div><div class="note">Framework PyTorch pinned to version 2.1.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Framework PyTorch pinned to version 2.1.0</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 2: Model Access and Distribution</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can model weights, code, and inference pipeline be located and used?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Weight Distribution Mechanism Defined</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Code Repository Available</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Inference / Usage Example Provided</div><div class="note">usage_documentation.code_examples: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">usage_documentation.code_examples: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Input / Output Specification</div><div class="note">model_parameters.input_format: Multi-channel atmospheric state patches:
+- Shape: (768, 768, 16)
+- Channels (16 pressure levels): T, U, V, Q, Z, PSL, TM…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: Multi-channel atmospheric state patches:
+- Shape: (768, 768, 16)
+- Channels (16 pressure levels): T, U, V, Q, Z, PSL, TM…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model File Format Specified</div><div class="note">library_name: climatenet</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">library_name: climatenet</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 3: Model Reuse and Interoperability</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Is sufficient information provided to reuse and integrate this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">License Terms Allow Reuse</div><div class="note">SPDX license identified: [&#x27;BSD-3-Clause&#x27;]</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">SPDX license identified: [&#x27;BSD-3-Clause&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standard Framework / Format Used</div><div class="note">framework: PyTorch</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">framework: PyTorch</td>
+</tr>
+<tr>
+<td><div class="elem-name">Base Model or Foundation Lineage Stated</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Supported Tasks Declared</div><div class="note">pipeline_tag: image-segmentation</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">pipeline_tag: image-segmentation</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Artifacts Provided</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 4: Ethical Use and Responsible AI</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card document risks, bias, and ethical oversight?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Ethical Considerations Documented</div><div class="note">considerations.ethical_considerations: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.ethical_considerations: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Known Model / Output Bias Disclosed</div><div class="note">Missing all of: bias_model, bias_output, bias_input</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: bias_model, bias_output, bias_input</td>
+</tr>
+<tr>
+<td><div class="elem-name">Out-of-Scope / Discouraged Uses</div><div class="note">considerations.out_of_scope_uses: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.out_of_scope_uses: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Sensitive Data Use Disclosed</div><div class="note">No sensitive-data disclosure on any dataset</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">No sensitive-data disclosure on any dataset</td>
+</tr>
+<tr>
+<td><div class="elem-name">Intended Users and Stakeholder Tradeoffs</div><div class="note">considerations.users: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.users: list(3)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 5: Model Architecture and Training Composition</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can the architecture and training composition be understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Architecture Described in Detail</div><div class="note">model_parameters.model_architecture: ResNet-50 Feature Pyramid Network (FPN) with dual-head architecture:
+
+Backbone:
+- ResNet-50 pretrained on ImageNet
+- Mod…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.model_architecture: ResNet-50 Feature Pyramid Network (FPN) with dual-head architecture:
+
+Backbone:
+- ResNet-50 pretrained on ImageNet
+- Mod…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training Data Documented</div><div class="note">3 dataset(s), 3 with links</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">3 dataset(s), 3 with links</td>
+</tr>
+<tr>
+<td><div class="elem-name">Hyperparameters Reported</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute Infrastructure Reported (Extended)</div><div class="note">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training / Evaluation Split Defined</div><div class="note">Multiple dataset entries or model_index present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Multiple dataset entries or model_index present</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 6: Model Provenance and Versioning</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user determine versions, owners, citations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Version Number Provided</div><div class="note">Semver-shaped version: v2.0.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Semver-shaped version: v2.0.0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Version Date Documented</div><div class="note">ISO date: 2024-11-15</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">ISO date: 2024-11-15</td>
+</tr>
+<tr>
+<td><div class="elem-name">Change Description for This Version</div><div class="note">model_details.version.diff: - Upgraded to ResNet-50 from ResNet-34
+- Added atmospheric river detection capability
+- Improved tropical cyclone bounda…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.version.diff: - Upgraded to ResNet-50 from ResNet-34
+- Added atmospheric river detection capability
+- Improved tropical cyclone bounda…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Owners / Contributors Identified</div><div class="note">4 contributor(s) with role</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">4 contributor(s) with role</td>
+</tr>
+<tr>
+<td><div class="elem-name">Citation Provided</div><div class="note">model_details.citations: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.citations: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 7: Scientific Motivation and Funding Transparency</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata state why the model exists and who funded it?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Motivation / Use Case Rationale</div><div class="note">model_details.overview: ClimateNet-v2 is a deep convolutional neural network trained to identify and segment
+extreme weather events (tropical cy…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: ClimateNet-v2 is a deep convolutional neural network trained to identify and segment
+extreme weather events (tropical cy…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Primary Intended Use Articulated</div><div class="note">considerations.use_cases: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.use_cases: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Mission Relevance Stated (Extended)</div><div class="note">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_source&#x27;, &#x27;description&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_source&#x27;, &#x27;description&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Funding Source / Grant Agency Listed</div><div class="note">Funding agency mentioned in affiliations or mission_relevance</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Funding agency mentioned in affiliations or mission_relevance</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute / Platform Acknowledgement</div><div class="note">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.compute_infrastructure: dict(keys=[&#x27;hardware&#x27;, &#x27;hardware_list&#x27;, &#x27;software&#x27;, &#x27;software_dependencies&#x27;, &#x27;training_speed&#x27;])</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 8: Training and Evaluation Transparency</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can training and evaluation procedures be replicated or understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Training Procedure Documented</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Evaluation Procedure Documented</div><div class="note">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.training_procedure: dict(keys=[&#x27;description&#x27;, &#x27;methodology&#x27;, &#x27;reproducibility_info&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Information (Extended)</div><div class="note">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_source&#x27;, &#x27;description&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">mission_relevance: dict(keys=[&#x27;doe_project&#x27;, &#x27;doe_facility&#x27;, &#x27;funding_source&#x27;, &#x27;description&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Open-Source Code Linked</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">External Standards or References Cited</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 9: Performance Evaluation and Limitations Disclosure</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata communicate performance and limitations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Quantitative Performance Metrics Reported</div><div class="note">5 metric(s) with numeric value</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">5 metric(s) with numeric value</td>
+</tr>
+<tr>
+<td><div class="elem-name">Performance Across Slices / Subpopulations</div><div class="note">2 distinct slice(s) reported</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 distinct slice(s) reported</td>
+</tr>
+<tr>
+<td><div class="elem-name">Confidence Intervals or Error Bars</div><div class="note">Confidence interval or value_error present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Confidence interval or value_error present</td>
+</tr>
+<tr>
+<td><div class="elem-name">Limitations Section Present</div><div class="note">considerations.limitations: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.limitations: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tradeoffs / Risks Acknowledged</div><div class="note">considerations.tradeoffs: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.tradeoffs: list(2)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 10: Cross-Platform and Community Integration</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card connect to wider model ecosystems and standards?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Published on a Recognized Platform</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Cross-referenced DOIs or Related Model Links</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Benchmark Results (Papers with Code)</div><div class="note">Missing all of: model_index</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_index</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standards / Schema Conformance Stated</div><div class="note">schema_version: 2.0.0-extended</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version: 2.0.0-extended</td>
+</tr>
+<tr>
+<td><div class="elem-name">Datasets Linked</div><div class="note">3 dataset(s) with name+link</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">3 dataset(s) with name+link</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Model Discovery and Identification (5/5)</li>
+<li>Strong Model Access and Distribution (5/5)</li>
+<li>Strong Model Reuse and Interoperability (5/5)</li>
+<li>Strong Model Architecture and Training Composition (5/5)</li>
+<li>Strong Model Provenance and Versioning (5/5)</li>
+<li>Strong Scientific Motivation and Funding Transparency (5/5)</li>
+<li>Strong Training and Evaluation Transparency (5/5)</li>
+<li>Strong Performance Evaluation and Limitations Disclosure (5/5)</li>
+<li>Strong Cross-Platform and Community Integration (4/5)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">sentiment-classifier-with-datasheet-refs.yaml</span> <span class="section-tag">rubric10</span><span class="elem-score good">41/50 (82.0%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Element 1: Model Discovery and Identification</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user or system discover and uniquely identify this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Persistent Identifier</div><div class="note">Identifier-like field present but unverified: model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Identifier-like field present but unverified: model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model Name and Description Completeness</div><div class="note">Name + comprehensive overview (130 chars)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Name + comprehensive overview (130 chars)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tags / Pipeline Tag for Searchability</div><div class="note">6 tags + pipeline_tag/category</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">6 tags + pipeline_tag/category</td>
+</tr>
+<tr>
+<td><div class="elem-name">Landing Page or Repository URL</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Library / Framework Identification</div><div class="note">Framework PyTorch pinned to version 2.0.1</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Framework PyTorch pinned to version 2.0.1</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 2: Model Access and Distribution</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can model weights, code, and inference pipeline be located and used?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Weight Distribution Mechanism Defined</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Code Repository Available</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Inference / Usage Example Provided</div><div class="note">model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.
+Input is automatically tokenized using BERT WordPiece tokenize…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.
+Input is automatically tokenized using BERT WordPiece tokenize…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Input / Output Specification</div><div class="note">model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.
+Input is automatically tokenized using BERT WordPiece tokenize…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.
+Input is automatically tokenized using BERT WordPiece tokenize…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Model File Format Specified</div><div class="note">library_name: transformers</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">library_name: transformers</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 3: Model Reuse and Interoperability</span><span class="elem-score good">4/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Is sufficient information provided to reuse and integrate this model?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">License Terms Allow Reuse</div><div class="note">SPDX license identified: [&#x27;Apache-2.0&#x27;]</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">SPDX license identified: [&#x27;Apache-2.0&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standard Framework / Format Used</div><div class="note">framework: PyTorch</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">framework: PyTorch</td>
+</tr>
+<tr>
+<td><div class="elem-name">Base Model or Foundation Lineage Stated</div><div class="note">base_model: bert-base-uncased</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">base_model: bert-base-uncased</td>
+</tr>
+<tr>
+<td><div class="elem-name">Supported Tasks Declared</div><div class="note">pipeline_tag: text-classification</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">pipeline_tag: text-classification</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Artifacts Provided</div><div class="note">Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 4: Ethical Use and Responsible AI</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card document risks, bias, and ethical oversight?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Ethical Considerations Documented</div><div class="note">considerations.ethical_considerations: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.ethical_considerations: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Known Model / Output Bias Disclosed</div><div class="note">Missing all of: bias_model, bias_output, bias_input</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: bias_model, bias_output, bias_input</td>
+</tr>
+<tr>
+<td><div class="elem-name">Out-of-Scope / Discouraged Uses</div><div class="note">considerations.limitations: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.limitations: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Sensitive Data Use Disclosed</div><div class="note">No sensitive-data disclosure on any dataset</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">No sensitive-data disclosure on any dataset</td>
+</tr>
+<tr>
+<td><div class="elem-name">Intended Users and Stakeholder Tradeoffs</div><div class="note">considerations.users: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.users: list(3)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 5: Model Architecture and Training Composition</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can the architecture and training composition be understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Architecture Described in Detail</div><div class="note">model_parameters.model_architecture: BERT-base (110M parameters):
+- 12 transformer layers
+- 768 hidden dimensions
+- 12 attention heads
+
+Classification head:
+…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_parameters.model_architecture: BERT-base (110M parameters):
+- 12 transformer layers
+- 768 hidden dimensions
+- 12 attention heads
+
+Classification head:
+…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training Data Documented</div><div class="note">1 dataset(s), 1 with links/URIs</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 dataset(s), 1 with links/URIs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Hyperparameters Reported</div><div class="note">Missing all of: model_parameters.training_procedure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.training_procedure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute Infrastructure Reported (Extended)</div><div class="note">Missing all of: model_parameters.compute_infrastructure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.compute_infrastructure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Training / Evaluation Split Defined</div><div class="note">Multiple dataset entries or model_index present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Multiple dataset entries or model_index present</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 6: Model Provenance and Versioning</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can a user determine versions, owners, citations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Version Number Provided</div><div class="note">Semver-shaped version: 1.2.0</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Semver-shaped version: 1.2.0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Version Date Documented</div><div class="note">ISO date: 2025-11-20</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">ISO date: 2025-11-20</td>
+</tr>
+<tr>
+<td><div class="elem-name">Change Description for This Version</div><div class="note">model_details.version.diff: - Improved accuracy by 5% through hyperparameter tuning
+- Added support for longer sequences (512 → 1024 tokens)
+- Fixed…</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.version.diff: - Improved accuracy by 5% through hyperparameter tuning
+- Added support for longer sequences (512 → 1024 tokens)
+- Fixed…</td>
+</tr>
+<tr>
+<td><div class="elem-name">Owners / Contributors Identified</div><div class="note">2 owner/contributor(s) (roles missing)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 owner/contributor(s) (roles missing)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Citation Provided</div><div class="note">model_details.citations: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.citations: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 7: Scientific Motivation and Funding Transparency</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata state why the model exists and who funded it?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Motivation / Use Case Rationale</div><div class="note">model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.
+Trained on IMDb movie reviews, achieves 92% accuracy on …</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.
+Trained on IMDb movie reviews, achieves 92% accuracy on …</td>
+</tr>
+<tr>
+<td><div class="elem-name">Primary Intended Use Articulated</div><div class="note">considerations.use_cases: list(3)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.use_cases: list(3)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Mission Relevance Stated (Extended)</div><div class="note">Missing all of: mission_relevance</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: mission_relevance</td>
+</tr>
+<tr>
+<td><div class="elem-name">Funding Source / Grant Agency Listed</div><div class="note">Missing all of: model_details.contributors, mission_relevance, funding_grants</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_details.contributors, mission_relevance, funding_grants</td>
+</tr>
+<tr>
+<td><div class="elem-name">Compute / Platform Acknowledgement</div><div class="note">model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.
+Trained on IMDb movie reviews, achieves 92% accuracy on …</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.
+Trained on IMDb movie reviews, achieves 92% accuracy on …</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 8: Training and Evaluation Transparency</span><span class="elem-score ok">3/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Can training and evaluation procedures be replicated or understood?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Training Procedure Documented</div><div class="note">Missing all of: model_parameters.training_procedure</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: model_parameters.training_procedure</td>
+</tr>
+<tr>
+<td><div class="elem-name">Evaluation Procedure Documented</div><div class="note">quantitative_analysis: dict(keys=[&#x27;performance_metrics&#x27;])</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">quantitative_analysis: dict(keys=[&#x27;performance_metrics&#x27;])</td>
+</tr>
+<tr>
+<td><div class="elem-name">Reproducibility Information (Extended)</div><div class="note">Missing all of: mission_relevance, usage_documentation</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">Missing all of: mission_relevance, usage_documentation</td>
+</tr>
+<tr>
+<td><div class="elem-name">Open-Source Code Linked</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">External Standards or References Cited</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 9: Performance Evaluation and Limitations Disclosure</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the metadata communicate performance and limitations?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Quantitative Performance Metrics Reported</div><div class="note">5 metric(s) with numeric value</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">5 metric(s) with numeric value</td>
+</tr>
+<tr>
+<td><div class="elem-name">Performance Across Slices / Subpopulations</div><div class="note">3 distinct slice(s) reported</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">3 distinct slice(s) reported</td>
+</tr>
+<tr>
+<td><div class="elem-name">Confidence Intervals or Error Bars</div><div class="note">Confidence interval or value_error present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">Confidence interval or value_error present</td>
+</tr>
+<tr>
+<td><div class="elem-name">Limitations Section Present</div><div class="note">considerations.limitations: list(4)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.limitations: list(4)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Tradeoffs / Risks Acknowledged</div><div class="note">considerations.tradeoffs: list(1)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">considerations.tradeoffs: list(1)</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Element 10: Cross-Platform and Community Integration</span><span class="elem-score good">5/5</span></summary>
+<div class="meta" style="padding: 0 .9rem;">Does the card connect to wider model ecosystems and standards?</div>
+<table><thead><tr><th>Sub-element</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Published on a Recognized Platform</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Cross-referenced DOIs or Related Model Links</div><div class="note">model_details.references: list(2)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">model_details.references: list(2)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Benchmark Results (Papers with Code)</div><div class="note">1 benchmark result(s)</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 benchmark result(s)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Standards / Schema Conformance Stated</div><div class="note">schema_version: 0.0.2</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version: 0.0.2</td>
+</tr>
+<tr>
+<td><div class="elem-name">Datasets Linked</div><div class="note">1 dataset(s) with name+link</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">1 dataset(s) with name+link</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Model Discovery and Identification (5/5)</li>
+<li>Strong Model Access and Distribution (5/5)</li>
+<li>Strong Model Reuse and Interoperability (4/5)</li>
+<li>Strong Model Provenance and Versioning (5/5)</li>
+<li>Strong Performance Evaluation and Limitations Disclosure (5/5)</li>
+<li>Strong Cross-Platform and Community Integration (5/5)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<h2>Rubric20 — 4 categories / 84 points</h2>
+<details open><summary><span class="elem-name">densenet121_tv_in1k_model_card.yaml</span> <span class="section-tag r20">rubric20</span><span class="elem-score ok">59/84 (70.2%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Structural Completeness</span><span class="elem-score good">21/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q1: Required Field Completeness</div><div class="note">All 5 required fields populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">populated=[&#x27;model_details.name&#x27;, &#x27;model_details.overview&#x27;, &#x27;model_details.licenses&#x27;, &#x27;model_details.version&#x27;, &#x27;model_parameters.model_architecture&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q2: Overview Length Adequacy</div><div class="note">&gt;500 chars across narrative fields</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">overview=741, doc=587, short=112</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q3: Tag / Keyword Diversity</div><div class="note">≥4 tags + pipeline_tag + (language or model_category)</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">8 tags, pipeline=image-classification, lang=[&#x27;en&#x27;], cat=convolutional-neural-network</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q4: Input / Output Specification</div><div class="note">Both I/O specified with format_map populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">prose + structured map</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q5: Schema Version Declared</div><div class="note">schema_version populated</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version=0.0.2</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Metadata Quality &amp; Content</span><span class="elem-score ok">13/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q6: Persistent Identifier Present</div><div class="note">Only generic URLs, no DOI/HF Hub</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">refs=[&#x27;https://arxiv.org/abs/1608.06993&#x27;, &#x27;https://huggingface.co/timm/densenet121.tv_in1k&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q7: Funding &amp; Acknowledgements Completeness</div><div class="note">No funding info detected</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q8: Ethical &amp; Responsible-AI Documentation</div><div class="note">ethics + bias + out_of_scope all populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">comprehensive</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q9: License Clarity &amp; SPDX Compliance</div><div class="note">SPDX identifier, no explicit restrictions text</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">spdx=[&#x27;Apache-2.0&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q10: Framework / Library Standardization</div><div class="note">Framework + version + library, no model_index</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">PyTorch torch&gt;=1.13, lib=timm</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Technical Documentation</span><span class="elem-score bad">11/25</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q11: Tool &amp; Software Transparency</div><div class="note">Some tool/library named</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q12: Training Procedure Clarity</div><div class="note">No training procedure</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q13: Version History Documentation</div><div class="note">Version name + date present</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">version=tv_in1k, date=2017-08-25</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q14: Citations &amp; References</div><div class="note">Citation(s) + reference(s), DOIs missing</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">1 cites, 4 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q15: Compute Infrastructure &amp; Energy</div><div class="note">No compute_infrastructure</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Performance &amp; FAIRness</span><span class="elem-score good">14/17</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q16: Findability (Persistent Landing)</div><div class="note">At least one resolvable URL</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">4 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q17: Accessibility &amp; Inference Path</div><div class="note">Partial usage docs</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">examples=0, io=True</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q18: Performance Metrics with Slices &amp; CI</div><div class="note">Metrics across multiple slices, no CI</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">4 metrics, 3 slices</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q19: Out-of-Scope Uses, Limitations &amp; Tradeoffs</div><div class="note">All three populated with concrete items</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">lim=3, tradeoffs=1, oos=4</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q20: Cross-Platform Interlinks</div><div class="note">Cross-platform reference present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">benchmark=False, doi=False, dataset_link=True</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Structural Completeness (21/21)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<ul>
+<li>Weak Technical Documentation (11/25)</li>
+</ul>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">subcell_saprot_650m_model_card.yaml</span> <span class="section-tag r20">rubric20</span><span class="elem-score ok">65/84 (77.4%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Structural Completeness</span><span class="elem-score good">21/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q1: Required Field Completeness</div><div class="note">All 5 required fields populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">populated=[&#x27;model_details.name&#x27;, &#x27;model_details.overview&#x27;, &#x27;model_details.licenses&#x27;, &#x27;model_details.version&#x27;, &#x27;model_parameters.model_architecture&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q2: Overview Length Adequacy</div><div class="note">&gt;500 chars across narrative fields</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">overview=697, doc=761, short=172</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q3: Tag / Keyword Diversity</div><div class="note">≥4 tags + pipeline_tag + (language or model_category)</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">8 tags, pipeline=text-classification, lang=[&#x27;protein&#x27;], cat=protein-language-model</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q4: Input / Output Specification</div><div class="note">Both I/O specified with format_map populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">prose + structured map</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q5: Schema Version Declared</div><div class="note">schema_version populated</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version=0.0.2</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Metadata Quality &amp; Content</span><span class="elem-score ok">14/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q6: Persistent Identifier Present</div><div class="note">Resolvable persistent identifier</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">DOI or HF Hub URL present</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q7: Funding &amp; Acknowledgements Completeness</div><div class="note">No funding info detected</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q8: Ethical &amp; Responsible-AI Documentation</div><div class="note">ethics + bias + out_of_scope all populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">comprehensive</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q9: License Clarity &amp; SPDX Compliance</div><div class="note">SPDX identifier, no explicit restrictions text</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">spdx=[&#x27;MIT&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q10: Framework / Library Standardization</div><div class="note">Framework + version + library, no model_index</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">PyTorch torch&gt;=2.0, lib=transformers</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Technical Documentation</span><span class="elem-score ok">17/25</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q11: Tool &amp; Software Transparency</div><div class="note">Some tool/library named</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q12: Training Procedure Clarity</div><div class="note">Optimizer + LR + batch + epochs + schedule + regularization</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">comprehensive hyperparameters</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q13: Version History Documentation</div><div class="note">Semver + ISO date + non-trivial diff</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">version=1.0, date=2024-08-01, diff=121 chars</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q14: Citations &amp; References</div><div class="note">Citation(s) + reference(s), DOIs missing</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">2 cites, 5 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q15: Compute Infrastructure &amp; Energy</div><div class="note">No compute_infrastructure</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Performance &amp; FAIRness</span><span class="elem-score ok">13/17</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q16: Findability (Persistent Landing)</div><div class="note">At least one resolvable URL</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">5 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q17: Accessibility &amp; Inference Path</div><div class="note">Partial usage docs</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">examples=0, io=True</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q18: Performance Metrics with Slices &amp; CI</div><div class="note">Metrics with values, no slices</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">1 metric(s)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q19: Out-of-Scope Uses, Limitations &amp; Tradeoffs</div><div class="note">All three populated with concrete items</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">lim=3, tradeoffs=1, oos=3</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q20: Cross-Platform Interlinks</div><div class="note">Cross-platform reference present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">benchmark=False, doi=False, dataset_link=True</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Structural Completeness (21/21)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">climate-forecasting-model-card.yaml</span> <span class="section-tag r20">rubric20</span><span class="elem-score good">75/84 (89.3%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Structural Completeness</span><span class="elem-score good">21/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q1: Required Field Completeness</div><div class="note">All 5 required fields populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">populated=[&#x27;model_details.name&#x27;, &#x27;model_details.overview&#x27;, &#x27;model_details.licenses&#x27;, &#x27;model_details.version&#x27;, &#x27;model_parameters.model_architecture&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q2: Overview Length Adequacy</div><div class="note">&gt;500 chars across narrative fields</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">overview=248, doc=241, short=63</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q3: Tag / Keyword Diversity</div><div class="note">≥4 tags + pipeline_tag + (language or model_category)</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">9 tags, pipeline=climate-forecasting, lang=[&#x27;en&#x27;], cat=None</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q4: Input / Output Specification</div><div class="note">Both I/O specified with format_map populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">prose + structured map</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q5: Schema Version Declared</div><div class="note">schema_version populated</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version=d4d-1.0</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Metadata Quality &amp; Content</span><span class="elem-score ok">15/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q6: Persistent Identifier Present</div><div class="note">Only generic URLs, no DOI/HF Hub</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">refs=[&#x27;https://github.com/climate-ai-lab/climate-transformer&#x27;, &#x27;https://doi.org/10.1234/climate-ai-2025&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q7: Funding &amp; Acknowledgements Completeness</div><div class="note">Funding agency mentioned, no grant number</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q8: Ethical &amp; Responsible-AI Documentation</div><div class="note">Ethics present but missing bias or out_of_scope</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q9: License Clarity &amp; SPDX Compliance</div><div class="note">SPDX identifier, no explicit restrictions text</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">spdx=[&#x27;Apache-2.0&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q10: Framework / Library Standardization</div><div class="note">Framework + version + library + model_index</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">PyTorch 2.1.0, lib=climate-forecasting, model_index present</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Technical Documentation</span><span class="elem-score good">22/25</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q11: Tool &amp; Software Transparency</div><div class="note">Comprehensive: framework_version + deps/container + examples</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">exemplary</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q12: Training Procedure Clarity</div><div class="note">Optimizer + LR + batch + epochs + schedule + regularization</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">comprehensive hyperparameters</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q13: Version History Documentation</div><div class="note">Semver + ISO date + non-trivial diff</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">version=v2.1.0, date=2025-01-15, diff=169 chars</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q14: Citations &amp; References</div><div class="note">Citation(s) + reference(s), DOIs missing</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">1 cites, 2 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q15: Compute Infrastructure &amp; Energy</div><div class="note">Hardware or software listed</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Performance &amp; FAIRness</span><span class="elem-score good">17/17</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q16: Findability (Persistent Landing)</div><div class="note">At least one resolvable URL</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q17: Accessibility &amp; Inference Path</div><div class="note">Runnable code example(s) + I/O specs</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">2 example(s)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q18: Performance Metrics with Slices &amp; CI</div><div class="note">≥2 metrics, ≥2 slices, CI on ≥1</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">3 metrics, 2 slices, CI=True</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q19: Out-of-Scope Uses, Limitations &amp; Tradeoffs</div><div class="note">All three populated with concrete items</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">lim=4, tradeoffs=2, oos=4</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q20: Cross-Platform Interlinks</div><div class="note">Cross-platform reference present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">benchmark=True, doi=True, dataset_link=False</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Structural Completeness (21/21)</li>
+<li>Strong Technical Documentation (22/25)</li>
+<li>Strong Performance &amp; FAIRness (17/17)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">climate-model-extended.yaml</span> <span class="section-tag r20">rubric20</span><span class="elem-score good">73/84 (86.9%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Structural Completeness</span><span class="elem-score good">17/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q1: Required Field Completeness</div><div class="note">All 5 required fields populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">populated=[&#x27;model_details.name&#x27;, &#x27;model_details.overview&#x27;, &#x27;model_details.licenses&#x27;, &#x27;model_details.version&#x27;, &#x27;model_parameters.model_architecture&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q2: Overview Length Adequacy</div><div class="note">&gt;500 chars across narrative fields</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">overview=509, doc=376, short=82</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q3: Tag / Keyword Diversity</div><div class="note">Some tags or pipeline tag only</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">7 tags, pipeline=image-segmentation, lang=None, cat=None</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q4: Input / Output Specification</div><div class="note">Input AND output described in prose only</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">prose only</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q5: Schema Version Declared</div><div class="note">schema_version populated</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version=2.0.0-extended</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Metadata Quality &amp; Content</span><span class="elem-score ok">16/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q6: Persistent Identifier Present</div><div class="note">Only generic URLs, no DOI/HF Hub</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">refs=[&#x27;https://github.com/lbnl-climate/climatenet-v2&#x27;, &#x27;https://climatenet.lbl.gov&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q7: Funding &amp; Acknowledgements Completeness</div><div class="note">Agency + grant ID + facility/acknowledgement</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">all three present</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q8: Ethical &amp; Responsible-AI Documentation</div><div class="note">Ethics present but missing bias or out_of_scope</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q9: License Clarity &amp; SPDX Compliance</div><div class="note">SPDX identifier, no explicit restrictions text</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">spdx=[&#x27;BSD-3-Clause&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q10: Framework / Library Standardization</div><div class="note">Framework + version + library, no model_index</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">PyTorch 2.1.0, lib=climatenet</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Technical Documentation</span><span class="elem-score good">23/25</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q11: Tool &amp; Software Transparency</div><div class="note">Comprehensive: framework_version + deps/container + examples</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">exemplary</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q12: Training Procedure Clarity</div><div class="note">Optimizer + LR + batch + epochs + schedule + regularization</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">comprehensive hyperparameters</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q13: Version History Documentation</div><div class="note">Semver + ISO date + non-trivial diff</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">version=v2.0.0, date=2024-11-15, diff=190 chars</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q14: Citations &amp; References</div><div class="note">Citation(s) + reference(s), DOIs missing</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">1 cites, 2 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q15: Compute Infrastructure &amp; Energy</div><div class="note">Hardware + software + total compute</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">no energy estimate</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Performance &amp; FAIRness</span><span class="elem-score good">17/17</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q16: Findability (Persistent Landing)</div><div class="note">At least one resolvable URL</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q17: Accessibility &amp; Inference Path</div><div class="note">Runnable code example(s) + I/O specs</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">3 example(s)</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q18: Performance Metrics with Slices &amp; CI</div><div class="note">≥2 metrics, ≥2 slices, CI on ≥1</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">5 metrics, 2 slices, CI=True</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q19: Out-of-Scope Uses, Limitations &amp; Tradeoffs</div><div class="note">All three populated with concrete items</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">lim=3, tradeoffs=2, oos=3</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q20: Cross-Platform Interlinks</div><div class="note">Cross-platform reference present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">benchmark=False, doi=False, dataset_link=True</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<ul>
+<li>Strong Technical Documentation (23/25)</li>
+<li>Strong Performance &amp; FAIRness (17/17)</li>
+</ul>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+<details open><summary><span class="elem-name">sentiment-classifier-with-datasheet-refs.yaml</span> <span class="section-tag r20">rubric20</span><span class="elem-score ok">53/84 (63.1%)</span></summary>
+<div style="padding: .9rem 1rem;">
+<details><summary><span class="elem-name">Structural Completeness</span><span class="elem-score good">17/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q1: Required Field Completeness</div><div class="note">All 5 required fields populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">populated=[&#x27;model_details.name&#x27;, &#x27;model_details.overview&#x27;, &#x27;model_details.licenses&#x27;, &#x27;model_details.version&#x27;, &#x27;model_parameters.model_architecture&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q2: Overview Length Adequacy</div><div class="note">50–500 chars combined</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">overview=130, doc=243, short=0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q3: Tag / Keyword Diversity</div><div class="note">Some tags or pipeline tag only</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">6 tags, pipeline=text-classification, lang=None, cat=None</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q4: Input / Output Specification</div><div class="note">Both I/O specified with format_map populated</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">prose + structured map</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q5: Schema Version Declared</div><div class="note">schema_version populated</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">schema_version=0.0.2</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Metadata Quality &amp; Content</span><span class="elem-score ok">11/21</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q6: Persistent Identifier Present</div><div class="note">Only generic URLs, no DOI/HF Hub</div>
+</td>
+<td class="score bad">0/1</td>
+<td class="evidence">refs=[&#x27;https://arxiv.org/abs/1810.04805&#x27;, &#x27;https://example.org/models/bert-sentiment&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q7: Funding &amp; Acknowledgements Completeness</div><div class="note">No funding info detected</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q8: Ethical &amp; Responsible-AI Documentation</div><div class="note">Only ethical_considerations populated</div>
+</td>
+<td class="score bad">2/5</td>
+<td class="evidence">minimal</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q9: License Clarity &amp; SPDX Compliance</div><div class="note">SPDX identifier, no explicit restrictions text</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">spdx=[&#x27;Apache-2.0&#x27;]</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q10: Framework / Library Standardization</div><div class="note">Framework + version + library + model_index</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">PyTorch 2.0.1, lib=transformers, model_index present</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Technical Documentation</span><span class="elem-score bad">12/25</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q11: Tool &amp; Software Transparency</div><div class="note">Some tool/library named</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">partial</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q12: Training Procedure Clarity</div><div class="note">No training procedure</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q13: Version History Documentation</div><div class="note">Semver + ISO date + non-trivial diff</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">version=1.2.0, date=2025-11-20, diff=147 chars</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q14: Citations &amp; References</div><div class="note">Citation(s) + reference(s), DOIs missing</div>
+</td>
+<td class="score good">4/5</td>
+<td class="evidence">1 cites, 2 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q15: Compute Infrastructure &amp; Energy</div><div class="note">No compute_infrastructure</div>
+</td>
+<td class="score bad">0/5</td>
+<td class="evidence">absent</td>
+</tr>
+</tbody></table></details>
+<details><summary><span class="elem-name">Performance &amp; FAIRness</span><span class="elem-score ok">13/17</span></summary>
+<table><thead><tr><th>Question</th><th class="score">Score</th><th>Evidence</th></tr></thead><tbody>
+<tr>
+<td><div class="elem-name">Q16: Findability (Persistent Landing)</div><div class="note">At least one resolvable URL</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">2 refs</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q17: Accessibility &amp; Inference Path</div><div class="note">Partial usage docs</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">examples=0, io=True</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q18: Performance Metrics with Slices &amp; CI</div><div class="note">≥2 metrics, ≥2 slices, CI on ≥1</div>
+</td>
+<td class="score good">5/5</td>
+<td class="evidence">5 metrics, 3 slices, CI=True</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q19: Out-of-Scope Uses, Limitations &amp; Tradeoffs</div><div class="note">2 of 3 populated</div>
+</td>
+<td class="score ok">3/5</td>
+<td class="evidence">lim=4, tradeoffs=1, oos=0</td>
+</tr>
+<tr>
+<td><div class="elem-name">Q20: Cross-Platform Interlinks</div><div class="note">Cross-platform reference present</div>
+</td>
+<td class="score good">1/1</td>
+<td class="evidence">benchmark=True, doi=False, dataset_link=True</td>
+</tr>
+</tbody></table></details>
+<div class="assessment">
+<div class="col"><h4>Strengths</h4>
+<div class="meta">None</div>
+</div>
+<div class="col"><h4>Weaknesses</h4>
+<ul>
+<li>Weak Technical Documentation (12/25)</li>
+</ul>
+</div>
+<div class="col"><h4>Recommendations</h4>
+<div class="meta">None</div>
+</div>
+</div>
+</div></details>
+</main>
+<footer>Model Card Schema evaluation report · Model Card portfolio: harmonized + HF Hub</footer>
+</body></html>

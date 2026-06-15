@@ -130,3 +130,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .DS_Store
+
+# Schema-gen smoke-test output (`make test-schema`, manual gen-project runs)
+tmp/

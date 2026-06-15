@@ -1,0 +1,451 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "subcell_saprot_650m_model_card.yaml",
+  "model": "SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)",
+  "method": "claudecode_assistant",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 42,
+    "max_points": 50,
+    "percentage": 84.0
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M'; model_details.references[0]: same URL; base_model: 'westlake-repl/SaProt_650M_AF2'",
+          "quality_note": "HuggingFace Hub identifier provided as both path and reference. The ID is unique and resolvable."
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: 'SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)'; short_description: 93 chars; overview: 437 chars with architecture details and performance",
+          "quality_note": "Comprehensive name, short description, and detailed overview explaining model purpose, architecture, and performance metrics."
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: 8 tags including 'protein-language-model', 'subcellular-localization', 'bioinformatics', 'protein-classification', 'saprot', 'lora', 'deeploc', 'structure-aware'; pipeline_tag: 'text-classification'; model_category: 'protein-language-model'",
+          "quality_note": "Excellent tag coverage (8 relevant domain-specific tags) with appropriate pipeline_tag and model_category."
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references: 5 URLs including HF Hub model page, base model page, GitHub repo, UniProt documentation, and DeepLoc service",
+          "quality_note": "Multiple accessible landing pages provided, including primary HF Hub location, base model, code repository, and domain-specific documentation."
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: 'torch>=2.0'; library_name: 'transformers'",
+          "quality_note": "Framework, version constraint, and library explicitly specified."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M'",
+          "quality_note": "Clear HuggingFace Hub path for weight distribution provided."
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references[2]: 'https://github.com/westlake-repl/SaProt'",
+          "quality_note": "GitHub repository link provided for the SaProt codebase."
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "model_details.documentation contains usage example: 'from saprot_hub import load_model / model = load_model(\"SaProtHub/Model-Subcellular_Localization-650M\") / pred = model.predict(sa_sequence)'",
+          "quality_note": "Runnable Python code snippet provided with clear API usage pattern."
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format: 'Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens'; input_format_map with type, encoding, max_length; output_format: 'Classification label (integer 0-9)'; output_format_map with shape '[B, 10]' and interpretation of 10 classes",
+          "quality_note": "Detailed input/output specifications including format, encoding, shape, and class interpretation."
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "No explicit mention of file format (safetensors, ONNX, PyTorch state_dict, etc.) in model_details.path or model_parameters",
+          "quality_note": "While HuggingFace Hub path is provided, the specific serialization format (safetensors vs PyTorch .bin vs ONNX) is not explicitly stated."
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: 'MIT'; license_name: 'MIT License'; license_link: 'https://opensource.org/licenses/MIT'",
+          "quality_note": "SPDX-style MIT license explicitly stated with link, allowing broad reuse."
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: 'torch>=2.0'; library_name: 'transformers'",
+          "quality_note": "Standard framework (PyTorch) with version constraint and HuggingFace transformers library specified."
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "base_model: 'westlake-repl/SaProt_650M_AF2'; model_details.references[1]: 'https://huggingface.co/westlake-repl/SaProt_650M_AF2'; overview states 'LoRA fine-tune of westlake-repl/SaProt_650M_AF2'",
+          "quality_note": "Base model clearly identified with HuggingFace Hub ID, reference link, and explicit fine-tuning relationship."
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: 'text-classification'; considerations.use_cases: 4 use cases including 'Predicting subcellular localization for protein-annotation pipelines', 'Filtering proteomics candidates by compartment', 'Benchmarking against DeepLoc 2.0', 'Educational reference for LoRA fine-tuning'",
+          "quality_note": "Clear pipeline task classification with multiple concrete use cases provided."
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.reproducibility_info.hyperparameters includes optimizer (AdamW), learning_rate (0.0005), batch_size (64), training_epochs (100), loss_function, optimization_techniques with LoRA parameters, mixed precision; GitHub repo link provided",
+          "quality_note": "Comprehensive hyperparameters provided with optimizer details, LoRA configuration, and code repository link sufficient for reproduction."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations[0].name: 'Mis-localization in drug discovery pipelines'; mitigation_strategy: 'Treat predictions as a screening hypothesis, not ground truth. Confirm with experimental localization...'",
+          "quality_note": "Named ethical risk with concrete mitigation strategy addressing downstream pharmaceutical use."
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 1,
+          "evidence": "bias_model: 'Predictions reflect the species and protein-family distribution of the DeepLoc training set (SwissProt-biased toward extensively-studied model organisms)...'; bias_output: 'Class prior matches the DeepLoc training distribution — rare compartments (peroxisome, plastid) are likely under-predicted...'",
+          "quality_note": "Specific biases disclosed for both model (species bias toward model organisms) and output (class imbalance in predictions)."
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses: 3 items including 'Diagnosing localization-related diseases without experimental confirmation', 'Predicting localization in species or kingdoms underrepresented in DeepLoc', 'Multi-label localization prediction'",
+          "quality_note": "Explicit out-of-scope uses documented with concrete examples of discouraged applications."
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 1,
+          "evidence": "model_parameters.data[0].sensitive.sensitive_data: ['No human PII; SwissProt protein sequences only']",
+          "quality_note": "Explicit disclosure that no human PII is present, only SwissProt protein sequences."
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users[0]: 'Structural biologists and bioinformaticians who want quick subcellular localization predictions...'; tradeoffs[0]: '650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at higher inference cost. LoRA keeps trainable parameter count small...'",
+          "quality_note": "Named user groups (structural biologists, bioinformaticians) and explicit accuracy vs. computational cost tradeoff documented."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: '650M-parameter SaProt_650M_AF2 base (ESM-style encoder augmented with structure-aware vocabulary from AlphaFold2 Foldseek tokens). LoRA (rank 16, alpha 32, dropout 0) targeting attention query/key/value projections and the feedforward dense layers...'",
+          "quality_note": "Detailed architecture description including parameter count (650M), base architecture (ESM-style encoder), LoRA configuration (rank 16, alpha 32, dropout 0), and target layers (Q/K/V projections, FFN)."
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.data[0]: name 'DeepLoc subcellular localization dataset (SaProtHub mirror)'; link: 'https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc'; description: 'DeepLoc 2.0 benchmark: SwissProt proteins with experimentally-annotated subcellular localizations spanning 10 classes...'",
+          "quality_note": "Concrete dataset documented with name, link, and detailed description including data source (SwissProt), annotation type (experimentally-validated), and class coverage (10 classes)."
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.reproducibility_info.hyperparameters: optimizer: 'AdamW', learning_rate: 0.0005, batch_size: 64, training_epochs: 100, loss_function: 'Cross-entropy', optimization_techniques including LoRA parameters, mixed precision FP16, AdamW betas=(0.9, 0.98), weight_decay=0.01",
+          "quality_note": "Comprehensive hyperparameters including optimizer (AdamW with betas), learning rate, batch size, epochs, loss function, and regularization (weight decay, LoRA dropout)."
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "model_parameters.training_procedure.description mentions 'Mixed precision (FP16) on a single GPU' but no model_parameters.compute_infrastructure field with hardware type, GPU model, compute hours, or energy use",
+          "quality_note": "Only minimal infrastructure information provided (single GPU, FP16). Missing specific GPU model, compute hours, and energy consumption."
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_parameters.data[0].description: 'Train/validation/test splits provided by the SaProtHub mirror'; quantitative_analysis.performance_metrics[0].slice: 'DeepLoc subcellular localization test set (10-way)'",
+          "quality_note": "Train/validation/test splits explicitly mentioned, and test set performance reported on the designated test split."
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: '1.0'",
+          "quality_note": "Semantic version number provided (1.0)."
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2024-08-01'",
+          "quality_note": "ISO 8601 release date provided (2024-08-01)."
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: 'Initial release of the LoRA fine-tune on the DeepLoc subcellular-localization training split using AdamW for 100 epochs.'",
+          "quality_note": "Clear change description for the version, identifying this as the initial release with training configuration details."
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 0,
+          "evidence": "model_details.contributors[0]: name: 'SaProtHub maintainers', role: developed_by, affiliation: 'Westlake Representation Learning Lab' (but no email, ORCID, or individual names); contributors[1]: name: 'Westlake-repl team (base SaProt)', role: contributed_by, affiliation: 'Westlake University'",
+          "quality_note": "Contributors identified with roles and affiliations, but only team/group names provided (no individual names, emails, or ORCIDs per CRediT-style taxonomy)."
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0]: style: IEEE, citation for the model; citations[1]: style: IEEE, citation for SaProt paper 'J. Su et al., \"SaProt: Protein Language Modeling with Structure-aware Vocabulary,\" in ICLR, 2024.'",
+          "quality_note": "Two IEEE-style citations provided. While BibTeX would be preferable, the structured citations are machine-parseable and include sufficient information."
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: 'This model classifies protein sequences into one of ten subcellular localization classes...'; considerations.use_cases: 4 use cases including annotation pipelines, proteomics filtering, benchmarking, and educational reference",
+          "quality_note": "Clear motivation stated (subcellular localization classification) with multiple concrete use cases."
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases[0]: 'Predicting subcellular localization for protein-annotation pipelines'; pipeline_tag: 'text-classification'",
+          "quality_note": "Primary intended use clearly articulated as protein annotation with specific deployment context (pipelines)."
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "No mission_relevance field present in the YAML file",
+          "quality_note": "Missing extended template mission_relevance field. No explicit alignment with DOE/NIH/NSF research programs or domain mission stated."
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "model_details.contributors have affiliations ('Westlake Representation Learning Lab', 'Westlake University') but no funding sources, grant numbers, or agencies (NIH, NSF, DOE) mentioned",
+          "quality_note": "No funding sources or grant agencies documented despite institutional affiliations being present."
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 0,
+          "evidence": "model_parameters.training_procedure.description mentions 'single GPU' but no acknowledgement of computing facilities, cloud credits, or supporting institutions",
+          "quality_note": "No acknowledgement of computing platform support, supercomputing facilities, or institutional computing resources."
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.description: 'LoRA fine-tuning of SaProt_650M_AF2 on the DeepLoc subcellular-localization train split...'; reproducibility_info.hyperparameters with loss, optimizer, schedule, epochs, augmentation (LoRA), regularization (weight_decay)",
+          "quality_note": "Comprehensive training procedure documented including loss function (cross-entropy), optimizer (AdamW), hyperparameters, epochs (100), and optimization techniques (LoRA)."
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 0,
+          "evidence": "quantitative_analysis.performance_metrics reports test accuracy but no model_parameters.training_procedure.evaluation_procedure or detailed evaluation protocol (metrics computation, slicing strategy beyond test set mention)",
+          "quality_note": "Evaluation metrics reported but evaluation procedure (protocol, metrics computation details, evaluation frequency) not documented."
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "model_parameters.training_procedure.reproducibility_info.hyperparameters present but no separate ReproducibilityInfo with seeds, deterministic flags, environment pins, container hashes, or mission_relevance section",
+          "quality_note": "Hyperparameters documented but missing extended reproducibility information (random seeds, deterministic flags, pinned environment, container specifications)."
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references[2]: 'https://github.com/westlake-repl/SaProt'; model_details.documentation includes usage example with saprot_hub import",
+          "quality_note": "GitHub repository link provided with code for the SaProt framework and usage examples."
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.citations[1]: SaProt ICLR 2024 paper; model_details.references[3]: UniProt subcellular location documentation; references[4]: DeepLoc 2.0 service",
+          "quality_note": "External standards cited including academic paper (ICLR 2024), benchmark suite (DeepLoc 2.0), and domain-specific documentation (UniProt)."
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics[0]: type: 'test accuracy', value: 85.75, slice: 'DeepLoc subcellular localization test set (10-way)', unit: '%'",
+          "quality_note": "Quantitative metric (test accuracy 85.75%) reported with slice (DeepLoc test set, 10-way classification) and unit."
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 0,
+          "evidence": "quantitative_analysis.performance_metrics[0].slice: 'DeepLoc subcellular localization test set (10-way)' but no per-class, per-organism, or per-subgroup performance breakdown",
+          "quality_note": "Only aggregate test accuracy reported. No per-class accuracy, per-organism performance, or other sub-population slicing provided."
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 0,
+          "evidence": "quantitative_analysis.performance_metrics[0] has value: 85.75 but no confidence_interval or value_error fields",
+          "quality_note": "Single point estimate provided without confidence intervals, standard deviations, or error bars."
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: 3 limitations including training data bias (SwissProt organism coverage), structural input requirement, and single-label constraint",
+          "quality_note": "Explicit limitations documented with concrete failure modes: organism bias, structural dependency, and multi-label limitation."
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs[0]: '650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at higher inference cost. LoRA keeps trainable parameter count small...'; ethical_considerations addresses drug discovery risk",
+          "quality_note": "Tradeoffs acknowledged (accuracy vs. computational cost, model size vs. inference time) and ethical risk (mis-localization in drug discovery) documented."
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M'; library_name: 'transformers'; model_details.references[0]: HuggingFace Hub URL",
+          "quality_note": "Published on HuggingFace Hub, a recognized model hosting platform, with transformers library integration."
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references[1]: base model 'https://huggingface.co/westlake-repl/SaProt_650M_AF2'; base_model: 'westlake-repl/SaProt_650M_AF2'; citations reference SaProt ICLR 2024 paper (though DOI not explicitly provided)",
+          "quality_note": "Base model cross-referenced with HuggingFace Hub link and academic paper citation. No DOI explicitly provided, but paper citation includes venue (ICLR 2024)."
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics[0]: test accuracy 85.75% on DeepLoc test set; datasets[0]: 'SaProtHub/Dataset-Subcellular_Localization-DeepLoc'; tags include 'deeploc'",
+          "quality_note": "Benchmark result reported on standard dataset (DeepLoc 2.0) with metric (accuracy 85.75%), suitable for leaderboard comparison."
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: '0.0.2' (line 9); comment at top references 'Schema: src/model_card_schema/schema/model_card_schema.yaml'",
+          "quality_note": "Schema version explicitly stated (0.0.2) with reference to the Model Card schema definition."
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 1,
+          "evidence": "model_parameters.data[0].link: 'https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc'; datasets[0]: 'SaProtHub/Dataset-Subcellular_Localization-DeepLoc'; model_details.references[4]: DeepLoc 2.0 service link",
+          "quality_note": "Dataset linked to HuggingFace Datasets page (SaProtHub mirror) and DeepLoc 2.0 service. While not a formal datasheet (D4D), the dataset is registered and accessible."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Exceptional model discovery metadata with complete identification (HF Hub ID, name, 8 domain-specific tags, multiple reference links)",
+      "Comprehensive ethical and responsible AI documentation including specific bias disclosures (species bias, class imbalance), out-of-scope uses, and mitigation strategies",
+      "Detailed architecture specification with LoRA configuration (rank 16, alpha 32, dropout 0) and layer-level detail (Q/K/V projections, FFN)",
+      "Strong reuse and interoperability support with MIT license, base model lineage (westlake-repl/SaProt_650M_AF2), and comprehensive hyperparameters",
+      "Excellent cross-platform integration with HuggingFace Hub publication, benchmark results (DeepLoc 2.0, 85.75% accuracy), and dataset links",
+      "Clear limitations documentation addressing organism bias, structural input requirements, and single-label constraints",
+      "Detailed input/output specifications with structure-aware (SA) sequence format and 10-class interpretation"
+    ],
+    "weaknesses": [
+      "Missing compute infrastructure details (Element 5): No specific GPU model, compute hours, or energy consumption beyond 'single GPU' and FP16",
+      "Incomplete provenance documentation (Element 6): Contributors only have team names, no individual names, emails, or ORCIDs per CRediT taxonomy",
+      "Missing funding transparency (Element 7): No funding sources, grant agencies, or grant numbers documented despite institutional affiliations",
+      "No mission relevance field (Element 7): Extended template mission_relevance field absent (DOE/NIH/NSF alignment not stated)",
+      "Evaluation procedure not documented (Element 8): Metrics reported but evaluation protocol, metrics computation details, and evaluation frequency not specified",
+      "Missing extended reproducibility information (Element 8): No random seeds, deterministic flags, pinned environment, or container specifications",
+      "No per-class or sub-population performance (Element 9): Only aggregate test accuracy reported; no per-class, per-organism, or demographic slicing",
+      "No confidence intervals (Element 9): Single point estimate (85.75%) without error bars, standard deviations, or confidence intervals",
+      "Model file format not specified (Element 2): Serialization format (safetensors, PyTorch .bin, ONNX) not explicitly stated",
+      "No computing platform acknowledgements (Element 7): No mention of supercomputing facilities, cloud credits, or institutional computing support"
+    ],
+    "recommendations": [
+      "Add model_parameters.compute_infrastructure with hardware details (GPU model/count), total compute hours, and energy consumption if available",
+      "Expand model_details.contributors to include individual names, emails, and ORCIDs following CRediT taxonomy (e.g., Su, J. as first author with ORCID)",
+      "Add funding source documentation in contributors or mission_relevance section with grant agencies (NSF, NIH, DOE) and program names if applicable",
+      "Populate mission_relevance extended field if applicable (e.g., DOE BER Biological Systems Science Division alignment for proteomics)",
+      "Document model_parameters.training_procedure.evaluation_procedure with evaluation protocol, metrics computation details, and validation frequency",
+      "Add extended reproducibility fields: random seeds, deterministic flags (torch.use_deterministic_algorithms), pinned environment (conda env YAML or requirements.txt hash), container image hash if containerized",
+      "Expand quantitative_analysis.performance_metrics with per-class accuracy for all 10 subcellular localization classes and per-organism performance (human vs. E. coli vs. yeast) if data available",
+      "Add confidence intervals or error bars to performance metrics (e.g., from multiple runs or bootstrapping)",
+      "Explicitly state model file format in model_details.path or model_parameters notes (e.g., 'safetensors format' or 'PyTorch state_dict')",
+      "Add BibTeX citation format alongside IEEE style for better machine-readability (e.g., @inproceedings{su2024saprot, ...})",
+      "Consider adding acknowledgement of computing platform support if institutional resources were used (e.g., university HPC cluster, AWS credits)"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "rubric10-v1.0-20260615",
+    "rubric_hash": "sha256-mc_rubric10_specification_hierarchical_10x5_binary",
+    "model_card_hash": "sha256-subcell_saprot_650m_model_card_yaml"
+  }
+}

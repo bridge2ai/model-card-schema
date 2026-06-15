@@ -97,13 +97,110 @@ compile-sheets:
 
 # In future this will be done by conversion
 gen-examples:
-	cp src/data/examples/* $(EXAMPLEDIR)
+	mkdir -p $(EXAMPLEDIR)
+	cp -r src/data/examples/* $(EXAMPLEDIR)
 
 # generates all project files
 
 gen-project: $(PYMODEL) compile-sheets
 	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 
+
+# =========================================================================
+# Model Card AI Assistant: rubric evaluation
+# =========================================================================
+# Defaults — override on the command line:
+#   make evaluate-rubric10 MC_INPUT_GLOB='src/data/examples/extended/*.yaml'
+#   make evaluate-rubric10 MC_INPUT=path/to/card.yaml MC_EVAL_DIR=tmp/eval
+MC_INPUT_GLOB ?= src/data/examples/extended/*.yaml
+MC_EVAL_DIR   ?= data/evaluation/rubric10
+
+# Hybrid (rule-based + quality heuristics) — fast, no LLM cost
+evaluate-rubric10:
+ifdef MC_INPUT
+	$(RUN) python scripts/batch_evaluate_mc_rubric10_hybrid.py \
+		--input  $(MC_INPUT) \
+		--output-dir $(MC_EVAL_DIR)
+else
+	$(RUN) python scripts/batch_evaluate_mc_rubric10_hybrid.py \
+		--input-glob '$(MC_INPUT_GLOB)' \
+		--output-dir $(MC_EVAL_DIR)
+endif
+
+# Smoke-test the hybrid evaluator against the canonical extended example
+evaluate-rubric10-smoke:
+	$(RUN) python scripts/batch_evaluate_mc_rubric10_hybrid.py \
+		--input src/data/examples/extended/climate-model-extended.yaml \
+		--output-dir tmp/mc-eval-smoke
+
+# Completeness quality gate (used by the @mcassistant workflow before PR)
+#   make check-completeness MC_FILE=path/to/card.yaml [MC_BLOCK=acceptable]
+MC_BLOCK ?= minimal
+check-completeness:
+ifndef MC_FILE
+	$(error MC_FILE is required: make check-completeness MC_FILE=path/to/card.yaml)
+endif
+	$(RUN) python src/github/validate_mc_completeness.py $(MC_FILE) --block-threshold $(MC_BLOCK)
+
+# Prerequisites check for the @mcassistant workflow
+#   make check-prereqs MC_MODEL=climatenet MC_MODE=url MC_URLS='https://...'
+MC_MODE  ?= url
+MC_URLS  ?=
+check-prereqs:
+ifndef MC_MODEL
+	$(error MC_MODEL is required: make check-prereqs MC_MODEL=name MC_MODE=url MC_URLS='https://...')
+endif
+	@if [ "$(MC_MODE)" = "url" ]; then \
+		src/github/validate_prerequisites.sh --model $(MC_MODEL) --mode url --urls "$(MC_URLS)"; \
+	else \
+		src/github/validate_prerequisites.sh --model $(MC_MODEL) --mode file; \
+	fi
+
+MC_EVAL20_DIR ?= data/evaluation/rubric20
+
+evaluate-rubric20:
+ifdef MC_INPUT
+	$(RUN) python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+		--input $(MC_INPUT) \
+		--output-dir $(MC_EVAL20_DIR)
+else
+	$(RUN) python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+		--input-glob '$(MC_INPUT_GLOB)' \
+		--output-dir $(MC_EVAL20_DIR)
+endif
+
+evaluate-rubric20-smoke:
+	$(RUN) python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+		--input src/data/examples/extended/climate-model-extended.yaml \
+		--output-dir tmp/mc-rubric20-smoke
+
+# Render evaluation JSON(s) to HTML
+#   make render-eval EVAL_JSONS='tmp/mc-eval-smoke/*.json' EVAL_HTML=tmp/report.html
+EVAL_HTML ?= data/evaluation/report.html
+render-eval:
+ifndef EVAL_JSONS
+	$(error EVAL_JSONS is required: make render-eval EVAL_JSONS='glob/of/*.json' EVAL_HTML=path/to/report.html)
+endif
+	$(RUN) python scripts/render_evaluation_html.py --input-glob '$(EVAL_JSONS)' --output $(EVAL_HTML)
+
+# Cross-evaluator comparison view (hybrid vs LLM × rubric10 / rubric20)
+#   make render-compare EVAL_JSONS='glob/of/*.json' EVAL_HTML=path/to/compare.html
+render-compare:
+ifndef EVAL_JSONS
+	$(error EVAL_JSONS is required: make render-compare EVAL_JSONS='glob/of/*.json' EVAL_HTML=path/to/compare.html)
+endif
+	$(RUN) python scripts/render_evaluation_html.py --input-glob '$(EVAL_JSONS)' --output $(EVAL_HTML) --compare --title "Cross-evaluator comparison"
+
+# Emit shields.io-style SVG quality badges (one per evaluation) + index.html
+#   make render-badges EVAL_JSONS='glob/of/*.json' BADGE_DIR=data/evaluation/badges
+BADGE_DIR ?= data/evaluation/badges
+render-badges:
+ifndef EVAL_JSONS
+	$(error EVAL_JSONS is required: make render-badges EVAL_JSONS='glob/of/*.json' [BADGE_DIR=path/])
+endif
+	$(RUN) python scripts/render_evaluation_html.py --input-glob '$(EVAL_JSONS)' --output $(BADGE_DIR) --badge --title "Model Card quality badges"
+
+.PHONY: evaluate-rubric10 evaluate-rubric10-smoke evaluate-rubric20 evaluate-rubric20-smoke check-completeness check-prereqs render-eval render-compare render-badges
 
 test: test-schema test-python test-examples
 
