@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
-  "evaluation_timestamp": "2026-06-15T20:41:00.532011+00:00",
+  "evaluation_timestamp": "2026-06-16T03:13:15.483369+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -68,7 +68,7 @@
     },
     {
       "name": "Metadata Quality & Content",
-      "category_score": 14,
+      "category_score": 15,
       "category_max": 21,
       "questions": [
         {
@@ -105,11 +105,11 @@
           "id": 9,
           "name": "License Clarity & SPDX Compliance",
           "score_type": "numeric",
-          "score": 4,
+          "score": 5,
           "max_score": 5,
-          "score_label": "SPDX identifier, no explicit restrictions text",
+          "score_label": "SPDX permissive license (no additional restrictions needed)",
           "evidence": "spdx=['MIT']",
-          "quality_note": "SPDX identifier, no explicit restrictions text"
+          "quality_note": "SPDX permissive license (no additional restrictions needed)"
         },
         {
           "id": 10,
@@ -125,7 +125,7 @@
     },
     {
       "name": "Technical Documentation",
-      "category_score": 17,
+      "category_score": 16,
       "category_max": 25,
       "questions": [
         {
@@ -142,11 +142,11 @@
           "id": 12,
           "name": "Training Procedure Clarity",
           "score_type": "numeric",
-          "score": 5,
+          "score": 4,
           "max_score": 5,
-          "score_label": "Optimizer + LR + batch + epochs + schedule + regularization",
-          "evidence": "comprehensive hyperparameters",
-          "quality_note": "Optimizer + LR + batch + epochs + schedule + regularization"
+          "score_label": "Most hyperparameters present",
+          "evidence": "good",
+          "quality_note": "Most hyperparameters present"
         },
         {
           "id": 13,
@@ -221,9 +221,9 @@
           "score_type": "numeric",
           "score": 5,
           "max_score": 5,
-          "score_label": "All three populated with concrete items",
+          "score_label": "All three populated with concrete enumerated items",
           "evidence": "lim=3, tradeoffs=1, oos=3",
-          "quality_note": "All three populated with concrete items"
+          "quality_note": "All three populated with concrete enumerated items"
         },
         {
           "id": 20,

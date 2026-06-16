@@ -68,37 +68,54 @@ make render-eval     EVAL_JSONS='data/evaluation/all/**/*.json' EVAL_HTML=data/e
 make render-compare  EVAL_JSONS='data/evaluation/all/**/*.json' EVAL_HTML=data/evaluation/all/portfolio_compare.html
 ```
 
-## Hybrid vs LLM (full cross-evaluator)
+## Hybrid vs LLM (historical — partial coverage, pre-PR-#25-fix)
 
-LLM rubric10 and rubric20 now also run on the HF Hub-ported cards. Updated portfolio:
+> **Note**: this section is preserved for the calibration history. The numbers here are from before the PR #25 scoring fixes (the q19 list-vs-string fix, the q9 SPDX-permissive-can-reach-5/5 fix, the harmonized funding_grants path fix) and before the harmonized cards had LLM scores. **The canonical post-fix numbers are in the "Final cross-evaluator portfolio" section below.**
 
-| Card | r10 hybrid | r10 LLM | Δ | r20 hybrid | r20 LLM | Δ |
+| Card | r10 hybrid (pre-fix) | r10 LLM (pre-fix) | Δ | r20 hybrid (pre-fix) | r20 LLM (pre-fix) | Δ |
 |---|---:|---:|---:|---:|---:|---:|
 | climate-model-extended | 47/50 (94%) | 44/50 (88%) | hybrid +6 | 73/84 (87%) | 76/84 (91%) | hybrid −4 |
 | climate-forecasting (harmonized) | 48/50 (96%) | — | — | 75/84 (89%) | — | — |
 | sentiment-classifier (harmonized) | 41/50 (82%) | — | — | 53/84 (63%) | — | — |
-| densenet121.tv_in1k (HF) | 41/50 (82%) | 43/50 (86%) | hybrid **−4** | 59/84 (70%) | 63/84 (75%) | hybrid −5 |
-| subcell-saprot-650m (HF) | 44/50 (88%) | 42/50 (84%) | hybrid +4 | 65/84 (77%) | 66/84 (79%) | **≈ peer** |
+| densenet121.tv_in1k (HF) | 41/50 (82%) | 43/50 (86%) | hybrid −4 | 59/84 (70%) | 63/84 (75%) | hybrid −5 |
+| subcell-saprot-650m (HF) | 44/50 (88%) | 42/50 (84%) | hybrid +4 | 65/84 (77%) | 66/84 (79%) | ≈ peer |
 
-### Where hybrid and LLM disagree
+The analysis below the table (where hybrid/LLM disagree, sign of the gap) used these pre-fix scores. The post-fix tables show smaller divergences because of the PR #25 evaluator improvements.
 
-- **DenseNet**: LLM higher than hybrid — the LLM credits Element 7 (Scientific Motivation) at only 2/5 (no NIH/NSF/DOE grant on a permissively-licensed academic model is reasonable) but the hybrid's keyword scan was generous. Hybrid drops Element 5 to 2/5 because the timm card doesn't disclose training hyperparameters; LLM gives 3/5 acknowledging the architecture is well-described. Net: LLM ends 4pp higher because it's more forgiving about missing training procedure on a 2017 checkpoint.
-- **SubCell**: hybrid higher than LLM on rubric10 (+4pp). Hybrid credits Element 7 (4/5) for SaProtHub university affiliation as "funding"; LLM disagrees (2/5, "no concrete funding agency named"). LLM also drops Element 6 to 4/5 because contributors lack ORCIDs / explicit roles.
-- **SubCell rubric20**: ≈ peer (77.4% vs 78.6%, within 2pp). Best agreement of the portfolio — the SaProtHub card is structurally complete enough that both evaluators agree on the major categories.
+## Final cross-evaluator portfolio (full LLM coverage)
 
-### Sign of the gap
+After running mc-rubric10 + mc-rubric20 LLM agents against both harmonized cards, **all 5 example cards now have both hybrid and LLM scores on both rubrics**:
 
-Across the 3 cards with both evaluators run:
-- 2 of 3 rubric10 runs have hybrid more lenient (climate-extended +6, SubCell +4); 1 has hybrid stricter (DenseNet −4)
-- 3 of 3 rubric20 runs have hybrid stricter (climate-extended −4, DenseNet −5, SubCell ≈)
+All scores below are read from the committed evaluation JSONs (post the PR #26 arithmetic fixes). Δ columns are percentage-point deltas. \"hybrid +N\" = hybrid scored N pp higher than LLM.
 
-Pattern: **hybrid rubric20 is consistently more conservative than LLM** (no false positives from keyword matching because the rubric20 heuristics are tighter). **Hybrid rubric10 is more variable** — it can go either way depending on the card's surface signals.
+| Card | r10 hybrid | r10 LLM | Δ r10 | r20 hybrid | r20 LLM | Δ r20 |
+|---|---:|---:|---:|---:|---:|---:|
+| climate-model-extended (base) | 47/50 (94%) | 46/50 (92%) | hybrid +2 | 74/84 (88%) | 76/84 (91%) | hybrid −3 |
+| **climate-forecasting (harmonized + D4D)** | **48/50 (96%)** | **49/50 (98%)** | **hybrid −2** | **79/84 (94%)** | **79/84 (94%)** | **≈ peer** |
+| sentiment-classifier (harmonized) | 41/50 (82%) | 31/50 (62%) | hybrid **+20** | 54/84 (64%) | 59/84 (70%) | hybrid −6 |
+| DenseNet-121 (HF Hub port) | 41/50 (82%) | 40/50 (80%) | hybrid +2 | 61/84 (73%) | 63/84 (75%) | hybrid −2 |
+| SubCell SaProt 650M (HF Hub port) | 44/50 (88%) | 40/50 (80%) | hybrid +8 | 65/84 (77%) | 66/84 (79%) | hybrid −2 |
 
-Takeaway: rubric20 hybrid is the most calibrated of the four scorers and is the best candidate for CI gating. Rubric10 hybrid is fine as a quick smoke test but shouldn't be the gate.
+### Headline findings
+
+1. **Climate-forecasting (harmonized + D4D) is now the top scorer** — 98% r10 LLM / 94% r20 LLM. r20 hybrid + LLM are exactly tied at 79/84. The harmonized + D4D pattern is the production target for new model cards.
+2. **Sentiment-classifier r10 hybrid +20pp** is the largest divergence in the whole calibration. The hybrid awards generous presence-only credit (82%); the LLM downgrades to 62% for thin training procedure (1/5), thin model access (2/5), and placeholder URLs. **This is the LLM correctly punishing thin content the hybrid can't distinguish from substantive content.**
+3. **r20 hybrid is consistently within ≤6pp of LLM** across all 5 cards, always within the LLM's favor — meaning r20 hybrid will not falsely pass thin content. Safe as a quality gate.
+4. **r10 hybrid is NOT safe as a sole gate** — it can over-credit thin cards by up to 20pp. Smoke-test only.
+5. The harmonized variant pattern (creator_references, training_datasets, evaluation_datasets, mission_relevance.funding_grants) scores cleanly across both rubrics now that the post-review fixes landed.
+
+### Score range
+
+Across the 20 (5 cards × 4 evaluators) scores in the Final table, the portfolio spans:
+
+- **High**: 98% / 49/50 — climate-forecasting r10 LLM
+- **Median**: ~82–88% — most cards on most evaluators
+- **Low**: 62% / 31/50 — sentiment-classifier r10 LLM
+
+Distinct from the original "everyone scored 70%+" symptom that motivated the floor fixtures (which anchor 0% and ~30%). The 36pp spread between the highest and lowest card establishes that the rubrics do discriminate.
 
 ## Open follow-ups
 
-- Run LLM rubrics against the two harmonized cards (climate-forecasting and sentiment-classifier) to complete the LLM column
-- Add the four "authoring gotchas" above to `.goosehints` so the @mcassistant workflow avoids them
-- Build a known-bad / minimal Model Card fixture so the rubric score floor is anchored (currently the lowest score in the portfolio is 63% — none of the cards are genuinely bad)
-- Consider a `--badge` mode in the renderer that emits SVG quality-tier badges to drop into READMEs
+- Now that all 5 cards have both hybrid + LLM scores, port a couple more HF Hub cards (CLIP, Llama-2-7B-base, Stable Diffusion XL) to expand the calibration set beyond CV / proteins / sentiment
+- Run the semantic rubric variants (mc-rubric10-semantic, mc-rubric20-semantic) on the same portfolio to characterize the cost in points of failing format / consistency / plausibility checks
+- Build a `make compare-portfolio` Makefile target that re-renders portfolio_compare.html + badges from the canonical evaluation directories in one command

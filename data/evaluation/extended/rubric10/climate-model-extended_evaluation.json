@@ -1,8 +1,8 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
-  "evaluation_timestamp": "2026-06-16T03:13:15.793520+00:00",
+  "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
+  "evaluation_timestamp": "2026-06-16T03:13:15.550495+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -23,14 +23,14 @@
         {
           "name": "Model Name and Description Completeness",
           "score": 1,
-          "evidence": "Name + comprehensive overview (130 chars)",
-          "quality_note": "Name + comprehensive overview (130 chars)"
+          "evidence": "Name + comprehensive overview (509 chars)",
+          "quality_note": "Name + comprehensive overview (509 chars)"
         },
         {
           "name": "Tags / Pipeline Tag for Searchability",
           "score": 1,
-          "evidence": "6 tags + pipeline_tag/category",
-          "quality_note": "6 tags + pipeline_tag/category"
+          "evidence": "7 tags + pipeline_tag/category",
+          "quality_note": "7 tags + pipeline_tag/category"
         },
         {
           "name": "Landing Page or Repository URL",
@@ -41,8 +41,8 @@
         {
           "name": "Library / Framework Identification",
           "score": 1,
-          "evidence": "Framework PyTorch pinned to version 2.0.1",
-          "quality_note": "Framework PyTorch pinned to version 2.0.1"
+          "evidence": "Framework PyTorch pinned to version 2.1.0",
+          "quality_note": "Framework PyTorch pinned to version 2.1.0"
         }
       ],
       "element_score": 5,
@@ -68,20 +68,20 @@
         {
           "name": "Inference / Usage Example Provided",
           "score": 1,
-          "evidence": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026",
-          "quality_note": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026"
+          "evidence": "usage_documentation.code_examples: list(3)",
+          "quality_note": "usage_documentation.code_examples: list(3)"
         },
         {
           "name": "Input / Output Specification",
           "score": 1,
-          "evidence": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026",
-          "quality_note": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026"
+          "evidence": "model_parameters.input_format: Multi-channel atmospheric state patches:\n- Shape: (768, 768, 16)\n- Channels (16 pressure levels): T, U, V, Q, Z, PSL, TM\u2026",
+          "quality_note": "model_parameters.input_format: Multi-channel atmospheric state patches:\n- Shape: (768, 768, 16)\n- Channels (16 pressure levels): T, U, V, Q, Z, PSL, TM\u2026"
         },
         {
           "name": "Model File Format Specified",
           "score": 1,
-          "evidence": "library_name: transformers",
-          "quality_note": "library_name: transformers"
+          "evidence": "library_name: climatenet",
+          "quality_note": "library_name: climatenet"
         }
       ],
       "element_score": 5,
@@ -95,8 +95,8 @@
         {
           "name": "License Terms Allow Reuse",
           "score": 1,
-          "evidence": "SPDX license identified: ['Apache-2.0']",
-          "quality_note": "SPDX license identified: ['Apache-2.0']"
+          "evidence": "SPDX license identified: ['BSD-3-Clause']",
+          "quality_note": "SPDX license identified: ['BSD-3-Clause']"
         },
         {
           "name": "Standard Framework / Format Used",
@@ -107,23 +107,23 @@
         {
           "name": "Base Model or Foundation Lineage Stated",
           "score": 1,
-          "evidence": "base_model: bert-base-uncased",
-          "quality_note": "base_model: bert-base-uncased"
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
         },
         {
           "name": "Supported Tasks Declared",
           "score": 1,
-          "evidence": "pipeline_tag: text-classification",
-          "quality_note": "pipeline_tag: text-classification"
+          "evidence": "pipeline_tag: image-segmentation",
+          "quality_note": "pipeline_tag: image-segmentation"
         },
         {
           "name": "Reproducibility Artifacts Provided",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation",
-          "quality_note": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation"
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])"
         }
       ],
-      "element_score": 4,
+      "element_score": 5,
       "element_max": 5
     },
     {
@@ -146,8 +146,8 @@
         {
           "name": "Out-of-Scope / Discouraged Uses",
           "score": 1,
-          "evidence": "considerations.limitations: list(4)",
-          "quality_note": "considerations.limitations: list(4)"
+          "evidence": "considerations.out_of_scope_uses: list(3)",
+          "quality_note": "considerations.out_of_scope_uses: list(3)"
         },
         {
           "name": "Sensitive Data Use Disclosed",
@@ -173,26 +173,26 @@
         {
           "name": "Architecture Described in Detail",
           "score": 1,
-          "evidence": "model_parameters.model_architecture: BERT-base (110M parameters):\n- 12 transformer layers\n- 768 hidden dimensions\n- 12 attention heads\n\nClassification head:\n\u2026",
-          "quality_note": "model_parameters.model_architecture: BERT-base (110M parameters):\n- 12 transformer layers\n- 768 hidden dimensions\n- 12 attention heads\n\nClassification head:\n\u2026"
+          "evidence": "model_parameters.model_architecture: ResNet-50 Feature Pyramid Network (FPN) with dual-head architecture:\n\nBackbone:\n- ResNet-50 pretrained on ImageNet\n- Mod\u2026",
+          "quality_note": "model_parameters.model_architecture: ResNet-50 Feature Pyramid Network (FPN) with dual-head architecture:\n\nBackbone:\n- ResNet-50 pretrained on ImageNet\n- Mod\u2026"
         },
         {
           "name": "Training Data Documented",
           "score": 1,
-          "evidence": "1 dataset(s), 1 with links/URIs",
-          "quality_note": "1 dataset(s), 1 with links/URIs"
+          "evidence": "3 dataset(s), 3 with links/URIs",
+          "quality_note": "3 dataset(s), 3 with links/URIs"
         },
         {
           "name": "Hyperparameters Reported",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.training_procedure",
-          "quality_note": "Missing all of: model_parameters.training_procedure"
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])"
         },
         {
           "name": "Compute Infrastructure Reported (Extended)",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.compute_infrastructure",
-          "quality_note": "Missing all of: model_parameters.compute_infrastructure"
+          "score": 1,
+          "evidence": "model_parameters.compute_infrastructure: dict(keys=['hardware', 'hardware_list', 'software', 'software_dependencies', 'training_speed'])",
+          "quality_note": "model_parameters.compute_infrastructure: dict(keys=['hardware', 'hardware_list', 'software', 'software_dependencies', 'training_speed'])"
         },
         {
           "name": "Training / Evaluation Split Defined",
@@ -201,7 +201,7 @@
           "quality_note": "Multiple dataset entries or model_index present"
         }
       ],
-      "element_score": 3,
+      "element_score": 5,
       "element_max": 5
     },
     {
@@ -212,26 +212,26 @@
         {
           "name": "Version Number Provided",
           "score": 1,
-          "evidence": "Semver-shaped version: 1.2.0",
-          "quality_note": "Semver-shaped version: 1.2.0"
+          "evidence": "Semver-shaped version: v2.0.0",
+          "quality_note": "Semver-shaped version: v2.0.0"
         },
         {
           "name": "Version Date Documented",
           "score": 1,
-          "evidence": "ISO date: 2025-11-20",
-          "quality_note": "ISO date: 2025-11-20"
+          "evidence": "ISO date: 2024-11-15",
+          "quality_note": "ISO date: 2024-11-15"
         },
         {
           "name": "Change Description for This Version",
           "score": 1,
-          "evidence": "model_details.version.diff: - Improved accuracy by 5% through hyperparameter tuning\n- Added support for longer sequences (512 \u2192 1024 tokens)\n- Fixed\u2026",
-          "quality_note": "model_details.version.diff: - Improved accuracy by 5% through hyperparameter tuning\n- Added support for longer sequences (512 \u2192 1024 tokens)\n- Fixed\u2026"
+          "evidence": "model_details.version.diff: - Upgraded to ResNet-50 from ResNet-34\n- Added atmospheric river detection capability\n- Improved tropical cyclone bounda\u2026",
+          "quality_note": "model_details.version.diff: - Upgraded to ResNet-50 from ResNet-34\n- Added atmospheric river detection capability\n- Improved tropical cyclone bounda\u2026"
         },
         {
           "name": "Owners / Contributors Identified",
           "score": 1,
-          "evidence": "2 owner/contributor/reference(s) (roles missing)",
-          "quality_note": "2 owner/contributor/reference(s) (roles missing)"
+          "evidence": "4 contributor(s)/reference(s) with role",
+          "quality_note": "4 contributor(s)/reference(s) with role"
         },
         {
           "name": "Citation Provided",
@@ -251,35 +251,35 @@
         {
           "name": "Motivation / Use Case Rationale",
           "score": 1,
-          "evidence": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026",
-          "quality_note": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026"
+          "evidence": "model_details.overview: ClimateNet-v2 is a deep convolutional neural network trained to identify and segment\nextreme weather events (tropical cy\u2026",
+          "quality_note": "model_details.overview: ClimateNet-v2 is a deep convolutional neural network trained to identify and segment\nextreme weather events (tropical cy\u2026"
         },
         {
           "name": "Primary Intended Use Articulated",
           "score": 1,
-          "evidence": "considerations.use_cases: list(3)",
-          "quality_note": "considerations.use_cases: list(3)"
+          "evidence": "considerations.use_cases: list(4)",
+          "quality_note": "considerations.use_cases: list(4)"
         },
         {
           "name": "Mission Relevance Stated (Extended)",
-          "score": 0,
-          "evidence": "Missing all of: mission_relevance",
-          "quality_note": "Missing all of: mission_relevance"
+          "score": 1,
+          "evidence": "mission_relevance: dict(keys=['doe_project', 'doe_facility', 'funding_source', 'description'])",
+          "quality_note": "mission_relevance: dict(keys=['doe_project', 'doe_facility', 'funding_source', 'description'])"
         },
         {
           "name": "Funding Source / Grant Agency Listed",
-          "score": 0,
-          "evidence": "Missing all of: model_details.contributors, mission_relevance, mission_relevance.funding_grants",
-          "quality_note": "Missing all of: model_details.contributors, mission_relevance, mission_relevance.funding_grants"
+          "score": 1,
+          "evidence": "Funding agency mentioned in affiliations / mission_relevance / funding_grants",
+          "quality_note": "Funding agency mentioned in affiliations / mission_relevance / funding_grants"
         },
         {
           "name": "Compute / Platform Acknowledgement",
           "score": 1,
-          "evidence": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026",
-          "quality_note": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026"
+          "evidence": "model_parameters.compute_infrastructure: dict(keys=['hardware', 'hardware_list', 'software', 'software_dependencies', 'training_speed'])",
+          "quality_note": "model_parameters.compute_infrastructure: dict(keys=['hardware', 'hardware_list', 'software', 'software_dependencies', 'training_speed'])"
         }
       ],
-      "element_score": 3,
+      "element_score": 5,
       "element_max": 5
     },
     {
@@ -289,21 +289,21 @@
       "sub_elements": [
         {
           "name": "Training Procedure Documented",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.training_procedure",
-          "quality_note": "Missing all of: model_parameters.training_procedure"
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])"
         },
         {
           "name": "Evaluation Procedure Documented",
           "score": 1,
-          "evidence": "quantitative_analysis: dict(keys=['performance_metrics'])",
-          "quality_note": "quantitative_analysis: dict(keys=['performance_metrics'])"
+          "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info'])"
         },
         {
           "name": "Reproducibility Information (Extended)",
-          "score": 0,
-          "evidence": "Missing all of: mission_relevance, usage_documentation",
-          "quality_note": "Missing all of: mission_relevance, usage_documentation"
+          "score": 1,
+          "evidence": "mission_relevance: dict(keys=['doe_project', 'doe_facility', 'funding_source', 'description'])",
+          "quality_note": "mission_relevance: dict(keys=['doe_project', 'doe_facility', 'funding_source', 'description'])"
         },
         {
           "name": "Open-Source Code Linked",
@@ -318,7 +318,7 @@
           "quality_note": "model_details.references: list(2)"
         }
       ],
-      "element_score": 3,
+      "element_score": 5,
       "element_max": 5
     },
     {
@@ -335,8 +335,8 @@
         {
           "name": "Performance Across Slices / Subpopulations",
           "score": 1,
-          "evidence": "3 distinct slice(s) reported",
-          "quality_note": "3 distinct slice(s) reported"
+          "evidence": "2 distinct slice(s) reported",
+          "quality_note": "2 distinct slice(s) reported"
         },
         {
           "name": "Confidence Intervals or Error Bars",
@@ -347,14 +347,14 @@
         {
           "name": "Limitations Section Present",
           "score": 1,
-          "evidence": "considerations.limitations: list(4)",
-          "quality_note": "considerations.limitations: list(4)"
+          "evidence": "considerations.limitations: list(3)",
+          "quality_note": "considerations.limitations: list(3)"
         },
         {
           "name": "Tradeoffs / Risks Acknowledged",
           "score": 1,
-          "evidence": "considerations.tradeoffs: list(1)",
-          "quality_note": "considerations.tradeoffs: list(1)"
+          "evidence": "considerations.tradeoffs: list(2)",
+          "quality_note": "considerations.tradeoffs: list(2)"
         }
       ],
       "element_score": 5,
@@ -379,46 +379,49 @@
         },
         {
           "name": "Benchmark Results (Papers with Code)",
-          "score": 1,
-          "evidence": "1 benchmark result(s)",
-          "quality_note": "1 benchmark result(s)"
+          "score": 0,
+          "evidence": "Missing all of: model_index",
+          "quality_note": "Missing all of: model_index"
         },
         {
           "name": "Standards / Schema Conformance Stated",
           "score": 1,
-          "evidence": "schema_version: 0.0.2",
-          "quality_note": "schema_version: 0.0.2"
+          "evidence": "schema_version: 2.0.0-extended",
+          "quality_note": "schema_version: 2.0.0-extended"
         },
         {
           "name": "Datasets Linked",
           "score": 1,
-          "evidence": "1 dataset(s) with name+link",
-          "quality_note": "1 dataset(s) with name+link"
+          "evidence": "3 dataset(s) with name+link",
+          "quality_note": "3 dataset(s) with name+link"
         }
       ],
-      "element_score": 5,
+      "element_score": 4,
       "element_max": 5
     }
   ],
   "overall_score": {
-    "total_points": 41,
+    "total_points": 47,
     "max_points": 50,
-    "percentage": 82.0
+    "percentage": 94.0
   },
   "assessment": {
     "strengths": [
       "Strong Model Discovery and Identification (5/5)",
       "Strong Model Access and Distribution (5/5)",
-      "Strong Model Reuse and Interoperability (4/5)",
+      "Strong Model Reuse and Interoperability (5/5)",
+      "Strong Model Architecture and Training Composition (5/5)",
       "Strong Model Provenance and Versioning (5/5)",
+      "Strong Scientific Motivation and Funding Transparency (5/5)",
+      "Strong Training and Evaluation Transparency (5/5)",
       "Strong Performance Evaluation and Limitations Disclosure (5/5)",
-      "Strong Cross-Platform and Community Integration (5/5)"
+      "Strong Cross-Platform and Community Integration (4/5)"
     ],
     "weaknesses": [],
     "recommendations": []
   },
   "metadata": {
     "evaluator_id": "batch-hybrid-evaluator",
-    "model_card_hash": "a6e1fe2a52c1382b10ae5ebfcff5e946a71c637bf4bad13aa84e0943d656994e"
+    "model_card_hash": "2bf73e9b356746c67d842053941a02ec8fe2b8d90aa8017839f487b5b9dd21de"
   }
 }

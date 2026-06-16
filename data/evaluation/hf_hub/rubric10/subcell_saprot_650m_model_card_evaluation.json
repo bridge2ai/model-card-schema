@@ -2,7 +2,7 @@
   "rubric": "mc_rubric10",
   "version": "1.0",
   "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
-  "evaluation_timestamp": "2026-06-15T20:41:00.476407+00:00",
+  "evaluation_timestamp": "2026-06-16T03:13:15.425592+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -230,8 +230,8 @@
         {
           "name": "Owners / Contributors Identified",
           "score": 1,
-          "evidence": "2 contributor(s) with role",
-          "quality_note": "2 contributor(s) with role"
+          "evidence": "2 contributor(s)/reference(s) with role",
+          "quality_note": "2 contributor(s)/reference(s) with role"
         },
         {
           "name": "Citation Provided",
@@ -269,8 +269,8 @@
         {
           "name": "Funding Source / Grant Agency Listed",
           "score": 1,
-          "evidence": "Affiliations present (funding agency unclear)",
-          "quality_note": "Affiliations present (funding agency unclear)"
+          "evidence": "Affiliations or funding_grants present (funding agency unclear)",
+          "quality_note": "Affiliations or funding_grants present (funding agency unclear)"
         },
         {
           "name": "Compute / Platform Acknowledgement",

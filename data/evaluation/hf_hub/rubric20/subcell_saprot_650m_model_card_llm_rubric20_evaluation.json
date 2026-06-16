@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric20",
   "version": "1.0",
-  "model_card_file": "subcell_saprot_650m_model_card.yaml",
+  "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
   "model": "SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)",
   "method": "Claude Code Deterministic ASSISTANT (in-session synthesis)",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -49,7 +49,7 @@
           "max_score": 5,
           "score_label": ">=4 tags + pipeline_tag + (language or model_category)",
           "evidence": "tags=[protein-language-model, subcellular-localization, bioinformatics, protein-classification, saprot, lora, deeploc, structure-aware] (8 tags); pipeline_tag='text-classification'; language=['protein']; model_category='protein-language-model'",
-          "quality_note": "Eight tags plus pipeline_tag, language, and model_category — exceeds the threshold comfortably."
+          "quality_note": "Eight tags plus pipeline_tag, language, and model_category \u2014 exceeds the threshold comfortably."
         },
         {
           "id": 4,
@@ -106,7 +106,7 @@
           "max_score": 5,
           "score_label": "Ethical considerations + bias disclosure + out-of-scope, all concrete",
           "evidence": "considerations.ethical_considerations includes 'Mis-localization in drug discovery pipelines' with concrete mitigation; bias_model and bias_output narratives describe DeepLoc/SwissProt species bias and class-prior effects on rare compartments; out_of_scope_uses lists three specific scenarios.",
-          "quality_note": "Ethics, two bias dimensions, and three out-of-scope items — all model-specific, not boilerplate."
+          "quality_note": "Ethics, two bias dimensions, and three out-of-scope items \u2014 all model-specific, not boilerplate."
         },
         {
           "id": 9,
@@ -182,7 +182,7 @@
           "score": 0,
           "max_score": 5,
           "score_label": "No compute infrastructure section",
-          "evidence": "No model_parameters.compute_infrastructure section present. Only an incidental 'Mixed precision (FP16) on a single GPU' note in training_procedure.description — no hardware model, no GPU-hours, no energy or carbon estimate.",
+          "evidence": "No model_parameters.compute_infrastructure section present. Only an incidental 'Mixed precision (FP16) on a single GPU' note in training_procedure.description \u2014 no hardware model, no GPU-hours, no energy or carbon estimate.",
           "quality_note": "Compute infrastructure block is absent; no quantitative compute or energy reporting."
         }
       ]

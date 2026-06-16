@@ -2,7 +2,7 @@
   "rubric": "mc_rubric10",
   "version": "1.0",
   "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
-  "evaluation_timestamp": "2026-06-15T20:35:41.522523+00:00",
+  "evaluation_timestamp": "2026-06-16T03:13:15.674625+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -17,8 +17,8 @@
         {
           "name": "Persistent Identifier",
           "score": 1,
-          "evidence": "Identifier-like field present but unverified: model_details.references: list(2)",
-          "quality_note": "Identifier-like field present but unverified: model_details.references: list(2)"
+          "evidence": "Resolvable identifier present (model_details.references: list(2))",
+          "quality_note": "Resolvable identifier present (model_details.references: list(2))"
         },
         {
           "name": "Model Name and Description Completeness",
@@ -230,8 +230,8 @@
         {
           "name": "Owners / Contributors Identified",
           "score": 1,
-          "evidence": "model_details.creator_references: list(3)",
-          "quality_note": "model_details.creator_references: list(3)"
+          "evidence": "3 owner/contributor/reference(s) (roles missing)",
+          "quality_note": "3 owner/contributor/reference(s) (roles missing)"
         },
         {
           "name": "Citation Provided",
@@ -269,8 +269,8 @@
         {
           "name": "Funding Source / Grant Agency Listed",
           "score": 1,
-          "evidence": "Funding agency mentioned in affiliations or mission_relevance",
-          "quality_note": "Funding agency mentioned in affiliations or mission_relevance"
+          "evidence": "Funding agency mentioned in affiliations / mission_relevance / funding_grants",
+          "quality_note": "Funding agency mentioned in affiliations / mission_relevance / funding_grants"
         },
         {
           "name": "Compute / Platform Acknowledgement",

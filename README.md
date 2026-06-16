@@ -2,6 +2,10 @@ Executive Order 14168: This repository is under review for potential modificatio
 
 # model-card-schema
 
+**Canonical example quality** ([climate-model-extended.yaml](src/data/examples/extended/climate-model-extended.yaml)):
+
+![rubric10 hybrid](data/evaluation/badges/climate-model-extended_rubric10_hybrid.svg)
+![rubric20 hybrid](data/evaluation/badges/climate-model-extended_rubric20_hybrid.svg)
 
 A LinkML schema for the Model Cards model as published in [Model Cards for Model Reporting](https://arxiv.org/abs/1810.03993), which is an effort to democratize AI/ML technologies including increasing transparency. Model Cards represent information about trained machine learning models and can provide data on benchmarked model evaluations across a variety of conditions, including varying cultural, demographic, or phenotypic factors. Model Cards can also specify the applicable contexts for using the trained model and other relevant information.
 
@@ -20,6 +24,57 @@ This repository now includes comprehensive integration with **Datasheets for Dat
 - 📚 **Complete examples** - Working examples with full documentation
 
 **Quick Start**: See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for step-by-step instructions.
+
+## 🎯 Quality Evaluation
+
+This repo ships **two rubrics** for scoring Model Card YAMLs, plus a hybrid (rule-based) batch evaluator and an LLM-based judge for each:
+
+- **rubric10** — 10 elements × 5 sub-elements (50 points). Coarse, fast quality check.
+- **rubric20** — 20 questions across 4 categories: Structural Completeness, Metadata Quality, Technical Documentation, Performance & FAIRness (84 points). Detailed audit.
+
+Each rubric runs in two flavors: a **hybrid** scorer (rule-based + heuristics, no LLM cost) and an **LLM** scorer (`mc-rubric10` / `mc-rubric20` Claude sub-agents). The hybrid acts as a fast prefilter; the LLM provides the deeper quality signal.
+
+### Portfolio scores (live)
+
+| Card | Source | rubric10 hybrid | rubric10 LLM | rubric20 hybrid | rubric20 LLM |
+| --- | --- | :---: | :---: | :---: | :---: |
+| [`climate-model-extended.yaml`](src/data/examples/extended/climate-model-extended.yaml) | DOE canonical example | ![](data/evaluation/badges/climate-model-extended_rubric10_hybrid.svg) | ![](data/evaluation/badges/climate-model-extended_rubric10_llm.svg) | ![](data/evaluation/badges/climate-model-extended_rubric20_hybrid.svg) | ![](data/evaluation/badges/climate-model-extended_rubric20_llm.svg) |
+| [`climate-forecasting-model-card.yaml`](src/data/examples/d4d_integration/climate-forecasting-model-card.yaml) | Harmonized + D4D refs | ![](data/evaluation/badges/climate-forecasting-model-card_rubric10_hybrid.svg) | ![](data/evaluation/badges/climate-forecasting-model-card_rubric10_llm.svg) | ![](data/evaluation/badges/climate-forecasting-model-card_rubric20_hybrid.svg) | ![](data/evaluation/badges/climate-forecasting-model-card_rubric20_llm.svg) |
+| [`sentiment-classifier-with-datasheet-refs.yaml`](src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml) | Harmonized | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric10_hybrid.svg) | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric10_llm.svg) | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric20_hybrid.svg) | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric20_llm.svg) |
+| [`densenet121_tv_in1k_model_card.yaml`](data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml) | HF Hub (timm) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric10_hybrid.svg) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric10_llm.svg) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric20_hybrid.svg) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric20_llm.svg) |
+| [`subcell_saprot_650m_model_card.yaml`](data/model_cards_assistant/subcell_saprot_650m_model_card.yaml) | HF Hub (SaProtHub) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric10_hybrid.svg) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric10_llm.svg) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric20_hybrid.svg) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric20_llm.svg) |
+| [`minimal-viable-model-card.yaml`](src/data/examples/fixtures/minimal-viable-model-card.yaml) | Floor anchor (mid) | ![](data/evaluation/badges/minimal-viable-model-card_rubric10_hybrid.svg) | — | ![](data/evaluation/badges/minimal-viable-model-card_rubric20_hybrid.svg) | — |
+| [`minimal-model-card.yaml`](src/data/examples/fixtures/minimal-model-card.yaml) | Floor anchor (zero) | ![](data/evaluation/badges/minimal-model-card_rubric10_hybrid.svg) | — | ![](data/evaluation/badges/minimal-model-card_rubric20_hybrid.svg) | — |
+
+Color band: 🟢 ≥80% · 🟡 ≥50% · 🔴 <50%.
+
+**Dashboards** (open locally — GitHub doesn't render embedded HTML):
+- [`data/evaluation/all/portfolio_compare.html`](data/evaluation/all/portfolio_compare.html) — cross-evaluator comparison matrix with element-level diffs
+- [`data/evaluation/badges/index.html`](data/evaluation/badges/index.html) — all badges with copy-paste markdown snippets
+
+### Reproduce
+
+```bash
+# Hybrid evaluators (fast, no LLM cost)
+make evaluate-rubric10 MC_INPUT=path/to/card.yaml MC_EVAL_DIR=data/evaluation/mine/rubric10
+make evaluate-rubric20 MC_INPUT=path/to/card.yaml MC_EVAL20_DIR=data/evaluation/mine/rubric20
+
+# LLM evaluators (via Claude Code sub-agents in this session) — tell the
+# agent where to write the JSON so the render-* targets below pick it up:
+# > "Evaluate path/to/card.yaml with rubric10 and save the JSON to
+# >  data/evaluation/mine/rubric10/<stem>_llm_evaluation.json"
+# > "Evaluate path/to/card.yaml with rubric20 and save the JSON to
+# >  data/evaluation/mine/rubric20/<stem>_llm_rubric20_evaluation.json"
+
+# Render reports + badges
+make render-eval     EVAL_JSONS='data/evaluation/mine/**/*.json' EVAL_HTML=data/evaluation/mine/report.html
+make render-compare  EVAL_JSONS='data/evaluation/mine/**/*.json' EVAL_HTML=data/evaluation/mine/compare.html
+make render-badges   EVAL_JSONS='data/evaluation/mine/**/*.json' BADGE_DIR=data/evaluation/mine/badges
+```
+
+### `@mcassistant` GitHub Action
+
+Mention `@mcassistant` in an issue with a HuggingFace Hub URL (or a GitHub README link) and the assistant will generate a Model Card YAML in `data/model_cards_assistant/`, validate it against the schema, score it against the quality gate, and open a PR. See [`.goosehints`](.goosehints) for the full workflow contract.
 
 ## Repository Structure
 

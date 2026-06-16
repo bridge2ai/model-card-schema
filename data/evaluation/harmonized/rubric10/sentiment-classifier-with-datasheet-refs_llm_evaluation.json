@@ -1,0 +1,449 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
+  "model": "BERT Sentiment Classifier v1.2",
+  "method": "harmonized_d4d_external_refs",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 31,
+    "max_points": 50,
+    "percentage": 62.0
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 0,
+          "evidence": "model_details.references: ['https://arxiv.org/abs/1810.04805', 'https://example.org/models/bert-sentiment']",
+          "quality_note": "No DOI or HuggingFace Hub ID present. The references are a paper (BERT original) and an example.org URL (placeholder domain). No persistent identifier like DOI, HF Hub model ID, or Zenodo record."
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: 'BERT Sentiment Classifier v1.2'; overview: 119 chars; documentation: 247 chars",
+          "quality_note": "Clear name with version. Overview is brief (119 chars) but meaningful. Documentation provides additional context about BERT-base architecture and fine-tuning. Combined overview + documentation exceed 200 chars and explain purpose."
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: ['sentiment-analysis', 'bert', 'pytorch', 'transformers', 'text-classification', 'movie-reviews'] (6 tags); pipeline_tag: 'text-classification'",
+          "quality_note": "Excellent tag coverage with 6 relevant tags. Pipeline tag is properly specified for HuggingFace-style discovery."
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 0,
+          "evidence": "model_details.references[1]: 'https://example.org/models/bert-sentiment'",
+          "quality_note": "URL uses placeholder 'example.org' domain, not a real accessible landing page or repository. No GitHub, HuggingFace Hub, or institutional repository link."
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: '2.0.1'; library_name: 'transformers'",
+          "quality_note": "Complete framework specification with version (PyTorch 2.0.1) and library (transformers). Sufficient for reproducibility."
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 0,
+          "evidence": "deployment_info.container_image: 'example-org/bert-sentiment:1.2.0'; deployment_info.inference_endpoint: 'https://api.example.org/...'",
+          "quality_note": "Container image and endpoint are placeholders (example-org, example.org). No actual weight download mechanism specified (no HF Hub, S3, or real hosting service)."
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 0,
+          "evidence": "No code repository field in model_details.references or usage_documentation",
+          "quality_note": "No GitHub/GitLab repository link provided for training or inference code. Only has paper reference and placeholder landing page."
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "input_format includes example: 'This movie was absolutely fantastic! Highly recommended.'; deployment_info.inference_endpoint present; input/output format maps defined",
+          "quality_note": "Input format includes a concrete usage example. API endpoint specified (though placeholder). Input/output schemas well-defined but no complete code snippet."
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "input_format: 'Text string, maximum 1024 tokens...'; input_format_map: [text: string, max_length: 1024]; output_format: 'Binary classification...'; output_format_map: [predicted_class, probabilities, confidence]",
+          "quality_note": "Excellent input/output specification with structured format maps, max length constraints, and clear data types. Actionable for integration."
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "Container image mentioned but no explicit file format (safetensors, ONNX, PyTorch state_dict, etc.)",
+          "quality_note": "No explicit mention of weight file format. Container deployment info present but doesn't specify serialization format."
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: 'Apache-2.0'",
+          "quality_note": "Clear SPDX-style license (Apache-2.0) that permits commercial and research reuse with attribution."
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: '2.0.1'; library_name: 'transformers'",
+          "quality_note": "Standard framework (PyTorch 2.0.1) with widely-adopted library (transformers/HuggingFace). High interoperability."
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "base_model: 'bert-base-uncased'; model_details.references: 'https://arxiv.org/abs/1810.04805' (BERT paper)",
+          "quality_note": "Clear base model identifier (bert-base-uncased) and reference to original BERT paper. Fine-tuning lineage established."
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: 'text-classification'; considerations.use_cases: [3 specific use cases]; model_index.task.type: 'text-classification'",
+          "quality_note": "Clear task declaration (text-classification, sentiment analysis) with three concrete use cases: product review analysis, content moderation, customer feedback analysis."
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 0,
+          "evidence": "No training procedure, hyperparameters, seeds, or training configuration documented in model_parameters",
+          "quality_note": "Missing critical reproducibility information: no training procedure, hyperparameters, optimizer config, learning rate, batch size, seeds, or training environment specs."
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations: [2 items] - 'Bias in training data' with mitigation (testing on diverse sources, human-in-the-loop); 'Potential for misuse in censorship' with mitigation (documentation, human review)",
+          "quality_note": "Two concrete ethical considerations with specific mitigation strategies. Not generic; addresses actual risks (demographic bias, censorship misuse)."
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 0,
+          "evidence": "No bias_model or bias_output fields present; ethical_considerations mention 'demographic and cultural biases' but no concrete bias specification",
+          "quality_note": "Biases mentioned in mitigation strategy but not disclosed as structured bias_model or bias_output fields. No specific demographic, sampling, or representation biases enumerated."
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 0,
+          "evidence": "No considerations.out_of_scope_uses field present",
+          "quality_note": "Missing out_of_scope_uses field. Ethical considerations mention misuse potential but don't explicitly list discouraged applications."
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 0,
+          "evidence": "No model_parameters.data[].sensitive field or sensitive_data_used disclosure",
+          "quality_note": "No disclosure of sensitive data, PII, or protected attributes in training data. IMDb reviews may contain user-generated content but this isn't documented as sensitive."
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users: ['Content moderators...', 'Researchers...', 'Product teams...']; considerations.tradeoffs: 'Accuracy vs. Speed' with specific latency trade-off",
+          "quality_note": "Three user groups clearly named with contexts. One concrete tradeoff (accuracy vs speed: BERT-base ~50ms vs DistilBERT for latency-critical apps)."
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: 'BERT-base (110M parameters): 12 transformer layers, 768 hidden dimensions, 12 attention heads; Classification head: Dense (768\u2192256), ReLU, Dropout(0.1), Output(256\u21922)'",
+          "quality_note": "Excellent architectural detail: parameter count, layer specifications, hidden dims, attention heads, and task-specific head architecture with dimensions and activations."
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.data[0]: name='IMDb Movie Reviews', link='https://ai.stanford.edu/~amaas/data/sentiment/', description includes size (50,000 reviews), balance info; dataset_documentation.training_datasets includes datasheet references",
+          "quality_note": "Training data well-documented with dataset name, accessible link (Stanford), composition (50k balanced reviews), and external datasheet references (D4D format, DOI 10.18653/v1/P11-1015)."
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 0,
+          "evidence": "No model_parameters.training_procedure field; no hyperparameters documented",
+          "quality_note": "Missing training procedure entirely: no optimizer, learning rate, batch size, epochs, scheduler, or regularization parameters."
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "No model_parameters.compute_infrastructure field; deployment_info.hardware_requirements only covers inference (not training)",
+          "quality_note": "No training compute infrastructure reported. Inference requirements specified (4GB RAM, NVIDIA T4) but no training GPU/TPU, compute hours, or energy use."
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_parameters.data lists IMDb (training); dataset_documentation.evaluation_datasets includes SST2-v1; model_index.dataset.split: 'test'; quantitative_analysis.performance_metrics sliced by 'test_set'",
+          "quality_note": "Training dataset (IMDb) and evaluation dataset (SST2) separately documented. Test split explicitly referenced in benchmarks. Though split sizes not specified, the separation is clear."
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: '1.2.0'",
+          "quality_note": "Semantic version number (1.2.0) present."
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2025-11-20'",
+          "quality_note": "ISO 8601 release date provided."
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: '- Improved accuracy by 5% through hyperparameter tuning\\n- Added support for longer sequences (512 \u2192 1024 tokens)\\n- Fixed bias in handling negation'",
+          "quality_note": "Concrete, actionable change description with three specific improvements: accuracy gain, sequence length increase, bias fix. Not just a version bump."
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.owners: [{'name': 'ML Research Team', 'contact': 'ml-team@example.org'}, {'name': 'Jane Smith', 'contact': 'jane.smith@example.org'}]",
+          "quality_note": "Two owners identified with names and contact emails. Though simplified structure (no roles/ORCID/affiliations), sufficient for attribution and contact."
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0]: style='APA', citation='Smith, J., & Team, M. (2025). BERT Sentiment Classifier v1.2. Example Organization.'",
+          "quality_note": "Citation provided in APA format. Not BibTeX but machine-parsable structured citation. Includes authors, year, version, and organization."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: 'Fine-tuned BERT-base model for binary sentiment classification. Trained on IMDb movie reviews...'; considerations.use_cases: [3 detailed use cases]",
+          "quality_note": "Clear motivation (binary sentiment classification on movie reviews) and three concrete use cases explaining deployment contexts."
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "pipeline_tag: 'text-classification'; considerations.use_cases[0]: 'Automated sentiment analysis of product reviews'",
+          "quality_note": "Primary use clearly stated: automated sentiment analysis for product reviews, content filtering, and customer feedback analysis. Task and target users identified."
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "No mission_relevance field present",
+          "quality_note": "No DOE or domain mission alignment documented. This is an extended template field not present in harmonized example."
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "No funding information in owners, contributors, or mission_relevance fields",
+          "quality_note": "No funding sources, grant agencies, or program names disclosed."
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 0,
+          "evidence": "No acknowledgements of computing facilities, cloud credits, or supporting institutions",
+          "quality_note": "No acknowledgement of compute infrastructure, supercomputing facilities, or institutional support for training."
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 0,
+          "evidence": "No model_parameters.training_procedure field present",
+          "quality_note": "Training procedure completely missing: no loss function, optimizer, scheduler, epochs, augmentation, or regularization details."
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 0,
+          "evidence": "No evaluation procedure field; quantitative_analysis has metrics but no procedure documentation",
+          "quality_note": "Evaluation metrics reported but no procedure: no protocol, metrics computation methodology, or slicing strategy documentation."
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "No reproducibility info, seeds, deterministic flags, environment pins, or container hashes in extended fields",
+          "quality_note": "No reproducibility artifacts: missing seeds, deterministic mode flags, environment specifications, or container/image hashes."
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 0,
+          "evidence": "No GitHub/GitLab links in references or usage_documentation",
+          "quality_note": "No code repository links for training or inference code. References include paper and placeholder landing page only."
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.references: 'https://arxiv.org/abs/1810.04805' (BERT paper); dataset_documentation references Datasheets for Datasets v1.0 framework",
+          "quality_note": "External standards cited: original BERT paper (Devlin et al., 2018) and Datasheets for Datasets v1.0 framework for dataset documentation."
+        }
+      ],
+      "element_score": 1,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: 5 metrics (accuracy=0.92, f1_positive=0.91, f1_negative=0.93, precision=0.90, recall=0.94) all with slices",
+          "quality_note": "Excellent metric coverage: accuracy, F1, precision, recall all reported with numeric values and slice specifications (test_set, test_set_positive, test_set_negative)."
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 1,
+          "evidence": "performance_metrics sliced by: 'test_set', 'test_set_positive', 'test_set_negative' \u2014 metrics broken down by sentiment class",
+          "quality_note": "Per-class performance breakdown (positive vs negative sentiment). Shows F1 variation across subgroups (0.91 vs 0.93)."
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "performance_metrics[0].confidence_interval: {lower_bound: 0.91, upper_bound: 0.93} for accuracy",
+          "quality_note": "Confidence interval provided for accuracy metric (91%-93%). Demonstrates uncertainty quantification."
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: [4 items] - sarcasm/irony (65% accuracy), domain transfer, English-only, sequence length (1024 tokens)",
+          "quality_note": "Four concrete, specific limitations with failure modes and degradation estimates. Not generic warnings; includes measurable performance drops (e.g., 65% on sarcasm)."
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs: 'Accuracy vs. Speed: BERT-base ~50ms per review vs DistilBERT for latency-critical'; ethical_considerations address misuse risks",
+          "quality_note": "Concrete accuracy-latency tradeoff with quantified inference time (50ms) and alternative recommendation (DistilBERT). Ethical risks (bias, censorship) also acknowledged."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 0,
+          "evidence": "References use example.org placeholder domain; no HuggingFace Hub, Papers with Code, TF Hub, Zenodo, or GitHub Releases link",
+          "quality_note": "No real platform publication. All URLs are placeholder example.org domains, not accessible repositories or model registries."
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "base_model: 'bert-base-uncased'; dataset DOI: '10.18653/v1/P11-1015'; BERT paper reference: 'https://arxiv.org/abs/1810.04805'",
+          "quality_note": "Base model referenced (bert-base-uncased), dataset DOI provided (IMDb paper), and original BERT paper linked. Good cross-referencing despite placeholder domains."
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "model_index[0].results: task=text-classification, dataset=imdb/test, metrics=[accuracy: 0.92, f1: 0.91], source.name='Internal Evaluation'",
+          "quality_note": "Structured benchmark results in Papers with Code format: task type, dataset, split, and metrics. Source attribution present (though internal, not leaderboard)."
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: '0.0.2'; dataset_documentation.datasheet_format: 'datasheets-for-datasets-v1.0'",
+          "quality_note": "Schema conformance declared (Google MCT v0.0.2) and external dataset schema referenced (Datasheets for Datasets v1.0). Clear standards alignment."
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 1,
+          "evidence": "dataset_documentation.training_datasets[0]: datasheet_url='https://datasheets.example.org/imdb-sentiment-v1.yaml', datasheet_doi='10.18653/v1/P11-1015', datasheet_format='datasheets-for-datasets-v1.0'; data[0].link='https://ai.stanford.edu/~amaas/data/sentiment/'",
+          "quality_note": "Excellent D4D integration: datasets linked with external datasheet URLs, DOIs, and format declarations. IMDb dataset has both data link and datasheet reference. This is the harmonized pattern's strength."
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Excellent provenance and versioning (5/5): semantic version, release date, detailed change log, owner contacts, and citation",
+      "Strong performance evaluation (5/5): comprehensive metrics with slices, confidence intervals, and four concrete limitations with quantified degradation",
+      "Exemplary D4D harmonization: datasets linked to external datasheets with DOIs, format declarations, and comprehensive documentation pointers",
+      "Clear architecture specification: BERT-base with 110M params, layer-by-layer breakdown including classification head dimensions",
+      "Good reuse support: Apache-2.0 license, standard framework (PyTorch 2.0.1 + transformers), base model lineage (bert-base-uncased)",
+      "Thoughtful ethical considerations: two concrete risks (demographic bias, censorship misuse) with specific mitigation strategies"
+    ],
+    "weaknesses": [
+      "Missing training transparency (1/5 in Element 8): no training procedure, hyperparameters, optimizer, learning rate, batch size, epochs, or reproducibility artifacts (seeds, environment)",
+      "No persistent identifier or real platform: all URLs are placeholder example.org domains; no DOI, HuggingFace Hub ID, or accessible repository",
+      "Incomplete responsible AI documentation (2/5 in Element 4): missing bias_model/bias_output structured disclosure and out_of_scope_uses field",
+      "No code repository: no GitHub/GitLab links for training or inference code; limits reproducibility despite good architectural docs",
+      "Missing compute infrastructure: no training GPU/TPU specs, compute hours, or energy use (only inference requirements documented)",
+      "No funding transparency: no grant agencies, program names, or institutional support acknowledged"
+    ],
+    "recommendations": [
+      "Add model_parameters.training_procedure with: optimizer (e.g., AdamW), learning rate (e.g., 2e-5), batch size, epochs (e.g., 3), warmup steps, and loss function (cross-entropy)",
+      "Document compute infrastructure: training hardware (e.g., 4x NVIDIA V100, 24 GPU-hours), software environment (PyTorch 2.0.1, CUDA 11.8, transformers 4.30.0), and reproducibility seeds",
+      "Add considerations.out_of_scope_uses listing: clinical/medical diagnosis, legal decision-making, non-English sentiment analysis, real-time critical systems",
+      "Populate bias_model and bias_output with concrete findings from fairness audit (e.g., demographic bias from IMDb user distribution, genre-specific performance variation)",
+      "Replace placeholder example.org URLs with real resources: publish weights to HuggingFace Hub, code to GitHub, obtain DOI via Zenodo or institutional repository",
+      "Add training/evaluation evaluation_procedure documentation: how metrics were computed, train/val/test split methodology, evaluation protocol",
+      "Document funding sources if applicable (e.g., NSF grant, institutional support, cloud compute credits) for transparency",
+      "Link GitHub repository with training scripts, inference code, and environment configuration (requirements.txt or environment.yml)"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "rubric10-claude-sonnet-4-5",
+    "rubric_hash": "mc_rubric10_v1.0_sha256",
+    "model_card_hash": "sentiment-classifier-harmonized-sha256",
+    "harmonized_schema_variant": true,
+    "external_datasheet_refs": [
+      "imdb-sentiment-v1",
+      "sst2-v1"
+    ],
+    "evaluation_notes": "This harmonized Model Card demonstrates the external reference pattern for D4D integration (Pattern 1 from INTEGRATION_GUIDE.md). It avoids schema imports and uses string-based references to external datasheets. As a simplified example card, it deliberately omits extended template fields (mission_relevance, compute_infrastructure, training_procedure), resulting in lower scores in Elements 5, 7, and 8. The card excels in versioning, performance metrics, and dataset documentation through external datasheets."
+  }
+}

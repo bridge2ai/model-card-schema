@@ -1,0 +1,274 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
+  "model": "Climate Forecasting Transformer v2.1",
+  "method": "harmonized_d4d",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 79,
+    "max_points": 84,
+    "percentage": 94.0
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 20,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 populated with non-trivial content",
+          "evidence": "model_details.name='Climate Forecasting Transformer v2.1'; overview describes transformer for regional climate prediction trained on 50 yrs NOAA data; licenses=[{identifier: 'Apache-2.0'}]; version.name='v2.1.0'; model_architecture='Custom Transformer with Spatiotemporal Attention: 12 encoder layers, 8 heads, hidden 512, 85M params'",
+          "quality_note": "All five required fields populated with concrete, model-specific content."
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars across overview/documentation with meaningful structure",
+          "evidence": "overview (~270 chars) + documentation (~260 chars) + short_description (~75 chars) combine to well over 500 chars; documentation describes spatiotemporal attention mechanism architecture.",
+          "quality_note": "Two-part narrative (overview + documentation) clearly exceeds 500 chars and provides meaningful structure."
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "≥4 tags AND pipeline_tag AND (language or model_category)",
+          "evidence": "tags=[climate, weather, forecasting, transformer, spatiotemporal, extreme-events, project:genesis, science:climate, risk:reviewed] (9 tags); pipeline_tag='climate-forecasting'; language=[en]",
+          "quality_note": "Nine domain-specific tags including namespaced project/science/risk tags, plus pipeline_tag and language."
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Input and output specified with shape/type; only input_format_map populated",
+          "evidence": "input_format describes 3D tensor [time_steps, lat_grid, lon_grid, variables] with explicit shapes; output_format describes probabilistic forecast tensor with quantiles; input_format_map has 5 entries (temperature, pressure, humidity, wind_u, wind_v); output_format_map not provided.",
+          "quality_note": "Excellent input documentation including shape and units; output is prose-described with shape but lacks an output_format_map structure."
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: d4d-1.0",
+          "quality_note": "Recognizable schema version string declared at top of file."
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 19,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_details.references includes https://doi.org/10.1234/climate-ai-2025 (DOI) and GitHub repo URL; model_details.path='s3://climate-models/forecasting-transformer-v2.1/'",
+          "quality_note": "DOI is a true persistent identifier; S3 path and GitHub link supplement."
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Funding agency + grant ID + acknowledgement of computing facility",
+          "evidence": "mission_relevance.funding_grants references DOE SciDAC Climate Modeling and NSF AI for Climate (grant references via D4D); mission_relevance.doe_project='GENESIS Climate AI Initiative'; doe_facility='OLCF Frontier, ALCF Polaris'; description acknowledges DOE Leadership Computing Facilities.",
+          "quality_note": "Two funding agencies (DOE, NSF) named with grant references and explicit acknowledgement of the OLCF Frontier and ALCF Polaris computing facilities."
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Ethical considerations + out_of_scope_uses populated; bias addressed within ethical_considerations rather than dedicated bias_* slots",
+          "evidence": "ethical_considerations: [Climate_justice with mitigation_strategy to evaluate across all regions including rural/underserved; Over_reliance_risk with mitigation to always communicate uncertainty]; out_of_scope_uses: 4 concrete items (long-term projections, regions outside NA, deterministic forecasts, emergency response without expert verification).",
+          "quality_note": "Strong ethical content with concrete mitigation strategies and detailed out_of_scope_uses; bias is addressed under ethical_considerations (climate justice) rather than explicit bias_model/output/input slots, slightly short of full criteria."
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "SPDX identifier present; no explicit restriction text",
+          "evidence": "model_details.licenses: [{identifier: Apache-2.0}]",
+          "quality_note": "Clean SPDX identifier (Apache-2.0); no custom_text or restriction statement provided to clarify any boundaries beyond Apache-2.0 defaults."
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Framework + version pinned + library_name + Papers-with-Code-style model_index",
+          "evidence": "framework=PyTorch; framework_version=2.1.0; library_name=climate-forecasting; model_index entry with task, dataset, metrics, and source URL conforms to Papers-with-Code shape.",
+          "quality_note": "All four signals present with well-formed Papers-with-Code-style model_index entry."
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 23,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Comprehensive: framework_version + reproducibility-relevant libs + env pinning",
+          "evidence": "compute_infrastructure.software_dependencies contains a pinned pip-freeze (torch==2.1.0, transformers==4.35.0, numpy==1.24.3, xarray==2023.8.0, netCDF4==1.6.4, dask==2023.9.0); environment_config pins CUDA_VERSION=12.1, NCCL_VERSION=2.18, PYTORCH_CUDA_ALLOC_CONF; usage_documentation includes installation_instructions with conda env and pip install commands.",
+          "quality_note": "Excellent reproducibility documentation: pinned dependencies, CUDA/NCCL versions, conda env, install commands."
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Optimizer + LR + batch size + epochs/steps + schedule + regularization disclosed",
+          "evidence": "hyperparameters: optimizer=AdamW, learning_rate=0.0001, batch_size=32, training_epochs=50, training_steps=125000, optimization_techniques include mixed precision, gradient checkpointing, gradient clipping (max_norm=1.0), LR warmup (5000 steps), cosine annealing schedule; loss_function='Weighted MSE + quantile loss'; methodology describes DDP + fp16 + early stopping.",
+          "quality_note": "Complete set of hyperparameters and training methodology disclosed including curriculum-learning stages."
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver name + ISO date + non-trivial diff",
+          "evidence": "version.name='v2.1.0' (semver); version.date='2025-01-15' (ISO); version.diff lists 3 concrete changes (15% extreme-weather detection improvement, added precipitation uncertainty quantification, 30% inference speedup via pruning); last_updated='2025-01-20T14:30:00Z'.",
+          "quality_note": "Clean semver, ISO date, and a substantive change log."
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Citation with DOI AND multiple references with DOIs/URLs",
+          "evidence": "citations: APA-style entry for Smith et al. 2025 in Journal of Climate AI with DOI https://doi.org/10.1234/climate-ai-2025; references: GitHub repo URL and DOI URL.",
+          "quality_note": "Formal citation with DOI plus two distinct external references (code repo + DOI)."
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Hardware AND software listed; no GPU-hours/FLOPs or energy/carbon estimate",
+          "evidence": "compute_infrastructure.hardware='8x NVIDIA A100 80GB GPUs'; hardware_list includes OLCF Frontier MI250X and ALCF Polaris A100; software='PyTorch 2.1, CUDA 12.1'; training_speed='~2500 samples/sec on 8x A100'. No total GPU-hours, FLOPs, kWh, or carbon estimate disclosed.",
+          "quality_note": "Strong hardware/software disclosure including DOE LCFs, but no total compute budget or energy/carbon estimate to enable environmental accounting."
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 17,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include GitHub repo (https://github.com/climate-ai-lab/climate-transformer) and DOI (https://doi.org/10.1234/climate-ai-2025); model_details.path='s3://climate-models/forecasting-transformer-v2.1/'; model_index.source.url='https://benchmark.noaa.gov/climate-v3'.",
+          "quality_note": "Multiple resolvable landing URLs across code, publication, weights, and benchmark."
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Runnable code example + I/O formats + library hooks",
+          "evidence": "usage_documentation includes installation_instructions, training_configuration, inference_configuration (full PyTorch snippet with .from_pretrained, .to('cuda'), torch.no_grad inference returning quantiles), and two complete code_examples (forecasting + extreme detection) in Python; matched by detailed input_format and output_format specs.",
+          "quality_note": "End-to-end runnable Python examples plus install/training/inference configurations and tensor I/O documentation."
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "≥2 metrics with numeric values AND ≥2 slices AND CIs present",
+          "evidence": "performance_metrics: RMSE_temperature=1.23 [CI 1.18-1.28, ±0.05] Kelvin slice='7-day forecast'; RMSE_precipitation=2.45 [CI 2.33-2.57, ±0.12] mm/day slice='7-day forecast'; F1_extreme_events=0.78 [CI 0.74-0.82] slice='Extreme heat/cold events'.",
+          "quality_note": "Three metrics each with numeric value, confidence interval, and slice; two metrics also include value_error."
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All three populated with concrete, model-specific content",
+          "evidence": "limitations: 4 items (7-day horizon, North America only, requires high-quality inputs, OOD extreme events); tradeoffs: 2 items (32x32 grid vs 3x compute; ensembles vs 10x inference cost); out_of_scope_uses: 4 items (long-term projections, non-NA regions, deterministic forecasts, emergency response without expert verification).",
+          "quality_note": "All three sections populated with concrete, model-specific content and explicit cost/benefit reasoning in tradeoffs."
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_index conforms to Papers-with-Code shape with task, dataset (NOAA Climate Prediction Benchmark v3), metrics, and source URL; model_parameters.training_datasets and evaluation_datasets reference D4D datasheet instances (noaa-historical-climate-dataset.yaml, era5-reanalysis, noaa-test-dataset.yaml, extreme-weather-benchmark); model_details.creator_references link to D4D Creator instances and an ORCID; mission_relevance.funding_grants reference D4D Grant instances; citations include DOI to publication.",
+          "quality_note": "Rich cross-platform interlinks across Papers-with-Code, D4D dataset/creator/grant instances, ORCID, and DOI publication."
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Exceptional Performance & FAIRness section: full marks (17/17) with metric CIs, slices, comprehensive tradeoffs/limitations/out-of-scope content, and rich cross-platform interlinks (D4D datasets/creators/grants, Papers-with-Code model_index, ORCID, DOI).",
+      "Strong reproducibility: pinned framework version, full pip-freeze of dependencies, CUDA/NCCL versions, random_seed, environment_config, training pipeline_url, and complete hyperparameter disclosure (optimizer, LR, batch, epochs, steps, schedule, regularization).",
+      "Excellent funding and acknowledgements: two agencies (DOE, NSF) named via D4D grant references, plus explicit acknowledgement of OLCF Frontier and ALCF Polaris computing facilities.",
+      "Two runnable Python code examples (forecasting and extreme event detection) plus install/training/inference configurations make the inference path fully reproducible.",
+      "Diverse, well-namespaced tag set (9 tags including project:/science:/risk: namespaces) and Papers-with-Code-conformant model_index."
+    ],
+    "weaknesses": [
+      "No total compute budget (GPU-hours/FLOPs) or energy/carbon estimate in compute_infrastructure, limiting environmental accounting (Q15: 3/5).",
+      "Bias is addressed via ethical_considerations (climate_justice) but no dedicated bias_model/bias_output/bias_input slots are populated (Q8: 4/5).",
+      "output_format_map is not populated even though input_format_map is (Q4: 4/5).",
+      "License is SPDX-clean (Apache-2.0) but no custom_text or restriction statement is provided (Q9: 4/5)."
+    ],
+    "recommendations": [
+      "Add total training compute (e.g., GPU-hours on Frontier/Polaris) and an energy or carbon estimate to compute_infrastructure to reach 5/5 on Q15.",
+      "Populate output_format_map with per-variable/quantile semantics to mirror input_format_map for full I/O coverage.",
+      "Add explicit bias_model / bias_output / bias_input slots (e.g., regional sampling bias toward NOAA-observed regions, calibration bias across precipitation magnitudes) to strengthen Q8.",
+      "Add a brief license custom_text statement clarifying redistribution and downstream-use boundaries to reach 5/5 on Q9."
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "d73772cf-4e35-4e84-8b2e-1e1e4bbee5fd",
+    "rubric_hash": "c81c94a03409d6248286ee69e0affb72d5d1bb6cd4f845d3e2fd9dcfbcba2ae0",
+    "model_card_hash": "f194fa874de568ff4df2d249fcdd736a07344a54a0f1f29674c4f0a4f816c820"
+  }
+}

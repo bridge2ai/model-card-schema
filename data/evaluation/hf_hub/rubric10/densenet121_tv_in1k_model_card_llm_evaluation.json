@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "densenet121_tv_in1k_model_card.yaml",
+  "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
   "model": "DenseNet-121 (timm/densenet121.tv_in1k)",
   "method": "claudecode_assistant",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -11,9 +11,9 @@
     "evaluation_type": "llm_as_judge"
   },
   "overall_score": {
-    "total_points": 43.0,
+    "total_points": 40,
     "max_points": 50,
-    "percentage": 86.0
+    "percentage": 80.0
   },
   "elements": [
     {
