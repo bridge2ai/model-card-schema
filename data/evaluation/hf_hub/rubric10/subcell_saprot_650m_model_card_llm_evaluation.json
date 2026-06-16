@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "subcell_saprot_650m_model_card.yaml",
+  "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
   "model": "SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)",
   "method": "claudecode_assistant",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -11,9 +11,9 @@
     "evaluation_type": "llm_as_judge"
   },
   "overall_score": {
-    "total_points": 42,
+    "total_points": 40,
     "max_points": 50,
-    "percentage": 84.0
+    "percentage": 80.0
   },
   "elements": [
     {
@@ -81,7 +81,7 @@
         {
           "name": "Input / Output Specification",
           "score": 1,
-          "evidence": "model_parameters.input_format: 'Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens'; input_format_map with type, encoding, max_length; output_format: 'Classification label (integer 0-9)'; output_format_map with shape '[B, 10]' and interpretation of 10 classes",
+          "evidence": "model_parameters.input_format: 'Structure-aware (SA) protein sequence \u2014 amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens'; input_format_map with type, encoding, max_length; output_format: 'Classification label (integer 0-9)'; output_format_map with shape '[B, 10]' and interpretation of 10 classes",
           "quality_note": "Detailed input/output specifications including format, encoding, shape, and class interpretation."
         },
         {
@@ -147,7 +147,7 @@
         {
           "name": "Known Model / Output Bias Disclosed",
           "score": 1,
-          "evidence": "bias_model: 'Predictions reflect the species and protein-family distribution of the DeepLoc training set (SwissProt-biased toward extensively-studied model organisms)...'; bias_output: 'Class prior matches the DeepLoc training distribution — rare compartments (peroxisome, plastid) are likely under-predicted...'",
+          "evidence": "bias_model: 'Predictions reflect the species and protein-family distribution of the DeepLoc training set (SwissProt-biased toward extensively-studied model organisms)...'; bias_output: 'Class prior matches the DeepLoc training distribution \u2014 rare compartments (peroxisome, plastid) are likely under-predicted...'",
           "quality_note": "Specific biases disclosed for both model (species bias toward model organisms) and output (class imbalance in predictions)."
         },
         {

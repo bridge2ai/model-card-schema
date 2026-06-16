@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "climate-model-extended.yaml",
+  "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
   "model": "ClimateNet-v2",
   "method": "manual_extended_template",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -11,9 +11,9 @@
     "evaluation_type": "llm_as_judge"
   },
   "overall_score": {
-    "total_points": 44.0,
+    "total_points": 46,
     "max_points": 50,
-    "percentage": 88.0
+    "percentage": 92.0
   },
   "elements": [
     {
@@ -198,13 +198,13 @@
         {
           "name": "Compute Infrastructure Reported (Extended)",
           "score": 1,
-          "evidence": "compute_infrastructure.hardware: 'NERSC Perlmutter, 64 nodes × 4 A100 40GB = 256 GPUs, AMD EPYC 7763, 512GB RAM, Slingshot-11'; training_speed: '32,768 GPU-hours (128 hours on 256 A100s)'",
+          "evidence": "compute_infrastructure.hardware: 'NERSC Perlmutter, 64 nodes \u00d7 4 A100 40GB = 256 GPUs, AMD EPYC 7763, 512GB RAM, Slingshot-11'; training_speed: '32,768 GPU-hours (128 hours on 256 A100s)'",
           "quality_note": "Detailed compute infrastructure with GPU type/count, CPU, memory, interconnect, and total compute hours"
         },
         {
           "name": "Training / Evaluation Split Defined",
           "score": 1,
-          "evidence": "training_procedure.methodology: 'Train/val/test split: 70/15/15 by simulation year'; quantitative_analysis.evaluation_procedure: 'Test set: 3 climate models × 10 years, Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts'",
+          "evidence": "training_procedure.methodology: 'Train/val/test split: 70/15/15 by simulation year'; quantitative_analysis.evaluation_procedure: 'Test set: 3 climate models \u00d7 10 years, Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts'",
           "quality_note": "Clear train/val/test split with detailed evaluation dataset composition"
         }
       ],
@@ -258,7 +258,7 @@
         {
           "name": "Motivation / Use Case Rationale",
           "score": 1,
-          "evidence": "model_details.overview: 'supports DOE's climate science mission by enabling automated analysis of petabyte-scale climate simulation datasets'; mission_relevance.description: 'enables analysis of multi-petabyte climate datasets, 1000× speedup vs. manual'",
+          "evidence": "model_details.overview: 'supports DOE's climate science mission by enabling automated analysis of petabyte-scale climate simulation datasets'; mission_relevance.description: 'enables analysis of multi-petabyte climate datasets, 1000\u00d7 speedup vs. manual'",
           "quality_note": "Clear motivation with scientific problem statement and mission alignment"
         },
         {
@@ -303,7 +303,7 @@
         {
           "name": "Evaluation Procedure Documented",
           "score": 1,
-          "evidence": "quantitative_analysis.evaluation_procedure: metrics (IoU for segmentation, mAP for detection), benchmarks (3 climate models × 10 years, event counts), baselines (ClimateNet-v1, TECA), uncertainty quantification (bootstrap with 10,000 iterations)",
+          "evidence": "quantitative_analysis.evaluation_procedure: metrics (IoU for segmentation, mAP for detection), benchmarks (3 climate models \u00d7 10 years, event counts), baselines (ClimateNet-v1, TECA), uncertainty quantification (bootstrap with 10,000 iterations)",
           "quality_note": "Detailed evaluation procedure with metrics, benchmarks, baselines, and uncertainty quantification"
         },
         {
@@ -342,13 +342,13 @@
         {
           "name": "Performance Across Sub-populations / Slices",
           "score": 1,
-          "evidence": "performance_metrics slices: 'Test set (E3SM v2)' for segmentation metrics, 'Test set (all events)' for detection, 'single A100 GPU' for throughput; limitations: 'degrades in polar regions (>70°)'",
+          "evidence": "performance_metrics slices: 'Test set (E3SM v2)' for segmentation metrics, 'Test set (all events)' for detection, 'single A100 GPU' for throughput; limitations: 'degrades in polar regions (>70\u00b0)'",
           "quality_note": "Metrics reported with dataset slices and geographic performance variation documented"
         },
         {
           "name": "Confidence Intervals or Error Bars",
           "score": 1,
-          "evidence": "performance_metrics[0-2].confidence_interval: TC IoU [0.841, 0.853], AR IoU [0.774, 0.790], Front IoU [0.681, 0.701]; evaluation_procedure.uncertainty_quantification: 'bootstrap resampling (10,000 iterations), ensemble σ=0.012'",
+          "evidence": "performance_metrics[0-2].confidence_interval: TC IoU [0.841, 0.853], AR IoU [0.774, 0.790], Front IoU [0.681, 0.701]; evaluation_procedure.uncertainty_quantification: 'bootstrap resampling (10,000 iterations), ensemble \u03c3=0.012'",
           "quality_note": "Confidence intervals provided for key metrics with bootstrap methodology"
         },
         {
@@ -425,7 +425,7 @@
       "Dataset links point to model framework pages (CAM, E3SM, MPAS) but not to formal datasheets or registry entries"
     ],
     "recommendations": [
-      "Add bias_model disclosure: 'Geographic bias: Performance degrades in polar regions (>70° latitude) due to limited training data. IoU drops by ~12% for events above 70°N/S.'",
+      "Add bias_model disclosure: 'Geographic bias: Performance degrades in polar regions (>70\u00b0 latitude) due to limited training data. IoU drops by ~12% for events above 70\u00b0N/S.'",
       "Populate sensitive.sensitive_data_used=false for each dataset in model_parameters.data to explicitly confirm no sensitive data",
       "Register model on Zenodo or similar to obtain a DOI; add to model_details.references",
       "Add DOI to SC24 paper citation if available",

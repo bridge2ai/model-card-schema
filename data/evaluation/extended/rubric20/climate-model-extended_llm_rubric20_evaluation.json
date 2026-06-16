@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric20",
   "version": "1.0",
-  "model_card_file": "climate-model-extended.yaml",
+  "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
   "model": "ClimateNet-v2",
   "method": "llm_as_judge",
   "evaluation_timestamp": "2026-06-15T20:29:14Z",
@@ -254,7 +254,7 @@
       "Clear funding attribution with DOE office, BER program, grant number, and NERSC facility"
     ],
     "weaknesses": [
-      "No bias_model / bias_output / bias_input fields populated — bias disclosure happens only obliquely through ethical_considerations",
+      "No bias_model / bias_output / bias_input fields populated \u2014 bias disclosure happens only obliquely through ethical_considerations",
       "Compute reporting lacks an energy or carbon estimate despite GPU-hour totals being available",
       "model_index (Papers-with-Code shape) is not provided, limiting machine-readable benchmark integration",
       "License lacks explicit restriction text and citations have no DOIs or BibTeX entries",

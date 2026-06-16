@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric20",
   "version": "1.0",
-  "model_card_file": "sentiment-classifier-with-datasheet-refs.yaml",
+  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
   "model": "BERT Sentiment Classifier v1.2",
   "method": "harmonized_d4d_external_reference",
   "evaluation_timestamp": "2026-06-16T02:08:44Z",

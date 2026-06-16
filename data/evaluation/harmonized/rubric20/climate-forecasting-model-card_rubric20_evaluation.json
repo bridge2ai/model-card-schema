@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
-  "evaluation_timestamp": "2026-06-15T20:35:41.641679+00:00",
+  "evaluation_timestamp": "2026-06-16T03:13:15.738128+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -68,28 +68,28 @@
     },
     {
       "name": "Metadata Quality & Content",
-      "category_score": 15,
+      "category_score": 19,
       "category_max": 21,
       "questions": [
         {
           "id": 6,
           "name": "Persistent Identifier Present",
           "score_type": "pass_fail",
-          "score": 0,
+          "score": 1,
           "max_score": 1,
-          "score_label": "Only generic URLs, no DOI/HF Hub",
-          "evidence": "refs=['https://github.com/climate-ai-lab/climate-transformer', 'https://doi.org/10.1234/climate-ai-2025']",
-          "quality_note": "Only generic URLs, no DOI/HF Hub"
+          "score_label": "Resolvable persistent identifier",
+          "evidence": "DOI or HF Hub URL present",
+          "quality_note": "Resolvable persistent identifier"
         },
         {
           "id": 7,
           "name": "Funding & Acknowledgements Completeness",
           "score_type": "numeric",
-          "score": 3,
+          "score": 5,
           "max_score": 5,
-          "score_label": "Funding agency mentioned, no grant number",
-          "evidence": "partial",
-          "quality_note": "Funding agency mentioned, no grant number"
+          "score_label": "Agency + grant ID + facility/acknowledgement",
+          "evidence": "all three present",
+          "quality_note": "Agency + grant ID + facility/acknowledgement"
         },
         {
           "id": 8,
@@ -105,11 +105,11 @@
           "id": 9,
           "name": "License Clarity & SPDX Compliance",
           "score_type": "numeric",
-          "score": 4,
+          "score": 5,
           "max_score": 5,
-          "score_label": "SPDX identifier, no explicit restrictions text",
+          "score_label": "SPDX permissive license (no additional restrictions needed)",
           "evidence": "spdx=['Apache-2.0']",
-          "quality_note": "SPDX identifier, no explicit restrictions text"
+          "quality_note": "SPDX permissive license (no additional restrictions needed)"
         },
         {
           "id": 10,
@@ -221,9 +221,9 @@
           "score_type": "numeric",
           "score": 5,
           "max_score": 5,
-          "score_label": "All three populated with concrete items",
+          "score_label": "All three populated with concrete enumerated items",
           "evidence": "lim=4, tradeoffs=2, oos=4",
-          "quality_note": "All three populated with concrete items"
+          "quality_note": "All three populated with concrete enumerated items"
         },
         {
           "id": 20,
@@ -232,20 +232,21 @@
           "score": 1,
           "max_score": 1,
           "score_label": "Cross-platform reference present",
-          "evidence": "benchmark=True, doi=True, dataset_link=False",
+          "evidence": "benchmark=True, doi=True, dataset_link=True",
           "quality_note": "Cross-platform reference present"
         }
       ]
     }
   ],
   "overall_score": {
-    "total_points": 75,
+    "total_points": 79,
     "max_points": 84,
-    "percentage": 89.3
+    "percentage": 94.0
   },
   "assessment": {
     "strengths": [
       "Strong Structural Completeness (21/21)",
+      "Strong Metadata Quality & Content (19/21)",
       "Strong Technical Documentation (22/25)",
       "Strong Performance & FAIRness (17/17)"
     ],

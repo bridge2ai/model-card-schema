@@ -2,7 +2,7 @@
   "rubric": "mc_rubric10",
   "version": "1.0",
   "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
-  "evaluation_timestamp": "2026-06-15T20:35:41.579618+00:00",
+  "evaluation_timestamp": "2026-06-16T03:13:15.793520+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -230,8 +230,8 @@
         {
           "name": "Owners / Contributors Identified",
           "score": 1,
-          "evidence": "2 owner/contributor(s) (roles missing)",
-          "quality_note": "2 owner/contributor(s) (roles missing)"
+          "evidence": "2 owner/contributor/reference(s) (roles missing)",
+          "quality_note": "2 owner/contributor/reference(s) (roles missing)"
         },
         {
           "name": "Citation Provided",
@@ -269,8 +269,8 @@
         {
           "name": "Funding Source / Grant Agency Listed",
           "score": 0,
-          "evidence": "Missing all of: model_details.contributors, mission_relevance, funding_grants",
-          "quality_note": "Missing all of: model_details.contributors, mission_relevance, funding_grants"
+          "evidence": "Missing all of: model_details.contributors, mission_relevance, mission_relevance.funding_grants",
+          "quality_note": "Missing all of: model_details.contributors, mission_relevance, mission_relevance.funding_grants"
         },
         {
           "name": "Compute / Platform Acknowledgement",

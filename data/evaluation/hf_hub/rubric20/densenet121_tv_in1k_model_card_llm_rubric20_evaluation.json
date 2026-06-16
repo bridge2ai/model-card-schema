@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric20",
   "version": "1.0",
-  "model_card_file": "densenet121_tv_in1k_model_card.yaml",
+  "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
   "model": "DenseNet-121 (timm/densenet121.tv_in1k)",
   "method": "Claude Code Deterministic ASSISTANT (in-session synthesis)",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -94,7 +94,7 @@
           "score_type": "numeric",
           "score": 1,
           "max_score": 5,
-          "score_label": "Poor — only affiliations, no funding agency or grant",
+          "score_label": "Poor \u2014 only affiliations, no funding agency or grant",
           "evidence": "contributors list affiliations (Cornell University, Tsinghua University, Facebook AI Research, Meta, Hugging Face). No mission_relevance, no funding agency (NIH/NSF/DOE), no grant ID, no compute facility acknowledgement.",
           "quality_note": "Author affiliations are listed but no funding source or acknowledgement section exists. Lacks both grant identification and compute facility acknowledgement."
         },
@@ -104,7 +104,7 @@
           "score_type": "numeric",
           "score": 5,
           "max_score": 5,
-          "score_label": "Excellent — ethics + multiple bias disclosures + out_of_scope_uses",
+          "score_label": "Excellent \u2014 ethics + multiple bias disclosures + out_of_scope_uses",
           "evidence": "considerations.ethical_considerations includes 'ImageNet representation bias' with mitigation strategy; bias_model and bias_output populated with concrete content; bias_input on data discusses geographic/demographic skew citing Crawford & Paglen 2019 and Yang et al. 2020; out_of_scope_uses lists 4 concrete uses (face recognition, demographic classification, surveillance, clinical/medical)",
           "quality_note": "Full coverage of ethics, multiple bias fields, and concrete out-of-scope uses with literature references."
         },
@@ -114,7 +114,7 @@
           "score_type": "numeric",
           "score": 4,
           "max_score": 5,
-          "score_label": "Very Good — SPDX identifier present; restrictions not explicitly elaborated",
+          "score_label": "Very Good \u2014 SPDX identifier present; restrictions not explicitly elaborated",
           "evidence": "licenses[0].identifier='Apache-2.0'; license_name='Apache License 2.0'; license_link to canonical Apache 2.0 text. No custom_text or explicit restriction discussion beyond standard Apache-2.0 terms.",
           "quality_note": "Clear SPDX identifier with canonical link. Lacks explicit statement of restrictions or limitations specific to this model."
         },
@@ -124,7 +124,7 @@
           "score_type": "numeric",
           "score": 3,
           "max_score": 5,
-          "score_label": "Good — framework + library declared; version is a range; no model_index",
+          "score_label": "Good \u2014 framework + library declared; version is a range; no model_index",
           "evidence": "framework='PyTorch'; framework_version='torch>=1.13' (range, not pinned); library_name='timm'; pipeline_tag='image-classification'. No model_index field in Papers-with-Code shape.",
           "quality_note": "Framework, library_name declared, but version is a constraint range rather than a pinned version and there is no Papers-with-Code model_index entry."
         }
@@ -141,7 +141,7 @@
           "score_type": "numeric",
           "score": 3,
           "max_score": 5,
-          "score_label": "Good — tools/libraries named with usage example",
+          "score_label": "Good \u2014 tools/libraries named with usage example",
           "evidence": "Usage code example showing 'import timm; timm.create_model(...)'; framework_version='torch>=1.13'; library_name='timm'. No Dockerfile, no container image, no pinned environment file.",
           "quality_note": "Names timm and PyTorch with a runnable snippet, but no reproducibility-level pinning (no Dockerfile, no environment lock)."
         },
@@ -151,7 +151,7 @@
           "score_type": "numeric",
           "score": 1,
           "max_score": 5,
-          "score_label": "Poor — no optimizer/hyperparameters disclosed",
+          "score_label": "Poor \u2014 no optimizer/hyperparameters disclosed",
           "evidence": "No model_parameters.training_procedure field present. The diff notes 'Original 2017-era torchvision training recipe' but does not disclose optimizer, learning rate, batch size, epochs, schedule, or regularization.",
           "quality_note": "Training procedure is referenced only obliquely as 'original torchvision recipe'. No hyperparameters disclosed in the model card itself."
         },
@@ -161,7 +161,7 @@
           "score_type": "numeric",
           "score": 4,
           "max_score": 5,
-          "score_label": "Very Good — name + ISO date + descriptive diff (not semver)",
+          "score_label": "Very Good \u2014 name + ISO date + descriptive diff (not semver)",
           "evidence": "version.name='tv_in1k'; version.date='2017-08-25' (ISO); version.diff describes that this is the original torchvision DenseNet-121 ImageNet-1k weights repackaged under timm",
           "quality_note": "Name, ISO-format date, and non-trivial diff are all present. Name is not semver (uses tag-style 'tv_in1k')."
         },
@@ -171,7 +171,7 @@
           "score_type": "numeric",
           "score": 5,
           "max_score": 5,
-          "score_label": "Excellent — formal citation plus multiple resolvable references",
+          "score_label": "Excellent \u2014 formal citation plus multiple resolvable references",
           "evidence": "citations: IEEE-style citation of Huang et al. CVPR 2017. references: arXiv:1608.06993, HuggingFace Hub URL, timm GitHub repo, PyTorch vision docs (4 references).",
           "quality_note": "Includes a properly formatted citation plus four distinct external references including arXiv DOI-like URL."
         },
@@ -208,7 +208,7 @@
           "score_type": "numeric",
           "score": 5,
           "max_score": 5,
-          "score_label": "Excellent — runnable code + I/O spec + library hooks",
+          "score_label": "Excellent \u2014 runnable code + I/O spec + library hooks",
           "evidence": "documentation includes runnable timm.create_model code snippet; input_format and output_format with format_maps; documentation references forward_features and forward_head hooks",
           "quality_note": "Provides a copy-pasteable load snippet, full I/O specification, and notes feature-extraction API hooks."
         },
@@ -218,7 +218,7 @@
           "score_type": "numeric",
           "score": 3,
           "max_score": 5,
-          "score_label": "Good — 2 metrics with values but single slice and no CI",
+          "score_label": "Good \u2014 2 metrics with values but single slice and no CI",
           "evidence": "quantitative_analysis.performance_metrics: top-1 accuracy 74.4%, top-5 accuracy 91.9% (both on ImageNet-1k validation slice), plus parameters (8.0 M) and GMACs (2.9). No confidence_interval, no value_error. Accuracy metrics all on same slice; no demographic or subset slices.",
           "quality_note": "Multiple numeric metrics but only one evaluation slice for accuracy and no confidence intervals or error bars."
         },
@@ -228,7 +228,7 @@
           "score_type": "numeric",
           "score": 5,
           "max_score": 5,
-          "score_label": "Excellent — all three populated with concrete model-specific content",
+          "score_label": "Excellent \u2014 all three populated with concrete model-specific content",
           "evidence": "limitations: 3 concrete items (OOD performance on non-ImageNet domains, ImageNet bias inheritance, 2017-era recipe vs modern improvements); tradeoffs: DenseNet-121 vs ResNet-50 parameter-vs-wall-clock comparison; out_of_scope_uses: 4 concrete uses (face recognition, demographic classification, surveillance, clinical diagnosis)",
           "quality_note": "All three sections populated with model-specific, non-boilerplate content."
         },
@@ -247,7 +247,7 @@
   ],
   "assessment": {
     "strengths": [
-      "Excellent structural completeness — all 21 points across required fields, overview, tags, I/O spec, and schema version.",
+      "Excellent structural completeness \u2014 all 21 points across required fields, overview, tags, I/O spec, and schema version.",
       "Strong responsible-AI documentation: ethics, multiple bias fields, and concrete out-of-scope uses with literature citations (Crawford & Paglen 2019, Yang et al. 2020).",
       "Concrete model-specific limitations and tradeoffs (parameter count vs wall-clock vs ResNet-50).",
       "Good cross-platform interlinking: base_model, dataset, arXiv paper, HF Hub, GitHub all referenced.",
@@ -256,7 +256,7 @@
     ],
     "weaknesses": [
       "Compute infrastructure and energy reporting entirely absent (Q15 = 0).",
-      "Training procedure clarity is poor — no optimizer, learning rate, batch size, epochs, schedule, or regularization disclosed (Q12 = 1).",
+      "Training procedure clarity is poor \u2014 no optimizer, learning rate, batch size, epochs, schedule, or regularization disclosed (Q12 = 1).",
       "No funding agency, grant ID, or compute-facility acknowledgement (Q7 = 1).",
       "Performance metrics lack confidence intervals/error bars and demographic or distributional slices (Q18 = 3).",
       "Framework version specified as a range (torch>=1.13) rather than pinned; no Papers-with-Code model_index entry (Q10 = 3).",

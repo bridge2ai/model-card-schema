@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "climate-forecasting-model-card.yaml",
+  "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
   "model": "Climate Forecasting Transformer v2.1",
   "method": "d4d_harmonized",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -196,7 +196,7 @@
           "quality_note": "Comprehensive hyperparameters: optimizer, learning rate, batch size, epochs, loss function, and advanced optimization techniques."
         },
         {
-          "name": "Compute Infrastructure Reported",
+          "name": "Compute Infrastructure Reported (Extended)",
           "score": 1,
           "evidence": "model_parameters.compute_infrastructure: hardware 8x NVIDIA A100 80GB GPUs, hardware_list [OLCF Frontier AMD MI250X, ALCF Polaris NVIDIA A100], software PyTorch 2.1 CUDA 12.1, software_dependencies (pip freeze), training_speed ~2500 samples/sec on 8x A100",
           "quality_note": "Detailed compute infrastructure: specific GPU types, DOE facilities (Frontier, Polaris), software versions, dependencies, and training throughput."
@@ -268,7 +268,7 @@
           "quality_note": "Primary use: 7-day regional weather forecasting for North America with specific temporal and geographic scope."
         },
         {
-          "name": "Mission Relevance Stated",
+          "name": "Mission Relevance Stated (Extended)",
           "score": 1,
           "evidence": "mission_relevance.doe_project: GENESIS Climate AI Initiative; doe_facility: OLCF Frontier, ALCF Polaris; description: This model supports DOE's mission in climate science and extreme weather prediction. Trained on DOE Leadership Computing Facilities (Frontier, Polaris), it demonstrates the value of exascale computing for climate AI applications.",
           "quality_note": "Explicit DOE mission alignment with GENESIS Climate AI Initiative and demonstration of exascale computing value."
@@ -307,7 +307,7 @@
           "quality_note": "Detailed evaluation protocol: held-out test set, two benchmarks, four baselines, and uncertainty calibration assessment."
         },
         {
-          "name": "Reproducibility Information",
+          "name": "Reproducibility Information (Extended)",
           "score": 1,
           "evidence": "model_parameters.training_procedure.reproducibility_info: random_seed=42, environment_config (CUDA_VERSION=12.1, NCCL_VERSION=2.18, PYTORCH_CUDA_ALLOC_CONF), pipeline_url: https://github.com/climate-ai-lab/climate-transformer/tree/v2.1/training",
           "quality_note": "Complete reproducibility info: seed, environment variables, CUDA/NCCL versions, memory allocation config, and pipeline URL."

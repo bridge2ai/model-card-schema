@@ -1,6 +1,6 @@
 # Model Card Rubric20 Batch Summary
 
-Generated: 2026-06-16T02:09:33.279500+00:00  
+Generated: 2026-06-16T03:13:15.614643+00:00  
 Files evaluated: 1
 
 | File | Score | % | Structural | Metadata | Technical | FAIRness |

@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
-  "evaluation_timestamp": "2026-06-16T02:09:33.278070+00:00",
+  "evaluation_timestamp": "2026-06-16T03:13:15.613365+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",

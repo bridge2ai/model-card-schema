@@ -1,7 +1,7 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "sentiment-classifier-with-datasheet-refs.yaml",
+  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
   "model": "BERT Sentiment Classifier v1.2",
   "method": "harmonized_d4d_external_refs",
   "evaluation_timestamp": "2026-06-15T00:00:00Z",
@@ -11,9 +11,9 @@
     "evaluation_type": "llm_as_judge"
   },
   "overall_score": {
-    "total_points": 32.0,
+    "total_points": 31,
     "max_points": 50,
-    "percentage": 64.0
+    "percentage": 62.0
   },
   "elements": [
     {
@@ -180,7 +180,7 @@
         {
           "name": "Architecture Described in Detail",
           "score": 1,
-          "evidence": "model_parameters.model_architecture: 'BERT-base (110M parameters): 12 transformer layers, 768 hidden dimensions, 12 attention heads; Classification head: Dense (768→256), ReLU, Dropout(0.1), Output(256→2)'",
+          "evidence": "model_parameters.model_architecture: 'BERT-base (110M parameters): 12 transformer layers, 768 hidden dimensions, 12 attention heads; Classification head: Dense (768\u2192256), ReLU, Dropout(0.1), Output(256\u21922)'",
           "quality_note": "Excellent architectural detail: parameter count, layer specifications, hidden dims, attention heads, and task-specific head architecture with dimensions and activations."
         },
         {
@@ -231,7 +231,7 @@
         {
           "name": "Change Description for This Version",
           "score": 1,
-          "evidence": "model_details.version.diff: '- Improved accuracy by 5% through hyperparameter tuning\\n- Added support for longer sequences (512 → 1024 tokens)\\n- Fixed bias in handling negation'",
+          "evidence": "model_details.version.diff: '- Improved accuracy by 5% through hyperparameter tuning\\n- Added support for longer sequences (512 \u2192 1024 tokens)\\n- Fixed bias in handling negation'",
           "quality_note": "Concrete, actionable change description with three specific improvements: accuracy gain, sequence length increase, bias fix. Not just a version bump."
         },
         {
@@ -342,7 +342,7 @@
         {
           "name": "Performance Across Sub-populations / Slices",
           "score": 1,
-          "evidence": "performance_metrics sliced by: 'test_set', 'test_set_positive', 'test_set_negative' — metrics broken down by sentiment class",
+          "evidence": "performance_metrics sliced by: 'test_set', 'test_set_positive', 'test_set_negative' \u2014 metrics broken down by sentiment class",
           "quality_note": "Per-class performance breakdown (positive vs negative sentiment). Shows F1 variation across subgroups (0.91 vs 0.93)."
         },
         {
