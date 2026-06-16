@@ -96,9 +96,48 @@ Pattern: **hybrid rubric20 is consistently more conservative than LLM** (no fals
 
 Takeaway: rubric20 hybrid is the most calibrated of the four scorers and is the best candidate for CI gating. Rubric10 hybrid is fine as a quick smoke test but shouldn't be the gate.
 
+## Final cross-evaluator portfolio (full LLM coverage)
+
+After running mc-rubric10 + mc-rubric20 LLM agents against both harmonized cards, **all 5 example cards now have both hybrid and LLM scores on both rubrics**:
+
+| Card | r10 hybrid | r10 LLM | Δ r10 | r20 hybrid | r20 LLM | Δ r20 |
+|---|---:|---:|---:|---:|---:|---:|
+| climate-model-extended (base) | 47/50 (94%) | 44/50 (88%) | hybrid +6 | 74/84 (88%) | 76/84 (91%) | hybrid −3 |
+| **climate-forecasting (harmonized + D4D)** | **48/50 (96%)** | **49/50 (98%)** | **≈ peer** | **75/84 (89%)** | **79/84 (94%)** | hybrid −5 |
+| sentiment-classifier (harmonized) | 41/50 (82%) | 32/50 (64%) | hybrid **+18** | 53/84 (63%) | 59/84 (70%) | hybrid −7 |
+| DenseNet-121 (HF Hub port) | 41/50 (82%) | 43/50 (86%) | hybrid −4 | 61/84 (73%) | 63/84 (75%) | hybrid −2 |
+| SubCell SaProt 650M (HF Hub port) | 44/50 (88%) | 42/50 (84%) | hybrid +4 | 65/84 (77%) | 66/84 (79%) | hybrid ≈ |
+
+### Headline findings
+
+1. **Climate-forecasting (harmonized + D4D) is now the top scorer** — 98% r10 LLM / 94% r20 LLM. Surpasses climate-model-extended on both rubrics, with **r10 ≈ peer agreement** between hybrid and LLM. The harmonized + D4D pattern is the production target.
+2. **Sentiment-classifier r10 hybrid +18pp** is the largest divergence in the whole calibration. The hybrid awards generous presence-only credit; the LLM downgrades for thin training procedure (1/5), thin model access (2/5), and placeholder URLs. **This is the LLM correctly punishing thin content the hybrid can't distinguish from substantive content.**
+3. **r20 hybrid is consistently within ≤7pp of LLM** across all 5 cards, always within the LLM's favor — meaning r20 hybrid will not falsely pass thin content. Safe as a quality gate.
+4. **r10 hybrid is NOT safe as a sole gate** — it can over-credit thin cards by up to 18pp. Smoke-test only.
+5. The harmonized variant pattern (creator_references, training_datasets, evaluation_datasets, mission_relevance.funding_grants) scores cleanly across both rubrics once the post-review fixes landed.
+
+### Score distribution
+
+```
+100% ┤
+ 95% ┤  ●●        ← climate-forecasting (top)
+ 90% ┤    ●●●     ← climate-extended, SubCell
+ 85% ┤      ●●    ← DenseNet
+ 80% ┤        ●
+ 75% ┤          ●
+ 70% ┤            ● ← sentiment-classifier
+ 65% ┤              ●
+ 60% ┤                ●
+ 55% ┤                  ●
+ 50% ┤
+        r10  r20  r10  r20
+        hyb  hyb  llm  llm
+```
+
+The score range across the portfolio is now wide (64%–98%) without any forced floor — distinct from the original "everyone scored 70%+" symptom that motivated the floor fixtures.
+
 ## Open follow-ups
 
-- Run LLM rubrics against the two harmonized cards (climate-forecasting and sentiment-classifier) to complete the LLM column
-- Add the four "authoring gotchas" above to `.goosehints` so the @mcassistant workflow avoids them
-- Build a known-bad / minimal Model Card fixture so the rubric score floor is anchored (currently the lowest score in the portfolio is 63% — none of the cards are genuinely bad)
-- Consider a `--badge` mode in the renderer that emits SVG quality-tier badges to drop into READMEs
+- Now that all 5 cards have both hybrid + LLM scores, port a couple more HF Hub cards (CLIP, Llama-2-7B-base, Stable Diffusion XL) to expand the calibration set beyond CV / proteins / sentiment
+- Run the semantic rubric variants (mc-rubric10-semantic, mc-rubric20-semantic) on the same portfolio to characterize the cost in points of failing format / consistency / plausibility checks
+- Build a `make compare-portfolio` Makefile target that re-renders portfolio_compare.html + badges from the canonical evaluation directories in one command

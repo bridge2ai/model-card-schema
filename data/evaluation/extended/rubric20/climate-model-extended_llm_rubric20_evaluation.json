@@ -1,0 +1,276 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "climate-model-extended.yaml",
+  "model": "ClimateNet-v2",
+  "method": "llm_as_judge",
+  "evaluation_timestamp": "2026-06-15T20:29:14Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 76,
+    "max_points": 84,
+    "percentage": 90.5
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 19,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 populated",
+          "evidence": "model_details.name='ClimateNet-v2'; overview ~600 chars describing CNN for extreme weather; licenses=[{identifier:'BSD-3-Clause'}]; version.name='v2.0.0'; model_parameters.model_architecture describes ResNet-50 FPN with dual-head, 38.5M params",
+          "quality_note": "All five required fields populated with concrete, non-trivial content"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars with meaningful structure",
+          "evidence": "overview is ~600 chars covering purpose, inputs, outputs, and DOE mission; documentation block adds architecture sections, training details, citation pointers; short_description present too",
+          "quality_note": "Overview + documentation comfortably exceed 500 chars and are well-structured"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": ">=4 tags AND pipeline_tag but no language/model_category",
+          "evidence": "tags=[climate, extreme-weather, segmentation, object-detection, scientific-ml, doe, nersc] (7 tags); pipeline_tag='image-segmentation'; no top-level language or model_category field",
+          "quality_note": "Strong tag set and pipeline_tag, but neither language nor model_category present so full 5 not awarded"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Shape/type given but no *_format_map",
+          "evidence": "input_format: shape (768,768,16), 16 channels enumerated (T,U,V,Q,Z,PSL,TMQ,PRECT), Z-score normalization, HDF5 format; output_format: segmentation mask (768,768) uint8 with class labels + bbox tuples + HDF5/GeoTIFF; no input_format_map or output_format_map populated",
+          "quality_note": "Inputs and outputs specified with shapes and types but the structured *_format_map fields are not provided"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: '2.0.0-extended'",
+          "quality_note": "Recognizable schema version string at top level"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 17,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include 'https://github.com/lbnl-climate/climatenet-v2' (GitHub repo) and 'https://climatenet.lbl.gov' project site; installation also points to GHCR container 'ghcr.io/lbnl-climate/climatenet-v2:latest' and weights URL 'https://climatenet.lbl.gov/models/climatenet-v2.0.0.pth'",
+          "quality_note": "Multiple resolvable URIs that act as model identifiers; no DOI but GitHub release / project landing satisfy criterion"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Agency + grant ID + computing facility",
+          "evidence": "mission_relevance.funding_source: 'DOE Office of Science, Biological and Environmental Research (BER), Grant: DE-AC02-05CH11231'; doe_facility: 'NERSC Perlmutter'; contributor entry 'DOE Office of Science' with role funded_by",
+          "quality_note": "Agency, specific grant number, and computing facility all explicitly named"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Ethical considerations + out_of_scope_uses, no explicit bias_* fields",
+          "evidence": "considerations.ethical_considerations has two named items ('Climate justice implications', 'Model uncertainty communication') each with mitigation_strategy; out_of_scope_uses lists three concrete uses to avoid; however bias_model / bias_output / bias_input fields are not populated",
+          "quality_note": "Strong ethics + out-of-scope content but no dedicated bias disclosure field, so falls short of the 5 criterion"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "SPDX identifier present, no explicit restrictions",
+          "evidence": "model_details.licenses[0].identifier='BSD-3-Clause' with license_name and OSI link; no custom_text describing restrictions",
+          "quality_note": "Clean SPDX identifier but explicit restriction/usage text not stated"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Framework + version pinned + library_name, no model_index",
+          "evidence": "framework='PyTorch', framework_version='2.1.0', library_name='climatenet'; no Papers-with-Code-shaped model_index block present",
+          "quality_note": "Framework standardization strong but model_index field missing for full 5"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 23,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Framework_version + reproducibility libs + container reference",
+          "evidence": "compute_infrastructure.software lists PyTorch 2.1.0+CUDA 12.1, Horovod 0.28.1, NVIDIA Apex, Python 3.10; software_dependencies pins exact conda versions for h5py, xarray, dask, pandas, numpy, scikit-learn; usage_documentation references Docker image 'ghcr.io/lbnl-climate/climatenet-v2:latest' and environment.yml",
+          "quality_note": "Comprehensive: pinned framework, full env list, Docker image, and conda recipe"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Optimizer + LR + batch + epochs + schedule + regularization",
+          "evidence": "hyperparameters: optimizer='AdamW', learning_rate=0.0001, batch_size=2 per GPU (effective 512), training_epochs=40, training_steps=24000; optimization_techniques include mixed precision, gradient clipping max_norm=1.0, cosine annealing schedule (T_max=40), 2-epoch warmup; regularization: weight_decay 1e-4, dropout 0.1, label smoothing 0.1",
+          "quality_note": "All elements of the rubric criterion explicitly disclosed"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver + ISO date + non-trivial diff",
+          "evidence": "version.name='v2.0.0' (semver); version.date='2024-11-15' (ISO); diff enumerates four substantive changes (ResNet-34 to ResNet-50, atmospheric-river capability, +15% TC boundary accuracy, 3x more training data)",
+          "quality_note": "All three required version elements meaningfully populated"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "One citation + multiple references with URLs (no DOIs)",
+          "evidence": "citations has one IEEE-style citation to SC24 proceedings (no BibTeX, no DOI); references lists 2 URLs (GitHub repo, project site); baselines text mentions Prabhat et al. 2021 inline",
+          "quality_note": "Solid but only a single formal citation and no DOIs, so not full 5"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Hardware + software + total compute, no carbon/energy estimate",
+          "evidence": "hardware: 64 nodes x 4 A100 40GB (256 GPUs total), AMD EPYC 7763, Slingshot-11; software stack pinned; training_speed reports 32,768 GPU-hours total and per-epoch throughput; no kWh or CO2 estimate",
+          "quality_note": "GPU-hours quantified but no explicit energy or carbon footprint reported"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 17,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include GitHub repo and project landing page; usage docs provide GHCR container URL and direct weights download URL",
+          "quality_note": "Multiple resolvable landing URLs documented"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Runnable code + I/O formats + library hooks",
+          "evidence": "Three runnable code_examples: Python inference (ClimateNetV2.from_pretrained, model(patch), outputs['segmentation']), Python evaluation (compute_metrics), bash SLURM batch script; installation_instructions cover conda, Docker, NERSC module; input_format and output_format documented",
+          "quality_note": "Full reproducible inference path with multiple entry points"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">=2 metrics + >=2 slices + CIs",
+          "evidence": "performance_metrics has 5 entries with numeric values: IoU TC 0.847 [0.841,0.853] slice 'Test set (E3SM v2)'; IoU AR 0.782 [0.774,0.790] same slice; IoU Fronts 0.691 [0.681,0.701]; mAP@0.5 0.823 slice 'Test set (all events)'; throughput 125.3. Multiple slices and bootstrap CIs on three metrics; ensemble sigma=0.012 reported",
+          "quality_note": "Meets and exceeds threshold: multiple metrics, multiple slices, explicit confidence intervals"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All three populated with concrete, model-specific content",
+          "evidence": "limitations: 3 entries (coarse-resolution training, atmospheric-only scope, polar accuracy degradation >70 deg); tradeoffs: 2 entries (resolution vs throughput; backbone vs IoU); out_of_scope_uses: 3 entries (real-time forecasting, satellite imagery, attribution)",
+          "quality_note": "All three fields contain specific, non-boilerplate, model-relevant statements"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_parameters.data links three external dataset projects (CAM5.1, E3SM v2, MPAS-A) with URLs; references link to GitHub repo and project site; citations point to SC24 proceedings",
+          "quality_note": "Cross-platform links to external dataset records and external publication present"
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Comprehensive training-procedure disclosure: optimizer, schedule, regularization, distributed-training topology, and seed all explicit",
+      "Strong reproducibility surface: pinned framework/library versions, conda environment, Docker image, and SLURM launch script",
+      "Rich performance reporting with multiple metrics, slices, and bootstrap confidence intervals",
+      "All three responsible-AI considerations populated (limitations, tradeoffs, out_of_scope_uses) with model-specific content",
+      "Clear funding attribution with DOE office, BER program, grant number, and NERSC facility"
+    ],
+    "weaknesses": [
+      "No bias_model / bias_output / bias_input fields populated — bias disclosure happens only obliquely through ethical_considerations",
+      "Compute reporting lacks an energy or carbon estimate despite GPU-hour totals being available",
+      "model_index (Papers-with-Code shape) is not provided, limiting machine-readable benchmark integration",
+      "License lacks explicit restriction text and citations have no DOIs or BibTeX entries",
+      "Input/output specifications are prose-only; *_format_map structured fields are unused"
+    ],
+    "recommendations": [
+      "Add explicit bias_model / bias_output / bias_input entries describing geographic, seasonal, and resolution-related biases",
+      "Estimate energy consumption (kWh) and CO2-equivalent from the reported 32,768 GPU-hours on NERSC Perlmutter",
+      "Populate model_index in Papers-with-Code form with task, dataset, and metric triples to enable cross-platform benchmark discovery",
+      "Add a DOI for the SC24 paper and include a BibTeX block in citations",
+      "Populate input_format_map and output_format_map with structured per-channel / per-class metadata"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "fb242b9f-ef7c-4db0-b9c8-91d59136a132",
+    "rubric_hash": "c81c94a03409d6248286ee69e0affb72d5d1bb6cd4f845d3e2fd9dcfbcba2ae0",
+    "model_card_hash": "2bf73e9b356746c67d842053941a02ec8fe2b8d90aa8017839f487b5b9dd21de"
+  }
+}
