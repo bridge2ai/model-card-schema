@@ -245,7 +245,23 @@ compare-portfolio:
 	@echo "  Compare:   $(PORTFOLIO_OUT_DIR)/portfolio_compare.html"
 	@echo "  Badges:    $(PORTFOLIO_BADGE_DIR)/"
 
-.PHONY: evaluate-rubric10 evaluate-rubric10-smoke evaluate-rubric20 evaluate-rubric20-smoke check-completeness check-prereqs render-eval render-compare render-badges compare-portfolio
+# =========================================================================
+# rubric-report: rank semantic_findings across the portfolio
+# =========================================================================
+# Aggregates semantic_findings from every rubric10_semantic / rubric20_semantic
+# JSON, groups them by rule/field, ranks by # of cards affected, and writes a
+# markdown report. Findings already encoded as deterministic hybrid rules
+# (Q18 train_eval_leakage, Q19 bias_tradeoff_gap) are tagged so the report
+# also surfaces what to encode next.
+RUBRIC_REPORT_ROOT ?= data/evaluation
+RUBRIC_REPORT_OUT ?= data/evaluation/all/common_issues.md
+rubric-report:
+	@mkdir -p $(dir $(RUBRIC_REPORT_OUT))
+	$(RUN) python scripts/build_rubric_report.py \
+		--root $(RUBRIC_REPORT_ROOT) \
+		--output $(RUBRIC_REPORT_OUT)
+
+.PHONY: evaluate-rubric10 evaluate-rubric10-smoke evaluate-rubric20 evaluate-rubric20-smoke check-completeness check-prereqs render-eval render-compare render-badges compare-portfolio rubric-report
 
 test: test-schema test-python test-examples
 
