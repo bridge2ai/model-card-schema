@@ -1,0 +1,998 @@
+{
+  "rubric": "mc_rubric10_semantic",
+  "version": "1.0",
+  "model_card_file": "densenet121_tv_in1k_model_card.yaml",
+  "model": "DenseNet-121 (timm/densenet121.tv_in1k)",
+  "method": "claudecode_assistant",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge_semantic"
+  },
+  "overall_score": {
+    "total_points": 37.0,
+    "max_points": 50,
+    "percentage": 74.0,
+    "semantic_deductions": [
+      {
+        "sub_element": "Element 2, Model File Format Specified",
+        "deduction": "No explicit file format declared (safetensors / pickle / state_dict); only HF Hub URL given"
+      },
+      {
+        "sub_element": "Element 3, Reproducibility Artifacts Provided",
+        "deduction": "No hyperparameters, seeds, or container/env pins; training recipe only described qualitatively"
+      },
+      {
+        "sub_element": "Element 5, Hyperparameters Reported",
+        "deduction": "training_procedure.hyperparameters absent; only architecture-side numbers given"
+      },
+      {
+        "sub_element": "Element 5, Compute Infrastructure Reported",
+        "deduction": "model_parameters.compute_infrastructure absent (no GPU/TPU, hours, or energy)"
+      },
+      {
+        "sub_element": "Element 7, Mission Relevance Stated",
+        "deduction": "No mission_relevance block; pretrained benchmark checkpoint with no DOE/domain alignment"
+      },
+      {
+        "sub_element": "Element 7, Funding Source / Grant Agency Listed",
+        "deduction": "No funding agency or grant program identified"
+      },
+      {
+        "sub_element": "Element 7, Acknowledgement of Computing / Platform Support",
+        "deduction": "No supercomputer, cloud-credit, or platform acknowledgement"
+      },
+      {
+        "sub_element": "Element 8, Training Procedure Documented",
+        "deduction": "model_parameters.training_procedure absent (no loss, optimizer, schedule, epochs)"
+      },
+      {
+        "sub_element": "Element 8, Evaluation Procedure Documented",
+        "deduction": "Only the dataset name and torchvision reference are given; no explicit evaluation protocol"
+      },
+      {
+        "sub_element": "Element 8, Reproducibility Information",
+        "deduction": "No seeds, deterministic flags, container hashes, or environment pins"
+      },
+      {
+        "sub_element": "Element 9, Performance Across Sub-populations / Slices",
+        "deduction": "Only aggregate ImageNet-1k val numbers; no per-class or per-subgroup slice metrics"
+      },
+      {
+        "sub_element": "Element 9, Confidence Intervals or Error Bars",
+        "deduction": "No CIs, error bars, or standard deviations on reported metrics"
+      },
+      {
+        "sub_element": "Element 10, Benchmark Results (Papers with Code style)",
+        "deduction": "No model_index[].results[] entries; metrics reported in quantitative_analysis only, not as leaderboard-style benchmark records"
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/timm/densenet121.tv_in1k'; model_details.references include the same HF URL and 'https://arxiv.org/abs/1608.06993'",
+          "quality_note": "Resolvable HF Hub identifier plus arXiv paper link",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "HF URL matches https://huggingface.co/{org}/{model_name} (timm/densenet121.tv_in1k); arXiv URL well-formed",
+            "consistency_check": "pass",
+            "consistency_details": "library_name 'timm' and pipeline_tag 'image-classification' consistent with HF Hub hosting under timm namespace",
+            "plausibility_check": "pass",
+            "plausibility_details": "timm is a well-known HF org maintained by Ross Wightman; arXiv 1608.06993 is the canonical DenseNet paper"
+          }
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: 'DenseNet-121 (timm/densenet121.tv_in1k)'; short_description present; overview ~700 chars covering dense connectivity, parameter efficiency, and provenance of the checkpoint",
+          "quality_note": "Clear name, short_description, and comprehensive overview (>>200 chars)",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Three distinct fields used as intended; overview is multi-paragraph and concrete",
+            "consistency_check": "pass",
+            "consistency_details": "Overview ('densely connected … ImageNet-1k 1.28M images') is consistent with model_parameters.data and pipeline_tag",
+            "plausibility_check": "pass",
+            "plausibility_details": "Description matches the published DenseNet architecture; checkpoint provenance (torchvision -> timm) is accurate"
+          }
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: 8 entries (image-classification, densenet, imagenet, imagenet-1k, computer-vision, timm, feature-extraction, transfer-learning); pipeline_tag: 'image-classification'; model_category: 'convolutional-neural-network'",
+          "quality_note": "8 relevant tags + pipeline_tag + model_category",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "pipeline_tag uses standard HF taxonomy value",
+            "consistency_check": "pass",
+            "consistency_details": "Tags consistent with output_format (1000-way classification logits) and use_cases",
+            "plausibility_check": "pass",
+            "plausibility_details": "All tags map to real concepts; feature-extraction tag matches the forward_features capability mentioned in documentation"
+          }
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references include HF Hub model page, timm GitHub repo, torchvision DenseNet docs, and arXiv paper; model_details.path mirrors HF URL",
+          "quality_note": "Multiple resolvable landing-page URLs",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All four reference URLs are well-formed https URLs",
+            "consistency_check": "pass",
+            "consistency_details": "References agree with base_model 'torchvision/densenet121' and library_name 'timm'",
+            "plausibility_check": "pass",
+            "plausibility_details": "All four target real, currently-hosted pages"
+          }
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: 'PyTorch'; framework_version: 'torch>=1.13'; library_name: 'timm'",
+          "quality_note": "Framework and library named; version is a floor constraint",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "framework_version 'torch>=1.13' is a floating constraint; rubric notes floating pins as marginal for reproducibility, but it is still informative",
+            "consistency_check": "pass",
+            "consistency_details": "PyTorch framework consistent with timm library_name and tensor-shape input_format_map",
+            "plausibility_check": "pass",
+            "plausibility_details": "timm requires torch>=1.13 in recent releases — plausible"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.path: 'https://huggingface.co/timm/densenet121.tv_in1k'; documentation snippet uses timm.create_model(..., pretrained=True) which pulls weights from this Hub repo",
+          "quality_note": "HF Hub hosting plus a one-line pretrained=True download path",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URL well-formed; standard timm download flow",
+            "consistency_check": "pass",
+            "consistency_details": "library_name 'timm' is the mechanism that resolves this HF path",
+            "plausibility_check": "pass",
+            "plausibility_details": "timm pretrained download is the canonical access route for this checkpoint"
+          }
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references include 'https://github.com/huggingface/pytorch-image-models' (timm) and torchvision docs",
+          "quality_note": "Linked to the timm GitHub repo, which hosts inference and training code",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "GitHub URL well-formed",
+            "consistency_check": "pass",
+            "consistency_details": "timm repo consistent with library_name 'timm'",
+            "plausibility_check": "pass",
+            "plausibility_details": "Repository is the actual upstream code for the library"
+          }
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "documentation contains a runnable timm snippet (timm.create_model('densenet121.tv_in1k', pretrained=True); model.eval()); plus narrative mention of forward_features / forward_head",
+          "quality_note": "Runnable, minimal inference example",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Python code block is syntactically valid",
+            "consistency_check": "pass",
+            "consistency_details": "Snippet model id matches HF path; eval() consistent with inference use",
+            "plausibility_check": "pass",
+            "plausibility_details": "Demonstrated API is the actual timm public API"
+          }
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format and input_format_map (shape [B,3,224,224], dtype float32, ImageNet normalization); output_format and output_format_map ([B,1000] logits, softmax for probabilities)",
+          "quality_note": "Explicit tensor shapes, dtypes, normalization, and output semantics",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Shape strings, dtype, and mean/std are correctly specified",
+            "consistency_check": "pass",
+            "consistency_details": "pipeline_tag 'image-classification' requires image input + class probabilities; rubric rule satisfied: input mentions image tensor and output describes class logits/probabilities",
+            "plausibility_check": "pass",
+            "plausibility_details": "ImageNet mean/std values match the standard torchvision values; 1000 classes match ImageNet-1k"
+          }
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "No mention of safetensors / pickle / state_dict / ONNX in the card; model_details.path is just the HF Hub repo URL",
+          "quality_note": "File format on disk not explicitly declared",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No format identifier (safetensors / PyTorch state_dict / ONNX) anywhere",
+            "consistency_check": "pass",
+            "consistency_details": "Absence is consistent throughout — no contradicting claim",
+            "plausibility_check": "pass",
+            "plausibility_details": "timm checkpoints are typically PyTorch state_dicts; would be plausible if declared"
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0]: identifier 'Apache-2.0', license_name 'Apache License 2.0', license_link to apache.org",
+          "quality_note": "SPDX identifier with canonical license URL",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'Apache-2.0' is a valid SPDX identifier",
+            "consistency_check": "pass",
+            "consistency_details": "base_model 'torchvision/densenet121' is BSD-3-Clause upstream; Apache-2.0 redistribution downstream is compatible (permissive -> permissive)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Apache-2.0 is the license declared on the HF Hub repo for this checkpoint"
+          }
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework 'PyTorch' + framework_version 'torch>=1.13' + library_name 'timm'",
+          "quality_note": "Standard PyTorch + timm",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "framework_version is a floor constraint rather than a pinned version (e.g. '2.1.0')",
+            "consistency_check": "pass",
+            "consistency_details": "Framework matches the inference snippet and input tensor convention",
+            "plausibility_check": "pass",
+            "plausibility_details": "torch>=1.13 matches current timm requirements"
+          }
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "base_model: 'torchvision/densenet121'; version.diff explains the tv_in1k checkpoint is repackaged torchvision weights",
+          "quality_note": "Clear lineage from torchvision DenseNet-121 weights",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "base_model populated; diff text describes the relationship",
+            "consistency_check": "pass",
+            "consistency_details": "Lineage consistent with version.name 'tv_in1k' and the references list",
+            "plausibility_check": "pass",
+            "plausibility_details": "timm densenet121.tv_in1k is in fact the torchvision checkpoint"
+          }
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag 'image-classification'; considerations.use_cases lists 4 concrete tasks (ImageNet baseline, transfer-learning backbone, feature extraction, educational reference)",
+          "quality_note": "Pipeline tag + four explicit use cases",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "use_cases is a list of {description} entries",
+            "consistency_check": "pass",
+            "consistency_details": "Use cases consistent with pipeline_tag and the feature-extraction tag",
+            "plausibility_check": "pass",
+            "plausibility_details": "Each declared use is realistic for a DenseNet-121 ImageNet backbone"
+          }
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 0,
+          "evidence": "No model_parameters.training_procedure; no hyperparameters; no seeds; no container or environment pins; documentation describes inference only",
+          "quality_note": "Inference reproducible but training reproducibility unsupported",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "training_procedure block absent",
+            "consistency_check": "pass",
+            "consistency_details": "Card honestly describes itself as the torchvision recipe without claiming a custom training run",
+            "plausibility_check": "pass",
+            "plausibility_details": "Lack of training reproducibility artifacts is typical for redistributed legacy checkpoints"
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations[0]: name 'ImageNet representation bias' with a mitigation_strategy advising downstream audits and citing ImageNet Roulette / Buolamwini-style analyses",
+          "quality_note": "Named risk with concrete mitigation guidance",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Entry has both name and mitigation_strategy populated",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with bias_model / bias_output disclosures and limitations[1]",
+            "plausibility_check": "pass",
+            "plausibility_details": "The cited bias literature is real and directly relevant"
+          }
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 1,
+          "evidence": "bias_model: geographic/demographic skew, no fairness audit; bias_output: class-prior calibration, rare classes under-predicted; model_parameters.data[0].bias_input cites Crawford & Paglen 2019 and Yang et al. 2020",
+          "quality_note": "Specific, source-cited bias disclosure (not 'may be biased')",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All three bias fields populated with non-trivial content",
+            "consistency_check": "pass",
+            "consistency_details": "Per rubric rule 'bias_model/output non-empty -> tradeoffs acknowledge fairness': considerations.tradeoffs addresses an accuracy vs parameter-efficiency vs inference-speed tradeoff but does NOT directly acknowledge accuracy-vs-fairness; minor gap but bias disclosure itself is solid",
+            "plausibility_check": "pass",
+            "plausibility_details": "Citations (Crawford & Paglen 2019; Yang et al. 2020) are real ImageNet-bias papers"
+          }
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses lists 4 explicit categories: face recognition, demographic classification, surveillance, clinical/medical diagnosis without retraining and regulatory clearance",
+          "quality_note": "Four concrete and high-risk out-of-scope categories",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Standard list-of-{description} structure",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with the ImageNet-representation ethical concern; satisfies the rubric rule requiring out_of_scope_uses for models with meaningful ethical risk",
+            "plausibility_check": "pass",
+            "plausibility_details": "Each listed misuse is a documented historical concern with ImageNet-trained classifiers"
+          }
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 1,
+          "evidence": "model_parameters.data[0].sensitive.sensitive_data: 'No PII in labels; some person-class images contain incidental faces'",
+          "quality_note": "Honest qualitative disclosure of incidental sensitive content",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "sensitive_data_used boolean flag is not set explicitly, only the descriptive sensitive_data list — partial use of the sensitive sub-schema",
+            "consistency_check": "pass",
+            "consistency_details": "Disclosure is consistent with ethical_considerations and out_of_scope_uses (face-related uses discouraged)",
+            "plausibility_check": "pass",
+            "plausibility_details": "ImageNet does contain incidental faces in person-related classes; statement is accurate"
+          }
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users[0].description names ML researchers/engineers using DenseNet-121 as baseline, backbone, or building block; considerations.tradeoffs[0] describes the parameter-efficiency vs inference-speed tradeoff vs ResNet-50",
+          "quality_note": "Both intended users and a concrete tradeoff are documented",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "users and tradeoffs both populated",
+            "consistency_check": "marginal",
+            "consistency_details": "Tradeoff is a performance tradeoff, not an accuracy-vs-fairness tradeoff — the bias disclosure would benefit from a paired fairness tradeoff (cross-field rubric rule)",
+            "plausibility_check": "pass",
+            "plausibility_details": "DenseNet-121 vs ResNet-50 parameter/speed comparison is a real and well-known engineering tradeoff"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: 4 dense blocks, growth rate 32, transition layers (1x1 conv + 2x2 avg pool), ~8.0M parameters, ~2.9 GMACs at 224x224, 1000-way classifier head; documentation block repeats key numbers",
+          "quality_note": "Concrete architecture facts: block count, growth rate, params, GMACs, input size",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Block multiline string with quantitative attributes",
+            "consistency_check": "pass",
+            "consistency_details": "Architecture numbers consistent between model_architecture, documentation, and quantitative_analysis (8.0M params, 2.9 GMACs)",
+            "plausibility_check": "pass",
+            "plausibility_details": "8.0M params and 2.9 GMACs at 224x224 match the canonical DenseNet-121 numbers"
+          }
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.data[0]: name 'ImageNet-1k (ILSVRC2012)', link image-net.org, description '1,281,167 training images and 50,000 validation images across 1000 object categories'",
+          "quality_note": "Named dataset with link, exact counts, and bias_input commentary",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Required name + link + description + sensitive + bias_input fields populated",
+            "consistency_check": "pass",
+            "consistency_details": "1000 classes consistent with output_format_map shape [B, 1000]",
+            "plausibility_check": "pass",
+            "plausibility_details": "ILSVRC2012 counts (1,281,167 train / 50,000 val) are exactly correct"
+          }
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 0,
+          "evidence": "model_parameters has no training_procedure block; no optimizer, learning rate, batch size, epochs, or schedule given",
+          "quality_note": "Training hyperparameters not reported anywhere",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "training_procedure.hyperparameters absent",
+            "consistency_check": "pass",
+            "consistency_details": "Card honestly does not claim to know the original torchvision recipe",
+            "plausibility_check": "pass",
+            "plausibility_details": "Absence is plausible for a redistributed legacy checkpoint, but still scores 0"
+          }
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "No model_parameters.compute_infrastructure block in the file; no GPU/TPU model, count, total hours, or energy",
+          "quality_note": "Compute infrastructure entirely absent",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "compute_infrastructure key not present",
+            "consistency_check": "pass",
+            "consistency_details": "Architecture is not billion-parameter-scale, so the rubric's heavy-compute consistency rule does not require multi-GPU/multi-day pinning, but the field is still expected",
+            "plausibility_check": "n/a",
+            "plausibility_details": "No content to evaluate"
+          }
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_parameters.data[0].description names both '1,281,167 training images' and '50,000 validation images'; quantitative_analysis metrics labeled 'ImageNet-1k validation (reference torchvision)'",
+          "quality_note": "Train and val split sizes documented inside the single dataset entry",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Splits are described in text rather than as separate model_parameters.data entries with explicit split fields",
+            "consistency_check": "pass",
+            "consistency_details": "Cross-rule check (train vs eval data): same dataset is used for training and evaluation, which would normally flag potential leakage — but the standard ImageNet-1k train/val protocol is itself the convention, and the val set is held out by design, so this is consistent rather than a leakage failure",
+            "plausibility_check": "pass",
+            "plausibility_details": "1.28M/50K split is the canonical ILSVRC2012 protocol"
+          }
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: 'tv_in1k'",
+          "quality_note": "Release tag (not semver, but a recognizable timm release identifier)",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Not MAJOR.MINOR.PATCH; this is a recognizable release tag (timm tag suffix), which the rubric explicitly allows",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with the HF Hub model name suffix 'tv_in1k'",
+            "plausibility_check": "pass",
+            "plausibility_details": "tv_in1k is the actual timm convention for the torchvision-ImageNet-1k weights"
+          }
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2017-08-25'",
+          "quality_note": "ISO 8601 date",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "YYYY-MM-DD",
+            "consistency_check": "marginal",
+            "consistency_details": "Date predates the timm repackaging; presumably refers to the original torchvision release. Rubric temporal rule (train < release < eval) is not contradicted",
+            "plausibility_check": "pass",
+            "plausibility_details": "Date is within plausible torchvision DenseNet release window"
+          }
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: 'Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm's timm/densenet121.tv_in1k HuggingFace Hub identifier.'",
+          "quality_note": "Diff describes the repackaging step rather than a meaningless version bump",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Free-text multiline diff",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with base_model 'torchvision/densenet121' and version.name 'tv_in1k'",
+            "plausibility_check": "pass",
+            "plausibility_details": "Description accurately matches what timm does with this checkpoint"
+          }
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.contributors: 6 named individuals/orgs with role + affiliation (Huang/Cornell, Liu/Tsinghua, van der Maaten/FAIR, Weinberger/Cornell, PyTorch Vision Team/Meta, Ross Wightman/Hugging Face)",
+          "quality_note": "Six contributors with CRediT-style roles (developed_by, contributed_by) and affiliations",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each entry has name, role, affiliation; no orcid/email but those are optional",
+            "consistency_check": "pass",
+            "consistency_details": "Affiliations match the original DenseNet paper authors and the timm maintainer",
+            "plausibility_check": "pass",
+            "plausibility_details": "All six are real entities with the affiliations stated at time of work"
+          }
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0]: style 'IEEE', full citation 'G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger, \"Densely connected convolutional networks,\" CVPR 2017, pp. 4700-4708'",
+          "quality_note": "IEEE-style citation present; not BibTeX but valid",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Rubric prefers BibTeX (machine-readable); IEEE style is human-readable but not directly machine-parseable",
+            "consistency_check": "pass",
+            "consistency_details": "Authors and year (2017) match contributors and version.date; CVPR is consistent with arXiv 1608.06993 reference",
+            "plausibility_check": "pass",
+            "plausibility_details": "Citation is bibliographically accurate for the DenseNet paper"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview explains the dense-connectivity motivation (vanishing gradients, feature reuse, parameter efficiency); considerations.use_cases enumerate 4 concrete uses",
+          "quality_note": "Architectural and practical rationale both articulated",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Narrative motivation in overview + structured use_cases",
+            "consistency_check": "pass",
+            "consistency_details": "Motivation aligns with the architecture description (dense blocks, growth rate, ~8M params vs ResNet-50)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Accurately summarizes the original DenseNet paper's argument"
+          }
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "pipeline_tag 'image-classification'; considerations.use_cases gives 4 specific intended uses (ImageNet baseline, transfer-learning backbone, feature extraction, educational reference)",
+          "quality_note": "Specific task, target users, and deployment context all named",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "use_cases populated; pipeline_tag matches HF taxonomy",
+            "consistency_check": "pass",
+            "consistency_details": "Intended uses consistent with output_format and considerations.users",
+            "plausibility_check": "pass",
+            "plausibility_details": "Each declared use is realistic for this checkpoint"
+          }
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "No top-level mission_relevance block in the YAML",
+          "quality_note": "Mission_relevance field not used",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Extended schema mission_relevance block absent",
+            "consistency_check": "pass",
+            "consistency_details": "Card does not claim DOE/program alignment, so absence is consistent with overview content",
+            "plausibility_check": "pass",
+            "plausibility_details": "A generic ImageNet baseline plausibly has no specific mission alignment to declare"
+          }
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "No funding agency, grant program, or related field in the YAML",
+          "quality_note": "Funding not disclosed",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No funding-related block",
+            "consistency_check": "pass",
+            "consistency_details": "Contributors' affiliations are listed but funding source is independent metadata",
+            "plausibility_check": "n/a",
+            "plausibility_details": "Original work was likely industry/academic mix; not declared"
+          }
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 0,
+          "evidence": "No compute_infrastructure block and no acknowledgement of supercomputing/cloud-credit/platform support in overview or documentation",
+          "quality_note": "No platform/compute acknowledgement",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "compute_infrastructure absent and no narrative acknowledgement",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with the broader absence of compute/training details",
+            "plausibility_check": "n/a",
+            "plausibility_details": "No content to evaluate"
+          }
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 0,
+          "evidence": "No model_parameters.training_procedure block; limitations[2] alludes qualitatively to the '2017-era torchvision training recipe' but never spells it out",
+          "quality_note": "Training procedure absent",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "training_procedure key missing",
+            "consistency_check": "pass",
+            "consistency_details": "Card does not claim to have rerun training",
+            "plausibility_check": "pass",
+            "plausibility_details": "Honest about not duplicating the original recipe"
+          }
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 0,
+          "evidence": "quantitative_analysis.performance_metrics slice text says 'ImageNet-1k validation (reference torchvision)' but no explicit evaluation protocol (crop strategy, augmentation at eval, etc.)",
+          "quality_note": "Only dataset name + 'reference torchvision' provenance; no protocol detail",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No evaluation_procedure block; metric provenance is described in the slice string only",
+            "consistency_check": "pass",
+            "consistency_details": "Metric values (74.4 / 91.9) are presented as reference numbers, consistent with that framing",
+            "plausibility_check": "pass",
+            "plausibility_details": "Standard 224x224 center-crop eval is the implicit convention but is not stated"
+          }
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "No mission_relevance / ReproducibilityInfo block; no seeds, deterministic flags, container hashes",
+          "quality_note": "Reproducibility metadata absent",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Extended reproducibility block missing",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with absent training_procedure",
+            "plausibility_check": "n/a",
+            "plausibility_details": "No content to evaluate"
+          }
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references includes 'https://github.com/huggingface/pytorch-image-models' and 'https://pytorch.org/vision/main/models/densenet.html'",
+          "quality_note": "Open-source code repositories linked (timm + torchvision DenseNet docs)",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URLs are well-formed",
+            "consistency_check": "pass",
+            "consistency_details": "timm repo consistent with library_name; torchvision link consistent with base_model",
+            "plausibility_check": "pass",
+            "plausibility_details": "Both repos are real and host the relevant code"
+          }
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.citations[0] gives IEEE CVPR 2017 reference; model_details.references include arXiv 1608.06993; bias_input cites Crawford & Paglen 2019 and Yang et al. 2020",
+          "quality_note": "Foundational paper + bias literature cited",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Citations structured, references list URLs",
+            "consistency_check": "pass",
+            "consistency_details": "All citations consistent with the model and its bias narrative",
+            "plausibility_check": "pass",
+            "plausibility_details": "All cited works are real and topically relevant"
+          }
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: top-1 acc 74.4% and top-5 acc 91.9% on ImageNet-1k val; plus params (8.0 M) and GMACs (2.9) reported as model-size/efficiency metrics",
+          "quality_note": "Standard ImageNet-1k accuracy numbers reported with slice labels and units",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each entry has type, value, slice, unit",
+            "consistency_check": "pass",
+            "consistency_details": "Params (8.0M) and GMACs (2.9) consistent with model_architecture description",
+            "plausibility_check": "pass",
+            "plausibility_details": "Top-1 74.4 / top-5 91.9 are within the published torchvision DenseNet-121 range; values are in the expected 0-100% band"
+          }
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 0,
+          "evidence": "All four metric entries use the same slice 'ImageNet-1k validation (reference torchvision)' or model-size; no per-class, per-subgroup, or per-condition slicing",
+          "quality_note": "Only aggregate ImageNet val numbers; no slice diversity",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Rubric semantic rule: aggregate-only metrics are a fairness weakness",
+            "consistency_check": "marginal",
+            "consistency_details": "Inconsistent with the bias disclosures that emphasize subpopulation skew — the bias narrative argues per-slice evaluation is needed but no per-slice metric is reported",
+            "plausibility_check": "pass",
+            "plausibility_details": "Original torchvision report is aggregate-only; not falsified"
+          }
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 0,
+          "evidence": "performance_metrics entries have no confidence_interval / value_error / std fields",
+          "quality_note": "No uncertainty quantification on reported metrics",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No CI fields populated",
+            "consistency_check": "pass",
+            "consistency_details": "Absence is consistent; values are not contradicted by missing CI",
+            "plausibility_check": "n/a",
+            "plausibility_details": "Single point estimates, no CI to range-check"
+          }
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: 3 entries covering OOD performance, ImageNet bias, and dated training recipe",
+          "quality_note": "Three concrete, distinct limitations",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Standard list-of-{description} structure",
+            "consistency_check": "pass",
+            "consistency_details": "Limitations consistent with bias disclosures and out_of_scope_uses",
+            "plausibility_check": "pass",
+            "plausibility_details": "All three limitations are real and well-documented in the literature"
+          }
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs[0]: DenseNet-121 vs ResNet-50 parameter-count vs inference-speed tradeoff; ethical_considerations also captured separately",
+          "quality_note": "Concrete engineering tradeoff articulated",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "tradeoffs populated with substantive entry",
+            "consistency_check": "marginal",
+            "consistency_details": "Rubric cross-field rule expects bias disclosure to be paired with an accuracy-vs-fairness tradeoff; this card supplies only the engineering tradeoff",
+            "plausibility_check": "pass",
+            "plausibility_details": "DenseNet vs ResNet param/throughput tradeoff is well-documented"
+          }
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.path on HuggingFace Hub; references include timm GitHub and torchvision docs; library_name 'timm'",
+          "quality_note": "Hosted on HF Hub and tied to GitHub-distributed timm/torchvision",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Standard HF URL",
+            "consistency_check": "pass",
+            "consistency_details": "Platform identity consistent across path, references, and library_name",
+            "plausibility_check": "pass",
+            "plausibility_details": "HF Hub and the timm GitHub repo are real and host this checkpoint"
+          }
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references include arXiv 1608.06993 (DenseNet paper) and torchvision docs; base_model 'torchvision/densenet121' points at the parent checkpoint",
+          "quality_note": "arXiv paper link + base_model lineage",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "No formal DOI (e.g. 10.1109/...) string; arXiv URL serves as the de facto identifier",
+            "consistency_check": "pass",
+            "consistency_details": "References, citations, and base_model all point at the same ancestor lineage",
+            "plausibility_check": "pass",
+            "plausibility_details": "arXiv 1608.06993 is the canonical DenseNet preprint"
+          }
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 0,
+          "evidence": "No model_index[].results[] structure; performance numbers are in quantitative_analysis.performance_metrics only",
+          "quality_note": "Metrics not exposed as leaderboard-style benchmark records",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "model_index block absent",
+            "consistency_check": "pass",
+            "consistency_details": "Metrics themselves are present elsewhere; no contradiction",
+            "plausibility_check": "pass",
+            "plausibility_details": "PwC does index DenseNet-121 on ImageNet; the card could add a model_index entry but did not"
+          }
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "Top-level schema_version: '0.0.2' (Google MCT v0.0.2 lineage); model_category 'convolutional-neural-network'",
+          "quality_note": "Schema version and model_category declared",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "schema_version populated with a recognizable MCT-style version string",
+            "consistency_check": "pass",
+            "consistency_details": "model_category consistent with the architecture",
+            "plausibility_check": "pass",
+            "plausibility_details": "0.0.2 matches the schema version this repo targets"
+          }
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 1,
+          "evidence": "model_parameters.data[0].link: 'https://www.image-net.org/'; top-level datasets: ['imagenet-1k']",
+          "quality_note": "Dataset name + canonical link present; not a D4D datasheet but a meaningful registered link",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "No D4D datasheet identifier or DatasetReference object — just a homepage URL",
+            "consistency_check": "pass",
+            "consistency_details": "Dataset name 'imagenet-1k' consistent with model_parameters.data and benchmark slice labels",
+            "plausibility_check": "pass",
+            "plausibility_details": "image-net.org is the canonical project page"
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {
+        "field": "framework_version",
+        "issue": "Floating constraint 'torch>=1.13' rather than a pinned version; marginal for reproducibility"
+      },
+      {
+        "field": "model_details.version.name",
+        "issue": "'tv_in1k' is a recognizable release tag but not semver; accepted by rubric as a release tag"
+      },
+      {
+        "field": "model_details.citations[0]",
+        "issue": "IEEE style provided; no BibTeX (rubric prefers machine-readable BibTeX)"
+      },
+      {
+        "field": "model_parameters.data[0].sensitive",
+        "issue": "Descriptive sensitive_data populated but the sensitive_data_used boolean is not explicitly set"
+      },
+      {
+        "field": "model_details.references / cross-refs",
+        "issue": "No formal DOI (10.XXXX/...) string; arXiv URL used as the closest identifier"
+      },
+      {
+        "field": "model_parameters.training_procedure",
+        "issue": "Block entirely absent — no hyperparameters or evaluation protocol"
+      },
+      {
+        "field": "model_parameters.compute_infrastructure",
+        "issue": "Block entirely absent — no hardware, software, total_compute, or energy"
+      },
+      {
+        "field": "mission_relevance",
+        "issue": "Block absent — no DOE/domain mission alignment or reproducibility info"
+      },
+      {
+        "field": "quantitative_analysis.performance_metrics[].confidence_interval",
+        "issue": "No CIs or error bars on any metric"
+      },
+      {
+        "field": "model_index",
+        "issue": "No model_index[].results[] entries — metrics not exposed as Papers-with-Code-style benchmark records"
+      },
+      {
+        "field": "model_parameters.data[0].link",
+        "issue": "Homepage URL only; no D4D datasheet reference object"
+      },
+      {
+        "field": "model file format",
+        "issue": "No explicit on-disk format (safetensors / state_dict / ONNX) declared"
+      }
+    ],
+    "consistency_failures": [
+      {
+        "rule": "bias_model/bias_output non-empty -> tradeoffs acknowledge accuracy-vs-fairness",
+        "issue": "Bias is disclosed for model and output, but considerations.tradeoffs only covers an engineering (param-count vs latency) tradeoff and does not name an accuracy-vs-fairness tradeoff"
+      },
+      {
+        "rule": "Bias narrative -> sliced performance metrics",
+        "issue": "Card argues that subpopulation evaluation is necessary, but quantitative_analysis only reports aggregate ImageNet-1k val numbers; no per-class or per-subgroup slice metrics"
+      },
+      {
+        "rule": "Documentation completeness ratio",
+        "issue": "Not a failure here — overview is well above 200 chars and documentation is populated"
+      }
+    ],
+    "plausibility_failures": [],
+    "consistency_passes_noted": [
+      {
+        "rule": "pipeline_tag image-classification -> input/output format",
+        "details": "input_format describes RGB image tensor [B,3,224,224] with ImageNet normalization; output_format describes 1000-way class logits — fully consistent"
+      },
+      {
+        "rule": "base_model license compatibility",
+        "details": "torchvision DenseNet-121 (BSD-3-Clause upstream) is compatible with the Apache-2.0 redistribution declared here"
+      },
+      {
+        "rule": "Architecture scale vs compute infrastructure",
+        "details": "DenseNet-121 (~8.0M params) is not billion-parameter scale, so absence of multi-GPU/multi-day compute_infrastructure is not a semantic inconsistency — though the field is still expected"
+      },
+      {
+        "rule": "Training vs evaluation dataset overlap",
+        "details": "Same ImageNet-1k dataset is used for both training (train split) and evaluation (val split); this is the canonical held-out split and not a leakage failure"
+      },
+      {
+        "rule": "Citation vs contributors and version date",
+        "details": "CVPR 2017 / arXiv 2016 citation, 2017-08-25 version date, and the four DenseNet co-authors listed in contributors are mutually consistent"
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Strong identification and provenance: HF Hub path, base_model lineage, arXiv reference, IEEE citation, six contributors with affiliations",
+      "Architecture is described with concrete, correct numbers (4 dense blocks, growth rate 32, ~8.0M params, ~2.9 GMACs at 224x224) that match the canonical DenseNet-121",
+      "Honest and well-cited bias disclosure: bias_input, bias_model, bias_output, ethical considerations with mitigation, and four concrete out-of-scope uses (face recognition, demographic classification, surveillance, clinical diagnosis)",
+      "Clear, runnable timm inference example and detailed input/output tensor specification",
+      "License is SPDX-formatted (Apache-2.0) and compatible with the upstream torchvision lineage"
+    ],
+    "weaknesses": [
+      "Training procedure entirely absent (no optimizer, learning rate, batch size, epochs, schedule, augmentation, seeds)",
+      "Compute infrastructure block entirely absent (no hardware, hours, or energy)",
+      "Evaluation procedure under-documented: metric values are given as 'reference torchvision' numbers with no explicit eval protocol",
+      "Performance metrics are aggregate-only on ImageNet-1k val; no per-class or per-subgroup slices despite a strong bias narrative",
+      "No confidence intervals, error bars, or standard deviations on any metric",
+      "No model_index[].results[] structure for Papers-with-Code-style benchmark interoperability",
+      "Funding, mission_relevance, and platform/compute acknowledgements all absent",
+      "Model file format (safetensors / state_dict / ONNX) not declared",
+      "framework_version is a floating floor ('torch>=1.13') rather than a pinned version",
+      "Citation is in IEEE style only; no BibTeX block for machine-readable use",
+      "Sensitive-data sub-block uses sensitive_data descriptive list but does not set the sensitive_data_used boolean"
+    ],
+    "semantic_concerns": [
+      "Cross-field gap: bias_model and bias_output disclose real risks, but considerations.tradeoffs only captures an engineering tradeoff and does not pair the bias narrative with an accuracy-vs-fairness tradeoff",
+      "Cross-field gap: the bias narrative argues for per-subpopulation evaluation but the performance_metrics provide only aggregate numbers",
+      "No leakage concern: identical dataset name in train and eval reflects the canonical ImageNet-1k train/val protocol, not leakage"
+    ],
+    "recommendations": [
+      "Add a model_parameters.training_procedure block stating the torchvision training recipe (SGD with momentum, lr schedule, batch size, epochs, augmentations) even if quoted from the torchvision references repository",
+      "Add a model_parameters.compute_infrastructure block — even an estimate (GPU type, approximate epochs/hours) — for reproducibility transparency",
+      "Add per-class or at least per-superclass slice metrics on ImageNet-1k val to honour the bias narrative; consider also reporting ImageNet-V2 / ImageNet-Sketch for OOD",
+      "Add at least 1-sigma error bars (or multiple-seed std) to the top-1 / top-5 numbers, or note that the values are deterministic point estimates from a single checkpoint",
+      "Add a model_index[].results[] block restating top-1 / top-5 on ImageNet-1k val so the card is consumable by Papers-with-Code-style indexers",
+      "Add an accuracy-vs-fairness tradeoff entry to considerations.tradeoffs to close the bias <-> tradeoff cross-field rule",
+      "Declare the on-disk file format (timm-style PyTorch state_dict or safetensors) under model_details.path or in documentation",
+      "Pin framework_version to a concrete version (e.g. 'torch==2.1.0') used at validation time rather than the >=1.13 floor",
+      "Add a BibTeX citation entry alongside the IEEE-style one to support machine-readable bibliographic ingestion",
+      "Explicitly set model_parameters.data[0].sensitive.sensitive_data_used to a boolean to complete the sensitive sub-block",
+      "Where applicable, populate mission_relevance and acknowledge any platform / compute support, even if just to declare 'not applicable: pretrained baseline redistribution'"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "mc-rubric10-semantic-2026-06-15",
+    "rubric_hash": "sha256:883f4369f8bf90e554b4287a5c528e99cd0e955f9ef844c60e94b000c73b77b2",
+    "model_card_hash": "sha256:eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5"
+  }
+}

@@ -200,7 +200,52 @@ ifndef EVAL_JSONS
 endif
 	$(RUN) python scripts/render_evaluation_html.py --input-glob '$(EVAL_JSONS)' --output $(BADGE_DIR) --badge --title "Model Card quality badges"
 
-.PHONY: evaluate-rubric10 evaluate-rubric10-smoke evaluate-rubric20 evaluate-rubric20-smoke check-completeness check-prereqs render-eval render-compare render-badges
+# =========================================================================
+# Portfolio: regenerate all dashboards + badges from the canonical eval dirs
+# =========================================================================
+# One-stop target — globs across data/evaluation/{extended,harmonized,hf_hub,fixtures}/{rubric10,rubric20}/
+# and rewrites portfolio.html, portfolio_compare.html, and the badges/ dir.
+# Use this any time an eval JSON has been re-run so the README badges and
+# dashboards stay in sync.
+#
+# Override defaults if you've staged evals somewhere else:
+#   make compare-portfolio PORTFOLIO_OUT_DIR=tmp/preview-portfolio
+PORTFOLIO_OUT_DIR ?= data/evaluation/all
+PORTFOLIO_BADGE_DIR ?= data/evaluation/badges
+PORTFOLIO_INPUTS = \
+	--input-glob 'data/evaluation/extended/rubric10/*evaluation.json' \
+	--input-glob 'data/evaluation/extended/rubric20/*evaluation.json' \
+	--input-glob 'data/evaluation/extended/rubric10_semantic/*evaluation.json' \
+	--input-glob 'data/evaluation/extended/rubric20_semantic/*evaluation.json' \
+	--input-glob 'data/evaluation/harmonized/rubric10/*evaluation.json' \
+	--input-glob 'data/evaluation/harmonized/rubric20/*evaluation.json' \
+	--input-glob 'data/evaluation/harmonized/rubric10_semantic/*evaluation.json' \
+	--input-glob 'data/evaluation/harmonized/rubric20_semantic/*evaluation.json' \
+	--input-glob 'data/evaluation/hf_hub/rubric10/*evaluation.json' \
+	--input-glob 'data/evaluation/hf_hub/rubric20/*evaluation.json' \
+	--input-glob 'data/evaluation/hf_hub/rubric10_semantic/*evaluation.json' \
+	--input-glob 'data/evaluation/hf_hub/rubric20_semantic/*evaluation.json' \
+	--input-glob 'data/evaluation/fixtures/rubric10/*evaluation.json' \
+	--input-glob 'data/evaluation/fixtures/rubric20/*evaluation.json'
+
+compare-portfolio:
+	@mkdir -p $(PORTFOLIO_OUT_DIR) $(PORTFOLIO_BADGE_DIR)
+	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) \
+		--output $(PORTFOLIO_OUT_DIR)/portfolio.html \
+		--title "Model Card portfolio quality report"
+	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) \
+		--output $(PORTFOLIO_OUT_DIR)/portfolio_compare.html --compare \
+		--title "Model Card portfolio: hybrid vs LLM x rubric10 x rubric20"
+	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) \
+		--output $(PORTFOLIO_BADGE_DIR) --badge \
+		--title "Model Card portfolio quality badges"
+	@echo ""
+	@echo "Portfolio regenerated:"
+	@echo "  Report:    $(PORTFOLIO_OUT_DIR)/portfolio.html"
+	@echo "  Compare:   $(PORTFOLIO_OUT_DIR)/portfolio_compare.html"
+	@echo "  Badges:    $(PORTFOLIO_BADGE_DIR)/"
+
+.PHONY: evaluate-rubric10 evaluate-rubric10-smoke evaluate-rubric20 evaluate-rubric20-smoke check-completeness check-prereqs render-eval render-compare render-badges compare-portfolio
 
 test: test-schema test-python test-examples
 
