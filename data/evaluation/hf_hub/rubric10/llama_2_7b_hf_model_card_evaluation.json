@@ -1,8 +1,8 @@
 {
   "rubric": "mc_rubric10",
   "version": "1.0",
-  "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
-  "evaluation_timestamp": "2026-06-18T02:48:02.948323+00:00",
+  "model_card_file": "data/model_cards_assistant/llama_2_7b_hf_model_card.yaml",
+  "evaluation_timestamp": "2026-06-18T02:48:02.963944+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -17,32 +17,32 @@
         {
           "name": "Persistent Identifier",
           "score": 1,
-          "evidence": "Resolvable identifier present (model_details.references: list(4))",
-          "quality_note": "Resolvable identifier present (model_details.references: list(4))"
+          "evidence": "Resolvable identifier present (model_details.references: list(7))",
+          "quality_note": "Resolvable identifier present (model_details.references: list(7))"
         },
         {
           "name": "Model Name and Description Completeness",
           "score": 1,
-          "evidence": "Name + comprehensive overview (741 chars)",
-          "quality_note": "Name + comprehensive overview (741 chars)"
+          "evidence": "Name + comprehensive overview (842 chars)",
+          "quality_note": "Name + comprehensive overview (842 chars)"
         },
         {
           "name": "Tags / Pipeline Tag for Searchability",
           "score": 1,
-          "evidence": "8 tags + pipeline_tag/category",
-          "quality_note": "8 tags + pipeline_tag/category"
+          "evidence": "13 tags + pipeline_tag/category",
+          "quality_note": "13 tags + pipeline_tag/category"
         },
         {
           "name": "Landing Page or Repository URL",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         },
         {
           "name": "Library / Framework Identification",
           "score": 1,
-          "evidence": "Framework PyTorch pinned to version torch>=1.13",
-          "quality_note": "Framework PyTorch pinned to version torch>=1.13"
+          "evidence": "Framework PyTorch pinned to version torch>=2.0",
+          "quality_note": "Framework PyTorch pinned to version torch>=2.0"
         }
       ],
       "element_score": 5,
@@ -56,32 +56,32 @@
         {
           "name": "Weight Distribution Mechanism Defined",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         },
         {
           "name": "Code Repository Available",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         },
         {
           "name": "Inference / Usage Example Provided",
           "score": 1,
-          "evidence": "model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std",
-          "quality_note": "model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std"
+          "evidence": "model_parameters.input_format: UTF-8 text (English-dominant); SentencePiece BPE tokenization; up to 4096 tokens of context.",
+          "quality_note": "model_parameters.input_format: UTF-8 text (English-dominant); SentencePiece BPE tokenization; up to 4096 tokens of context."
         },
         {
           "name": "Input / Output Specification",
           "score": 1,
-          "evidence": "model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std",
-          "quality_note": "model_parameters.input_format: RGB images, 224x224, normalized with ImageNet mean/std"
+          "evidence": "model_parameters.input_format: UTF-8 text (English-dominant); SentencePiece BPE tokenization; up to 4096 tokens of context.",
+          "quality_note": "model_parameters.input_format: UTF-8 text (English-dominant); SentencePiece BPE tokenization; up to 4096 tokens of context."
         },
         {
           "name": "Model File Format Specified",
           "score": 1,
-          "evidence": "model_details.path: https://huggingface.co/timm/densenet121.tv_in1k",
-          "quality_note": "model_details.path: https://huggingface.co/timm/densenet121.tv_in1k"
+          "evidence": "model_details.path: https://huggingface.co/meta-llama/Llama-2-7b-hf",
+          "quality_note": "model_details.path: https://huggingface.co/meta-llama/Llama-2-7b-hf"
         }
       ],
       "element_score": 5,
@@ -95,8 +95,8 @@
         {
           "name": "License Terms Allow Reuse",
           "score": 1,
-          "evidence": "SPDX license identified: ['Apache-2.0']",
-          "quality_note": "SPDX license identified: ['Apache-2.0']"
+          "evidence": "model_details.licenses: list(1)",
+          "quality_note": "model_details.licenses: list(1)"
         },
         {
           "name": "Standard Framework / Format Used",
@@ -107,23 +107,23 @@
         {
           "name": "Base Model or Foundation Lineage Stated",
           "score": 1,
-          "evidence": "base_model: torchvision/densenet121",
-          "quality_note": "base_model: torchvision/densenet121"
+          "evidence": "base_model: meta-llama/Llama-2-7b",
+          "quality_note": "base_model: meta-llama/Llama-2-7b"
         },
         {
           "name": "Supported Tasks Declared",
           "score": 1,
-          "evidence": "pipeline_tag: image-classification",
-          "quality_note": "pipeline_tag: image-classification"
+          "evidence": "pipeline_tag: text-generation",
+          "quality_note": "pipeline_tag: text-generation"
         },
         {
           "name": "Reproducibility Artifacts Provided",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation",
-          "quality_note": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation"
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])"
         }
       ],
-      "element_score": 4,
+      "element_score": 5,
       "element_max": 5
     },
     {
@@ -134,20 +134,20 @@
         {
           "name": "Ethical Considerations Documented",
           "score": 1,
-          "evidence": "considerations.ethical_considerations: list(1)",
-          "quality_note": "considerations.ethical_considerations: list(1)"
+          "evidence": "considerations.ethical_considerations: list(6)",
+          "quality_note": "considerations.ethical_considerations: list(6)"
         },
         {
           "name": "Known Model / Output Bias Disclosed",
           "score": 1,
-          "evidence": "bias_model: Inherits the geographic / demographic skew of its training data. No fairness audit was\nperformed by the original DenseNe\u2026",
-          "quality_note": "bias_model: Inherits the geographic / demographic skew of its training data. No fairness audit was\nperformed by the original DenseNe\u2026"
+          "evidence": "bias_model: Llama-2-7B inherits the demographic, cultural, geographic, political, and topical biases of its\n~2T-token English-domina\u2026",
+          "quality_note": "bias_model: Llama-2-7B inherits the demographic, cultural, geographic, political, and topical biases of its\n~2T-token English-domina\u2026"
         },
         {
           "name": "Out-of-Scope / Discouraged Uses",
           "score": 1,
-          "evidence": "considerations.out_of_scope_uses: list(4)",
-          "quality_note": "considerations.out_of_scope_uses: list(4)"
+          "evidence": "considerations.out_of_scope_uses: list(10)",
+          "quality_note": "considerations.out_of_scope_uses: list(10)"
         },
         {
           "name": "Sensitive Data Use Disclosed",
@@ -158,8 +158,8 @@
         {
           "name": "Intended Users and Stakeholder Tradeoffs",
           "score": 1,
-          "evidence": "considerations.users: list(1)",
-          "quality_note": "considerations.users: list(1)"
+          "evidence": "considerations.users: list(3)",
+          "quality_note": "considerations.users: list(3)"
         }
       ],
       "element_score": 5,
@@ -173,20 +173,20 @@
         {
           "name": "Architecture Described in Detail",
           "score": 1,
-          "evidence": "model_parameters.model_architecture: DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with\ntransition layers (1x1 conv + \u2026",
-          "quality_note": "model_parameters.model_architecture: DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with\ntransition layers (1x1 conv + \u2026"
+          "evidence": "model_parameters.model_architecture: Auto-regressive decoder-only transformer (\"Llama\" architecture). 32 transformer layers,\nhidden size 4096, 32 attention h\u2026",
+          "quality_note": "model_parameters.model_architecture: Auto-regressive decoder-only transformer (\"Llama\" architecture). 32 transformer layers,\nhidden size 4096, 32 attention h\u2026"
         },
         {
           "name": "Training Data Documented",
           "score": 1,
-          "evidence": "1 dataset(s), 1 with links/URIs",
-          "quality_note": "1 dataset(s), 1 with links/URIs"
+          "evidence": "2 dataset(s), 2 with links/URIs",
+          "quality_note": "2 dataset(s), 2 with links/URIs"
         },
         {
           "name": "Hyperparameters Reported",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.training_procedure",
-          "quality_note": "Missing all of: model_parameters.training_procedure"
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])"
         },
         {
           "name": "Compute Infrastructure Reported (Extended)",
@@ -196,12 +196,12 @@
         },
         {
           "name": "Training / Evaluation Split Defined",
-          "score": 0,
-          "evidence": "Single or no dataset; no benchmark split",
-          "quality_note": "Single or no dataset; no benchmark split"
+          "score": 1,
+          "evidence": "Multiple dataset entries or model_index present",
+          "quality_note": "Multiple dataset entries or model_index present"
         }
       ],
-      "element_score": 2,
+      "element_score": 4,
       "element_max": 5
     },
     {
@@ -212,32 +212,32 @@
         {
           "name": "Version Number Provided",
           "score": 1,
-          "evidence": "Version present but non-semver: tv_in1k",
-          "quality_note": "Version present but non-semver: tv_in1k"
+          "evidence": "Version present but non-semver: Llama-2-7b-hf",
+          "quality_note": "Version present but non-semver: Llama-2-7b-hf"
         },
         {
           "name": "Version Date Documented",
           "score": 1,
-          "evidence": "ISO date: 2017-08-25",
-          "quality_note": "ISO date: 2017-08-25"
+          "evidence": "ISO date: 2023-07-18",
+          "quality_note": "ISO date: 2023-07-18"
         },
         {
           "name": "Change Description for This Version",
           "score": 1,
-          "evidence": "model_details.version.diff: Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm's\n`timm/densenet121.tv_in1k` HuggingFace Hu\u2026",
-          "quality_note": "model_details.version.diff: Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm's\n`timm/densenet121.tv_in1k` HuggingFace Hu\u2026"
+          "evidence": "model_details.version.diff: Initial public release of Llama 2 7B base model in HuggingFace Transformers format.\nSuccessor to Llama 1 (LLaMA) release\u2026",
+          "quality_note": "model_details.version.diff: Initial public release of Llama 2 7B base model in HuggingFace Transformers format.\nSuccessor to Llama 1 (LLaMA) release\u2026"
         },
         {
           "name": "Owners / Contributors Identified",
           "score": 1,
-          "evidence": "6 contributor(s)/reference(s) with role",
-          "quality_note": "6 contributor(s)/reference(s) with role"
+          "evidence": "7 contributor(s)/reference(s) with role",
+          "quality_note": "7 contributor(s)/reference(s) with role"
         },
         {
           "name": "Citation Provided",
           "score": 1,
-          "evidence": "model_details.citations: list(1)",
-          "quality_note": "model_details.citations: list(1)"
+          "evidence": "model_details.citations: list(2)",
+          "quality_note": "model_details.citations: list(2)"
         }
       ],
       "element_score": 5,
@@ -251,14 +251,14 @@
         {
           "name": "Motivation / Use Case Rationale",
           "score": 1,
-          "evidence": "model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer\nreceives feature m\u2026",
-          "quality_note": "model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer\nreceives feature m\u2026"
+          "evidence": "model_details.overview: Llama-2-7B is the 7-billion-parameter base (pretrained, non-instruction-tuned, non-chat) variant of\nMeta's Llama 2 famil\u2026",
+          "quality_note": "model_details.overview: Llama-2-7B is the 7-billion-parameter base (pretrained, non-instruction-tuned, non-chat) variant of\nMeta's Llama 2 famil\u2026"
         },
         {
           "name": "Primary Intended Use Articulated",
           "score": 1,
-          "evidence": "considerations.use_cases: list(4)",
-          "quality_note": "considerations.use_cases: list(4)"
+          "evidence": "considerations.use_cases: list(5)",
+          "quality_note": "considerations.use_cases: list(5)"
         },
         {
           "name": "Mission Relevance Stated (Extended)",
@@ -275,8 +275,8 @@
         {
           "name": "Compute / Platform Acknowledgement",
           "score": 1,
-          "evidence": "model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer\nreceives feature m\u2026",
-          "quality_note": "model_details.overview: DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer\nreceives feature m\u2026"
+          "evidence": "model_details.overview: Llama-2-7B is the 7-billion-parameter base (pretrained, non-instruction-tuned, non-chat) variant of\nMeta's Llama 2 famil\u2026",
+          "quality_note": "model_details.overview: Llama-2-7B is the 7-billion-parameter base (pretrained, non-instruction-tuned, non-chat) variant of\nMeta's Llama 2 famil\u2026"
         }
       ],
       "element_score": 4,
@@ -289,15 +289,15 @@
       "sub_elements": [
         {
           "name": "Training Procedure Documented",
-          "score": 0,
-          "evidence": "Missing all of: model_parameters.training_procedure",
-          "quality_note": "Missing all of: model_parameters.training_procedure"
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])"
         },
         {
           "name": "Evaluation Procedure Documented",
           "score": 1,
-          "evidence": "quantitative_analysis: dict(keys=['performance_metrics'])",
-          "quality_note": "quantitative_analysis: dict(keys=['performance_metrics'])"
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'reproducibility_info'])"
         },
         {
           "name": "Reproducibility Information (Extended)",
@@ -308,17 +308,17 @@
         {
           "name": "Open-Source Code Linked",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         },
         {
           "name": "External Standards or References Cited",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         }
       ],
-      "element_score": 3,
+      "element_score": 4,
       "element_max": 5
     },
     {
@@ -329,14 +329,14 @@
         {
           "name": "Quantitative Performance Metrics Reported",
           "score": 1,
-          "evidence": "4 metric(s) with numeric value",
-          "quality_note": "4 metric(s) with numeric value"
+          "evidence": "20 metric(s) with numeric value",
+          "quality_note": "20 metric(s) with numeric value"
         },
         {
           "name": "Performance Across Slices / Subpopulations",
           "score": 1,
-          "evidence": "3 distinct slice(s) reported",
-          "quality_note": "3 distinct slice(s) reported"
+          "evidence": "20 distinct slice(s) reported",
+          "quality_note": "20 distinct slice(s) reported"
         },
         {
           "name": "Confidence Intervals or Error Bars",
@@ -347,14 +347,14 @@
         {
           "name": "Limitations Section Present",
           "score": 1,
-          "evidence": "considerations.limitations: list(3)",
-          "quality_note": "considerations.limitations: list(3)"
+          "evidence": "considerations.limitations: list(5)",
+          "quality_note": "considerations.limitations: list(5)"
         },
         {
           "name": "Tradeoffs / Risks Acknowledged",
           "score": 1,
-          "evidence": "considerations.tradeoffs: list(1)",
-          "quality_note": "considerations.tradeoffs: list(1)"
+          "evidence": "considerations.tradeoffs: list(4)",
+          "quality_note": "considerations.tradeoffs: list(4)"
         }
       ],
       "element_score": 4,
@@ -368,14 +368,14 @@
         {
           "name": "Published on a Recognized Platform",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         },
         {
           "name": "Cross-referenced DOIs or Related Model Links",
           "score": 1,
-          "evidence": "model_details.references: list(4)",
-          "quality_note": "model_details.references: list(4)"
+          "evidence": "model_details.references: list(7)",
+          "quality_note": "model_details.references: list(7)"
         },
         {
           "name": "Benchmark Results (Papers with Code)",
@@ -392,8 +392,8 @@
         {
           "name": "Datasets Linked",
           "score": 1,
-          "evidence": "1 dataset(s) with name+link",
-          "quality_note": "1 dataset(s) with name+link"
+          "evidence": "2 dataset(s) with name+link",
+          "quality_note": "2 dataset(s) with name+link"
         }
       ],
       "element_score": 4,
@@ -401,18 +401,20 @@
     }
   ],
   "overall_score": {
-    "total_points": 41,
+    "total_points": 45,
     "max_points": 50,
-    "percentage": 82.0
+    "percentage": 90.0
   },
   "assessment": {
     "strengths": [
       "Strong Model Discovery and Identification (5/5)",
       "Strong Model Access and Distribution (5/5)",
-      "Strong Model Reuse and Interoperability (4/5)",
+      "Strong Model Reuse and Interoperability (5/5)",
       "Strong Ethical Use and Responsible AI (5/5)",
+      "Strong Model Architecture and Training Composition (4/5)",
       "Strong Model Provenance and Versioning (5/5)",
       "Strong Scientific Motivation and Funding Transparency (4/5)",
+      "Strong Training and Evaluation Transparency (4/5)",
       "Strong Performance Evaluation and Limitations Disclosure (4/5)",
       "Strong Cross-Platform and Community Integration (4/5)"
     ],
@@ -421,6 +423,6 @@
   },
   "metadata": {
     "evaluator_id": "batch-hybrid-evaluator",
-    "model_card_hash": "eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5"
+    "model_card_hash": "dab2a0d36d16275a022baa59659cdf1456c6d7a87111ed79c7aba66eaef5eea4"
   }
 }

@@ -166,6 +166,20 @@ Portfolio re-run confirms the hybrid caps land on the same cards the LLM flagged
 
 The hybrid now lands ≤2.4pp below the LLM r20-semantic on every portfolio card, so gating on it doesn't materially loosen the standard while removing the per-PR API call.
 
+## Portfolio extension: CLIP, Llama-2-7B, SDXL
+
+Three additional HF Hub cards added to broaden calibration beyond CV / proteins / sentiment. All generated via the `mc-assistant` skill from the public HF Hub model pages + canonical papers, then scored:
+
+| Card | r10 hybrid | r20 hybrid | r20 semantic deductions (hybrid) |
+|---|---:|---:|---|
+| openai/clip-vit-base-patch32 | 41/50 (82%) | 64/84 (76.2%) | Q18 5→3 (ImageNet appears in both training and zero-shot evaluation slices) |
+| meta-llama/Llama-2-7b-hf | 45/50 (90%) | 63/84 (75.0%) | — (clean) |
+| stabilityai/stable-diffusion-xl-base-1.0 | 45/50 (90%) | 62/84 (73.8%) | Q18 4→3 (LAION-5B subsets overlap eval prompts) |
+
+All three score above the 60% gate threshold. The Q19 bias-tradeoffs rule did **not** fire on any of the three — the generation prompt explicitly asked for an accuracy-vs-fairness tradeoff, and the agents complied. This validates that the rule is teachable: once card authors know it exists, they write content that passes it.
+
+Llama-2 lands the highest r10 score (90%) but only the middle r20 (75%) — its 20-metric benchmark sweep clears the rubric10 metrics sub-elements but the rubric20 funding / DOI / energy heuristics still trim 9 points.
+
 ### Open follow-ups
 
 - Port a couple more HF Hub cards (CLIP, Llama-2-7B-base, Stable Diffusion XL) — broadens calibration beyond CV / proteins / sentiment

@@ -1,8 +1,8 @@
 {
   "rubric": "mc_rubric20",
   "version": "1.0",
-  "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
-  "evaluation_timestamp": "2026-06-18T02:47:39.158859+00:00",
+  "model_card_file": "data/model_cards_assistant/llama_2_7b_hf_model_card.yaml",
+  "evaluation_timestamp": "2026-06-18T02:47:39.174745+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -31,7 +31,7 @@
           "score": 5,
           "max_score": 5,
           "score_label": ">500 chars across narrative fields",
-          "evidence": "overview=741, doc=587, short=112",
+          "evidence": "overview=842, doc=1282, short=144",
           "quality_note": ">500 chars across narrative fields"
         },
         {
@@ -41,7 +41,7 @@
           "score": 5,
           "max_score": 5,
           "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
-          "evidence": "8 tags, pipeline=image-classification, lang=['en'], cat=convolutional-neural-network",
+          "evidence": "13 tags, pipeline=text-generation, lang=['en'], cat=large-language-model",
           "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
         },
         {
@@ -68,7 +68,7 @@
     },
     {
       "name": "Metadata Quality & Content",
-      "category_score": 15,
+      "category_score": 13,
       "category_max": 21,
       "questions": [
         {
@@ -105,11 +105,11 @@
           "id": 9,
           "name": "License Clarity & SPDX Compliance",
           "score_type": "numeric",
-          "score": 5,
+          "score": 3,
           "max_score": 5,
-          "score_label": "SPDX permissive license (no additional restrictions needed)",
-          "evidence": "spdx=['Apache-2.0']",
-          "quality_note": "SPDX permissive license (no additional restrictions needed)"
+          "score_label": "License present but non-SPDX",
+          "evidence": "identifiers=[None]",
+          "quality_note": "License present but non-SPDX"
         },
         {
           "id": 10,
@@ -118,14 +118,14 @@
           "score": 4,
           "max_score": 5,
           "score_label": "Framework + version + library, no model_index",
-          "evidence": "PyTorch torch>=1.13, lib=timm",
+          "evidence": "PyTorch torch>=2.0, lib=transformers",
           "quality_note": "Framework + version + library, no model_index"
         }
       ]
     },
     {
       "name": "Technical Documentation",
-      "category_score": 11,
+      "category_score": 15,
       "category_max": 25,
       "questions": [
         {
@@ -142,11 +142,11 @@
           "id": 12,
           "name": "Training Procedure Clarity",
           "score_type": "numeric",
-          "score": 0,
+          "score": 4,
           "max_score": 5,
-          "score_label": "No training procedure",
-          "evidence": "absent",
-          "quality_note": "No training procedure"
+          "score_label": "Most hyperparameters present",
+          "evidence": "good",
+          "quality_note": "Most hyperparameters present"
         },
         {
           "id": 13,
@@ -155,7 +155,7 @@
           "score": 4,
           "max_score": 5,
           "score_label": "Version name + date present",
-          "evidence": "version=tv_in1k, date=2017-08-25",
+          "evidence": "version=Llama-2-7b-hf, date=2023-07-18",
           "quality_note": "Version name + date present"
         },
         {
@@ -165,7 +165,7 @@
           "score": 4,
           "max_score": 5,
           "score_label": "Citation(s) + reference(s), DOIs missing",
-          "evidence": "1 cites, 4 refs",
+          "evidence": "2 cites, 7 refs",
           "quality_note": "Citation(s) + reference(s), DOIs missing"
         },
         {
@@ -182,7 +182,7 @@
     },
     {
       "name": "Performance & FAIRness",
-      "category_score": 11,
+      "category_score": 14,
       "category_max": 17,
       "questions": [
         {
@@ -192,7 +192,7 @@
           "score": 1,
           "max_score": 1,
           "score_label": "At least one resolvable URL",
-          "evidence": "4 refs",
+          "evidence": "7 refs",
           "quality_note": "At least one resolvable URL"
         },
         {
@@ -209,21 +209,21 @@
           "id": 18,
           "name": "Performance Metrics with Slices & CI",
           "score_type": "numeric",
-          "score": 3,
+          "score": 4,
           "max_score": 5,
-          "score_label": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI",
-          "evidence": "4 metrics, 3 slices; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation (reference torchvision)', 'ImageNet-1k (ILSVRC2012)' ~ 'imagenet-1k'",
-          "quality_note": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI"
+          "score_label": "Metrics across multiple slices, no CI",
+          "evidence": "20 metrics, 20 slices",
+          "quality_note": "Metrics across multiple slices, no CI"
         },
         {
           "id": 19,
           "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
           "score_type": "numeric",
-          "score": 3,
+          "score": 5,
           "max_score": 5,
-          "score_label": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items",
-          "evidence": "lim=3, tradeoffs=1, oos=4; semantic_rule=bias_tradeoff_gap: bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: 'Compared to ResNet-50 (25M params), DenseNet-121 reaches similar accuracy with ~1/3 the\\nparameters but slower wall-clock\u2026'",
-          "quality_note": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items"
+          "score_label": "All three populated with concrete enumerated items",
+          "evidence": "lim=5, tradeoffs=4, oos=10",
+          "quality_note": "All three populated with concrete enumerated items"
         },
         {
           "id": 20,
@@ -239,37 +239,20 @@
     }
   ],
   "overall_score": {
-    "total_points": 58,
+    "total_points": 63,
     "max_points": 84,
-    "percentage": 69.0,
-    "semantic_deductions": [
-      {
-        "question": "Q18",
-        "rule": "train_eval_leakage",
-        "raw_score": 4,
-        "capped_score": 3,
-        "reason": "Training/benchmark dataset overlap: 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation (reference torchvision)', 'ImageNet-1k (ILSVRC2012)' ~ 'imagenet-1k'"
-      },
-      {
-        "question": "Q19",
-        "rule": "bias_tradeoff_gap",
-        "raw_score": 5,
-        "capped_score": 3,
-        "reason": "bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: 'Compared to ResNet-50 (25M params), DenseNet-121 reaches similar accuracy with ~1/3 the\\nparameters but slower wall-clock\u2026'"
-      }
-    ]
+    "percentage": 75.0,
+    "semantic_deductions": []
   },
   "assessment": {
     "strengths": [
       "Strong Structural Completeness (21/21)"
     ],
-    "weaknesses": [
-      "Weak Technical Documentation (11/25)"
-    ],
+    "weaknesses": [],
     "recommendations": []
   },
   "metadata": {
     "evaluator_id": "batch-hybrid-rubric20",
-    "model_card_hash": "eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5"
+    "model_card_hash": "dab2a0d36d16275a022baa59659cdf1456c6d7a87111ed79c7aba66eaef5eea4"
   }
 }

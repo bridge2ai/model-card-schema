@@ -1,2 +1,6 @@
 model_card_file,total_score,max_score,percentage,elements_passing_3_of_5,element_1_score,element_2_score,element_3_score,element_4_score,element_5_score,element_6_score,element_7_score,element_8_score,element_9_score,element_10_score
+data/model_cards_assistant/clip_vit_base_patch32_model_card.yaml,46,50,92.0,10,5,5,5,5,4,5,4,4,5,4
+data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml,41,50,82.0,9,5,5,4,5,2,5,4,3,4,4
+data/model_cards_assistant/llama_2_7b_hf_model_card.yaml,45,50,90.0,10,5,5,5,5,4,5,4,4,4,4
+data/model_cards_assistant/stable_diffusion_xl_base_1_0_model_card.yaml,45,50,90.0,10,5,5,5,5,4,5,4,4,4,4
 data/model_cards_assistant/subcell_saprot_650m_model_card.yaml,44,50,88.0,10,5,5,5,5,3,5,4,4,4,4

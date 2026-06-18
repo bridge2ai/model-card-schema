@@ -2,7 +2,7 @@
   "rubric": "mc_rubric10",
   "version": "1.0",
   "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
-  "evaluation_timestamp": "2026-06-16T03:13:15.425592+00:00",
+  "evaluation_timestamp": "2026-06-18T02:48:02.985706+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
