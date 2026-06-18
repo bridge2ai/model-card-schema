@@ -1,0 +1,139 @@
+name: mc-rubric20 gate
+
+# Blocking PR check that scores any changed Model Card YAML against the
+# rubric20 hybrid evaluator (which now bakes in the highest-frequency
+# rubric20-semantic findings — Q18 train/eval leakage and Q19 bias↔tradeoffs
+# consistency, see scripts/batch_evaluate_mc_rubric20_hybrid.py).
+#
+# Why the hybrid and not the LLM r20-semantic agent:
+#   - Deterministic, reproducible bit-for-bit, no ANTHROPIC_API_KEY needed
+#   - Portfolio measurement (notes/PORTFOLIO_EVALUATION.md) shows r20-semantic
+#     stays within ~3pp of r20 base LLM, and our hybrid (with the two encoded
+#     semantic rules) now lands within ~2-4pp of r20-semantic on the same
+#     portfolio. Cheap enough to run on every PR; faithful enough to gate on.
+#   - The LLM r20-semantic agent remains the gold-standard audit (see
+#     mc-rubric20-semantic-audit.yml — manual / scheduled) and the rubric-report
+#     aggregator surfaces what to encode into the hybrid next.
+
+on:
+  pull_request:
+    paths:
+      - 'data/example_model_cards/**/*.yaml'
+      - 'data/model_cards_assistant/**/*.yaml'
+      - 'src/data/examples/**/*.yaml'
+      - 'scripts/batch_evaluate_mc_rubric20_hybrid.py'
+      - 'tests/test_rubric20_semantic_rules.py'
+      - '.github/workflows/mc-rubric20-gate.yml'
+  workflow_dispatch:
+    inputs:
+      threshold:
+        description: 'Minimum rubric20 hybrid score percentage (default 60)'
+        required: false
+        default: '60'
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    env:
+      THRESHOLD: ${{ github.event.inputs.threshold || '60' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+
+      - name: Run hybrid rubric20 semantic-rule unit tests
+        run: poetry run python -m unittest tests.test_rubric20_semantic_rules -v
+
+      - name: Detect changed model card YAMLs
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}" --depth=1 || true
+            base="origin/${{ github.base_ref }}"
+            files=$(git diff --name-only --diff-filter=AM "$base"...HEAD \
+              | grep -E '^(data/example_model_cards|data/model_cards_assistant|src/data/examples)/.*\.yaml$' \
+              | grep -v 'imdb-sentiment-datasheet' \
+              || true)
+          else
+            files=$(find data/example_model_cards data/model_cards_assistant src/data/examples -name '*.yaml' 2>/dev/null \
+              | grep -v 'imdb-sentiment-datasheet' \
+              || true)
+          fi
+          if [ -z "$files" ]; then
+            echo "No model card YAMLs changed."
+            echo "have_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "have_changes=true" >> "$GITHUB_OUTPUT"
+          # Persist as newline-separated file — easier than escaping for env vars
+          printf '%s\n' "$files" > /tmp/changed_cards.txt
+          echo "Changed files:"
+          cat /tmp/changed_cards.txt
+
+      - name: Score changed cards with rubric20 hybrid
+        if: steps.changed.outputs.have_changes == 'true'
+        run: |
+          mkdir -p tmp/rubric20_gate
+          fail=0
+          : > tmp/rubric20_gate/summary.md
+          echo "# rubric20 hybrid gate" >> tmp/rubric20_gate/summary.md
+          echo "" >> tmp/rubric20_gate/summary.md
+          echo "Threshold: **$THRESHOLD%**" >> tmp/rubric20_gate/summary.md
+          echo "" >> tmp/rubric20_gate/summary.md
+          echo "| Card | Score | % | Semantic deductions |" >> tmp/rubric20_gate/summary.md
+          echo "|---|---:|---:|---|" >> tmp/rubric20_gate/summary.md
+          while IFS= read -r card; do
+            [ -z "$card" ] && continue
+            [ -f "$card" ] || continue
+            poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+              --input "$card" --output-dir tmp/rubric20_gate
+            json="tmp/rubric20_gate/$(basename "${card%.yaml}")_rubric20_evaluation.json"
+            if [ ! -f "$json" ]; then
+              echo "::error file=$card::rubric20 evaluator produced no output"
+              fail=1
+              continue
+            fi
+            pct=$(poetry run python -c "import json,sys; print(json.load(open('$json'))['overall_score']['percentage'])")
+            score=$(poetry run python -c "import json,sys; r=json.load(open('$json'))['overall_score']; print(f\"{r['total_points']}/{r['max_points']}\")")
+            deds=$(poetry run python -c "import json; d=json.load(open('$json'))['overall_score'].get('semantic_deductions',[]); print('; '.join(f\"{x['question']}:{x['rule']} ({x['raw_score']}->{x['capped_score']})\" for x in d) or '—')")
+            echo "| \`$card\` | $score | $pct% | $deds |" >> tmp/rubric20_gate/summary.md
+            below=$(poetry run python -c "import sys; sys.exit(0 if float('$pct') >= float('$THRESHOLD') else 1)" && echo 0 || echo 1)
+            if [ "$below" = "1" ]; then
+              echo "::error file=$card::rubric20 score $pct% is below threshold $THRESHOLD%"
+              fail=1
+            fi
+          done < /tmp/changed_cards.txt
+          echo "" >> tmp/rubric20_gate/summary.md
+          echo "Hybrid r20 now encodes Q18 train_eval_leakage and Q19 bias_tradeoff_gap as deterministic rules — see \`notes/PORTFOLIO_EVALUATION.md\` for portfolio data." >> tmp/rubric20_gate/summary.md
+          cat tmp/rubric20_gate/summary.md
+          if [ -n "$GITHUB_STEP_SUMMARY" ]; then
+            cat tmp/rubric20_gate/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ "$fail" = "1" ]; then
+            echo "::error::One or more model cards failed the rubric20 gate"
+            exit 1
+          fi

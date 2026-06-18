@@ -144,9 +144,31 @@ Ran `mc-rubric10-semantic` + `mc-rubric20-semantic` against the 5 example cards.
 4. **Only climate-forecasting passes the leakage check** — temporal train/eval split is the gold standard. Everything else has either explicit (IMDb), implicit (DenseNet within-distribution), or family-level (climate-extended) overlap.
 5. **Semantic agent is reproducible enough for production gating** at the r20 level — ≤3pp spread between hybrid and semantic on every card. r10-semantic is more variable (sentiment-classifier *gained* 2pp, DenseNet lost 6) so use as audit, not gate.
 
-### Open follow-ups (replaces prior list)
+## Hybrid + CI gate
+
+The two most-frequent semantic findings — **Q18 train/eval leakage** and **Q19 bias-vs-tradeoffs gap** — are now encoded as deterministic rules in `scripts/batch_evaluate_mc_rubric20_hybrid.py`. When either fires, the hybrid caps the relevant question at 3 and surfaces a `semantic_deductions` entry mirroring the LLM agent's output shape.
+
+Portfolio re-run confirms the hybrid caps land on the same cards the LLM flagged:
+
+| Card | LLM Q18/Q19 flag | Hybrid Q18/Q19 cap |
+|---|---|---|
+| climate-extended | Q18 | Q18 ✓ |
+| climate-forecasting | — | — ✓ |
+| sentiment-classifier | Q18, Q19* | Q18 ✓ (Q19 LLM cap is a different rule — moderation-without-OOS) |
+| DenseNet-121 | Q18, Q19 | Q18 + Q19 ✓ |
+| SubCell SaProt | Q19 | Q19 ✓ |
+
+**CI architecture**:
+
+- **PR gate** (`.github/workflows/mc-rubric20-gate.yml`) — hybrid r20 with the two encoded semantic rules. Deterministic, no API key, runs in seconds. Fails if any changed card scores below `THRESHOLD` (default 60%). This is the blocking check.
+- **Weekly audit** (`.github/workflows/mc-rubric20-portfolio-audit.yml`) — re-runs hybrid across the full portfolio, regenerates dashboards/badges + common_issues.md, opens a PR with the deltas.
+- **LLM r20-semantic** remains the gold-standard audit, run manually via the `mc-rubric20-semantic` agent inside Claude Code. Commit the regenerated JSONs and the next audit cycle picks them up.
+
+The hybrid now lands ≤2.4pp below the LLM r20-semantic on every portfolio card, so gating on it doesn't materially loosen the standard while removing the per-PR API call.
+
+### Open follow-ups
 
 - Port a couple more HF Hub cards (CLIP, Llama-2-7B-base, Stable Diffusion XL) — broadens calibration beyond CV / proteins / sentiment
-- Encode the most-common semantic findings as hybrid rules so the rule-based evaluator can flag them too (Q19 bias↔tradeoffs and Q18 train/eval overlap are the highest-frequency checks)
-- Build a `mc-rubric-report` agent that aggregates `semantic_findings` blocks across the portfolio into a single ranked "common issues" markdown
-- Make r20-semantic the default LLM gate in CI (within 3pp of base LLM, catches concrete quality issues, reproducible across re-runs)
+- Re-run rubric10 hybrid with equivalent semantic rules at the sub-element level (currently only rubric20 has the rule-based caps); rubric10 has the same Q18/Q19-shaped findings but the binary 0/1 sub-element scoring needs a different encoding
+- Extend `build_rubric_report.py` grouping: today three near-identical wordings of the train/eval leakage rule (`benchmark dataset != training dataset`, `benchmark dataset != training dataset (no train/eval leakage)`, `benchmark dataset ↔ training data (train/eval leakage)`) still land in three separate buckets. A simple "all marker words present" similarity check would collapse them
+- Run mc-rubric20-semantic against the audit branch's regenerated JSONs to confirm hybrid+LLM stay aligned as new cards land
