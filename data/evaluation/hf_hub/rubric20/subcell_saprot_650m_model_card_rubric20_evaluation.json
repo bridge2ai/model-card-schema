@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
-  "evaluation_timestamp": "2026-06-16T03:13:15.483369+00:00",
+  "evaluation_timestamp": "2026-06-18T02:35:55.407377+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -182,7 +182,7 @@
     },
     {
       "name": "Performance & FAIRness",
-      "category_score": 13,
+      "category_score": 11,
       "category_max": 17,
       "questions": [
         {
@@ -219,11 +219,11 @@
           "id": 19,
           "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
           "score_type": "numeric",
-          "score": 5,
+          "score": 3,
           "max_score": 5,
-          "score_label": "All three populated with concrete enumerated items",
-          "evidence": "lim=3, tradeoffs=1, oos=3",
-          "quality_note": "All three populated with concrete enumerated items"
+          "score_label": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items",
+          "evidence": "lim=3, tradeoffs=1, oos=3; semantic_rule=bias_tradeoff_gap: bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: '650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at\\nhigher inference cost. LoRA keeps \u2026'",
+          "quality_note": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items"
         },
         {
           "id": 20,
@@ -239,9 +239,18 @@
     }
   ],
   "overall_score": {
-    "total_points": 65,
+    "total_points": 63,
     "max_points": 84,
-    "percentage": 77.4
+    "percentage": 75.0,
+    "semantic_deductions": [
+      {
+        "question": "Q19",
+        "rule": "bias_tradeoff_gap",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: '650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at\\nhigher inference cost. LoRA keeps \u2026'"
+      }
+    ]
   },
   "assessment": {
     "strengths": [

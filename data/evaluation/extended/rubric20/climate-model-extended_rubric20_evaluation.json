@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
-  "evaluation_timestamp": "2026-06-16T03:13:15.613365+00:00",
+  "evaluation_timestamp": "2026-06-18T02:35:38.812393+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -182,7 +182,7 @@
     },
     {
       "name": "Performance & FAIRness",
-      "category_score": 17,
+      "category_score": 15,
       "category_max": 17,
       "questions": [
         {
@@ -209,11 +209,11 @@
           "id": 18,
           "name": "Performance Metrics with Slices & CI",
           "score_type": "numeric",
-          "score": 5,
+          "score": 3,
           "max_score": 5,
-          "score_label": "\u22652 metrics, \u22652 slices, CI on \u22651",
-          "evidence": "5 metrics, 2 slices, CI=True",
-          "quality_note": "\u22652 metrics, \u22652 slices, CI on \u22651"
+          "score_label": "[capped 5->3 by train_eval_leakage] \u22652 metrics, \u22652 slices, CI on \u22651",
+          "evidence": "5 metrics, 2 slices, CI=True; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'E3SM v2 High-Resolution' ~ 'Test set (E3SM v2)'",
+          "quality_note": "[capped 5->3 by train_eval_leakage] \u22652 metrics, \u22652 slices, CI on \u22651"
         },
         {
           "id": 19,
@@ -239,14 +239,23 @@
     }
   ],
   "overall_score": {
-    "total_points": 74,
+    "total_points": 72,
     "max_points": 84,
-    "percentage": 88.1
+    "percentage": 85.7,
+    "semantic_deductions": [
+      {
+        "question": "Q18",
+        "rule": "train_eval_leakage",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "Training/benchmark dataset overlap: 'E3SM v2 High-Resolution' ~ 'Test set (E3SM v2)'"
+      }
+    ]
   },
   "assessment": {
     "strengths": [
       "Strong Technical Documentation (23/25)",
-      "Strong Performance & FAIRness (17/17)"
+      "Strong Performance & FAIRness (15/17)"
     ],
     "weaknesses": [],
     "recommendations": []
