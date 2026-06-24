@@ -1,0 +1,424 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
+  "evaluation_timestamp": "2026-06-16T03:13:15.793520+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "Identifier-like field present but unverified: model_details.references: list(2)",
+          "quality_note": "Identifier-like field present but unverified: model_details.references: list(2)"
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "Name + comprehensive overview (130 chars)",
+          "quality_note": "Name + comprehensive overview (130 chars)"
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "6 tags + pipeline_tag/category",
+          "quality_note": "6 tags + pipeline_tag/category"
+        },
+        {
+          "name": "Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "Framework PyTorch pinned to version 2.0.1",
+          "quality_note": "Framework PyTorch pinned to version 2.0.1"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        },
+        {
+          "name": "Inference / Usage Example Provided",
+          "score": 1,
+          "evidence": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026",
+          "quality_note": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026"
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026",
+          "quality_note": "model_parameters.input_format: Text string, maximum 1024 tokens after BERT tokenization.\nInput is automatically tokenized using BERT WordPiece tokenize\u2026"
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 1,
+          "evidence": "library_name: transformers",
+          "quality_note": "library_name: transformers"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "SPDX license identified: ['Apache-2.0']",
+          "quality_note": "SPDX license identified: ['Apache-2.0']"
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: PyTorch",
+          "quality_note": "framework: PyTorch"
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "base_model: bert-base-uncased",
+          "quality_note": "base_model: bert-base-uncased"
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: text-classification",
+          "quality_note": "pipeline_tag: text-classification"
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation",
+          "quality_note": "Missing all of: model_parameters.training_procedure, mission_relevance, usage_documentation"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the card document risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations: list(2)",
+          "quality_note": "considerations.ethical_considerations: list(2)"
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 0,
+          "evidence": "Missing all of: bias_model, bias_output, bias_input",
+          "quality_note": "Missing all of: bias_model, bias_output, bias_input"
+        },
+        {
+          "name": "Out-of-Scope / Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.limitations: list(4)",
+          "quality_note": "considerations.limitations: list(4)"
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 0,
+          "evidence": "No sensitive-data disclosure on any dataset",
+          "quality_note": "No sensitive-data disclosure on any dataset"
+        },
+        {
+          "name": "Intended Users and Stakeholder Tradeoffs",
+          "score": 1,
+          "evidence": "considerations.users: list(3)",
+          "quality_note": "considerations.users: list(3)"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the architecture and training composition be understood?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: BERT-base (110M parameters):\n- 12 transformer layers\n- 768 hidden dimensions\n- 12 attention heads\n\nClassification head:\n\u2026",
+          "quality_note": "model_parameters.model_architecture: BERT-base (110M parameters):\n- 12 transformer layers\n- 768 hidden dimensions\n- 12 attention heads\n\nClassification head:\n\u2026"
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "1 dataset(s), 1 with links/URIs",
+          "quality_note": "1 dataset(s), 1 with links/URIs"
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure",
+          "quality_note": "Missing all of: model_parameters.training_procedure"
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.compute_infrastructure",
+          "quality_note": "Missing all of: model_parameters.compute_infrastructure"
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "Multiple dataset entries or model_index present",
+          "quality_note": "Multiple dataset entries or model_index present"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine versions, owners, citations?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "Semver-shaped version: 1.2.0",
+          "quality_note": "Semver-shaped version: 1.2.0"
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "ISO date: 2025-11-20",
+          "quality_note": "ISO date: 2025-11-20"
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: - Improved accuracy by 5% through hyperparameter tuning\n- Added support for longer sequences (512 \u2192 1024 tokens)\n- Fixed\u2026",
+          "quality_note": "model_details.version.diff: - Improved accuracy by 5% through hyperparameter tuning\n- Added support for longer sequences (512 \u2192 1024 tokens)\n- Fixed\u2026"
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "2 owner/contributor/reference(s) (roles missing)",
+          "quality_note": "2 owner/contributor/reference(s) (roles missing)"
+        },
+        {
+          "name": "Citation Provided",
+          "score": 1,
+          "evidence": "model_details.citations: list(1)",
+          "quality_note": "model_details.citations: list(1)"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026",
+          "quality_note": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026"
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases: list(3)",
+          "quality_note": "considerations.use_cases: list(3)"
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: mission_relevance",
+          "quality_note": "Missing all of: mission_relevance"
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "Missing all of: model_details.contributors, mission_relevance, mission_relevance.funding_grants",
+          "quality_note": "Missing all of: model_details.contributors, mission_relevance, mission_relevance.funding_grants"
+        },
+        {
+          "name": "Compute / Platform Acknowledgement",
+          "score": 1,
+          "evidence": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026",
+          "quality_note": "model_details.overview: Fine-tuned BERT-base model for binary sentiment classification.\nTrained on IMDb movie reviews, achieves 92% accuracy on \u2026"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.training_procedure",
+          "quality_note": "Missing all of: model_parameters.training_procedure"
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 1,
+          "evidence": "quantitative_analysis: dict(keys=['performance_metrics'])",
+          "quality_note": "quantitative_analysis: dict(keys=['performance_metrics'])"
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: mission_relevance, usage_documentation",
+          "quality_note": "Missing all of: mission_relevance, usage_documentation"
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "5 metric(s) with numeric value",
+          "quality_note": "5 metric(s) with numeric value"
+        },
+        {
+          "name": "Performance Across Slices / Subpopulations",
+          "score": 1,
+          "evidence": "3 distinct slice(s) reported",
+          "quality_note": "3 distinct slice(s) reported"
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "Confidence interval or value_error present",
+          "quality_note": "Confidence interval or value_error present"
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: list(4)",
+          "quality_note": "considerations.limitations: list(4)"
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs: list(1)",
+          "quality_note": "considerations.tradeoffs: list(1)"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the card connect to wider model ecosystems and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references: list(2)",
+          "quality_note": "model_details.references: list(2)"
+        },
+        {
+          "name": "Benchmark Results (Papers with Code)",
+          "score": 1,
+          "evidence": "1 benchmark result(s)",
+          "quality_note": "1 benchmark result(s)"
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: 0.0.2",
+          "quality_note": "schema_version: 0.0.2"
+        },
+        {
+          "name": "Datasets Linked",
+          "score": 1,
+          "evidence": "1 dataset(s) with name+link",
+          "quality_note": "1 dataset(s) with name+link"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    }
+  ],
+  "overall_score": {
+    "total_points": 41,
+    "max_points": 50,
+    "percentage": 82.0
+  },
+  "assessment": {
+    "strengths": [
+      "Strong Model Discovery and Identification (5/5)",
+      "Strong Model Access and Distribution (5/5)",
+      "Strong Model Reuse and Interoperability (4/5)",
+      "Strong Model Provenance and Versioning (5/5)",
+      "Strong Performance Evaluation and Limitations Disclosure (5/5)",
+      "Strong Cross-Platform and Community Integration (5/5)"
+    ],
+    "weaknesses": [],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-evaluator",
+    "model_card_hash": "a6e1fe2a52c1382b10ae5ebfcff5e946a71c637bf4bad13aa84e0943d656994e"
+  }
+}

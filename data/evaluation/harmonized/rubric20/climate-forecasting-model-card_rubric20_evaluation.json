@@ -1,0 +1,261 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
+  "evaluation_timestamp": "2026-06-24T19:35:59.496450+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 required fields populated",
+          "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+          "quality_note": "All 5 required fields populated"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars across narrative fields",
+          "evidence": "overview=248, doc=241, short=63",
+          "quality_note": ">500 chars across narrative fields"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
+          "evidence": "9 tags, pipeline=climate-forecasting, lang=['en'], cat=None",
+          "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both I/O specified with format_map populated",
+          "evidence": "prose + structured map",
+          "quality_note": "Both I/O specified with format_map populated"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "schema_version populated",
+          "evidence": "schema_version=d4d-1.0",
+          "quality_note": "schema_version populated"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 19,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Resolvable persistent identifier",
+          "evidence": "DOI or HF Hub URL present",
+          "quality_note": "Resolvable persistent identifier"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Agency + grant ID + facility/acknowledgement",
+          "evidence": "all three present",
+          "quality_note": "Agency + grant ID + facility/acknowledgement"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Ethics present but missing bias or out_of_scope",
+          "evidence": "partial",
+          "quality_note": "Ethics present but missing bias or out_of_scope"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "SPDX permissive license (no additional restrictions needed)",
+          "evidence": "spdx=['Apache-2.0']",
+          "quality_note": "SPDX permissive license (no additional restrictions needed)"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Framework + version + library + model_index",
+          "evidence": "PyTorch 2.1.0, lib=climate-forecasting, model_index present",
+          "quality_note": "Framework + version + library + model_index"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 22,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Comprehensive: framework_version + deps/container + examples",
+          "evidence": "exemplary",
+          "quality_note": "Comprehensive: framework_version + deps/container + examples"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Optimizer + LR + batch + epochs + schedule + regularization",
+          "evidence": "comprehensive hyperparameters",
+          "quality_note": "Optimizer + LR + batch + epochs + schedule + regularization"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver + ISO date + non-trivial diff",
+          "evidence": "version=v2.1.0, date=2025-01-15, diff=169 chars",
+          "quality_note": "Semver + ISO date + non-trivial diff"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Citation(s) + reference(s), DOIs missing",
+          "evidence": "1 cites, 2 refs",
+          "quality_note": "Citation(s) + reference(s), DOIs missing"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Hardware or software listed",
+          "evidence": "partial",
+          "quality_note": "Hardware or software listed"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 17,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "At least one resolvable URL",
+          "evidence": "2 refs",
+          "quality_note": "At least one resolvable URL"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Runnable code example(s) + I/O specs",
+          "evidence": "2 example(s)",
+          "quality_note": "Runnable code example(s) + I/O specs"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "\u22652 metrics, \u22652 slices, CI on \u22651",
+          "evidence": "3 metrics, 2 slices, CI=True",
+          "quality_note": "\u22652 metrics, \u22652 slices, CI on \u22651"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All three populated with concrete enumerated items",
+          "evidence": "lim=4, tradeoffs=2, oos=4",
+          "quality_note": "All three populated with concrete enumerated items"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Cross-platform reference present",
+          "evidence": "benchmark=True, doi=True, dataset_link=True",
+          "quality_note": "Cross-platform reference present"
+        }
+      ]
+    }
+  ],
+  "overall_score": {
+    "total_points": 79,
+    "max_points": 84,
+    "percentage": 94.0,
+    "semantic_deductions": []
+  },
+  "assessment": {
+    "strengths": [
+      "Strong Structural Completeness (21/21)",
+      "Strong Metadata Quality & Content (19/21)",
+      "Strong Technical Documentation (22/25)",
+      "Strong Performance & FAIRness (17/17)"
+    ],
+    "weaknesses": [],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-rubric20",
+    "model_card_hash": "f194fa874de568ff4df2d249fcdd736a07344a54a0f1f29674c4f0a4f816c820"
+  }
+}

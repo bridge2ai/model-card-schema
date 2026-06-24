@@ -1,0 +1,303 @@
+# Example Datasheets for Datasets Dataset instance
+# This is referenced by the model card's training_datasets field
+#
+# Note: This is a simplified example showing key sections.
+# Full D4D Dataset schema has 60+ classes and 200+ fields for comprehensive documentation.
+# See: https://github.com/bridge2ai/data-sheets-schema
+
+dataset_name: NOAA Historical Climate Observations (North America)
+dataset_version: v3.2.1
+dataset_url: https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database
+
+# === MOTIVATION ===
+motivation:
+  purpose: |-
+    Provide high-quality, quality-controlled surface weather observations for climate
+    research, model training, and operational forecasting. Data spans 50+ years across
+    North America with hourly resolution.
+
+  creators:
+    - name: NOAA National Centers for Environmental Information
+      organization: National Oceanic and Atmospheric Administration
+      role: Data collector and curator
+
+  funding:
+    - funder: NOAA Climate Program Office
+      grant_id: NA19OAR4310300
+      program: Regional Integrated Sciences and Assessments
+
+  creation_date: 1970-01-01
+  last_updated: 2024-12-31
+
+# === COMPOSITION ===
+composition:
+  instance_count: 438000000
+  instance_description: |-
+    Each instance represents one hourly observation from one weather station,
+    including temperature, pressure, humidity, wind speed/direction, and precipitation.
+
+  temporal_coverage:
+    start_date: 1970-01-01
+    end_date: 2024-12-31
+    resolution: Hourly
+
+  spatial_coverage:
+    region: North America
+    latitude_range: [25.0, 50.0]
+    longitude_range: [-125.0, -65.0]
+    coordinate_system: WGS84
+
+  data_types:
+    - type: numeric
+      description: Temperature, pressure, humidity, wind speed (continuous values)
+    - type: categorical
+      description: Weather conditions, cloud cover (categorical codes)
+    - type: geospatial
+      description: Station locations (lat/lon coordinates)
+    - type: temporal
+      description: Observation timestamps (UTC)
+
+  variables:
+    - name: temperature
+      description: 2-meter air temperature
+      unit: Celsius
+      type: float
+      range: [-50.0, 50.0]
+      missing_value_code: -9999
+
+    - name: pressure
+      description: Sea level pressure
+      unit: hectopascals
+      type: float
+      range: [900.0, 1100.0]
+      missing_value_code: -9999
+
+    - name: humidity
+      description: Relative humidity
+      unit: percent
+      type: float
+      range: [0.0, 100.0]
+      missing_value_code: -9999
+
+    - name: wind_speed
+      description: Wind speed at 10 meters
+      unit: meters per second
+      type: float
+      range: [0.0, 100.0]
+      missing_value_code: -9999
+
+    - name: wind_direction
+      description: Wind direction
+      unit: degrees
+      type: float
+      range: [0.0, 360.0]
+      missing_value_code: -9999
+
+    - name: precipitation
+      description: Hourly precipitation
+      unit: millimeters
+      type: float
+      range: [0.0, 500.0]
+      missing_value_code: -9999
+
+  missing_data:
+    description: |-
+      Missing values coded as -9999. Occur due to sensor failures, maintenance,
+      or quality control rejection. Approximately 5% of observations have at least
+      one missing variable.
+
+    handling_strategy: |-
+      For model training, sequences with >20% missing values are excluded.
+      Remaining gaps filled using linear interpolation for temporal continuity.
+
+# === COLLECTION PROCESS ===
+collection:
+  acquisition_method: |-
+    Automated sensors at fixed weather stations. Data transmitted in real-time
+    via GOES satellite, radio, or internet connection. Quality control performed
+    at NCEI using automated algorithms and manual review.
+
+  sampling_strategy: |-
+    Not sampled - complete census of all operational weather stations in North America
+    that meet WMO quality standards. Station density varies by region (higher in
+    populated areas).
+
+  data_collectors:
+    - organization: NOAA National Weather Service
+      role: Primary data collector (US stations)
+    - organization: Environment and Climate Change Canada
+      role: Canadian stations
+    - organization: Servicio Meteorológico Nacional (Mexico)
+      role: Mexican stations
+
+  collection_timeframe:
+    start: 1970-01-01
+    end: ongoing
+    description: Continuous data collection, updated daily
+
+  ethical_review: Not applicable (public environmental data)
+
+  consent: Not applicable (automated sensor data)
+
+# === PREPROCESSING ===
+preprocessing:
+  cleaning_procedures:
+    - step: Quality control screening
+      description: |-
+        NCEI automated quality control flags impossible values (e.g., temperature >60°C),
+        internal inconsistencies (e.g., dew point > temperature), and temporal
+        inconsistencies (e.g., >20° change in 1 hour).
+
+    - step: Outlier detection
+      description: |-
+        Statistical outlier detection using climatological bounds and spatial
+        consistency checks with neighboring stations.
+
+    - step: Duplicate removal
+      description: Remove duplicate reports from same station/time
+
+  transformations:
+    - transformation: Unit conversion
+      description: All temperatures converted to Celsius, all pressures to hPa
+
+    - transformation: Timestamp standardization
+      description: All timestamps converted to UTC
+
+    - transformation: Missing value encoding
+      description: All missing values standardized to -9999
+
+  data_splits:
+    - name: training
+      description: 1970-2019 (50 years)
+      size: 412500000 observations
+
+    - name: validation
+      description: 2020-2021 (2 years)
+      size: 17500000 observations
+
+    - name: test
+      description: 2022-2024 (3 years)
+      size: 26250000 observations
+
+# === USES ===
+recommended_uses:
+  - use_case: Climate model training and validation
+  - use_case: Weather forecasting research
+  - use_case: Climate change trend analysis
+  - use_case: Extreme weather event studies
+
+unsuitable_uses:
+  - use_case: Single-station forecasting (use station-specific models)
+  - use_case: Sub-hourly predictions (temporal resolution insufficient)
+  - use_case: Regions outside North America (spatial coverage limitation)
+
+tasks_dataset_suitable_for:
+  - Climate pattern recognition
+  - Extreme weather detection
+  - Spatiotemporal forecasting
+  - Climate trend analysis
+
+# === PRIVACY AND ETHICS ===
+privacy:
+  contains_personal_data: false
+  contains_sensitive_data: false
+  privacy_measures: |-
+    Dataset contains only environmental measurements from automated sensors.
+    Station locations are public information. No personal or sensitive data.
+
+ethics:
+  ethical_considerations: |-
+    1. Station distribution bias: Higher density in populated/accessible areas
+       may lead to underrepresentation of remote regions.
+
+    2. Climate justice: Ensure model trained on this data performs equitably
+       across all geographic regions, not just well-monitored areas.
+
+    3. Data access: Dataset is freely available, but requires technical expertise
+       and computational resources to use effectively, potentially limiting access.
+
+  fairness_concerns: |-
+    Geographic bias in station coverage could lead to models that perform better
+    in well-monitored regions (urban areas, airports) compared to rural or
+    remote regions.
+
+  mitigation_strategies: |-
+    - Evaluate model performance across all regions, not just high-density areas
+    - Consider resampling or weighting to balance geographic coverage
+    - Document performance disparities in model card
+    - Make derived datasets and trained models openly available
+
+# === DISTRIBUTION ===
+distribution:
+  how_distributed: |-
+    Publicly available through:
+    1. NOAA NCEI website (https://www.ncei.noaa.gov/isd)
+    2. AWS Open Data Registry (s3://noaa-isd-pds/)
+    3. Google Cloud Public Datasets
+
+  distribution_format:
+    - format: NetCDF
+      description: Primary format for gridded data
+    - format: CSV
+      description: Station-based tabular format
+    - format: Parquet
+      description: Optimized for cloud-based analytics
+
+  license: CC0 1.0 Universal (Public Domain)
+  license_url: https://creativecommons.org/publicdomain/zero/1.0/
+
+  access_restrictions: None (public domain data)
+
+  cost: Free
+
+  download_url: https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database
+
+# === MAINTENANCE ===
+maintenance:
+  maintainer:
+    organization: NOAA National Centers for Environmental Information
+    contact: ncei.orders@noaa.gov
+
+  update_frequency: Daily (new observations added continuously)
+
+  versioning_scheme: Semantic versioning (v3.2.1 = major.minor.patch)
+
+  support_contact: ncei.info@noaa.gov
+
+  retention_plan: Permanent archival at NOAA NCEI
+
+# === PROVENANCE ===
+provenance:
+  created_by: NOAA NCEI
+  created_on: 1970-01-01T00:00:00Z
+  modified_by: NOAA NCEI
+  modified_on: 2024-12-31T23:59:59Z
+
+  version_history:
+    - version: v3.2.1
+      date: 2024-12-31
+      changes: Updated through December 2024, improved quality control algorithms
+    - version: v3.2.0
+      date: 2024-01-01
+      changes: Added 150 new stations, enhanced metadata
+    - version: v3.1.0
+      date: 2023-01-01
+      changes: Improved missing data handling
+
+# === ADDITIONAL METADATA ===
+citations:
+  preferred_citation: |-
+    NOAA National Centers for Environmental Information. (2024). Integrated Surface
+    Database (ISD), Version 3.2.1. NOAA National Centers for Environmental Information.
+    https://doi.org/10.25921/82ty-9e16
+
+  doi: https://doi.org/10.25921/82ty-9e16
+
+related_datasets:
+  - name: ERA5 Reanalysis
+    url: https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5
+    relationship: Complementary global reanalysis data
+
+  - name: PRISM Climate Data
+    url: https://prism.oregonstate.edu/
+    relationship: Higher spatial resolution gridded climate data for US

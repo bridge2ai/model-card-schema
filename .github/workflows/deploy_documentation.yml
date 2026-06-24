@@ -43,7 +43,7 @@ jobs:
     #----------------------------------------------
     - name: Install dependencies
       # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction
+      run: poetry install --no-interaction --no-root
 
     #----------------------------------------------
     #  Create documentation and deploy.

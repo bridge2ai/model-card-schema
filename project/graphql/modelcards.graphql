@@ -1,10 +1,75 @@
-type Dataset
+# metamodel_version: 1.7.0
+enum CitationStyleEnum
+  {
+    MLA
+    APA
+    Chicago
+    IEEE
+  }
+
+type BenchmarkDataset
+  {
+    type: String
+    name: String
+    config: String
+    split: String
+    revision: String
+    args: String
+  }
+
+type BenchmarkMetric
+  {
+    type: String
+    value: Float
+    name: String
+    config: String
+    args: String
+  }
+
+type BenchmarkResult
+  {
+    task: Task
+    dataset: BenchmarkDataset
+    metrics: [BenchmarkMetric]
+    source: BenchmarkSource
+  }
+
+type BenchmarkSource
   {
     name: String
-    link: String
-    sensitive: Boolean
-    graphics: Graphics
+    url: Uri
+  }
+
+type Citation
+  {
+    style: CitationStyleEnum
+    citation: String
+  }
+
+type ConfidenceInterval
+  {
+    lowerBound: Float
+    upperBound: Float
+  }
+
+type Considerations
+  {
+    users: [User]
+    useCases: [UseCase]
+    limitations: [Limitation]
+    tradeoffs: [Tradeoff]
+    ethicalConsiderations: [Risk]
+  }
+
+type DataSet
+  {
+    name: String
+    description: String
+    link: Uri!
+    sensitive: SensitiveData
+    graphics: GraphicsCollection
     biasInput: String
+    unit: String
   }
 
 type Graphic
@@ -13,22 +78,78 @@ type Graphic
     image: String
   }
 
-type Graphics
+type GraphicsCollection
   {
     description: String
-    collection: [String]
+    collection: [Graphic]
+  }
+
+type KeyVal
+  {
+    key: String
+    value: String
+  }
+
+type License
+  {
+    identifier: String
+    customText: String
+  }
+
+type Limitation
+  {
+    description: String
   }
 
 type ModelCard
   {
     schemaVersion: String
-    modelDetails: String!
-    modelParameters: String
-    quantitativeAnalysis: String
-    considerations: String
+    modelDetails: ModelDetails!
+    modelParameters: ModelParameters
+    quantitativeAnalysis: QuantitativeAnalysis
+    considerations: Considerations
     modelCategory: String
     biasModel: String
     biasOutput: String
+    framework: String
+    frameworkVersion: String
+    libraryName: String
+    pipelineTag: String
+    language: [String]
+    baseModel: String
+    tags: [String]
+    datasets: [String]
+    metrics: [String]
+    modelIndex: [ModelIndex]
+  }
+
+type ModelDetails
+  {
+    name: String!
+    overview: String
+    documentation: String
+    owners: [Owner]
+    version: Version
+    licenses: [License]
+    references: [Reference]
+    citations: [Citation]
+    path: String
+  }
+
+type ModelIndex
+  {
+    name: String
+    results: [BenchmarkResult]
+  }
+
+type ModelParameters
+  {
+    modelArchitecture: String
+    data: [DataSet]
+    inputFormat: String
+    inputFormatMap: [KeyVal]
+    outputFormat: String
+    outputFormatMap: [KeyVal]
   }
 
 type Owner
@@ -40,11 +161,23 @@ type Owner
 type PerformanceMetric
   {
     type: String!
-    value: String
-    confidenceInterval: String
+    value: Float
+    valueError: Float
+    confidenceInterval: ConfidenceInterval
     threshold: Float
     slice: String
-    valueError: String
+    unit: String
+  }
+
+type QuantitativeAnalysis
+  {
+    performanceMetrics: [PerformanceMetric]
+    graphics: GraphicsCollection
+  }
+
+type Reference
+  {
+    reference: String
   }
 
 type Risk
@@ -53,3 +186,35 @@ type Risk
     mitigationStrategy: String
   }
 
+type SensitiveData
+  {
+    sensitiveData: [String]
+  }
+
+type Task
+  {
+    type: String
+    name: String
+  }
+
+type Tradeoff
+  {
+    description: String
+  }
+
+type UseCase
+  {
+    description: String
+  }
+
+type User
+  {
+    description: String
+  }
+
+type Version
+  {
+    name: String
+    date: Date
+    diff: String
+  }

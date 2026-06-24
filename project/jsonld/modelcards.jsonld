@@ -1,6 +1,6 @@
 {
   "name": "Model_Card",
-  "description": "An EXPERIMENTAL rendering of the model card schema in LinkML\n\nThis is not the official model card schema!",
+  "description": "A comprehensive LinkML rendering of model card schemas,\nincorporating Google Model Card Toolkit v0.0.2, HuggingFace,\nand Papers with Code specifications.\n\nThis schema provides structured metadata for documenting machine learning models\nincluding model details, training data, performance metrics, ethical considerations,\nand deployment specifications.",
   "id": "https://w3id.org/linkml/modelcard",
   "imports": [
     "linkml:types"
@@ -23,8 +23,14 @@
       "name": "string",
       "definition_uri": "https://w3id.org/linkml/String",
       "description": "A character string",
+      "notes": [
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Text"
+      ],
       "base": "str",
       "uri": "http://www.w3.org/2001/XMLSchema#string",
       "@type": "TypeDefinition"
@@ -33,8 +39,14 @@
       "name": "integer",
       "definition_uri": "https://w3id.org/linkml/Integer",
       "description": "An integer",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Integer"
+      ],
       "base": "int",
       "uri": "http://www.w3.org/2001/XMLSchema#integer",
       "@type": "TypeDefinition"
@@ -43,8 +55,14 @@
       "name": "boolean",
       "definition_uri": "https://w3id.org/linkml/Boolean",
       "description": "A binary (true or false) value",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Boolean"
+      ],
       "base": "Bool",
       "uri": "http://www.w3.org/2001/XMLSchema#boolean",
       "repr": "bool",
@@ -54,8 +72,14 @@
       "name": "float",
       "definition_uri": "https://w3id.org/linkml/Float",
       "description": "A real number that conforms to the xsd:float specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Float"
+      ],
       "base": "float",
       "uri": "http://www.w3.org/2001/XMLSchema#float",
       "@type": "TypeDefinition"
@@ -64,8 +88,14 @@
       "name": "double",
       "definition_uri": "https://w3id.org/linkml/Double",
       "description": "A real number that conforms to the xsd:double specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:Float"
+      ],
       "base": "float",
       "uri": "http://www.w3.org/2001/XMLSchema#double",
       "@type": "TypeDefinition"
@@ -74,8 +104,14 @@
       "name": "decimal",
       "definition_uri": "https://w3id.org/linkml/Decimal",
       "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "broad_mappings": [
+        "schema:Number"
+      ],
       "base": "Decimal",
       "uri": "http://www.w3.org/2001/XMLSchema#decimal",
       "@type": "TypeDefinition"
@@ -85,12 +121,16 @@
       "definition_uri": "https://w3id.org/linkml/Time",
       "description": "A time object represents a (local) time of day, independent of any particular day",
       "notes": [
-        "URI is dateTime because OWL reasoners do not work with straight date or time"
+        "URI is dateTime because OWL reasoners do not work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"."
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Time"
+      ],
       "base": "XSDTime",
-      "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#time",
       "repr": "str",
       "@type": "TypeDefinition"
     },
@@ -99,10 +139,14 @@
       "definition_uri": "https://w3id.org/linkml/Date",
       "description": "a date (year, month and day) in an idealized calendar",
       "notes": [
-        "URI is dateTime because OWL reasoners don't work with straight date or time"
+        "URI is dateTime because OWL reasoners don't work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"."
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Date"
+      ],
       "base": "XSDDate",
       "uri": "http://www.w3.org/2001/XMLSchema#date",
       "repr": "str",
@@ -112,8 +156,14 @@
       "name": "datetime",
       "definition_uri": "https://w3id.org/linkml/Datetime",
       "description": "The combination of a date and time",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:DateTime"
+      ],
       "base": "XSDDateTime",
       "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
       "repr": "str",
@@ -123,6 +173,9 @@
       "name": "date_or_datetime",
       "definition_uri": "https://w3id.org/linkml/DateOrDatetime",
       "description": "Either a date or a datetime",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
       "base": "str",
@@ -134,6 +187,9 @@
       "name": "uriorcurie",
       "definition_uri": "https://w3id.org/linkml/Uriorcurie",
       "description": "a URI or a CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
       "base": "URIorCURIE",
@@ -142,11 +198,40 @@
       "@type": "TypeDefinition"
     },
     {
-      "name": "uri",
-      "definition_uri": "https://w3id.org/linkml/Uri",
-      "description": "a complete URI",
+      "name": "curie",
+      "definition_uri": "https://w3id.org/linkml/Curie",
+      "conforms_to": "https://www.w3.org/TR/curie/",
+      "description": "a compact URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"."
+      ],
+      "comments": [
+        "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation"
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
+      "base": "Curie",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uri",
+      "definition_uri": "https://w3id.org/linkml/Uri",
+      "conforms_to": "https://www.ietf.org/rfc/rfc3987.txt",
+      "description": "a complete URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"."
+      ],
+      "comments": [
+        "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:URL"
+      ],
       "base": "URI",
       "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
       "repr": "str",
@@ -156,6 +241,9 @@
       "name": "ncname",
       "definition_uri": "https://w3id.org/linkml/Ncname",
       "description": "Prefix part of CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
       "base": "NCName",
@@ -167,8 +255,11 @@
       "name": "objectidentifier",
       "definition_uri": "https://w3id.org/linkml/Objectidentifier",
       "description": "A URI or CURIE that represents an object in the model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"."
+      ],
       "comments": [
-        "Used for inheritence and type checking"
+        "Used for inheritance and type checking"
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
@@ -181,26 +272,126 @@
       "name": "nodeidentifier",
       "definition_uri": "https://w3id.org/linkml/Nodeidentifier",
       "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"."
+      ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
       "base": "NodeIdentifier",
       "uri": "http://www.w3.org/ns/shex#nonLiteral",
       "repr": "str",
       "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpointer",
+      "definition_uri": "https://w3id.org/linkml/Jsonpointer",
+      "conforms_to": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "description": "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpath",
+      "definition_uri": "https://w3id.org/linkml/Jsonpath",
+      "conforms_to": "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html",
+      "description": "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sparqlpath",
+      "definition_uri": "https://w3id.org/linkml/Sparqlpath",
+      "conforms_to": "https://www.w3.org/TR/sparql11-query/#propertypaths",
+      "description": "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    }
+  ],
+  "enums": [
+    {
+      "name": "CitationStyleEnum",
+      "definition_uri": "https://w3id.org/linkml/modelcard/CitationStyleEnum",
+      "description": "Citation format styles",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "permissible_values": [
+        {
+          "text": "MLA",
+          "description": "Modern Language Association style"
+        },
+        {
+          "text": "APA",
+          "description": "American Psychological Association style"
+        },
+        {
+          "text": "Chicago",
+          "description": "Chicago Manual of Style"
+        },
+        {
+          "text": "IEEE",
+          "description": "Institute of Electrical and Electronics Engineers style"
+        }
+      ]
     }
   ],
   "slots": [
     {
       "name": "name",
       "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Name or identifier",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/name",
-      "owner": "Risk",
+      "owner": "ModelIndex",
       "domain_of": [
+        "Version",
         "Owner",
-        "Dataset",
+        "ModelDetails",
         "Graphic",
-        "Risk"
+        "DataSet",
+        "Risk",
+        "Task",
+        "BenchmarkDataset",
+        "BenchmarkMetric",
+        "BenchmarkSource",
+        "ModelIndex"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "description",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
+      "description": "Textual description",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
+      "owner": "Tradeoff",
+      "domain_of": [
+        "GraphicsCollection",
+        "DataSet",
+        "User",
+        "UseCase",
+        "Limitation",
+        "Tradeoff"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -208,7 +399,7 @@
     {
       "name": "contact",
       "definition_uri": "https://w3id.org/linkml/modelcard/contact",
-      "description": "The contact information of the owner.",
+      "description": "Contact information (email, URL, etc.)",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/contact",
       "owner": "Owner",
@@ -219,67 +410,406 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "link",
-      "definition_uri": "https://w3id.org/linkml/modelcard/link",
-      "description": "A link to the dataset.",
+      "name": "date",
+      "definition_uri": "https://w3id.org/linkml/modelcard/date",
+      "description": "Date value",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "slot_uri": "https://w3id.org/linkml/modelcard/link",
-      "owner": "Dataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/date",
+      "owner": "Version",
       "domain_of": [
-        "Dataset"
+        "Version"
+      ],
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "diff",
+      "definition_uri": "https://w3id.org/linkml/modelcard/diff",
+      "description": "Difference or changelog from previous version",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/diff",
+      "owner": "Version",
+      "domain_of": [
+        "Version"
       ],
       "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "identifier",
+      "definition_uri": "https://w3id.org/linkml/modelcard/identifier",
+      "description": "SPDX license identifier (e.g., 'Apache-2.0', 'MIT')",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/identifier",
+      "owner": "License",
+      "domain_of": [
+        "License"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "custom_text",
+      "definition_uri": "https://w3id.org/linkml/modelcard/custom_text",
+      "description": "Custom license text (when not using SPDX identifier)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/custom_text",
+      "owner": "License",
+      "domain_of": [
+        "License"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "reference",
+      "definition_uri": "https://w3id.org/linkml/modelcard/reference",
+      "description": "Reference URL or citation string",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/reference",
+      "owner": "Reference",
+      "domain_of": [
+        "Reference"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "style",
+      "definition_uri": "https://w3id.org/linkml/modelcard/style",
+      "description": "Citation format style",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/style",
+      "owner": "Citation",
+      "domain_of": [
+        "Citation"
+      ],
+      "range": "CitationStyleEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "citation",
+      "definition_uri": "https://w3id.org/linkml/modelcard/citation",
+      "description": "Formatted citation text",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/citation",
+      "owner": "Citation",
+      "domain_of": [
+        "Citation"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "overview",
+      "definition_uri": "https://w3id.org/linkml/modelcard/overview",
+      "description": "High-level model description",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/overview",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "documentation",
+      "definition_uri": "https://w3id.org/linkml/modelcard/documentation",
+      "description": "Detailed usage guide and documentation",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/documentation",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "owners",
+      "definition_uri": "https://w3id.org/linkml/modelcard/owners",
+      "description": "Model owners or maintainers",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/owners",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/version",
+      "description": "Version information",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/version",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "licenses",
+      "definition_uri": "https://w3id.org/linkml/modelcard/licenses",
+      "description": "License information",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/licenses",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "references",
+      "definition_uri": "https://w3id.org/linkml/modelcard/references",
+      "description": "Related resources and references",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/references",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "citations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/citations",
+      "description": "Citation information for the model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/citations",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "path",
+      "definition_uri": "https://w3id.org/linkml/modelcard/path",
+      "description": "Storage location or path to model artifacts",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/path",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "link",
+      "definition_uri": "https://w3id.org/linkml/modelcard/link",
+      "description": "URL to dataset",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/link",
+      "owner": "DataSet",
+      "domain_of": [
+        "DataSet"
+      ],
+      "range": "uri",
       "@type": "SlotDefinition"
     },
     {
       "name": "sensitive",
       "definition_uri": "https://w3id.org/linkml/modelcard/sensitive",
-      "description": "Does this dataset contain human or other sensitive data?",
+      "description": "Sensitive data information",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/sensitive",
-      "owner": "Dataset",
+      "owner": "DataSet",
       "domain_of": [
-        "Dataset"
+        "DataSet"
       ],
-      "range": "boolean",
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
       "name": "graphics",
       "definition_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "description": "Visualizations and graphics",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/graphics",
-      "owner": "Dataset",
+      "owner": "QuantitativeAnalysis",
       "domain_of": [
-        "Dataset"
+        "DataSet",
+        "QuantitativeAnalysis"
       ],
-      "range": "Graphics",
-      "inlined": true,
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "type",
-      "definition_uri": "https://w3id.org/linkml/modelcard/type",
-      "description": "The type of performance metric.",
+      "name": "bias_input",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_input",
+      "description": "Known biases in the input data",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "slot_uri": "https://w3id.org/linkml/modelcard/type",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_input",
+      "owner": "DataSet",
+      "domain_of": [
+        "DataSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "unit",
+      "definition_uri": "https://w3id.org/linkml/modelcard/unit",
+      "description": "Unit of measurement",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/unit",
       "owner": "PerformanceMetric",
       "domain_of": [
+        "DataSet",
         "PerformanceMetric"
       ],
       "range": "string",
-      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sensitive_data",
+      "definition_uri": "https://w3id.org/linkml/modelcard/sensitive_data",
+      "description": "Types of PII or sensitive information present",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/sensitive_data",
+      "owner": "SensitiveData",
+      "domain_of": [
+        "SensitiveData"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "model_architecture",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_architecture",
+      "description": "Model architecture specification",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_architecture",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "data",
+      "definition_uri": "https://w3id.org/linkml/modelcard/data",
+      "description": "Training and evaluation datasets",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/data",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "input_format",
+      "definition_uri": "https://w3id.org/linkml/modelcard/input_format",
+      "description": "Plain text input format specification",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/input_format",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "input_format_map",
+      "definition_uri": "https://w3id.org/linkml/modelcard/input_format_map",
+      "description": "Structured input format mapping",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/input_format_map",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "output_format",
+      "definition_uri": "https://w3id.org/linkml/modelcard/output_format",
+      "description": "Plain text output format specification",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/output_format",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "output_format_map",
+      "definition_uri": "https://w3id.org/linkml/modelcard/output_format_map",
+      "description": "Structured output format mapping",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/output_format_map",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "key",
+      "definition_uri": "https://w3id.org/linkml/modelcard/key",
+      "description": "Key in key-value pair",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/key",
+      "owner": "KeyVal",
+      "domain_of": [
+        "KeyVal"
+      ],
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
       "name": "value",
       "definition_uri": "https://w3id.org/linkml/modelcard/value",
-      "description": "The value of the performance metric.",
+      "description": "Value in key-value pair or metric value",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/value",
-      "owner": "PerformanceMetric",
+      "owner": "BenchmarkMetric",
       "domain_of": [
-        "PerformanceMetric"
+        "KeyVal",
+        "PerformanceMetric",
+        "BenchmarkMetric"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "type",
+      "definition_uri": "https://w3id.org/linkml/modelcard/type",
+      "description": "Type or category",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/type",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "PerformanceMetric",
+        "Task",
+        "BenchmarkDataset",
+        "BenchmarkMetric"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -287,16 +817,20 @@
     {
       "name": "value_error",
       "definition_uri": "https://w3id.org/linkml/modelcard/value_error",
-      "description": "The estimated error for the performance metric.",
+      "description": "Estimated error for the metric",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/value_error",
-      "range": "string",
+      "owner": "PerformanceMetric",
+      "domain_of": [
+        "PerformanceMetric"
+      ],
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
       "name": "confidence_interval",
       "definition_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
-      "description": "The confidence interval of the metric.",
+      "description": "Confidence interval for the metric",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
       "owner": "PerformanceMetric",
@@ -309,7 +843,7 @@
     {
       "name": "threshold",
       "definition_uri": "https://w3id.org/linkml/modelcard/threshold",
-      "description": "The decision threshold the metric was computed on.",
+      "description": "Decision threshold the metric was computed on",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/threshold",
       "owner": "PerformanceMetric",
@@ -322,7 +856,7 @@
     {
       "name": "slice",
       "definition_uri": "https://w3id.org/linkml/modelcard/slice",
-      "description": "The name of the slice this metric was computed on. By default, assume this metric is not sliced.",
+      "description": "Data slice identifier this metric was computed on",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/slice",
       "owner": "PerformanceMetric",
@@ -333,35 +867,49 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "description",
-      "definition_uri": "https://w3id.org/linkml/modelcard/description",
-      "description": "A description of this collection of graphics.",
+      "name": "lower_bound",
+      "definition_uri": "https://w3id.org/linkml/modelcard/lower_bound",
+      "description": "Lower bound of confidence interval",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "slot_uri": "https://w3id.org/linkml/modelcard/description",
-      "owner": "Graphics",
+      "slot_uri": "https://w3id.org/linkml/modelcard/lower_bound",
+      "owner": "ConfidenceInterval",
       "domain_of": [
-        "Graphics"
+        "ConfidenceInterval"
       ],
-      "range": "string",
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "upper_bound",
+      "definition_uri": "https://w3id.org/linkml/modelcard/upper_bound",
+      "description": "Upper bound of confidence interval",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/upper_bound",
+      "owner": "ConfidenceInterval",
+      "domain_of": [
+        "ConfidenceInterval"
+      ],
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
       "name": "collection",
       "definition_uri": "https://w3id.org/linkml/modelcard/collection",
+      "description": "Collection of items",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/collection",
-      "multivalued": true,
-      "owner": "Graphics",
+      "owner": "GraphicsCollection",
       "domain_of": [
-        "Graphics"
+        "GraphicsCollection"
       ],
       "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "image",
       "definition_uri": "https://w3id.org/linkml/modelcard/image",
-      "description": "The graphic, encoded as a base64 string.",
+      "description": "Base64-encoded image (PNG format)",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/image",
       "owner": "Graphic",
@@ -372,48 +920,93 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "bias_input",
-      "definition_uri": "https://w3id.org/linkml/modelcard/bias_input",
-      "description": "A known bias in the input data.",
+      "name": "performance_metrics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/performance_metrics",
+      "description": "Performance metrics and evaluation results",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "slot_uri": "https://w3id.org/linkml/modelcard/bias_input",
-      "owner": "Dataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/performance_metrics",
+      "owner": "QuantitativeAnalysis",
       "domain_of": [
-        "Dataset"
+        "QuantitativeAnalysis"
       ],
       "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "bias_model",
-      "definition_uri": "https://w3id.org/linkml/modelcard/bias_model",
-      "description": "A known bias in the model that was applied to the input data.",
+      "name": "users",
+      "definition_uri": "https://w3id.org/linkml/modelcard/users",
+      "description": "Intended users or user types",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "slot_uri": "https://w3id.org/linkml/modelcard/bias_model",
-      "owner": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/users",
+      "owner": "Considerations",
       "domain_of": [
-        "ModelCard"
+        "Considerations"
       ],
       "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "bias_output",
-      "definition_uri": "https://w3id.org/linkml/modelcard/bias_output",
-      "description": "A known bias in the output of the model that was applied to the input data.",
+      "name": "use_cases",
+      "definition_uri": "https://w3id.org/linkml/modelcard/use_cases",
+      "description": "Intended use cases and application scenarios",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "slot_uri": "https://w3id.org/linkml/modelcard/bias_output",
-      "owner": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/use_cases",
+      "owner": "Considerations",
       "domain_of": [
-        "ModelCard"
+        "Considerations"
       ],
       "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "limitations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/limitations",
+      "description": "Known limitations and constraints",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/limitations",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "tradeoffs",
+      "definition_uri": "https://w3id.org/linkml/modelcard/tradeoffs",
+      "description": "Performance tradeoffs and considerations",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/tradeoffs",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ethical_considerations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ethical_considerations",
+      "description": "Ethical considerations and risks",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/ethical_considerations",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "mitigation_strategy",
       "definition_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
-      "description": "Strategy used to address this risk.",
+      "description": "Strategy to address or mitigate this risk",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
       "owner": "Risk",
@@ -426,7 +1019,7 @@
     {
       "name": "schema_version",
       "definition_uri": "https://w3id.org/linkml/modelcard/schema_version",
-      "description": "The version of the schema.",
+      "description": "Version of the model card schema",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/schema_version",
       "owner": "ModelCard",
@@ -439,7 +1032,7 @@
     {
       "name": "model_category",
       "definition_uri": "https://w3id.org/linkml/modelcard/model_category",
-      "description": "The category or parent class of the model.",
+      "description": "Category or parent class of the model",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/model_category",
       "owner": "ModelCard",
@@ -452,7 +1045,7 @@
     {
       "name": "model_details",
       "definition_uri": "https://w3id.org/linkml/modelcard/model_details",
-      "description": "Metadata about the model.",
+      "description": "Comprehensive model metadata",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/model_details",
       "owner": "ModelCard",
@@ -466,7 +1059,7 @@
     {
       "name": "model_parameters",
       "definition_uri": "https://w3id.org/linkml/modelcard/model_parameters",
-      "description": "Parameters for construction of the model.",
+      "description": "Model construction and architecture parameters",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/model_parameters",
       "owner": "ModelCard",
@@ -479,7 +1072,7 @@
     {
       "name": "quantitative_analysis",
       "definition_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
-      "description": "A quantitative analysis of the model",
+      "description": "Quantitative analysis and performance evaluation",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
       "owner": "ModelCard",
@@ -492,7 +1085,7 @@
     {
       "name": "considerations",
       "definition_uri": "https://w3id.org/linkml/modelcard/considerations",
-      "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
+      "description": "Usage considerations, limitations, and ethical concerns",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slot_uri": "https://w3id.org/linkml/modelcard/considerations",
       "owner": "ModelCard",
@@ -503,9 +1096,381 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "bias_model",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_model",
+      "description": "Known biases in the model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_model",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bias_output",
+      "definition_uri": "https://w3id.org/linkml/modelcard/bias_output",
+      "description": "Known biases in the model output",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/bias_output",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "framework",
+      "definition_uri": "https://w3id.org/linkml/modelcard/framework",
+      "description": "ML framework (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/framework",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "framework_version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/framework_version",
+      "description": "Version of the ML framework",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/framework_version",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "library_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/library_name",
+      "description": "Library name for loading the model (e.g., transformers, diffusers)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/library_name",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "pipeline_tag",
+      "definition_uri": "https://w3id.org/linkml/modelcard/pipeline_tag",
+      "description": "Task type (text-generation, image-classification, etc.)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/pipeline_tag",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "language",
+      "definition_uri": "https://w3id.org/linkml/modelcard/language",
+      "description": "Natural language(s) processed by the model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/language",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "base_model",
+      "definition_uri": "https://w3id.org/linkml/modelcard/base_model",
+      "description": "Parent model identifier (for fine-tuned models)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/base_model",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "tags",
+      "definition_uri": "https://w3id.org/linkml/modelcard/tags",
+      "description": "Searchable keywords and tags",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/tags",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "datasets",
+      "definition_uri": "https://w3id.org/linkml/modelcard/datasets",
+      "description": "Training dataset identifiers",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/datasets",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "metrics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/metrics",
+      "description": "Evaluation metrics used",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/metrics",
+      "owner": "ModelCard",
+      "domain_of": [
+        "BenchmarkResult",
+        "ModelCard"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "task",
+      "definition_uri": "https://w3id.org/linkml/modelcard/task",
+      "description": "ML task specification",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/task",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataset",
+      "definition_uri": "https://w3id.org/linkml/modelcard/dataset",
+      "description": "Dataset information",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/dataset",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "source",
+      "definition_uri": "https://w3id.org/linkml/modelcard/source",
+      "description": "Source of information or results",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/source",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "results",
+      "definition_uri": "https://w3id.org/linkml/modelcard/results",
+      "description": "Benchmark or evaluation results",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/results",
+      "owner": "ModelIndex",
+      "domain_of": [
+        "ModelIndex"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "model_index",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_index",
+      "description": "Papers with Code model-index for benchmark tracking",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_index",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "config",
+      "definition_uri": "https://w3id.org/linkml/modelcard/config",
+      "description": "Configuration specification",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/config",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkDataset",
+        "BenchmarkMetric"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "split",
+      "definition_uri": "https://w3id.org/linkml/modelcard/split",
+      "description": "Dataset split (train, test, validation)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/split",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "revision",
+      "definition_uri": "https://w3id.org/linkml/modelcard/revision",
+      "description": "Dataset or model revision/version",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/revision",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "args",
+      "definition_uri": "https://w3id.org/linkml/modelcard/args",
+      "description": "Additional arguments or parameters",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/args",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkDataset",
+        "BenchmarkMetric"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "url",
+      "definition_uri": "https://w3id.org/linkml/modelcard/url",
+      "description": "URL reference",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/url",
+      "owner": "BenchmarkSource",
+      "domain_of": [
+        "BenchmarkSource"
+      ],
+      "range": "uri",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Version_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Version identifier (e.g., '1.0.0', 'v2', 'beta')",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "Version",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "Version",
+      "domain_of": [
+        "Version"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Version_date",
+      "definition_uri": "https://w3id.org/linkml/modelcard/date",
+      "description": "Release date of this version",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "date",
+      "domain": "Version",
+      "slot_uri": "https://w3id.org/linkml/modelcard/date",
+      "alias": "date",
+      "owner": "Version",
+      "domain_of": [
+        "Version"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "date",
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Version_diff",
+      "definition_uri": "https://w3id.org/linkml/modelcard/diff",
+      "description": "Changes from the previous version",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "diff",
+      "domain": "Version",
+      "slot_uri": "https://w3id.org/linkml/modelcard/diff",
+      "alias": "diff",
+      "owner": "Version",
+      "domain_of": [
+        "Version"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "diff",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "License_identifier",
+      "definition_uri": "https://w3id.org/linkml/modelcard/identifier",
+      "description": "SPDX license identifier (e.g., 'Apache-2.0', 'MIT', 'CC-BY-4.0')",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "identifier",
+      "domain": "License",
+      "slot_uri": "https://w3id.org/linkml/modelcard/identifier",
+      "alias": "identifier",
+      "owner": "License",
+      "domain_of": [
+        "License"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "identifier",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "License_custom_text",
+      "definition_uri": "https://w3id.org/linkml/modelcard/custom_text",
+      "description": "Custom license text (use when SPDX identifier is not applicable)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "custom_text",
+      "domain": "License",
+      "slot_uri": "https://w3id.org/linkml/modelcard/custom_text",
+      "alias": "custom_text",
+      "owner": "License",
+      "domain_of": [
+        "License"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "custom_text",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "owner_name",
       "definition_uri": "https://w3id.org/linkml/modelcard/name",
-      "description": "The name of the owner.",
+      "description": "Name of the owner (individual or organization)",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "name",
       "domain": "Owner",
@@ -523,7 +1488,7 @@
     {
       "name": "owner_contact",
       "definition_uri": "https://w3id.org/linkml/modelcard/contact",
-      "description": "The contact information of the owner.",
+      "description": "Contact information (email, website, etc.)",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "contact",
       "domain": "Owner",
@@ -539,17 +1504,300 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "dataset_name",
+      "name": "Reference_reference",
+      "definition_uri": "https://w3id.org/linkml/modelcard/reference",
+      "description": "URL or citation string for related resource",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "reference",
+      "domain": "Reference",
+      "slot_uri": "https://w3id.org/linkml/modelcard/reference",
+      "alias": "reference",
+      "owner": "Reference",
+      "domain_of": [
+        "Reference"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "reference",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Citation_style",
+      "definition_uri": "https://w3id.org/linkml/modelcard/style",
+      "description": "Citation format style",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "style",
+      "domain": "Citation",
+      "slot_uri": "https://w3id.org/linkml/modelcard/style",
+      "alias": "style",
+      "owner": "Citation",
+      "domain_of": [
+        "Citation"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "style",
+      "range": "CitationStyleEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Citation_citation",
+      "definition_uri": "https://w3id.org/linkml/modelcard/citation",
+      "description": "Formatted citation text",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "citation",
+      "domain": "Citation",
+      "slot_uri": "https://w3id.org/linkml/modelcard/citation",
+      "alias": "citation",
+      "owner": "Citation",
+      "domain_of": [
+        "Citation"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "citation",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_name",
       "definition_uri": "https://w3id.org/linkml/modelcard/name",
-      "description": "The name of the dataset.",
+      "description": "Model name or identifier",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "name",
-      "domain": "Dataset",
+      "domain": "ModelDetails",
       "slot_uri": "https://w3id.org/linkml/modelcard/name",
       "alias": "name",
-      "owner": "Dataset",
+      "owner": "ModelDetails",
       "domain_of": [
-        "Dataset"
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_overview",
+      "definition_uri": "https://w3id.org/linkml/modelcard/overview",
+      "description": "High-level description of what the model does",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "overview",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/overview",
+      "alias": "overview",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "overview",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_documentation",
+      "definition_uri": "https://w3id.org/linkml/modelcard/documentation",
+      "description": "Detailed documentation and usage guide",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "documentation",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/documentation",
+      "alias": "documentation",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "documentation",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_owners",
+      "definition_uri": "https://w3id.org/linkml/modelcard/owners",
+      "description": "Model owners or maintainers",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "owners",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/owners",
+      "alias": "owners",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "owners",
+      "range": "Owner",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/version",
+      "description": "Version information",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "version",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/version",
+      "alias": "version",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "version",
+      "range": "Version",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_licenses",
+      "definition_uri": "https://w3id.org/linkml/modelcard/licenses",
+      "description": "Licensing information",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "licenses",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/licenses",
+      "alias": "licenses",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "licenses",
+      "range": "License",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_references",
+      "definition_uri": "https://w3id.org/linkml/modelcard/references",
+      "description": "References to related resources",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "references",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/references",
+      "alias": "references",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "references",
+      "range": "Reference",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_citations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/citations",
+      "description": "How to cite this model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "citations",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/citations",
+      "alias": "citations",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "citations",
+      "range": "Citation",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelDetails_path",
+      "definition_uri": "https://w3id.org/linkml/modelcard/path",
+      "description": "Storage location or path to model artifacts",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "path",
+      "domain": "ModelDetails",
+      "slot_uri": "https://w3id.org/linkml/modelcard/path",
+      "alias": "path",
+      "owner": "ModelDetails",
+      "domain_of": [
+        "ModelDetails"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "path",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "SensitiveData_sensitive_data",
+      "definition_uri": "https://w3id.org/linkml/modelcard/sensitive_data",
+      "description": "Types of PII or sensitive information (e.g., names, addresses, medical records)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "sensitive_data",
+      "domain": "SensitiveData",
+      "slot_uri": "https://w3id.org/linkml/modelcard/sensitive_data",
+      "alias": "sensitive_data",
+      "owner": "SensitiveData",
+      "domain_of": [
+        "SensitiveData"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "sensitive_data",
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "GraphicsCollection_description",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
+      "description": "Description of this graphics collection",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "description",
+      "domain": "GraphicsCollection",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
+      "alias": "description",
+      "owner": "GraphicsCollection",
+      "domain_of": [
+        "GraphicsCollection"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "description",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "GraphicsCollection_collection",
+      "definition_uri": "https://w3id.org/linkml/modelcard/collection",
+      "description": "Graphics in this collection",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "collection",
+      "domain": "GraphicsCollection",
+      "slot_uri": "https://w3id.org/linkml/modelcard/collection",
+      "alias": "collection",
+      "owner": "GraphicsCollection",
+      "domain_of": [
+        "GraphicsCollection"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "collection",
+      "range": "Graphic",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "graphic_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Name or title of the graphic",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "Graphic",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "Graphic",
+      "domain_of": [
+        "Graphic"
       ],
       "is_usage_slot": true,
       "usage_slot_name": "name",
@@ -557,71 +1805,128 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "dataset_link",
-      "definition_uri": "https://w3id.org/linkml/modelcard/link",
-      "description": "A link to the dataset.",
+      "name": "graphic_image",
+      "definition_uri": "https://w3id.org/linkml/modelcard/image",
+      "description": "Base64-encoded PNG image",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "is_a": "link",
-      "domain": "Dataset",
-      "slot_uri": "https://w3id.org/linkml/modelcard/link",
-      "alias": "link",
-      "owner": "Dataset",
+      "is_a": "image",
+      "domain": "Graphic",
+      "slot_uri": "https://w3id.org/linkml/modelcard/image",
+      "alias": "image",
+      "owner": "Graphic",
       "domain_of": [
-        "Dataset"
+        "Graphic"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "link",
+      "usage_slot_name": "image",
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "dataset_sensitive",
-      "definition_uri": "https://w3id.org/linkml/modelcard/sensitive",
-      "description": "Does this dataset contain human or other sensitive data?",
+      "name": "dataSet_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Dataset name or identifier",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "is_a": "sensitive",
-      "domain": "Dataset",
-      "slot_uri": "https://w3id.org/linkml/modelcard/sensitive",
-      "alias": "sensitive",
-      "owner": "Dataset",
+      "is_a": "name",
+      "domain": "DataSet",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "DataSet",
       "domain_of": [
-        "Dataset"
+        "DataSet"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "sensitive",
-      "range": "boolean",
+      "usage_slot_name": "name",
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "dataset_graphics",
-      "definition_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "name": "dataSet_description",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
+      "description": "Dataset overview and characteristics",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "is_a": "graphics",
-      "domain": "Dataset",
-      "slot_uri": "https://w3id.org/linkml/modelcard/graphics",
-      "alias": "graphics",
-      "owner": "Dataset",
+      "is_a": "description",
+      "domain": "DataSet",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
+      "alias": "description",
+      "owner": "DataSet",
       "domain_of": [
-        "Dataset"
+        "DataSet"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "graphics",
-      "range": "Graphics",
+      "usage_slot_name": "description",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSet_link",
+      "definition_uri": "https://w3id.org/linkml/modelcard/link",
+      "description": "URL to the dataset",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "link",
+      "domain": "DataSet",
+      "slot_uri": "https://w3id.org/linkml/modelcard/link",
+      "alias": "link",
+      "owner": "DataSet",
+      "domain_of": [
+        "DataSet"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "link",
+      "range": "uri",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSet_sensitive",
+      "definition_uri": "https://w3id.org/linkml/modelcard/sensitive",
+      "description": "Sensitive data information",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "sensitive",
+      "domain": "DataSet",
+      "slot_uri": "https://w3id.org/linkml/modelcard/sensitive",
+      "alias": "sensitive",
+      "owner": "DataSet",
+      "domain_of": [
+        "DataSet"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "sensitive",
+      "range": "SensitiveData",
       "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "dataset_bias_input",
+      "name": "dataSet_graphics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "description": "Visualizations of the dataset",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "graphics",
+      "domain": "DataSet",
+      "slot_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "alias": "graphics",
+      "owner": "DataSet",
+      "domain_of": [
+        "DataSet"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "graphics",
+      "range": "GraphicsCollection",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSet_bias_input",
       "definition_uri": "https://w3id.org/linkml/modelcard/bias_input",
-      "description": "A known bias in the input data.",
+      "description": "Known biases present in the input data",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "bias_input",
-      "domain": "Dataset",
+      "domain": "DataSet",
       "slot_uri": "https://w3id.org/linkml/modelcard/bias_input",
       "alias": "bias_input",
-      "owner": "Dataset",
+      "owner": "DataSet",
       "domain_of": [
-        "Dataset"
+        "DataSet"
       ],
       "is_usage_slot": true,
       "usage_slot_name": "bias_input",
@@ -629,9 +1934,213 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "performance_metric_type",
+      "name": "dataSet_unit",
+      "definition_uri": "https://w3id.org/linkml/modelcard/unit",
+      "description": "Unit for values in this dataset",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "unit",
+      "domain": "DataSet",
+      "slot_uri": "https://w3id.org/linkml/modelcard/unit",
+      "alias": "unit",
+      "owner": "DataSet",
+      "domain_of": [
+        "DataSet"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "unit",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "KeyVal_key",
+      "definition_uri": "https://w3id.org/linkml/modelcard/key",
+      "description": "Key identifier",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "key",
+      "domain": "KeyVal",
+      "slot_uri": "https://w3id.org/linkml/modelcard/key",
+      "alias": "key",
+      "owner": "KeyVal",
+      "domain_of": [
+        "KeyVal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "key",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "KeyVal_value",
+      "definition_uri": "https://w3id.org/linkml/modelcard/value",
+      "description": "Value associated with the key",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "value",
+      "domain": "KeyVal",
+      "slot_uri": "https://w3id.org/linkml/modelcard/value",
+      "alias": "value",
+      "owner": "KeyVal",
+      "domain_of": [
+        "KeyVal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "value",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelParameters_model_architecture",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_architecture",
+      "description": "Model architecture specification and description",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "model_architecture",
+      "domain": "ModelParameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_architecture",
+      "alias": "model_architecture",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "model_architecture",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelParameters_data",
+      "definition_uri": "https://w3id.org/linkml/modelcard/data",
+      "description": "Training and evaluation datasets",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "data",
+      "domain": "ModelParameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/data",
+      "alias": "data",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "data",
+      "range": "DataSet",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelParameters_input_format",
+      "definition_uri": "https://w3id.org/linkml/modelcard/input_format",
+      "description": "Plain text description of input format",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "input_format",
+      "domain": "ModelParameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/input_format",
+      "alias": "input_format",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "input_format",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelParameters_input_format_map",
+      "definition_uri": "https://w3id.org/linkml/modelcard/input_format_map",
+      "description": "Structured mapping of input format fields",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "input_format_map",
+      "domain": "ModelParameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/input_format_map",
+      "alias": "input_format_map",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "input_format_map",
+      "range": "KeyVal",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelParameters_output_format",
+      "definition_uri": "https://w3id.org/linkml/modelcard/output_format",
+      "description": "Plain text description of output format",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "output_format",
+      "domain": "ModelParameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/output_format",
+      "alias": "output_format",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "output_format",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelParameters_output_format_map",
+      "definition_uri": "https://w3id.org/linkml/modelcard/output_format_map",
+      "description": "Structured mapping of output format fields",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "output_format_map",
+      "domain": "ModelParameters",
+      "slot_uri": "https://w3id.org/linkml/modelcard/output_format_map",
+      "alias": "output_format_map",
+      "owner": "ModelParameters",
+      "domain_of": [
+        "ModelParameters"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "output_format_map",
+      "range": "KeyVal",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ConfidenceInterval_lower_bound",
+      "definition_uri": "https://w3id.org/linkml/modelcard/lower_bound",
+      "description": "Lower bound of the confidence interval",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "lower_bound",
+      "domain": "ConfidenceInterval",
+      "slot_uri": "https://w3id.org/linkml/modelcard/lower_bound",
+      "alias": "lower_bound",
+      "owner": "ConfidenceInterval",
+      "domain_of": [
+        "ConfidenceInterval"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "lower_bound",
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ConfidenceInterval_upper_bound",
+      "definition_uri": "https://w3id.org/linkml/modelcard/upper_bound",
+      "description": "Upper bound of the confidence interval",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "upper_bound",
+      "domain": "ConfidenceInterval",
+      "slot_uri": "https://w3id.org/linkml/modelcard/upper_bound",
+      "alias": "upper_bound",
+      "owner": "ConfidenceInterval",
+      "domain_of": [
+        "ConfidenceInterval"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "upper_bound",
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "performanceMetric_type",
       "definition_uri": "https://w3id.org/linkml/modelcard/type",
-      "description": "The type of performance metric.",
+      "description": "Type of performance metric (e.g., 'accuracy', 'F1', 'AUC', 'precision')",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "type",
       "domain": "PerformanceMetric",
@@ -648,9 +2157,9 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "performance_metric_value",
+      "name": "performanceMetric_value",
       "definition_uri": "https://w3id.org/linkml/modelcard/value",
-      "description": "The value of the performance metric.",
+      "description": "Metric value",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "value",
       "domain": "PerformanceMetric",
@@ -662,31 +2171,13 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "value",
-      "range": "string",
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
-      "name": "performance_metric_confidence_interval",
-      "definition_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
-      "description": "The confidence interval of the metric.",
-      "from_schema": "https://w3id.org/linkml/modelcard",
-      "is_a": "confidence_interval",
-      "domain": "PerformanceMetric",
-      "slot_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
-      "alias": "confidence_interval",
-      "owner": "PerformanceMetric",
-      "domain_of": [
-        "PerformanceMetric"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "confidence_interval",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "performance_metric_value_error",
+      "name": "performanceMetric_value_error",
       "definition_uri": "https://w3id.org/linkml/modelcard/value_error",
-      "description": "The estimated error for the performance metric.",
+      "description": "Estimated error for the metric value",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "value_error",
       "domain": "PerformanceMetric",
@@ -698,13 +2189,32 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "value_error",
-      "range": "string",
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
-      "name": "performance_metric_threshold",
+      "name": "performanceMetric_confidence_interval",
+      "definition_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
+      "description": "Confidence interval for the metric",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "confidence_interval",
+      "domain": "PerformanceMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/confidence_interval",
+      "alias": "confidence_interval",
+      "owner": "PerformanceMetric",
+      "domain_of": [
+        "PerformanceMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "confidence_interval",
+      "range": "ConfidenceInterval",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "performanceMetric_threshold",
       "definition_uri": "https://w3id.org/linkml/modelcard/threshold",
-      "description": "The decision threshold the metric was computed on.",
+      "description": "Decision threshold used when computing this metric",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "threshold",
       "domain": "PerformanceMetric",
@@ -720,9 +2230,9 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "performance_metric_slice",
+      "name": "performanceMetric_slice",
       "definition_uri": "https://w3id.org/linkml/modelcard/slice",
-      "description": "The name of the slice this metric was computed on. By default, assume this metric is not sliced.",
+      "description": "Data slice or subset this metric was computed on",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "slice",
       "domain": "PerformanceMetric",
@@ -738,17 +2248,74 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "graphics_description",
+      "name": "performanceMetric_unit",
+      "definition_uri": "https://w3id.org/linkml/modelcard/unit",
+      "description": "Unit for the metric value, if applicable",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "unit",
+      "domain": "PerformanceMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/unit",
+      "alias": "unit",
+      "owner": "PerformanceMetric",
+      "domain_of": [
+        "PerformanceMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "unit",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "QuantitativeAnalysis_performance_metrics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/performance_metrics",
+      "description": "Performance metrics and evaluation results",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "performance_metrics",
+      "domain": "QuantitativeAnalysis",
+      "slot_uri": "https://w3id.org/linkml/modelcard/performance_metrics",
+      "alias": "performance_metrics",
+      "owner": "QuantitativeAnalysis",
+      "domain_of": [
+        "QuantitativeAnalysis"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "performance_metrics",
+      "range": "PerformanceMetric",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "QuantitativeAnalysis_graphics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "description": "Performance visualizations and plots",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "graphics",
+      "domain": "QuantitativeAnalysis",
+      "slot_uri": "https://w3id.org/linkml/modelcard/graphics",
+      "alias": "graphics",
+      "owner": "QuantitativeAnalysis",
+      "domain_of": [
+        "QuantitativeAnalysis"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "graphics",
+      "range": "GraphicsCollection",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "User_description",
       "definition_uri": "https://w3id.org/linkml/modelcard/description",
-      "description": "A description of this collection of graphics.",
+      "description": "Description of the intended user type or role",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "description",
-      "domain": "Graphics",
+      "domain": "User",
       "slot_uri": "https://w3id.org/linkml/modelcard/description",
       "alias": "description",
-      "owner": "Graphics",
+      "owner": "User",
       "domain_of": [
-        "Graphics"
+        "User"
       ],
       "is_usage_slot": true,
       "usage_slot_name": "description",
@@ -756,45 +2323,81 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "graphics_collection",
-      "definition_uri": "https://w3id.org/linkml/modelcard/collection",
+      "name": "UseCase_description",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
+      "description": "Description of the application scenario",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "is_a": "collection",
-      "domain": "Graphics",
-      "slot_uri": "https://w3id.org/linkml/modelcard/collection",
-      "multivalued": true,
-      "alias": "collection",
-      "owner": "Graphics",
+      "is_a": "description",
+      "domain": "UseCase",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
+      "alias": "description",
+      "owner": "UseCase",
       "domain_of": [
-        "Graphics"
+        "UseCase"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "collection",
+      "usage_slot_name": "description",
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "graphic_image",
-      "definition_uri": "https://w3id.org/linkml/modelcard/image",
-      "description": "The graphic, encoded as a base64 string.",
+      "name": "Limitation_description",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
+      "description": "Description of the limitation or constraint",
       "from_schema": "https://w3id.org/linkml/modelcard",
-      "is_a": "image",
-      "domain": "Graphic",
-      "slot_uri": "https://w3id.org/linkml/modelcard/image",
-      "alias": "image",
-      "owner": "Graphic",
+      "is_a": "description",
+      "domain": "Limitation",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
+      "alias": "description",
+      "owner": "Limitation",
       "domain_of": [
-        "Graphic"
+        "Limitation"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "image",
+      "usage_slot_name": "description",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Tradeoff_description",
+      "definition_uri": "https://w3id.org/linkml/modelcard/description",
+      "description": "Description of the performance tradeoff",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "description",
+      "domain": "Tradeoff",
+      "slot_uri": "https://w3id.org/linkml/modelcard/description",
+      "alias": "description",
+      "owner": "Tradeoff",
+      "domain_of": [
+        "Tradeoff"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "description",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "risk_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Name or type of the risk",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "Risk",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "Risk",
+      "domain_of": [
+        "Risk"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
       "name": "risk_mitigation_strategy",
       "definition_uri": "https://w3id.org/linkml/modelcard/mitigation_strategy",
-      "description": "Strategy used to address this risk.",
+      "description": "Strategy used to address or mitigate this risk",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "mitigation_strategy",
       "domain": "Risk",
@@ -810,9 +2413,494 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_schema_version",
+      "name": "Considerations_users",
+      "definition_uri": "https://w3id.org/linkml/modelcard/users",
+      "description": "Intended user types",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "users",
+      "domain": "Considerations",
+      "slot_uri": "https://w3id.org/linkml/modelcard/users",
+      "alias": "users",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "users",
+      "range": "User",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Considerations_use_cases",
+      "definition_uri": "https://w3id.org/linkml/modelcard/use_cases",
+      "description": "Intended use cases and application scenarios",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "use_cases",
+      "domain": "Considerations",
+      "slot_uri": "https://w3id.org/linkml/modelcard/use_cases",
+      "alias": "use_cases",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "use_cases",
+      "range": "UseCase",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Considerations_limitations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/limitations",
+      "description": "Known limitations and constraints",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "limitations",
+      "domain": "Considerations",
+      "slot_uri": "https://w3id.org/linkml/modelcard/limitations",
+      "alias": "limitations",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "limitations",
+      "range": "Limitation",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Considerations_tradeoffs",
+      "definition_uri": "https://w3id.org/linkml/modelcard/tradeoffs",
+      "description": "Performance tradeoffs to consider",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "tradeoffs",
+      "domain": "Considerations",
+      "slot_uri": "https://w3id.org/linkml/modelcard/tradeoffs",
+      "alias": "tradeoffs",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "tradeoffs",
+      "range": "Tradeoff",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Considerations_ethical_considerations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ethical_considerations",
+      "description": "Ethical considerations and identified risks",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "ethical_considerations",
+      "domain": "Considerations",
+      "slot_uri": "https://w3id.org/linkml/modelcard/ethical_considerations",
+      "alias": "ethical_considerations",
+      "owner": "Considerations",
+      "domain_of": [
+        "Considerations"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "ethical_considerations",
+      "range": "Risk",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Task_type",
+      "definition_uri": "https://w3id.org/linkml/modelcard/type",
+      "description": "Task type identifier (e.g., 'text-generation', 'image-classification')",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "type",
+      "domain": "Task",
+      "slot_uri": "https://w3id.org/linkml/modelcard/type",
+      "alias": "type",
+      "owner": "Task",
+      "domain_of": [
+        "Task"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "type",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Task_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Human-readable task name",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "Task",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "Task",
+      "domain_of": [
+        "Task"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkDataset_type",
+      "definition_uri": "https://w3id.org/linkml/modelcard/type",
+      "description": "Dataset type identifier",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "type",
+      "domain": "BenchmarkDataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/type",
+      "alias": "type",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "type",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkDataset_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Dataset name",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "BenchmarkDataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkDataset_config",
+      "definition_uri": "https://w3id.org/linkml/modelcard/config",
+      "description": "Dataset configuration",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "config",
+      "domain": "BenchmarkDataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/config",
+      "alias": "config",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "config",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkDataset_split",
+      "definition_uri": "https://w3id.org/linkml/modelcard/split",
+      "description": "Dataset split (train, test, validation)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "split",
+      "domain": "BenchmarkDataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/split",
+      "alias": "split",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "split",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkDataset_revision",
+      "definition_uri": "https://w3id.org/linkml/modelcard/revision",
+      "description": "Dataset version or revision",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "revision",
+      "domain": "BenchmarkDataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/revision",
+      "alias": "revision",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "revision",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkDataset_args",
+      "definition_uri": "https://w3id.org/linkml/modelcard/args",
+      "description": "Additional arguments for dataset loading",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "args",
+      "domain": "BenchmarkDataset",
+      "slot_uri": "https://w3id.org/linkml/modelcard/args",
+      "alias": "args",
+      "owner": "BenchmarkDataset",
+      "domain_of": [
+        "BenchmarkDataset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "args",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkMetric_type",
+      "definition_uri": "https://w3id.org/linkml/modelcard/type",
+      "description": "Metric type identifier",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "type",
+      "domain": "BenchmarkMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/type",
+      "alias": "type",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "type",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkMetric_value",
+      "definition_uri": "https://w3id.org/linkml/modelcard/value",
+      "description": "Metric value",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "value",
+      "domain": "BenchmarkMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/value",
+      "alias": "value",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "value",
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkMetric_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Metric name",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "BenchmarkMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkMetric_config",
+      "definition_uri": "https://w3id.org/linkml/modelcard/config",
+      "description": "Metric configuration",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "config",
+      "domain": "BenchmarkMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/config",
+      "alias": "config",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "config",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkMetric_args",
+      "definition_uri": "https://w3id.org/linkml/modelcard/args",
+      "description": "Additional metric arguments",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "args",
+      "domain": "BenchmarkMetric",
+      "slot_uri": "https://w3id.org/linkml/modelcard/args",
+      "alias": "args",
+      "owner": "BenchmarkMetric",
+      "domain_of": [
+        "BenchmarkMetric"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "args",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkSource_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Source name (e.g., 'Open LLM Leaderboard', 'GLUE Benchmark')",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "BenchmarkSource",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "BenchmarkSource",
+      "domain_of": [
+        "BenchmarkSource"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkSource_url",
+      "definition_uri": "https://w3id.org/linkml/modelcard/url",
+      "description": "URL to the source",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "url",
+      "domain": "BenchmarkSource",
+      "slot_uri": "https://w3id.org/linkml/modelcard/url",
+      "alias": "url",
+      "owner": "BenchmarkSource",
+      "domain_of": [
+        "BenchmarkSource"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "url",
+      "range": "uri",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkResult_task",
+      "definition_uri": "https://w3id.org/linkml/modelcard/task",
+      "description": "Task that was evaluated",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "task",
+      "domain": "BenchmarkResult",
+      "slot_uri": "https://w3id.org/linkml/modelcard/task",
+      "alias": "task",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "task",
+      "range": "Task",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkResult_dataset",
+      "definition_uri": "https://w3id.org/linkml/modelcard/dataset",
+      "description": "Dataset used for evaluation",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "dataset",
+      "domain": "BenchmarkResult",
+      "slot_uri": "https://w3id.org/linkml/modelcard/dataset",
+      "alias": "dataset",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "dataset",
+      "range": "BenchmarkDataset",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkResult_metrics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/metrics",
+      "description": "Metrics reported for this benchmark",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "metrics",
+      "domain": "BenchmarkResult",
+      "slot_uri": "https://w3id.org/linkml/modelcard/metrics",
+      "alias": "metrics",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "metrics",
+      "range": "BenchmarkMetric",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BenchmarkResult_source",
+      "definition_uri": "https://w3id.org/linkml/modelcard/source",
+      "description": "Source of the benchmark results",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "source",
+      "domain": "BenchmarkResult",
+      "slot_uri": "https://w3id.org/linkml/modelcard/source",
+      "alias": "source",
+      "owner": "BenchmarkResult",
+      "domain_of": [
+        "BenchmarkResult"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "source",
+      "range": "BenchmarkSource",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelIndex_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/name",
+      "description": "Model name for this benchmark entry",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "name",
+      "domain": "ModelIndex",
+      "slot_uri": "https://w3id.org/linkml/modelcard/name",
+      "alias": "name",
+      "owner": "ModelIndex",
+      "domain_of": [
+        "ModelIndex"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ModelIndex_results",
+      "definition_uri": "https://w3id.org/linkml/modelcard/results",
+      "description": "Benchmark results",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "results",
+      "domain": "ModelIndex",
+      "slot_uri": "https://w3id.org/linkml/modelcard/results",
+      "alias": "results",
+      "owner": "ModelIndex",
+      "domain_of": [
+        "ModelIndex"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "results",
+      "range": "BenchmarkResult",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_schema_version",
       "definition_uri": "https://w3id.org/linkml/modelcard/schema_version",
-      "description": "The version of the schema.",
+      "description": "Version of the model card schema being used",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "schema_version",
       "domain": "ModelCard",
@@ -828,9 +2916,9 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_model_details",
+      "name": "modelCard_model_details",
       "definition_uri": "https://w3id.org/linkml/modelcard/model_details",
-      "description": "Metadata about the model.",
+      "description": "Comprehensive model metadata and details",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "model_details",
       "domain": "ModelCard",
@@ -842,14 +2930,15 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "model_details",
-      "range": "string",
+      "range": "ModelDetails",
       "required": true,
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_model_parameters",
+      "name": "modelCard_model_parameters",
       "definition_uri": "https://w3id.org/linkml/modelcard/model_parameters",
-      "description": "Parameters for construction of the model.",
+      "description": "Model construction and architecture parameters",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "model_parameters",
       "domain": "ModelCard",
@@ -861,13 +2950,14 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "model_parameters",
-      "range": "string",
+      "range": "ModelParameters",
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_quantitative_analysis",
+      "name": "modelCard_quantitative_analysis",
       "definition_uri": "https://w3id.org/linkml/modelcard/quantitative_analysis",
-      "description": "A quantitative analysis of the model",
+      "description": "Quantitative analysis and performance evaluation",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "quantitative_analysis",
       "domain": "ModelCard",
@@ -879,13 +2969,14 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "quantitative_analysis",
-      "range": "string",
+      "range": "QuantitativeAnalysis",
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_considerations",
+      "name": "modelCard_considerations",
       "definition_uri": "https://w3id.org/linkml/modelcard/considerations",
-      "description": "What considerations should be taken into account regarding the model's construction, training, and application?",
+      "description": "Usage considerations, limitations, and ethical concerns",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "considerations",
       "domain": "ModelCard",
@@ -897,13 +2988,14 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "considerations",
-      "range": "string",
+      "range": "Considerations",
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_model_category",
+      "name": "modelCard_model_category",
       "definition_uri": "https://w3id.org/linkml/modelcard/model_category",
-      "description": "The category or parent class of the model.",
+      "description": "Category or parent class of the model",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "model_category",
       "domain": "ModelCard",
@@ -919,9 +3011,9 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_bias_model",
+      "name": "modelCard_bias_model",
       "definition_uri": "https://w3id.org/linkml/modelcard/bias_model",
-      "description": "A known bias in the model that was applied to the input data.",
+      "description": "Known biases in the model itself",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "bias_model",
       "domain": "ModelCard",
@@ -937,9 +3029,9 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "ModelCard_bias_output",
+      "name": "modelCard_bias_output",
       "definition_uri": "https://w3id.org/linkml/modelcard/bias_output",
-      "description": "A known bias in the output of the model that was applied to the input data.",
+      "description": "Known biases in the model's outputs",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "is_a": "bias_output",
       "domain": "ModelCard",
@@ -953,12 +3045,226 @@
       "usage_slot_name": "bias_output",
       "range": "string",
       "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_framework",
+      "definition_uri": "https://w3id.org/linkml/modelcard/framework",
+      "description": "ML framework used (TensorFlow, PyTorch, JAX, Scikit-Learn, etc.)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "framework",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/framework",
+      "alias": "framework",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "framework",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_framework_version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/framework_version",
+      "description": "Version of the ML framework",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "framework_version",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/framework_version",
+      "alias": "framework_version",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "framework_version",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_library_name",
+      "definition_uri": "https://w3id.org/linkml/modelcard/library_name",
+      "description": "Library name for loading the model (e.g., transformers, diffusers, timm)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "library_name",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/library_name",
+      "alias": "library_name",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "library_name",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_pipeline_tag",
+      "definition_uri": "https://w3id.org/linkml/modelcard/pipeline_tag",
+      "description": "Task type for pipeline usage",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "pipeline_tag",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/pipeline_tag",
+      "alias": "pipeline_tag",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "pipeline_tag",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_language",
+      "definition_uri": "https://w3id.org/linkml/modelcard/language",
+      "description": "Natural language(s) processed by the model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "language",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/language",
+      "alias": "language",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "language",
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_base_model",
+      "definition_uri": "https://w3id.org/linkml/modelcard/base_model",
+      "description": "Parent model identifier (for fine-tuned or derived models)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "base_model",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/base_model",
+      "alias": "base_model",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "base_model",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_tags",
+      "definition_uri": "https://w3id.org/linkml/modelcard/tags",
+      "description": "Searchable keywords and tags for discovery",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "tags",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/tags",
+      "alias": "tags",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "tags",
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_datasets",
+      "definition_uri": "https://w3id.org/linkml/modelcard/datasets",
+      "description": "Training dataset identifiers or names",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "datasets",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/datasets",
+      "alias": "datasets",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "datasets",
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_metrics",
+      "definition_uri": "https://w3id.org/linkml/modelcard/metrics",
+      "description": "Evaluation metrics used for this model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "metrics",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/metrics",
+      "alias": "metrics",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "metrics",
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modelCard_model_index",
+      "definition_uri": "https://w3id.org/linkml/modelcard/model_index",
+      "description": "Benchmark results following Papers with Code model-index format",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "is_a": "model_index",
+      "domain": "ModelCard",
+      "slot_uri": "https://w3id.org/linkml/modelcard/model_index",
+      "alias": "model_index",
+      "owner": "ModelCard",
+      "domain_of": [
+        "ModelCard"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "model_index",
+      "range": "ModelIndex",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
     }
   ],
   "classes": [
     {
+      "name": "Version",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Version",
+      "description": "Version information for a model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "Version_name",
+        "Version_date",
+        "Version_diff"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/Version",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "License",
+      "definition_uri": "https://w3id.org/linkml/modelcard/License",
+      "description": "License information (use SPDX identifier OR custom text, not both)",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "License_identifier",
+        "License_custom_text"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/License",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Owner",
       "definition_uri": "https://w3id.org/linkml/modelcard/Owner",
+      "description": "Model owner or maintainer information",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
         "owner_name",
@@ -969,54 +3275,82 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Dataset",
-      "definition_uri": "https://w3id.org/linkml/modelcard/Dataset",
+      "name": "Reference",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Reference",
+      "description": "Reference to related resources",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "dataset_name",
-        "dataset_link",
-        "dataset_sensitive",
-        "dataset_graphics",
-        "dataset_bias_input"
+        "Reference_reference"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/modelcard/Dataset",
+      "class_uri": "https://w3id.org/linkml/modelcard/Reference",
       "@type": "ClassDefinition"
     },
     {
-      "name": "PerformanceMetric",
-      "definition_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
+      "name": "Citation",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Citation",
+      "description": "Citation information for the model",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "performance_metric_type",
-        "performance_metric_value",
-        "performance_metric_confidence_interval",
-        "performance_metric_threshold",
-        "performance_metric_slice",
-        "performance_metric_value_error"
+        "Citation_style",
+        "Citation_citation"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
+      "class_uri": "https://w3id.org/linkml/modelcard/Citation",
       "@type": "ClassDefinition"
     },
     {
-      "name": "Graphics",
-      "definition_uri": "https://w3id.org/linkml/modelcard/Graphics",
+      "name": "ModelDetails",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ModelDetails",
+      "description": "Comprehensive metadata about the model",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "graphics_description",
-        "graphics_collection"
+        "ModelDetails_name",
+        "ModelDetails_overview",
+        "ModelDetails_documentation",
+        "ModelDetails_owners",
+        "ModelDetails_version",
+        "ModelDetails_licenses",
+        "ModelDetails_references",
+        "ModelDetails_citations",
+        "ModelDetails_path"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/modelcard/Graphics",
+      "class_uri": "https://w3id.org/linkml/modelcard/ModelDetails",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SensitiveData",
+      "definition_uri": "https://w3id.org/linkml/modelcard/SensitiveData",
+      "description": "Information about sensitive data in a dataset",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "SensitiveData_sensitive_data"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/SensitiveData",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "GraphicsCollection",
+      "definition_uri": "https://w3id.org/linkml/modelcard/GraphicsCollection",
+      "description": "Collection of graphics and visualizations",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "GraphicsCollection_description",
+        "GraphicsCollection_collection"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/GraphicsCollection",
       "@type": "ClassDefinition"
     },
     {
       "name": "Graphic",
       "definition_uri": "https://w3id.org/linkml/modelcard/Graphic",
+      "description": "A single graphic or visualization",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "name",
+        "graphic_name",
         "graphic_image"
       ],
       "slot_usage": {},
@@ -1024,11 +3358,152 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Risk",
-      "definition_uri": "https://w3id.org/linkml/modelcard/Risk",
+      "name": "DataSet",
+      "definition_uri": "https://w3id.org/linkml/modelcard/DataSet",
+      "description": "Information about a dataset used for training or evaluation",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "name",
+        "dataSet_name",
+        "dataSet_description",
+        "dataSet_link",
+        "dataSet_sensitive",
+        "dataSet_graphics",
+        "dataSet_bias_input",
+        "dataSet_unit"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/DataSet",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "KeyVal",
+      "definition_uri": "https://w3id.org/linkml/modelcard/KeyVal",
+      "description": "Key-value pair for format mappings",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "KeyVal_key",
+        "KeyVal_value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/KeyVal",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ModelParameters",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ModelParameters",
+      "description": "Parameters and specifications for model construction",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "ModelParameters_model_architecture",
+        "ModelParameters_data",
+        "ModelParameters_input_format",
+        "ModelParameters_input_format_map",
+        "ModelParameters_output_format",
+        "ModelParameters_output_format_map"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/ModelParameters",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ConfidenceInterval",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ConfidenceInterval",
+      "description": "Confidence interval for a metric value",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "ConfidenceInterval_lower_bound",
+        "ConfidenceInterval_upper_bound"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/ConfidenceInterval",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PerformanceMetric",
+      "definition_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
+      "description": "A performance metric with optional confidence interval",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "performanceMetric_type",
+        "performanceMetric_value",
+        "performanceMetric_value_error",
+        "performanceMetric_confidence_interval",
+        "performanceMetric_threshold",
+        "performanceMetric_slice",
+        "performanceMetric_unit"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/PerformanceMetric",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuantitativeAnalysis",
+      "definition_uri": "https://w3id.org/linkml/modelcard/QuantitativeAnalysis",
+      "description": "Quantitative analysis and performance evaluation of the model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "QuantitativeAnalysis_performance_metrics",
+        "QuantitativeAnalysis_graphics"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/QuantitativeAnalysis",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "User",
+      "definition_uri": "https://w3id.org/linkml/modelcard/User",
+      "description": "Description of an intended user type",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "User_description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/User",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "UseCase",
+      "definition_uri": "https://w3id.org/linkml/modelcard/UseCase",
+      "description": "Description of a use case or application scenario",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "UseCase_description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/UseCase",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Limitation",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Limitation",
+      "description": "A known limitation or constraint of the model",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "Limitation_description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/Limitation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Tradeoff",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Tradeoff",
+      "description": "A performance tradeoff consideration",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "Tradeoff_description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/Tradeoff",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Risk",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Risk",
+      "description": "An ethical, environmental, or operational risk",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "risk_name",
         "risk_mitigation_strategy"
       ],
       "slot_usage": {},
@@ -1036,18 +3511,132 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "ModelCard",
-      "definition_uri": "https://w3id.org/linkml/modelcard/ModelCard",
+      "name": "Considerations",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Considerations",
+      "description": "Considerations for model usage including limitations and ethical concerns",
       "from_schema": "https://w3id.org/linkml/modelcard",
       "slots": [
-        "ModelCard_schema_version",
-        "ModelCard_model_details",
-        "ModelCard_model_parameters",
-        "ModelCard_quantitative_analysis",
-        "ModelCard_considerations",
-        "ModelCard_model_category",
-        "ModelCard_bias_model",
-        "ModelCard_bias_output"
+        "Considerations_users",
+        "Considerations_use_cases",
+        "Considerations_limitations",
+        "Considerations_tradeoffs",
+        "Considerations_ethical_considerations"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/Considerations",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Task",
+      "definition_uri": "https://w3id.org/linkml/modelcard/Task",
+      "description": "ML task specification for benchmarking",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "Task_type",
+        "Task_name"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/Task",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BenchmarkDataset",
+      "definition_uri": "https://w3id.org/linkml/modelcard/BenchmarkDataset",
+      "description": "Dataset used for benchmarking",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "BenchmarkDataset_type",
+        "BenchmarkDataset_name",
+        "BenchmarkDataset_config",
+        "BenchmarkDataset_split",
+        "BenchmarkDataset_revision",
+        "BenchmarkDataset_args"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/BenchmarkDataset",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BenchmarkMetric",
+      "definition_uri": "https://w3id.org/linkml/modelcard/BenchmarkMetric",
+      "description": "Benchmark metric result",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "BenchmarkMetric_type",
+        "BenchmarkMetric_value",
+        "BenchmarkMetric_name",
+        "BenchmarkMetric_config",
+        "BenchmarkMetric_args"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/BenchmarkMetric",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BenchmarkSource",
+      "definition_uri": "https://w3id.org/linkml/modelcard/BenchmarkSource",
+      "description": "Source of benchmark results",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "BenchmarkSource_name",
+        "BenchmarkSource_url"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/BenchmarkSource",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BenchmarkResult",
+      "definition_uri": "https://w3id.org/linkml/modelcard/BenchmarkResult",
+      "description": "Benchmark result entry with task, dataset, and metrics",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "BenchmarkResult_task",
+        "BenchmarkResult_dataset",
+        "BenchmarkResult_metrics",
+        "BenchmarkResult_source"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/BenchmarkResult",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ModelIndex",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ModelIndex",
+      "description": "Papers with Code model-index structure for benchmark tracking",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "ModelIndex_name",
+        "ModelIndex_results"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/modelcard/ModelIndex",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ModelCard",
+      "definition_uri": "https://w3id.org/linkml/modelcard/ModelCard",
+      "description": "Complete model card with metadata, performance, and considerations",
+      "from_schema": "https://w3id.org/linkml/modelcard",
+      "slots": [
+        "modelCard_schema_version",
+        "modelCard_model_details",
+        "modelCard_model_parameters",
+        "modelCard_quantitative_analysis",
+        "modelCard_considerations",
+        "modelCard_model_category",
+        "modelCard_bias_model",
+        "modelCard_bias_output",
+        "modelCard_framework",
+        "modelCard_framework_version",
+        "modelCard_library_name",
+        "modelCard_pipeline_tag",
+        "modelCard_language",
+        "modelCard_base_model",
+        "modelCard_tags",
+        "modelCard_datasets",
+        "modelCard_metrics",
+        "modelCard_model_index"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml/modelcard/ModelCard",
@@ -1057,9 +3646,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "modelcards.yaml",
-  "source_file_date": "2022-10-04T16:19:56",
-  "source_file_size": 5082,
-  "generation_date": "2022-10-04T16:30:04",
+  "source_file_date": "2025-11-19T19:54:47",
+  "source_file_size": 23823,
+  "generation_date": "2025-11-19T19:55:00",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/modelcards.context.jsonld",

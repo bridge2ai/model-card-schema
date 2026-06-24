@@ -1,0 +1,266 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
+  "evaluation_timestamp": "2026-06-24T19:36:00.288064+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 required fields populated",
+          "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+          "quality_note": "All 5 required fields populated"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars across narrative fields",
+          "evidence": "overview=697, doc=761, short=172",
+          "quality_note": ">500 chars across narrative fields"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
+          "evidence": "8 tags, pipeline=text-classification, lang=['protein'], cat=protein-language-model",
+          "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both I/O specified with format_map populated",
+          "evidence": "prose + structured map",
+          "quality_note": "Both I/O specified with format_map populated"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "schema_version populated",
+          "evidence": "schema_version=0.0.2",
+          "quality_note": "schema_version populated"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 15,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Resolvable persistent identifier",
+          "evidence": "DOI or HF Hub URL present",
+          "quality_note": "Resolvable persistent identifier"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding info detected",
+          "evidence": "absent",
+          "quality_note": "No funding info detected"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "ethics + bias + out_of_scope all populated",
+          "evidence": "comprehensive",
+          "quality_note": "ethics + bias + out_of_scope all populated"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "SPDX permissive license (no additional restrictions needed)",
+          "evidence": "spdx=['MIT']",
+          "quality_note": "SPDX permissive license (no additional restrictions needed)"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Framework + version + library, no model_index",
+          "evidence": "PyTorch torch>=2.0, lib=transformers",
+          "quality_note": "Framework + version + library, no model_index"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 16,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Some tool/library named",
+          "evidence": "partial",
+          "quality_note": "Some tool/library named"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Most hyperparameters present",
+          "evidence": "good",
+          "quality_note": "Most hyperparameters present"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver + ISO date + non-trivial diff",
+          "evidence": "version=1.0, date=2024-08-01, diff=121 chars",
+          "quality_note": "Semver + ISO date + non-trivial diff"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Citation(s) + reference(s), DOIs missing",
+          "evidence": "2 cites, 5 refs",
+          "quality_note": "Citation(s) + reference(s), DOIs missing"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute_infrastructure",
+          "evidence": "absent",
+          "quality_note": "No compute_infrastructure"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 11,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "At least one resolvable URL",
+          "evidence": "5 refs",
+          "quality_note": "At least one resolvable URL"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Partial usage docs",
+          "evidence": "examples=0, io=True",
+          "quality_note": "Partial usage docs"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Metrics with values, no slices",
+          "evidence": "1 metric(s)",
+          "quality_note": "Metrics with values, no slices"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items",
+          "evidence": "lim=3, tradeoffs=1, oos=3; semantic_rule=bias_tradeoff_gap: bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: '650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at\\nhigher inference cost. LoRA keeps \u2026'",
+          "quality_note": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Cross-platform reference present",
+          "evidence": "benchmark=False, doi=False, dataset_link=True",
+          "quality_note": "Cross-platform reference present"
+        }
+      ]
+    }
+  ],
+  "overall_score": {
+    "total_points": 63,
+    "max_points": 84,
+    "percentage": 75.0,
+    "semantic_deductions": [
+      {
+        "question": "Q19",
+        "rule": "bias_tradeoff_gap",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: '650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at\\nhigher inference cost. LoRA keeps \u2026'"
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Strong Structural Completeness (21/21)"
+    ],
+    "weaknesses": [],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-rubric20",
+    "model_card_hash": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de"
+  }
+}

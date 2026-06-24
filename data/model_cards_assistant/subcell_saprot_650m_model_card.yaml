@@ -1,0 +1,212 @@
+# Model Card for SubCell (SaProtHub/Model-Subcellular_Localization-650M)
+# Generation Method: Claude Code Deterministic ASSISTANT (in-session synthesis)
+# Workflow: .github/workflows/mc_assistant_create.md
+# Source: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M
+# Schema: src/model_card_schema/schema/model_card_schema.yaml
+# Temperature: 0.0
+# Generated: 2026-06-15
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)"
+  short_description: "Protein-level classifier predicting subcellular localization across ten cellular compartments using a LoRA-fine-tuned 650M-parameter structure-aware protein language model."
+  overview: |
+    This model classifies protein sequences into one of ten subcellular localization classes:
+    nucleus, cytoplasm, extracellular space, mitochondrion, cell membrane, endoplasmic reticulum,
+    plastid, Golgi apparatus, lysosome/vacuole, and peroxisome.
+
+    It is a LoRA (Low-Rank Adaptation) fine-tune of westlake-repl/SaProt_650M_AF2 — a 650M-parameter
+    structure-aware protein language model that incorporates AlphaFold2 structural tokens alongside
+    the amino-acid sequence. LoRA is applied to the query/key/value attention projections and the
+    feedforward dense layers, with a small classifier head added on top.
+
+    The model achieves 85.75% test-set accuracy on the DeepLoc subcellular localization benchmark.
+  documentation: |
+    ## Architecture
+    - Base model: westlake-repl/SaProt_650M_AF2 (650M parameters)
+    - Adaptation: LoRA on attention projections (Q/K/V) + FFN dense layers
+    - LoRA rank: 16, alpha: 32, dropout: 0
+    - Classifier head: 10-way over subcellular localization classes
+    - Inherited input: structure-aware (SA) sequence — amino-acid sequence + AlphaFold2 structure tokens
+
+    ## Usage
+    ```python
+    from saprot_hub import load_model
+    model = load_model("SaProtHub/Model-Subcellular_Localization-650M")
+    # Input: SA-sequence (protein sequence with structure annotations)
+    pred = model.predict(sa_sequence)  # 0-9 class label
+    ```
+
+    ## Training Configuration
+    - Optimizer: AdamW (β1=0.9, β2=0.98, weight_decay=0.01)
+    - Learning rate: 5e-4
+    - Epochs: 100
+    - Batch size: 64
+    - Precision: 16-bit mixed
+  contributors:
+    - name: "SaProtHub maintainers"
+      role: developed_by
+      affiliation: "Westlake Representation Learning Lab"
+    - name: "Westlake-repl team (base SaProt)"
+      role: contributed_by
+      affiliation: "Westlake University"
+  version:
+    name: "1.0"
+    date: "2024-08-01"
+    diff: |
+      Initial release of the LoRA fine-tune on the DeepLoc subcellular-localization
+      training split using AdamW for 100 epochs.
+  licenses:
+    - identifier: "MIT"
+      license_name: "MIT License"
+      license_link: "https://opensource.org/licenses/MIT"
+  citations:
+    - style: IEEE
+      citation: |
+        SaProtHub, "SubCellular Localization 650M (LoRA fine-tune of SaProt_650M_AF2)," HuggingFace Hub, 2024.
+        [Online]. Available: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M
+    - style: IEEE
+      citation: |
+        J. Su et al., "SaProt: Protein Language Modeling with Structure-aware Vocabulary," in ICLR, 2024.
+  references:
+    - reference: "https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M"
+    - reference: "https://huggingface.co/westlake-repl/SaProt_650M_AF2"
+    - reference: "https://github.com/westlake-repl/SaProt"
+    - reference: "https://www.uniprot.org/help/subcellular_location"
+    - reference: "https://services.healthtech.dtu.dk/services/DeepLoc-2.0/"
+  path: "https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M"
+
+# HuggingFace Hub metadata
+framework: "PyTorch"
+framework_version: "torch>=2.0"
+library_name: "transformers"
+pipeline_tag: "text-classification"
+language:
+  - "protein"
+base_model: "westlake-repl/SaProt_650M_AF2"
+tags:
+  - "protein-language-model"
+  - "subcellular-localization"
+  - "bioinformatics"
+  - "protein-classification"
+  - "saprot"
+  - "lora"
+  - "deeploc"
+  - "structure-aware"
+datasets:
+  - "SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+metrics:
+  - "accuracy"
+model_category: "protein-language-model"
+
+model_parameters:
+  model_architecture: |
+    Transformer-based protein language model: 650M-parameter SaProt_650M_AF2 base (ESM-style encoder
+    augmented with structure-aware vocabulary from AlphaFold2 Foldseek tokens). Fine-tuning uses
+    LoRA (rank 16, alpha 32, dropout 0) targeting attention query/key/value projections and the
+    feedforward dense layers (intermediate.dense and output.dense). A linear classifier head
+    projects pooled representations to 10 subcellular-localization classes.
+
+  data:
+    - name: "DeepLoc subcellular localization dataset (SaProtHub mirror)"
+      link: "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+      description: |
+        DeepLoc 2.0 benchmark: SwissProt proteins with experimentally-annotated subcellular
+        localizations spanning 10 classes. Train/validation/test splits provided by the SaProtHub
+        mirror; structure-aware (SA) sequences are pre-computed from AlphaFold2 predictions.
+      sensitive:
+        sensitive_data:
+          - "No human PII; SwissProt protein sequences only"
+
+  input_format: "Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens"
+  input_format_map:
+    - key: "type"
+      value: "string"
+    - key: "encoding"
+      value: "SA-vocabulary (amino acids + structural tokens)"
+    - key: "max_length"
+      value: "model-dependent (typically 1024 SA-tokens)"
+  output_format: "Classification label (integer 0-9) corresponding to one of ten subcellular localization classes"
+  output_format_map:
+    - key: "shape"
+      value: "[B, 10]"
+    - key: "interpretation"
+      value: "raw logits over {nucleus, cytoplasm, extracellular, mitochondrion, cell_membrane, endoplasmic_reticulum, plastid, golgi, lysosome_vacuole, peroxisome}"
+
+  training_procedure:
+    description: |
+      LoRA fine-tuning of SaProt_650M_AF2 on the DeepLoc subcellular-localization train split,
+      with the classifier head trained from scratch. Mixed precision (FP16) on a single GPU.
+    reproducibility_info:
+      hyperparameters:
+        optimizer: "AdamW"
+        learning_rate: 0.0005
+        batch_size: 64
+        training_epochs: 100
+        loss_function: "Cross-entropy over 10 classes"
+        optimization_techniques:
+          - "LoRA rank=16"
+          - "LoRA alpha=32"
+          - "LoRA dropout=0"
+          - "Mixed precision FP16"
+          - "AdamW betas=(0.9, 0.98)"
+          - "weight_decay=0.01"
+
+quantitative_analysis:
+  performance_metrics:
+    - type: "test accuracy"
+      value: 85.75
+      slice: "DeepLoc subcellular localization test set (10-way)"
+      unit: "%"
+
+considerations:
+  users:
+    - description: |
+        Structural biologists and bioinformaticians who want quick subcellular localization
+        predictions for protein sequences with known or predicted structure; researchers
+        building protein-annotation pipelines.
+
+  use_cases:
+    - description: "Predicting subcellular localization for protein-annotation pipelines"
+    - description: "Filtering proteomics candidates by compartment of interest"
+    - description: "Benchmarking against DeepLoc 2.0 on the same 10-class taxonomy"
+    - description: "Educational reference for LoRA fine-tuning of protein language models"
+
+  limitations:
+    - description: |
+        Trained on SwissProt-curated proteins with experimentally-validated subcellular labels;
+        coverage of organism diversity is uneven (heavily human / E. coli / yeast biased).
+    - description: |
+        Requires structure-aware input — sequences without AlphaFold2 structural tokens cannot
+        be scored directly. Predictions for novel proteins without structural neighbors may be
+        unreliable.
+    - description: |
+        10-way classification only; many proteins localize to multiple compartments. The model
+        cannot express multi-label outputs without retraining with a multi-label objective.
+
+  tradeoffs:
+    - description: |
+        650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at
+        higher inference cost. LoRA keeps trainable parameter count small (~few M) but base
+        weights still need to be loaded.
+
+  ethical_considerations:
+    - name: "Mis-localization in drug discovery pipelines"
+      mitigation_strategy: |
+        Treat predictions as a screening hypothesis, not ground truth. Confirm with experimental
+        localization (immunofluorescence, fractionation, etc.) before acting on a prediction in
+        downstream pharmacology or therapeutic targeting.
+
+  out_of_scope_uses:
+    - description: "Diagnosing localization-related diseases without experimental confirmation"
+    - description: "Predicting localization in species or kingdoms underrepresented in DeepLoc"
+    - description: "Multi-label localization prediction (model is single-label)"
+
+bias_model: |
+  Predictions reflect the species and protein-family distribution of the DeepLoc training set
+  (SwissProt-biased toward extensively-studied model organisms). Performance on understudied
+  proteomes and disordered / signal-peptide-containing proteins is not characterized.
+bias_output: |
+  Class prior matches the DeepLoc training distribution — rare compartments (peroxisome,
+  plastid) are likely under-predicted relative to their true biological frequency.

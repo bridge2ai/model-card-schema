@@ -1,0 +1,171 @@
+name: mc-rubric20 gate
+
+# Blocking PR check that scores any changed Model Card YAML against the
+# rubric20 hybrid evaluator (which now bakes in the highest-frequency
+# rubric20-semantic findings — Q18 train/eval leakage and Q19 bias↔tradeoffs
+# consistency, see scripts/batch_evaluate_mc_rubric20_hybrid.py).
+#
+# Why the hybrid and not the LLM r20-semantic agent:
+#   - Deterministic, reproducible bit-for-bit, no ANTHROPIC_API_KEY needed
+#   - Portfolio measurement (notes/PORTFOLIO_EVALUATION.md) shows r20-semantic
+#     stays within ~3pp of r20 base LLM, and our hybrid (with the two encoded
+#     semantic rules) now lands within ~2-4pp of r20-semantic on the same
+#     portfolio. Cheap enough to run on every PR; faithful enough to gate on.
+#   - The LLM r20-semantic agent remains the gold-standard audit (see
+#     mc-rubric20-semantic-audit.yml — manual / scheduled) and the rubric-report
+#     aggregator surfaces what to encode into the hybrid next.
+
+on:
+  pull_request:
+    paths:
+      - 'data/example_model_cards/**/*.yaml'
+      - 'data/model_cards_assistant/**/*.yaml'
+      - 'src/data/examples/**/*.yaml'
+      - 'scripts/batch_evaluate_mc_rubric20_hybrid.py'
+      - 'tests/test_rubric20_semantic_rules.py'
+      - '.github/workflows/mc-rubric20-gate.yml'
+  workflow_dispatch:
+    inputs:
+      threshold:
+        description: 'Minimum rubric20 hybrid score percentage (default 60)'
+        required: false
+        default: '60'
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    env:
+      THRESHOLD: ${{ github.event.inputs.threshold || '60' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+
+      - name: Run hybrid rubric20 semantic-rule unit tests
+        run: poetry run python -m unittest tests.test_rubric20_semantic_rules -v
+
+      - name: Detect changed model card YAMLs
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}" --depth=1 || true
+            base="origin/${{ github.base_ref }}"
+            files=$(git diff --name-only --diff-filter=AM "$base"...HEAD \
+              | grep -E '^(data/example_model_cards|data/model_cards_assistant|src/data/examples)/.*\.yaml$' \
+              | grep -v 'imdb-sentiment-datasheet' \
+              || true)
+          else
+            files=$(find data/example_model_cards data/model_cards_assistant src/data/examples -name '*.yaml' 2>/dev/null \
+              | grep -v 'imdb-sentiment-datasheet' \
+              || true)
+          fi
+          if [ -z "$files" ]; then
+            echo "No model card YAMLs changed."
+            echo "have_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "have_changes=true" >> "$GITHUB_OUTPUT"
+          # Persist as newline-separated file — easier than escaping for env vars
+          printf '%s\n' "$files" > /tmp/changed_cards.txt
+          echo "Changed files:"
+          cat /tmp/changed_cards.txt
+
+      - name: Score changed cards with rubric20 hybrid
+        if: steps.changed.outputs.have_changes == 'true'
+        run: |
+          mkdir -p tmp/rubric20_gate
+          # Per-card output dir keyed by the full repo-relative path
+          # (replace / with __) so two cards with the same basename across
+          # directories don't overwrite each other's JSON.
+          while IFS= read -r card; do
+            [ -z "$card" ] && continue
+            [ -f "$card" ] || continue
+            slot="$(printf '%s' "$card" | tr '/' '_')"
+            mkdir -p "tmp/rubric20_gate/$slot"
+            poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+              --input "$card" --output-dir "tmp/rubric20_gate/$slot"
+          done < /tmp/changed_cards.txt
+
+          # One Python invocation reads all the JSONs, prints the summary,
+          # and exits non-zero if any score is below the threshold.
+          poetry run python - <<'PY' /tmp/changed_cards.txt tmp/rubric20_gate "${THRESHOLD}"
+          import json, sys
+          from pathlib import Path
+
+          card_list_path, scores_dir, threshold_s = sys.argv[1:4]
+          threshold = float(threshold_s)
+          scores_dir = Path(scores_dir)
+          cards = [c.strip() for c in Path(card_list_path).read_text().splitlines() if c.strip()]
+
+          out_lines = [
+              "# rubric20 hybrid gate",
+              "",
+              f"Threshold: **{int(threshold)}%**",
+              "",
+              "| Card | Score | % | Semantic deductions |",
+              "|---|---:|---:|---|",
+          ]
+          fail = False
+          for card in cards:
+              if not Path(card).is_file():
+                  continue
+              slot = card.replace("/", "_")
+              stem = Path(card).stem
+              json_path = scores_dir / slot / f"{stem}_rubric20_evaluation.json"
+              if not json_path.exists():
+                  print(f"::error file={card}::rubric20 evaluator produced no output")
+                  fail = True
+                  continue
+              doc = json.loads(json_path.read_text())
+              overall = doc.get("overall_score", {})
+              total = overall.get("total_points", 0)
+              maxp = overall.get("max_points", 0)
+              pct = overall.get("percentage", 0)
+              deds = overall.get("semantic_deductions") or []
+              deds_str = "; ".join(
+                  f"{d['question']}:{d['rule']} ({d['raw_score']}->{d['capped_score']})"
+                  for d in deds
+              ) or "—"
+              out_lines.append(f"| `{card}` | {total}/{maxp} | {pct}% | {deds_str} |")
+              if float(pct) < threshold:
+                  print(f"::error file={card}::rubric20 score {pct}% is below threshold {int(threshold)}%")
+                  fail = True
+
+          out_lines.append("")
+          out_lines.append(
+              "Hybrid r20 encodes Q18 train_eval_leakage and Q19 bias_tradeoff_gap as deterministic rules "
+              "— see `notes/PORTFOLIO_EVALUATION.md` for portfolio data."
+          )
+          summary = "\n".join(out_lines) + "\n"
+          Path(scores_dir / "summary.md").write_text(summary)
+          print(summary)
+          import os
+          step_summary = os.environ.get("GITHUB_STEP_SUMMARY")
+          if step_summary:
+              Path(step_summary).open("a").write(summary)
+          sys.exit(1 if fail else 0)
+          PY
