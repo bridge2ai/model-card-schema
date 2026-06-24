@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "data/model_cards_assistant/stable_diffusion_xl_base_1_0_model_card.yaml",
-  "evaluation_timestamp": "2026-06-18T02:47:39.188818+00:00",
+  "evaluation_timestamp": "2026-06-24T19:36:00.280356+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -212,7 +212,7 @@
           "score": 3,
           "max_score": 5,
           "score_label": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI",
-          "evidence": "7 metrics, 7 slices; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'Filtered subset of LAION-5B (private)' ~ 'laion-5b (filtered subset, not publicly released)', 'Internal aesthetic-filtered Stability AI dataset (private)' ~ 'internal aesthetic-filtered Stability AI dataset (not publicly released)'",
+          "evidence": "7 metrics, 7 slices; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'Filtered subset of LAION-5B (private)' ~ 'laion-5b (filtered subset, not publicly released)', 'Internal aesthetic-filtered Stability AI dataset (private)' ~ 'human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SD 1.5)', 'Internal aesthetic-filtered Stability AI dataset (private)' ~ 'human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SD 2.1)'",
           "quality_note": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI"
         },
         {
@@ -248,7 +248,7 @@
         "rule": "train_eval_leakage",
         "raw_score": 4,
         "capped_score": 3,
-        "reason": "Training/benchmark dataset overlap: 'Filtered subset of LAION-5B (private)' ~ 'laion-5b (filtered subset, not publicly released)', 'Internal aesthetic-filtered Stability AI dataset (private)' ~ 'internal aesthetic-filtered Stability AI dataset (not publicly released)'"
+        "reason": "Training/benchmark dataset overlap: 'Filtered subset of LAION-5B (private)' ~ 'laion-5b (filtered subset, not publicly released)', 'Internal aesthetic-filtered Stability AI dataset (private)' ~ 'human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SD 1.5)', 'Internal aesthetic-filtered Stability AI dataset (private)' ~ 'human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SD 2.1)'"
       }
     ]
   },

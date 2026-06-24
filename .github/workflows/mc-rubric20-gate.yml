@@ -98,42 +98,74 @@ jobs:
         if: steps.changed.outputs.have_changes == 'true'
         run: |
           mkdir -p tmp/rubric20_gate
-          fail=0
-          : > tmp/rubric20_gate/summary.md
-          echo "# rubric20 hybrid gate" >> tmp/rubric20_gate/summary.md
-          echo "" >> tmp/rubric20_gate/summary.md
-          echo "Threshold: **$THRESHOLD%**" >> tmp/rubric20_gate/summary.md
-          echo "" >> tmp/rubric20_gate/summary.md
-          echo "| Card | Score | % | Semantic deductions |" >> tmp/rubric20_gate/summary.md
-          echo "|---|---:|---:|---|" >> tmp/rubric20_gate/summary.md
+          # Per-card output dir keyed by the full repo-relative path
+          # (replace / with __) so two cards with the same basename across
+          # directories don't overwrite each other's JSON.
           while IFS= read -r card; do
             [ -z "$card" ] && continue
             [ -f "$card" ] || continue
+            slot="$(printf '%s' "$card" | tr '/' '_')"
+            mkdir -p "tmp/rubric20_gate/$slot"
             poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
-              --input "$card" --output-dir tmp/rubric20_gate
-            json="tmp/rubric20_gate/$(basename "${card%.yaml}")_rubric20_evaluation.json"
-            if [ ! -f "$json" ]; then
-              echo "::error file=$card::rubric20 evaluator produced no output"
-              fail=1
-              continue
-            fi
-            pct=$(poetry run python -c "import json,sys; print(json.load(open('$json'))['overall_score']['percentage'])")
-            score=$(poetry run python -c "import json,sys; r=json.load(open('$json'))['overall_score']; print(f\"{r['total_points']}/{r['max_points']}\")")
-            deds=$(poetry run python -c "import json; d=json.load(open('$json'))['overall_score'].get('semantic_deductions',[]); print('; '.join(f\"{x['question']}:{x['rule']} ({x['raw_score']}->{x['capped_score']})\" for x in d) or '—')")
-            echo "| \`$card\` | $score | $pct% | $deds |" >> tmp/rubric20_gate/summary.md
-            below=$(poetry run python -c "import sys; sys.exit(0 if float('$pct') >= float('$THRESHOLD') else 1)" && echo 0 || echo 1)
-            if [ "$below" = "1" ]; then
-              echo "::error file=$card::rubric20 score $pct% is below threshold $THRESHOLD%"
-              fail=1
-            fi
+              --input "$card" --output-dir "tmp/rubric20_gate/$slot"
           done < /tmp/changed_cards.txt
-          echo "" >> tmp/rubric20_gate/summary.md
-          echo "Hybrid r20 now encodes Q18 train_eval_leakage and Q19 bias_tradeoff_gap as deterministic rules — see \`notes/PORTFOLIO_EVALUATION.md\` for portfolio data." >> tmp/rubric20_gate/summary.md
-          cat tmp/rubric20_gate/summary.md
-          if [ -n "$GITHUB_STEP_SUMMARY" ]; then
-            cat tmp/rubric20_gate/summary.md >> "$GITHUB_STEP_SUMMARY"
-          fi
-          if [ "$fail" = "1" ]; then
-            echo "::error::One or more model cards failed the rubric20 gate"
-            exit 1
-          fi
+
+          # One Python invocation reads all the JSONs, prints the summary,
+          # and exits non-zero if any score is below the threshold.
+          poetry run python - <<'PY' /tmp/changed_cards.txt tmp/rubric20_gate "${THRESHOLD}"
+          import json, sys
+          from pathlib import Path
+
+          card_list_path, scores_dir, threshold_s = sys.argv[1:4]
+          threshold = float(threshold_s)
+          scores_dir = Path(scores_dir)
+          cards = [c.strip() for c in Path(card_list_path).read_text().splitlines() if c.strip()]
+
+          out_lines = [
+              "# rubric20 hybrid gate",
+              "",
+              f"Threshold: **{int(threshold)}%**",
+              "",
+              "| Card | Score | % | Semantic deductions |",
+              "|---|---:|---:|---|",
+          ]
+          fail = False
+          for card in cards:
+              if not Path(card).is_file():
+                  continue
+              slot = card.replace("/", "_")
+              stem = Path(card).stem
+              json_path = scores_dir / slot / f"{stem}_rubric20_evaluation.json"
+              if not json_path.exists():
+                  print(f"::error file={card}::rubric20 evaluator produced no output")
+                  fail = True
+                  continue
+              doc = json.loads(json_path.read_text())
+              overall = doc.get("overall_score", {})
+              total = overall.get("total_points", 0)
+              maxp = overall.get("max_points", 0)
+              pct = overall.get("percentage", 0)
+              deds = overall.get("semantic_deductions") or []
+              deds_str = "; ".join(
+                  f"{d['question']}:{d['rule']} ({d['raw_score']}->{d['capped_score']})"
+                  for d in deds
+              ) or "—"
+              out_lines.append(f"| `{card}` | {total}/{maxp} | {pct}% | {deds_str} |")
+              if float(pct) < threshold:
+                  print(f"::error file={card}::rubric20 score {pct}% is below threshold {int(threshold)}%")
+                  fail = True
+
+          out_lines.append("")
+          out_lines.append(
+              "Hybrid r20 encodes Q18 train_eval_leakage and Q19 bias_tradeoff_gap as deterministic rules "
+              "— see `notes/PORTFOLIO_EVALUATION.md` for portfolio data."
+          )
+          summary = "\n".join(out_lines) + "\n"
+          Path(scores_dir / "summary.md").write_text(summary)
+          print(summary)
+          import os
+          step_summary = os.environ.get("GITHUB_STEP_SUMMARY")
+          if step_summary:
+              Path(step_summary).open("a").write(summary)
+          sys.exit(1 if fail else 0)
+          PY

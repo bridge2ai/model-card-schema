@@ -1,2 +1,2 @@
 model_card_file,total_score,max_score,percentage,structural,metadata,technical,fairness,q1_score,q2_score,q3_score,q4_score,q5_score,q6_score,q7_score,q8_score,q9_score,q10_score,q11_score,q12_score,q13_score,q14_score,q15_score,q16_score,q17_score,q18_score,q19_score,q20_score
-src/data/examples/extended/climate-model-extended.yaml,72,84,85.7,17,17,23,15,5,5,3,3,1,0,5,3,5,4,5,5,5,4,4,1,5,3,5,1
+src/data/examples/extended/climate-model-extended.yaml,74,84,88.1,17,17,23,17,5,5,3,3,1,0,5,3,5,4,5,5,5,4,4,1,5,5,5,1

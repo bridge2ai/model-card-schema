@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
-  "evaluation_timestamp": "2026-06-18T02:35:39.484638+00:00",
+  "evaluation_timestamp": "2026-06-24T19:35:58.759390+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -212,7 +212,7 @@
           "score": 3,
           "max_score": 5,
           "score_label": "[capped 5->3 by train_eval_leakage] \u22652 metrics, \u22652 slices, CI on \u22651",
-          "evidence": "5 metrics, 3 slices, CI=True; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'IMDb Movie Reviews' ~ 'IMDb Movie Reviews', 'IMDb Movie Reviews' ~ 'imdb'",
+          "evidence": "5 metrics, 3 slices, CI=True; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'IMDb Movie Reviews' ~ 'IMDb Movie Reviews'",
           "quality_note": "[capped 5->3 by train_eval_leakage] \u22652 metrics, \u22652 slices, CI on \u22651"
         },
         {
@@ -248,7 +248,7 @@
         "rule": "train_eval_leakage",
         "raw_score": 5,
         "capped_score": 3,
-        "reason": "Training/benchmark dataset overlap: 'IMDb Movie Reviews' ~ 'IMDb Movie Reviews', 'IMDb Movie Reviews' ~ 'imdb'"
+        "reason": "Training/benchmark dataset overlap: 'IMDb Movie Reviews' ~ 'IMDb Movie Reviews'"
       }
     ]
   },

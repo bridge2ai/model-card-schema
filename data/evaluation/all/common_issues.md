@@ -21,15 +21,15 @@ Aggregated from 10 semantic evaluation file(s) covering 5 card(s).  Ranked by nu
 | 13 | 1 | consistency | rubric20 | benchmark dataset != training dataset | ✅ `train_eval_leakage` |
 | 14 | 1 | consistency | rubric20 | benchmark dataset != training dataset (no train/eval leakage) | ✅ `train_eval_leakage` |
 | 15 | 1 | consistency | rubric20 | benchmark dataset ↔ training data (train/eval leakage) | ✅ `train_eval_leakage` |
-| 16 | 1 | consistency | rubric10 | bias acknowledged -> fairness-vs-accuracy tradeoff expected in tradeoffs[] | — |
+| 16 | 1 | consistency | rubric10 | bias acknowledged -> fairness-vs-accuracy tradeoff expected in tradeoffs[] | ✅ `bias_tradeoff_gap` |
 | 17 | 1 | consistency | rubric20 | bias disclosure -> tradeoffs (accuracy vs fairness) | ✅ `bias_tradeoff_gap` |
 | 18 | 1 | consistency | rubric10 | Bias narrative -> sliced performance metrics | — |
 | 19 | 1 | consistency | rubric20 | bias_* fields ↔ ethical_considerations | — |
 | 20 | 1 | format | rubric10 | bias_model / bias_output | — |
 | 21 | 1 | consistency | rubric10 | bias_model / bias_output → slice-level performance metrics | — |
-| 22 | 1 | consistency | rubric10 | bias_model / bias_output → tradeoffs[] acknowledging accuracy vs fairness | — |
-| 23 | 1 | consistency | rubric10 | bias_model/bias_output non-empty -> tradeoffs acknowledge accuracy-vs-fairness | — |
-| 24 | 1 | consistency | rubric20 | bias_model/bias_output populated → tradeoffs must acknowledge accuracy-vs-fairness | — |
+| 22 | 1 | consistency | rubric10 | bias_model / bias_output → tradeoffs[] acknowledging accuracy vs fairness | ✅ `bias_tradeoff_gap` |
+| 23 | 1 | consistency | rubric10 | bias_model/bias_output non-empty -> tradeoffs acknowledge accuracy-vs-fairness | ✅ `bias_tradeoff_gap` |
+| 24 | 1 | consistency | rubric20 | bias_model/bias_output populated → tradeoffs must acknowledge accuracy-vs-fairness | ✅ `bias_tradeoff_gap` |
 | 25 | 1 | consistency | rubric10 | Climate_justice ethical consideration ↔ bias disclosure | — |
 | 26 | 1 | consistency | rubric10 | Climate_justice mitigation ↔ slice diversity | — |
 | 27 | 1 | format | rubric10 | considerations (bias_model, bias_output) | — |
@@ -74,7 +74,7 @@ Aggregated from 10 semantic evaluation file(s) covering 5 card(s).  Ranked by nu
 | 66 | 1 | format | rubric10 | pipeline_tag | — |
 | 67 | 1 | consistency | rubric10 | pipeline_tag ↔ input/output format | — |
 | 68 | 1 | consistency | rubric10 | primary use 'product reviews' vs training data 'movie reviews' | — |
-| 69 | 1 | plausibility | rubric20 | quantitative_analysis.performance_metrics | ✅ `train_eval_leakage` |
+| 69 | 1 | plausibility | rubric20 | quantitative_analysis.performance_metrics | — |
 | 70 | 1 | format | rubric10 | quantitative_analysis.performance_metrics[].confidence_interval | — |
 | 71 | 1 | consistency | rubric10 | Sensitive data disclosure (top-level affirmation) | — |
 | 72 | 1 | consistency | rubric10 | sensitive/bias acknowledgement -> bias_model + out_of_scope_uses populated | — |
@@ -225,5 +225,5 @@ Aggregated from 10 semantic evaluation file(s) covering 5 card(s).  Ranked by nu
 
 These rules already fire in `scripts/batch_evaluate_mc_rubric20_hybrid.py`:
 
-- `bias_tradeoff_gap` — matches findings containing: _bias disclosure tradeoffs_
-- `train_eval_leakage` — matches findings containing: _benchmark dataset training data_
+- `bias_tradeoff_gap` — matches findings containing: _[{'tradeoffs', 'bias_model'}, {'tradeoffs', 'bias_output'}, {'bias', 'tradeoffs', 'fairness'}, {'bias', 'tradeoffs', 'considerations'}]_
+- `train_eval_leakage` — matches findings containing: _[{'benchmark', 'dataset', 'training'}, {'evaluation', 'overlap', 'training'}, {'leakage', 'eval', 'train'}]_

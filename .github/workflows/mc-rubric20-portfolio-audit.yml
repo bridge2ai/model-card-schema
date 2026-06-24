@@ -55,15 +55,18 @@ jobs:
 
       - name: Re-run rubric20 hybrid on full portfolio
         run: |
+          # Each invocation is its own gate — if any of the four fails (YAML
+          # parse error, schema regression, missing file), the audit step
+          # exits non-zero loud, instead of silently opening an all-green PR.
           poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
             --input-glob 'src/data/examples/extended/*.yaml' \
             --output-dir data/evaluation/extended/rubric20
           poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
-            --input-glob 'src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml' \
+            --input-glob 'src/data/examples/harmonized/*.yaml' \
             --output-dir data/evaluation/harmonized/rubric20
           poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
-            --input-glob 'src/data/examples/harmonized/climate-forecasting-model-card.yaml' \
-            --output-dir data/evaluation/harmonized/rubric20 || true
+            --input-glob 'src/data/examples/d4d_integration/*.yaml' \
+            --output-dir data/evaluation/harmonized/rubric20
           poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
             --input-glob 'data/model_cards_assistant/*.yaml' \
             --output-dir data/evaluation/hf_hub/rubric20
@@ -77,6 +80,10 @@ jobs:
       - name: Open PR if anything changed
         uses: peter-evans/create-pull-request@v6
         with:
+          # Use a PAT so the resulting PR triggers downstream workflows
+          # (notably mc-rubric20-gate.yml). PRs opened with the default
+          # GITHUB_TOKEN do NOT trigger workflows by GitHub design.
+          token: ${{ secrets.PAT_FOR_PR }}
           commit-message: 'chore(audit): refresh rubric20 portfolio artifacts'
           title: 'Weekly rubric20 portfolio audit'
           body: |

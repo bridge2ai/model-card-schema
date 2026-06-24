@@ -2,7 +2,7 @@
   "rubric": "mc_rubric20",
   "version": "1.0",
   "model_card_file": "data/model_cards_assistant/llama_2_7b_hf_model_card.yaml",
-  "evaluation_timestamp": "2026-06-18T02:47:39.174745+00:00",
+  "evaluation_timestamp": "2026-06-24T19:36:00.265734+00:00",
   "evaluator": {
     "name": "hybrid-heuristic-evaluator",
     "temperature": "N/A",
@@ -182,7 +182,7 @@
     },
     {
       "name": "Performance & FAIRness",
-      "category_score": 14,
+      "category_score": 13,
       "category_max": 17,
       "questions": [
         {
@@ -209,11 +209,11 @@
           "id": 18,
           "name": "Performance Metrics with Slices & CI",
           "score_type": "numeric",
-          "score": 4,
+          "score": 3,
           "max_score": 5,
-          "score_label": "Metrics across multiple slices, no CI",
-          "evidence": "20 metrics, 20 slices",
-          "quality_note": "Metrics across multiple slices, no CI"
+          "score_label": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI",
+          "evidence": "20 metrics, 20 slices; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'Llama 2 pretraining corpus (~2T tokens, publicly available online sources)' ~ 'pretraining corpus size', 'Llama 2 pretraining corpus (~2T tokens, publicly available online sources)' ~ 'Llama-2-7B pretraining (Meta A100-80GB)', 'Llama 2 pretraining corpus (~2T tokens, publicly available online sources)' ~ 'Llama-2-7B pretraining (tCO2eq, 100% offset by Meta)'",
+          "quality_note": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI"
         },
         {
           "id": 19,
@@ -239,10 +239,18 @@
     }
   ],
   "overall_score": {
-    "total_points": 63,
+    "total_points": 62,
     "max_points": 84,
-    "percentage": 75.0,
-    "semantic_deductions": []
+    "percentage": 73.8,
+    "semantic_deductions": [
+      {
+        "question": "Q18",
+        "rule": "train_eval_leakage",
+        "raw_score": 4,
+        "capped_score": 3,
+        "reason": "Training/benchmark dataset overlap: 'Llama 2 pretraining corpus (~2T tokens, publicly available online sources)' ~ 'pretraining corpus size', 'Llama 2 pretraining corpus (~2T tokens, publicly available online sources)' ~ 'Llama-2-7B pretraining (Meta A100-80GB)', 'Llama 2 pretraining corpus (~2T tokens, publicly available online sources)' ~ 'Llama-2-7B pretraining (tCO2eq, 100% offset by Meta)'"
+      }
+    ]
   },
   "assessment": {
     "strengths": [

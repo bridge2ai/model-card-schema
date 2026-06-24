@@ -246,7 +246,19 @@ def detect_train_eval_leakage(d: dict) -> tuple[bool, str]:
                 for b in b_vars:
                     if not b:
                         continue
-                    if t == b or (len(t) >= 4 and t in b) or (len(b) >= 4 and b in t):
+                    # Whole-token equality on either the full normalized name
+                    # or any of its space-separated tokens. Substring
+                    # containment caused false positives on common tokens
+                    # like 'test', 'eval', 'data', 'mnli'.
+                    if t == b:
+                        matched = True
+                        break
+                    t_toks = set(t.split())
+                    b_toks = set(b.split())
+                    shared = t_toks & b_toks
+                    # Require at least one shared token of length >= 8 to
+                    # avoid coincidental matches on short generic words.
+                    if any(len(tok) >= 8 for tok in shared):
                         matched = True
                         break
                 if matched:
@@ -263,19 +275,24 @@ def detect_train_eval_leakage(d: dict) -> tuple[bool, str]:
 
 
 def detect_bias_tradeoff_gap(d: dict) -> tuple[bool, str]:
-    """True if bias_model or bias_output is populated but tradeoffs[] mentions
-    no fairness-adjacent concept.
+    """True if bias_model or bias_output is populated but tradeoffs[] doesn't
+    address a fairness/bias dimension — including the case where tradeoffs is
+    empty entirely.
 
     Mirrors the rubric20-semantic 'bias disclosure -> tradeoffs' consistency
-    rule. Skips when tradeoffs is empty so we don't double-flag the existing
-    base presence rule.
+    rule (`.claude/agents/mc-rubric20-semantic.md` line 42), which caps Q19
+    unconditionally when bias is declared without an accuracy-vs-fairness
+    tradeoff — empty tradeoffs included.
     """
     bias_declared = has_content(d.get("bias_model")) or has_content(d.get("bias_output"))
     if not bias_declared:
         return False, ""
     tradeoffs = get_nested(d, "considerations.tradeoffs") or []
     if not has_content(tradeoffs):
-        return False, ""
+        return True, (
+            "bias_model/bias_output populated but considerations.tradeoffs is "
+            "empty — fairness/bias dimension missing"
+        )
     blob = stringify(tradeoffs)
     if BIAS_TRADEOFF_RE.search(blob):
         return False, ""
@@ -771,14 +788,14 @@ def evaluate_one(path: Path) -> dict[str, Any]:
             score, qmax, label, evidence = scorer(data)
             cap = semantic_caps.get(f"Q{qid}")
             if cap and score > SEMANTIC_CAP:
-                raw = score
+                raw_score = score
                 score = SEMANTIC_CAP
-                label = f"[capped {raw}->{score} by {cap['rule']}] {label}"
+                label = f"[capped {raw_score}->{score} by {cap['rule']}] {label}"
                 evidence = f"{evidence}; semantic_rule={cap['rule']}: {cap['reason']}"
                 semantic_deductions.append({
                     "question": f"Q{qid}",
                     "rule": cap["rule"],
-                    "raw_score": raw,
+                    "raw_score": raw_score,
                     "capped_score": score,
                     "reason": cap["reason"],
                 })

@@ -26,15 +26,24 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-# Rules already encoded in the hybrid evaluator. Lower-case, stem-style keys —
-# we match findings against these via substring on a normalized rule string.
-ENCODED_HYBRID_RULES: dict[str, str] = {
-    "bias_tradeoff_gap": (
-        "bias disclosure tradeoffs"  # matches both r10 and r20 wordings
-    ),
-    "train_eval_leakage": (
-        "benchmark dataset training data"
-    ),
+# Rules already encoded in the hybrid evaluator. Lower-case, stem-style keys.
+# Each value is a list of marker-token sets — any set whose tokens *all*
+# appear in the normalized finding text declares the finding covered.
+# Tokens were chosen by sampling actual JSON `rule` strings the LLM agent
+# emits (see data/evaluation/**/rubric*_semantic/*.json), not the
+# human-readable rule names in the agent .md.
+ENCODED_HYBRID_RULES: dict[str, list[set[str]]] = {
+    "bias_tradeoff_gap": [
+        {"bias_model", "tradeoffs"},
+        {"bias_output", "tradeoffs"},
+        {"bias", "tradeoffs", "fairness"},
+        {"bias", "considerations", "tradeoffs"},
+    ],
+    "train_eval_leakage": [
+        {"benchmark", "dataset", "training"},
+        {"training", "evaluation", "overlap"},
+        {"train", "eval", "leakage"},
+    ],
 }
 
 
@@ -84,7 +93,11 @@ def collect_findings(paths: list[Path]) -> tuple[list[Finding], list[Deduction]]
         except Exception as e:
             print(f"  warn: could not parse {path}: {e}", file=sys.stderr)
             continue
-        rubric = "rubric20" if "rubric20" in str(path) else "rubric10"
+        # Classify by the canonical `rubric` field in the JSON, not by path.
+        # Path-substring matching collides on filenames like
+        # `*_llm_rubric20_evaluation.json` that may live in a `rubric10_*` dir.
+        rubric_field = str(doc.get("rubric") or "")
+        rubric = "rubric20" if "rubric20" in rubric_field else "rubric10"
         card = card_name_from(path)
         sf = doc.get("semantic_findings") or {}
         for cat_key, fcat in (
@@ -153,12 +166,15 @@ def group_findings(findings: list[Finding]) -> list[Group]:
 
 def hybrid_coverage(group: Group) -> str | None:
     """Return the encoded rule name if this group is already covered, else None."""
-    blob = normalize(group.rule_or_field + " " + (group.examples[0].issue if group.examples else ""))
-    for rule_name, marker in ENCODED_HYBRID_RULES.items():
-        marker_norm = normalize(marker)
-        # Check all words of the marker appear in the finding's text
-        if all(w in blob for w in marker_norm.split()):
-            return rule_name
+    blob_words = set(
+        normalize(
+            group.rule_or_field + " " + (group.examples[0].issue if group.examples else "")
+        ).split()
+    )
+    for rule_name, marker_sets in ENCODED_HYBRID_RULES.items():
+        for marker in marker_sets:
+            if marker <= blob_words:
+                return rule_name
     return None
 
 

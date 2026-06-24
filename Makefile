@@ -201,12 +201,16 @@ endif
 	$(RUN) python scripts/render_evaluation_html.py --input-glob '$(EVAL_JSONS)' --output $(BADGE_DIR) --badge --title "Model Card quality badges"
 
 # =========================================================================
-# Portfolio: regenerate all dashboards + badges from the canonical eval dirs
+# Portfolio: regenerate dashboards + badges from existing eval JSONs
 # =========================================================================
-# One-stop target — globs across data/evaluation/{extended,harmonized,hf_hub,fixtures}/{rubric10,rubric20}/
-# and rewrites portfolio.html, portfolio_compare.html, and the badges/ dir.
-# Use this any time an eval JSON has been re-run so the README badges and
-# dashboards stay in sync.
+# Re-renders portfolio.html, portfolio_compare.html, and the badges/ dir
+# from whatever eval JSONs currently exist under
+# data/evaluation/{extended,harmonized,hf_hub,fixtures}/{rubric10,rubric20}/.
+#
+# **Does NOT re-run the evaluator** — it only renders. To refresh the
+# scoring numbers first, run the evaluator (e.g. `make evaluate-rubric20`
+# or the per-card script invocation) and THEN run this target to push the
+# new scores into the dashboards + badges.
 #
 # Override defaults if you've staged evals somewhere else:
 #   make compare-portfolio PORTFOLIO_OUT_DIR=tmp/preview-portfolio
