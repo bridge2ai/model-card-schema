@@ -107,10 +107,15 @@ class BiasTradeoffGapTests(unittest.TestCase):
         flagged, _ = evaluator.detect_bias_tradeoff_gap(card)
         self.assertFalse(flagged)
 
-    def test_bias_declared_no_tradeoffs_skips_to_avoid_double_flag(self):
+    def test_bias_declared_no_tradeoffs_flags_as_gap(self):
+        """Per the rubric20-semantic agent spec, an empty tradeoffs[] when
+        bias_model/bias_output is declared IS a gap — the cap fires
+        unconditionally. (Previous behavior deferred to the base presence
+        rule; PR #27 review flagged that as too lenient.)"""
         card = {"bias_model": "Inherits ImageNet demographic skew"}
-        flagged, _ = evaluator.detect_bias_tradeoff_gap(card)
-        self.assertFalse(flagged, "Should defer to base Q19 presence rule")
+        flagged, reason = evaluator.detect_bias_tradeoff_gap(card)
+        self.assertTrue(flagged, "Should flag empty tradeoffs as bias-vs-fairness gap")
+        self.assertIn("empty", reason.lower())
 
     def test_bias_declared_tradeoffs_omit_fairness_flags_gap(self):
         card = {

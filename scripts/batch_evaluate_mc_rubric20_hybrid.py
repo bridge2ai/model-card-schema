@@ -147,8 +147,10 @@ def _dataset_name_variants(name: Any) -> list[str]:
     """Yield normalized variants of `name` for overlap matching.
 
     Returns the normalized full string, the parens-stripped variant, and each
-    parenthetical's inner content normalized. This captures cases like
-    'Test set (E3SM v2)' sharing 'e3sm v2' with 'E3SM v2 High-Resolution'.
+    parenthetical's inner content normalized. For the parens content also
+    emit a version-tail-preserving form so 'Test set (E3SM v2)' yields both
+    'e3sm' and 'e3sm v2' — the version-bearing variant matches against
+    'E3SM v2 High-Resolution' under the substring rule.
     """
     raw = stringify(name)
     out: list[str] = []
@@ -163,7 +165,12 @@ def _dataset_name_variants(name: Any) -> list[str]:
     paren_stripped = _PARENS_RE.sub("", raw)
     _add(_normalize_dataset_name(paren_stripped))
     for m in _PARENS_RE.finditer(raw):
-        _add(_normalize_dataset_name(m.group(1)))
+        inner = m.group(1)
+        _add(_normalize_dataset_name(inner))
+        # Also keep the parens content WITHOUT version stripping, so a name
+        # like 'e3sm v2' (7 chars) survives instead of being collapsed to
+        # 'e3sm' (4 chars, under the 6-char substring threshold).
+        _add(re.sub(r"\s+", " ", stringify(inner)).strip().lower())
     return out
 
 
@@ -246,19 +253,18 @@ def detect_train_eval_leakage(d: dict) -> tuple[bool, str]:
                 for b in b_vars:
                     if not b:
                         continue
-                    # Whole-token equality on either the full normalized name
-                    # or any of its space-separated tokens. Substring
-                    # containment caused false positives on common tokens
-                    # like 'test', 'eval', 'data', 'mnli'.
+                    # Exact-equality always matches (e.g. 'GLUE' == 'GLUE').
+                    # Otherwise allow substring containment but require
+                    # the matched side to be at least 6 chars long — that
+                    # filters out 4-char common tokens ('test', 'eval',
+                    # 'data', 'val ', 'mnli', 'train') while still catching
+                    # distinctive partial matches like 'e3sm v2' (7 chars)
+                    # inside 'e3sm v2 high-resolution', or 'imagenet' (8)
+                    # inside 'imagenet-1k validation'.
                     if t == b:
                         matched = True
                         break
-                    t_toks = set(t.split())
-                    b_toks = set(b.split())
-                    shared = t_toks & b_toks
-                    # Require at least one shared token of length >= 8 to
-                    # avoid coincidental matches on short generic words.
-                    if any(len(tok) >= 8 for tok in shared):
+                    if (len(t) >= 6 and t in b) or (len(b) >= 6 and b in t):
                         matched = True
                         break
                 if matched:
