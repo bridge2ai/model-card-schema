@@ -201,6 +201,20 @@ endif
 	$(RUN) python scripts/render_evaluation_html.py --input-glob '$(EVAL_JSONS)' --output $(BADGE_DIR) --badge --title "Model Card quality badges"
 
 # =========================================================================
+# Human-readable HTML render of a Model Card YAML
+# =========================================================================
+# Writes <input>.html next to the YAML by default. Pass --output for custom.
+#   make render-card MC_FILE=data/model_cards_assistant/foo_model_card.yaml
+#   make render-card MC_FILE='data/model_cards_assistant/*.yaml'  # globs work
+render-card:
+ifndef MC_FILE
+	$(error MC_FILE is required: make render-card MC_FILE=path/to/card.yaml)
+endif
+	$(RUN) python src/html/human_readable_renderer.py $(MC_FILE)
+
+.PHONY: render-card
+
+# =========================================================================
 # Portfolio: regenerate dashboards + badges from existing eval JSONs
 # =========================================================================
 # Re-renders portfolio.html, portfolio_compare.html, and the badges/ dir
