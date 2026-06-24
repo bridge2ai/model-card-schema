@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080"
+     font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow-exc" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#047857"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1920" height="1080" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="960" y="100" text-anchor="middle" font-size="56" font-weight="800" fill="#064e3b">
+    Zoom · D4D Harmonization &amp; External References
+  </text>
+  <text x="960" y="160" text-anchor="middle" font-size="26" fill="#475569">
+    Lightweight inline fields → ID + URI references to comprehensive D4D instances
+  </text>
+
+  <!-- Frame -->
+  <rect x="100" y="220" width="1720" height="700" rx="22" ry="22"
+        fill="#ecfdf5" stroke="#047857" stroke-width="4"/>
+
+  <!-- Left column: two schemas -->
+  <rect x="160" y="270" width="500" height="280" rx="16" ry="16"
+        fill="#ffffff" stroke="#047857" stroke-width="3"/>
+  <text x="410" y="320" text-anchor="middle" font-size="30" font-weight="800" fill="#064e3b">Two schemas</text>
+  <text x="410" y="370" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">model_card_schema.yaml</text>
+  <text x="410" y="400" text-anchor="middle" font-size="20" fill="#065f46">base · 34 classes · inline fields</text>
+  <text x="410" y="450" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">…_d4dharmonized.yaml</text>
+  <text x="410" y="480" text-anchor="middle" font-size="20" fill="#065f46">+ external refs</text>
+  <text x="410" y="510" text-anchor="middle" font-size="20" fill="#065f46">+ provenance metadata</text>
+
+  <!-- Left column: examples -->
+  <rect x="160" y="580" width="500" height="280" rx="16" ry="16"
+        fill="#ffffff" stroke="#047857" stroke-width="3"/>
+  <text x="410" y="630" text-anchor="middle" font-size="30" font-weight="800" fill="#064e3b">Worked examples</text>
+  <text x="410" y="680" text-anchor="middle" font-size="20" fill="#065f46">src/data/examples/</text>
+  <text x="410" y="715" text-anchor="middle" font-size="20" fill="#065f46">d4d_integration/climate-forecasting</text>
+  <text x="410" y="745" text-anchor="middle" font-size="20" fill="#065f46">harmonized/sentiment-classifier</text>
+  <text x="410" y="800" text-anchor="middle" font-size="18" fill="#065f46" font-style="italic">D4D_HARMONIZATION.md</text>
+  <text x="410" y="828" text-anchor="middle" font-size="18" fill="#065f46" font-style="italic">MIGRATION_GUIDE.md</text>
+
+  <!-- Middle column: refs replacement -->
+  <rect x="710" y="270" width="500" height="590" rx="16" ry="16"
+        fill="#ffffff" stroke="#047857" stroke-width="3"/>
+  <text x="960" y="320" text-anchor="middle" font-size="30" font-weight="800" fill="#064e3b">Field → reference</text>
+
+  <text x="960" y="395" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">owner / Contributor</text>
+  <text x="960" y="425" text-anchor="middle" font-size="24" fill="#047857">↓</text>
+  <text x="960" y="455" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">CreatorReference  →  D4D Person</text>
+
+  <text x="960" y="525" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">dataSet  (7 fields)</text>
+  <text x="960" y="555" text-anchor="middle" font-size="24" fill="#047857">↓</text>
+  <text x="960" y="585" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">DatasetReference  →  D4D Dataset  (60+)</text>
+
+  <text x="960" y="655" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">funding_source  (str)</text>
+  <text x="960" y="685" text-anchor="middle" font-size="24" fill="#047857">↓</text>
+  <text x="960" y="715" text-anchor="middle" font-size="22" font-weight="700" fill="#065f46">GrantReference  →  D4D Grant</text>
+
+  <text x="960" y="790" text-anchor="middle" font-size="18" fill="#065f46" font-style="italic">references = plain id + uri pairs</text>
+  <text x="960" y="820" text-anchor="middle" font-size="18" fill="#065f46" font-style="italic">no schema imports — clean separation</text>
+
+  <!-- Right column: cross-repo flow -->
+  <rect x="1260" y="270" width="500" height="590" rx="16" ry="16"
+        fill="#d1fae5" stroke="#047857" stroke-width="3"/>
+  <text x="1510" y="320" text-anchor="middle" font-size="30" font-weight="800" fill="#064e3b">Cross-repo flow</text>
+
+  <!-- Model Card -->
+  <rect x="1320" y="370" width="380" height="110" rx="12" ry="12"
+        fill="#ffffff" stroke="#047857" stroke-width="3"/>
+  <text x="1510" y="410" text-anchor="middle" font-size="24" font-weight="800" fill="#064e3b">Model Card YAML</text>
+  <text x="1510" y="440" text-anchor="middle" font-size="18" fill="#065f46">model-card-schema repo</text>
+  <text x="1510" y="465" text-anchor="middle" font-size="16" fill="#065f46" font-style="italic">cites refs by URI</text>
+
+  <!-- arrow -->
+  <line x1="1510" y1="490" x2="1510" y2="540" stroke="#047857" stroke-width="5" marker-end="url(#arrow-exc)"/>
+  <text x="1535" y="520" font-size="16" fill="#064e3b">references</text>
+
+  <!-- D4D instance -->
+  <rect x="1320" y="550" width="380" height="110" rx="12" ry="12"
+        fill="#ffffff" stroke="#047857" stroke-width="3"/>
+  <text x="1510" y="590" text-anchor="middle" font-size="24" font-weight="800" fill="#064e3b">D4D YAML instance</text>
+  <text x="1510" y="620" text-anchor="middle" font-size="18" fill="#065f46">data-sheets-schema repo</text>
+  <text x="1510" y="645" text-anchor="middle" font-size="16" fill="#065f46" font-style="italic">Person · Dataset · Grant</text>
+
+  <!-- reuse note -->
+  <rect x="1320" y="690" width="380" height="110" rx="12" ry="12"
+        fill="#ffffff" stroke="#047857" stroke-width="3" stroke-dasharray="5 4"/>
+  <text x="1510" y="725" text-anchor="middle" font-size="22" font-weight="700" fill="#064e3b">Reusable</text>
+  <text x="1510" y="755" text-anchor="middle" font-size="18" fill="#065f46">one datasheet,</text>
+  <text x="1510" y="780" text-anchor="middle" font-size="18" fill="#065f46">many model cards</text>
+
+  <!-- Bottom note -->
+  <text x="960" y="990" text-anchor="middle" font-size="24" fill="#64748b" font-style="italic">
+    Replaces shallow inline metadata with FAIR, governance-grade dataset / creator / grant documentation
+  </text>
+</svg>

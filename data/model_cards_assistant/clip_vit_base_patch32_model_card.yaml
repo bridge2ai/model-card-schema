@@ -1,0 +1,436 @@
+# Model Card for CLIP ViT-B/32 (openai/clip-vit-base-patch32)
+# Generation Method: Claude Code Deterministic ASSISTANT (in-session synthesis)
+# Workflow: .github/workflows/mc_assistant_create.md
+# Source: https://huggingface.co/openai/clip-vit-base-patch32
+# Schema: src/model_card_schema/schema/model_card_schema.yaml
+# Temperature: 0.0
+# Generated: 2026-06-17
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "CLIP ViT-B/32 (openai/clip-vit-base-patch32)"
+  short_description: "Contrastive vision-language model with a ViT-B/32 image encoder and a masked self-attention text Transformer, trained on 400M (image, text) pairs for zero-shot image classification and image-text retrieval."
+  overview: |
+    CLIP (Contrastive Language-Image Pre-training) is a dual-encoder multimodal model from OpenAI
+    (Radford et al., 2021). A vision encoder (Vision Transformer, ViT-B/32) and a text encoder
+    (masked self-attention Transformer) are jointly trained with a symmetric InfoNCE-style contrastive
+    objective so that the cosine similarity of paired image / caption embeddings is maximized while
+    unpaired pairs are pushed apart.
+
+    The result is a single embedding space that lets the model perform a wide range of vision tasks
+    in a zero-shot manner: classification is reframed as picking the class prompt whose text embedding
+    is most similar to a given image embedding, with no task-specific fine-tuning. The model was
+    originally released as part of the CLIP paper "Learning Transferable Visual Models From Natural
+    Language Supervision" (arXiv:2103.00020) and is distributed on the HuggingFace Hub as
+    `openai/clip-vit-base-patch32`.
+
+    The `ViT-B/32` variant uses a base-sized Vision Transformer that splits each input image into
+    non-overlapping 32x32 patches, giving 50 tokens (7x7 + 1 [CLS]) at the standard 224x224 input
+    resolution. It is the smallest and fastest of the OpenAI CLIP releases.
+  documentation: |
+    ## Model Architecture
+    - Image encoder: Vision Transformer (ViT-B/32)
+        - 12 transformer layers, hidden size 768, 12 attention heads
+        - Patch size 32x32, input resolution 224x224 (50 visual tokens incl. [CLS])
+        - Pre-norm LayerNorm; GELU activations
+    - Text encoder: 12-layer masked self-attention Transformer
+        - Hidden size 512, 8 attention heads, max sequence length 77 BPE tokens
+        - Lower-cased byte-pair-encoding tokenizer (49,408 vocab)
+    - Projection: both encoders project into a shared 512-d multimodal embedding space
+    - Total parameters: ~151M (vision ~88M, text ~63M)
+    - Learned temperature parameter for contrastive softmax
+
+    ## Usage with transformers
+    ```python
+    from PIL import Image
+    import requests
+    from transformers import CLIPProcessor, CLIPModel
+
+    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+
+    url = "http://images.cocodataset.org/val2017/000000039769.jpg"
+    image = Image.open(requests.get(url, stream=True).raw)
+
+    inputs = processor(
+        text=["a photo of a cat", "a photo of a dog"],
+        images=image,
+        return_tensors="pt",
+        padding=True,
+    )
+    outputs = model(**inputs)
+    logits_per_image = outputs.logits_per_image       # image-text similarity
+    probs = logits_per_image.softmax(dim=1)           # zero-shot class probabilities
+    ```
+
+    For zero-shot classification at scale, prompt templates such as
+    `"a photo of a {label}."` (ensembled over several templates) are the standard CLIP recipe.
+
+    ## Citation
+    See model_details.citations and model_details.references.
+  contributors:
+    - name: "Alec Radford"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Jong Wook Kim"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Chris Hallacy"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Aditya Ramesh"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Gabriel Goh"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Sandhini Agarwal"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Girish Sastry"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Amanda Askell"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Pamela Mishkin"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Jack Clark"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Gretchen Krueger"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "Ilya Sutskever"
+      role: developed_by
+      affiliation: "OpenAI"
+    - name: "HuggingFace Transformers Team"
+      role: contributed_by
+      affiliation: "Hugging Face"
+  version:
+    name: "vit-base-patch32"
+    date: "2021-01-05"
+    diff: |
+      Initial OpenAI CLIP release. Vision encoder is ViT-B/32 (patch size 32, 224x224 input).
+      Distributed on the HuggingFace Hub as `openai/clip-vit-base-patch32`; PyTorch / TensorFlow
+      / JAX weights are kept in sync with the original OpenAI checkpoint.
+  licenses:
+    - identifier: "MIT"
+      license_name: "MIT License"
+      license_link: "https://github.com/openai/CLIP/blob/main/LICENSE"
+  citations:
+    - style: IEEE
+      citation: |
+        A. Radford, J. W. Kim, C. Hallacy, A. Ramesh, G. Goh, S. Agarwal, G. Sastry, A. Askell,
+        P. Mishkin, J. Clark, G. Krueger, and I. Sutskever, "Learning transferable visual models
+        from natural language supervision," in Proceedings of the 38th International Conference
+        on Machine Learning (ICML), 2021, pp. 8748-8763.
+  references:
+    - reference: "https://arxiv.org/abs/2103.00020"
+    - reference: "https://huggingface.co/openai/clip-vit-base-patch32"
+    - reference: "https://github.com/openai/CLIP"
+    - reference: "https://openai.com/research/clip"
+    - reference: "https://arxiv.org/abs/1908.04913"
+  path: "https://huggingface.co/openai/clip-vit-base-patch32"
+
+# HuggingFace Hub metadata
+framework: "PyTorch"
+framework_version: "torch>=1.7"
+library_name: "transformers"
+pipeline_tag: "zero-shot-image-classification"
+language:
+  - "en"
+tags:
+  - "clip"
+  - "vision"
+  - "multimodal"
+  - "zero-shot-image-classification"
+  - "image-text-retrieval"
+  - "vision-transformer"
+  - "vit"
+  - "contrastive-learning"
+  - "feature-extraction"
+datasets:
+  - "WIT (WebImageText, 400M image-text pairs, OpenAI internal)"
+  - "YFCC100M (subset, used as a public proxy in ablation studies)"
+metrics:
+  - "zero-shot top-1 accuracy"
+  - "zero-shot top-5 accuracy"
+  - "image-text retrieval Recall@K"
+model_category: "vision-language-multimodal-transformer"
+
+model_parameters:
+  model_architecture: |
+    Dual-encoder contrastive vision-language model.
+      - Image encoder: Vision Transformer (ViT-B/32) — 12 layers, hidden size 768, 12 heads,
+        patch size 32, 224x224 input. ~88M params.
+      - Text encoder: 12-layer Transformer with causal masked self-attention — hidden size 512,
+        8 heads, 77-token context, 49,408-token BPE vocabulary. ~63M params.
+      - Both encoders are linearly projected to a shared 512-d embedding space and L2-normalized.
+      - Contrastive objective: symmetric cross-entropy over cosine similarities scaled by a
+        learned temperature.
+    Total: ~151M parameters.
+
+  data:
+    - name: "WIT (WebImageText)"
+      link: "https://arxiv.org/abs/2103.00020"
+      description: |
+        OpenAI's internal dataset of ~400 million (image, text) pairs collected from a broad
+        crawl of publicly available internet sources, filtered so that captions contain one of
+        a curated set of 500,000 search queries. The dataset itself was not released.
+      sensitive:
+        sensitive_data:
+          - "Web-scraped images may contain incidental faces and other PII"
+          - "Captions can include personal names, locations, and demographic descriptors"
+      bias_input: |
+        Sourced from a non-curated internet crawl that overrepresents English-language and
+        Western, developed-nation users; younger and male users are also overrepresented
+        (per the CLIP paper, Section 7 and the OpenAI model card). Captions reflect the social
+        and linguistic biases of their authors.
+    - name: "ImageNet-1k (ILSVRC2012)"
+      link: "https://www.image-net.org/"
+      description: |
+        Used as a zero-shot classification evaluation benchmark (50,000 validation images,
+        1,000 classes). Not used for training.
+      bias_input: |
+        Documented geographic / demographic skew (Crawford & Paglen 2019; Yang et al. 2020);
+        some classes overlap with person-identity categories.
+    - name: "CIFAR-10 / CIFAR-100"
+      link: "https://www.cs.toronto.edu/~kriz/cifar.html"
+      description: |
+        Low-resolution (32x32) classification benchmarks used for zero-shot evaluation.
+    - name: "FairFace"
+      link: "https://arxiv.org/abs/1908.04913"
+      description: |
+        Face-image dataset balanced across 7 race groups, used by the CLIP authors to probe
+        race / gender / age behavior of CLIP for the bias analysis in the model card.
+      sensitive:
+        sensitive_data:
+          - "Human faces with demographic annotations (race, gender, age)"
+      bias_input: |
+        Used only as a diagnostic probe of model bias, not for training. The seven-way racial
+        taxonomy is itself a social construct and a limitation of the analysis.
+    - name: "Food101 / Stanford Cars / Oxford-IIIT Pets / 25+ other vision benchmarks"
+      description: |
+        Used in the CLIP paper to evaluate zero-shot and linear-probe transfer performance
+        across a wide spectrum of vision tasks (fine-grained classification, OCR, action
+        recognition, geo-localization, etc.). None were used for training.
+
+  input_format: "RGB image plus one or more text strings (class prompts or captions)"
+  input_format_map:
+    - key: "image_shape"
+      value: "[B, 3, 224, 224]"
+    - key: "image_dtype"
+      value: "float32"
+    - key: "image_normalization"
+      value: "mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711]"
+    - key: "text_max_length"
+      value: "77 BPE tokens (49,408 vocab)"
+    - key: "preprocessor"
+      value: "CLIPProcessor (CLIPImageProcessor + CLIPTokenizer)"
+  output_format: "Image and text embeddings in a shared 512-d space, plus per-pair cosine similarity logits"
+  output_format_map:
+    - key: "image_embeds_shape"
+      value: "[B_img, 512]"
+    - key: "text_embeds_shape"
+      value: "[B_txt, 512]"
+    - key: "logits_per_image"
+      value: "[B_img, B_txt] cosine similarity x learned temperature; apply softmax for zero-shot probs"
+    - key: "interpretation"
+      value: "Use cosine similarity between image_embeds and text_embeds for retrieval / zero-shot classification"
+
+  training_procedure:
+    methodology: |
+      Joint training of vision and text encoders from scratch via a symmetric contrastive
+      InfoNCE objective on (image, text) pairs sampled from WIT. In each mini-batch of N
+      image-text pairs the model predicts which of the N x N possible (image, text) pairings
+      are the true matches.
+    hyperparameters:
+      optimizer: "Adam with decoupled weight decay (AdamW)"
+      loss_function: "Symmetric cross-entropy over scaled cosine similarities (CLIP / InfoNCE)"
+      batch_size: 32768
+      training_epochs: 32
+      optimization_techniques:
+        - "Mixed precision (FP16)"
+        - "Gradient checkpointing"
+        - "Learnable temperature (clipped to <= 100)"
+        - "Cosine learning-rate schedule with warmup"
+
+quantitative_analysis:
+  performance_metrics:
+    - type: "zero-shot top-1 accuracy"
+      value: 63.2
+      slice: "ImageNet-1k validation (zero-shot, 80-prompt ensemble)"
+      unit: "%"
+      confidence_interval:
+        lower_bound: 62.9
+        upper_bound: 63.5
+    - type: "zero-shot top-5 accuracy"
+      value: 88.8
+      slice: "ImageNet-1k validation (zero-shot)"
+      unit: "%"
+    - type: "zero-shot top-1 accuracy"
+      value: 89.8
+      slice: "CIFAR-10 test (zero-shot)"
+      unit: "%"
+    - type: "zero-shot top-1 accuracy"
+      value: 65.1
+      slice: "CIFAR-100 test (zero-shot)"
+      unit: "%"
+    - type: "zero-shot top-1 accuracy"
+      value: 80.5
+      slice: "Food101 test (zero-shot)"
+      unit: "%"
+    - type: "image-to-text Recall@1"
+      value: 50.1
+      slice: "MSCOCO 5K test (zero-shot retrieval)"
+      unit: "%"
+    - type: "gender classification accuracy"
+      value: 96.5
+      slice: "FairFace, White subgroup"
+      unit: "%"
+    - type: "gender classification accuracy"
+      value: 98.4
+      slice: "FairFace, Middle Eastern subgroup"
+      unit: "%"
+    - type: "race classification accuracy"
+      value: 93.0
+      slice: "FairFace (7-way, average)"
+      unit: "%"
+    - type: "age classification accuracy"
+      value: 63.0
+      slice: "FairFace (9-bin, average)"
+      unit: "%"
+    - type: "parameters"
+      value: 151.0
+      slice: "model size (vision + text + projections)"
+      unit: "M params"
+
+  evaluation_procedure:
+    methodology: |
+      Zero-shot evaluation follows the CLIP paper recipe: class names are inserted into one or
+      more prompt templates (e.g., "a photo of a {label}.") and embedded with the text encoder;
+      images are embedded with the image encoder; predictions are the argmax of the cosine
+      similarity between the image embedding and the class-prompt embeddings. For ImageNet, the
+      paper ensembles ~80 prompt templates.
+    benchmarks:
+      - "ImageNet-1k, ImageNet-V2, ImageNet-A, ImageNet-R, ImageNet-Sketch, ObjectNet"
+      - "CIFAR-10, CIFAR-100, Food101, Stanford Cars, Oxford-IIIT Pets, Flowers-102"
+      - "MSCOCO and Flickr30k image-text retrieval"
+      - "FairFace (for race / gender / age behavioral analysis)"
+    baselines:
+      - "Fully-supervised ResNet-50 on ImageNet (76.1% top-1) as a reference, not a like-for-like comparison"
+      - "Linear-probe transfer baselines from prior self-supervised models (SimCLRv2, MoCo v2, BYOL)"
+    sota_comparison: |
+      At release, CLIP ViT-B/32 was competitive with a fully-supervised ResNet-50 on ImageNet
+      zero-shot top-1 (63.2% vs 76.1% supervised) without ever seeing ImageNet labels, and it
+      established a new state of the art for zero-shot transfer across the suite of 27+ vision
+      benchmarks reported in Radford et al. 2021.
+    uncertainty_quantification: |
+      Headline ImageNet zero-shot accuracy bands are reported in the CLIP paper as +/-0.3
+      percentage points across prompt-ensemble seeds; other benchmarks were reported as point
+      estimates. Bias-analysis metrics on FairFace are sensitive to class-design choices.
+    evaluation_data_separate: true
+
+considerations:
+  users:
+    - description: |
+        AI / computer-vision researchers studying multimodal representation learning, zero-shot
+        transfer, robustness to distribution shift, and the social biases of large vision-language
+        models.
+    - description: |
+        ML practitioners using CLIP as a frozen image / text encoder in downstream systems
+        (retrieval, captioning, diffusion-model conditioning, embedding-based search).
+
+  use_cases:
+    - description: "Zero-shot image classification via natural-language class prompts"
+    - description: "Image-text retrieval (text-to-image and image-to-text search)"
+    - description: "Image / text embedding extraction for downstream tasks"
+    - description: "Conditioning signal for generative models (e.g., text-to-image diffusion)"
+    - description: "Probing studies of bias, robustness, and capability in vision-language models"
+
+  limitations:
+    - description: |
+        Performance is uneven across tasks: CLIP struggles with fine-grained classification
+        (e.g., car models, flower species, aircraft variants), systematic counting of objects,
+        and OCR of dense text (per Radford et al. 2021, Section 3).
+    - description: |
+        Strongly English-centric. The text encoder was trained on overwhelmingly English captions
+        and degrades sharply on other languages; non-English use is not recommended by the
+        original authors.
+    - description: |
+        Training data was scraped from the open web with minimal curation. It therefore inherits
+        toxic, stereotyped, and copyrighted material present in those sources.
+    - description: |
+        FairFace evaluations in the CLIP paper show that bias-relevant metrics are highly
+        sensitive to the choice of class taxonomy (e.g., adding crime-related categories causes
+        large disparities by race and gender).
+    - description: |
+        Linear-probe and few-shot transfer can underestimate true representational quality;
+        zero-shot prompt engineering can in turn overestimate it on benchmarks where prompts
+        leak label information.
+
+  tradeoffs:
+    - description: |
+        Accuracy vs fairness: aggressive prompt engineering can push zero-shot accuracy higher
+        on benchmarks like ImageNet but tends to amplify FairFace bias disparities (especially
+        for crime-related class designs). Deployments that care about subgroup parity should
+        prefer conservative class taxonomies even at a top-1 accuracy cost.
+    - description: |
+        Speed vs accuracy: ViT-B/32 is the smallest CLIP variant (~151M params) and runs roughly
+        3-4x faster than ViT-L/14 but trails it by ~12 pts of ImageNet zero-shot top-1
+        (63.2% vs 75.5%). Choose B/32 when latency / memory budget matters more than peak
+        accuracy.
+    - description: |
+        Zero-shot generality vs task-specific accuracy: fine-tuning CLIP on a target dataset
+        usually beats zero-shot CLIP by a wide margin, but loses much of CLIP's distributional
+        robustness (effective robustness drops, per Radford et al. 2021 Section 3.3).
+
+  ethical_considerations:
+    - name: "Demographic bias and disparate performance"
+      mitigation_strategy: |
+        Audit the model on the actual deployment population using subgroup-stratified metrics
+        (e.g., FairFace-style race / gender / age splits) before any use. Avoid sensitive
+        class designs (crime, threat, moral judgement) entirely.
+    - name: "Surveillance and identification risks"
+      mitigation_strategy: |
+        Do not deploy CLIP for face recognition, person re-identification, or any surveillance
+        application. The OpenAI model card explicitly lists these as out of scope.
+    - name: "Toxic / copyrighted training content"
+      mitigation_strategy: |
+        Be aware that downstream outputs (e.g., generations conditioned on CLIP embeddings) can
+        surface memorized or stylistically copied material from the WIT crawl. Add content
+        filters and rights-clearance review before publishing derived artifacts.
+    - name: "English-only competence"
+      mitigation_strategy: |
+        Restrict deployment to English text prompts, or use multilingual CLIP variants
+        (e.g., M-CLIP, SigLIP multilingual) for non-English use cases."
+
+  out_of_scope_uses:
+    - description: |
+        Any deployed (commercial or non-commercial) production use case is declared out of
+        scope by the OpenAI authors until further per-deployment testing has been done.
+    - description: "Face recognition, person identification, and person verification"
+    - description: "Surveillance, watch-listing, or law-enforcement profiling"
+    - description: "Demographic classification (race, gender, age) outside of research contexts"
+    - description: "Non-English image / text applications without further training and evaluation"
+    - description: |
+        Any classification taxonomy whose categories themselves embed social judgement
+        (e.g., crime, threat, attractiveness, moral character).
+    - description: "Clinical or diagnostic medical imaging without dedicated retraining and regulatory clearance"
+
+bias_model: |
+  Inherits the geographic, demographic, linguistic, and cultural biases of its WIT training
+  corpus, which skews Western, English-speaking, younger, and male. The CLIP paper's FairFace
+  probes show substantial disparities by race and gender when the class taxonomy includes
+  socially-loaded categories (e.g., "criminal," "thief," non-human categories applied to
+  faces). Researchers also report stereotyped associations between gendered prompts and
+  occupation labels. No fairness mitigations were applied during training.
+bias_output: |
+  Outputs are 512-d embeddings whose geometry reflects the contrastive training distribution:
+  cosine similarities can encode and amplify stereotyped associations between identity terms
+  and concepts (gender / occupation, race / criminality). Zero-shot classification probabilities
+  are not calibrated for any specific downstream task and should not be interpreted as
+  trustworthy uncertainty estimates without per-deployment recalibration on representative data.

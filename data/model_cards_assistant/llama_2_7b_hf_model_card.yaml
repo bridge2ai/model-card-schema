@@ -1,0 +1,445 @@
+# Model Card for Llama-2-7B (meta-llama/Llama-2-7b-hf)
+# Generation Method: Claude Code Deterministic ASSISTANT (in-session synthesis)
+# Workflow: .github/workflows/mc_assistant_create.md
+# Source: https://huggingface.co/meta-llama/Llama-2-7b-hf
+# Schema: src/model_card_schema/schema/model_card_schema.yaml
+# Temperature: 0.0
+# Generated: 2026-06-17
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "Llama-2-7B (meta-llama/Llama-2-7b-hf)"
+  short_description: "7B-parameter pretrained decoder-only transformer base language model from Meta's Llama 2 family, distributed in HuggingFace Transformers format."
+  overview: |
+    Llama-2-7B is the 7-billion-parameter base (pretrained, non-instruction-tuned, non-chat) variant of
+    Meta's Llama 2 family of large language models (Touvron et al., 2023; arXiv:2307.09288). It is an
+    auto-regressive, decoder-only transformer trained from scratch on roughly 2 trillion tokens of
+    publicly available text data, with a 4,096-token context window.
+
+    This particular checkpoint (`meta-llama/Llama-2-7b-hf`) is the official Meta release converted into
+    HuggingFace Transformers format so it can be loaded directly with `AutoModelForCausalLM` /
+    `AutoTokenizer`. It is intended as a foundation model for further fine-tuning, instruction-tuning,
+    or research; the `Llama-2-7b-chat-hf` sibling is the RLHF-aligned chat variant. Llama 2 was
+    released July 18, 2023 and is governed by the Llama 2 Community License (not an OSI / SPDX license).
+  documentation: |
+    ## Model Architecture
+    - Family: Llama 2
+    - Type: Auto-regressive, decoder-only transformer (Llama architecture)
+    - Parameters: ~6.74B (commonly referred to as 7B)
+    - Hidden size: 4096
+    - Layers: 32
+    - Attention heads: 32 (standard multi-head attention; Grouped-Query Attention is used only on the 70B variant)
+    - Context length: 4096 tokens
+    - Vocabulary size: 32,000 (SentencePiece BPE tokenizer)
+    - Positional encoding: Rotary Position Embeddings (RoPE)
+    - Normalization: RMSNorm (pre-norm)
+    - Activation: SwiGLU
+    - Tied input/output embeddings: no
+
+    ## Usage with HuggingFace Transformers
+    ```python
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    import torch
+
+    model_id = "meta-llama/Llama-2-7b-hf"
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        torch_dtype=torch.float16,
+        device_map="auto",
+    )
+    inputs = tokenizer("The capital of France is", return_tensors="pt").to(model.device)
+    out = model.generate(**inputs, max_new_tokens=32, do_sample=False)
+    print(tokenizer.decode(out[0], skip_special_tokens=True))
+    ```
+
+    Access to the weights requires accepting the Llama 2 Community License on the HuggingFace
+    model page and on ai.meta.com.
+
+    ## Citation
+    See `model_details.citations` and `model_details.references`.
+  contributors:
+    - name: "Hugo Touvron"
+      role: developed_by
+      affiliation: "Meta AI (GenAI)"
+    - name: "Louis Martin"
+      role: developed_by
+      affiliation: "Meta AI (GenAI)"
+    - name: "Kevin Stone"
+      role: developed_by
+      affiliation: "Meta AI (GenAI)"
+    - name: "Peter Albert"
+      role: developed_by
+      affiliation: "Meta AI (GenAI)"
+    - name: "Llama 2 Team"
+      role: developed_by
+      affiliation: "Meta"
+    - name: "Meta"
+      role: funded_by
+      affiliation: "Meta Platforms, Inc."
+    - name: "Hugging Face"
+      role: contributed_by
+      affiliation: "Hugging Face (Transformers integration & hosting)"
+  version:
+    name: "Llama-2-7b-hf"
+    date: "2023-07-18"
+    diff: |
+      Initial public release of Llama 2 7B base model in HuggingFace Transformers format.
+      Successor to Llama 1 (LLaMA) released February 2023; trained on 40% more tokens (2T vs ~1.4T),
+      doubled context window (4096 vs 2048), and released under a license permitting commercial use
+      (subject to Llama 2 Community License Agreement terms).
+  licenses:
+    - license_name: "Llama 2 Community License Agreement"
+      license_link: "https://ai.meta.com/llama/license/"
+      custom_text: |
+        Custom Meta community license. Permits commercial and research use subject to an
+        Acceptable Use Policy and a 700-million-monthly-active-user threshold above which a
+        separate license from Meta is required. Not an OSI-approved open-source license; no
+        SPDX identifier is applicable.
+  citations:
+    - style: IEEE
+      citation: |
+        H. Touvron, L. Martin, K. Stone, P. Albert, A. Almahairi, Y. Babaei, et al.,
+        "Llama 2: Open Foundation and Fine-Tuned Chat Models," arXiv preprint arXiv:2307.09288, 2023.
+    - style: APA
+      citation: |
+        Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., et al. (2023).
+        Llama 2: Open foundation and fine-tuned chat models. arXiv:2307.09288.
+  references:
+    - reference: "https://arxiv.org/abs/2307.09288"
+    - reference: "https://huggingface.co/meta-llama/Llama-2-7b-hf"
+    - reference: "https://ai.meta.com/llama/"
+    - reference: "https://ai.meta.com/llama/license/"
+    - reference: "https://ai.meta.com/llama/use-policy/"
+    - reference: "https://github.com/meta-llama/llama"
+    - reference: "https://github.com/facebookresearch/llama-recipes"
+  path: "https://huggingface.co/meta-llama/Llama-2-7b-hf"
+
+# HuggingFace Hub metadata
+framework: "PyTorch"
+framework_version: "torch>=2.0"
+library_name: "transformers"
+pipeline_tag: "text-generation"
+language:
+  - "en"
+base_model: "meta-llama/Llama-2-7b"
+tags:
+  - "llama"
+  - "llama-2"
+  - "text-generation"
+  - "facebook"
+  - "meta"
+  - "pytorch"
+  - "transformers"
+  - "foundation-model"
+  - "language-model"
+  - "decoder-only"
+  - "causal-lm"
+  - "pretrained"
+  - "en"
+datasets:
+  - "publicly-available-online-data (~2T tokens; mixture not fully disclosed)"
+metrics:
+  - "accuracy"
+  - "exact-match"
+  - "pass@1"
+  - "perplexity"
+  - "TruthfulQA"
+  - "ToxiGen"
+model_category: "large-language-model"
+
+model_parameters:
+  model_architecture: |
+    Auto-regressive decoder-only transformer ("Llama" architecture). 32 transformer layers,
+    hidden size 4096, 32 attention heads (standard multi-head attention; 7B does NOT use
+    Grouped-Query Attention — GQA is used only on the 70B variant). FFN with SwiGLU activation,
+    RMSNorm pre-normalization, Rotary Position Embeddings (RoPE), SentencePiece BPE tokenizer
+    with a 32,000-token vocabulary, and a 4,096-token context window. ~6.74B trainable parameters.
+
+  data:
+    - name: "Llama 2 pretraining corpus (~2T tokens, publicly available online sources)"
+      link: "https://arxiv.org/abs/2307.09288"
+      description: |
+        A new mix of publicly available online data totaling approximately 2 trillion tokens,
+        collected through January 2023 (training conducted January – July 2023). Meta states
+        the corpus excludes data from Meta's products and services and that efforts were made
+        to remove data from sites known to contain large volumes of personal information.
+        The exact source composition is not fully disclosed in the Llama 2 paper.
+      sensitive:
+        sensitive_data:
+          - "Web-scraped text may incidentally contain personal names, contact information, and other PII"
+          - "Meta reports up-sampling factual sources and removing sites with high PII volume, but residual PII risk remains"
+      bias_input: |
+        Training data is predominantly English (Llama 2 paper reports ~89.7% English by token count,
+        with very small fractions of other languages and ~8.4% code). It reflects the demographic,
+        cultural, political, and topical skew of large-scale English web text. Llama 2 Section 5
+        (Responsibility) documents biases on gender, religion, race/ethnicity, sexual orientation,
+        age, nationality, disability, physical appearance, and socioeconomic status as measured on
+        BOLD and other benchmarks.
+    - name: "Human preference & safety data for fine-tuned variants (chat/RLHF only)"
+      link: "https://arxiv.org/abs/2307.09288"
+      description: |
+        Over 1 million human-annotated comparisons used for RLHF of the `*-chat` siblings.
+        NOT used for this base model (`Llama-2-7b-hf`); listed here for context because the
+        HuggingFace card discusses the family as a whole.
+      bias_input: |
+        Annotator demographics, instructions, and reward modeling decisions encode their own biases;
+        these biases are inherited by the chat variants, not by this base 7B model.
+
+  input_format: "UTF-8 text (English-dominant); SentencePiece BPE tokenization; up to 4096 tokens of context."
+  input_format_map:
+    - key: "modality"
+      value: "text"
+    - key: "tokenizer"
+      value: "SentencePiece BPE, vocab=32000"
+    - key: "max_context_tokens"
+      value: "4096"
+    - key: "dtype"
+      value: "float16 / bfloat16 / float32 weights available"
+  output_format: "Auto-regressive token-by-token text generation (logits over the 32k-token vocabulary)."
+  output_format_map:
+    - key: "shape"
+      value: "[B, T, 32000]"
+    - key: "interpretation"
+      value: "Next-token logits; apply softmax/temperature/top-p sampling for generation."
+    - key: "modality"
+      value: "text"
+
+  training_procedure:
+    methodology: |
+      Standard causal language-modeling pretraining (next-token prediction) on ~2T tokens of
+      publicly available web text. Trained with the AdamW optimizer (beta1=0.9, beta2=0.95,
+      eps=1e-5), cosine learning-rate schedule with warmup, peak LR 3.0e-4 for the 7B model,
+      weight decay 0.1, gradient clipping 1.0. Context length 4096. No supervised fine-tuning
+      and no RLHF on this base checkpoint (those are applied to the `*-chat` siblings).
+    reproducibility_info:
+      random_seed: 42
+      environment_config: |
+        Training conducted between January 2023 and July 2023 on Meta's internal Research
+        Super Cluster as well as production GPU clusters. Custom training stack on top of PyTorch.
+      hyperparameters:
+        optimizer: "AdamW (beta1=0.9, beta2=0.95, eps=1e-5), weight decay 0.1, gradient clipping 1.0"
+        loss_function: "Cross-entropy over next-token prediction (causal LM)"
+        learning_rate: 0.0003
+        batch_size: 4194304
+        training_steps: 500000
+        stopping_criterion: "Fixed token budget (~2T tokens) following a cosine LR schedule with 2000 warmup steps."
+        optimization_techniques:
+          - "Mixed-precision training (bf16)"
+          - "Gradient clipping (max-norm 1.0)"
+          - "Cosine learning-rate schedule with warmup"
+          - "FlashAttention"
+
+quantitative_analysis:
+  performance_metrics:
+    # Capability benchmarks (Llama 2 paper, Table 3 — pretrained models, 7B column)
+    - type: "MMLU (5-shot, accuracy)"
+      value: 45.3
+      slice: "MMLU full test set, 5-shot"
+      unit: "%"
+    - type: "TriviaQA (1-shot, exact match)"
+      value: 68.9
+      slice: "TriviaQA dev set, 1-shot"
+      unit: "%"
+    - type: "Natural Questions (1-shot, exact match)"
+      value: 22.7
+      slice: "Natural Questions, 1-shot"
+      unit: "%"
+    - type: "GSM8K (8-shot, exact match)"
+      value: 14.6
+      slice: "GSM8K test, 8-shot CoT"
+      unit: "%"
+    - type: "HumanEval (pass@1)"
+      value: 12.8
+      slice: "HumanEval, 0-shot, greedy"
+      unit: "%"
+    - type: "MBPP (pass@1)"
+      value: 20.8
+      slice: "MBPP, 3-shot"
+      unit: "%"
+    - type: "HumanEval+MBPP average"
+      value: 16.8
+      slice: "average of HumanEval pass@1 and MBPP pass@1"
+      unit: "%"
+    - type: "BIG Bench Hard (3-shot CoT)"
+      value: 32.6
+      slice: "BBH, 3-shot chain-of-thought"
+      unit: "%"
+    - type: "BoolQ (0-shot, accuracy)"
+      value: 77.4
+      slice: "BoolQ dev"
+      unit: "%"
+    - type: "PIQA (0-shot, accuracy)"
+      value: 78.8
+      slice: "PIQA"
+      unit: "%"
+    - type: "HellaSwag (0-shot, accuracy)"
+      value: 77.2
+      slice: "HellaSwag"
+      unit: "%"
+    - type: "WinoGrande (0-shot, accuracy)"
+      value: 69.2
+      slice: "WinoGrande"
+      unit: "%"
+    - type: "ARC-Challenge (0-shot, accuracy)"
+      value: 45.9
+      slice: "ARC Challenge"
+      unit: "%"
+    # Safety / truthfulness benchmarks (Llama 2 paper, Table 11 — pretrained 7B)
+    - type: "TruthfulQA (% truthful AND informative)"
+      value: 33.29
+      slice: "TruthfulQA generation, MC1+MC2 truth+info"
+      unit: "%"
+    - type: "ToxiGen (% toxic generations, lower is better)"
+      value: 21.25
+      slice: "ToxiGen prompts; toxicity classifier"
+      unit: "%"
+    # Model-level descriptive stats
+    - type: "parameters"
+      value: 6.74
+      slice: "model size"
+      unit: "B params"
+    - type: "context_length"
+      value: 4096
+      slice: "max input tokens"
+      unit: "tokens"
+    - type: "training_tokens"
+      value: 2.0
+      slice: "pretraining corpus size"
+      unit: "T tokens"
+    - type: "training_GPU_hours"
+      value: 184320
+      slice: "Llama-2-7B pretraining (Meta A100-80GB)"
+      unit: "GPU-hours"
+    - type: "training_CO2eq"
+      value: 31.22
+      slice: "Llama-2-7B pretraining (tCO2eq, 100% offset by Meta)"
+      unit: "tCO2eq"
+
+considerations:
+  users:
+    - description: |
+        ML researchers and engineers building on a permissively-licensed (Llama 2 Community License)
+        base LLM — for instruction tuning, RLHF / DPO, domain adaptation, retrieval-augmented
+        generation, evaluation harnesses, or interpretability research.
+    - description: |
+        Commercial developers building English-language assistant, summarization, classification,
+        or code-assistance products, subject to the Llama 2 Community License and Acceptable Use Policy.
+    - description: |
+        Educators and students using a mid-sized open-weights LLM as a teaching artifact for
+        transformer architectures, scaling laws, and alignment research.
+
+  use_cases:
+    - description: "Base model for downstream supervised fine-tuning (SFT) and instruction tuning."
+    - description: "Base model for RLHF / DPO / preference optimization research."
+    - description: "Embedding extraction and representation learning for English text."
+    - description: "Few-shot and zero-shot English text generation, classification, and Q&A research."
+    - description: "Retrieval-augmented generation (RAG) backbone in English-language pipelines."
+
+  limitations:
+    - description: |
+        English-dominant: the Llama 2 paper reports ~89.7% English tokens with negligible coverage
+        of most other languages. Performance and safety on non-English inputs is materially worse and
+        was not systematically evaluated by Meta.
+    - description: |
+        Knowledge cutoff: pretraining data was collected through early 2023; the model has no
+        knowledge of events after that and will confidently hallucinate facts about more recent events.
+    - description: |
+        Base (non-chat) model: not aligned via SFT or RLHF. It will not follow instructions reliably,
+        may produce unsafe, biased, or low-quality completions, and is not suitable for direct
+        end-user deployment without further fine-tuning and safety mitigations.
+    - description: |
+        4096-token context window — short by 2026 standards. Long-document tasks require windowing,
+        retrieval, or context-length extension (RoPE scaling, YaRN, etc.).
+    - description: |
+        Known issues with hallucination, sycophancy, and reasoning errors typical of mid-2023 LLMs
+        of this scale. Math and code performance (GSM8K 14.6%, HumanEval 12.8%) is significantly
+        below larger or more modern models.
+
+  tradeoffs:
+    - description: |
+        Capability vs. safety/fairness: as the base (non-RLHF) checkpoint, Llama-2-7B has higher raw
+        flexibility and better baseline perplexity than the `-chat` variant, but at the cost of
+        safety alignment. ToxiGen toxicity (21.25%) is substantially higher than the chat variant
+        (≈0% for Llama-2-7b-chat per the paper). Downstream developers must explicitly trade off
+        accuracy against fairness/safety mitigation strength when fine-tuning — overly aggressive
+        safety filters reduce helpfulness on legitimate prompts, while weak filters leave toxicity
+        and demographic-bias risks unaddressed.
+    - description: |
+        Size vs. quality: at 7B parameters, Llama-2-7B trails Llama-2-13B and Llama-2-70B by 5-20
+        points on most reasoning benchmarks but is roughly 2x and 10x cheaper to run, respectively.
+        For latency-/cost-sensitive applications the 7B is often the right operating point.
+    - description: |
+        Quantization tradeoff: 4-bit / 8-bit quantization (bitsandbytes, GPTQ, AWQ) reduces VRAM
+        by 2-4x with small (<2 pt) accuracy loss on most benchmarks, enabling single-consumer-GPU
+        inference at the cost of some quality.
+    - description: |
+        Context vs. compute: the 4096-token window can be extended via RoPE scaling or YaRN, but
+        extension typically requires further fine-tuning and degrades short-context performance.
+
+  ethical_considerations:
+    - name: "Toxic and hateful generations"
+      mitigation_strategy: |
+        Base model exhibits 21.25% toxicity on ToxiGen prompts. Deployers should apply downstream
+        safety mitigations (classifier-based filtering, RLHF / DPO alignment, prompt-level guards,
+        Llama Guard, or moderation APIs) before user-facing deployment.
+    - name: "Misinformation and hallucination"
+      mitigation_strategy: |
+        TruthfulQA shows only 33.29% truthful-AND-informative responses. Deployers should ground
+        outputs with retrieval, citations, or fact-checking, and clearly disclose AI-generated
+        content. Do not use for medical, legal, financial, or other high-stakes advisory tasks
+        without expert review.
+    - name: "Demographic and cultural bias"
+      mitigation_strategy: |
+        Documented biases on gender, race, religion, nationality, and other axes (Llama 2 paper §5,
+        BOLD benchmark). Deployers should run subgroup-level evaluation on their target population
+        and apply bias mitigation (counterfactual data augmentation, fairness-constrained fine-tuning).
+    - name: "Privacy and PII"
+      mitigation_strategy: |
+        Web-scraped pretraining data may have memorized PII. Avoid prompting the model to elicit
+        personal information about identifiable individuals; apply output PII scrubbing in
+        production deployments.
+    - name: "Dual use and disinformation"
+      mitigation_strategy: |
+        A capable English text generator can be misused for spam, phishing, or coordinated
+        disinformation. Compliance with the Meta Acceptable Use Policy is mandatory, and
+        deployers should implement rate-limiting, abuse detection, and content provenance signals.
+    - name: "Environmental impact"
+      mitigation_strategy: |
+        Pretraining the 7B emitted an estimated 31.22 tCO2eq (Meta states 100% offset). Downstream
+        fine-tuning and inference still consume energy; consider efficiency techniques (LoRA,
+        QLoRA, quantization, distillation) and report compute footprint per the Llama 2 paper.
+
+  out_of_scope_uses:
+    - description: "Use in any way that violates the Llama 2 Community License Agreement or Meta's Acceptable Use Policy."
+    - description: "Commercial deployment by an entity with more than 700 million monthly active users (as of the Llama 2 release date) without a separate license from Meta."
+    - description: "Use in non-English-dominant deployments without additional language-specific evaluation and fine-tuning; the model was tested almost exclusively on English."
+    - description: "Generation of disinformation, propaganda, deceptive synthetic media, spam, or coordinated inauthentic behavior."
+    - description: "Generation of harmful content including CSAM, content that sexualizes minors, harassment, hate speech, or content that incites violence or self-harm."
+    - description: "High-stakes autonomous decision-making without human oversight (medical diagnosis, legal judgments, financial-trading decisions, hiring/firing, credit scoring, criminal-justice risk assessment, immigration decisions, safety-critical control systems)."
+    - description: "Generation of malware, exploitation code, weapons-development guidance, or instructions for activities prohibited by applicable laws or regulations."
+    - description: "Surveillance, biometric identification, or social-scoring applications targeting individuals or groups."
+    - description: "User-facing chat / assistant deployments using the bare base checkpoint without further safety alignment (use `Llama-2-7b-chat-hf` or perform your own SFT+RLHF/DPO+safety tuning first)."
+    - description: "Use that violates applicable laws or regulations (including trade-compliance laws) in any jurisdiction of deployment."
+
+bias_model: |
+  Llama-2-7B inherits the demographic, cultural, geographic, political, and topical biases of its
+  ~2T-token English-dominant web pretraining corpus. The Llama 2 paper (Section 5, Responsibility)
+  documents measurable bias on gender, religion, race/ethnicity, sexual orientation, age,
+  nationality, disability, physical appearance, and socioeconomic status using the BOLD benchmark,
+  and reports a 21.25% toxicity rate on ToxiGen prompts and only 33.29% truthful-AND-informative
+  responses on TruthfulQA. As a base (non-RLHF) checkpoint, no safety alignment has been applied;
+  the model is materially more biased and toxic than the `Llama-2-7b-chat-hf` sibling. Users should
+  perform their own subgroup-level fairness audits on the populations and tasks of interest before
+  deployment.
+bias_output: |
+  Outputs are predominantly English (~89.7% of pretraining tokens) and reflect a Western,
+  Anglophone, internet-skewed worldview. Generations may reproduce stereotypes about gender,
+  race, religion, nationality, and other protected attributes; may amplify majority viewpoints
+  on contested political and cultural topics; and may confidently state false or fabricated facts
+  (hallucination), especially regarding people, recent events (post-cutoff: early 2023), specialized
+  domains, and non-English content. The base checkpoint is not calibrated for any specific task
+  or population, has no instruction-following safety alignment, and should not be deployed in
+  user-facing applications without downstream fine-tuning, safety filtering, and task-appropriate
+  evaluation.

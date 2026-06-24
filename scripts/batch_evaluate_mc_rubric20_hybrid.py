@@ -108,6 +108,220 @@ def _all_datasets(d: dict) -> list:
     return out
 
 
+# ---------------------------------------------------------------------------
+# Semantic rules — deterministic checks lifted from the rubric20-semantic LLM
+# evaluator. Currently cover:
+#   Q18 (train/eval data leakage)
+#   Q19 (bias declared without a matching fairness tradeoff)
+# Caps reflect the consistent 5->3 (or 4->3) drop the semantic agent applies.
+# ---------------------------------------------------------------------------
+SEMANTIC_CAP = 3
+
+# Tradeoff text is considered to acknowledge bias/fairness if it mentions any
+# of these stems. Kept loose on purpose — the goal is to flag tradeoffs that
+# are purely operational (size vs latency, accuracy vs cost) when the card has
+# concrete bias_model / bias_output disclosures.
+BIAS_TRADEOFF_RE = re.compile(
+    r"\b(fair(?:ness)?|bias(?:es|ed)?|demographic|equit|disparit|"
+    r"under[-\s]?represent|subgroup|protected[-\s]?(?:class|attribute|group)|"
+    r"calibration|harm(?:ful|s)?|discriminat)\b",
+    re.I,
+)
+
+_VERSION_TAIL_RE = re.compile(r"\s*(?:v\d+(?:\.\d+)*|version\s+\d+(?:\.\d+)*)\s*$", re.I)
+_PARENS_RE = re.compile(r"\(([^()]*)\)")
+
+
+def _normalize_dataset_name(name: Any) -> str:
+    """Lowercase + collapse whitespace + drop trailing version marker.
+
+    Leaves parenthetical content in place — the variant extractor uses parens
+    as alias boundaries instead.
+    """
+    s = stringify(name).strip()
+    s = _VERSION_TAIL_RE.sub("", s)
+    return re.sub(r"\s+", " ", s).strip().lower()
+
+
+def _dataset_name_variants(name: Any) -> list[str]:
+    """Yield normalized variants of `name` for overlap matching.
+
+    Returns the normalized full string, the parens-stripped variant, and each
+    parenthetical's inner content normalized. For the parens content also
+    emit a version-tail-preserving form so 'Test set (E3SM v2)' yields both
+    'e3sm' and 'e3sm v2' — the version-bearing variant matches against
+    'E3SM v2 High-Resolution' under the substring rule.
+    """
+    raw = stringify(name)
+    out: list[str] = []
+    seen: set[str] = set()
+
+    def _add(v: str) -> None:
+        if v and v not in seen:
+            seen.add(v)
+            out.append(v)
+
+    _add(_normalize_dataset_name(raw))
+    paren_stripped = _PARENS_RE.sub("", raw)
+    _add(_normalize_dataset_name(paren_stripped))
+    for m in _PARENS_RE.finditer(raw):
+        inner = m.group(1)
+        _add(_normalize_dataset_name(inner))
+        # Also keep the parens content WITHOUT version stripping, so a name
+        # like 'e3sm v2' (7 chars) survives instead of being collapsed to
+        # 'e3sm' (4 chars, under the 6-char substring threshold).
+        _add(re.sub(r"\s+", " ", stringify(inner)).strip().lower())
+    return out
+
+
+def _dataset_names_from(items: Any) -> list[str]:
+    """Pull plausible dataset-name strings out of a list/dict/scalar source."""
+    if not items:
+        return []
+    if isinstance(items, dict):
+        items = [items]
+    out: list[str] = []
+    if isinstance(items, list):
+        for it in items:
+            if isinstance(it, dict):
+                nm = it.get("name") or it.get("dataset") or it.get("id")
+                if nm:
+                    out.append(stringify(nm))
+            elif isinstance(it, str):
+                out.append(it)
+    return out
+
+
+def _training_dataset_names(d: dict) -> list[str]:
+    return (
+        _dataset_names_from(get_nested(d, "model_parameters.data"))
+        + _dataset_names_from(get_nested(d, "model_parameters.training_datasets"))
+    )
+
+
+def _benchmark_dataset_names(d: dict) -> list[str]:
+    names: list[str] = []
+    names.extend(_dataset_names_from(get_nested(d, "model_parameters.evaluation_datasets")))
+    metrics = get_nested(d, "quantitative_analysis.performance_metrics") or []
+    if isinstance(metrics, list):
+        for m in metrics:
+            if isinstance(m, dict) and m.get("slice"):
+                names.append(stringify(m["slice"]))
+    mi = d.get("model_index") or []
+    if isinstance(mi, list):
+        for entry in mi:
+            if not isinstance(entry, dict):
+                continue
+            for r in entry.get("results") or []:
+                if not isinstance(r, dict):
+                    continue
+                ds = r.get("dataset")
+                if isinstance(ds, dict):
+                    nm = ds.get("name") or ds.get("id")
+                    if nm:
+                        names.append(stringify(nm))
+                elif isinstance(ds, str):
+                    names.append(ds)
+    top_ds = d.get("datasets")
+    if isinstance(top_ds, list):
+        names.extend(stringify(x) for x in top_ds if x)
+    return names
+
+
+def detect_train_eval_leakage(d: dict) -> tuple[bool, str]:
+    """True if a benchmark/eval dataset name matches a training dataset name.
+
+    Matches the rubric20-semantic 'benchmark dataset <-> training data' rule.
+    Comparison is case-insensitive after stripping version tails ('v2', '1.0')
+    and parenthetical qualifiers, and uses substring containment so 'ImageNet-1k'
+    matches 'ImageNet-1k validation'.
+    """
+    train_raw = _training_dataset_names(d)
+    bench_raw = _benchmark_dataset_names(d)
+    if not train_raw or not bench_raw:
+        return False, ""
+    train_variants = [(orig, _dataset_name_variants(orig)) for orig in train_raw]
+    bench_variants = [(orig, _dataset_name_variants(orig)) for orig in bench_raw]
+    overlaps: list[tuple[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for t_orig, t_vars in train_variants:
+        for b_orig, b_vars in bench_variants:
+            matched = False
+            for t in t_vars:
+                if not t:
+                    continue
+                for b in b_vars:
+                    if not b:
+                        continue
+                    # Exact-equality always matches (e.g. 'GLUE' == 'GLUE').
+                    # Otherwise allow substring containment but require
+                    # the matched side to be at least 6 chars long — that
+                    # filters out 4-char common tokens ('test', 'eval',
+                    # 'data', 'val ', 'mnli', 'train') while still catching
+                    # distinctive partial matches like 'e3sm v2' (7 chars)
+                    # inside 'e3sm v2 high-resolution', or 'imagenet' (8)
+                    # inside 'imagenet-1k validation'.
+                    if t == b:
+                        matched = True
+                        break
+                    if (len(t) >= 6 and t in b) or (len(b) >= 6 and b in t):
+                        matched = True
+                        break
+                if matched:
+                    break
+            if matched:
+                key = (t_orig, b_orig)
+                if key not in seen:
+                    seen.add(key)
+                    overlaps.append(key)
+    if not overlaps:
+        return False, ""
+    examples = ", ".join(f"'{t}' ~ '{b}'" for t, b in overlaps[:3])
+    return True, f"Training/benchmark dataset overlap: {examples}"
+
+
+def detect_bias_tradeoff_gap(d: dict) -> tuple[bool, str]:
+    """True if bias_model or bias_output is populated but tradeoffs[] doesn't
+    address a fairness/bias dimension — including the case where tradeoffs is
+    empty entirely.
+
+    Mirrors the rubric20-semantic 'bias disclosure -> tradeoffs' consistency
+    rule (`.claude/agents/mc-rubric20-semantic.md` line 42), which caps Q19
+    unconditionally when bias is declared without an accuracy-vs-fairness
+    tradeoff — empty tradeoffs included.
+    """
+    bias_declared = has_content(d.get("bias_model")) or has_content(d.get("bias_output"))
+    if not bias_declared:
+        return False, ""
+    tradeoffs = get_nested(d, "considerations.tradeoffs") or []
+    if not has_content(tradeoffs):
+        return True, (
+            "bias_model/bias_output populated but considerations.tradeoffs is "
+            "empty — fairness/bias dimension missing"
+        )
+    blob = stringify(tradeoffs)
+    if BIAS_TRADEOFF_RE.search(blob):
+        return False, ""
+    snippet = blob[:120] + ("…" if len(blob) > 120 else "")
+    return True, (
+        "bias_model/bias_output populated but considerations.tradeoffs omits "
+        f"fairness/bias dimension — tradeoffs read: {snippet!r}"
+    )
+
+
+def compute_semantic_caps(d: dict) -> dict[str, dict]:
+    """Return {'Q18'|'Q19': {rule, reason}} for any deterministic semantic rule
+    that fires against this card. Empty if none fire."""
+    out: dict[str, dict] = {}
+    leak, leak_reason = detect_train_eval_leakage(d)
+    if leak:
+        out["Q18"] = {"rule": "train_eval_leakage", "reason": leak_reason}
+    gap, gap_reason = detect_bias_tradeoff_gap(d)
+    if gap:
+        out["Q19"] = {"rule": "bias_tradeoff_gap", "reason": gap_reason}
+    return out
+
+
 def q1_field_completeness(d: dict) -> tuple[int, int, str, str]:
     required = [
         ("model_details.name", get_nested(d, "model_details.name")),
@@ -569,12 +783,28 @@ def evaluate_one(path: Path) -> dict[str, Any]:
         },
     }
 
+    semantic_caps = compute_semantic_caps(data)
+    semantic_deductions: list[dict[str, Any]] = []
+
     total = 0
     for cat in CATEGORIES:
         cat_score = 0
         cat_questions = []
         for qid, qname, scorer in cat["questions"]:
             score, qmax, label, evidence = scorer(data)
+            cap = semantic_caps.get(f"Q{qid}")
+            if cap and score > SEMANTIC_CAP:
+                raw_score = score
+                score = SEMANTIC_CAP
+                label = f"[capped {raw_score}->{score} by {cap['rule']}] {label}"
+                evidence = f"{evidence}; semantic_rule={cap['rule']}: {cap['reason']}"
+                semantic_deductions.append({
+                    "question": f"Q{qid}",
+                    "rule": cap["rule"],
+                    "raw_score": raw_score,
+                    "capped_score": score,
+                    "reason": cap["reason"],
+                })
             score_type = "pass_fail" if qmax == 1 else "numeric"
             cat_questions.append({
                 "id": int(qid),
@@ -599,6 +829,7 @@ def evaluate_one(path: Path) -> dict[str, Any]:
         "total_points": total,
         "max_points": MAX_POINTS,
         "percentage": round(total / MAX_POINTS * 100, 1),
+        "semantic_deductions": semantic_deductions,
     }
 
     for cat in result["categories"]:

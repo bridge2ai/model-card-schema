@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1600" height="1100" viewBox="0 0 1600 1100"
+     font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6"
+            markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#374151"/>
+    </marker>
+    <marker id="arrow-gen" viewBox="0 0 12 12" refX="10" refY="6"
+            markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="arrow-exc" viewBox="0 0 12 12" refX="10" refY="6"
+            markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#047857"/>
+    </marker>
+    <marker id="arrow-eval" viewBox="0 0 12 12" refX="10" refY="6"
+            markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#6d28d9"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1100" fill="#ffffff"/>
+
+  <!-- TITLE -->
+  <text x="800" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#0f172a">
+    Model Cards: Generation, D4D Harmonization, and Evaluation
+  </text>
+  <text x="800" y="74" text-anchor="middle" font-size="14" fill="#475569">
+    LinkML schema · multi-method extraction · external D4D references · hybrid + LLM rubric scoring · CI-gated portfolio
+  </text>
+
+  <!-- SOURCES STRIP -->
+  <g id="sources">
+    <rect x="40" y="100" width="520" height="80" rx="10" ry="10"
+          fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="60" y="124" font-size="14" font-weight="700" fill="#92400e">Source documentation (per model)</text>
+    <text x="60" y="146" font-size="12" fill="#78350f">HuggingFace Hub README · GitHub MODEL_CARD.md · papers / arXiv · DOIs · KOGUT docs</text>
+    <text x="60" y="164" font-size="12" fill="#78350f">Portfolio: climate-extended · climate-forecasting · sentiment · densenet121 · subcell-saprot · minimal fixtures</text>
+  </g>
+
+  <!-- SCHEMA STRIP -->
+  <g id="schema-strip">
+    <rect x="580" y="100" width="980" height="80" rx="10" ry="10"
+          fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="600" y="124" font-size="14" font-weight="700" fill="#92400e">Model Card LinkML schemas (source of truth)</text>
+    <text x="600" y="146" font-size="12" fill="#78350f">
+      src/model_card_schema/schema/model_card_schema.yaml  (base, 34 classes)  ·  …_d4dharmonized.yaml  (adds Creator/Dataset/Grant refs)
+    </text>
+    <text x="600" y="164" font-size="12" fill="#78350f">
+      Generates: JSON Schema · OWL · SHACL · GraphQL · Protobuf · Python dataclasses · Excel · SQL DDL  ·  groups: Core · ModelDetails · Datasets · Params · Performance · Considerations · Benchmarking · Extended (DOE)
+    </text>
+  </g>
+
+  <!-- ============== SECTION 1: GENERATION (left) ============== -->
+  <g id="generation">
+    <rect x="40" y="210" width="520" height="820" rx="14" ry="14"
+          fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="60" y="242" font-size="20" font-weight="800" fill="#1e3a8a">1 · Model Card Generation</text>
+    <text x="60" y="262" font-size="12" fill="#1e40af">
+      Source docs → preprocessed text → Model Card YAML, by one of several methods.
+    </text>
+
+    <!-- Local / interactive methods -->
+    <rect x="60" y="280" width="480" height="200" rx="8" ry="8"
+          fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="76" y="302" font-size="14" font-weight="700" fill="#1e3a8a">Local / interactive generation</text>
+
+    <rect x="76" y="316" width="220" height="62" rx="6" ry="6"
+          fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="86" y="334" font-size="12" font-weight="700" fill="#1e3a8a">mc-agent ★ current</text>
+    <text x="86" y="351" font-size="11" fill="#1e3a8a">/mc-agent skill · parallel sub-agents</text>
+    <text x="86" y="367" font-size="11" fill="#1e3a8a">per-section synthesis, deterministic</text>
+
+    <rect x="304" y="316" width="220" height="62" rx="6" ry="6"
+          fill="#dbeafe" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="314" y="334" font-size="12" font-weight="700" fill="#1e3a8a">mc-assistant</text>
+    <text x="314" y="351" font-size="11" fill="#1e3a8a">/mc-assistant skill</text>
+    <text x="314" y="367" font-size="11" fill="#1e3a8a">human-in-the-loop refinement</text>
+
+    <rect x="76" y="388" width="146" height="60" rx="6" ry="6"
+          fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+    <text x="86" y="406" font-size="12" font-weight="700" fill="#0c4a6e">HF Hub direct</text>
+    <text x="86" y="422" font-size="11" fill="#0c4a6e">README ingest</text>
+    <text x="86" y="438" font-size="11" fill="#0c4a6e">(densenet, SaProt, …)</text>
+
+    <rect x="230" y="388" width="146" height="60" rx="6" ry="6"
+          fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+    <text x="240" y="406" font-size="12" font-weight="700" fill="#92400e">canonical</text>
+    <text x="240" y="422" font-size="11" fill="#78350f">DOE climate-extended</text>
+    <text x="240" y="438" font-size="11" fill="#78350f">gold reference</text>
+
+    <rect x="384" y="388" width="140" height="60" rx="6" ry="6"
+          fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+    <text x="394" y="406" font-size="12" font-weight="700" fill="#92400e">fixtures</text>
+    <text x="394" y="422" font-size="11" fill="#78350f">minimal · minimal-viable</text>
+    <text x="394" y="438" font-size="11" fill="#78350f">floor anchors</text>
+
+    <text x="76" y="466" font-size="11" fill="#475569">Skills: .claude/commands/{mc-agent,mc-assistant}.md  ·  agents: .claude/agents/mc-*.md</text>
+
+    <!-- GitHub assistant -->
+    <rect x="60" y="496" width="480" height="180" rx="8" ry="8"
+          fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="76" y="518" font-size="14" font-weight="700" fill="#1e3a8a">GitHub Model Card Assistant</text>
+    <text x="76" y="538" font-size="12" fill="#1e3a8a">.github/workflows/mc-agent.yml  ·  triggered by mention in issue/PR/comment</text>
+    <text x="76" y="556" font-size="12" fill="#1e3a8a">Modes: URL ingest (HF Hub / GitHub / arXiv) · DOI via ARTL MCP</text>
+    <text x="76" y="574" font-size="12" fill="#1e3a8a">Workflow steps: prerequisites · fetch · generate · validate · open PR · comment</text>
+    <text x="76" y="592" font-size="12" fill="#1e3a8a">Support scripts (src/github/): validate_prerequisites.sh · generate_mc_metadata.py</text>
+    <text x="76" y="610" font-size="12" fill="#1e3a8a">                                                  · validate_mc_completeness.py</text>
+    <text x="76" y="628" font-size="11" fill="#475569">Instructions: .github/workflows/mc_assistant_{create,edit}.md</text>
+    <text x="76" y="646" font-size="11" fill="#475569">CI gate on PR: mc-rubric20-gate.yml (blocking, hybrid scorer)</text>
+    <text x="76" y="664" font-size="11" fill="#475569">Weekly: mc-rubric20-portfolio-audit.yml (re-runs + opens PR)</text>
+
+    <!-- Outputs -->
+    <rect x="60" y="694" width="480" height="320" rx="8" ry="8"
+          fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="76" y="716" font-size="14" font-weight="700" fill="#1e3a8a">Generated Model Card YAML</text>
+    <text x="76" y="736" font-size="12" fill="#1e3a8a">data/model_cards_assistant/{model}_model_card.yaml</text>
+    <text x="76" y="754" font-size="12" fill="#1e3a8a">data/model_cards_concatenated/claudecode_agent/{PROJECT}_model_card.yaml</text>
+    <text x="76" y="772" font-size="12" fill="#1e3a8a">data/model_cards_individual/claudecode_agent/{PROJECT}/{src}_model_card.yaml</text>
+    <text x="76" y="790" font-size="12" fill="#1e3a8a">src/data/examples/{extended,harmonized,d4d_integration,fixtures}/  (curated)</text>
+
+    <text x="76" y="818" font-size="12" font-weight="700" fill="#1e3a8a">Validation &amp; build</text>
+    <text x="76" y="836" font-size="12" fill="#1e3a8a">make gen-project · make test-{schema,python,examples} · make lint</text>
+    <text x="76" y="854" font-size="12" fill="#1e3a8a">linkml-validate; in-CI mc-rubric20 hybrid gate runs on every PR</text>
+
+    <text x="76" y="884" font-size="12" font-weight="700" fill="#1e3a8a">Rendering &amp; docs</text>
+    <text x="76" y="902" font-size="12" fill="#1e3a8a">scripts/render_evaluation_html.py · scripts/build_rubric_report.py</text>
+    <text x="76" y="920" font-size="12" fill="#1e3a8a">portfolio.html · portfolio_compare.html · badges (SVG, per card)</text>
+
+    <text x="76" y="950" font-size="12" font-weight="700" fill="#1e3a8a">Determinism &amp; provenance</text>
+    <text x="76" y="968" font-size="12" fill="#1e3a8a">claude-sonnet-4-5 · T=0.0 · SHA-256 inputs/schema/prompts</text>
+    <text x="76" y="986" font-size="12" fill="#1e3a8a">{model}_metadata.yaml records model, git SHA, extraction ID</text>
+    <text x="76" y="1004" font-size="11" fill="#475569">Same inputs → same Model Card (enables cross-method comparison)</text>
+  </g>
+
+  <!-- ============== Model Card YAML hub ============== -->
+  <g id="hub">
+    <rect x="600" y="430" width="220" height="190" rx="14" ry="14"
+          fill="#fff7ed" stroke="#c2410c" stroke-width="2.5"/>
+    <text x="710" y="468" text-anchor="middle" font-size="18" font-weight="800" fill="#7c2d12">Model Card</text>
+    <text x="710" y="488" text-anchor="middle" font-size="18" font-weight="800" fill="#7c2d12">YAML</text>
+    <text x="710" y="514" text-anchor="middle" font-size="14" font-weight="700" fill="#9a3412">model card instance</text>
+    <text x="710" y="538" text-anchor="middle" font-size="11" fill="#7c2d12">conforms to LinkML</text>
+    <text x="710" y="554" text-anchor="middle" font-size="11" fill="#7c2d12">schema (34 classes)</text>
+    <text x="710" y="578" text-anchor="middle" font-size="11" fill="#7c2d12">optional D4D refs</text>
+    <text x="710" y="600" text-anchor="middle" font-size="11" fill="#7c2d12">+ provenance metadata</text>
+  </g>
+
+  <!-- arrow: Generation → Model Card YAML -->
+  <line x1="565" y1="525" x2="595" y2="525" stroke="#1d4ed8" stroke-width="2.5" marker-end="url(#arrow-gen)"/>
+
+  <!-- ============== SECTION 2: D4D HARMONIZATION (top right) ============== -->
+  <g id="harmonization">
+    <rect x="860" y="210" width="700" height="410" rx="14" ry="14"
+          fill="#ecfdf5" stroke="#047857" stroke-width="2"/>
+    <text x="880" y="242" font-size="20" font-weight="800" fill="#064e3b">2 · D4D Harmonization · External References</text>
+    <text x="880" y="262" font-size="12" fill="#065f46">
+      Replace lightweight inline fields with ID + URI references to comprehensive D4D instances. No schema imports — clean separation.
+    </text>
+
+    <!-- Base vs harmonized -->
+    <rect x="880" y="280" width="330" height="160" rx="8" ry="8"
+          fill="#ffffff" stroke="#047857" stroke-width="1.5"/>
+    <text x="896" y="302" font-size="13" font-weight="700" fill="#064e3b">Two schemas</text>
+    <text x="896" y="322" font-size="11" fill="#065f46">model_card_schema.yaml</text>
+    <text x="906" y="338" font-size="11" fill="#065f46">base · 34 classes · inline owner / dataSet / funding</text>
+    <text x="896" y="360" font-size="11" fill="#065f46">model_card_schema_d4dharmonized.yaml</text>
+    <text x="906" y="376" font-size="11" fill="#065f46">+ CreatorRef · DatasetRef · GrantRef</text>
+    <text x="906" y="392" font-size="11" fill="#065f46">+ created_by / modified_by / created_on / modified_on</text>
+    <text x="896" y="418" font-size="11" fill="#065f46" font-style="italic">Pick harmonized when ethics/governance/lineage matters</text>
+
+    <!-- Reference pattern -->
+    <rect x="1230" y="280" width="330" height="160" rx="8" ry="8"
+          fill="#ffffff" stroke="#047857" stroke-width="1.5"/>
+    <text x="1246" y="302" font-size="13" font-weight="700" fill="#064e3b">External reference pattern</text>
+    <text x="1246" y="322" font-size="11" fill="#065f46">owner / Contributor  →  CreatorReference  →  D4D Person</text>
+    <text x="1246" y="342" font-size="11" fill="#065f46">dataSet (7 fields)  →  DatasetReference  →  D4D Dataset (60+)</text>
+    <text x="1246" y="362" font-size="11" fill="#065f46">funding_source (str)  →  GrantReference  →  D4D Grant</text>
+    <text x="1246" y="386" font-size="11" fill="#065f46">References are plain id + uri pairs</text>
+    <text x="1246" y="402" font-size="11" fill="#065f46">D4D instances live in the data-sheets-schema repo</text>
+    <text x="1246" y="424" font-size="11" fill="#065f46" font-style="italic">"Document datasets once, reference from many cards"</text>
+
+    <!-- Flow strip: Model Card → D4D instance -->
+    <rect x="880" y="460" width="680" height="140" rx="8" ry="8"
+          fill="#d1fae5" stroke="#047857" stroke-width="1.5"/>
+    <text x="896" y="482" font-size="13" font-weight="700" fill="#064e3b">External-ref flow</text>
+
+    <rect x="900" y="500" width="200" height="60" rx="6" ry="6"
+          fill="#ffffff" stroke="#047857" stroke-width="1.25"/>
+    <text x="1000" y="520" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">Model Card YAML</text>
+    <text x="1000" y="538" text-anchor="middle" font-size="10" fill="#065f46">CreatorRef · DatasetRef · GrantRef</text>
+    <text x="1000" y="552" text-anchor="middle" font-size="10" fill="#065f46">(id + uri)</text>
+
+    <rect x="1180" y="500" width="200" height="60" rx="6" ry="6"
+          fill="#ffffff" stroke="#047857" stroke-width="1.25"/>
+    <text x="1280" y="520" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">D4D YAML instance</text>
+    <text x="1280" y="538" text-anchor="middle" font-size="10" fill="#065f46">Person / Dataset / Grant</text>
+    <text x="1280" y="552" text-anchor="middle" font-size="10" fill="#065f46">(LinkML, full D4D schema)</text>
+
+    <rect x="1390" y="500" width="160" height="60" rx="6" ry="6"
+          fill="#ffffff" stroke="#047857" stroke-width="1.25" stroke-dasharray="4 3"/>
+    <text x="1470" y="520" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">Reusable across cards</text>
+    <text x="1470" y="538" text-anchor="middle" font-size="10" fill="#065f46">one datasheet,</text>
+    <text x="1470" y="552" text-anchor="middle" font-size="10" fill="#065f46">many model cards</text>
+
+    <line x1="1105" y1="530" x2="1175" y2="530" stroke="#047857" stroke-width="2" marker-end="url(#arrow-exc)"/>
+    <line x1="1385" y1="530" x2="1388" y2="530" stroke="#047857" stroke-width="2"
+          stroke-dasharray="4 3" marker-end="url(#arrow-exc)"/>
+    <text x="1140" y="524" text-anchor="middle" font-size="10" fill="#064e3b">reference</text>
+  </g>
+
+  <!-- arrows: hub <-> harmonization -->
+  <line x1="825" y1="505" x2="858" y2="475" stroke="#047857" stroke-width="2.5"
+        marker-end="url(#arrow-exc)"/>
+  <line x1="858" y1="495" x2="825" y2="525" stroke="#047857" stroke-width="2.5"
+        marker-end="url(#arrow-exc)"/>
+
+  <!-- Footnote -->
+  <g id="harm-tools">
+    <text x="880" y="630" font-size="11" fill="#065f46">
+      Examples: src/data/examples/d4d_integration/  (climate-forecasting-model-card.yaml)  ·  harmonized/  (sentiment-classifier-with-datasheet-refs.yaml)  ·  D4D_HARMONIZATION.md
+    </text>
+  </g>
+
+  <!-- ============== SECTION 3: EVAL (bottom right) ============== -->
+  <g id="eval">
+    <rect x="860" y="660" width="700" height="370" rx="14" ry="14"
+          fill="#f5f3ff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="880" y="692" font-size="20" font-weight="800" fill="#4c1d95">3 · Rubric Evaluation · Hybrid + LLM</text>
+    <text x="880" y="712" font-size="12" fill="#5b21b6">
+      Two axes: which rubric (10 vs 20) × which evaluator (deterministic hybrid vs LLM-as-judge).
+    </text>
+
+    <!-- Rubrics side -->
+    <rect x="880" y="730" width="320" height="120" rx="8" ry="8"
+          fill="#ffffff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="896" y="752" font-size="13" font-weight="700" fill="#4c1d95">Rubrics</text>
+
+    <rect x="896" y="762" width="140" height="74" rx="6" ry="6"
+          fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="966" y="780" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">rubric10</text>
+    <text x="966" y="796" text-anchor="middle" font-size="10" fill="#5b21b6">10 elements × 5 sub</text>
+    <text x="966" y="810" text-anchor="middle" font-size="10" fill="#5b21b6">coarse · fast</text>
+    <text x="966" y="824" text-anchor="middle" font-size="10" fill="#5b21b6">max 50 pts</text>
+
+    <rect x="1044" y="762" width="140" height="74" rx="6" ry="6"
+          fill="#ede9fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="1114" y="780" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">rubric20</text>
+    <text x="1114" y="796" text-anchor="middle" font-size="10" fill="#5b21b6">20 questions, 4 categories</text>
+    <text x="1114" y="810" text-anchor="middle" font-size="10" fill="#5b21b6">Struct · Meta · Tech · FAIR</text>
+    <text x="1114" y="824" text-anchor="middle" font-size="10" fill="#5b21b6">max 84 pts</text>
+
+    <!-- Evaluator side -->
+    <rect x="1220" y="730" width="340" height="120" rx="8" ry="8"
+          fill="#ffffff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="1236" y="752" font-size="13" font-weight="700" fill="#4c1d95">Evaluator types</text>
+
+    <rect x="1236" y="762" width="155" height="74" rx="6" ry="6"
+          fill="#fde68a" stroke="#b45309" stroke-width="1"/>
+    <text x="1313" y="780" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">Hybrid (rule-based)</text>
+    <text x="1313" y="794" text-anchor="middle" font-size="10" fill="#7c2d12">batch_evaluate_mc_</text>
+    <text x="1313" y="808" text-anchor="middle" font-size="10" fill="#7c2d12">rubric{10,20}_hybrid.py</text>
+    <text x="1313" y="824" text-anchor="middle" font-size="10" fill="#7c2d12">deterministic · free · &lt;1 s</text>
+
+    <rect x="1399" y="762" width="155" height="74" rx="6" ry="6"
+          fill="#ddd6fe" stroke="#6d28d9" stroke-width="1"/>
+    <text x="1476" y="780" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">LLM as judge</text>
+    <text x="1476" y="794" text-anchor="middle" font-size="10" fill="#5b21b6">mc-rubric{10,20}</text>
+    <text x="1476" y="808" text-anchor="middle" font-size="10" fill="#5b21b6">+ -semantic variants</text>
+    <text x="1476" y="824" text-anchor="middle" font-size="10" fill="#5b21b6">claude-sonnet-4-5 · T=0.0</text>
+
+    <!-- Agents + CI -->
+    <rect x="880" y="868" width="680" height="80" rx="8" ry="8"
+          fill="#ffffff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="896" y="890" font-size="13" font-weight="700" fill="#4c1d95">Conversational agents (.claude/agents/) + CI</text>
+    <text x="896" y="908" font-size="11" fill="#5b21b6">
+      mc-rubric10 · mc-rubric10-semantic   ·   mc-rubric20 · mc-rubric20-semantic   ·   mc-description-reviewer · mc-validator · mc-schema-expert
+    </text>
+    <text x="896" y="924" font-size="11" fill="#5b21b6">
+      Blocking PR gate: mc-rubric20-gate.yml (hybrid; bakes in semantic findings — Q18 train/eval leakage, Q19 bias↔tradeoffs)
+    </text>
+    <text x="896" y="942" font-size="11" fill="#475569">Weekly: mc-rubric20-portfolio-audit.yml — re-runs hybrid across portfolio, opens PR with regenerated badges + common_issues.md</text>
+
+    <!-- Outputs -->
+    <rect x="880" y="960" width="680" height="60" rx="8" ry="8"
+          fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="896" y="982" font-size="13" font-weight="700" fill="#4c1d95">Outputs</text>
+    <text x="896" y="1000" font-size="11" fill="#5b21b6">data/evaluation/{all, badges, extended, harmonized, hf_hub, fixtures}/  ·  portfolio.html · portfolio_compare.html · common_issues.md</text>
+    <text x="896" y="1016" font-size="11" fill="#5b21b6">per-card SVG badge (rubric × evaluator) shown in README · per-rubric JSON with score + rationale + evidence</text>
+  </g>
+
+  <!-- arrows: hub → eval -->
+  <line x1="710" y1="624" x2="710" y2="800" stroke="#6d28d9" stroke-width="2.5"
+        marker-end="url(#arrow-eval)"/>
+  <line x1="710" y1="800" x2="858" y2="800" stroke="#6d28d9" stroke-width="2.5"
+        marker-end="url(#arrow-eval)"/>
+  <text x="725" y="720" font-size="11" fill="#4c1d95">scored against rubrics</text>
+
+  <!-- arrows: sources → generation -->
+  <line x1="300" y1="182" x2="300" y2="278" stroke="#1d4ed8" stroke-width="2"
+        marker-end="url(#arrow-gen)"/>
+
+  <!-- arrow: schema → hub -->
+  <line x1="1000" y1="182" x2="820" y2="428" stroke="#c2410c" stroke-width="1.5"
+        stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="850" y="270" font-size="11" fill="#7c2d12">validates</text>
+
+  <!-- arrow: schema → harmonization (refs derive from harmonized schema) -->
+  <line x1="1250" y1="182" x2="1250" y2="278" stroke="#047857" stroke-width="1.5"
+        stroke-dasharray="5 4" marker-end="url(#arrow-exc)"/>
+  <text x="1258" y="220" font-size="11" fill="#064e3b">defines refs</text>
+
+  <!-- LEGEND -->
+  <g id="legend">
+    <rect x="40" y="1050" width="1520" height="40" rx="6" ry="6"
+          fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+    <text x="56" y="1076" font-size="12" font-weight="700" fill="#0f172a">Legend:</text>
+
+    <rect x="120" y="1062" width="18" height="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="144" y="1076" font-size="12" fill="#0f172a">Generation</text>
+
+    <rect x="234" y="1062" width="18" height="14" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+    <text x="258" y="1076" font-size="12" fill="#0f172a">D4D Harmonization</text>
+
+    <rect x="404" y="1062" width="18" height="14" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="428" y="1076" font-size="12" fill="#0f172a">Evaluation</text>
+
+    <rect x="520" y="1062" width="18" height="14" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="544" y="1076" font-size="12" fill="#0f172a">Schema · sources · central artifacts</text>
+
+    <line x1="780" y1="1070" x2="820" y2="1070" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="828" y="1076" font-size="12" fill="#0f172a">data flow</text>
+
+    <line x1="920" y1="1070" x2="960" y2="1070" stroke="#374151" stroke-width="2"
+          stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+    <text x="968" y="1076" font-size="12" fill="#0f172a">schema-governed / dashed = optional or external</text>
+
+    <text x="1310" y="1076" font-size="11" fill="#475569">★ recommended method</text>
+  </g>
+
+</svg>

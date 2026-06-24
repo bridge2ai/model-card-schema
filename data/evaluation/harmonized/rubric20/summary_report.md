@@ -1,8 +1,8 @@
 # Model Card Rubric20 Batch Summary
 
-Generated: 2026-06-16T03:13:15.852460+00:00  
+Generated: 2026-06-24T19:35:59.498300+00:00  
 Files evaluated: 1
 
 | File | Score | % | Structural | Metadata | Technical | FAIRness |
 |---|---:|---:|---:|---:|---:|---:|
-| `src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml` | 54/84 | 64.3% | 17/21 | 12/21 | 12/25 | 13/17 |
+| `src/data/examples/d4d_integration/climate-forecasting-model-card.yaml` | 79/84 | 94.0% | 21/21 | 19/21 | 22/25 | 17/17 |

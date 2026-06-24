@@ -1,2 +1,2 @@
 model_card_file,total_score,max_score,percentage,structural,metadata,technical,fairness,q1_score,q2_score,q3_score,q4_score,q5_score,q6_score,q7_score,q8_score,q9_score,q10_score,q11_score,q12_score,q13_score,q14_score,q15_score,q16_score,q17_score,q18_score,q19_score,q20_score
-src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml,54,84,64.3,17,12,12,13,5,3,3,5,1,0,0,2,5,5,3,0,5,4,0,1,3,5,3,1
+src/data/examples/d4d_integration/climate-forecasting-model-card.yaml,79,84,94.0,21,19,22,17,5,5,5,5,1,1,5,3,5,5,5,5,5,4,3,1,5,5,5,1

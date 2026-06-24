@@ -1,0 +1,913 @@
+{
+  "rubric": "mc_rubric10_semantic",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
+  "model": "Climate Forecasting Transformer v2.1",
+  "method": "harmonized_d4d_example",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge_semantic"
+  },
+  "overall_score": {
+    "total_points": 45.0,
+    "max_points": 50,
+    "percentage": 90.0,
+    "semantic_deductions": [
+      {
+        "sub_element": "Element 2, Model File Format Specified",
+        "deduction": "No explicit model file format (safetensors, ONNX, PyTorch state_dict, TF SavedModel) is named; only an S3 directory path is provided."
+      },
+      {
+        "sub_element": "Element 3, Base Model or Foundation Lineage Stated",
+        "deduction": "No base_model field; architecture is described as 'custom' but no lineage (pretrained backbone, parent checkpoint) is declared."
+      },
+      {
+        "sub_element": "Element 4, Known Model / Output Bias Disclosed",
+        "deduction": "No bias_model / bias_output / bias_input field is populated. Climate_justice ethical consideration alludes to regional bias but is not paired with a concrete bias disclosure slot."
+      },
+      {
+        "sub_element": "Element 4, Sensitive Data Use Disclosed",
+        "deduction": "No model_parameters.data[].sensitive block exists; harmonized training_datasets refer out to D4D datasheets but the card itself does not affirm/deny sensitive-data use."
+      },
+      {
+        "sub_element": "Element 10, Cross-referenced DOIs or Related Model Links",
+        "deduction": "DOI 10.1234/climate-ai-2025 uses a placeholder prefix (10.1234 is not a real registrant) and no base_model / related-model DOI is linked."
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.path: 's3://climate-models/forecasting-transformer-v2.1/'; model_details.references[1].reference: 'https://doi.org/10.1234/climate-ai-2025'; model_details.references[0].reference: 'https://github.com/climate-ai-lab/climate-transformer'",
+          "quality_note": "Multiple identifiers present (S3 path, GitHub URL, DOI). DOI prefix is implausible but a persistent identifier surface still exists.",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "DOI shape '10.XXXX/...' is structurally valid but '10.1234' is a placeholder-style prefix, not a real registrant (e.g. 10.5281 Zenodo, 10.48550 arXiv).",
+            "consistency_check": "pass",
+            "consistency_details": "S3 path version 'forecasting-transformer-v2.1' matches model_details.version.name 'v2.1.0'.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "S3 bucket 'climate-models' is private-style; resolvable persistence depends on bucket access."
+          }
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: 'Climate Forecasting Transformer v2.1'; model_details.short_description present; overview is ~290 chars; documentation block adds architecture rationale.",
+          "quality_note": "Name + short description + multi-paragraph overview + documentation. Comfortably above the 200-char overview threshold.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Name and description fields populated with prose.",
+            "consistency_check": "pass",
+            "consistency_details": "Overview mentions transformer/NOAA/7-day forecasting which is consistent with architecture and training_datasets.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Description aligns with claimed task (climate forecasting)."
+          }
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: [climate, weather, forecasting, transformer, spatiotemporal, extreme-events, project:genesis, science:climate, risk:reviewed]; pipeline_tag: 'climate-forecasting'",
+          "quality_note": "Nine tags covering domain, modality, and program; pipeline_tag present.",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "'climate-forecasting' is not a standard HuggingFace pipeline_tag; HF taxonomy has no climate task. Still useful for discoverability.",
+            "consistency_check": "pass",
+            "consistency_details": "Tags align with model task and architecture (transformer + spatiotemporal).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tag set is coherent."
+          }
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references[0].reference: 'https://github.com/climate-ai-lab/climate-transformer'; reproducibility_info.pipeline_url points at /tree/v2.1/training.",
+          "quality_note": "GitHub repository acts as the landing page; version-pinned subtree for training pipeline.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Valid GitHub URL shape.",
+            "consistency_check": "pass",
+            "consistency_details": "Pipeline URL tag 'v2.1' matches version.name 'v2.1.0'.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Org/repo name pattern is realistic."
+          }
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: PyTorch; framework_version: 2.1.0; library_name: 'climate-forecasting'; software_dependencies pins torch==2.1.0, transformers==4.35.0.",
+          "quality_note": "Framework + pinned version + dependency manifest.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "framework_version '2.1.0' pairs cleanly with framework 'PyTorch' and is fully pinned.",
+            "consistency_check": "pass",
+            "consistency_details": "compute_infrastructure.software 'PyTorch 2.1, CUDA 12.1' is consistent with framework_version.",
+            "plausibility_check": "pass",
+            "plausibility_details": "torch 2.1.0 + CUDA 12.1 is a real, contemporaneous combination."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.path: 's3://climate-models/forecasting-transformer-v2.1/'; usage_documentation.installation_instructions: 'aws s3 cp s3://climate-models/forecasting-transformer-v2.1/ ./weights/ --recursive'",
+          "quality_note": "Weights distribution mechanism (S3) defined with concrete download command.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "S3 URI shape valid; download command syntactically correct.",
+            "consistency_check": "pass",
+            "consistency_details": "Path in installation_instructions matches model_details.path exactly.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Bucket is presumably private; no public mirror (Zenodo / HF) is offered."
+          }
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references[0]: 'https://github.com/climate-ai-lab/climate-transformer'; pipeline_url and clone command both reference it.",
+          "quality_note": "Repository is referenced and used in installation instructions.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "GitHub URL well-formed.",
+            "consistency_check": "pass",
+            "consistency_details": "Repo URL is reused consistently across documentation, references, and pipeline_url.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Plausible org/repo."
+          }
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "usage_documentation.inference_configuration block with `ClimateTransformer.from_pretrained`; code_examples[0] and [1] show forecasting and extreme-event detection workflows.",
+          "quality_note": "Multiple runnable Python snippets covering load, forecast, and extreme-event detection.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Python code blocks are syntactically reasonable.",
+            "consistency_check": "pass",
+            "consistency_details": "Forecast tensor shape in inference comment '[batch, 168, 16, 16, 5, 5]' matches input_format (168 timesteps, 16x16 grid, 5 vars) and output_format (5 quantiles).",
+            "plausibility_check": "pass",
+            "plausibility_details": "API surface (from_pretrained, forecast, return_quantiles) is plausible for a PyTorch model wrapper."
+          }
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format and output_format describe a [time, lat, lon, vars] tensor and probabilistic output with quantiles; input_format_map gives semantic meaning per variable.",
+          "quality_note": "Explicit tensor shapes, units (Kelvin, Pa, %, m/s), and quantile list for outputs.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Shapes and units fully specified.",
+            "consistency_check": "pass",
+            "consistency_details": "input_format dims (168, 16, 16, 5) match inference example tensor shape and architecture description (16x16 grid, 168-hour window).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Quantile set [0.1, 0.25, 0.5, 0.75, 0.9] is a standard probabilistic-forecast configuration."
+          }
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "model_details.path points at an S3 directory; no .safetensors / .pt / .onnx / SavedModel format is named anywhere; install step copies the directory blind.",
+          "quality_note": "Concrete serialization format is missing.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No file extension or serialization format is declared.",
+            "consistency_check": "n/a",
+            "consistency_details": "Cannot verify consistency without a stated format.",
+            "plausibility_check": "n/a",
+            "plausibility_details": "Reasonable users will not know whether to expect PyTorch state_dict, safetensors, or a checkpoint directory."
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: 'Apache-2.0'",
+          "quality_note": "SPDX-recognized permissive license.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'Apache-2.0' is a valid SPDX identifier.",
+            "consistency_check": "pass",
+            "consistency_details": "No base_model is declared, so no license incompatibility (e.g. LLaMA-derived) to flag.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Apache-2.0 is plausible for a research codebase trained on public NOAA/ERA5 data."
+          }
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: PyTorch; framework_version: 2.1.0; compute_infrastructure.software: 'PyTorch 2.1, CUDA 12.1'.",
+          "quality_note": "Standard, pinned framework.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Framework name and version both present and pinned.",
+            "consistency_check": "pass",
+            "consistency_details": "Framework version matches software_dependencies torch==2.1.0.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Realistic pairing."
+          }
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 0,
+          "evidence": "No top-level base_model field; model_architecture describes a 'Custom Transformer' but does not reference a parent checkpoint or pretrained backbone.",
+          "quality_note": "Lineage not declared. Without a parent model, mark as missing per rubric.",
+          "semantic_analysis": {
+            "format_check": "n/a",
+            "format_details": "Field absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "n/a",
+            "plausibility_check": "marginal",
+            "plausibility_details": "A 'custom' from-scratch transformer is plausible for climate forecasting, but the card should still affirm 'trained from scratch'."
+          }
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: 'climate-forecasting'; considerations.use_cases lists 7-day regional forecasting, extreme-weather early warning, climate adaptation; model_index[0].results[0].task: 'climate-forecasting / Regional Climate Prediction'.",
+          "quality_note": "Tasks declared at multiple layers consistently.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Tasks present in pipeline_tag, use_cases, and model_index.",
+            "consistency_check": "pass",
+            "consistency_details": "All three sources agree on 'climate-forecasting'.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tasks match architecture, input/output, and metrics."
+          }
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 1,
+          "evidence": "reproducibility_info.random_seed: 42; environment_config pins CUDA_VERSION, NCCL_VERSION, PYTORCH_CUDA_ALLOC_CONF; pipeline_url to v2.1 training tree; hyperparameters complete; software_dependencies pinned.",
+          "quality_note": "Seed + env + pinned deps + versioned pipeline link.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All pins use concrete versions.",
+            "consistency_check": "pass",
+            "consistency_details": "Pipeline URL tag 'v2.1' matches version.name; CUDA 12.1 matches compute_infrastructure.software.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Container hash is absent but the pinned env + pipeline_url is enough to reproduce in practice."
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations[0] 'Climate_justice' + mitigation_strategy; [1] 'Over_reliance_risk' + mitigation_strategy.",
+          "quality_note": "Two named risks each paired with mitigation guidance.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Both entries have name and mitigation_strategy.",
+            "consistency_check": "pass",
+            "consistency_details": "Over-reliance mitigation echoes the probabilistic output design (uncertainty quantification) elsewhere in the card.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Risks are appropriate for an operational forecasting model."
+          }
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 0,
+          "evidence": "No bias_model, bias_output, or per-dataset bias_input field is populated. Climate_justice mitigation gestures at potential regional bias but is not paired with a concrete disclosed bias.",
+          "quality_note": "Bias is named indirectly via a mitigation strategy, not disclosed as a positive finding.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Dedicated bias fields are empty.",
+            "consistency_check": "fail",
+            "consistency_details": "Climate_justice mitigation implies bias risk exists, but no corresponding bias disclosure is present — internal inconsistency.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Climate forecasting models trained on NOAA grids do exhibit regional/under-sampling bias; absence of disclosure is a real gap."
+          }
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses: long-term climate projections, non-North-America forecasts, single-point deterministic forecasts, emergency response without expert verification.",
+          "quality_note": "Four explicit out-of-scope uses with concrete justifications.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each entry has a description.",
+            "consistency_check": "pass",
+            "consistency_details": "Out-of-scope set mirrors the limitations list (NA-only, 7-day horizon, requires expert verification).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Realistic exclusions for a regional forecasting model."
+          }
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 0,
+          "evidence": "No model_parameters.data[].sensitive block (harmonized variant defers dataset detail to D4D references); the card itself does not affirm or deny sensitive-data use.",
+          "quality_note": "In the harmonized pattern this is expected to live on the referenced datasheet, but a top-level affirmation is still useful and is absent.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Field absent at model-card level.",
+            "consistency_check": "marginal",
+            "consistency_details": "Climate observations (temperature, pressure, humidity, wind) are not PII; semantically a 'no sensitive data' disclosure would suffice but is missing.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Domain risk is low, but the rubric still expects an explicit statement."
+          }
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users: climate scientists/meteorologists, emergency-management agencies, agricultural planners; considerations.tradeoffs: resolution vs compute, ensemble vs inference cost.",
+          "quality_note": "Three named user groups + two concrete tradeoffs.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Both users[] and tradeoffs[] populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Tradeoffs align with architectural choices (16x16 grid, single-shot forecast).",
+            "plausibility_check": "pass",
+            "plausibility_details": "User groups match the use_cases declared elsewhere."
+          }
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: 12 encoder layers, 8 attention heads, hidden_dim 512, spatial attention 16x16, temporal attention 168-hour window, 85M params post-pruning (from 120M).",
+          "quality_note": "Layer count, head count, hidden dim, attention shapes, and parameter count all reported.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Numbers are concrete.",
+            "consistency_check": "pass",
+            "consistency_details": "Architecture (12 layers, 8 heads, 512 hidden, 16x16 spatial, 168 temporal) matches input_format dims and inference example ClimateTransformer constructor args.",
+            "plausibility_check": "pass",
+            "plausibility_details": "85M params and 12-layer / 8-head / 512-hidden geometry is internally consistent and realistic for the described compute (8x A100)."
+          }
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.training_datasets[0]: file://./datasets/noaa-historical-climate-dataset.yaml (D4D ref); [1]: https://datasheets.example.org/datasets/era5-reanalysis. Each has a description.",
+          "quality_note": "Two training datasets referenced via the harmonized D4D pattern with descriptions.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URLs follow D4D harmonized convention (file:// to local datasheets, https:// to remote registry).",
+            "consistency_check": "pass",
+            "consistency_details": "Datasets (NOAA + ERA5) align with overview ('50 years of historical climate data from NOAA') and the top-level datasets: [noaa-climate-observations, era5-reanalysis] tag list.",
+            "plausibility_check": "pass",
+            "plausibility_details": "NOAA + ERA5 is a standard combination in operational climate ML."
+          }
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 1,
+          "evidence": "training_procedure.reproducibility_info.hyperparameters: AdamW, lr=1e-4, batch=32, epochs=50, steps=125000, weighted MSE + quantile loss, Xavier init, cosine schedule with 5000-step warmup, gradient clipping 1.0, mixed precision.",
+          "quality_note": "Comprehensive hyperparameter block.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All numeric values present.",
+            "consistency_check": "pass",
+            "consistency_details": "batch_size=32 and learning_rate=1e-4 in hyperparameters match the Trainer instantiation in usage_documentation.training_configuration.",
+            "plausibility_check": "pass",
+            "plausibility_details": "50 epochs * 125k steps / 32 batch is internally consistent with a multi-day 8x A100 training run."
+          }
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 1,
+          "evidence": "compute_infrastructure.hardware: '8x NVIDIA A100 80GB GPUs'; hardware_list: OLCF Frontier MI250X, ALCF Polaris A100; software: 'PyTorch 2.1, CUDA 12.1'; training_speed '~2500 samples/sec on 8x A100'.",
+          "quality_note": "Hardware (GPU type + count), DOE facility list, software stack, and throughput all provided.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Field populated with concrete values.",
+            "consistency_check": "marginal",
+            "consistency_details": "hardware says '8x A100 80GB' but hardware_list also names MI250X (AMD) on Frontier — readers should understand these are the available facilities; total_compute / energy fields are absent.",
+            "plausibility_check": "pass",
+            "plausibility_details": "85M params on 8x A100 80GB is comfortably compute-feasible; 2500 samples/sec is plausible."
+          }
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_parameters.training_datasets vs model_parameters.evaluation_datasets are disjoint in the harmonized variant; evaluation_datasets explicitly notes 'Held-out test set - 2020-2024 observations'; model_index dataset.split: 'test'.",
+          "quality_note": "Train/eval split is structurally enforced by the harmonized schema and explicitly described.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Distinct training_datasets and evaluation_datasets blocks.",
+            "consistency_check": "pass",
+            "consistency_details": "No training_datasets URL is reused under evaluation_datasets — no leakage flag.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Held-out 2020-2024 split following 1970-2019 training is a standard time-based hold-out for climate models."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: 'v2.1.0'",
+          "quality_note": "Semver-shaped tag.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'v2.1.0' matches MAJOR.MINOR.PATCH semver with v-prefix.",
+            "consistency_check": "pass",
+            "consistency_details": "Version matches the top-level name suffix 'v2.1', the S3 path 'forecasting-transformer-v2.1', and pipeline_url '/tree/v2.1/'.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Realistic release tag."
+          }
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2025-01-15'; version.last_updated: '2025-01-20T14:30:00Z'.",
+          "quality_note": "ISO date plus a last_updated timestamp.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "ISO 8601.",
+            "consistency_check": "pass",
+            "consistency_details": "version.date matches created_on (2025-01-15); last_updated matches modified_on (2025-01-20).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Dates are coherent and recent."
+          }
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: '+15% extreme-event accuracy; added precipitation uncertainty quantification; -30% inference time via pruning'.",
+          "quality_note": "Concrete, multi-line diff — not just a bump.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Diff is populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Mention of pruning ('Reduced inference time by 30% through model pruning') matches model_architecture note '85M (after pruning from 120M)'.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Claimed deltas are plausible for a pruning + uncertainty-head update."
+          }
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.creator_references[]: Jane Smith (PI), Climate AI Lab (organization), ORCID 0000-0002-1234-5678 (co-investigator). Roles given via 'description' field per harmonized pattern.",
+          "quality_note": "Harmonized D4D creator_references with role descriptions and an ORCID URL.",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "ORCID URL '0000-0002-1234-5678' has the right shape (XXXX-XXXX-XXXX-XXXX, last digit numeric) but the digit pattern is a documentation-style placeholder.",
+            "consistency_check": "pass",
+            "consistency_details": "Lead creator 'Jane Smith' matches created_by and modified_by at root and in model_details.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Names and lab are realistic-styled placeholders rather than real attributable identities."
+          }
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0].style: 'APA'; citation body includes authors, year, title, journal, DOI link.",
+          "quality_note": "Human-readable APA citation present; no BibTeX entry though.",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "APA prose citation; no machine-readable BibTeX entry as preferred by rubric.",
+            "consistency_check": "pass",
+            "consistency_details": "Citation year 2025 matches version.date 2025-01-15; lead author 'Smith, J.' aligns with creator_references PI Jane Smith.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Journal 'Journal of Climate AI' and DOI 10.1234/climate-ai-2025 are placeholder-style — but per rubric a citation is present and complete in structure."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "overview explains regional climate pattern prediction; mission_relevance.description explains DOE mission alignment and exascale-compute rationale.",
+          "quality_note": "Motivation stated both at model level and program level.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Overview + mission_relevance.description both populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Motivation in overview (regional, 7-day, extreme weather) aligns with mission_relevance (climate science + extreme weather prediction).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Rationale is coherent."
+          }
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases: 7-day regional weather forecasting, extreme-weather early warning, climate adaptation/risk; pipeline_tag 'climate-forecasting'.",
+          "quality_note": "Intended uses are specific, deployment-aware, and matched to stakeholder groups in users[].",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Three concrete use cases plus pipeline_tag.",
+            "consistency_check": "pass",
+            "consistency_details": "Aligned with users[] (climate scientists, emergency management, agricultural planners).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Use cases are realistic operational deployments."
+          }
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 1,
+          "evidence": "mission_relevance.doe_project: 'GENESIS Climate AI Initiative'; doe_facility: 'OLCF Frontier, ALCF Polaris'; description ties to DOE climate science mission.",
+          "quality_note": "Explicit DOE program + facilities + paragraph-length rationale.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All mission_relevance sub-fields populated.",
+            "consistency_check": "pass",
+            "consistency_details": "DOE facilities cited here match hardware_list (OLCF Frontier MI250X, ALCF Polaris A100) and the 'project:genesis' tag.",
+            "plausibility_check": "pass",
+            "plausibility_details": "OLCF Frontier and ALCF Polaris are real DOE leadership-class systems."
+          }
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 1,
+          "evidence": "mission_relevance.funding_grants[]: 'DOE SciDAC Climate Modeling' (file://./grants/doe-scidac-grant.yaml) and 'NSF AI for Climate' (https://grants.example.org/nsf-ai-climate).",
+          "quality_note": "Harmonized funding_grants references replace the simple funding_source string; both DOE and NSF programs named.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "D4D reference pattern: url + description per grant.",
+            "consistency_check": "pass",
+            "consistency_details": "DOE SciDAC funding matches mission_relevance.doe_project 'GENESIS Climate AI Initiative' and DOE facility use.",
+            "plausibility_check": "pass",
+            "plausibility_details": "DOE SciDAC and NSF AI for Climate are realistic-shaped program names."
+          }
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 1,
+          "evidence": "mission_relevance.doe_facility and hardware_list name OLCF Frontier and ALCF Polaris; mission_relevance.description explicitly thanks 'DOE Leadership Computing Facilities (Frontier, Polaris)'.",
+          "quality_note": "Explicit acknowledgement of DOE leadership-class facilities.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Acknowledgement is in prose and as structured fields.",
+            "consistency_check": "pass",
+            "consistency_details": "Facility list is consistent everywhere it appears.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Real facilities, real program."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 1,
+          "evidence": "training_procedure.description: 3-stage curriculum (pre-train 1970-2010, fine-tune 2010-2019, adversarial extreme-event); methodology: DDP across 8 GPUs, fp16, gradient checkpointing, early stopping on validation MSE.",
+          "quality_note": "Procedure described with stages, distributed-training mode, and stopping rule.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Description + methodology + reproducibility_info all populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Mixed precision in methodology matches 'precision=fp16' in training_configuration and the 'Mixed precision (fp16)' optimization technique listed in hyperparameters.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Pre-train / fine-tune / adversarial curriculum is a plausible training recipe."
+          }
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 1,
+          "evidence": "quantitative_analysis.evaluation_procedure.description (held-out 2020-2024 + extreme-weather benchmark); benchmarks: NOAA CPB v3, WMO Extreme Weather Detection Challenge; baselines: 4 listed; sota_comparison and uncertainty_quantification populated.",
+          "quality_note": "Eval protocol, benchmarks, baselines, and calibration assessment all documented.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All evaluation_procedure fields populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Benchmarks here match model_index dataset name 'NOAA Climate Prediction Benchmark v3'.",
+            "plausibility_check": "pass",
+            "plausibility_details": "CRPS + reliability diagrams are the standard tools for probabilistic-forecast calibration."
+          }
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 1,
+          "evidence": "training_procedure.reproducibility_info: random_seed 42, environment_config (CUDA, NCCL, PYTORCH_CUDA_ALLOC_CONF), pipeline_url to v2.1 training tree.",
+          "quality_note": "Seeds + env pins + versioned pipeline URL.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All sub-fields populated.",
+            "consistency_check": "pass",
+            "consistency_details": "CUDA 12.1 in env matches software 'PyTorch 2.1, CUDA 12.1'.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Container hash absent, but seeds + pinned versions + pipeline URL approximate reproducibility well."
+          }
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references[0]: github.com/climate-ai-lab/climate-transformer; usage_documentation.installation_instructions clones the same repo.",
+          "quality_note": "Code repo linked and reused throughout the card.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Valid GitHub URL.",
+            "consistency_check": "pass",
+            "consistency_details": "Same URL in references, installation_instructions, and pipeline_url.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Plausible OSS layout."
+          }
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.citations APA entry; model_details.references include GitHub and DOI; evaluation benchmarks reference NOAA CPB v3 and WMO Extreme Weather Detection Challenge; sota_comparison cites 'ConvLSTM-Attention, Wang et al. 2024'.",
+          "quality_note": "Citations to a journal article, two community benchmarks, and a prior SOTA work.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Citations and benchmark references present.",
+            "consistency_check": "pass",
+            "consistency_details": "NOAA and WMO benchmarks cited in evaluation_procedure also appear in model_index.results.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Wang et al. 2024 ConvLSTM-Attention is plausible but uncited (no DOI for the comparison); journal placeholder."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: RMSE_temperature=1.23 K, RMSE_precipitation=2.45 mm/day, F1_extreme_events=0.78. Each has type, value, unit/threshold, and slice.",
+          "quality_note": "Three metrics across both regression (RMSE) and classification (F1) families, each with units and slice.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Numeric values present with explicit units.",
+            "consistency_check": "pass",
+            "consistency_details": "Metric values match model_index.results metrics (rmse_temperature=1.23, rmse_precipitation=2.45, f1_extreme=0.78).",
+            "plausibility_check": "pass",
+            "plausibility_details": "F1=0.78 in [0,1]; RMSE values are non-negative and reasonable in physical units for 7-day forecasts."
+          }
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 1,
+          "evidence": "Each performance_metric has a slice: '7-day forecast' (two metrics) and 'Extreme heat/cold events' (one).",
+          "quality_note": "Slices used; would be stronger with per-region or per-season slices.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "slice field populated on every metric.",
+            "consistency_check": "marginal",
+            "consistency_details": "Slices distinguish forecast horizon and event type but not geographic sub-population, which Climate_justice ethical consideration would call for.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Slice labels match the documented evaluation scope."
+          }
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "Each metric carries confidence_interval (lower_bound, upper_bound) and the two RMSE metrics also carry value_error.",
+          "quality_note": "CIs and error bars reported uniformly.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "CI bounds present.",
+            "consistency_check": "pass",
+            "consistency_details": "All three CIs satisfy lower < value < upper: 1.18<1.23<1.28; 2.33<2.45<2.57; 0.74<0.78<0.82.",
+            "plausibility_check": "pass",
+            "plausibility_details": "CI widths align with reported value_error magnitudes."
+          }
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: 7-day horizon, North-America-only, requires complete inputs, OOD extreme events.",
+          "quality_note": "Four concrete failure modes.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Four entries with descriptions.",
+            "consistency_check": "pass",
+            "consistency_details": "Limitations align with out_of_scope_uses and with the temporal/spatial scope declared in input_format.",
+            "plausibility_check": "pass",
+            "plausibility_details": "All four are plausible operational limits."
+          }
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs: spatial resolution vs 3x compute; ensemble forecasts vs 10x inference cost. ethical_considerations adds over-reliance risk.",
+          "quality_note": "Concrete quantitative tradeoffs plus an over-reliance risk.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Both entries populated.",
+            "consistency_check": "marginal",
+            "consistency_details": "Rubric would also expect an accuracy-vs-fairness tradeoff given Climate_justice mitigation, but compute/cost tradeoffs are documented.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tradeoffs are realistic engineering choices."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.references include GitHub (github.com/climate-ai-lab/climate-transformer); model is also distributed via S3.",
+          "quality_note": "GitHub counts as a recognized platform; no HF Hub / Zenodo / PWC model record though.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "GitHub URL valid.",
+            "consistency_check": "pass",
+            "consistency_details": "Repo URL consistent throughout the card.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "A formal release (GitHub Releases, Zenodo DOI) would be stronger than an S3 directory."
+          }
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 0,
+          "evidence": "Only DOI present is 'https://doi.org/10.1234/climate-ai-2025' in references and citation. No base_model field; no DOI for the baseline ConvLSTM-Attention or ResNet-50 baseline mentioned in sota_comparison.",
+          "quality_note": "DOI prefix '10.1234' is not a real registrant (Crossref/DataCite shortest real prefixes start at 10.1000+ but '10.1234' is widely used as a placeholder); no cross-references to parent or related models.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Shape '10.XXXX/...' matches, but '10.1234' is a placeholder prefix, not a known registrant (Zenodo 10.5281, arXiv 10.48550, IEEE 10.1109, etc.).",
+            "consistency_check": "marginal",
+            "consistency_details": "Same placeholder DOI is reused consistently in references and citation; the consistency is real but the underlying identifier is not resolvable.",
+            "plausibility_check": "fail",
+            "plausibility_details": "DOI is not a real persistent identifier; no related/parent model DOI is provided."
+          }
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "model_index[0]: task 'climate-forecasting / Regional Climate Prediction'; dataset 'NOAA Climate Prediction Benchmark v3' split 'test'; metrics rmse_temperature=1.23, rmse_precipitation=2.45, f1_extreme=0.78; source linked.",
+          "quality_note": "Full PWC-style benchmark record with task, dataset, metrics, split, and source URL.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "model_index follows the PWC schema with task/dataset/metrics/source.",
+            "consistency_check": "pass",
+            "consistency_details": "Benchmark dataset 'NOAA Climate Prediction Benchmark v3' does not appear in training_datasets — no leakage. Metric values match quantitative_analysis.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Source URL benchmark.noaa.gov/climate-v3 is plausibly shaped."
+          }
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "Top-level schema_version: 'd4d-1.0'.",
+          "quality_note": "Conformance to the D4D-harmonized schema version declared.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "schema_version field populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Use of creator_references / training_datasets / evaluation_datasets / funding_grants matches the d4d-1.0 harmonized schema.",
+            "plausibility_check": "pass",
+            "plausibility_details": "schema_version 'd4d-1.0' matches the variant under src/data/examples/d4d_integration/."
+          }
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 1,
+          "evidence": "training_datasets[0]: file://./datasets/noaa-historical-climate-dataset.yaml (D4D datasheet); [1]: https://datasheets.example.org/datasets/era5-reanalysis; evaluation_datasets[0]: file://./datasets/noaa-test-dataset.yaml; [1]: https://datasheets.example.org/datasets/extreme-weather-benchmark.",
+          "quality_note": "All four datasets link to D4D-style datasheet references (local file:// or remote https://datasheets...).",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URL shapes follow the D4D external-reference pattern.",
+            "consistency_check": "pass",
+            "consistency_details": "Top-level datasets: [noaa-climate-observations, era5-reanalysis] aligns with the training_datasets entries; evaluation_datasets are distinct.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Pattern matches the documented harmonized integration approach."
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {
+        "field": "model_details.references[1].reference / model_details.citations[0].citation",
+        "issue": "DOI '10.1234/climate-ai-2025' uses placeholder prefix 10.1234 (not a real Crossref/DataCite registrant)."
+      },
+      {
+        "field": "model_details.creator_references[2].url",
+        "issue": "ORCID 0000-0002-1234-5678 is shape-correct but a documentation-style placeholder identity."
+      },
+      {
+        "field": "model_details.path",
+        "issue": "Only an S3 directory URI is given; no explicit model file format (safetensors / .pt / ONNX / SavedModel)."
+      },
+      {
+        "field": "pipeline_tag",
+        "issue": "'climate-forecasting' is not a standard HuggingFace pipeline_tag (HF taxonomy has no climate task)."
+      }
+    ],
+    "consistency_failures": [
+      {
+        "rule": "Climate_justice ethical consideration ↔ bias disclosure",
+        "issue": "Ethical_considerations name 'Climate_justice' implies known regional/representation bias risk, but bias_model / bias_output / bias_input fields are empty — internal inconsistency."
+      },
+      {
+        "rule": "Climate_justice mitigation ↔ slice diversity",
+        "issue": "Climate_justice mitigation_strategy promises evaluation across rural/underserved regions, but performance_metrics slices are only by forecast horizon and event type — no per-region slice."
+      },
+      {
+        "rule": "Sensitive data disclosure (top-level affirmation)",
+        "issue": "No model_parameters.data[].sensitive block at model-card level; under the harmonized pattern this is delegated to D4D datasheets but no explicit affirmation is given on the card itself."
+      }
+    ],
+    "plausibility_failures": [
+      {
+        "field": "model_details.references[1].reference (DOI)",
+        "issue": "DOI is not resolvable to a real registrant; placeholder identifier."
+      },
+      {
+        "field": "base_model / lineage",
+        "issue": "No base_model declared and no 'trained from scratch' affirmation; lineage is implicit."
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Strong reproducibility surface: random_seed, fully pinned PyTorch/CUDA/NCCL versions, versioned pipeline_url at the same v2.1 tag as the release.",
+      "Comprehensive performance reporting: every metric has value, unit, slice, and confidence interval, and CI bounds satisfy lower<value<upper across all three metrics.",
+      "Clean harmonized D4D integration — training_datasets, evaluation_datasets, creator_references, and funding_grants all follow the external-reference pattern with descriptions.",
+      "Internally consistent architecture story: model_architecture (16x16 spatial, 168 temporal, 12 layers, 8 heads, 512 hidden, 85M params) matches input_format dimensions and the ClimateTransformer constructor arguments in the inference example.",
+      "Mission/funding/facility coherence: GENESIS Climate AI Initiative, DOE SciDAC + NSF AI for Climate grants, and OLCF Frontier + ALCF Polaris facilities are mutually consistent across mission_relevance, hardware_list, and acknowledgements.",
+      "Disjoint train/eval datasets and a benchmark dataset (NOAA CPB v3) that does not appear in training_datasets — no leakage flag."
+    ],
+    "weaknesses": [
+      "Bias disclosure is absent: no bias_model / bias_output / bias_input, despite Climate_justice ethical consideration implying regional bias risk.",
+      "No model file format declared (safetensors / .pt / ONNX) — only an S3 directory URI.",
+      "No base_model / lineage affirmation; users must infer 'trained from scratch'.",
+      "Slices are only by forecast horizon and event type — no per-region or per-season slice, despite Climate_justice mitigation explicitly promising regional fairness evaluation.",
+      "DOI uses placeholder prefix 10.1234; ORCID uses placeholder digit pattern; journal name is placeholder-style.",
+      "No top-level sensitive_data_used affirmation (even a 'false' would satisfy the rubric)."
+    ],
+    "semantic_concerns": [
+      "Climate_justice mitigation promises regional fairness evaluation that the performance_metrics slicing does not deliver.",
+      "Placeholder DOI prefix 10.1234 is not a real registrant — affects Element 10 cross-referencing and indirectly the citation in Element 6.",
+      "pipeline_tag 'climate-forecasting' is non-standard and will not appear in HuggingFace task pickers; consider 'other' with a tag, or document this as a custom task.",
+      "Train/eval split is structurally clean, but a temporal hold-out (1970-2019 train vs 2020-2024 test) is sensitive to climate non-stationarity — worth disclosing as an evaluation caveat."
+    ],
+    "recommendations": [
+      "Populate bias_model and bias_output (or a per-dataset bias_input via the linked D4D datasheets) addressing regional, temporal, and class-imbalance biases of NOAA + ERA5 training data.",
+      "Add a sliced performance table by sub-region (e.g. western/central/eastern US, urban/rural grid cells) to back the Climate_justice mitigation_strategy claim.",
+      "Declare the serialization format (e.g. 'PyTorch state_dict checkpoint' or 'safetensors') and a sample file path under the S3 prefix.",
+      "Replace placeholder DOI '10.1234/...' with a real Zenodo (10.5281/...) or arXiv (10.48550/...) DOI when the paper is registered; add base_model: null or a 'trained from scratch' note.",
+      "Add a model_parameters sensitive_data affirmation (or rely on the linked D4D datasheets and reference them explicitly from the model card).",
+      "Add baseline DOIs (ConvLSTM-Attention Wang et al. 2024) to model_details.references so the SOTA comparison is verifiable."
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "mc-rubric10-semantic",
+    "rubric_hash": "rubric10-semantic@1.0",
+    "model_card_hash": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml"
+  }
+}
