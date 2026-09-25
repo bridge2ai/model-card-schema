@@ -17,12 +17,13 @@ the LinkML schema to be loaded. It renders the well-known sections
 into themed cards, then falls through to a generic key/value table for any
 remaining keys. Inline CSS only; no external assets.
 
-If a sibling badge SVG exists under ``data/evaluation/badges/<stem>_*.svg`` it
-is embedded under the title.
+Badge SVGs found under ``data/evaluation/badges/<stem>_*.svg`` are embedded
+as data URLs under the title, so the HTML can be shared without separate assets.
 """
 from __future__ import annotations
 
 import argparse
+import base64
 import glob
 import html
 import sys
@@ -481,7 +482,8 @@ def render_card(yaml_path: Path) -> str:
     badge_row = ""
     if badges:
         imgs = " ".join(
-            f'<img src="../evaluation/badges/{b.name}" alt="{b.stem}">'
+            f'<img src="data:image/svg+xml;base64,{base64.b64encode(b.read_bytes()).decode("ascii")}" '
+            f'alt="{esc(b.stem)}">'
             for b in badges
         )
         badge_row = f'<div class="badge-row">{imgs}</div>'
