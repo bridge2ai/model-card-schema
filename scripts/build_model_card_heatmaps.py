@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 from urllib.parse import urlsplit, urlunsplit
@@ -41,16 +42,62 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+# The figure's short row labels are positional; these full names pin what each row must be.
+RUBRIC10_ELEMENTS = [
+    "Model Discovery and Identification", "Model Access and Distribution", "Model Reuse and Interoperability",
+    "Ethical Use and Responsible AI", "Model Architecture and Training Composition", "Model Provenance and Versioning",
+    "Scientific Motivation and Funding Transparency", "Training and Evaluation Transparency", "Performance Evaluation and Limitations Disclosure",
+    "Cross-Platform and Community Integration",
+]
+RUBRIC10_ITEMS = [
+    "Persistent Identifier", "Model Name and Description Completeness", "Tags / Pipeline Tag for Searchability", "Landing Page or Repository URL", "Library / Framework Identification",
+    "Weight Distribution Mechanism Defined", "Code Repository Available", "Inference / Usage Example Provided", "Input / Output Specification", "Model File Format Specified",
+    "License Terms Allow Reuse", "Standard Framework / Format Used", "Base Model or Foundation Lineage Stated", "Supported Tasks Declared", "Reproducibility Artifacts Provided",
+    "Ethical Considerations Documented", "Known Model / Output Bias Disclosed", "Out-of-Scope / Discouraged Uses", "Sensitive Data Use Disclosed", "Intended Users and Stakeholder Tradeoffs",
+    "Architecture Described in Detail", "Training Data Documented", "Hyperparameters Reported", "Compute Infrastructure Reported (Extended)", "Training / Evaluation Split Defined",
+    "Version Number Provided", "Version Date Documented", "Change Description for This Version", "Owners / Contributors Identified", "Citation Provided",
+    "Motivation / Use Case Rationale", "Primary Intended Use Articulated", "Mission Relevance Stated (Extended)", "Funding Source / Grant Agency Listed", "Compute / Platform Acknowledgement",
+    "Training Procedure Documented", "Evaluation Procedure Documented", "Reproducibility Information (Extended)", "Open-Source Code Linked", "External Standards or References Cited",
+    "Quantitative Performance Metrics Reported", "Performance Across Slices / Subpopulations", "Confidence Intervals or Error Bars", "Limitations Section Present", "Tradeoffs / Risks Acknowledged",
+    "Published on a Recognized Platform", "Cross-referenced DOIs or Related Model Links", "Benchmark Results (Papers with Code)", "Standards / Schema Conformance Stated", "Datasets Linked",
+]
+RUBRIC20_QUESTIONS = [
+    "Required Field Completeness", "Overview Length Adequacy", "Tag / Keyword Diversity", "Input / Output Specification", "Schema Version Declared",
+    "Persistent Identifier Present", "Funding & Acknowledgements Completeness", "Ethical & Responsible-AI Documentation", "License Clarity & SPDX Compliance", "Framework / Library Standardization",
+    "Tool & Software Transparency", "Training Procedure Clarity", "Version History Documentation", "Citations & References", "Compute Infrastructure & Energy",
+    "Findability (Persistent Landing)", "Accessibility & Inference Path", "Performance Metrics with Slices & CI", "Out-of-Scope Uses, Limitations & Tradeoffs", "Cross-Platform Interlinks",
+]
+
+
 def public_remote(url):
-    """Keep a remote URL only if it is a network location, without any credentials."""
+    """Keep a remote URL only if it is a network location, without credentials, query or fragment."""
     if not url:
         return None
-    parts = urlsplit(url)
-    if parts.scheme in ("http", "https", "ssh", "git"):
-        return urlunsplit(parts._replace(netloc=parts.hostname + (f":{parts.port}" if parts.port else "")))
-    if not parts.scheme and ":" in url and not url.startswith(("/", ".")):
-        return url.split("@", 1)[-1]  # scp-style git@host:owner/repo carries only a user name
+    try:
+        parts = urlsplit(url)
+        if parts.scheme in ("http", "https", "ssh", "git"):
+            if not parts.hostname:
+                return None
+            netloc = parts.hostname + (f":{parts.port}" if parts.port else "")
+            return urlunsplit(parts._replace(netloc=netloc, query="", fragment=""))
+    except ValueError:  # for example a non-numeric port
+        return None
+    if not parts.scheme and ":" in url and not url.startswith(("/", ".", "~")):
+        return url.split("@", 1)[-1].split("?", 1)[0]  # scp-style git@host:owner/repo carries only a user name
     return None
+
+
+def local_paths(value, homes):
+    """Yield keys and strings that look like local filesystem paths."""
+    if isinstance(value, dict):
+        for key, item in value.items():
+            yield from local_paths(key, homes)
+            yield from local_paths(item, homes)
+    elif isinstance(value, list):
+        for item in value:
+            yield from local_paths(item, homes)
+    elif isinstance(value, str) and (value.startswith(("/", "~/")) or any(home in value for home in homes)):
+        yield value
 
 
 def evaluation_payload(report):
@@ -117,17 +164,22 @@ def main(argv=None):
     SOURCES = {}
     generated_at = datetime.now(timezone.utc).isoformat()
 
+    # GIT_DIR and friends would point git at another repository; ignore them.
+    git_env = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+
     def git(*command):
         try:
             # Only the trailing newline: leading spaces are significant in `git status` output.
-            return subprocess.check_output(["git", "-C", str(REPO), *command], text=True, stderr=subprocess.DEVNULL).rstrip("\n")
+            return subprocess.check_output(["git", "-C", str(REPO), *command], text=True, env=git_env,
+                                           stderr=subprocess.DEVNULL).rstrip("\n")
         except (OSError, subprocess.CalledProcessError):
             return None
 
     # Only trust git when --repo is itself the working tree's top level, not a folder
-    # copied into some other repository.
+    # copied into some other repository. samefile, because macOS paths are case-insensitive.
     toplevel = git("rev-parse", "--show-toplevel")
-    in_git = toplevel is not None and Path(toplevel).resolve() == REPO
+    in_git = toplevel is not None and Path(toplevel).samefile(REPO)
+    writes_repo_folder = IN_REPO_OUT.exists() and OUT.samefile(IN_REPO_OUT)
 
     def read(relative, kind):
         path = REPO / relative
@@ -166,8 +218,12 @@ def main(argv=None):
         changed = {entry[3:] for entry in git("status", "--porcelain=v1", "-z", "--untracked-files=all", "--", *SOURCES).split("\0") if entry}
         for relative, info in SOURCES.items():
             info["committed"] = relative in tracked and relative not in changed
+        # The builder that actually ran may be a copy; it counts as committed only if its bytes
+        # are the committed script's.
+        head_blob = git("rev-parse", f"HEAD:{SCRIPT}")
+        SOURCES[SCRIPT]["committed"] = head_blob is not None and git("hash-object", str(script_path)) == head_blob
         uncommitted = [relative for relative, info in SOURCES.items() if not info["committed"]]
-        if uncommitted and OUT == IN_REPO_OUT.resolve() and not args.allow_uncommitted:
+        if uncommitted and writes_repo_folder and not args.allow_uncommitted:
             raise SystemExit("Inputs are untracked or modified, so the published provenance would cite files that are "
                              f"not on GitHub: {uncommitted}. Commit them first, write elsewhere with --output-dir, "
                              "or pass --allow-uncommitted.")
@@ -238,9 +294,10 @@ def main(argv=None):
 
     r10 = [flatten10(r) for r in ratings10]
     r20 = [flatten20(r) for r in ratings20]
-    # The short row labels below are positional; fail if the evaluators reorder or renumber items.
-    assert [(e, s) for e, s, _, _ in r10[0]] == [(e, s) for e in range(1, 11) for s in range(1, 6)], "rubric10 item order changed"
-    assert [q["id"] for _, q in r20[0]] == list(range(1, 21)), "rubric20 question order changed"
+    # The short row labels below are positional; fail if the evaluators reorder, rename or renumber items.
+    assert [e["name"] for e in ratings10[0]["elements"]] == RUBRIC10_ELEMENTS, "rubric10 elements changed; update the row labels"
+    assert [s["name"] for *_, s in r10[0]] == RUBRIC10_ITEMS, "rubric10 sub-items changed; update the row labels"
+    assert [(q["id"], q["name"]) for _, q in r20[0]] == list(enumerate(RUBRIC20_QUESTIONS, 1)), "rubric20 questions changed; update the row labels"
     assert [(a, b, c, d["name"]) for a, b, c, d in r10[0]] == [(a, b, c, d["name"]) for a, b, c, d in r10[1]]
     assert [(c, q["id"], q["name"], q["max_score"], q["score_type"]) for c, q in r20[0]] == [(c, q["id"], q["name"], q["max_score"], q["score_type"]) for c, q in r20[1]]
     for i in range(2):
@@ -290,6 +347,7 @@ def main(argv=None):
     SEQ = ["#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"]
     SCORE_COLORS = [SEQ[i] for i in [3, 4, 6, 8, 10, 12]]
     ramp = LinearSegmentedColormap.from_list("documentation_blue", RAMP_STOPS)
+    matplotlib.rcdefaults()  # a personal matplotlibrc (e.g. savefig.bbox: tight) must not change the output
     plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": METRIC_FONTS, "svg.fonttype": "none",
                          "svg.hashsalt": "model-card-heatmaps", "pdf.fonttype": 42, "axes.unicode_minus": False})
     # Two installs of one font tie in findfont and the font cache's order is random; sorting
@@ -545,38 +603,6 @@ def main(argv=None):
     assert not overlapping, f"Overlapping text: {overlapping[:5]}"
     assert max(presence_bottom_right, rubric10_bottom, summary_bottom + 53) < 1360
 
-    svg_path = OUT / "model_cards_scores_and_field_presence.svg"
-    description = "DenseNet-121 and SaProtHub SubCell 650M. Field presence across 126 schema terminal paths; rubric10 and rubric20 deterministic hybrid documentation checks selected by the current YAML SHA-256. These scores do not measure model performance."
-    fig.savefig(svg_path, facecolor=SURFACE, metadata={"Title": "Model cards: structured field presence and documentation checks", "Description": description, "Date": None})
-    fig.savefig(OUT / "model_cards_scores_and_field_presence.png", dpi=180, facecolor=SURFACE, metadata={"Description": description})
-    fig.savefig(OUT / "model_cards_scores_and_field_presence.pdf", facecolor=SURFACE, metadata={"Title": "Model-card field presence and documentation checks", "Subject": description, "CreationDate": None})
-
-    # Add native SVG tooltips, including full rubric item names and stored evidence.
-    NS = "http://www.w3.org/2000/svg"
-    ET.register_namespace("", NS)
-    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
-    tree = ET.parse(svg_path)
-    root = tree.getroot()
-    for node in root.iter():
-        gid = node.get("id")
-        if gid in tooltips:
-            ET.SubElement(node, f"{{{NS}}}title").text = tooltips[gid]
-    assert not list(root.iter(f"{{{NS}}}image")), "Expected pure vector output."
-    tree.write(svg_path, encoding="utf-8", xml_declaration=True)
-
-    with (OUT / "field_presence.csv").open("w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(["schema_path", *STEMS])
-        writer.writerows([".".join(p), *presence[p]] for p in ordered_paths)
-    with (OUT / "scores.csv").open("w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(["rubric", "group", "item_id", "item_name", "max_score", *STEMS])
-        for idx, (e, s, group, item) in enumerate(r10[0]):
-            writer.writerow(["rubric10_hybrid", group, f"E{e}.{s}", item["name"], 1, *[r10[j][idx][3]["score"] for j in range(2)]])
-        for idx, (group, q) in enumerate(r20[0]):
-            writer.writerow(["rubric20_hybrid", group, f"Q{q['id']}", q["name"], q["max_score"], *[r20[j][idx][1]["score"] for j in range(2)]])
-
-
     def coverage(group_paths):
         return [sum(presence[p][j] for p in group_paths) for j in range(2)]
 
@@ -647,9 +673,43 @@ def main(argv=None):
             "panel_bottoms": [presence_bottom_left, presence_bottom_right, rubric10_bottom, rubric20_bottom, summary_bottom],
         },
     }
+    # Refuse local paths before writing anything, so a refused run leaves the previous outputs intact.
+    homes = {str(home) for home in (Path.home(), Path.home().resolve()) if str(home) not in ("", "/")}
     for name, document in (("provenance.json", provenance), ("figure_data.json", figure_data)):
-        if str(Path.home()) in json.dumps(document):
-            raise SystemExit(f"{name} would publish a home-directory path; not writing it.")
+        found = sorted(set(local_paths(document, homes)))
+        if found:
+            raise SystemExit(f"{name} would publish local paths {found[:3]}; not writing any output.")
+
+    svg_path = OUT / "model_cards_scores_and_field_presence.svg"
+    description = "DenseNet-121 and SaProtHub SubCell 650M. Field presence across 126 schema terminal paths; rubric10 and rubric20 deterministic hybrid documentation checks selected by the current YAML SHA-256. These scores do not measure model performance."
+    fig.savefig(svg_path, facecolor=SURFACE, metadata={"Title": "Model cards: structured field presence and documentation checks", "Description": description, "Date": None})
+    fig.savefig(OUT / "model_cards_scores_and_field_presence.png", dpi=180, facecolor=SURFACE, metadata={"Description": description})
+    fig.savefig(OUT / "model_cards_scores_and_field_presence.pdf", facecolor=SURFACE, metadata={"Title": "Model-card field presence and documentation checks", "Subject": description, "CreationDate": None})
+
+    # Add native SVG tooltips, including full rubric item names and stored evidence.
+    NS = "http://www.w3.org/2000/svg"
+    ET.register_namespace("", NS)
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
+    tree = ET.parse(svg_path)
+    root = tree.getroot()
+    for node in root.iter():
+        gid = node.get("id")
+        if gid in tooltips:
+            ET.SubElement(node, f"{{{NS}}}title").text = tooltips[gid]
+    assert not list(root.iter(f"{{{NS}}}image")), "Expected pure vector output."
+    tree.write(svg_path, encoding="utf-8", xml_declaration=True)
+
+    with (OUT / "field_presence.csv").open("w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["schema_path", *STEMS])
+        writer.writerows([".".join(p), *presence[p]] for p in ordered_paths)
+    with (OUT / "scores.csv").open("w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["rubric", "group", "item_id", "item_name", "max_score", *STEMS])
+        for idx, (e, s, group, item) in enumerate(r10[0]):
+            writer.writerow(["rubric10_hybrid", group, f"E{e}.{s}", item["name"], 1, *[r10[j][idx][3]["score"] for j in range(2)]])
+        for idx, (group, q) in enumerate(r20[0]):
+            writer.writerow(["rubric20_hybrid", group, f"Q{q['id']}", q["name"], q["max_score"], *[r20[j][idx][1]["score"] for j in range(2)]])
     (OUT / "figure_data.json").write_text(json.dumps(figure_data, indent=2) + "\n")
     (OUT / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
     plt.close(fig)

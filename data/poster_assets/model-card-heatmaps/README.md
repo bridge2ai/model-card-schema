@@ -41,10 +41,10 @@ Hybrid evaluators apply structural and keyword heuristics; they are not independ
 
 ## Provenance and verification
 
-[provenance.json](provenance.json) records the source schema, cards, evaluators, selected results and builder, each with its SHA-256. It also records whether each input was committed (tracked and unmodified), plus the font files and Matplotlib version used. [figure_data.json](figure_data.json) contains both models' exact totals and section aggregations; [poster_provenance.json](poster_provenance.json) binds the poster to those data and to its renderer, fonts and output files. No local paths are recorded: the builder notes the repository's remote URL without credentials, and it refuses to write a file that would contain the home directory.
+[provenance.json](provenance.json) records the source schema, cards, evaluators, selected results and builder, each with its SHA-256. It also records whether each input was committed (tracked and unmodified), plus the font files and Matplotlib version used. [figure_data.json](figure_data.json) contains both models' exact totals and section aggregations; [poster_provenance.json](poster_provenance.json) binds the poster to those data and to its renderer, fonts and output files. No local paths are recorded. The builder notes the repository's remote URL without credentials, and it writes nothing at all if the provenance or figure data would contain an absolute, `~` or home-directory path.
 
 - The builder selects only hash-matching hybrid evaluations, takes the latest timestamp and rejects conflicting ties. It reruns the current deterministic evaluators and checks every scoring/evidence field against the selected results.
-- It refuses to write into this folder if any input is untracked or modified, so the published provenance never cites files missing from GitHub. `--allow-uncommitted` overrides this for local drafts.
+- It refuses to write into this folder if any input is untracked or modified, so the published provenance never cites files missing from GitHub. A copy of the builder run from elsewhere counts as committed only if its bytes equal the committed script. `--allow-uncommitted` overrides the refusal for local drafts.
 - All 252 presence cells, 140 rubric cells, section sums and displayed totals were checked independently. Poster counts partition the same 126 paths.
 - Both SVGs contain vector artwork and editable text, without embedded raster images. Both scripts check that no text leaves the canvas or overlaps other text. The poster also checks that its dark text stays inside the white box and that the box stays inside the portfolio poster's crop.
 
@@ -54,7 +54,7 @@ The exact rows and evidence are in [field_presence.csv](field_presence.csv) and 
 
 Requires Python, Matplotlib and PyYAML. Both scripts also need Arial or a metric-compatible font (Liberation Sans or Arimo), in regular and bold. Without one they stop with an error, because their layouts assume Arial's widths. If you have just installed such a font, delete Matplotlib's font cache (`fontlist-*.json` in `matplotlib.get_cachedir()`) before rerunning.
 
-With the same Matplotlib version (3.10.9 here) and the same font files, re-running on unchanged inputs reproduces every figure and CSV byte for byte. Each builder run rewrites `generated_at` in `figure_data.json` and `provenance.json`, which also changes `poster_provenance.json`'s `input_sha256`. `checkout_commit` records whichever commit is checked out.
+Both scripts reset Matplotlib to its built-in defaults, so a personal `matplotlibrc` does not affect them. With the same Matplotlib version (3.10.9 here) and the same font files, re-running on unchanged inputs reproduces every figure and CSV byte for byte. Each builder run rewrites `generated_at` in `figure_data.json` and `provenance.json`, which also changes `poster_provenance.json`'s `input_sha256`. `checkout_commit` records whichever commit is checked out.
 
 From the model-card-schema repository root:
 

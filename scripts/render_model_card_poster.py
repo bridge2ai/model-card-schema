@@ -84,6 +84,7 @@ def render(input_path, output_dir):
 
     # Matplotlib reads only the regular face of macOS's Helvetica Neue .ttc, which silently
     # rendered every bold label as regular, so it is not a fallback here.
+    matplotlib.rcdefaults()  # a personal matplotlibrc (e.g. savefig.bbox: tight) must not change the output
     plt.rcParams.update({
         "font.family": "sans-serif", "font.sans-serif": METRIC_FONTS,
         "svg.fonttype": "none", "svg.hashsalt": "model-card-poster", "pdf.fonttype": 42, "axes.unicode_minus": False,
