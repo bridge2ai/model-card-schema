@@ -12,18 +12,16 @@ from datetime import datetime, timezone
 import hashlib
 import importlib.util
 import json
-import os
 from pathlib import Path
 import subprocess
-import tempfile
+from urllib.parse import urlsplit, urlunsplit
 import xml.etree.ElementTree as ET
 
-os.environ.setdefault("MPLCONFIGDIR", os.path.join(tempfile.gettempdir(), "model-card-heatmap-matplotlib"))
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.colors import to_rgb
+from matplotlib.colors import LinearSegmentedColormap, to_rgb
 from matplotlib.patches import Rectangle, Circle
 import yaml
 
@@ -34,10 +32,25 @@ METRIC_FONTS = ["Arial", "Liberation Sans", "Arimo"]
 STEMS = ["densenet121_tv_in1k", "subcell_saprot_650m"]
 NAMES = ["DenseNet-121", "SubCell 650M"]
 SHORT = ["DenseNet\n121", "SubCell\n650M"]
+SCRIPT = "scripts/build_model_card_heatmaps.py"
+# Shared with render_model_card_poster.py: section fractions get the same fill in both figures.
+RAMP_STOPS = ["#f0efec", "#9ec5f4", "#2874d0", "#104281"]
 
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def public_remote(url):
+    """Keep a remote URL only if it is a network location, without any credentials."""
+    if not url:
+        return None
+    parts = urlsplit(url)
+    if parts.scheme in ("http", "https", "ssh", "git"):
+        return urlunsplit(parts._replace(netloc=parts.hostname + (f":{parts.port}" if parts.port else "")))
+    if not parts.scheme and ":" in url and not url.startswith(("/", ".")):
+        return url.split("@", 1)[-1]  # scp-style git@host:owner/repo carries only a user name
+    return None
 
 
 def evaluation_payload(report):
@@ -94,12 +107,27 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output-dir", type=Path, help="Default: <repo>/data/poster_assets/model-card-heatmaps")
+    parser.add_argument("--allow-uncommitted", action="store_true",
+                        help="Write into the repository's figure folder even if an input is untracked or modified.")
     args = parser.parse_args(argv)
     REPO = args.repo.resolve()
-    OUT = (args.output_dir or REPO / "data/poster_assets/model-card-heatmaps").resolve()
+    IN_REPO_OUT = REPO / "data/poster_assets/model-card-heatmaps"
+    OUT = (args.output_dir or IN_REPO_OUT).resolve()
     OUT.mkdir(parents=True, exist_ok=True)
     SOURCES = {}
     generated_at = datetime.now(timezone.utc).isoformat()
+
+    def git(*command):
+        try:
+            # Only the trailing newline: leading spaces are significant in `git status` output.
+            return subprocess.check_output(["git", "-C", str(REPO), *command], text=True, stderr=subprocess.DEVNULL).rstrip("\n")
+        except (OSError, subprocess.CalledProcessError):
+            return None
+
+    # Only trust git when --repo is itself the working tree's top level, not a folder
+    # copied into some other repository.
+    toplevel = git("rev-parse", "--show-toplevel")
+    in_git = toplevel is not None and Path(toplevel).resolve() == REPO
 
     def read(relative, kind):
         path = REPO / relative
@@ -127,9 +155,22 @@ def main(argv=None):
             ratings[rubric].append(report)
             selections[rubric].append(selection)
             read(selection["path"], "json")
+    # Always keyed by its repository path; a copy run from elsewhere (for example the
+    # slide-assets build_heatmap.py) is named by file name only, never by absolute path.
     script_path = Path(__file__).resolve()
-    script_label = str(script_path.relative_to(REPO)) if script_path.is_relative_to(REPO) else str(script_path)
-    SOURCES[script_label] = {"sha256": sha256(script_path), "bytes": script_path.stat().st_size}
+    SOURCES[SCRIPT] = {"sha256": sha256(script_path), "bytes": script_path.stat().st_size}
+    if script_path != REPO / SCRIPT:
+        SOURCES[SCRIPT]["run_from_copy"] = script_path.name
+    if in_git:
+        tracked = set(git("ls-files", "-z", "--", *SOURCES).split("\0"))
+        changed = {entry[3:] for entry in git("status", "--porcelain=v1", "-z", "--untracked-files=all", "--", *SOURCES).split("\0") if entry}
+        for relative, info in SOURCES.items():
+            info["committed"] = relative in tracked and relative not in changed
+        uncommitted = [relative for relative, info in SOURCES.items() if not info["committed"]]
+        if uncommitted and OUT == IN_REPO_OUT.resolve() and not args.allow_uncommitted:
+            raise SystemExit("Inputs are untracked or modified, so the published provenance would cite files that are "
+                             f"not on GitHub: {uncommitted}. Commit them first, write elsewhere with --output-dir, "
+                             "or pass --allow-uncommitted.")
     ratings10, ratings20 = ratings["rubric10"], ratings["rubric20"]
 
     def slots(class_name):
@@ -197,6 +238,9 @@ def main(argv=None):
 
     r10 = [flatten10(r) for r in ratings10]
     r20 = [flatten20(r) for r in ratings20]
+    # The short row labels below are positional; fail if the evaluators reorder or renumber items.
+    assert [(e, s) for e, s, _, _ in r10[0]] == [(e, s) for e in range(1, 11) for s in range(1, 6)], "rubric10 item order changed"
+    assert [q["id"] for _, q in r20[0]] == list(range(1, 21)), "rubric20 question order changed"
     assert [(a, b, c, d["name"]) for a, b, c, d in r10[0]] == [(a, b, c, d["name"]) for a, b, c, d in r10[1]]
     assert [(c, q["id"], q["name"], q["max_score"], q["score_type"]) for c, q in r20[0]] == [(c, q["id"], q["name"], q["max_score"], q["score_type"]) for c, q in r20[1]]
     for i in range(2):
@@ -245,16 +289,21 @@ def main(argv=None):
     NAVY = "#184f95"
     SEQ = ["#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"]
     SCORE_COLORS = [SEQ[i] for i in [3, 4, 6, 8, 10, 12]]
+    ramp = LinearSegmentedColormap.from_list("documentation_blue", RAMP_STOPS)
     plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": METRIC_FONTS, "svg.fonttype": "none",
                          "svg.hashsalt": "model-card-heatmaps", "pdf.fonttype": 42, "axes.unicode_minus": False})
     # Two installs of one font tie in findfont and the font cache's order is random; sorting
     # by path keeps the embedded PDF font stable.
     font_manager.fontManager.ttflist.sort(key=lambda entry: entry.fname)
+    fonts = {}
     for weight in ("normal", "bold"):
-        font = font_manager.get_font(font_manager.findfont(font_manager.FontProperties(family="sans-serif", weight=weight)))
+        font_path = Path(font_manager.findfont(font_manager.FontProperties(family="sans-serif", weight=weight)))
+        font = font_manager.get_font(font_path)
         if font.family_name not in METRIC_FONTS or (weight == "bold") != ("Bold" in font.style_name):
             raise SystemExit(f"Heatmap layout needs {' or '.join(METRIC_FONTS)} in regular and bold; "
-                             f"found {font.family_name} {font.style_name}")
+                             f"found {font.family_name} {font.style_name}. If you just installed one, delete "
+                             f"Matplotlib's font cache ({matplotlib.get_cachedir()}/fontlist-*.json) and rerun.")
+        fonts[weight] = {"file": font_path.name, "sha256": sha256(font_path)}
     W, H = 2400, 1470
     fig = plt.figure(figsize=(W / 72, H / 72), facecolor=SURFACE)
     ax = fig.add_axes([0, 0, 1, 1])
@@ -301,18 +350,18 @@ def main(argv=None):
         for j, n in enumerate(totals):
             cx = cell_x + j * cw
             if names:
-                label(cx + cw / 2, 205, SHORT[j], 10, SECONDARY, "bold")
+                label(cx + cw / 2, 205, SHORT[j], 10, SECONDARY, "bold", ha="center")
             rect(cx + 15, top, cw - 30, bottom - top, EMPTY)
             h = (bottom - top) * n / maximum
             rect(cx + 15, bottom - h, cw - 30, h, BLUE)
-            label(cx + cw / 2, bottom + 13, f"{n / maximum:.1%}", 10.5, BLUE, "bold")
-            label(cx + cw / 2, bottom + 29, f"{n:g}/{maximum}", 9, SECONDARY)
+            label(cx + cw / 2, bottom + 13, f"{n / maximum:.1%}", 10.5, NAVY, "bold", ha="center")
+            label(cx + cw / 2, bottom + 29, f"{n:g}/{maximum}", 9, SECONDARY, ha="center")
         line(cell_x + 6, bottom, cell_x + cw * 2 - 6, bottom)
 
 
     label(48, 51, "Model cards: structured field presence and documentation checks", 31, weight="bold")
     model_ids = [c["model_details"]["path"].removeprefix("https://huggingface.co/").split("/tree/")[0] for c in cards]
-    label(48, 91, f"DenseNet-121 ({model_ids[0]})   |   SaProtHub SubCell 650M ({model_ids[1]})", 14, SECONDARY)
+    label(48, 91, f"{NAMES[0]} ({model_ids[0]})   |   {NAMES[1]} ({model_ids[1]})", 14, SECONDARY)
     line(48, 119, W - 48, 119, lw=1.5)
 
     AX, BX, CX = 48, 1140, 1756
@@ -340,14 +389,14 @@ def main(argv=None):
             top_bars(cell_x, cw, presence_totals, 126)
         else:
             for j in range(2):
-                label(cell_x + (j + 0.5) * cw, 306, SHORT[j], 10, SECONDARY, "bold")
+                label(cell_x + (j + 0.5) * cw, 306, SHORT[j], 10, SECONDARY, "bold", ha="center")
         y = 339
         for g, prefix, ps in groups:
             rect(x, y, width, 22, "#f2f5f9")
             label(x + 5, y + 11, g, 11, weight="bold")
             for j in range(2):
                 total = sum(presence[p][j] for p in ps)
-                label(cell_x + (j + 0.5) * cw, y + 11, f"{total}/{len(ps)}", 9, SECONDARY)
+                label(cell_x + (j + 0.5) * cw, y + 11, f"{total}/{len(ps)}", 9, SECONDARY, ha="center")
             y += 25
             for p in ps:
                 path = ".".join(p)
@@ -411,7 +460,7 @@ def main(argv=None):
                 fill = NAVY if value else SCORE_COLORS[0]
                 rect(B_CELL + j * B_CW + 1, y, B_CW - 2, 13.4, fill,
                      gid=f"r10_{idx}_{j}", tip=f"{NAMES[j]} | E{group_i + 1}.{sub_i + 1} {item['name']}: {value}/1\nEvaluation evidence: {item.get('evidence', '')}")
-                label(B_CELL + (j + 0.5) * B_CW, y + 6.7, str(value), 9, on_fill(fill))
+                label(B_CELL + (j + 0.5) * B_CW, y + 6.7, str(value), 9, on_fill(fill), ha="center")
             y += 14.4
         y += 4
     rubric10_bottom = y
@@ -420,7 +469,7 @@ def main(argv=None):
     label(CX, 218, "Graded score", 10.5, SECONDARY)
     for value, color in enumerate(SCORE_COLORS):
         rect(CX + value * 30, 235, 28, 19, color)
-        label(CX + value * 30 + 14, 244.5, str(value), 10, on_fill(color))
+        label(CX + value * 30 + 14, 244.5, str(value), 10, on_fill(color), ha="center")
     ax.add_patch(Circle((CX + 6, 280), radius=4, fill=False, edgecolor=SECONDARY, lw=1))
     label(CX + 20, 280, "Pass/fail: shown as 0/1 or 1/1", 11, SECONDARY)
     C_CELL, C_CW = CX + CW - 144, 72
@@ -446,7 +495,7 @@ def main(argv=None):
                 rect(C_CELL + j * C_CW + 1, y, C_CW - 2, 20, fill,
                      gid=f"r20_{idx}_{j}", tip=f"{NAMES[j]} | Q{q['id']} {q['name']}: {value}/{cap}\nEvaluation evidence: {q.get('evidence', '')}")
                 text_color = on_fill(fill)
-                label(C_CELL + (j + 0.5) * C_CW, y + 10, f"{value}/{cap}" if cap == 1 else str(value), 10, text_color)
+                label(C_CELL + (j + 0.5) * C_CW, y + 10, f"{value}/{cap}" if cap == 1 else str(value), 10, text_color, ha="center")
                 if cap == 1:
                     ax.add_patch(Circle((C_CELL + j * C_CW + 10, y + 10), radius=3.2, fill=False, edgecolor=text_color, lw=0.8))
             y += 21
@@ -459,15 +508,14 @@ def main(argv=None):
     panel(CX, dy, "D", "Field presence by section", "Fraction populated, with counts; same 126-path denominator as A")
     y = dy + 83
     for j in range(2):
-        label(C_CELL + (j + 0.5) * C_CW, y - 27, SHORT[j], 10, SECONDARY, "bold")
+        label(C_CELL + (j + 0.5) * C_CW, y - 27, SHORT[j], 10, SECONDARY, "bold", ha="center")
     for label_text, ps in section_specs:
         label(CX + 5, y + 14, label_text, 11.5, SECONDARY)
         for j in range(2):
             n = sum(presence[p][j] for p in ps)
-            fraction = n / len(ps)
-            color = EMPTY if not n else SEQ[round(fraction * (len(SEQ) - 1))]
+            color = ramp(n / len(ps))
             rect(C_CELL + j * C_CW + 1, y, C_CW - 2, 27, color)
-            label(C_CELL + (j + 0.5) * C_CW, y + 13.5, f"{n}/{len(ps)}", 10, on_fill(color))
+            label(C_CELL + (j + 0.5) * C_CW, y + 13.5, f"{n}/{len(ps)}", 10, on_fill(color), ha="center")
         y += 28
     summary_bottom = y
     training_paths = [p for p in paths if p[:2] == ("model_parameters", "training_procedure")]
@@ -480,9 +528,9 @@ def main(argv=None):
     line(48, 1372, W - 48, 1372, lw=1.3)
     label(48, 1397, "Presence ≠ documentation quality or model performance. Optional and extension fields are included; absent values are not necessarily defects.", 12, SECONDARY)
     label(48, 1420, "Sources: current YAML + SHA-256-matched hybrid results; current evaluators reproduce every item score. Automated documentation checks, not model performance.", 11, SECONDARY)
-    label(48, 1443, "Blue visual language adapted from D4D figures 3 and 5. Editable vector text; full paths, evidence, result hashes and evaluator hashes accompany this figure.", 10.5, MUTED)
+    label(48, 1443, "Blue visual language adapted from D4D figures 3 and 5. Editable vector text; full paths, evidence, result hashes and evaluator hashes accompany this figure.", 10.5, SECONDARY)
 
-    # Detect canvas clipping and preserve SVG text rather than rasterizing it.
+    # Detect canvas clipping and colliding labels; preserve SVG text rather than rasterizing it.
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
     outside = []
@@ -491,6 +539,10 @@ def main(argv=None):
         if bounds.x0 < 0 or bounds.x1 > W or min(bounds.y0, bounds.y1) < 0 or max(bounds.y0, bounds.y1) > H:
             outside.append(t.get_text())
     assert not outside, f"Text outside canvas: {outside}"
+    extents = [t.get_window_extent(renderer) for t in texts]
+    overlapping = [(texts[a].get_text(), texts[b].get_text()) for a in range(len(texts)) for b in range(a + 1, len(texts))
+                   if extents[a].overlaps(extents[b])]
+    assert not overlapping, f"Overlapping text: {overlapping[:5]}"
     assert max(presence_bottom_right, rubric10_bottom, summary_bottom + 53) < 1360
 
     svg_path = OUT / "model_cards_scores_and_field_presence.svg"
@@ -564,20 +616,15 @@ def main(argv=None):
             "Hybrid scores are automated documentation checks, not model capability or an independent semantic review.",
         ],
     }
-    (OUT / "figure_data.json").write_text(json.dumps(figure_data, indent=2) + "\n")
-    def git(*command):
-        try:
-            return subprocess.check_output(["git", "-C", str(REPO), *command], text=True, stderr=subprocess.DEVNULL).strip()
-        except (OSError, subprocess.CalledProcessError):
-            return None
-
-    commit = git("rev-parse", "HEAD")
     provenance = {
         "generated_at": generated_at,
-        # The remote URL rather than the local checkout path, which would publish a home directory.
-        "source_repository": git("remote", "get-url", "origin") or REPO.name,
-        "checkout_commit": commit,
-        "source_revision_note": "Input file SHA-256 values identify the actual workspace bytes; checkout commit alone does not identify uncommitted updates.",
+        # The configured remote (read without insteadOf expansion, credentials removed), never
+        # the local checkout path, which would publish a home directory.
+        "source_repository": public_remote(git("config", "--get", "remote.origin.url")) if in_git else None,
+        "checkout_commit": git("rev-parse", "HEAD") if in_git else None,
+        "source_revision_note": "Input file SHA-256 values identify the actual workspace bytes; each input's committed flag says whether it was tracked and unmodified at the checkout commit.",
+        "matplotlib_version": matplotlib.__version__,
+        "fonts": fonts,
         "files": SOURCES,
         "selection": selections,
         "selection_policy": "Only exact current-card SHA-256 matches from deterministic hybrid evaluators; choose latest timestamp and reject conflicting tied results.",
@@ -588,8 +635,9 @@ def main(argv=None):
         "root_slot_counts": dict(zip(STEMS, [sum(populated(c, (s,)) for s, _ in slots('modelCard')) for c in cards])),
         "root_slot_denominator": len(slots('modelCard')),
         "limitations": figure_data["caveats"],
-        "rubric10": ratings10,
-        "rubric20": ratings20,
+        # Reports are embedded whole, except that model_card_file is made repository-relative.
+        "rubric10": [{**report, "model_card_file": f"data/model_cards_assistant/{stem}_model_card.yaml"} for stem, report in zip(STEMS, ratings10)],
+        "rubric20": [{**report, "model_card_file": f"data/model_cards_assistant/{stem}_model_card.yaml"} for stem, report in zip(STEMS, ratings20)],
         "validation": {
             "all_selected_card_hashes_match": True,
             "all_selected_results_reproduced": True,
@@ -599,6 +647,10 @@ def main(argv=None):
             "panel_bottoms": [presence_bottom_left, presence_bottom_right, rubric10_bottom, rubric20_bottom, summary_bottom],
         },
     }
+    for name, document in (("provenance.json", provenance), ("figure_data.json", figure_data)):
+        if str(Path.home()) in json.dumps(document):
+            raise SystemExit(f"{name} would publish a home-directory path; not writing it.")
+    (OUT / "figure_data.json").write_text(json.dumps(figure_data, indent=2) + "\n")
     (OUT / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
     plt.close(fig)
     print(json.dumps({"output_dir": str(OUT), "presence": presence_totals, "rubric10": [r['overall_score']['total_points'] for r in ratings10], "rubric20": [r['overall_score']['total_points'] for r in ratings20], "selected_results": selections}, indent=2))

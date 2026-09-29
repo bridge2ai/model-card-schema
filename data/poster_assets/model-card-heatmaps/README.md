@@ -1,6 +1,6 @@
 # Current model-card heatmaps
 
-Updated September 28, 2026 from the current local DenseNet-121 and SubCell 650M cards. Both figures use the same verified inputs. They measure documentation, not model performance.
+Updated September 28, 2026 from the committed DenseNet-121 and SubCell 650M cards. Both figures use the same verified inputs. They measure documentation, not model performance.
 
 | Figure | PNG preview | Editable SVG | Vector PDF |
 |---|---|---|---|
@@ -9,11 +9,15 @@ Updated September 28, 2026 from the current local DenseNet-121 and SubCell 650M 
 
 The detailed figure retains all 126 terminal schema paths, 50 rubric10 subitems, 20 rubric20 questions and section totals. Its PNG is 6000 × 3675 pixels. The poster aggregates field presence into ten groups and shows the two overall rubric scores for each model, with larger text and fewer labels. Its PNG is 4800 × 3240 pixels at 300 dpi. Use SVG or PDF for scalable poster placement; SVG text remains editable. Cell hover titles preserve exact group names and counts.
 
-The poster's background is the teal of the Model Cards panel on the Bridge2AI Standards Portfolio poster (`#2f719a`). Its heatmap sits on a white rounded box and keeps the detailed figure's shading: darker cells mean higher values. One legend at the bottom of the box covers both panels, with its color ramp centered on the figure. The box sits inside the part of the figure the portfolio poster shows (its center crop, y 145–931 of 1080). That crop hides the footer caveats, so a note under the rubric scores says they rate the documentation, not model performance.
+The poster's background is the teal of the Model Cards panel on the Bridge2AI Standards Portfolio poster (`#2f719a`). Its heatmap sits on a white rounded box, where darker cells mean higher values. One legend at the bottom of the box covers both panels, with its color ramp centered on the figure. The box sits inside the part of the figure the portfolio poster shows (its center crop, y 145–931 of 1080). That crop hides the footer caveats, so a note in dark 20-pt text under the rubric scores says they rate the documentation, not model performance.
 
-In both figures, each cell's label is white or black, whichever contrasts more with its fill. One of the two always reaches at least 4.58:1, so the shared blue scale needed no change.
+**Place `model_cards_poster_transparent.png` on the portfolio poster.** It holds only the white box, on a transparent canvas, so the panel's own gradient shows around it; one flat teal cannot match that gradient everywhere. It leaves out the title and caveat lines: the poster's crop hides them, and their light text would vanish on a light background. The teal PNG, SVG and PDF are for standalone use.
 
-**Place `model_cards_poster_transparent.png` on the portfolio poster.** It holds only the white box, on a transparent canvas, so the panel's own gradient shows around it; one flat teal cannot match that gradient everywhere. It leaves out the title and caveat lines: the poster's crop hides them, and their light text would vanish on a light background. The teal PNG, SVG and PDF are for standalone use. The previous white-background version is kept under `archive/white-background-2026-09-28/` in the slide-assets folder.
+## Color and labels
+
+The poster's cells and panel D of the detailed figure use the same continuous blue scale, `#f0efec` → `#9ec5f4` → `#2874d0` → `#104281`, so a given fraction gets the same fill in both figures. Panels A–C of the detailed figure show binary presence, binary checks and 0–5 scores in discrete steps of the same blue palette.
+
+In both figures each cell label is white or black, whichever contrasts more with its fill; one of the two always reaches at least 4.58:1. The scale's middle stop is `#2874d0`, a barely distinguishable shade darker than the earlier `#2a78d6`, so white text reaches 4.67:1 there too. Every cell label in both figures is at least 4.67:1.
 
 ## Current values
 
@@ -37,40 +41,41 @@ Hybrid evaluators apply structural and keyword heuristics; they are not independ
 
 ## Provenance and verification
 
-[provenance.json](provenance.json) records source, schema, evaluator, selected-result and builder hashes. [figure_data.json](figure_data.json) contains both models' exact totals and section aggregations; [poster_provenance.json](poster_provenance.json) binds the poster to those data and its renderer/output files. The recorded Git HEAD is context; individual file hashes identify the exact input bytes, including any uncommitted changes.
+[provenance.json](provenance.json) records the source schema, cards, evaluators, selected results and builder, each with its SHA-256. It also records whether each input was committed (tracked and unmodified), plus the font files and Matplotlib version used. [figure_data.json](figure_data.json) contains both models' exact totals and section aggregations; [poster_provenance.json](poster_provenance.json) binds the poster to those data and to its renderer, fonts and output files. No local paths are recorded: the builder notes the repository's remote URL without credentials, and it refuses to write a file that would contain the home directory.
 
-- Detailed builder selects only hash-matching hybrid evaluations, takes the latest timestamp and rejects conflicting ties. It reruns the current deterministic evaluators and checks every scoring/evidence field against the selected results.
+- The builder selects only hash-matching hybrid evaluations, takes the latest timestamp and rejects conflicting ties. It reruns the current deterministic evaluators and checks every scoring/evidence field against the selected results.
+- It refuses to write into this folder if any input is untracked or modified, so the published provenance never cites files missing from GitHub. `--allow-uncommitted` overrides this for local drafts.
 - All 252 presence cells, 140 rubric cells, section sums and displayed totals were checked independently. Poster counts partition the same 126 paths.
-- Both SVGs contain vector artwork and editable text, without embedded raster images. Layout checks and visual review found no clipped or overlapping labels.
+- Both SVGs contain vector artwork and editable text, without embedded raster images. Both scripts check that no text leaves the canvas or overlaps other text. The poster also checks that its dark text stays inside the white box and that the box stays inside the portfolio poster's crop.
 
-The exact rows and evidence are in [field_presence.csv](field_presence.csv) and [scores.csv](scores.csv). Archived semantic scores are not included in these current totals.
+The exact rows and evidence are in [field_presence.csv](field_presence.csv) and [scores.csv](scores.csv). Archived semantic scores are not included in these current totals; the semantic baseline is in `notes/model_card_remediation/baseline/`.
 
 ## Reproduction
 
-Requires Python, Matplotlib and PyYAML. Both scripts also need Arial or a metric-compatible font (Liberation Sans or Arimo), in regular and bold. Without one they stop with an error, because their layouts assume Arial's widths. Re-running them on unchanged inputs and fonts reproduces every figure byte for byte; only the `generated_at` timestamps in `figure_data.json` and `provenance.json` change. `poster_provenance.json` records the font files the poster used. From the model-card-schema repository root:
+Requires Python, Matplotlib and PyYAML. Both scripts also need Arial or a metric-compatible font (Liberation Sans or Arimo), in regular and bold. Without one they stop with an error, because their layouts assume Arial's widths. If you have just installed such a font, delete Matplotlib's font cache (`fontlist-*.json` in `matplotlib.get_cachedir()`) before rerunning.
+
+With the same Matplotlib version (3.10.9 here) and the same font files, re-running on unchanged inputs reproduces every figure and CSV byte for byte. Each builder run rewrites `generated_at` in `figure_data.json` and `provenance.json`, which also changes `poster_provenance.json`'s `input_sha256`. `checkout_commit` records whichever commit is checked out.
+
+From the model-card-schema repository root:
 
 ```bash
-python scripts/build_model_card_heatmaps.py --repo . \
-  --output-dir data/poster_assets/model-card-heatmaps
+python scripts/build_model_card_heatmaps.py --repo .
 python scripts/render_model_card_poster.py \
   --input data/poster_assets/model-card-heatmaps/figure_data.json \
   --output-dir data/poster_assets/model-card-heatmaps
 ```
 
-The slide-assets copy includes both builders under `build_heatmap.py` and `render_model_card_poster.py`. From that folder:
-
-```bash
-python build_heatmap.py --repo /path/to/model-card-schema --output-dir .
-python render_model_card_poster.py --input figure_data.json --output-dir .
-```
-
-If a card changes, first rerun its hybrid evaluators; the figure builder rejects stale evaluations. The prior semantic figure and its original supporting files are preserved under `archive/original-semantic-2026-09-28/` in the slide-assets folder.
+If a card changes, first rerun its hybrid evaluators; the builder rejects stale evaluations.
 
 ## What is on GitHub
 
-Both scripts and this whole folder are in bridge2ai/model-card-schema:
-- PR #40 published the poster renderer.
-- The follow-up heatmap PR publishes the builder (`scripts/build_model_card_heatmaps.py`), the detailed figure, the CSVs, `provenance.json` and this README.
-- PR #54 publishes the SubCell card version and the two evaluation results that these figures cite. Once it merges, every input hash in `figure_data.json` and `provenance.json` resolves on GitHub (issue #43).
+Both scripts and everything in this folder are published in bridge2ai/model-card-schema:
+- #40 published the poster renderer.
+- #55 publishes the builder, the detailed figure, the CSVs, `provenance.json` and this README.
+- #54 publishes the SubCell card version and the two evaluation results these figures cite.
 
-The slide-assets folder holds the builder as `build_heatmap.py`.
+With both merged, every input hash in `figure_data.json` and `provenance.json` resolves on `main` (issue #43).
+
+## Maintainer's working copy
+
+The maintainer also keeps a private copy of this folder with the slide assets. It is not in this repository. There the builder is named `build_heatmap.py`, and an `archive/` folder keeps earlier versions: the original semantic figure, the white-background poster, and the detailed figure before bold and label-contrast fixes.
