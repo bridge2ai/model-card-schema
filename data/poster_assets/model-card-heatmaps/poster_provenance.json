@@ -1,7 +1,8 @@
 {
   "input": "figure_data.json",
-  "input_sha256": "13b09312620fdb90e71230f1626fd3e02251c4a759d84ebe21eea3d1c1f44191",
-  "renderer_sha256": "9b90e611b4dea6eca9a23e629c23d1926b1938753b43e7942a075463606750e0",
+  "input_sha256": "177c2f9bcd4315a9555ff29d7ef6986376905048a17a60f0ad390460f233e35c",
+  "renderer_sha256": "f6974d2c7a4eac53aa2a9b4fba45e5c0d57ca0554455384c2353a9d286adc598",
+  "matplotlib_version": "3.10.9",
   "fonts": {
     "normal": {
       "file": "Arial.ttf",
@@ -15,9 +16,9 @@
   "method": "Same counts and hybrid totals as detailed figure; section-level aggregation only",
   "percentage_display": "Rounded to whole percentages; exact fractions retained in every cell",
   "files": {
-    "model_cards_poster.png": "68e47dc29c8f8b0415d37ce7d8a5ec511d13611ba965dae97cd1e89af074364a",
-    "model_cards_poster.svg": "1058a9ce69911bd7a9e015b641099181d10402a04d4ef3361aa8381598e69334",
-    "model_cards_poster.pdf": "e57f2fd96ae3430a418bbe6c319beddf10575ada8941fba35e7c564bf0156d4d",
-    "model_cards_poster_transparent.png": "8ede30477f37ff3d5eead33b15f462b343ecebc28b60a2070c450f5efdc1db9e"
+    "model_cards_poster.png": "8fa86bee40bd033ac997b920820fbdaa4bcd3ecbdba93e026ecb48b28788a4ec",
+    "model_cards_poster.svg": "c10b2c15ab1120dba3c7d396b681c5b16112b4cd64d4c3efa0726a182b3fb519",
+    "model_cards_poster.pdf": "8ab6c78f3d3fe9c9d6e7433dab825e6b1fa6fd7c00352e9e66a427e2b70809f5",
+    "model_cards_poster_transparent.png": "a4fc90d6e84f3f3208321daf6b301e01917ca047d825bb43b1951aeeeac4c591"
   }
 }

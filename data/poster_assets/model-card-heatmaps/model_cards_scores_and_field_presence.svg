@@ -1518,52 +1518,52 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <path d="M 2290 867.8  C 2290.84865 867.8 2291.662656 868.137172 2292.262742 868.737258  C 2292.862828 869.337344 2293.2 870.15135 2293.2 871  C 2293.2 871.84865 2292.862828 872.662656 2292.262742 873.262742  C 2291.662656 873.862828 2290.84865 874.2 2290 874.2  C 2289.15135 874.2 2288.337344 873.862828 2287.737258 873.262742  C 2287.137172 872.662656 2286.8 871.84865 2286.8 871  C 2286.8 870.15135 2287.137172 869.337344 2287.737258 868.737258  C 2288.337344 868.137172 2289.15135 867.8 2290 867.8  L 2290 867.8  z " clip-path="url(#p435bbb0af5)" style="fill: none; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter" />
    </g>
    <g id="patch_58">
-    <path d="M 2209 1016  L 2279 1016  L 2279 1043  L 2209 1043  z " clip-path="url(#p435bbb0af5)" style="fill: #1c5cab" />
+    <path d="M 2209 1016  L 2279 1016  L 2279 1043  L 2209 1043  z " clip-path="url(#p435bbb0af5)" style="fill: #2165b8" />
    </g>
    <g id="patch_59">
-    <path d="M 2281 1016  L 2351 1016  L 2351 1043  L 2281 1043  z " clip-path="url(#p435bbb0af5)" style="fill: #184f95" />
+    <path d="M 2281 1016  L 2351 1016  L 2351 1043  L 2281 1043  z " clip-path="url(#p435bbb0af5)" style="fill: #1b59a5" />
    </g>
    <g id="patch_60">
-    <path d="M 2209 1044  L 2279 1044  L 2279 1071  L 2209 1071  z " clip-path="url(#p435bbb0af5)" style="fill: #256abf" />
+    <path d="M 2209 1044  L 2279 1044  L 2279 1071  L 2209 1071  z " clip-path="url(#p435bbb0af5)" style="fill: #256ec6" />
    </g>
    <g id="patch_61">
-    <path d="M 2281 1044  L 2351 1044  L 2351 1071  L 2281 1071  z " clip-path="url(#p435bbb0af5)" style="fill: #256abf" />
+    <path d="M 2281 1044  L 2351 1044  L 2351 1071  L 2281 1071  z " clip-path="url(#p435bbb0af5)" style="fill: #2874d0" />
    </g>
    <g id="patch_62">
-    <path d="M 2209 1072  L 2279 1072  L 2279 1099  L 2209 1099  z " clip-path="url(#p435bbb0af5)" style="fill: #5598e7" />
+    <path d="M 2209 1072  L 2279 1072  L 2279 1099  L 2209 1099  z " clip-path="url(#p435bbb0af5)" style="fill: #8cb9ee" />
    </g>
    <g id="patch_63">
-    <path d="M 2281 1072  L 2351 1072  L 2351 1099  L 2281 1099  z " clip-path="url(#p435bbb0af5)" style="fill: #2a78d6" />
+    <path d="M 2281 1072  L 2351 1072  L 2351 1099  L 2281 1099  z " clip-path="url(#p435bbb0af5)" style="fill: #4487d8" />
    </g>
    <g id="patch_64">
-    <path d="M 2209 1100  L 2279 1100  L 2279 1127  L 2209 1127  z " clip-path="url(#p435bbb0af5)" style="fill: #5598e7" />
+    <path d="M 2209 1100  L 2279 1100  L 2279 1127  L 2209 1127  z " clip-path="url(#p435bbb0af5)" style="fill: #82b2ec" />
    </g>
    <g id="patch_65">
-    <path d="M 2281 1100  L 2351 1100  L 2351 1127  L 2281 1127  z " clip-path="url(#p435bbb0af5)" style="fill: #6da7ec" />
+    <path d="M 2281 1100  L 2351 1100  L 2351 1127  L 2281 1127  z " clip-path="url(#p435bbb0af5)" style="fill: #97c0f2" />
    </g>
    <g id="patch_66">
-    <path d="M 2209 1128  L 2279 1128  L 2279 1155  L 2209 1155  z " clip-path="url(#p435bbb0af5)" style="fill: #0d366b" />
+    <path d="M 2209 1128  L 2279 1128  L 2279 1155  L 2209 1155  z " clip-path="url(#p435bbb0af5)" style="fill: #104281" />
    </g>
    <g id="patch_67">
-    <path d="M 2281 1128  L 2351 1128  L 2351 1155  L 2281 1155  z " clip-path="url(#p435bbb0af5)" style="fill: #0d366b" />
+    <path d="M 2281 1128  L 2351 1128  L 2351 1155  L 2281 1155  z " clip-path="url(#p435bbb0af5)" style="fill: #104281" />
    </g>
    <g id="patch_68">
-    <path d="M 2209 1156  L 2279 1156  L 2279 1183  L 2209 1183  z " clip-path="url(#p435bbb0af5)" style="fill: #256abf" />
+    <path d="M 2209 1156  L 2279 1156  L 2279 1183  L 2209 1183  z " clip-path="url(#p435bbb0af5)" style="fill: #2670ca" />
    </g>
    <g id="patch_69">
-    <path d="M 2281 1156  L 2351 1156  L 2351 1183  L 2281 1183  z " clip-path="url(#p435bbb0af5)" style="fill: #256abf" />
+    <path d="M 2281 1156  L 2351 1156  L 2351 1183  L 2281 1183  z " clip-path="url(#p435bbb0af5)" style="fill: #2670ca" />
    </g>
    <g id="patch_70">
-    <path d="M 2209 1184  L 2279 1184  L 2279 1211  L 2209 1211  z " clip-path="url(#p435bbb0af5)" style="fill: #86b6ef" />
+    <path d="M 2209 1184  L 2279 1184  L 2279 1211  L 2209 1211  z " clip-path="url(#p435bbb0af5)" style="fill: #b2cff2" />
    </g>
    <g id="patch_71">
     <path d="M 2281 1184  L 2351 1184  L 2351 1211  L 2281 1211  z " clip-path="url(#p435bbb0af5)" style="fill: #f0efec" />
    </g>
    <g id="patch_72">
-    <path d="M 2209 1212  L 2279 1212  L 2279 1239  L 2209 1239  z " clip-path="url(#p435bbb0af5)" style="fill: #0d366b" />
+    <path d="M 2209 1212  L 2279 1212  L 2279 1239  L 2209 1239  z " clip-path="url(#p435bbb0af5)" style="fill: #104281" />
    </g>
    <g id="patch_73">
-    <path d="M 2281 1212  L 2351 1212  L 2351 1239  L 2281 1239  z " clip-path="url(#p435bbb0af5)" style="fill: #0d366b" />
+    <path d="M 2281 1212  L 2351 1212  L 2351 1239  L 2281 1239  z " clip-path="url(#p435bbb0af5)" style="fill: #104281" />
    </g>
    <g id="line2d_1">
     <path d="M 48 119  L 2352 119  " clip-path="url(#p435bbb0af5)" style="fill: none; stroke: #e1e0d9; stroke-width: 1.5; stroke-linecap: square" />
@@ -1590,7 +1590,7 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 31px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="48" y="59.224688" transform="rotate(-0 48 59.224688)">Model cards: structured field presence and documentation checks</text>
    </g>
    <g id="text_2">
-    <text style="font-size: 14px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="48" y="94.6225" transform="rotate(-0 48 94.6225)">DenseNet-121 (timm/densenet121.tv_in1k)   |   SaProtHub SubCell 650M (SaProtHub/Model-Subcellular_Localization-650M)</text>
+    <text style="font-size: 14px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="48" y="94.6225" transform="rotate(-0 48 94.6225)">DenseNet-121 (timm/densenet121.tv_in1k)   |   SubCell 650M (SaProtHub/Model-Subcellular_Localization-650M)</text>
    </g>
    <g id="text_3">
     <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="48" y="158.184375" transform="rotate(-0 48 158.184375)">A</text>
@@ -1638,33 +1638,33 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="588" y="280.714414" transform="rotate(-0 588 280.714414)">The same two cards appear in both blocks.</text>
    </g>
    <g id="text_18">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(465 201.773945)">DenseNet</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(465 213.41043)">121</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(441.9375 201.773945)">DenseNet</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(456.658594 213.41043)">121</text>
    </g>
    <g id="text_19">
-    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="465" y="303.721797" transform="rotate(-0 465 303.721797)">58.7%</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #184f95" x="465" y="303.721797" transform="rotate(-0 465 303.721797)">58.7%</text>
    </g>
    <g id="text_20">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="465" y="319.326641" transform="rotate(-0 465 319.326641)">74/126</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="465" y="319.326641" transform="rotate(-0 465 319.326641)">74/126</text>
    </g>
    <g id="text_21">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(531 201.773945)">SubCell</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(531 213.41043)">650M</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(512.3875 201.773945)">SubCell</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(518.49375 213.41043)">650M</text>
    </g>
    <g id="text_22">
-    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="531" y="303.721797" transform="rotate(-0 531 303.721797)">63.5%</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #184f95" x="531" y="303.721797" transform="rotate(-0 531 303.721797)">63.5%</text>
    </g>
    <g id="text_23">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="531" y="319.326641" transform="rotate(-0 531 319.326641)">80/126</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="531" y="319.326641" transform="rotate(-0 531 319.326641)">80/126</text>
    </g>
    <g id="text_24">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="53" y="352.851406" transform="rotate(-0 53 352.851406)">Core metadata</text>
    </g>
    <g id="text_25">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="465" y="352.326641" transform="rotate(-0 465 352.326641)">10/13</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="465" y="352.326641" transform="rotate(-0 465 352.326641)">10/13</text>
    </g>
    <g id="text_26">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="531" y="352.326641" transform="rotate(-0 531 352.326641)">11/13</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="531" y="352.326641" transform="rotate(-0 531 352.326641)">11/13</text>
    </g>
    <g id="text_27">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="53" y="372.223234" transform="rotate(-0 53 372.223234)">schema_version</text>
@@ -1709,10 +1709,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="53" y="538.851406" transform="rotate(-0 53 538.851406)">Model details</text>
    </g>
    <g id="text_41">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="465" y="538.326641" transform="rotate(-0 465 538.326641)">17/24</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="465" y="538.326641" transform="rotate(-0 465 538.326641)">17/24</text>
    </g>
    <g id="text_42">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="531" y="538.326641" transform="rotate(-0 531 538.326641)">16/24</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="531" y="538.326641" transform="rotate(-0 531 538.326641)">16/24</text>
    </g>
    <g id="text_43">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="53" y="558.223234" transform="rotate(-0 53 558.223234)">name</text>
@@ -1790,10 +1790,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="53" y="856.851406" transform="rotate(-0 53 856.851406)">Architecture, data and I/O</text>
    </g>
    <g id="text_68">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="465" y="856.326641" transform="rotate(-0 465 856.326641)">11/16</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="465" y="856.326641" transform="rotate(-0 465 856.326641)">11/16</text>
    </g>
    <g id="text_69">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="531" y="856.326641" transform="rotate(-0 531 856.326641)">13/16</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="531" y="856.326641" transform="rotate(-0 531 856.326641)">13/16</text>
    </g>
    <g id="text_70">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="53" y="876.223234" transform="rotate(-0 53 876.223234)">model_architecture</text>
@@ -1847,10 +1847,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="53" y="1078.918437" transform="rotate(-0 53 1078.918437)">Compute infrastructure</text>
    </g>
    <g id="text_87">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="465" y="1078.326641" transform="rotate(-0 465 1078.326641)">0/5</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="465" y="1078.326641" transform="rotate(-0 465 1078.326641)">0/5</text>
    </g>
    <g id="text_88">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="531" y="1078.326641" transform="rotate(-0 531 1078.326641)">0/5</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="531" y="1078.326641" transform="rotate(-0 531 1078.326641)">0/5</text>
    </g>
    <g id="text_89">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="53" y="1098.223234" transform="rotate(-0 53 1098.223234)">hardware</text>
@@ -1868,21 +1868,21 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="53" y="1146.172844" transform="rotate(-0 53 1146.172844)">training_speed</text>
    </g>
    <g id="text_94">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1005 302.773945)">DenseNet</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1005 314.41043)">121</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(981.9375 302.773945)">DenseNet</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(996.658594 314.41043)">121</text>
    </g>
    <g id="text_95">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1071 302.773945)">SubCell</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1071 314.41043)">650M</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1052.3875 302.773945)">SubCell</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1058.49375 314.41043)">650M</text>
    </g>
    <g id="text_96">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="593" y="352.779219" transform="rotate(-0 593 352.779219)">Training procedure</text>
    </g>
    <g id="text_97">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1005" y="352.326641" transform="rotate(-0 1005 352.326641)">4/18</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1005" y="352.326641" transform="rotate(-0 1005 352.326641)">4/18</text>
    </g>
    <g id="text_98">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1071" y="352.326641" transform="rotate(-0 1071 352.326641)">10/18</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1071" y="352.326641" transform="rotate(-0 1071 352.326641)">10/18</text>
    </g>
    <g id="text_99">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="593" y="372.223234" transform="rotate(-0 593 372.223234)">description</text>
@@ -1942,10 +1942,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="593" y="598.84625" transform="rotate(-0 593 598.84625)">Quantitative analysis</text>
    </g>
    <g id="text_118">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1005" y="598.326641" transform="rotate(-0 1005 598.326641)">7/17</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1005" y="598.326641" transform="rotate(-0 1005 598.326641)">7/17</text>
    </g>
    <g id="text_119">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1071" y="598.326641" transform="rotate(-0 1071 598.326641)">6/17</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1071" y="598.326641" transform="rotate(-0 1071 598.326641)">6/17</text>
    </g>
    <g id="text_120">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="593" y="618.22525" transform="rotate(-0 593 618.22525)">performance_metrics.type</text>
@@ -2002,10 +2002,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="593" y="832.851406" transform="rotate(-0 593 832.851406)">Considerations</text>
    </g>
    <g id="text_138">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1005" y="832.326641" transform="rotate(-0 1005 832.326641)">7/7</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1005" y="832.326641" transform="rotate(-0 1005 832.326641)">7/7</text>
    </g>
    <g id="text_139">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1071" y="832.326641" transform="rotate(-0 1071 832.326641)">7/7</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1071" y="832.326641" transform="rotate(-0 1071 832.326641)">7/7</text>
    </g>
    <g id="text_140">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="593" y="852.223234" transform="rotate(-0 593 852.223234)">users.description</text>
@@ -2032,10 +2032,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="593" y="946.851406" transform="rotate(-0 593 946.851406)">Benchmark index</text>
    </g>
    <g id="text_148">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1005" y="946.326641" transform="rotate(-0 1005 946.326641)">11/16</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1005" y="946.326641" transform="rotate(-0 1005 946.326641)">11/16</text>
    </g>
    <g id="text_149">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1071" y="946.326641" transform="rotate(-0 1071 946.326641)">11/16</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1071" y="946.326641" transform="rotate(-0 1071 946.326641)">11/16</text>
    </g>
    <g id="text_150">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="593" y="966.223234" transform="rotate(-0 593 966.223234)">name</text>
@@ -2089,10 +2089,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="593" y="1168.851406" transform="rotate(-0 593 1168.851406)">Mission relevance</text>
    </g>
    <g id="text_167">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1005" y="1168.326641" transform="rotate(-0 1005 1168.326641)">1/4</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1005" y="1168.326641" transform="rotate(-0 1005 1168.326641)">1/4</text>
    </g>
    <g id="text_168">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1071" y="1168.326641" transform="rotate(-0 1071 1168.326641)">0/4</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1071" y="1168.326641" transform="rotate(-0 1071 1168.326641)">0/4</text>
    </g>
    <g id="text_169">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="593" y="1188.172844" transform="rotate(-0 593 1188.172844)">doe_project</text>
@@ -2110,10 +2110,10 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="593" y="1246.779219" transform="rotate(-0 593 1246.779219)">Usage documentation</text>
    </g>
    <g id="text_174">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1005" y="1246.326641" transform="rotate(-0 1005 1246.326641)">6/6</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1005" y="1246.326641" transform="rotate(-0 1005 1246.326641)">6/6</text>
    </g>
    <g id="text_175">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1071" y="1246.326641" transform="rotate(-0 1071 1246.326641)">6/6</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1071" y="1246.326641" transform="rotate(-0 1071 1246.326641)">6/6</text>
    </g>
    <g id="text_176">
     <text style="font-size: 8.6px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="593" y="1266.223234" transform="rotate(-0 593 1266.223234)">installation_instructions</text>
@@ -2155,24 +2155,24 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1140" y="288.714414" transform="rotate(-0 1140 288.714414)">Deterministic documentation checks</text>
    </g>
    <g id="text_189">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1621 201.773945)">DenseNet</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1621 213.41043)">121</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1597.9375 201.773945)">DenseNet</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1612.658594 213.41043)">121</text>
    </g>
    <g id="text_190">
-    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="1621" y="303.721797" transform="rotate(-0 1621 303.721797)">94.0%</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #184f95" x="1621" y="303.721797" transform="rotate(-0 1621 303.721797)">94.0%</text>
    </g>
    <g id="text_191">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1621" y="319.326641" transform="rotate(-0 1621 319.326641)">47/50</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1621" y="319.326641" transform="rotate(-0 1621 319.326641)">47/50</text>
    </g>
    <g id="text_192">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1687 201.773945)">SubCell</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1687 213.41043)">650M</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1668.3875 201.773945)">SubCell</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(1674.49375 213.41043)">650M</text>
    </g>
    <g id="text_193">
-    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="1687" y="303.721797" transform="rotate(-0 1687 303.721797)">90.0%</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #184f95" x="1687" y="303.721797" transform="rotate(-0 1687 303.721797)">90.0%</text>
    </g>
    <g id="text_194">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1687" y="319.326641" transform="rotate(-0 1687 319.326641)">45/50</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="1687" y="319.326641" transform="rotate(-0 1687 319.326641)">45/50</text>
    </g>
    <g id="text_195">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="352.84625" transform="rotate(-0 1145 352.84625)">E1  Discovery and identification</text>
@@ -2181,46 +2181,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="373.836859" transform="rotate(-0 1145 373.836859)">1.1  Persistent identifier</text>
    </g>
    <g id="text_197">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="373.026641" transform="rotate(-0 1621 373.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="373.026641" transform="rotate(-0 1621 373.026641)">1</text>
    </g>
    <g id="text_198">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="373.026641" transform="rotate(-0 1687 373.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="373.026641" transform="rotate(-0 1687 373.026641)">1</text>
    </g>
    <g id="text_199">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="388.252" transform="rotate(-0 1145 388.252)">1.2  Model name and description</text>
    </g>
    <g id="text_200">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="387.426641" transform="rotate(-0 1621 387.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="387.426641" transform="rotate(-0 1621 387.426641)">1</text>
    </g>
    <g id="text_201">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="387.426641" transform="rotate(-0 1687 387.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="387.426641" transform="rotate(-0 1687 387.426641)">1</text>
    </g>
    <g id="text_202">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="402.63925" transform="rotate(-0 1145 402.63925)">1.3  Tags / task discoverability</text>
    </g>
    <g id="text_203">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="401.826641" transform="rotate(-0 1621 401.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="401.826641" transform="rotate(-0 1621 401.826641)">1</text>
    </g>
    <g id="text_204">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="401.826641" transform="rotate(-0 1687 401.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="401.826641" transform="rotate(-0 1687 401.826641)">1</text>
    </g>
    <g id="text_205">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="417.03925" transform="rotate(-0 1145 417.03925)">1.4  Landing page / repository URL</text>
    </g>
    <g id="text_206">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="416.226641" transform="rotate(-0 1621 416.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="416.226641" transform="rotate(-0 1621 416.226641)">1</text>
    </g>
    <g id="text_207">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="416.226641" transform="rotate(-0 1687 416.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="416.226641" transform="rotate(-0 1687 416.226641)">1</text>
    </g>
    <g id="text_208">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="431.43925" transform="rotate(-0 1145 431.43925)">1.5  Library / framework identification</text>
    </g>
    <g id="text_209">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="430.626641" transform="rotate(-0 1621 430.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="430.626641" transform="rotate(-0 1621 430.626641)">1</text>
    </g>
    <g id="text_210">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="430.626641" transform="rotate(-0 1687 430.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="430.626641" transform="rotate(-0 1687 430.626641)">1</text>
    </g>
    <g id="text_211">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="453.851406" transform="rotate(-0 1145 453.851406)">E2  Access and distribution</text>
@@ -2229,46 +2229,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="474.792234" transform="rotate(-0 1145 474.792234)">2.1  Weight distribution</text>
    </g>
    <g id="text_213">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="474.026641" transform="rotate(-0 1621 474.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="474.026641" transform="rotate(-0 1621 474.026641)">1</text>
    </g>
    <g id="text_214">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="474.026641" transform="rotate(-0 1687 474.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="474.026641" transform="rotate(-0 1687 474.026641)">1</text>
    </g>
    <g id="text_215">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="489.23925" transform="rotate(-0 1145 489.23925)">2.2  Code repository</text>
    </g>
    <g id="text_216">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="488.426641" transform="rotate(-0 1621 488.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="488.426641" transform="rotate(-0 1621 488.426641)">1</text>
    </g>
    <g id="text_217">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="488.426641" transform="rotate(-0 1687 488.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="488.426641" transform="rotate(-0 1687 488.426641)">1</text>
    </g>
    <g id="text_218">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="503.63925" transform="rotate(-0 1145 503.63925)">2.3  Inference API / usage example</text>
    </g>
    <g id="text_219">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="502.826641" transform="rotate(-0 1621 502.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="502.826641" transform="rotate(-0 1621 502.826641)">1</text>
    </g>
    <g id="text_220">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="502.826641" transform="rotate(-0 1687 502.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="502.826641" transform="rotate(-0 1687 502.826641)">1</text>
    </g>
    <g id="text_221">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="518.099016" transform="rotate(-0 1145 518.099016)">2.4  Input / output specification</text>
    </g>
    <g id="text_222">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="517.226641" transform="rotate(-0 1621 517.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="517.226641" transform="rotate(-0 1621 517.226641)">1</text>
    </g>
    <g id="text_223">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="517.226641" transform="rotate(-0 1687 517.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="517.226641" transform="rotate(-0 1687 517.226641)">1</text>
    </g>
    <g id="text_224">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="532.436859" transform="rotate(-0 1145 532.436859)">2.5  Model file format</text>
    </g>
    <g id="text_225">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="531.626641" transform="rotate(-0 1621 531.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="531.626641" transform="rotate(-0 1621 531.626641)">1</text>
    </g>
    <g id="text_226">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="531.626641" transform="rotate(-0 1687 531.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="531.626641" transform="rotate(-0 1687 531.626641)">1</text>
    </g>
    <g id="text_227">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="554.795547" transform="rotate(-0 1145 554.795547)">E3  Reuse and interoperability</text>
@@ -2277,46 +2277,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="575.852" transform="rotate(-0 1145 575.852)">3.1  License permits reuse</text>
    </g>
    <g id="text_229">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="575.026641" transform="rotate(-0 1621 575.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="575.026641" transform="rotate(-0 1621 575.026641)">1</text>
    </g>
    <g id="text_230">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="575.026641" transform="rotate(-0 1687 575.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="575.026641" transform="rotate(-0 1687 575.026641)">1</text>
    </g>
    <g id="text_231">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="590.236859" transform="rotate(-0 1145 590.236859)">3.2  Standard framework / format</text>
    </g>
    <g id="text_232">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="589.426641" transform="rotate(-0 1621 589.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="589.426641" transform="rotate(-0 1621 589.426641)">1</text>
    </g>
    <g id="text_233">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="589.426641" transform="rotate(-0 1687 589.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="589.426641" transform="rotate(-0 1687 589.426641)">1</text>
    </g>
    <g id="text_234">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="604.592234" transform="rotate(-0 1145 604.592234)">3.3  Base-model lineage</text>
    </g>
    <g id="text_235">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="603.826641" transform="rotate(-0 1621 603.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="603.826641" transform="rotate(-0 1621 603.826641)">1</text>
    </g>
    <g id="text_236">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="603.826641" transform="rotate(-0 1687 603.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="603.826641" transform="rotate(-0 1687 603.826641)">1</text>
    </g>
    <g id="text_237">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="619.099016" transform="rotate(-0 1145 619.099016)">3.4  Supported tasks</text>
    </g>
    <g id="text_238">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="618.226641" transform="rotate(-0 1621 618.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="618.226641" transform="rotate(-0 1621 618.226641)">1</text>
    </g>
    <g id="text_239">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="618.226641" transform="rotate(-0 1687 618.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="618.226641" transform="rotate(-0 1687 618.226641)">1</text>
    </g>
    <g id="text_240">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="633.43925" transform="rotate(-0 1145 633.43925)">3.5  Reproducibility artifacts</text>
    </g>
    <g id="text_241">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="632.626641" transform="rotate(-0 1621 632.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="632.626641" transform="rotate(-0 1621 632.626641)">1</text>
    </g>
    <g id="text_242">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="632.626641" transform="rotate(-0 1687 632.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="632.626641" transform="rotate(-0 1687 632.626641)">1</text>
    </g>
    <g id="text_243">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="655.867734" transform="rotate(-0 1145 655.867734)">E4  Ethics and responsible AI</text>
@@ -2325,46 +2325,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="676.836859" transform="rotate(-0 1145 676.836859)">4.1  Ethical considerations</text>
    </g>
    <g id="text_245">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="676.026641" transform="rotate(-0 1621 676.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="676.026641" transform="rotate(-0 1621 676.026641)">1</text>
    </g>
    <g id="text_246">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="676.026641" transform="rotate(-0 1687 676.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="676.026641" transform="rotate(-0 1687 676.026641)">1</text>
    </g>
    <g id="text_247">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="691.299016" transform="rotate(-0 1145 691.299016)">4.2  Model / output bias</text>
    </g>
    <g id="text_248">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="690.426641" transform="rotate(-0 1621 690.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="690.426641" transform="rotate(-0 1621 690.426641)">1</text>
    </g>
    <g id="text_249">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="690.426641" transform="rotate(-0 1687 690.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="690.426641" transform="rotate(-0 1687 690.426641)">1</text>
    </g>
    <g id="text_250">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="705.642437" transform="rotate(-0 1145 705.642437)">4.3  Out-of-scope / discouraged uses</text>
    </g>
    <g id="text_251">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="704.826641" transform="rotate(-0 1621 704.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="704.826641" transform="rotate(-0 1621 704.826641)">1</text>
    </g>
    <g id="text_252">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="704.826641" transform="rotate(-0 1687 704.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="704.826641" transform="rotate(-0 1687 704.826641)">1</text>
    </g>
    <g id="text_253">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="720.036859" transform="rotate(-0 1145 720.036859)">4.4  Sensitive data disclosure</text>
    </g>
    <g id="text_254">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1621" y="719.226641" transform="rotate(-0 1621 719.226641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1621" y="719.226641" transform="rotate(-0 1621 719.226641)">0</text>
    </g>
    <g id="text_255">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="719.226641" transform="rotate(-0 1687 719.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="719.226641" transform="rotate(-0 1687 719.226641)">1</text>
    </g>
    <g id="text_256">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="734.499016" transform="rotate(-0 1145 734.499016)">4.5  Intended users / stakeholder impact</text>
    </g>
    <g id="text_257">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="733.626641" transform="rotate(-0 1621 733.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="733.626641" transform="rotate(-0 1621 733.626641)">1</text>
    </g>
    <g id="text_258">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="733.626641" transform="rotate(-0 1687 733.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="733.626641" transform="rotate(-0 1687 733.626641)">1</text>
    </g>
    <g id="text_259">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="756.779219" transform="rotate(-0 1145 756.779219)">E5  Architecture and training composition</text>
@@ -2373,46 +2373,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="777.836859" transform="rotate(-0 1145 777.836859)">5.1  Architecture details</text>
    </g>
    <g id="text_261">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="777.026641" transform="rotate(-0 1621 777.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="777.026641" transform="rotate(-0 1621 777.026641)">1</text>
    </g>
    <g id="text_262">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="777.026641" transform="rotate(-0 1687 777.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="777.026641" transform="rotate(-0 1687 777.026641)">1</text>
    </g>
    <g id="text_263">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="792.192234" transform="rotate(-0 1145 792.192234)">5.2  Training data</text>
    </g>
    <g id="text_264">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="791.426641" transform="rotate(-0 1621 791.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="791.426641" transform="rotate(-0 1621 791.426641)">1</text>
    </g>
    <g id="text_265">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="791.426641" transform="rotate(-0 1687 791.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="791.426641" transform="rotate(-0 1687 791.426641)">1</text>
    </g>
    <g id="text_266">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="806.592234" transform="rotate(-0 1145 806.592234)">5.3  Hyperparameters</text>
    </g>
    <g id="text_267">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="805.826641" transform="rotate(-0 1621 805.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="805.826641" transform="rotate(-0 1621 805.826641)">1</text>
    </g>
    <g id="text_268">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="805.826641" transform="rotate(-0 1687 805.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="805.826641" transform="rotate(-0 1687 805.826641)">1</text>
    </g>
    <g id="text_269">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="821.099016" transform="rotate(-0 1145 821.099016)">5.4  Compute infrastructure</text>
    </g>
    <g id="text_270">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1621" y="820.226641" transform="rotate(-0 1621 820.226641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1621" y="820.226641" transform="rotate(-0 1621 820.226641)">0</text>
    </g>
    <g id="text_271">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1687" y="820.226641" transform="rotate(-0 1687 820.226641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1687" y="820.226641" transform="rotate(-0 1687 820.226641)">0</text>
    </g>
    <g id="text_272">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="835.43925" transform="rotate(-0 1145 835.43925)">5.5  Training / evaluation split</text>
    </g>
    <g id="text_273">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="834.626641" transform="rotate(-0 1621 834.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="834.626641" transform="rotate(-0 1621 834.626641)">1</text>
    </g>
    <g id="text_274">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="834.626641" transform="rotate(-0 1687 834.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="834.626641" transform="rotate(-0 1687 834.626641)">1</text>
    </g>
    <g id="text_275">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="857.795547" transform="rotate(-0 1145 857.795547)">E6  Provenance and versioning</text>
@@ -2421,46 +2421,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="878.836859" transform="rotate(-0 1145 878.836859)">6.1  Version number</text>
    </g>
    <g id="text_277">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="878.026641" transform="rotate(-0 1621 878.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="878.026641" transform="rotate(-0 1621 878.026641)">1</text>
    </g>
    <g id="text_278">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="878.026641" transform="rotate(-0 1687 878.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="878.026641" transform="rotate(-0 1687 878.026641)">1</text>
    </g>
    <g id="text_279">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="893.236859" transform="rotate(-0 1145 893.236859)">6.2  Version date</text>
    </g>
    <g id="text_280">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="892.426641" transform="rotate(-0 1621 892.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="892.426641" transform="rotate(-0 1621 892.426641)">1</text>
    </g>
    <g id="text_281">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1687" y="892.426641" transform="rotate(-0 1687 892.426641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1687" y="892.426641" transform="rotate(-0 1687 892.426641)">0</text>
    </g>
    <g id="text_282">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="907.592234" transform="rotate(-0 1145 907.592234)">6.3  Version change description</text>
    </g>
    <g id="text_283">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="906.826641" transform="rotate(-0 1621 906.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="906.826641" transform="rotate(-0 1621 906.826641)">1</text>
    </g>
    <g id="text_284">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1687" y="906.826641" transform="rotate(-0 1687 906.826641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1687" y="906.826641" transform="rotate(-0 1687 906.826641)">0</text>
    </g>
    <g id="text_285">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="922.036859" transform="rotate(-0 1145 922.036859)">6.4  Owners / contributors</text>
    </g>
    <g id="text_286">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="921.226641" transform="rotate(-0 1621 921.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="921.226641" transform="rotate(-0 1621 921.226641)">1</text>
    </g>
    <g id="text_287">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="921.226641" transform="rotate(-0 1687 921.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="921.226641" transform="rotate(-0 1687 921.226641)">1</text>
    </g>
    <g id="text_288">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="936.436859" transform="rotate(-0 1145 936.436859)">6.5  Citation / BibTeX</text>
    </g>
    <g id="text_289">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="935.626641" transform="rotate(-0 1621 935.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="935.626641" transform="rotate(-0 1621 935.626641)">1</text>
    </g>
    <g id="text_290">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="935.626641" transform="rotate(-0 1687 935.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="935.626641" transform="rotate(-0 1687 935.626641)">1</text>
    </g>
    <g id="text_291">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="958.84625" transform="rotate(-0 1145 958.84625)">E7  Motivation and funding</text>
@@ -2469,46 +2469,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="979.836859" transform="rotate(-0 1145 979.836859)">7.1  Motivation / use-case rationale</text>
    </g>
    <g id="text_293">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="979.026641" transform="rotate(-0 1621 979.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="979.026641" transform="rotate(-0 1621 979.026641)">1</text>
    </g>
    <g id="text_294">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="979.026641" transform="rotate(-0 1687 979.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="979.026641" transform="rotate(-0 1687 979.026641)">1</text>
    </g>
    <g id="text_295">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="994.192234" transform="rotate(-0 1145 994.192234)">7.2  Primary intended use</text>
    </g>
    <g id="text_296">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="993.426641" transform="rotate(-0 1621 993.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="993.426641" transform="rotate(-0 1621 993.426641)">1</text>
    </g>
    <g id="text_297">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="993.426641" transform="rotate(-0 1687 993.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="993.426641" transform="rotate(-0 1687 993.426641)">1</text>
    </g>
    <g id="text_298">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1008.636859" transform="rotate(-0 1145 1008.636859)">7.3  Mission relevance</text>
    </g>
    <g id="text_299">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1007.826641" transform="rotate(-0 1621 1007.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1007.826641" transform="rotate(-0 1621 1007.826641)">1</text>
    </g>
    <g id="text_300">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1687" y="1007.826641" transform="rotate(-0 1687 1007.826641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1687" y="1007.826641" transform="rotate(-0 1687 1007.826641)">0</text>
    </g>
    <g id="text_301">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1023.03925" transform="rotate(-0 1145 1023.03925)">7.4  Funding source / grant agency</text>
    </g>
    <g id="text_302">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1022.226641" transform="rotate(-0 1621 1022.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1022.226641" transform="rotate(-0 1621 1022.226641)">1</text>
    </g>
    <g id="text_303">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1022.226641" transform="rotate(-0 1687 1022.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1022.226641" transform="rotate(-0 1687 1022.226641)">1</text>
    </g>
    <g id="text_304">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1037.43925" transform="rotate(-0 1145 1037.43925)">7.5  Compute / platform acknowledgements</text>
    </g>
    <g id="text_305">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1036.626641" transform="rotate(-0 1621 1036.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1036.626641" transform="rotate(-0 1621 1036.626641)">1</text>
    </g>
    <g id="text_306">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1036.626641" transform="rotate(-0 1687 1036.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1036.626641" transform="rotate(-0 1687 1036.626641)">1</text>
    </g>
    <g id="text_307">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="1059.795547" transform="rotate(-0 1145 1059.795547)">E8  Training and evaluation transparency</text>
@@ -2517,46 +2517,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1080.792234" transform="rotate(-0 1145 1080.792234)">8.1  Training procedure</text>
    </g>
    <g id="text_309">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1080.026641" transform="rotate(-0 1621 1080.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1080.026641" transform="rotate(-0 1621 1080.026641)">1</text>
    </g>
    <g id="text_310">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1080.026641" transform="rotate(-0 1687 1080.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1080.026641" transform="rotate(-0 1687 1080.026641)">1</text>
    </g>
    <g id="text_311">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1095.252" transform="rotate(-0 1145 1095.252)">8.2  Evaluation procedure</text>
    </g>
    <g id="text_312">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1094.426641" transform="rotate(-0 1621 1094.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1094.426641" transform="rotate(-0 1621 1094.426641)">1</text>
    </g>
    <g id="text_313">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1094.426641" transform="rotate(-0 1687 1094.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1094.426641" transform="rotate(-0 1687 1094.426641)">1</text>
    </g>
    <g id="text_314">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1109.63925" transform="rotate(-0 1145 1109.63925)">8.3  Reproducibility information</text>
    </g>
    <g id="text_315">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1108.826641" transform="rotate(-0 1621 1108.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1108.826641" transform="rotate(-0 1621 1108.826641)">1</text>
    </g>
    <g id="text_316">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1108.826641" transform="rotate(-0 1687 1108.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1108.826641" transform="rotate(-0 1687 1108.826641)">1</text>
    </g>
    <g id="text_317">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1124.102203" transform="rotate(-0 1145 1124.102203)">8.4  Open-source code</text>
    </g>
    <g id="text_318">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1123.226641" transform="rotate(-0 1621 1123.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1123.226641" transform="rotate(-0 1621 1123.226641)">1</text>
    </g>
    <g id="text_319">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1123.226641" transform="rotate(-0 1687 1123.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1123.226641" transform="rotate(-0 1687 1123.226641)">1</text>
    </g>
    <g id="text_320">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1138.436859" transform="rotate(-0 1145 1138.436859)">8.5  External standards / references</text>
    </g>
    <g id="text_321">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1137.626641" transform="rotate(-0 1621 1137.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1137.626641" transform="rotate(-0 1621 1137.626641)">1</text>
    </g>
    <g id="text_322">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1137.626641" transform="rotate(-0 1687 1137.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1137.626641" transform="rotate(-0 1687 1137.626641)">1</text>
    </g>
    <g id="text_323">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="1160.851406" transform="rotate(-0 1145 1160.851406)">E9  Performance and limitations</text>
@@ -2565,46 +2565,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1181.902203" transform="rotate(-0 1145 1181.902203)">9.1  Quantitative performance metrics</text>
    </g>
    <g id="text_325">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1181.026641" transform="rotate(-0 1621 1181.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1181.026641" transform="rotate(-0 1621 1181.026641)">1</text>
    </g>
    <g id="text_326">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1181.026641" transform="rotate(-0 1687 1181.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1181.026641" transform="rotate(-0 1687 1181.026641)">1</text>
    </g>
    <g id="text_327">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1196.236859" transform="rotate(-0 1145 1196.236859)">9.2  Performance across slices</text>
    </g>
    <g id="text_328">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1195.426641" transform="rotate(-0 1621 1195.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1195.426641" transform="rotate(-0 1621 1195.426641)">1</text>
    </g>
    <g id="text_329">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1195.426641" transform="rotate(-0 1687 1195.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1195.426641" transform="rotate(-0 1687 1195.426641)">1</text>
    </g>
    <g id="text_330">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1210.636859" transform="rotate(-0 1145 1210.636859)">9.3  Confidence intervals / error bars</text>
    </g>
    <g id="text_331">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1621" y="1209.826641" transform="rotate(-0 1621 1209.826641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1621" y="1209.826641" transform="rotate(-0 1621 1209.826641)">0</text>
    </g>
    <g id="text_332">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1687" y="1209.826641" transform="rotate(-0 1687 1209.826641)">0</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1687" y="1209.826641" transform="rotate(-0 1687 1209.826641)">0</text>
    </g>
    <g id="text_333">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1225.036859" transform="rotate(-0 1145 1225.036859)">9.4  Limitations</text>
    </g>
    <g id="text_334">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1224.226641" transform="rotate(-0 1621 1224.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1224.226641" transform="rotate(-0 1621 1224.226641)">1</text>
    </g>
    <g id="text_335">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1224.226641" transform="rotate(-0 1687 1224.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1224.226641" transform="rotate(-0 1687 1224.226641)">1</text>
    </g>
    <g id="text_336">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1239.436859" transform="rotate(-0 1145 1239.436859)">9.5  Tradeoffs / risks</text>
    </g>
    <g id="text_337">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1238.626641" transform="rotate(-0 1621 1238.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1238.626641" transform="rotate(-0 1621 1238.626641)">1</text>
    </g>
    <g id="text_338">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1238.626641" transform="rotate(-0 1687 1238.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1238.626641" transform="rotate(-0 1687 1238.626641)">1</text>
    </g>
    <g id="text_339">
     <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1145" y="1261.84625" transform="rotate(-0 1145 1261.84625)">E10  Platforms and community integration</text>
@@ -2613,90 +2613,90 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1282.83925" transform="rotate(-0 1145 1282.83925)">10.1  Recognized hosting platform</text>
    </g>
    <g id="text_341">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1282.026641" transform="rotate(-0 1621 1282.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1282.026641" transform="rotate(-0 1621 1282.026641)">1</text>
    </g>
    <g id="text_342">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1282.026641" transform="rotate(-0 1687 1282.026641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1282.026641" transform="rotate(-0 1687 1282.026641)">1</text>
    </g>
    <g id="text_343">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1297.236859" transform="rotate(-0 1145 1297.236859)">10.2  Related DOIs / model links</text>
    </g>
    <g id="text_344">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1296.426641" transform="rotate(-0 1621 1296.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1296.426641" transform="rotate(-0 1621 1296.426641)">1</text>
    </g>
    <g id="text_345">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1296.426641" transform="rotate(-0 1687 1296.426641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1296.426641" transform="rotate(-0 1687 1296.426641)">1</text>
    </g>
    <g id="text_346">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1311.636859" transform="rotate(-0 1145 1311.636859)">10.3  Structured benchmark results</text>
    </g>
    <g id="text_347">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1310.826641" transform="rotate(-0 1621 1310.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1310.826641" transform="rotate(-0 1621 1310.826641)">1</text>
    </g>
    <g id="text_348">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1310.826641" transform="rotate(-0 1687 1310.826641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1310.826641" transform="rotate(-0 1687 1310.826641)">1</text>
    </g>
    <g id="text_349">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1326.036859" transform="rotate(-0 1145 1326.036859)">10.4  Standards / schema conformance</text>
    </g>
    <g id="text_350">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1325.226641" transform="rotate(-0 1621 1325.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1325.226641" transform="rotate(-0 1621 1325.226641)">1</text>
    </g>
    <g id="text_351">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1325.226641" transform="rotate(-0 1687 1325.226641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1325.226641" transform="rotate(-0 1687 1325.226641)">1</text>
    </g>
    <g id="text_352">
     <text style="font-size: 10.2px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1145" y="1340.436859" transform="rotate(-0 1145 1340.436859)">10.5  Dataset / datasheet / D4D links</text>
    </g>
    <g id="text_353">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1621" y="1339.626641" transform="rotate(-0 1621 1339.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1621" y="1339.626641" transform="rotate(-0 1621 1339.626641)">1</text>
    </g>
    <g id="text_354">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1687" y="1339.626641" transform="rotate(-0 1687 1339.626641)">1</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1687" y="1339.626641" transform="rotate(-0 1687 1339.626641)">1</text>
    </g>
    <g id="text_355">
     <text style="font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1756" y="220.714414" transform="rotate(-0 1756 220.714414)">Graded score</text>
    </g>
    <g id="text_356">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1770" y="247.085156" transform="rotate(-0 1770 247.085156)">0</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1770" y="247.085156" transform="rotate(-0 1770 247.085156)">0</text>
    </g>
    <g id="text_357">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1800" y="247.085156" transform="rotate(-0 1800 247.085156)">1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1800" y="247.085156" transform="rotate(-0 1800 247.085156)">1</text>
    </g>
    <g id="text_358">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="1830" y="247.085156" transform="rotate(-0 1830 247.085156)">2</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="1830" y="247.085156" transform="rotate(-0 1830 247.085156)">2</text>
    </g>
    <g id="text_359">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1860" y="247.085156" transform="rotate(-0 1860 247.085156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1860" y="247.085156" transform="rotate(-0 1860 247.085156)">3</text>
    </g>
    <g id="text_360">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1890" y="247.085156" transform="rotate(-0 1890 247.085156)">4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1890" y="247.085156" transform="rotate(-0 1890 247.085156)">4</text>
    </g>
    <g id="text_361">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="1920" y="247.085156" transform="rotate(-0 1920 247.085156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="1920" y="247.085156" transform="rotate(-0 1920 247.085156)">5</text>
    </g>
    <g id="text_362">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1776" y="282.843672" transform="rotate(-0 1776 282.843672)">Pass/fail: shown as 0/1 or 1/1</text>
    </g>
    <g id="text_363">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2244 201.773945)">DenseNet</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2244 213.41043)">121</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2220.9375 201.773945)">DenseNet</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2235.658594 213.41043)">121</text>
    </g>
    <g id="text_364">
-    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="2244" y="303.721797" transform="rotate(-0 2244 303.721797)">79.8%</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #184f95" x="2244" y="303.721797" transform="rotate(-0 2244 303.721797)">79.8%</text>
    </g>
    <g id="text_365">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="2244" y="319.326641" transform="rotate(-0 2244 319.326641)">67/84</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="2244" y="319.326641" transform="rotate(-0 2244 319.326641)">67/84</text>
    </g>
    <g id="text_366">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2316 201.773945)">SubCell</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2316 213.41043)">650M</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2297.3875 201.773945)">SubCell</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2303.49375 213.41043)">650M</text>
    </g>
    <g id="text_367">
-    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="2316" y="303.721797" transform="rotate(-0 2316 303.721797)">73.8%</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #184f95" x="2316" y="303.721797" transform="rotate(-0 2316 303.721797)">73.8%</text>
    </g>
    <g id="text_368">
-    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="2316" y="319.326641" transform="rotate(-0 2316 319.326641)">62/84</text>
+    <text style="font-size: 9px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #52514e" x="2316" y="319.326641" transform="rotate(-0 2316 319.326641)">62/84</text>
    </g>
    <g id="text_369">
     <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1761" y="353.051094" transform="rotate(-0 1761 353.051094)">Structural Completeness</text>
@@ -2705,46 +2705,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="379.414141" transform="rotate(-0 1761 379.414141)">Q1  Required field completeness</text>
    </g>
    <g id="text_371">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="378.585156" transform="rotate(-0 2244 378.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="378.585156" transform="rotate(-0 2244 378.585156)">5</text>
    </g>
    <g id="text_372">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="378.585156" transform="rotate(-0 2316 378.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="378.585156" transform="rotate(-0 2316 378.585156)">5</text>
    </g>
    <g id="text_373">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="400.349688" transform="rotate(-0 1761 400.349688)">Q2  Overview length</text>
    </g>
    <g id="text_374">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="399.585156" transform="rotate(-0 2244 399.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="399.585156" transform="rotate(-0 2244 399.585156)">5</text>
    </g>
    <g id="text_375">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="399.585156" transform="rotate(-0 2316 399.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="399.585156" transform="rotate(-0 2316 399.585156)">5</text>
    </g>
    <g id="text_376">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="421.349688" transform="rotate(-0 1761 421.349688)">Q3  Tag / keyword diversity</text>
    </g>
    <g id="text_377">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="420.585156" transform="rotate(-0 2244 420.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="420.585156" transform="rotate(-0 2244 420.585156)">5</text>
    </g>
    <g id="text_378">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="420.585156" transform="rotate(-0 2316 420.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="420.585156" transform="rotate(-0 2316 420.585156)">5</text>
    </g>
    <g id="text_379">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="442.414141" transform="rotate(-0 1761 442.414141)">Q4  Input / output specification</text>
    </g>
    <g id="text_380">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="441.585156" transform="rotate(-0 2244 441.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="441.585156" transform="rotate(-0 2244 441.585156)">5</text>
    </g>
    <g id="text_381">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="441.585156" transform="rotate(-0 2316 441.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="441.585156" transform="rotate(-0 2316 441.585156)">5</text>
    </g>
    <g id="text_382">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="463.343672" transform="rotate(-0 1761 463.343672)">Q5  Schema version</text>
    </g>
    <g id="text_383">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="462.585156" transform="rotate(-0 2244 462.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="462.585156" transform="rotate(-0 2244 462.585156)">1/1</text>
    </g>
    <g id="text_384">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="462.585156" transform="rotate(-0 2316 462.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="462.585156" transform="rotate(-0 2316 462.585156)">1/1</text>
    </g>
    <g id="text_385">
     <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1761" y="489.975625" transform="rotate(-0 1761 489.975625)">Metadata Quality &amp; Content</text>
@@ -2753,46 +2753,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="516.343672" transform="rotate(-0 1761 516.343672)">Q6  Persistent identifier</text>
    </g>
    <g id="text_387">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="515.585156" transform="rotate(-0 2244 515.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="515.585156" transform="rotate(-0 2244 515.585156)">1/1</text>
    </g>
    <g id="text_388">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="515.585156" transform="rotate(-0 2316 515.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="515.585156" transform="rotate(-0 2316 515.585156)">1/1</text>
    </g>
    <g id="text_389">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="537.349688" transform="rotate(-0 1761 537.349688)">Q7  Funding / acknowledgements</text>
    </g>
    <g id="text_390">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="536.585156" transform="rotate(-0 2244 536.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="536.585156" transform="rotate(-0 2244 536.585156)">3</text>
    </g>
    <g id="text_391">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2316" y="536.585156" transform="rotate(-0 2316 536.585156)">0</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2316" y="536.585156" transform="rotate(-0 2316 536.585156)">0</text>
    </g>
    <g id="text_392">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="558.414141" transform="rotate(-0 1761 558.414141)">Q8  Ethics / responsible AI</text>
    </g>
    <g id="text_393">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="557.585156" transform="rotate(-0 2244 557.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="557.585156" transform="rotate(-0 2244 557.585156)">5</text>
    </g>
    <g id="text_394">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="557.585156" transform="rotate(-0 2316 557.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="557.585156" transform="rotate(-0 2316 557.585156)">5</text>
    </g>
    <g id="text_395">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="579.414141" transform="rotate(-0 1761 579.414141)">Q9  License / SPDX compliance</text>
    </g>
    <g id="text_396">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="578.585156" transform="rotate(-0 2244 578.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="578.585156" transform="rotate(-0 2244 578.585156)">5</text>
    </g>
    <g id="text_397">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="578.585156" transform="rotate(-0 2316 578.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="578.585156" transform="rotate(-0 2316 578.585156)">5</text>
    </g>
    <g id="text_398">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="600.349688" transform="rotate(-0 1761 600.349688)">Q10  Framework / library standards</text>
    </g>
    <g id="text_399">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="599.585156" transform="rotate(-0 2244 599.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="599.585156" transform="rotate(-0 2244 599.585156)">3</text>
    </g>
    <g id="text_400">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="599.585156" transform="rotate(-0 2316 599.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="599.585156" transform="rotate(-0 2316 599.585156)">3</text>
    </g>
    <g id="text_401">
     <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1761" y="626.981016" transform="rotate(-0 1761 626.981016)">Technical Documentation</text>
@@ -2801,46 +2801,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="653.349688" transform="rotate(-0 1761 653.349688)">Q11  Tools / software transparency</text>
    </g>
    <g id="text_403">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="652.585156" transform="rotate(-0 2244 652.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="652.585156" transform="rotate(-0 2244 652.585156)">3</text>
    </g>
    <g id="text_404">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="652.585156" transform="rotate(-0 2316 652.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="652.585156" transform="rotate(-0 2316 652.585156)">3</text>
    </g>
    <g id="text_405">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="674.349688" transform="rotate(-0 1761 674.349688)">Q12  Training procedure</text>
    </g>
    <g id="text_406">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="673.585156" transform="rotate(-0 2244 673.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="673.585156" transform="rotate(-0 2244 673.585156)">3</text>
    </g>
    <g id="text_407">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="673.585156" transform="rotate(-0 2316 673.585156)">4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="673.585156" transform="rotate(-0 2316 673.585156)">4</text>
    </g>
    <g id="text_408">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="695.349688" transform="rotate(-0 1761 695.349688)">Q13  Version history</text>
    </g>
    <g id="text_409">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="694.585156" transform="rotate(-0 2244 694.585156)">4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="694.585156" transform="rotate(-0 2244 694.585156)">4</text>
    </g>
    <g id="text_410">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="694.585156" transform="rotate(-0 2316 694.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="694.585156" transform="rotate(-0 2316 694.585156)">3</text>
    </g>
    <g id="text_411">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="716.343672" transform="rotate(-0 1761 716.343672)">Q14  Citations / references</text>
    </g>
    <g id="text_412">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="715.585156" transform="rotate(-0 2244 715.585156)">4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="715.585156" transform="rotate(-0 2244 715.585156)">4</text>
    </g>
    <g id="text_413">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="715.585156" transform="rotate(-0 2316 715.585156)">4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="715.585156" transform="rotate(-0 2316 715.585156)">4</text>
    </g>
    <g id="text_414">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="737.349688" transform="rotate(-0 1761 737.349688)">Q15  Compute / energy</text>
    </g>
    <g id="text_415">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2244" y="736.585156" transform="rotate(-0 2244 736.585156)">0</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2244" y="736.585156" transform="rotate(-0 2244 736.585156)">0</text>
    </g>
    <g id="text_416">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2316" y="736.585156" transform="rotate(-0 2316 736.585156)">0</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2316" y="736.585156" transform="rotate(-0 2316 736.585156)">0</text>
    </g>
    <g id="text_417">
     <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #0b0b0b" x="1761" y="763.981016" transform="rotate(-0 1761 763.981016)">Performance &amp; FAIRness</text>
@@ -2849,46 +2849,46 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="790.349688" transform="rotate(-0 1761 790.349688)">Q16  Findability / persistent landing</text>
    </g>
    <g id="text_419">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="789.585156" transform="rotate(-0 2244 789.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="789.585156" transform="rotate(-0 2244 789.585156)">1/1</text>
    </g>
    <g id="text_420">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="789.585156" transform="rotate(-0 2316 789.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="789.585156" transform="rotate(-0 2316 789.585156)">1/1</text>
    </g>
    <g id="text_421">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="811.414141" transform="rotate(-0 1761 811.414141)">Q17  Access / inference path</text>
    </g>
    <g id="text_422">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="810.585156" transform="rotate(-0 2244 810.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="810.585156" transform="rotate(-0 2244 810.585156)">5</text>
    </g>
    <g id="text_423">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="810.585156" transform="rotate(-0 2316 810.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="810.585156" transform="rotate(-0 2316 810.585156)">5</text>
    </g>
    <g id="text_424">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="832.349688" transform="rotate(-0 1761 832.349688)">Q18  Performance, slices and uncertainty</text>
    </g>
    <g id="text_425">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="831.585156" transform="rotate(-0 2244 831.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="831.585156" transform="rotate(-0 2244 831.585156)">3</text>
    </g>
    <g id="text_426">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="831.585156" transform="rotate(-0 2316 831.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="831.585156" transform="rotate(-0 2316 831.585156)">3</text>
    </g>
    <g id="text_427">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="853.414141" transform="rotate(-0 1761 853.414141)">Q19  Out-of-scope uses / limits / tradeoffs</text>
    </g>
    <g id="text_428">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="852.585156" transform="rotate(-0 2244 852.585156)">5</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="852.585156" transform="rotate(-0 2244 852.585156)">5</text>
    </g>
    <g id="text_429">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="852.585156" transform="rotate(-0 2316 852.585156)">3</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="852.585156" transform="rotate(-0 2316 852.585156)">3</text>
    </g>
    <g id="text_430">
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="874.414141" transform="rotate(-0 1761 874.414141)">Q20  Cross-platform links</text>
    </g>
    <g id="text_431">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="873.585156" transform="rotate(-0 2244 873.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="873.585156" transform="rotate(-0 2244 873.585156)">1/1</text>
    </g>
    <g id="text_432">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="873.585156" transform="rotate(-0 2316 873.585156)">1/1</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="873.585156" transform="rotate(-0 2316 873.585156)">1/1</text>
    </g>
    <g id="text_433">
     <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #2a78d6" x="1756" y="938.184375" transform="rotate(-0 1756 938.184375)">D</text>
@@ -2900,84 +2900,84 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 12px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1756" y="965.12" transform="rotate(-0 1756 965.12)">Fraction populated, with counts; same 126-path denominator as A</text>
    </g>
    <g id="text_436">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2244 985.773945)">DenseNet</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2244 997.41043)">121</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2220.9375 985.773945)">DenseNet</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2235.658594 997.41043)">121</text>
    </g>
    <g id="text_437">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2316 985.773945)">SubCell</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2316 997.41043)">650M</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2297.3875 985.773945)">SubCell</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; fill: #52514e" transform="translate(2303.49375 997.41043)">650M</text>
    </g>
    <g id="text_438">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1032.97293" transform="rotate(-0 1761 1032.97293)">Core metadata</text>
    </g>
    <g id="text_439">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="1032.085156" transform="rotate(-0 2244 1032.085156)">10/13</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="1032.085156" transform="rotate(-0 2244 1032.085156)">10/13</text>
    </g>
    <g id="text_440">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="1032.085156" transform="rotate(-0 2316 1032.085156)">11/13</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="1032.085156" transform="rotate(-0 2316 1032.085156)">11/13</text>
    </g>
    <g id="text_441">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1060.97293" transform="rotate(-0 1761 1060.97293)">Model details</text>
    </g>
    <g id="text_442">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="1060.085156" transform="rotate(-0 2244 1060.085156)">17/24</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="1060.085156" transform="rotate(-0 2244 1060.085156)">17/24</text>
    </g>
    <g id="text_443">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="1060.085156" transform="rotate(-0 2316 1060.085156)">16/24</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="1060.085156" transform="rotate(-0 2316 1060.085156)">16/24</text>
    </g>
    <g id="text_444">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1088.97293" transform="rotate(-0 1761 1088.97293)">Model parameters</text>
    </g>
    <g id="text_445">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2244" y="1088.085156" transform="rotate(-0 2244 1088.085156)">15/39</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2244" y="1088.085156" transform="rotate(-0 2244 1088.085156)">15/39</text>
    </g>
    <g id="text_446">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2316" y="1088.085156" transform="rotate(-0 2316 1088.085156)">23/39</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2316" y="1088.085156" transform="rotate(-0 2316 1088.085156)">23/39</text>
    </g>
    <g id="text_447">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1116.979219" transform="rotate(-0 1761 1116.979219)">Quantitative analysis</text>
    </g>
    <g id="text_448">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2244" y="1116.085156" transform="rotate(-0 2244 1116.085156)">7/17</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2244" y="1116.085156" transform="rotate(-0 2244 1116.085156)">7/17</text>
    </g>
    <g id="text_449">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2316" y="1116.085156" transform="rotate(-0 2316 1116.085156)">6/17</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2316" y="1116.085156" transform="rotate(-0 2316 1116.085156)">6/17</text>
    </g>
    <g id="text_450">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1144.97293" transform="rotate(-0 1761 1144.97293)">Considerations</text>
    </g>
    <g id="text_451">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="1144.085156" transform="rotate(-0 2244 1144.085156)">7/7</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="1144.085156" transform="rotate(-0 2244 1144.085156)">7/7</text>
    </g>
    <g id="text_452">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="1144.085156" transform="rotate(-0 2316 1144.085156)">7/7</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="1144.085156" transform="rotate(-0 2316 1144.085156)">7/7</text>
    </g>
    <g id="text_453">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1172.97293" transform="rotate(-0 1761 1172.97293)">Benchmark index</text>
    </g>
    <g id="text_454">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="1172.085156" transform="rotate(-0 2244 1172.085156)">11/16</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="1172.085156" transform="rotate(-0 2244 1172.085156)">11/16</text>
    </g>
    <g id="text_455">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="1172.085156" transform="rotate(-0 2316 1172.085156)">11/16</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="1172.085156" transform="rotate(-0 2316 1172.085156)">11/16</text>
    </g>
    <g id="text_456">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1200.97293" transform="rotate(-0 1761 1200.97293)">Mission relevance</text>
    </g>
    <g id="text_457">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2244" y="1200.085156" transform="rotate(-0 2244 1200.085156)">1/4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2244" y="1200.085156" transform="rotate(-0 2244 1200.085156)">1/4</text>
    </g>
    <g id="text_458">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start" x="2316" y="1200.085156" transform="rotate(-0 2316 1200.085156)">0/4</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="2316" y="1200.085156" transform="rotate(-0 2316 1200.085156)">0/4</text>
    </g>
    <g id="text_459">
     <text style="font-size: 11.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="1761" y="1228.905547" transform="rotate(-0 1761 1228.905547)">Usage documentation</text>
    </g>
    <g id="text_460">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2244" y="1228.085156" transform="rotate(-0 2244 1228.085156)">6/6</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2244" y="1228.085156" transform="rotate(-0 2244 1228.085156)">6/6</text>
    </g>
    <g id="text_461">
-    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #ffffff" x="2316" y="1228.085156" transform="rotate(-0 2316 1228.085156)">6/6</text>
+    <text style="font-size: 10px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="2316" y="1228.085156" transform="rotate(-0 2316 1228.085156)">6/6</text>
    </g>
    <g id="text_462">
     <text style="font-weight: 700; font-size: 12px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #184f95" x="1756" y="1273.105" transform="rotate(-0 1756 1273.105)">Training fields: 4/18 vs 10/18.</text>
@@ -2992,7 +2992,7 @@ Evaluation evidence: benchmark=True, doi=False, dataset_link=True</title></g>
     <text style="font-size: 11px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="48" y="1422.84625" transform="rotate(-0 48 1422.84625)">Sources: current YAML + SHA-256-matched hybrid results; current evaluators reproduce every item score. Automated documentation checks, not model performance.</text>
    </g>
    <g id="text_466">
-    <text style="font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #898781" x="48" y="1445.716875" transform="rotate(-0 48 1445.716875)">Blue visual language adapted from D4D figures 3 and 5. Editable vector text; full paths, evidence, result hashes and evaluator hashes accompany this figure.</text>
+    <text style="font-size: 10.5px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #52514e" x="48" y="1445.716875" transform="rotate(-0 48 1445.716875)">Blue visual language adapted from D4D figures 3 and 5. Editable vector text; full paths, evidence, result hashes and evaluator hashes accompany this figure.</text>
    </g>
   </g>
  </g>

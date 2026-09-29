@@ -1,48 +1,69 @@
 {
-  "generated_at": "2026-09-29T04:18:43.955143+00:00",
+  "generated_at": "2026-09-29T05:18:09.493069+00:00",
   "source_repository": "https://github.com/bridge2ai/model-card-schema",
-  "checkout_commit": "b528f71a307a997db2377ee8213a56ebdbfad1a4",
-  "source_revision_note": "Input file SHA-256 values identify the actual workspace bytes; checkout commit alone does not identify uncommitted updates.",
+  "checkout_commit": "e7a23d8286fd6685d6d03e3a169dcebe2e42d1ae",
+  "source_revision_note": "Input file SHA-256 values identify the actual workspace bytes; each input's committed flag says whether it was tracked and unmodified at the checkout commit.",
+  "matplotlib_version": "3.10.9",
+  "fonts": {
+    "normal": {
+      "file": "Arial.ttf",
+      "sha256": "a7c40b6347305a7a7946cbe95c423663e67794efdc0cc497a13d35364f4bc70b"
+    },
+    "bold": {
+      "file": "Arial Bold.ttf",
+      "sha256": "893af24f334b23a68f0233ccfa5b19a1c87b9fc6050ba01c34e91fc8e8f62a77"
+    }
+  },
   "files": {
     "src/model_card_schema/schema/model_card_schema.yaml": {
       "sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788",
-      "bytes": 40467
+      "bytes": 40467,
+      "committed": true
     },
     "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml": {
       "sha256": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
-      "bytes": 17167
+      "bytes": 17167,
+      "committed": true
     },
     "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml": {
       "sha256": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af",
-      "bytes": 22828
+      "bytes": 22828,
+      "committed": true
     },
     "scripts/batch_evaluate_mc_rubric10_hybrid.py": {
       "sha256": "a6b57ae2a32656bbde827f8be00f74e0a1e38badaa8ea130f1fdc1477a79a71a",
-      "bytes": 30935
+      "bytes": 30935,
+      "committed": true
     },
     "data/evaluation/remediation/2026-09-28/after/rubric10/densenet121_tv_in1k_model_card_evaluation.json": {
       "sha256": "370327cb1cdf5554d28eb787cb70161a1a4f1d8ea73efefe0b4c2c1d9dcb6e52",
-      "bytes": 17545
+      "bytes": 17545,
+      "committed": true
     },
     "data/evaluation/current/hf_hub/rubric10/subcell_saprot_650m_model_card_evaluation.json": {
       "sha256": "3af6b2659d2c21fc7217584aa17997ef9b429d2fe9dbeb46c6dddcab30963ae0",
-      "bytes": 17523
+      "bytes": 17523,
+      "committed": true
     },
     "scripts/batch_evaluate_mc_rubric20_hybrid.py": {
       "sha256": "1bf266232d4bbcc164f949b3f5c0d50aef8336cf36a4327d1593356648e83407",
-      "bytes": 41189
+      "bytes": 41189,
+      "committed": true
     },
     "data/evaluation/remediation/2026-09-28/after/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json": {
       "sha256": "c287bd26516afe74ad6aa8f8e0c6ad8de5bc1c3ac5ae4004c4571e9158b29aa6",
-      "bytes": 9677
+      "bytes": 9677,
+      "committed": true
     },
     "data/evaluation/current/hf_hub/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json": {
       "sha256": "90cff8a6e95d8d0316d7a386bc38038eb1a94f00cc1f847eed9ae9a869fc5914",
-      "bytes": 9279
+      "bytes": 9279,
+      "committed": true
     },
     "scripts/build_model_card_heatmaps.py": {
-      "sha256": "cf1aa6d30b4826eafe899e55b70fac5528a7bceb257b59e9098530697fae2e66",
-      "bytes": 33538
+      "sha256": "cb196f501f862a371ed97a9e9811f6750166312a389d58bc21f4d6d43ef2abcd",
+      "bytes": 37599,
+      "committed": true
     }
   },
   "selection": {
