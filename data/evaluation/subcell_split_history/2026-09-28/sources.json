@@ -1,0 +1,682 @@
+{
+  "dataset_repository": "SaProtHub/Dataset-Subcellular_Localization-DeepLoc",
+  "audited_head": "78096a0eff765cf8988323ca3c21c0f19ca1ae79",
+  "retrieved_at": "2026-09-29T01:07:12.098475+00:00",
+  "scope": "All 26 public main-branch commits and recursive trees including dotfiles; 12 unique CSV or data.mdb artifacts. No model weights or inference.",
+  "artifacts": {
+    "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13": {
+      "path": "test/data.mdb",
+      "size": 9949184,
+      "first_revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "first_date": "2024-05-03T15:35:02.000Z",
+      "git_oid": "3b4bd46590e7a0816cfbb182a8f09088dea12b71",
+      "lfs_sha256": "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13",
+      "versions": [
+        {
+          "revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+          "path": "test/data.mdb",
+          "date": "2024-05-03T15:35:02.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/f1f914e9ce4bf5ceefa33823f1a09562aac872b4/test/data.mdb",
+      "sha256": "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13",
+      "cache_filename": "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13.mdb"
+    },
+    "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e": {
+      "path": "train/data.mdb",
+      "size": 125423616,
+      "first_revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "first_date": "2024-05-03T15:35:02.000Z",
+      "git_oid": "6e39a066b91e64d748b3d6fa57502125d4ea4f38",
+      "lfs_sha256": "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e",
+      "versions": [
+        {
+          "revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+          "path": "train/data.mdb",
+          "date": "2024-05-03T15:35:02.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/f1f914e9ce4bf5ceefa33823f1a09562aac872b4/train/data.mdb",
+      "sha256": "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e",
+      "cache_filename": "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e.mdb"
+    },
+    "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141": {
+      "path": "valid/data.mdb",
+      "size": 10006528,
+      "first_revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "first_date": "2024-05-03T15:35:02.000Z",
+      "git_oid": "48465b2730591db0d645024c23ebd630ec7f1a17",
+      "lfs_sha256": "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141",
+      "versions": [
+        {
+          "revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+          "path": "valid/data.mdb",
+          "date": "2024-05-03T15:35:02.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/f1f914e9ce4bf5ceefa33823f1a09562aac872b4/valid/data.mdb",
+      "sha256": "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141",
+      "cache_filename": "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141.mdb"
+    },
+    "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae": {
+      "path": "test/data.mdb",
+      "size": 2658304,
+      "first_revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "first_date": "2024-05-06T11:28:06.000Z",
+      "git_oid": "9841bdefa2a4085619f5fabc41613b7e616aead4",
+      "lfs_sha256": "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae",
+      "versions": [
+        {
+          "revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+          "path": "test/data.mdb",
+          "date": "2024-05-06T11:28:06.000Z"
+        },
+        {
+          "revision": "a21d05344faec044f0285d8c03fc61f2cb28879f",
+          "path": "test/data.mdb",
+          "date": "2024-06-12T08:01:16.000Z"
+        },
+        {
+          "revision": "d792b300d29e79105ec77311dbf7062b26cf9381",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:06:36.000Z"
+        },
+        {
+          "revision": "5d4bc503c074ca024a1966bd4990b9b1e3741bda",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:08:42.000Z"
+        },
+        {
+          "revision": "0a79556be2cf274b32548441c8d2fb3682723735",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:11:50.000Z"
+        },
+        {
+          "revision": "577443d714d28fa1a9f0d6c2c1bc54255e9f0db2",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:15:10.000Z"
+        },
+        {
+          "revision": "682db94c373a5412332bdaae096aa41dda89bce9",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:15:25.000Z"
+        },
+        {
+          "revision": "21baada50fbc17dc22e7ee8217892df9b2a16d89",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:19:22.000Z"
+        },
+        {
+          "revision": "05fdc520a860dbf5410634deb3b0acaa8f4256c6",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:19:51.000Z"
+        },
+        {
+          "revision": "518bb381a0dc6c0dac320829e70a65c4d7917d7d",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T02:20:05.000Z"
+        },
+        {
+          "revision": "c5abd90a75862f83ee2a1e128e206fe8514154da",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T04:36:46.000Z"
+        },
+        {
+          "revision": "f89ca5e407b67582970b51f2861d62975634ea35",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T04:36:54.000Z"
+        },
+        {
+          "revision": "9cbf76b192b144e897a14b1b58209066744fddc5",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T04:37:02.000Z"
+        },
+        {
+          "revision": "f34283c6b314d0bb2e8c9cfddcbf530b32460b57",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T05:48:00.000Z"
+        },
+        {
+          "revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T05:48:46.000Z"
+        },
+        {
+          "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+          "path": "test/data.mdb",
+          "date": "2024-07-10T05:51:20.000Z"
+        },
+        {
+          "revision": "bd8ec78ea98f4ca54d6f5a4e6a0fb9961d5d0212",
+          "path": "test/data.mdb",
+          "date": "2024-08-08T10:59:40.000Z"
+        },
+        {
+          "revision": "2c89df2801e8850ecc195ecf135580ff54bee8b3",
+          "path": "test/data.mdb",
+          "date": "2024-08-08T11:01:23.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/c7af324a2eb84f834895e4febe34cf55cae6da00/test/data.mdb",
+      "sha256": "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae",
+      "cache_filename": "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae.mdb"
+    },
+    "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f": {
+      "path": "train/data.mdb",
+      "size": 16396288,
+      "first_revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "first_date": "2024-05-06T11:28:06.000Z",
+      "git_oid": "332262b70f0751a38cb03933a9ed51a30ec1fe8a",
+      "lfs_sha256": "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f",
+      "versions": [
+        {
+          "revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+          "path": "train/data.mdb",
+          "date": "2024-05-06T11:28:06.000Z"
+        },
+        {
+          "revision": "a21d05344faec044f0285d8c03fc61f2cb28879f",
+          "path": "train/data.mdb",
+          "date": "2024-06-12T08:01:16.000Z"
+        },
+        {
+          "revision": "d792b300d29e79105ec77311dbf7062b26cf9381",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:06:36.000Z"
+        },
+        {
+          "revision": "5d4bc503c074ca024a1966bd4990b9b1e3741bda",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:08:42.000Z"
+        },
+        {
+          "revision": "0a79556be2cf274b32548441c8d2fb3682723735",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:11:50.000Z"
+        },
+        {
+          "revision": "577443d714d28fa1a9f0d6c2c1bc54255e9f0db2",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:15:10.000Z"
+        },
+        {
+          "revision": "682db94c373a5412332bdaae096aa41dda89bce9",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:15:25.000Z"
+        },
+        {
+          "revision": "21baada50fbc17dc22e7ee8217892df9b2a16d89",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:19:22.000Z"
+        },
+        {
+          "revision": "05fdc520a860dbf5410634deb3b0acaa8f4256c6",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:19:51.000Z"
+        },
+        {
+          "revision": "518bb381a0dc6c0dac320829e70a65c4d7917d7d",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T02:20:05.000Z"
+        },
+        {
+          "revision": "c5abd90a75862f83ee2a1e128e206fe8514154da",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T04:36:46.000Z"
+        },
+        {
+          "revision": "f89ca5e407b67582970b51f2861d62975634ea35",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T04:36:54.000Z"
+        },
+        {
+          "revision": "9cbf76b192b144e897a14b1b58209066744fddc5",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T04:37:02.000Z"
+        },
+        {
+          "revision": "f34283c6b314d0bb2e8c9cfddcbf530b32460b57",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T05:48:00.000Z"
+        },
+        {
+          "revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T05:48:46.000Z"
+        },
+        {
+          "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+          "path": "train/data.mdb",
+          "date": "2024-07-10T05:51:20.000Z"
+        },
+        {
+          "revision": "bd8ec78ea98f4ca54d6f5a4e6a0fb9961d5d0212",
+          "path": "train/data.mdb",
+          "date": "2024-08-08T10:59:40.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/c7af324a2eb84f834895e4febe34cf55cae6da00/train/data.mdb",
+      "sha256": "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f",
+      "cache_filename": "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f.mdb"
+    },
+    "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205": {
+      "path": "valid/data.mdb",
+      "size": 2736128,
+      "first_revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "first_date": "2024-05-06T11:28:06.000Z",
+      "git_oid": "ea967862df316f6fa16b8f4e4ed55b0bef0ba455",
+      "lfs_sha256": "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205",
+      "versions": [
+        {
+          "revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+          "path": "valid/data.mdb",
+          "date": "2024-05-06T11:28:06.000Z"
+        },
+        {
+          "revision": "a21d05344faec044f0285d8c03fc61f2cb28879f",
+          "path": "valid/data.mdb",
+          "date": "2024-06-12T08:01:16.000Z"
+        },
+        {
+          "revision": "d792b300d29e79105ec77311dbf7062b26cf9381",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:06:36.000Z"
+        },
+        {
+          "revision": "5d4bc503c074ca024a1966bd4990b9b1e3741bda",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:08:42.000Z"
+        },
+        {
+          "revision": "0a79556be2cf274b32548441c8d2fb3682723735",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:11:50.000Z"
+        },
+        {
+          "revision": "577443d714d28fa1a9f0d6c2c1bc54255e9f0db2",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:15:10.000Z"
+        },
+        {
+          "revision": "682db94c373a5412332bdaae096aa41dda89bce9",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:15:25.000Z"
+        },
+        {
+          "revision": "21baada50fbc17dc22e7ee8217892df9b2a16d89",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:19:22.000Z"
+        },
+        {
+          "revision": "05fdc520a860dbf5410634deb3b0acaa8f4256c6",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:19:51.000Z"
+        },
+        {
+          "revision": "518bb381a0dc6c0dac320829e70a65c4d7917d7d",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T02:20:05.000Z"
+        },
+        {
+          "revision": "c5abd90a75862f83ee2a1e128e206fe8514154da",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T04:36:46.000Z"
+        },
+        {
+          "revision": "f89ca5e407b67582970b51f2861d62975634ea35",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T04:36:54.000Z"
+        },
+        {
+          "revision": "9cbf76b192b144e897a14b1b58209066744fddc5",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T04:37:02.000Z"
+        },
+        {
+          "revision": "f34283c6b314d0bb2e8c9cfddcbf530b32460b57",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T05:48:00.000Z"
+        },
+        {
+          "revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T05:48:46.000Z"
+        },
+        {
+          "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+          "path": "valid/data.mdb",
+          "date": "2024-07-10T05:51:20.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/c7af324a2eb84f834895e4febe34cf55cae6da00/valid/data.mdb",
+      "sha256": "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205",
+      "cache_filename": "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205.mdb"
+    },
+    "3e6000bf8dcddae3e2ab01922673f6af24ef4057": {
+      "path": "test.csv",
+      "size": 15418,
+      "first_revision": "d792b300d29e79105ec77311dbf7062b26cf9381",
+      "first_date": "2024-07-10T02:06:36.000Z",
+      "git_oid": "3e6000bf8dcddae3e2ab01922673f6af24ef4057",
+      "lfs_sha256": null,
+      "versions": [
+        {
+          "revision": "d792b300d29e79105ec77311dbf7062b26cf9381",
+          "path": "test.csv",
+          "date": "2024-07-10T02:06:36.000Z"
+        },
+        {
+          "revision": "5d4bc503c074ca024a1966bd4990b9b1e3741bda",
+          "path": "test.csv",
+          "date": "2024-07-10T02:08:42.000Z"
+        },
+        {
+          "revision": "5d4bc503c074ca024a1966bd4990b9b1e3741bda",
+          "path": "train.csv",
+          "date": "2024-07-10T02:08:42.000Z"
+        },
+        {
+          "revision": "5d4bc503c074ca024a1966bd4990b9b1e3741bda",
+          "path": "valid.csv",
+          "date": "2024-07-10T02:08:42.000Z"
+        },
+        {
+          "revision": "0a79556be2cf274b32548441c8d2fb3682723735",
+          "path": "test.csv",
+          "date": "2024-07-10T02:11:50.000Z"
+        },
+        {
+          "revision": "0a79556be2cf274b32548441c8d2fb3682723735",
+          "path": "train.csv",
+          "date": "2024-07-10T02:11:50.000Z"
+        },
+        {
+          "revision": "0a79556be2cf274b32548441c8d2fb3682723735",
+          "path": "validation.csv",
+          "date": "2024-07-10T02:11:50.000Z"
+        },
+        {
+          "revision": "577443d714d28fa1a9f0d6c2c1bc54255e9f0db2",
+          "path": "test.csv",
+          "date": "2024-07-10T02:15:10.000Z"
+        },
+        {
+          "revision": "577443d714d28fa1a9f0d6c2c1bc54255e9f0db2",
+          "path": "train.csv",
+          "date": "2024-07-10T02:15:10.000Z"
+        },
+        {
+          "revision": "577443d714d28fa1a9f0d6c2c1bc54255e9f0db2",
+          "path": "validation.csv",
+          "date": "2024-07-10T02:15:10.000Z"
+        },
+        {
+          "revision": "682db94c373a5412332bdaae096aa41dda89bce9",
+          "path": "test.csv",
+          "date": "2024-07-10T02:15:25.000Z"
+        },
+        {
+          "revision": "682db94c373a5412332bdaae096aa41dda89bce9",
+          "path": "train.csv",
+          "date": "2024-07-10T02:15:25.000Z"
+        },
+        {
+          "revision": "682db94c373a5412332bdaae096aa41dda89bce9",
+          "path": "validation.csv",
+          "date": "2024-07-10T02:15:25.000Z"
+        },
+        {
+          "revision": "21baada50fbc17dc22e7ee8217892df9b2a16d89",
+          "path": "test/test.csv",
+          "date": "2024-07-10T02:19:22.000Z"
+        },
+        {
+          "revision": "21baada50fbc17dc22e7ee8217892df9b2a16d89",
+          "path": "train.csv",
+          "date": "2024-07-10T02:19:22.000Z"
+        },
+        {
+          "revision": "21baada50fbc17dc22e7ee8217892df9b2a16d89",
+          "path": "validation.csv",
+          "date": "2024-07-10T02:19:22.000Z"
+        },
+        {
+          "revision": "05fdc520a860dbf5410634deb3b0acaa8f4256c6",
+          "path": "test/test.csv",
+          "date": "2024-07-10T02:19:51.000Z"
+        },
+        {
+          "revision": "05fdc520a860dbf5410634deb3b0acaa8f4256c6",
+          "path": "train/train.csv",
+          "date": "2024-07-10T02:19:51.000Z"
+        },
+        {
+          "revision": "05fdc520a860dbf5410634deb3b0acaa8f4256c6",
+          "path": "validation.csv",
+          "date": "2024-07-10T02:19:51.000Z"
+        },
+        {
+          "revision": "518bb381a0dc6c0dac320829e70a65c4d7917d7d",
+          "path": "test/test.csv",
+          "date": "2024-07-10T02:20:05.000Z"
+        },
+        {
+          "revision": "518bb381a0dc6c0dac320829e70a65c4d7917d7d",
+          "path": "train/train.csv",
+          "date": "2024-07-10T02:20:05.000Z"
+        },
+        {
+          "revision": "518bb381a0dc6c0dac320829e70a65c4d7917d7d",
+          "path": "valid/valid.csv",
+          "date": "2024-07-10T02:20:05.000Z"
+        },
+        {
+          "revision": "c5abd90a75862f83ee2a1e128e206fe8514154da",
+          "path": "test/test.csv",
+          "date": "2024-07-10T04:36:46.000Z"
+        },
+        {
+          "revision": "c5abd90a75862f83ee2a1e128e206fe8514154da",
+          "path": "train/train.csv",
+          "date": "2024-07-10T04:36:46.000Z"
+        },
+        {
+          "revision": "f89ca5e407b67582970b51f2861d62975634ea35",
+          "path": "test/test.csv",
+          "date": "2024-07-10T04:36:54.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/d792b300d29e79105ec77311dbf7062b26cf9381/test.csv",
+      "sha256": "74592a8931b2ed2f1606063fcef489169c1cfe9c714d9f22a9da3d4806520456",
+      "cache_filename": "3e6000bf8dcddae3e2ab01922673f6af24ef4057.csv"
+    },
+    "e09d250b419f2f141c611ca471d787d536cc887f": {
+      "path": "test/test.csv",
+      "size": 1661870,
+      "first_revision": "f34283c6b314d0bb2e8c9cfddcbf530b32460b57",
+      "first_date": "2024-07-10T05:48:00.000Z",
+      "git_oid": "e09d250b419f2f141c611ca471d787d536cc887f",
+      "lfs_sha256": null,
+      "versions": [
+        {
+          "revision": "f34283c6b314d0bb2e8c9cfddcbf530b32460b57",
+          "path": "test/test.csv",
+          "date": "2024-07-10T05:48:00.000Z"
+        },
+        {
+          "revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+          "path": "test/test.csv",
+          "date": "2024-07-10T05:48:46.000Z"
+        },
+        {
+          "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+          "path": "test/test.csv",
+          "date": "2024-07-10T05:51:20.000Z"
+        },
+        {
+          "revision": "bd8ec78ea98f4ca54d6f5a4e6a0fb9961d5d0212",
+          "path": "test/test.csv",
+          "date": "2024-08-08T10:59:40.000Z"
+        },
+        {
+          "revision": "2c89df2801e8850ecc195ecf135580ff54bee8b3",
+          "path": "test/test.csv",
+          "date": "2024-08-08T11:01:23.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/f34283c6b314d0bb2e8c9cfddcbf530b32460b57/test/test.csv",
+      "sha256": "f445dd51d6527e697220af886de78a9750ec1a92e0deaa5d63b17fd798c48ff5",
+      "cache_filename": "e09d250b419f2f141c611ca471d787d536cc887f.csv"
+    },
+    "4418ac1cb40a750a423a722bfe7c5cf1f83588d1": {
+      "path": "train/train.csv",
+      "size": 10213024,
+      "first_revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+      "first_date": "2024-07-10T05:48:46.000Z",
+      "git_oid": "4418ac1cb40a750a423a722bfe7c5cf1f83588d1",
+      "lfs_sha256": null,
+      "versions": [
+        {
+          "revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+          "path": "train/train.csv",
+          "date": "2024-07-10T05:48:46.000Z"
+        },
+        {
+          "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+          "path": "train/train.csv",
+          "date": "2024-07-10T05:51:20.000Z"
+        },
+        {
+          "revision": "bd8ec78ea98f4ca54d6f5a4e6a0fb9961d5d0212",
+          "path": "train/train.csv",
+          "date": "2024-08-08T10:59:40.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/ad265426182fa5e6a5e384419a2a5ca340dce7fc/train/train.csv",
+      "sha256": "540f6fce12a820fa0f38e17982e7759e1f35f26f7a9c565427d33ef40b4248f7",
+      "cache_filename": "4418ac1cb40a750a423a722bfe7c5cf1f83588d1.csv"
+    },
+    "e97c6ca5001b7fc7f741d37f7cdeb4b8a1ded20d": {
+      "path": "valid/valid.csv",
+      "size": 1686630,
+      "first_revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+      "first_date": "2024-07-10T05:51:20.000Z",
+      "git_oid": "e97c6ca5001b7fc7f741d37f7cdeb4b8a1ded20d",
+      "lfs_sha256": null,
+      "versions": [
+        {
+          "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+          "path": "valid/valid.csv",
+          "date": "2024-07-10T05:51:20.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/a2ba7f6e25cbb19130d418c86d0d27ec71233ff7/valid/valid.csv",
+      "sha256": "cd25298e48567d5299d0ac7280e710b7284dfa51a0328406e7bc9846f29aa854",
+      "cache_filename": "e97c6ca5001b7fc7f741d37f7cdeb4b8a1ded20d.csv"
+    },
+    "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9": {
+      "path": "dataset.csv",
+      "size": 13469406,
+      "first_revision": "ea88ea2785269900ed84577127fc474e7cd53319",
+      "first_date": "2024-08-08T11:04:06.000Z",
+      "git_oid": "8321be9435f82d14aa4407339f8bb5b9622505d3",
+      "lfs_sha256": "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9",
+      "versions": [
+        {
+          "revision": "ea88ea2785269900ed84577127fc474e7cd53319",
+          "path": "dataset.csv",
+          "date": "2024-08-08T11:04:06.000Z"
+        },
+        {
+          "revision": "1a2209018d29aecac6b35b6509a5c65b99853359",
+          "path": "dataset.csv",
+          "date": "2024-08-09T03:09:48.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/ea88ea2785269900ed84577127fc474e7cd53319/dataset.csv",
+      "sha256": "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9",
+      "cache_filename": "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9.csv"
+    },
+    "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e": {
+      "path": "dataset.csv",
+      "size": 13456254,
+      "first_revision": "c5247cfea75c7b74e7a1b36734c3c2502317390e",
+      "first_date": "2024-10-30T08:21:11.000Z",
+      "git_oid": "3bda1d884021af6d5e7fef5624a725cb92e22519",
+      "lfs_sha256": "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e",
+      "versions": [
+        {
+          "revision": "c5247cfea75c7b74e7a1b36734c3c2502317390e",
+          "path": "dataset.csv",
+          "date": "2024-10-30T08:21:11.000Z"
+        },
+        {
+          "revision": "e7891f14b61ebc95d978c23c86bfaa8185c7ffc2",
+          "path": "dataset.csv",
+          "date": "2024-11-13T09:54:43.000Z"
+        },
+        {
+          "revision": "78096a0eff765cf8988323ca3c21c0f19ca1ae79",
+          "path": "dataset.csv",
+          "date": "2025-02-04T03:45:23.000Z"
+        }
+      ],
+      "download_url": "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/c5247cfea75c7b74e7a1b36734c3c2502317390e/dataset.csv",
+      "sha256": "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e",
+      "cache_filename": "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e.csv"
+    }
+  },
+  "snapshots": [
+    {
+      "id": "2024-05-03",
+      "date": "2024-05-03",
+      "revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "format": "lmdb",
+      "artifact_keys": {
+        "test": "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13",
+        "train": "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e",
+        "valid": "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141"
+      }
+    },
+    {
+      "id": "2024-05-06",
+      "date": "2024-05-06",
+      "revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "format": "lmdb",
+      "artifact_keys": {
+        "test": "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae",
+        "train": "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f",
+        "valid": "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205"
+      }
+    },
+    {
+      "id": "2024-07-10",
+      "date": "2024-07-10",
+      "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+      "format": "csv",
+      "artifact_keys": {
+        "test": "e09d250b419f2f141c611ca471d787d536cc887f",
+        "train": "4418ac1cb40a750a423a722bfe7c5cf1f83588d1",
+        "valid": "e97c6ca5001b7fc7f741d37f7cdeb4b8a1ded20d"
+      }
+    },
+    {
+      "id": "2024-08-08",
+      "date": "2024-08-08",
+      "revision": "ea88ea2785269900ed84577127fc474e7cd53319",
+      "format": "csv",
+      "artifact_keys": {
+        "all": "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9"
+      }
+    },
+    {
+      "id": "2024-10-30",
+      "date": "2024-10-30",
+      "revision": "c5247cfea75c7b74e7a1b36734c3c2502317390e",
+      "format": "csv",
+      "artifact_keys": {
+        "all": "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e"
+      }
+    }
+  ]
+}

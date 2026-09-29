@@ -1,0 +1,390 @@
+[
+  {
+    "commit": "1c1edc0a2a819e341bbd4e778d5f9ce9e7a01dab",
+    "date": "2024-05-07T02:32:02.000Z",
+    "title": "initial commit"
+  },
+  {
+    "commit": "f63c2fe958a2918dab97f214880f0aacc4ac33fc",
+    "date": "2024-05-07T04:35:31.000Z",
+    "title": "Upload 2 files",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "/sujin/Models/SaProt/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    }
+  },
+  {
+    "commit": "70df3040b3de36455b304002c19b319f2e9163f9",
+    "date": "2024-05-08T03:31:40.000Z",
+    "title": "Update adapter_config.json",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    }
+  },
+  {
+    "commit": "81be7ff9c59aee25277b7ad2e865a44f86d091f3",
+    "date": "2024-05-08T04:11:02.000Z",
+    "title": "Create README.md",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "0f76760b80ed2b47e231ce73ad58d5ef5b79e1f6531ed958a7141f3faa4f56b1",
+    "readme_claims": {
+      "performance": "0.809 Spearman's \u03c1",
+      "r": "8",
+      "alpha": "8",
+      "learning_rate": "1e-4",
+      "epochs": "50"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "9c36e2a1cab36ed9d119412b8806f4c3232cb33e",
+    "date": "2024-05-08T04:15:52.000Z",
+    "title": "Update README.md",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "44fc95b4f43f66e633514af28f2b5d6bb9cb5bcf5a47e7a3e3317ab9afa35c02",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "8",
+      "alpha": "8",
+      "learning_rate": "1e-4",
+      "epochs": "50"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "d634191bbde0bfba73c1b82feeec1f1f50ed6bc4",
+    "date": "2024-05-08T07:52:17.000Z",
+    "title": "Update README.md",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "3711916283772ebda9b72949cd77da628beff7f914a2ddadfc96550670ba0184",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "1e-4",
+      "epochs": "50"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "ba57a63ff3bc21ac3eaf4157d79f28bfff8955a2",
+    "date": "2024-05-08T08:01:47.000Z",
+    "title": "Update README.md",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "54c2127a51ab0273c998440a77a197568e776f96a0cd17bed37204031c0c8661",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "5e-4",
+      "epochs": "100"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "dd69e132ce0595da29968601c3aaa2ae6e69028f",
+    "date": "2024-05-17T05:47:20.000Z",
+    "title": "Update adapter_config.json",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": "SA"
+    },
+    "readme_sha256": "54c2127a51ab0273c998440a77a197568e776f96a0cd17bed37204031c0c8661",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "5e-4",
+      "epochs": "100"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "52c507632c6b4b27a5d31d2bd5c39b3110bc0a4a",
+    "date": "2024-05-17T07:25:57.000Z",
+    "title": "Update adapter_config.json",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "54c2127a51ab0273c998440a77a197568e776f96a0cd17bed37204031c0c8661",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "5e-4",
+      "epochs": "100"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "79ff7a644c9364e7319202c72b586579b8f67592",
+    "date": "2024-07-08T11:28:14.000Z",
+    "title": "Update README.md",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "2e8ec66622df5d847102568c83c5b04d070e7e6c879b4a254be3b216c5885cc0",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "5e-4",
+      "epochs": "100"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "a5dd3ae6f3247e3643f23b64a7d76eb2c7099031",
+    "date": "2024-07-22T12:59:11.000Z",
+    "title": "Update README.md",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "77f7dc8398eca80e15d8bc107ea447cd6b14c3830638f86dac851f383e75cca3",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "5e-4",
+      "epochs": "100"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  },
+  {
+    "commit": "ffc656cde0bbfaf4933b364036753674520663b6",
+    "date": "2024-10-16T11:57:20.000Z",
+    "title": "Upload metadata.json",
+    "weights": {
+      "oid": "3efefc6d2410bda25d6a6906d4bf1abd3d47a1fb",
+      "size": 55417357,
+      "lfs": {
+        "oid": "af06be30281f9b02fb30f867fc163a9c2ba9ee299b2d8e0fdb648972444d1ea1",
+        "size": 55417357,
+        "pointerSize": 133
+      }
+    },
+    "adapter_config": {
+      "base_model_name_or_path": "westlake-repl/SaProt_650M_AF2",
+      "revision": null,
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.0,
+      "modules_to_save": [
+        "classifier"
+      ],
+      "training_data_type": null
+    },
+    "readme_sha256": "77f7dc8398eca80e15d8bc107ea447cd6b14c3830638f86dac851f383e75cca3",
+    "readme_claims": {
+      "performance": "85.75% Accuracy",
+      "r": "16",
+      "alpha": "32",
+      "learning_rate": "5e-4",
+      "epochs": "100"
+    },
+    "readme_links": [
+      "https://huggingface.co/westlake-repl/SaProt_650M_AF2",
+      "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc"
+    ]
+  }
+]
