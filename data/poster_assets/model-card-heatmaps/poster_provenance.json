@@ -1,7 +1,7 @@
 {
   "input": "figure_data.json",
-  "input_sha256": "177c2f9bcd4315a9555ff29d7ef6986376905048a17a60f0ad390460f233e35c",
-  "renderer_sha256": "f6974d2c7a4eac53aa2a9b4fba45e5c0d57ca0554455384c2353a9d286adc598",
+  "input_sha256": "33bfd145ccf8765231fda79908d2e840562ac4d8a86e388cb7a6afcb54fb9d0d",
+  "renderer_sha256": "3f7ce330f1ead852e1a4b175a588ded46e83ee026079aa46a6e355a7514e22fb",
   "matplotlib_version": "3.10.9",
   "fonts": {
     "normal": {

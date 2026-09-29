@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T05:18:09.493069+00:00",
+  "generated_at": "2026-09-29T05:55:23.783538+00:00",
   "source_repository": "https://github.com/bridge2ai/model-card-schema",
-  "checkout_commit": "e7a23d8286fd6685d6d03e3a169dcebe2e42d1ae",
+  "checkout_commit": "6e6c0614d13e458c24628f2585b0ac9dd38f20d5",
   "source_revision_note": "Input file SHA-256 values identify the actual workspace bytes; each input's committed flag says whether it was tracked and unmodified at the checkout commit.",
   "matplotlib_version": "3.10.9",
   "fonts": {
@@ -61,8 +61,8 @@
       "committed": true
     },
     "scripts/build_model_card_heatmaps.py": {
-      "sha256": "cb196f501f862a371ed97a9e9811f6750166312a389d58bc21f4d6d43ef2abcd",
-      "bytes": 37599,
+      "sha256": "d465b8104d55be3564c815e68b0143784c33693632315687464965d03243fb9c",
+      "bytes": 42648,
       "committed": true
     }
   },
