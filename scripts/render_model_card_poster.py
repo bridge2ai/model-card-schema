@@ -3,6 +3,9 @@
 
 The upstream builder performs card/schema/evaluation checks. This renderer keeps
 the same measurements while replacing individual fields with section totals.
+Place model_cards_poster_transparent.png on the Bridge2AI Standards Portfolio poster;
+the teal PNG, SVG and PDF are for standalone use. The layout needs Arial or a
+metric-compatible font (Liberation Sans, Arimo).
 """
 from __future__ import annotations
 
@@ -18,15 +21,15 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
 # BACKGROUND is the Model Cards panel of the Bridge2AI Standards Portfolio poster
 # (#EEF7FD at 11% opacity) composited over the page gradient behind this figure. Text on
-# it uses the poster's light inks; the heatmap keeps its white box and dark-is-higher scale.
+# it uses the poster's light ink; the heatmap keeps its white box and dark-is-higher scale.
 BACKGROUND = "#2f719a"
 ON_BACKGROUND = "#eef7fd"
-ON_BACKGROUND_MUTED = "#b3d0e2"
 INK = "#10263d"
 MUTED = "#506174"
 BLUE = "#2a78d6"
@@ -34,8 +37,12 @@ NAVY = "#184f95"
 PALE = "#f0efec"
 GRID = "#e0e6ed"
 W, H = 1600, 1080
-# The poster center-crops this figure to y 145-931; the box is centered in that window.
-BOX_TOP, BOX_BOTTOM = 163, 913
+# The poster's srcRect crops 13.465% off the top and 13.829% off the bottom; the white
+# box is centered in what remains.
+CROP_TOP, CROP_BOTTOM = 0.13465 * H, (1 - 0.13829) * H
+BOX_LEFT, BOX_RIGHT, BOX_TOP, BOX_BOTTOM, BOX_PADDING = 22, W - 22, 163, 913, 12
+# Every label position assumes Arial's advance widths.
+METRIC_FONTS = ["Arial", "Liberation Sans", "Arimo"]
 
 SHORT_LABELS = {
     "Core metadata": "Core metadata",
@@ -82,12 +89,18 @@ def render(input_path, output_dir):
         if group["label"] not in SHORT_LABELS or any(not 0 <= count <= group["total"] for count in group["counts"]):
             raise ValueError("Unexpected section or count")
 
-    # Arial first: Matplotlib reads only the regular face of macOS's Helvetica Neue .ttc,
-    # which silently rendered every bold label as regular.
+    # Matplotlib reads only the regular face of macOS's Helvetica Neue .ttc, which silently
+    # rendered every bold label as regular, so it is not a fallback here.
     plt.rcParams.update({
-        "font.family": "sans-serif", "font.sans-serif": ["Arial", "Helvetica Neue", "DejaVu Sans"],
-        "svg.fonttype": "none", "pdf.fonttype": 42, "axes.unicode_minus": False,
+        "font.family": "sans-serif", "font.sans-serif": METRIC_FONTS,
+        "svg.fonttype": "none", "svg.hashsalt": "model-card-poster", "pdf.fonttype": 42, "axes.unicode_minus": False,
     })
+    for weight in ("normal", "bold"):
+        font = font_manager.get_font(font_manager.findfont(font_manager.FontProperties(family="sans-serif", weight=weight)))
+        if font.family_name not in METRIC_FONTS or (weight == "bold") != ("Bold" in font.style_name):
+            raise ValueError(f"Poster layout needs {' or '.join(METRIC_FONTS)} in regular and bold; "
+                             f"found {font.family_name} {font.style_name}")
+    model_labels = [model["label"] for model in models]
     fig = plt.figure(figsize=(16, 10.8), facecolor=BACKGROUND)
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set(xlim=(0, W), ylim=(H, 0))
@@ -108,19 +121,18 @@ def render(input_path, output_dir):
         return contrast_color(cmap(fraction))
 
     label(58, 60, "Model-card documentation", 34, ON_BACKGROUND, "bold")
-    label(58, 111, "Current cards · automated rubric checks", 18, ON_BACKGROUND_MUTED)
-    ax.add_patch(FancyBboxPatch((22, BOX_TOP), W - 44, BOX_BOTTOM - BOX_TOP, boxstyle="round,pad=0,rounding_size=18",
-                                facecolor="white", edgecolor="none"))
+    label(58, 111, "Current cards · automated rubric checks", 18, ON_BACKGROUND)
+    ax.add_patch(FancyBboxPatch((BOX_LEFT, BOX_TOP), BOX_RIGHT - BOX_LEFT, BOX_BOTTOM - BOX_TOP,
+                                boxstyle="round,pad=0,rounding_size=18", facecolor="white", edgecolor="none"))
 
-    label(58, 201, "Field coverage", 26, weight="bold")
-    label(978, 201, "Evaluating the quality of content", 26, weight="bold")
-    label(58, 258, "Model Card Modules", 18, weight="bold")
-    model_labels = ["DenseNet-121", "SubCell 650M"]
+    label(58, 207, "Field coverage", 26, weight="bold")
+    label(978, 207, "Evaluating the quality of content", 26, weight="bold")
+    label(58, 262, "Model Card Modules", 18, weight="bold")
     for col, name in enumerate(model_labels):
-        label(480 + 195 * col, 258, name, 18, weight="bold", ha="center")
-        label(1122 + 226 * col, 258, name, 18, weight="bold", ha="center")
+        label(480 + 195 * col, 262, name, 18, weight="bold", ha="center")
+        label(1122 + 226 * col, 262, name, 18, weight="bold", ha="center")
 
-    row_y, row_h = 296, 46
+    row_y, row_h = 298, 46
     for index, group in enumerate(groups):
         y = row_y + index * row_h
         label(58, y + row_h / 2, SHORT_LABELS[group["label"]], 19)
@@ -132,15 +144,15 @@ def render(input_path, output_dir):
             label(x + 95, y + row_h / 2, f"{count}/{group['total']}", 20, color, "bold", ha="center")
 
     # Totals retain the same denominator as the detailed field-level figure.
-    label(58, 792, "All fields", 20, weight="bold")
+    label(58, 794, "All fields", 20, weight="bold")
     for col, model in enumerate(models):
         coverage = model["presence"]
         center = 480 + 195 * col
-        label(center, 788, f"{coverage['count'] / coverage['total']:.0%}", 29, NAVY, "bold", ha="center")
-        label(center, 828, f"{coverage['count']}/{coverage['total']}", 18, MUTED, ha="center")
+        label(center, 790, f"{coverage['count'] / coverage['total']:.0%}", 29, NAVY, "bold", ha="center")
+        label(center, 830, f"{coverage['count']}/{coverage['total']}", 18, MUTED, ha="center")
 
     for row, (key, name) in enumerate((("rubric10", "Rubric 10"), ("rubric20", "Rubric 20"))):
-        y = 336 + row * 250
+        y = 338 + row * 250
         label(978, y - 29, name, 21, weight="bold")
         for col, model in enumerate(models):
             metric = model["rubrics"][key]
@@ -151,29 +163,21 @@ def render(input_path, output_dir):
             label(x + 110, y + 71, f"{fraction:.0%}", 36, color, "bold", ha="center")
             label(x + 110, y + 126, f"{metric['score']}/{metric['max_score']}", 21, color, ha="center")
 
-    ax.plot([872, 872], [196, 846], color=GRID, linewidth=1)
+    ax.plot([872, 872], [200, 848], color=GRID, linewidth=1)
 
-    # One legend for both panels, centered at the bottom of the box.
-    legend_y, bar_width = 876, 240
-    parts = [label(0, legend_y, "Shade = fraction of maximum (both panels)", 16, MUTED), label(0, legend_y, "Lower", 16, MUTED),
-             None, label(0, legend_y, "Higher", 16, MUTED)]
-    gaps = [48, 16, 16, 0]
+    # One legend for both panels: the ramp is centered on the figure.
+    legend_y, bar_left, bar_width = 878, W / 2 - 120, 240
+    step = bar_width / 80
+    for stop in range(80):
+        ax.add_patch(Rectangle((bar_left + stop * step, legend_y - 11), step + 0.1, 22, facecolor=cmap(stop / 79), edgecolor="none"))
+    lower = label(bar_left - 14, legend_y, "Lower", 18, MUTED, ha="right")
+    label(bar_left + bar_width + 14, legend_y, "Higher", 18, MUTED)
     fig.canvas.draw()
-    renderer = fig.canvas.get_renderer()
-    widths = [bar_width if part is None else part.get_window_extent(renderer).transformed(ax.transData.inverted()).width
-              for part in parts]
-    x = (W - sum(widths) - sum(gaps)) / 2
-    for part, width, gap in zip(parts, widths, gaps):
-        if part is None:
-            step = bar_width / 80
-            for stop in range(80):
-                ax.add_patch(Rectangle((x + stop * step, legend_y - 10), step + 0.1, 20, facecolor=cmap(stop / 79), edgecolor="none"))
-        else:
-            part.set_x(x)
-        x += width + gap
+    lower_left = lower.get_window_extent(fig.canvas.get_renderer()).transformed(ax.transData.inverted()).x0
+    label(lower_left - 36, legend_y, "Shade = fraction of maximum (both panels)", 18, MUTED, ha="right")
 
-    label(58, 975, "Presence includes optional fields; an empty field is not necessarily a defect.", 18, ON_BACKGROUND_MUTED)
-    label(58, 1012, "Documentation measures, not model performance. No new semantic scoring.", 18, ON_BACKGROUND_MUTED)
+    label(58, 975, "Presence includes optional fields; an empty field is not necessarily a defect.", 18, ON_BACKGROUND)
+    label(58, 1012, "Documentation measures, not model performance. No new semantic scoring.", 18, ON_BACKGROUND)
 
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
@@ -186,12 +190,27 @@ def render(input_path, output_dir):
         for b in texts[first + 1:]:
             if a.get_window_extent(renderer).overlaps(b.get_window_extent(renderer)):
                 raise ValueError(f"Poster text overlaps: {a.get_text()!r}, {b.get_text()!r}")
+    if not CROP_TOP <= BOX_TOP < BOX_BOTTOM <= CROP_BOTTOM:
+        raise ValueError("White box extends past the poster's crop")
+    for item in texts:
+        x0, y0, x1, y1 = item.get_window_extent(renderer).transformed(ax.transData.inverted()).extents
+        top, bottom = min(y0, y1), max(y0, y1)
+        if item.get_color() == ON_BACKGROUND:
+            if bottom > BOX_TOP and top < BOX_BOTTOM:
+                raise ValueError(f"Poster text overlaps the white box: {item.get_text()}")
+        elif (x0 < BOX_LEFT + BOX_PADDING or x1 > BOX_RIGHT - BOX_PADDING
+              or top < BOX_TOP + BOX_PADDING or bottom > BOX_BOTTOM - BOX_PADDING):
+            raise ValueError(f"Poster text leaves the white box: {item.get_text()}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
     stem = output_dir / "model_cards_poster"
-    fig.savefig(stem.with_suffix(".svg"), facecolor=BACKGROUND)
-    fig.savefig(stem.with_suffix(".pdf"), facecolor=BACKGROUND, metadata={"Title": "Model-card documentation: poster summary"})
+    transparent_path = output_dir / "model_cards_poster_transparent.png"
+    fig.savefig(stem.with_suffix(".svg"), facecolor=BACKGROUND, metadata={"Date": None})
+    fig.savefig(stem.with_suffix(".pdf"), facecolor=BACKGROUND,
+                metadata={"Title": "Model-card documentation: poster summary", "CreationDate": None})
     fig.savefig(stem.with_suffix(".png"), dpi=300, facecolor=BACKGROUND)
+    # The poster's panel gradient shows through the transparent canvas; the white box stays opaque.
+    fig.savefig(transparent_path, dpi=300, transparent=True)
     plt.close(fig)
     svg_path = stem.with_suffix(".svg")
     namespace = "http://www.w3.org/2000/svg"
@@ -210,10 +229,11 @@ def render(input_path, output_dir):
         "renderer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "method": "Same counts and hybrid totals as detailed figure; section-level aggregation only",
         "percentage_display": "Rounded to whole percentages; exact fractions retained in every cell",
-        "files": {str(stem.with_suffix(ext).name): hashlib.sha256(stem.with_suffix(ext).read_bytes()).hexdigest() for ext in (".png", ".svg", ".pdf")},
+        "files": {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                  for path in [stem.with_suffix(ext) for ext in (".png", ".svg", ".pdf")] + [transparent_path]},
     }
     (output_dir / "poster_provenance.json").write_text(json.dumps(metadata, indent=2) + "\n")
-    print(f"Poster exported: {stem}.{{png,svg,pdf}}")
+    print(f"Poster exported: {stem}.{{png,svg,pdf}} and {transparent_path.name}")
 
 
 def main():
