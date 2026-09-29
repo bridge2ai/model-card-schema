@@ -19,19 +19,23 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
-from matplotlib.patches import Rectangle
+from matplotlib.patches import FancyBboxPatch, Rectangle
 
-# Colors from the Bridge2AI Standards Portfolio poster. BACKGROUND is the Model Cards
-# panel (#EEF7FD at 11% opacity) composited over the page gradient behind this figure.
+# BACKGROUND is the Model Cards panel of the Bridge2AI Standards Portfolio poster
+# (#EEF7FD at 11% opacity) composited over the page gradient behind this figure. Text on
+# it uses the poster's light inks; the heatmap keeps its white box and dark-is-higher scale.
 BACKGROUND = "#2f719a"
-INK = "#eef7fd"
-MUTED = "#b3d0e2"
-GRID = "#4e85ad"
-CELL_INK = "#061f3a"
-# Lighter = higher: dark blues vanish on this mid-tone teal. Stops are spaced by OKLCH
-# lightness; the lowest keeps 2.1:1 contrast with BACKGROUND.
-SCALE = [(0.0, "#6da7ec"), (0.185, "#86b6ef"), (0.374, "#9ec5f4"), (0.555, "#b7d3f6"), (0.740, "#cde2fb"), (1.0, "#eef7fd")]
+ON_BACKGROUND = "#eef7fd"
+ON_BACKGROUND_MUTED = "#b3d0e2"
+INK = "#10263d"
+MUTED = "#506174"
+BLUE = "#2a78d6"
+NAVY = "#184f95"
+PALE = "#f0efec"
+GRID = "#e0e6ed"
 W, H = 1600, 1080
+# The poster center-crops this figure to y 145-931; the box is centered in that window.
+BOX_TOP, BOX_BOTTOM = 163, 913
 
 SHORT_LABELS = {
     "Core metadata": "Core metadata",
@@ -48,16 +52,15 @@ SHORT_LABELS = {
 
 
 def contrast_color(rgb):
-    """Choose light or dark ink by actual relative-luminance contrast."""
+    """Choose dark ink or white by actual relative-luminance contrast."""
     def luminance(color):
         linear = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in color[:3]]
         return sum(weight * value for weight, value in zip((0.2126, 0.7152, 0.0722), linear))
 
-    def contrast(ink):
-        pair = (luminance(rgb), luminance(to_rgb(ink)))
-        return (max(pair) + 0.05) / (min(pair) + 0.05)
-
-    return max((INK, CELL_INK), key=contrast)
+    background = luminance(rgb)
+    foreground = luminance(to_rgb(INK))
+    dark_contrast = (max(background, foreground) + 0.05) / (min(background, foreground) + 0.05)
+    return "white" if (1.05 / (background + 0.05)) > dark_contrast else INK
 
 
 def render(input_path, output_dir):
@@ -90,7 +93,7 @@ def render(input_path, output_dir):
     ax.set(xlim=(0, W), ylim=(H, 0))
     ax.axis("off")
     texts, tips = [], {}
-    cmap = LinearSegmentedColormap.from_list("documentation_blue", SCALE)
+    cmap = LinearSegmentedColormap.from_list("documentation_blue", [PALE, "#9ec5f4", BLUE, "#104281"])
 
     def label(x, y, text, size=19, color=INK, weight="normal", ha="left", va="center"):
         item = ax.text(x, y, text, fontsize=size, color=color, fontweight=weight, ha=ha, va=va, linespacing=1.25)
@@ -98,25 +101,26 @@ def render(input_path, output_dir):
         return item
 
     def cell(x, y, width, height, fraction, gid, tip):
-        patch = Rectangle((x, y), width, height, facecolor=cmap(fraction), edgecolor=BACKGROUND, linewidth=2)
+        patch = Rectangle((x, y), width, height, facecolor=cmap(fraction), edgecolor="white", linewidth=2)
         patch.set_gid(gid)
         ax.add_patch(patch)
         tips[gid] = tip
         return contrast_color(cmap(fraction))
 
-    label(58, 60, "Model-card documentation", 34, weight="bold")
-    label(58, 111, "Current cards · automated rubric checks", 18, MUTED)
-    ax.plot([58, 1542], [150, 150], color=GRID, linewidth=1.2)
+    label(58, 60, "Model-card documentation", 34, ON_BACKGROUND, "bold")
+    label(58, 111, "Current cards · automated rubric checks", 18, ON_BACKGROUND_MUTED)
+    ax.add_patch(FancyBboxPatch((22, BOX_TOP), W - 44, BOX_BOTTOM - BOX_TOP, boxstyle="round,pad=0,rounding_size=18",
+                                facecolor="white", edgecolor="none"))
 
-    label(58, 198, "Field coverage", 26, weight="bold")
-    label(978, 198, "Evaluating the quality of content", 26, weight="bold")
+    label(58, 201, "Field coverage", 26, weight="bold")
+    label(978, 201, "Evaluating the quality of content", 26, weight="bold")
     label(58, 258, "Model Card Modules", 18, weight="bold")
     model_labels = ["DenseNet-121", "SubCell 650M"]
     for col, name in enumerate(model_labels):
         label(480 + 195 * col, 258, name, 18, weight="bold", ha="center")
         label(1122 + 226 * col, 258, name, 18, weight="bold", ha="center")
 
-    row_y, row_h = 300, 49
+    row_y, row_h = 296, 46
     for index, group in enumerate(groups):
         y = row_y + index * row_h
         label(58, y + row_h / 2, SHORT_LABELS[group["label"]], 19)
@@ -128,32 +132,31 @@ def render(input_path, output_dir):
             label(x + 95, y + row_h / 2, f"{count}/{group['total']}", 20, color, "bold", ha="center")
 
     # Totals retain the same denominator as the detailed field-level figure.
-    label(58, 826, "All fields", 20, weight="bold")
+    label(58, 792, "All fields", 20, weight="bold")
     for col, model in enumerate(models):
         coverage = model["presence"]
         center = 480 + 195 * col
-        label(center, 822, f"{coverage['count'] / coverage['total']:.0%}", 29, weight="bold", ha="center")
-        label(center, 862, f"{coverage['count']}/{coverage['total']}", 18, MUTED, ha="center")
+        label(center, 788, f"{coverage['count'] / coverage['total']:.0%}", 29, NAVY, "bold", ha="center")
+        label(center, 828, f"{coverage['count']}/{coverage['total']}", 18, MUTED, ha="center")
 
     for row, (key, name) in enumerate((("rubric10", "Rubric 10"), ("rubric20", "Rubric 20"))):
-        y = 340 + row * 260
+        y = 336 + row * 250
         label(978, y - 29, name, 21, weight="bold")
         for col, model in enumerate(models):
             metric = model["rubrics"][key]
             fraction = metric["score"] / metric["max_score"]
             x = 1010 + 226 * col
-            color = cell(x, y, 220, 178, fraction, f"rubric-{key}-{col}",
+            color = cell(x, y, 220, 170, fraction, f"rubric-{key}-{col}",
                          f"{model_labels[col]} — {name}, deterministic hybrid: {metric['score']}/{metric['max_score']}")
-            label(x + 110, y + 74, f"{fraction:.0%}", 36, color, "bold", ha="center")
-            label(x + 110, y + 132, f"{metric['score']}/{metric['max_score']}", 21, color, ha="center")
+            label(x + 110, y + 71, f"{fraction:.0%}", 36, color, "bold", ha="center")
+            label(x + 110, y + 126, f"{metric['score']}/{metric['max_score']}", 21, color, ha="center")
 
-    ax.plot([872, 872], [200, 880], color=GRID, linewidth=1)
+    ax.plot([872, 872], [196, 846], color=GRID, linewidth=1)
 
-    # One legend for both panels, centered and above y=931 so the Standards Portfolio
-    # poster's center crop of this figure keeps it.
-    legend_y, bar_width = 906, 240
-    parts = [label(0, legend_y, "Shade = fraction of maximum (both panels)", 16), label(0, legend_y, "Lower", 16),
-             None, label(0, legend_y, "Higher", 16)]
+    # One legend for both panels, centered at the bottom of the box.
+    legend_y, bar_width = 876, 240
+    parts = [label(0, legend_y, "Shade = fraction of maximum (both panels)", 16, MUTED), label(0, legend_y, "Lower", 16, MUTED),
+             None, label(0, legend_y, "Higher", 16, MUTED)]
     gaps = [48, 16, 16, 0]
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
@@ -169,9 +172,8 @@ def render(input_path, output_dir):
             part.set_x(x)
         x += width + gap
 
-    ax.plot([58, 1542], [947, 947], color=GRID, linewidth=1.2)
-    label(58, 983, "Presence includes optional fields; an empty field is not necessarily a defect.", 18, MUTED)
-    label(58, 1020, "Documentation measures, not model performance. No new semantic scoring.", 18, MUTED)
+    label(58, 975, "Presence includes optional fields; an empty field is not necessarily a defect.", 18, ON_BACKGROUND_MUTED)
+    label(58, 1012, "Documentation measures, not model performance. No new semantic scoring.", 18, ON_BACKGROUND_MUTED)
 
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
