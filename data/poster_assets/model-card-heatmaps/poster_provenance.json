@@ -1,0 +1,12 @@
+{
+  "input": "figure_data.json",
+  "input_sha256": "a1ed979c715d0ed4887423176b40bfb18f2fcf385f00be178ee7e9547c2db3da",
+  "renderer_sha256": "dfebae2417ef7a7958f22dc988ae54bc4b428d27374fa01370c290cfb7dfc354",
+  "method": "Same counts and hybrid totals as detailed figure; section-level aggregation only",
+  "percentage_display": "Rounded to whole percentages; exact fractions retained in every cell",
+  "files": {
+    "model_cards_poster.png": "6e32d0cd6acef26d4a45cdf0e18168eb83beb8f8917dedd9e1054d3c30d4f40a",
+    "model_cards_poster.svg": "caf9233b4b0b743e2e840e95a2355bdc85621d4715394ec684694ef1d2a6fc3f",
+    "model_cards_poster.pdf": "f5d3b16339bf36653415567a5eed238b12fe48b1fcd71b90e887cb339ee0a6c1"
+  }
+}

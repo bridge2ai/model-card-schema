@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-09-29T01:23:35.929812+00:00",
+  "method": "Current YAML field presence and hash-matching deterministic hybrid documentation checks",
+  "models": [
+    {
+      "stem": "densenet121_tv_in1k",
+      "label": "DenseNet-121",
+      "repository_id": "timm/densenet121.tv_in1k",
+      "yaml_sha256": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+      "presence": {
+        "count": 74,
+        "total": 126
+      },
+      "rubrics": {
+        "rubric10": {
+          "score": 47,
+          "max_score": 50,
+          "result_path": "data/evaluation/remediation/2026-09-28/after/rubric10/densenet121_tv_in1k_model_card_evaluation.json",
+          "result_sha256": "370327cb1cdf5554d28eb787cb70161a1a4f1d8ea73efefe0b4c2c1d9dcb6e52"
+        },
+        "rubric20": {
+          "score": 67,
+          "max_score": 84,
+          "result_path": "data/evaluation/remediation/2026-09-28/after/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json",
+          "result_sha256": "c287bd26516afe74ad6aa8f8e0c6ad8de5bc1c3ac5ae4004c4571e9158b29aa6"
+        }
+      }
+    },
+    {
+      "stem": "subcell_saprot_650m",
+      "label": "SubCell 650M",
+      "repository_id": "SaProtHub/Model-Subcellular_Localization-650M",
+      "yaml_sha256": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af",
+      "presence": {
+        "count": 80,
+        "total": 126
+      },
+      "rubrics": {
+        "rubric10": {
+          "score": 45,
+          "max_score": 50,
+          "result_path": "data/evaluation/current/hf_hub/rubric10/subcell_saprot_650m_model_card_evaluation.json",
+          "result_sha256": "3af6b2659d2c21fc7217584aa17997ef9b429d2fe9dbeb46c6dddcab30963ae0"
+        },
+        "rubric20": {
+          "score": 62,
+          "max_score": 84,
+          "result_path": "data/evaluation/current/hf_hub/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json",
+          "result_sha256": "90cff8a6e95d8d0316d7a386bc38038eb1a94f00cc1f847eed9ae9a869fc5914"
+        }
+      }
+    }
+  ],
+  "sections": [
+    {
+      "key": "core_metadata",
+      "label": "Core metadata",
+      "total": 13,
+      "counts": [
+        10,
+        11
+      ]
+    },
+    {
+      "key": "model_details",
+      "label": "Model details",
+      "total": 24,
+      "counts": [
+        17,
+        16
+      ]
+    },
+    {
+      "key": "model_parameters",
+      "label": "Model parameters",
+      "total": 39,
+      "counts": [
+        15,
+        23
+      ]
+    },
+    {
+      "key": "quantitative_analysis",
+      "label": "Quantitative analysis",
+      "total": 17,
+      "counts": [
+        7,
+        6
+      ]
+    },
+    {
+      "key": "considerations",
+      "label": "Considerations",
+      "total": 7,
+      "counts": [
+        7,
+        7
+      ]
+    },
+    {
+      "key": "model_index",
+      "label": "Benchmark index",
+      "total": 16,
+      "counts": [
+        11,
+        11
+      ]
+    },
+    {
+      "key": "mission_relevance",
+      "label": "Mission relevance",
+      "total": 4,
+      "counts": [
+        1,
+        0
+      ]
+    },
+    {
+      "key": "usage_documentation",
+      "label": "Usage documentation",
+      "total": 6,
+      "counts": [
+        6,
+        6
+      ]
+    }
+  ],
+  "display_groups": [
+    {
+      "key": "core_metadata",
+      "label": "Core metadata",
+      "total": 13,
+      "counts": [
+        10,
+        11
+      ]
+    },
+    {
+      "key": "model_details",
+      "label": "Model details",
+      "total": 24,
+      "counts": [
+        17,
+        16
+      ]
+    },
+    {
+      "key": "architecture_data_and_io",
+      "label": "Architecture, data and I/O",
+      "total": 16,
+      "counts": [
+        11,
+        13
+      ]
+    },
+    {
+      "key": "compute_infrastructure",
+      "label": "Compute infrastructure",
+      "total": 5,
+      "counts": [
+        0,
+        0
+      ]
+    },
+    {
+      "key": "training_procedure",
+      "label": "Training procedure",
+      "total": 18,
+      "counts": [
+        4,
+        10
+      ]
+    },
+    {
+      "key": "quantitative_analysis",
+      "label": "Quantitative analysis",
+      "total": 17,
+      "counts": [
+        7,
+        6
+      ]
+    },
+    {
+      "key": "considerations",
+      "label": "Considerations",
+      "total": 7,
+      "counts": [
+        7,
+        7
+      ]
+    },
+    {
+      "key": "benchmark_index",
+      "label": "Benchmark index",
+      "total": 16,
+      "counts": [
+        11,
+        11
+      ]
+    },
+    {
+      "key": "mission_relevance",
+      "label": "Mission relevance",
+      "total": 4,
+      "counts": [
+        1,
+        0
+      ]
+    },
+    {
+      "key": "usage_documentation",
+      "label": "Usage documentation",
+      "total": 6,
+      "counts": [
+        6,
+        6
+      ]
+    }
+  ],
+  "caveats": [
+    "Prose in another field does not populate a missing structured field; any non-empty value counts.",
+    "All optional and extension fields are included without applicability filtering.",
+    "Hybrid scores are automated documentation checks, not model capability or an independent semantic review."
+  ]
+}
