@@ -1,0 +1,68 @@
+{
+  "source_commit": "c0d94d239d6b302d4b2fbb8ebd3bc9f5ebbf1e90",
+  "schema_path": "src/model_card_schema/schema/model_card_schema.yaml",
+  "schema_sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788",
+  "presence_definition": "Traverse all terminal field paths from the modelCard root; collapse list indices; a path is populated if any resolved value is nonempty. Whitespace, null and empty collections are absent. Zero and false are values. No prose inference or applicability filtering.",
+  "schema_terminal_path_count": 126,
+  "presence_counts": {
+    "densenet121_tv_in1k": 53,
+    "subcell_saprot_650m": 59
+  },
+  "archived_rating_hash_checks": [
+    {
+      "card": "densenet121_tv_in1k",
+      "rubric": "rubric10_semantic",
+      "declared_hash": "sha256:eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5",
+      "actual_sha256": "eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5",
+      "matches": true
+    },
+    {
+      "card": "densenet121_tv_in1k",
+      "rubric": "rubric20_semantic",
+      "declared_hash": "sha256:densenet121_tv_in1k_model_card_assistant_20260615",
+      "actual_sha256": "eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5",
+      "matches": false
+    },
+    {
+      "card": "subcell_saprot_650m",
+      "rubric": "rubric10_semantic",
+      "declared_hash": "n/a",
+      "actual_sha256": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de",
+      "matches": false
+    },
+    {
+      "card": "subcell_saprot_650m",
+      "rubric": "rubric20_semantic",
+      "declared_hash": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de",
+      "actual_sha256": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de",
+      "matches": true
+    }
+  ],
+  "limitations": [
+    "These are archived model-card documentation ratings, not measurements of model capability or a fresh rescore.",
+    "DenseNet rubric20 uses a placeholder card hash and SubCell rubric10 records n/a. DenseNet rubric10 and SubCell rubric20 hashes match the current YAML. YAML source files have not changed since their June 2026 creation commit.",
+    "Presence retains optional and extended fields; its fraction is not a validated quality or applicability-adjusted score.",
+    "Nested field paths differ from the D4D reference figure's root-slot denominator; fractions are not directly comparable across schemas.",
+    "Rubric item labels are shortened for display; full names and archived evidence are retained in SVG tooltips and companion data."
+  ],
+  "source_provenance_sha256": "e4d63c7652db46045b239896846fd34fe3f4a697380ae2b7d08e146c0829ba77",
+  "files": {
+    "model_cards_scores_and_field_presence.png": {
+      "sha256": "3fbae234b17d08b8ab6b0ed8d37acbc21e4a520d238d5a3d635b4f2894751ace"
+    },
+    "field_presence.csv": {
+      "sha256": "93e8b5022ad6f99373e1fa1e28bd7afb400f23a50625805f157d7fc73ebab43a"
+    },
+    "semantic_scores.csv": {
+      "sha256": "c03b35bea697398e4a09dee12d285e958a2d859485be7b5be97d19cf6a811080"
+    },
+    "densenet121_tv_in1k_model_card.yaml": {
+      "sha256": "eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5",
+      "source_path": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml"
+    },
+    "subcell_saprot_650m_model_card.yaml": {
+      "sha256": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de",
+      "source_path": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml"
+    }
+  }
+}

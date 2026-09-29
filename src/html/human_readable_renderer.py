@@ -18,15 +18,18 @@ into themed cards, then falls through to a generic key/value table for any
 remaining keys. Inline CSS only; no external assets.
 
 Badge SVGs found under ``data/evaluation/badges/<stem>_*.svg`` are embedded
-as data URLs under the title, so the HTML can be shared without separate assets.
+as data URLs only when their recorded input hash matches the current YAML bytes.
+The HTML can be shared without separate assets; stale or unverified badges are omitted.
 """
 from __future__ import annotations
 
 import argparse
 import base64
 import glob
+import hashlib
 import html
 import sys
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -72,7 +75,7 @@ dl.kv { margin: 0; }
 dl.kv > div { display: grid; grid-template-columns: 200px 1fr; gap: .5rem 1rem; padding: .35rem 0; border-top: 1px solid var(--border); }
 dl.kv > div:first-child { border-top: 0; }
 dl.kv dt { color: var(--muted); font-weight: 500; font-size: .9rem; }
-dl.kv dd { margin: 0; word-break: break-word; }
+dl.kv dd { margin: 0; min-width: 0; word-break: break-word; }
 dl.kv code { background: #f3f4f6; padding: .05rem .3rem; border-radius: 3px; font-size: .85rem; }
 
 .chip-row { display: flex; flex-wrap: wrap; gap: .35rem; }
@@ -184,6 +187,7 @@ def render_model_details(md: dict) -> str:
             parts.append(f"<p>{label}</p>")
         if v_diff:
             parts.append(f'<h3>Change description</h3><div class="markdown"><p>{esc(v_diff)}</p></div>')
+        parts.append(render_kv_table(version, skip={"name", "date", "diff"}))
 
     if md.get("overview"):
         parts.append(f'<h3>Overview</h3><div class="markdown"><p>{esc(md["overview"]).replace(chr(10), "<br>")}</p></div>')
@@ -339,6 +343,12 @@ def render_model_parameters(mp: dict) -> str:
             for k, v in hp_block.items():
                 rows.append(f'<div><dt><code>{esc(k)}</code></dt><dd>{fmt_inline(v)}</dd></div>')
             parts.append(f'<dl class="kv">{"".join(rows)}</dl>')
+        parts.append(render_kv_table(tp, skip={"description", "hyperparameters", "reproducibility_info"}))
+        reproducibility = tp.get("reproducibility_info")
+        if isinstance(reproducibility, dict):
+            details = render_kv_table(reproducibility, skip={"hyperparameters"})
+            if details:
+                parts.append(f'<h3>Training reproducibility</h3>{details}')
 
     # compute infrastructure
     ci = mp.get("compute_infrastructure")
@@ -353,11 +363,13 @@ def render_quantitative_analysis(qa: dict) -> str:
     if not isinstance(qa, dict):
         return ""
     metrics = qa.get("performance_metrics") or []
-    if not metrics:
-        return ""
-    parts = ['<table class="metrics"><thead><tr>'
-             '<th>Metric</th><th>Slice</th><th class="num">Value</th><th class="num">Unit</th>'
-             '<th class="num">CI</th></tr></thead><tbody>']
+    parts = []
+    if metrics:
+        parts.append(
+            '<table class="metrics"><thead><tr>'
+            '<th>Metric</th><th>Slice</th><th class="num">Value</th><th class="num">Unit</th>'
+            '<th class="num">CI</th></tr></thead><tbody>'
+        )
     for m in metrics:
         if not isinstance(m, dict):
             continue
@@ -378,7 +390,11 @@ def render_quantitative_analysis(qa: dict) -> str:
             f'<td class="num">{esc(val)}</td><td class="num">{unit}</td>'
             f'<td class="num">{esc(ci_txt)}</td></tr>'
         )
-    parts.append("</tbody></table>")
+    if metrics:
+        parts.append("</tbody></table>")
+    procedure = qa.get("evaluation_procedure")
+    if isinstance(procedure, dict) and procedure:
+        parts.append(f'<h3>Evaluation procedure</h3>{render_kv_table(procedure)}')
     return "".join(parts)
 
 
@@ -445,8 +461,38 @@ def find_badge_files(yaml_path: Path) -> list[Path]:
     return sorted(badge_dir.glob(f"{stem}_rubric*_*.svg"))
 
 
+def render_badges(yaml_path: Path, card_hash: str) -> str:
+    """Embed only badges bound to this card, reading each SVG once."""
+    images = []
+    omitted = False
+    for badge_path in find_badge_files(yaml_path):
+        try:
+            svg = badge_path.read_bytes()
+            root = ET.fromstring(svg)
+        except (OSError, ET.ParseError):
+            omitted = True
+            continue
+        if (
+            root.tag != "{http://www.w3.org/2000/svg}svg"
+            or root.get("data-model-card-sha256") != card_hash
+        ):
+            omitted = True
+            continue
+        images.append(
+            f'<img src="data:image/svg+xml;base64,{base64.b64encode(svg).decode("ascii")}" '
+            f'alt="{esc(badge_path.stem)}">'
+        )
+    result = f'<div class="badge-row">{" ".join(images)}</div>' if images else ""
+    if omitted:
+        result += (
+            '<p class="meta-row">Archived or unverified evaluation badges '
+            'are omitted for this card version.</p>'
+        )
+    return result
+
+
 def render_card(yaml_path: Path) -> str:
-    raw = yaml_path.read_text()
+    raw = yaml_path.read_bytes()
     card = yaml.safe_load(raw)
     if not isinstance(card, dict):
         raise SystemExit(f"{yaml_path}: top-level YAML is not a mapping")
@@ -478,15 +524,7 @@ def render_card(yaml_path: Path) -> str:
         tags_row = f'<div class="chip-row" style="margin-top:.4rem;">{chips}</div>'
 
     # badges
-    badges = find_badge_files(yaml_path)
-    badge_row = ""
-    if badges:
-        imgs = " ".join(
-            f'<img src="data:image/svg+xml;base64,{base64.b64encode(b.read_bytes()).decode("ascii")}" '
-            f'alt="{esc(b.stem)}">'
-            for b in badges
-        )
-        badge_row = f'<div class="badge-row">{imgs}</div>'
+    badge_row = render_badges(yaml_path, hashlib.sha256(raw).hexdigest())
 
     header = (
         f'<header>'
@@ -507,6 +545,13 @@ def render_card(yaml_path: Path) -> str:
     body_parts.append(section("Quantitative Analysis", render_quantitative_analysis(card.get("quantitative_analysis") or {})))
     body_parts.append(section("Considerations", render_considerations(card.get("considerations") or {})))
     body_parts.append(section("Bias Disclosure", render_bias(card)))
+    for key, title in (
+        ("usage_documentation", "Usage Documentation"),
+        ("model_index", "Benchmark Index"),
+        ("mission_relevance", "Mission Relevance"),
+    ):
+        if card.get(key):
+            body_parts.append(section(title, fmt_inline(card[key])))
 
     # Anything top-level not consumed above
     leftovers = {k: v for k, v in card.items() if k not in KNOWN_TOPLEVEL}

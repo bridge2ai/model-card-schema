@@ -23,6 +23,7 @@ import argparse
 import glob
 import html
 import json
+import re
 import sys
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -518,13 +519,24 @@ def _badge_text_width(s: str) -> int:
     return max(20, int(7 * len(s) + 10))
 
 
-def render_badge_svg(label: str, value: str, color_band: str) -> str:
+def render_badge_svg(
+    label: str, value: str, color_band: str, model_card_hash: str | None = None,
+) -> str:
     """Render a single shields.io-style badge as an SVG string.
 
     `label` is the left (dark grey) text; `value` is the right (colored) text.
     `color_band` is one of {good, ok, bad} (named to avoid shadowing the
     module-level color_class() helper).
+    A valid evaluation input hash binds the badge to the exact YAML bytes.
     """
+    card_hash = (
+        model_card_hash.strip().lower().removeprefix("sha256:")
+        if isinstance(model_card_hash, str) else ""
+    )
+    provenance = (
+        f' data-model-card-sha256="{card_hash}"'
+        if re.fullmatch(r"[0-9a-f]{64}", card_hash) else ""
+    )
     color = BADGE_COLORS.get(color_band, BADGE_COLORS["ok"])
     label_w = _badge_text_width(label)
     value_w = _badge_text_width(value)
@@ -533,7 +545,7 @@ def render_badge_svg(label: str, value: str, color_band: str) -> str:
     value_x = label_w + value_w / 2
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_w}" height="20" '
-        f'role="img" aria-label="{esc(label)}: {esc(value)}">'
+        f'role="img" aria-label="{esc(label)}: {esc(value)}"{provenance}>'
         f'<title>{esc(label)}: {esc(value)}</title>'
         f'<linearGradient id="s" x2="0" y2="100%">'
         f'<stop offset="0" stop-color="#bbb" stop-opacity=".1"/>'
@@ -583,7 +595,8 @@ def write_badges(reports: list[dict], output_dir: Path) -> dict[str, Path]:
         label = badge_label_for(r)
         value = f"{pct}% ({total}/{rmax})"
         color = color_class(pct)
-        svg = render_badge_svg(label, value, color)
+        metadata = r.get("metadata") or {}
+        svg = render_badge_svg(label, value, color, metadata.get("model_card_hash"))
 
         # filename: <model_card_stem>_<rubric>_<evaluator>.svg
         model_stem = Path(r.get("model_card_file", "model_card")).stem

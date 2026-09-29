@@ -5,6 +5,8 @@
 # Schema: src/model_card_schema/schema/model_card_schema.yaml
 # Temperature: 0.0
 # Generated: 2026-06-15
+# Evidence review: 2026-09-28; original generation history retained.
+# Review ledger: notes/model_card_remediation/densenet121_evidence.md
 
 schema_version: "0.0.2"
 
@@ -12,15 +14,12 @@ model_details:
   name: "DenseNet-121 (timm/densenet121.tv_in1k)"
   short_description: "DenseNet image classification model trained on ImageNet-1k (original torchvision weights, distributed via timm)."
   overview: |
-    DenseNet-121 is a densely connected convolutional network (Huang et al., CVPR 2017) where every layer
-    receives feature maps from all preceding layers and passes its own feature maps to all subsequent layers.
-    This dense connectivity pattern alleviates the vanishing-gradient problem, strengthens feature
-    propagation, encourages feature reuse, and substantially reduces the parameter count compared to
-    traditional CNNs of similar depth.
-
-    This particular checkpoint (`timm/densenet121.tv_in1k`) is the original torchvision weights repackaged
-    under the timm (PyTorch Image Models) ecosystem so it can be loaded with timm's unified model API.
-    It is trained on the ImageNet-1k classification benchmark (1.28M training images across 1000 classes).
+    DenseNet-121 (Huang et al., CVPR 2017) concatenates earlier feature maps within each dense block.
+    This card covers the public ImageNet-1k checkpoint `timm/densenet121.tv_in1k`.
+    Its upstream card identifies original torchvision weights; torchvision records that these were
+    ported from LuaTorch. The timm distribution provides image classification and feature extraction.
+    The relationship between this public checkpoint and any CM4AI-specific trained model has not
+    been established by the sources cited here.
   documentation: |
     ## Model Architecture
     - Backbone: DenseNet-121 with four dense blocks
@@ -30,15 +29,20 @@ model_details:
     - Activations: 6.9M
     - Input resolution: 224 x 224
 
-    ## Usage with timm
-    ```python
-    import timm
-    model = timm.create_model("densenet121.tv_in1k", pretrained=True)
-    model.eval()
-    ```
+    ## Distribution and provenance
+    The [Hub file tree](https://huggingface.co/timm/densenet121.tv_in1k/tree/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b)
+    distributes `model.safetensors`, a PyTorch state dictionary in `pytorch_model.bin`, and `config.json`.
+    The revision identifies the inspected repository snapshot, not a new training run.
 
-    The model also exposes feature-extraction modes (forward_features, forward_head) for use as a
-    backbone in detection, segmentation, or transfer learning pipelines.
+    ## License scope
+    The [upstream model-card metadata](https://huggingface.co/timm/densenet121.tv_in1k/blob/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b/README.md)
+    declares Apache-2.0 for this Hub distribution. This is the distributor's declaration.
+    Torchvision source is BSD-3-Clause; the timm DenseNet implementation retains that attribution.
+    A library's code license alone does not establish the rights to every training image or checkpoint.
+
+    ## Usage
+    See usage_documentation for installation, preprocessing and complete inference code.
+    Feature extraction is available through `forward_features` and `forward_head`.
 
     ## Citation
     See model_details.citations and model_details.references.
@@ -57,16 +61,17 @@ model_details:
       affiliation: "Cornell University"
     - name: "PyTorch Vision Team"
       role: contributed_by
-      affiliation: "Meta"
     - name: "Ross Wightman (timm)"
       role: contributed_by
-      affiliation: "Hugging Face"
   version:
-    name: "tv_in1k"
-    date: "2017-08-25"
+    name: "tv_in1k; Hub revision f0d0f2698a02cb133b09d48396db6e1e46fe9f3b"
+    date: "2025-01-21"
     diff: |
-      Original torchvision DenseNet-121 ImageNet-1k weights, repackaged under timm's
-      `timm/densenet121.tv_in1k` HuggingFace Hub identifier.
+      The date is the Hub snapshot's metadata commit date (addition of a transformers tag),
+      not the checkpoint's training date. Upstream provenance: LuaTorch -> torchvision -> timm.
+      Card originally generated 2026-06-15; reviewed 2026-09-28 against linked primary sources.
+      This review corrects checkpoint provenance and reference metrics, records the Hub revision,
+      and adds structured usage, training context and evaluation provenance. No weights were changed.
   licenses:
     - identifier: "Apache-2.0"
       license_name: "Apache License 2.0"
@@ -78,19 +83,32 @@ model_details:
         in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 4700–4708.
   references:
     - reference: "https://arxiv.org/abs/1608.06993"
-    - reference: "https://huggingface.co/timm/densenet121.tv_in1k"
+    - reference: "https://arxiv.org/html/1608.06993v5"
+    - reference: "https://huggingface.co/timm/densenet121.tv_in1k/tree/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b"
+    - reference: "https://huggingface.co/timm/densenet121.tv_in1k/blob/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b/config.json"
     - reference: "https://github.com/huggingface/pytorch-image-models"
-    - reference: "https://pytorch.org/vision/main/models/densenet.html"
+    - reference: "https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html"
+    - reference: "https://github.com/pytorch/vision/pull/116"
+    - reference: "https://github.com/liuzhuang13/DenseNet"
+    - reference: "https://image-net.org/challenges/LSVRC/2012/index.php"
+    - reference: "https://github.com/pytorch/vision/blob/main/LICENSE"
+    - reference: "https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/densenet.py"
+    - reference: "https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/_hub.py"
   path: "https://huggingface.co/timm/densenet121.tv_in1k"
+mission_relevance:
+  funding_source: |
+    Original DenseNet paper acknowledgements: NSF (III-1618134, III-1526012, IIS-1149882),
+    Office of Naval Research (N00014-17-1-2175), Bill and Melinda Gates Foundation,
+    China Postdoctoral Council (20150015), National Basic Research Program of China
+    (2011CBA00300, 2011CBA00301), and NSFC (61361136003).
+    Source: https://arxiv.org/html/1608.06993v5 (Acknowledgements)
+    These are research-level acknowledgements, not verified funding for the torchvision port,
+    timm distribution or CM4AI. No DOE association is asserted.
 
 # HuggingFace Hub metadata
 framework: "PyTorch"
-framework_version: "torch>=1.13"
 library_name: "timm"
 pipeline_tag: "image-classification"
-language:
-  - "en"
-base_model: "torchvision/densenet121"
 tags:
   - "image-classification"
   - "densenet"
@@ -116,17 +134,33 @@ model_parameters:
     - name: "ImageNet-1k (ILSVRC2012)"
       link: "https://www.image-net.org/"
       description: |
-        1,281,167 training images and 50,000 validation images across 1000 object categories.
-        Used for both training and ImageNet-1k accuracy evaluation.
-      sensitive:
-        sensitive_data:
-          - "No PII in labels; some person-class images contain incidental faces"
+        The ILSVRC2012 organizers describe approximately 1.2 million training images and
+        50,000 labeled validation images across 1000 object categories. Training and validation
+        are distinct benchmark splits; the listed accuracy results use validation, not the
+        hidden-label challenge test set. The dataset is obtained separately from the weights.
+        Source: https://image-net.org/challenges/LSVRC/2012/index.php
       bias_input: |
-        ImageNet-1k has documented geographic and demographic skew (Western-centric, English-speaking
-        contributors); some classes overlap with person/identity categories. See Crawford & Paglen 2019,
-        Yang et al. 2020 for analyses.
+        The training label space is restricted to ImageNet-1k object categories. Aggregate
+        ImageNet accuracy does not establish coverage of a deployment population or microscopy
+        domain; an application-specific dataset audit and evaluation are still needed.
 
-  input_format: "RGB images, 224x224, normalized with ImageNet mean/std"
+  training_procedure:
+    description: |
+      Supervised ImageNet-1k classification. Torchvision identifies the supplied weights as a
+      LuaTorch port (https://github.com/pytorch/vision/pull/116); timm redistributes them.
+      A current torchvision reference training script is not evidence of this checkpoint's run.
+    methodology: |
+      The original paper's ImageNet recipe uses SGD with Nesterov momentum 0.9, weight decay
+      1e-4, batch size 256 and 90 epochs. Initial learning rate 0.1 is reduced tenfold at
+      epochs 30 and 60 (https://arxiv.org/html/1608.06993v5#S4.SS2).
+      These are paper-level settings, not a recovered run manifest for the Hub artifact.
+      Exact seed, software versions, checkpoint selection and run-specific configuration
+      remain unverified; numeric hyperparameter fields are therefore left unset.
+    reproducibility_info:
+      pipeline_url: "https://github.com/liuzhuang13/DenseNet"
+    training_data_separate: true
+
+  input_format: "RGB images; timm config specifies bicubic resize, center crop to 224x224, and ImageNet normalization"
   input_format_map:
     - key: "shape"
       value: "[B, 3, 224, 224]"
@@ -134,6 +168,8 @@ model_parameters:
       value: "float32"
     - key: "normalization"
       value: "mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]"
+    - key: "preprocessing"
+      value: "timm Hub config: bicubic interpolation, crop_pct=0.875, center crop; use resolve_model_data_config/create_transform"
   output_format: "1000-way classification logits"
   output_format_map:
     - key: "shape"
@@ -144,12 +180,12 @@ model_parameters:
 quantitative_analysis:
   performance_metrics:
     - type: "top-1 accuracy"
-      value: 74.4
-      slice: "ImageNet-1k validation (reference torchvision)"
+      value: 74.434
+      slice: "ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing"
       unit: "%"
     - type: "top-5 accuracy"
-      value: 91.9
-      slice: "ImageNet-1k validation (reference torchvision)"
+      value: 91.972
+      slice: "ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing"
       unit: "%"
     - type: "parameters"
       value: 8.0
@@ -159,6 +195,41 @@ quantitative_analysis:
       value: 2.9
       slice: "224x224 input"
       unit: "GMACs"
+  evaluation_procedure:
+    description: |
+      Accuracy values are quoted from torchvision's DenseNet121_Weights.IMAGENET1K_V1 metadata,
+      not measured by this card's authors: https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html
+      Torchvision documents bilinear resize to a short edge of 256, then a 224x224 center crop
+      and ImageNet normalization. Top-1/top-5 accuracy is the percentage of validation examples
+      whose target is among the one/five highest-ranked classes.
+      The timm Hub config instead specifies bicubic interpolation. The quoted torchvision
+      scores must not be treated as a fresh measurement of the pinned Hub model using timm's
+      default transforms. The timm-reported 8.0M parameters and 2.9 GMACs are architecture
+      descriptors, not accuracy measurements or training compute estimates.
+    benchmarks:
+      - "ILSVRC2012 / ImageNet-1k classification, validation split (50,000 images; 1000 classes)"
+    evaluation_data_separate: true
+
+model_index:
+  - name: "DenseNet-121 torchvision IMAGENET1K_V1 (upstream reference for timm/densenet121.tv_in1k)"
+    results:
+      - task:
+          type: "image-classification"
+          name: "Image classification"
+        dataset:
+          type: "imagenet-1k"
+          name: "ImageNet-1k (ILSVRC2012)"
+          split: "validation"
+        metrics:
+          - type: "accuracy"
+            name: "Top-1 accuracy (%)"
+            value: 74.434
+          - type: "top_k_accuracy"
+            name: "Top-5 accuracy (%)"
+            value: 91.972
+        source:
+          name: "Torchvision DenseNet121_Weights.IMAGENET1K_V1; bilinear reference preprocessing"
+          url: "https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html"
 
 considerations:
   users:
@@ -178,23 +249,32 @@ considerations:
         Trained on ImageNet-1k only; out-of-distribution performance on non-ImageNet domains
         (medical imaging, satellite imagery, microscopy) is unknown without further fine-tuning.
     - description: |
-        Reflects biases known to be present in the ImageNet-1k label space: skewed object-class
-        distribution, Western-centric representation, label noise on visually-similar classes.
+        The reviewed model card and torchvision metadata provide aggregate accuracy. Per-class,
+        demographic, microscopy and CM4AI-specific results are not established by those sources.
     - description: |
-        Original 2017-era torchvision training recipe; modern recipes (RandAugment, MixUp,
-        Knowledge Distillation, longer training) can substantially raise these baselines.
+        Confidence intervals, repeated-run estimates, calibration results, original training
+        hardware, wall time and energy consumption are not established by the reviewed sources.
+        No confidence bounds or compute estimates are inferred from rounded aggregate scores.
 
   tradeoffs:
     - description: |
-        Compared to ResNet-50 (25M params), DenseNet-121 reaches similar accuracy with ~1/3 the
-        parameters but slower wall-clock inference due to memory-bandwidth-heavy dense connections.
+        Dense connectivity reuses feature maps, but parameter count alone does not predict
+        deployment latency or memory consumption. Benchmark the implementation on target hardware.
+    - description: |
+        For downstream model selection, compare aggregate accuracy with per-class recall and
+        worst-subgroup error on relevant, adequately sized evaluation slices. A gain in average
+        accuracy can coexist with worse performance for a particular class or subgroup.
+        Set acceptance criteria according to the consequences of those errors and report
+        sample sizes and uncertainty. This is a recommendation by this card's maintainers;
+        no observed disparity or quantified accuracy-versus-fairness tradeoff is claimed here.
 
   ethical_considerations:
-    - name: "ImageNet representation bias"
+    - name: "Deployment outside the documented benchmark"
       mitigation_strategy: |
-        Downstream deployers should audit the model on their target population and consult
-        the ImageNet Roulette / Buolamwini-style analyses on class distribution before
-        deploying for use cases that touch person classes.
+        Evaluate error rates and calibration on representative target data and relevant
+        subgroups before relying on predictions. Review data rights, privacy and category
+        suitability for the intended application. These are recommendations by this card's
+        maintainers, not a claim that the original developers performed those audits.
 
   out_of_scope_uses:
     - description: "Face recognition / identification"
@@ -202,10 +282,50 @@ considerations:
     - description: "Surveillance applications"
     - description: "Clinical / medical diagnosis without dedicated retraining and regulatory clearance"
 
+usage_documentation:
+  installation_instructions: |
+    Install a compatible PyTorch/torchvision pair using https://pytorch.org/get-started/locally/,
+    then install `timm`, `huggingface_hub`, `safetensors` and `Pillow` in that environment.
+    These instructions describe inference dependencies, not the original LuaTorch training
+    environment. An exact tested dependency lock has not been established for this card.
+  training_configuration: |
+    The original authors provide this ImageNet training example in their repository README:
+    `th main.lua -netType densenet -dataset imagenet -data [dataFolder] -batchSize 256 -nEpochs 90 -depth 121 -growthRate 32 -nGPU 4 -nThreads 16 -optMemory 3`
+    Source: https://github.com/liuzhuang13/DenseNet#usage
+    This is a documented reproduction example. In particular, its GPU count and later memory
+    optimization options do not establish the hardware or exact command used for the ported weights.
+  inference_configuration: |
+    The example below loads a fixed Hub revision on CPU and preprocesses a local RGB image
+    using that model's timm configuration. It returns five zero-based ImageNet class indices
+    and softmax scores. Match indices to the ImageNet-1k category mapping before displaying labels.
+    The weights download on first use. This example has not been executed with model weights
+    during this documentation review, and its scores are not an evaluation result.
+  code_examples:
+    - description: "Classify a local image with the pinned Hub model and timm preprocessing"
+      code_language: "python"
+      code: |
+        from PIL import Image
+        import torch
+        import timm
+
+        revision = "f0d0f2698a02cb133b09d48396db6e1e46fe9f3b"
+        model = timm.create_model(
+            f"hf-hub:timm/densenet121.tv_in1k@{revision}",
+            pretrained=True,
+        ).eval()
+        data_config = timm.data.resolve_model_data_config(model)
+        transform = timm.data.create_transform(**data_config, is_training=False)
+        image = Image.open("image.jpg").convert("RGB")
+        with torch.inference_mode():
+            logits = model(transform(image).unsqueeze(0))
+            scores, class_indices = logits.softmax(dim=-1).topk(5, dim=-1)
+        print(class_indices[0].tolist(), scores[0].tolist())
+
 bias_model: |
-  Inherits the geographic / demographic skew of its training data. No fairness audit was
-  performed by the original DenseNet authors. Users should run their own slice-level evaluation
-  on relevant subpopulations before deployment.
+  The cited aggregate benchmark does not establish equitable performance across populations
+  or suitability for biomedical images. This card makes no claim that a fairness audit has
+  or has not been performed elsewhere; deployment-specific evidence is needed.
 bias_output: |
-  Logit calibration follows the ImageNet-1k class prior; rare classes may be under-predicted.
-  Not calibrated for any specific downstream task.
+  Predictions rank the fixed ImageNet-1k classes. Softmax scores are not evidence of calibrated
+  confidence, and the classifier has no explicit unknown-class output. Calibration and
+  out-of-distribution behavior require evaluation on the intended application.

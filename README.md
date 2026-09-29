@@ -34,23 +34,30 @@ This repo ships **two rubrics** for scoring Model Card YAMLs, plus a hybrid (rul
 
 Each rubric runs in two flavors: a **hybrid** scorer (rule-based + heuristics, no LLM cost) and an **LLM** scorer (`mc-rubric10` / `mc-rubric20` Claude sub-agents). The hybrid acts as a fast prefilter; the LLM provides the deeper quality signal.
 
-### Portfolio scores (live)
+### Portfolio scores
+
+DenseNet-121 and SubCell hybrid badges reflect the [September 2026 source review](notes/model_card_remediation/README.md).
+Their LLM links below are archived evaluations of the June 2026 cards, not ratings of the revised YAMLs.
 
 | Card | Source | rubric10 hybrid | rubric10 LLM | rubric20 hybrid | rubric20 LLM |
 | --- | --- | :---: | :---: | :---: | :---: |
 | [`climate-model-extended.yaml`](src/data/examples/extended/climate-model-extended.yaml) | DOE canonical example | ![](data/evaluation/badges/climate-model-extended_rubric10_hybrid.svg) | ![](data/evaluation/badges/climate-model-extended_rubric10_llm.svg) | ![](data/evaluation/badges/climate-model-extended_rubric20_hybrid.svg) | ![](data/evaluation/badges/climate-model-extended_rubric20_llm.svg) |
 | [`climate-forecasting-model-card.yaml`](src/data/examples/d4d_integration/climate-forecasting-model-card.yaml) | Harmonized + D4D refs | ![](data/evaluation/badges/climate-forecasting-model-card_rubric10_hybrid.svg) | ![](data/evaluation/badges/climate-forecasting-model-card_rubric10_llm.svg) | ![](data/evaluation/badges/climate-forecasting-model-card_rubric20_hybrid.svg) | ![](data/evaluation/badges/climate-forecasting-model-card_rubric20_llm.svg) |
 | [`sentiment-classifier-with-datasheet-refs.yaml`](src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml) | Harmonized | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric10_hybrid.svg) | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric10_llm.svg) | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric20_hybrid.svg) | ![](data/evaluation/badges/sentiment-classifier-with-datasheet-refs_rubric20_llm.svg) |
-| [`densenet121_tv_in1k_model_card.yaml`](data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml) | HF Hub (timm) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric10_hybrid.svg) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric10_llm.svg) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric20_hybrid.svg) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric20_llm.svg) |
-| [`subcell_saprot_650m_model_card.yaml`](data/model_cards_assistant/subcell_saprot_650m_model_card.yaml) | HF Hub (SaProtHub) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric10_hybrid.svg) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric10_llm.svg) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric20_hybrid.svg) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric20_llm.svg) |
+| [`densenet121_tv_in1k_model_card.yaml`](data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml) | HF Hub (timm) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric10_hybrid.svg) | [Archived](data/evaluation/hf_hub/rubric10/densenet121_tv_in1k_model_card_llm_evaluation.json) | ![](data/evaluation/badges/densenet121_tv_in1k_model_card_rubric20_hybrid.svg) | [Archived](data/evaluation/hf_hub/rubric20/densenet121_tv_in1k_model_card_llm_rubric20_evaluation.json) |
+| [`subcell_saprot_650m_model_card.yaml`](data/model_cards_assistant/subcell_saprot_650m_model_card.yaml) | HF Hub (SaProtHub) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric10_hybrid.svg) | [Archived](data/evaluation/hf_hub/rubric10/subcell_saprot_650m_model_card_llm_evaluation.json) | ![](data/evaluation/badges/subcell_saprot_650m_model_card_rubric20_hybrid.svg) | [Archived](data/evaluation/hf_hub/rubric20/subcell_saprot_650m_model_card_llm_rubric20_evaluation.json) |
 | [`minimal-viable-model-card.yaml`](src/data/examples/fixtures/minimal-viable-model-card.yaml) | Floor anchor (mid) | ![](data/evaluation/badges/minimal-viable-model-card_rubric10_hybrid.svg) | — | ![](data/evaluation/badges/minimal-viable-model-card_rubric20_hybrid.svg) | — |
 | [`minimal-model-card.yaml`](src/data/examples/fixtures/minimal-model-card.yaml) | Floor anchor (zero) | ![](data/evaluation/badges/minimal-model-card_rubric10_hybrid.svg) | — | ![](data/evaluation/badges/minimal-model-card_rubric20_hybrid.svg) | — |
 
 Color band: 🟢 ≥80% · 🟡 ≥50% · 🔴 <50%.
 
 **Dashboards** (open locally — GitHub doesn't render embedded HTML):
+- [Current two-card remediation analysis](data/evaluation/remediation/2026-09-28/README.md) — paired deterministic scores, input hashes and field-presence changes
 - [`data/evaluation/all/portfolio_compare.html`](data/evaluation/all/portfolio_compare.html) — cross-evaluator comparison matrix with element-level diffs
 - [`data/evaluation/badges/index.html`](data/evaluation/badges/index.html) — all badges with copy-paste markdown snippets
+
+The portfolio comparison is an archived snapshot; its DenseNet/SubCell rows predate this remediation.
+Legacy badges without a verified input hash are omitted when regenerating a card page.
 
 ### Reproduce
 
