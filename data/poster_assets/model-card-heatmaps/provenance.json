@@ -1,0 +1,1522 @@
+{
+  "generated_at": "2026-09-29T04:18:43.955143+00:00",
+  "source_repository": "https://github.com/bridge2ai/model-card-schema",
+  "checkout_commit": "b528f71a307a997db2377ee8213a56ebdbfad1a4",
+  "source_revision_note": "Input file SHA-256 values identify the actual workspace bytes; checkout commit alone does not identify uncommitted updates.",
+  "files": {
+    "src/model_card_schema/schema/model_card_schema.yaml": {
+      "sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788",
+      "bytes": 40467
+    },
+    "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml": {
+      "sha256": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+      "bytes": 17167
+    },
+    "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml": {
+      "sha256": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af",
+      "bytes": 22828
+    },
+    "scripts/batch_evaluate_mc_rubric10_hybrid.py": {
+      "sha256": "a6b57ae2a32656bbde827f8be00f74e0a1e38badaa8ea130f1fdc1477a79a71a",
+      "bytes": 30935
+    },
+    "data/evaluation/remediation/2026-09-28/after/rubric10/densenet121_tv_in1k_model_card_evaluation.json": {
+      "sha256": "370327cb1cdf5554d28eb787cb70161a1a4f1d8ea73efefe0b4c2c1d9dcb6e52",
+      "bytes": 17545
+    },
+    "data/evaluation/current/hf_hub/rubric10/subcell_saprot_650m_model_card_evaluation.json": {
+      "sha256": "3af6b2659d2c21fc7217584aa17997ef9b429d2fe9dbeb46c6dddcab30963ae0",
+      "bytes": 17523
+    },
+    "scripts/batch_evaluate_mc_rubric20_hybrid.py": {
+      "sha256": "1bf266232d4bbcc164f949b3f5c0d50aef8336cf36a4327d1593356648e83407",
+      "bytes": 41189
+    },
+    "data/evaluation/remediation/2026-09-28/after/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json": {
+      "sha256": "c287bd26516afe74ad6aa8f8e0c6ad8de5bc1c3ac5ae4004c4571e9158b29aa6",
+      "bytes": 9677
+    },
+    "data/evaluation/current/hf_hub/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json": {
+      "sha256": "90cff8a6e95d8d0316d7a386bc38038eb1a94f00cc1f847eed9ae9a869fc5914",
+      "bytes": 9279
+    },
+    "scripts/build_model_card_heatmaps.py": {
+      "sha256": "cf1aa6d30b4826eafe899e55b70fac5528a7bceb257b59e9098530697fae2e66",
+      "bytes": 33538
+    }
+  },
+  "selection": {
+    "rubric10": [
+      {
+        "path": "data/evaluation/remediation/2026-09-28/after/rubric10/densenet121_tv_in1k_model_card_evaluation.json",
+        "sha256": "370327cb1cdf5554d28eb787cb70161a1a4f1d8ea73efefe0b4c2c1d9dcb6e52",
+        "model_card_sha256": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+        "evaluation_timestamp": "2026-09-29T00:16:10.365213+00:00",
+        "matching_candidates": 1,
+        "same_timestamp_identical_reports": [
+          "data/evaluation/remediation/2026-09-28/after/rubric10/densenet121_tv_in1k_model_card_evaluation.json"
+        ]
+      },
+      {
+        "path": "data/evaluation/current/hf_hub/rubric10/subcell_saprot_650m_model_card_evaluation.json",
+        "sha256": "3af6b2659d2c21fc7217584aa17997ef9b429d2fe9dbeb46c6dddcab30963ae0",
+        "model_card_sha256": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af",
+        "evaluation_timestamp": "2026-09-29T01:11:20.350267+00:00",
+        "matching_candidates": 1,
+        "same_timestamp_identical_reports": [
+          "data/evaluation/current/hf_hub/rubric10/subcell_saprot_650m_model_card_evaluation.json"
+        ]
+      }
+    ],
+    "rubric20": [
+      {
+        "path": "data/evaluation/remediation/2026-09-28/after/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json",
+        "sha256": "c287bd26516afe74ad6aa8f8e0c6ad8de5bc1c3ac5ae4004c4571e9158b29aa6",
+        "model_card_sha256": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+        "evaluation_timestamp": "2026-09-29T00:16:10.395572+00:00",
+        "matching_candidates": 1,
+        "same_timestamp_identical_reports": [
+          "data/evaluation/remediation/2026-09-28/after/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json"
+        ]
+      },
+      {
+        "path": "data/evaluation/current/hf_hub/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json",
+        "sha256": "90cff8a6e95d8d0316d7a386bc38038eb1a94f00cc1f847eed9ae9a869fc5914",
+        "model_card_sha256": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af",
+        "evaluation_timestamp": "2026-09-29T01:11:20.443308+00:00",
+        "matching_candidates": 1,
+        "same_timestamp_identical_reports": [
+          "data/evaluation/current/hf_hub/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json"
+        ]
+      }
+    ]
+  },
+  "selection_policy": "Only exact current-card SHA-256 matches from deterministic hybrid evaluators; choose latest timestamp and reject conflicting tied results.",
+  "evaluator_verification": "Current evaluator scripts were re-executed locally; all item/category scores, evidence, overall scores and assessments match the selected reports. No historical evaluator hash is inferred.",
+  "presence_definition": "Traverse all terminal field paths from modelCard; collapse list indices; any nonempty resolved value fills a path. Whitespace, null and empty collections are absent. Zero and false are values. No prose inference or applicability filtering.",
+  "schema_terminal_path_count": 126,
+  "presence_counts": {
+    "densenet121_tv_in1k": 74,
+    "subcell_saprot_650m": 80
+  },
+  "root_slot_counts": {
+    "densenet121_tv_in1k": 17,
+    "subcell_saprot_650m": 17
+  },
+  "root_slot_denominator": 20,
+  "limitations": [
+    "Prose in another field does not populate a missing structured field; any non-empty value counts.",
+    "All optional and extension fields are included without applicability filtering.",
+    "Hybrid scores are automated documentation checks, not model capability or an independent semantic review."
+  ],
+  "rubric10": [
+    {
+      "rubric": "mc_rubric10",
+      "version": "1.0",
+      "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
+      "evaluation_timestamp": "2026-09-29T00:16:10.365213+00:00",
+      "evaluator": {
+        "name": "hybrid-heuristic-evaluator",
+        "temperature": "N/A",
+        "evaluation_type": "rule_based_with_quality_heuristics"
+      },
+      "elements": [
+        {
+          "id": 1,
+          "name": "Model Discovery and Identification",
+          "description": "Can a user or system discover and uniquely identify this model?",
+          "sub_elements": [
+            {
+              "name": "Persistent Identifier",
+              "score": 1,
+              "evidence": "Resolvable identifier present (model_details.references: list(12))",
+              "quality_note": "Resolvable identifier present (model_details.references: list(12))"
+            },
+            {
+              "name": "Model Name and Description Completeness",
+              "score": 1,
+              "evidence": "Name + comprehensive overview (507 chars)",
+              "quality_note": "Name + comprehensive overview (507 chars)"
+            },
+            {
+              "name": "Tags / Pipeline Tag for Searchability",
+              "score": 1,
+              "evidence": "8 tags + pipeline_tag/category",
+              "quality_note": "8 tags + pipeline_tag/category"
+            },
+            {
+              "name": "Landing Page or Repository URL",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "Library / Framework Identification",
+              "score": 1,
+              "evidence": "Framework/library declared but version not pinned",
+              "quality_note": "Framework/library declared but version not pinned"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 2,
+          "name": "Model Access and Distribution",
+          "description": "Can model weights, code, and inference pipeline be located and used?",
+          "sub_elements": [
+            {
+              "name": "Weight Distribution Mechanism Defined",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "Code Repository Available",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "Inference / Usage Example Provided",
+              "score": 1,
+              "evidence": "usage_documentation.code_examples: list(1)",
+              "quality_note": "usage_documentation.code_examples: list(1)"
+            },
+            {
+              "name": "Input / Output Specification",
+              "score": 1,
+              "evidence": "model_parameters.input_format: RGB images; timm config specifies bicubic resize, center crop to 224x224, and ImageNet normalization",
+              "quality_note": "model_parameters.input_format: RGB images; timm config specifies bicubic resize, center crop to 224x224, and ImageNet normalization"
+            },
+            {
+              "name": "Model File Format Specified",
+              "score": 1,
+              "evidence": "model_details.path: https://huggingface.co/timm/densenet121.tv_in1k",
+              "quality_note": "model_details.path: https://huggingface.co/timm/densenet121.tv_in1k"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 3,
+          "name": "Model Reuse and Interoperability",
+          "description": "Is sufficient information provided to reuse and integrate this model?",
+          "sub_elements": [
+            {
+              "name": "License Terms Allow Reuse",
+              "score": 1,
+              "evidence": "SPDX license identified: ['Apache-2.0']",
+              "quality_note": "SPDX license identified: ['Apache-2.0']"
+            },
+            {
+              "name": "Standard Framework / Format Used",
+              "score": 1,
+              "evidence": "framework: PyTorch",
+              "quality_note": "framework: PyTorch"
+            },
+            {
+              "name": "Base Model or Foundation Lineage Stated",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "Supported Tasks Declared",
+              "score": 1,
+              "evidence": "pipeline_tag: image-classification",
+              "quality_note": "pipeline_tag: image-classification"
+            },
+            {
+              "name": "Reproducibility Artifacts Provided",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 4,
+          "name": "Ethical Use and Responsible AI",
+          "description": "Does the card document risks, bias, and ethical oversight?",
+          "sub_elements": [
+            {
+              "name": "Ethical Considerations Documented",
+              "score": 1,
+              "evidence": "considerations.ethical_considerations: list(1)",
+              "quality_note": "considerations.ethical_considerations: list(1)"
+            },
+            {
+              "name": "Known Model / Output Bias Disclosed",
+              "score": 1,
+              "evidence": "bias_model: The cited aggregate benchmark does not establish equitable performance across populations\nor suitability for biomedical \u2026",
+              "quality_note": "bias_model: The cited aggregate benchmark does not establish equitable performance across populations\nor suitability for biomedical \u2026"
+            },
+            {
+              "name": "Out-of-Scope / Discouraged Uses",
+              "score": 1,
+              "evidence": "considerations.out_of_scope_uses: list(4)",
+              "quality_note": "considerations.out_of_scope_uses: list(4)"
+            },
+            {
+              "name": "Sensitive Data Use Disclosed",
+              "score": 0,
+              "evidence": "No sensitive-data disclosure on any dataset",
+              "quality_note": "No sensitive-data disclosure on any dataset"
+            },
+            {
+              "name": "Intended Users and Stakeholder Tradeoffs",
+              "score": 1,
+              "evidence": "considerations.users: list(1)",
+              "quality_note": "considerations.users: list(1)"
+            }
+          ],
+          "element_score": 4,
+          "element_max": 5
+        },
+        {
+          "id": 5,
+          "name": "Model Architecture and Training Composition",
+          "description": "Can the architecture and training composition be understood?",
+          "sub_elements": [
+            {
+              "name": "Architecture Described in Detail",
+              "score": 1,
+              "evidence": "model_parameters.model_architecture: DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with\ntransition layers (1x1 conv + \u2026",
+              "quality_note": "model_parameters.model_architecture: DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with\ntransition layers (1x1 conv + \u2026"
+            },
+            {
+              "name": "Training Data Documented",
+              "score": 1,
+              "evidence": "1 dataset(s), 1 with links/URIs",
+              "quality_note": "1 dataset(s), 1 with links/URIs"
+            },
+            {
+              "name": "Hyperparameters Reported",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])"
+            },
+            {
+              "name": "Compute Infrastructure Reported (Extended)",
+              "score": 0,
+              "evidence": "Missing all of: model_parameters.compute_infrastructure",
+              "quality_note": "Missing all of: model_parameters.compute_infrastructure"
+            },
+            {
+              "name": "Training / Evaluation Split Defined",
+              "score": 1,
+              "evidence": "Multiple dataset entries or model_index present",
+              "quality_note": "Multiple dataset entries or model_index present"
+            }
+          ],
+          "element_score": 4,
+          "element_max": 5
+        },
+        {
+          "id": 6,
+          "name": "Model Provenance and Versioning",
+          "description": "Can a user determine versions, owners, citations?",
+          "sub_elements": [
+            {
+              "name": "Version Number Provided",
+              "score": 1,
+              "evidence": "Version present but non-semver: tv_in1k; Hub revision f0d0f2698a02cb133b09d48396db6e1e46fe9f3b",
+              "quality_note": "Version present but non-semver: tv_in1k; Hub revision f0d0f2698a02cb133b09d48396db6e1e46fe9f3b"
+            },
+            {
+              "name": "Version Date Documented",
+              "score": 1,
+              "evidence": "ISO date: 2025-01-21",
+              "quality_note": "ISO date: 2025-01-21"
+            },
+            {
+              "name": "Change Description for This Version",
+              "score": 1,
+              "evidence": "model_details.version.diff: The date is the Hub snapshot's metadata commit date (addition of a transformers tag),\nnot the checkpoint's training date\u2026",
+              "quality_note": "model_details.version.diff: The date is the Hub snapshot's metadata commit date (addition of a transformers tag),\nnot the checkpoint's training date\u2026"
+            },
+            {
+              "name": "Owners / Contributors Identified",
+              "score": 1,
+              "evidence": "6 contributor(s)/reference(s) with role",
+              "quality_note": "6 contributor(s)/reference(s) with role"
+            },
+            {
+              "name": "Citation Provided",
+              "score": 1,
+              "evidence": "model_details.citations: list(1)",
+              "quality_note": "model_details.citations: list(1)"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 7,
+          "name": "Scientific Motivation and Funding Transparency",
+          "description": "Does the metadata state why the model exists and who funded it?",
+          "sub_elements": [
+            {
+              "name": "Motivation / Use Case Rationale",
+              "score": 1,
+              "evidence": "model_details.overview: DenseNet-121 (Huang et al., CVPR 2017) concatenates earlier feature maps within each dense block.\nThis card covers the p\u2026",
+              "quality_note": "model_details.overview: DenseNet-121 (Huang et al., CVPR 2017) concatenates earlier feature maps within each dense block.\nThis card covers the p\u2026"
+            },
+            {
+              "name": "Primary Intended Use Articulated",
+              "score": 1,
+              "evidence": "considerations.use_cases: list(4)",
+              "quality_note": "considerations.use_cases: list(4)"
+            },
+            {
+              "name": "Mission Relevance Stated (Extended)",
+              "score": 1,
+              "evidence": "mission_relevance: dict(keys=['funding_source'])",
+              "quality_note": "mission_relevance: dict(keys=['funding_source'])"
+            },
+            {
+              "name": "Funding Source / Grant Agency Listed",
+              "score": 1,
+              "evidence": "Funding agency mentioned in affiliations / mission_relevance / funding_grants",
+              "quality_note": "Funding agency mentioned in affiliations / mission_relevance / funding_grants"
+            },
+            {
+              "name": "Compute / Platform Acknowledgement",
+              "score": 1,
+              "evidence": "model_details.overview: DenseNet-121 (Huang et al., CVPR 2017) concatenates earlier feature maps within each dense block.\nThis card covers the p\u2026",
+              "quality_note": "model_details.overview: DenseNet-121 (Huang et al., CVPR 2017) concatenates earlier feature maps within each dense block.\nThis card covers the p\u2026"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 8,
+          "name": "Training and Evaluation Transparency",
+          "description": "Can training and evaluation procedures be replicated or understood?",
+          "sub_elements": [
+            {
+              "name": "Training Procedure Documented",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])"
+            },
+            {
+              "name": "Evaluation Procedure Documented",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'reproducibility_info', 'training_data_separate'])"
+            },
+            {
+              "name": "Reproducibility Information (Extended)",
+              "score": 1,
+              "evidence": "mission_relevance: dict(keys=['funding_source'])",
+              "quality_note": "mission_relevance: dict(keys=['funding_source'])"
+            },
+            {
+              "name": "Open-Source Code Linked",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "External Standards or References Cited",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 9,
+          "name": "Performance Evaluation and Limitations Disclosure",
+          "description": "Does the metadata communicate performance and limitations?",
+          "sub_elements": [
+            {
+              "name": "Quantitative Performance Metrics Reported",
+              "score": 1,
+              "evidence": "4 metric(s) with numeric value",
+              "quality_note": "4 metric(s) with numeric value"
+            },
+            {
+              "name": "Performance Across Slices / Subpopulations",
+              "score": 1,
+              "evidence": "3 distinct slice(s) reported",
+              "quality_note": "3 distinct slice(s) reported"
+            },
+            {
+              "name": "Confidence Intervals or Error Bars",
+              "score": 0,
+              "evidence": "No confidence intervals or error bars",
+              "quality_note": "No confidence intervals or error bars"
+            },
+            {
+              "name": "Limitations Section Present",
+              "score": 1,
+              "evidence": "considerations.limitations: list(3)",
+              "quality_note": "considerations.limitations: list(3)"
+            },
+            {
+              "name": "Tradeoffs / Risks Acknowledged",
+              "score": 1,
+              "evidence": "considerations.tradeoffs: list(2)",
+              "quality_note": "considerations.tradeoffs: list(2)"
+            }
+          ],
+          "element_score": 4,
+          "element_max": 5
+        },
+        {
+          "id": 10,
+          "name": "Cross-Platform and Community Integration",
+          "description": "Does the card connect to wider model ecosystems and standards?",
+          "sub_elements": [
+            {
+              "name": "Published on a Recognized Platform",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "Cross-referenced DOIs or Related Model Links",
+              "score": 1,
+              "evidence": "model_details.references: list(12)",
+              "quality_note": "model_details.references: list(12)"
+            },
+            {
+              "name": "Benchmark Results (Papers with Code)",
+              "score": 1,
+              "evidence": "1 benchmark result(s)",
+              "quality_note": "1 benchmark result(s)"
+            },
+            {
+              "name": "Standards / Schema Conformance Stated",
+              "score": 1,
+              "evidence": "schema_version: 0.0.2",
+              "quality_note": "schema_version: 0.0.2"
+            },
+            {
+              "name": "Datasets Linked",
+              "score": 1,
+              "evidence": "1 dataset(s) with name+link",
+              "quality_note": "1 dataset(s) with name+link"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        }
+      ],
+      "overall_score": {
+        "total_points": 47,
+        "max_points": 50,
+        "percentage": 94.0
+      },
+      "assessment": {
+        "strengths": [
+          "Strong Model Discovery and Identification (5/5)",
+          "Strong Model Access and Distribution (5/5)",
+          "Strong Model Reuse and Interoperability (5/5)",
+          "Strong Ethical Use and Responsible AI (4/5)",
+          "Strong Model Architecture and Training Composition (4/5)",
+          "Strong Model Provenance and Versioning (5/5)",
+          "Strong Scientific Motivation and Funding Transparency (5/5)",
+          "Strong Training and Evaluation Transparency (5/5)",
+          "Strong Performance Evaluation and Limitations Disclosure (4/5)",
+          "Strong Cross-Platform and Community Integration (5/5)"
+        ],
+        "weaknesses": [],
+        "recommendations": []
+      },
+      "metadata": {
+        "evaluator_id": "batch-hybrid-evaluator",
+        "model_card_hash": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+        "evaluator_sha256": "a6b57ae2a32656bbde827f8be00f74e0a1e38badaa8ea130f1fdc1477a79a71a",
+        "schema_sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788"
+      }
+    },
+    {
+      "rubric": "mc_rubric10",
+      "version": "1.0",
+      "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
+      "evaluation_timestamp": "2026-09-29T01:11:20.350267+00:00",
+      "evaluator": {
+        "name": "hybrid-heuristic-evaluator",
+        "temperature": "N/A",
+        "evaluation_type": "rule_based_with_quality_heuristics"
+      },
+      "elements": [
+        {
+          "id": 1,
+          "name": "Model Discovery and Identification",
+          "description": "Can a user or system discover and uniquely identify this model?",
+          "sub_elements": [
+            {
+              "name": "Persistent Identifier",
+              "score": 1,
+              "evidence": "Resolvable identifier present (model_details.references: list(13))",
+              "quality_note": "Resolvable identifier present (model_details.references: list(13))"
+            },
+            {
+              "name": "Model Name and Description Completeness",
+              "score": 1,
+              "evidence": "Name + comprehensive overview (807 chars)",
+              "quality_note": "Name + comprehensive overview (807 chars)"
+            },
+            {
+              "name": "Tags / Pipeline Tag for Searchability",
+              "score": 1,
+              "evidence": "8 tags + pipeline_tag/category",
+              "quality_note": "8 tags + pipeline_tag/category"
+            },
+            {
+              "name": "Landing Page or Repository URL",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            },
+            {
+              "name": "Library / Framework Identification",
+              "score": 1,
+              "evidence": "Framework/library declared but version not pinned",
+              "quality_note": "Framework/library declared but version not pinned"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 2,
+          "name": "Model Access and Distribution",
+          "description": "Can model weights, code, and inference pipeline be located and used?",
+          "sub_elements": [
+            {
+              "name": "Weight Distribution Mechanism Defined",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            },
+            {
+              "name": "Code Repository Available",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            },
+            {
+              "name": "Inference / Usage Example Provided",
+              "score": 1,
+              "evidence": "usage_documentation.code_examples: list(1)",
+              "quality_note": "usage_documentation.code_examples: list(1)"
+            },
+            {
+              "name": "Input / Output Specification",
+              "score": 1,
+              "evidence": "model_parameters.input_format: Structure-aware (SA) sequence: each amino-acid letter is paired with a Foldseek 3Di structural token; # denotes a masked\u2026",
+              "quality_note": "model_parameters.input_format: Structure-aware (SA) sequence: each amino-acid letter is paired with a Foldseek 3Di structural token; # denotes a masked\u2026"
+            },
+            {
+              "name": "Model File Format Specified",
+              "score": 1,
+              "evidence": "model_details.path: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/tree/ffc656cde0bbfaf4933b364036753674520663b6",
+              "quality_note": "model_details.path: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/tree/ffc656cde0bbfaf4933b364036753674520663b6"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 3,
+          "name": "Model Reuse and Interoperability",
+          "description": "Is sufficient information provided to reuse and integrate this model?",
+          "sub_elements": [
+            {
+              "name": "License Terms Allow Reuse",
+              "score": 1,
+              "evidence": "SPDX license identified: ['MIT']",
+              "quality_note": "SPDX license identified: ['MIT']"
+            },
+            {
+              "name": "Standard Framework / Format Used",
+              "score": 1,
+              "evidence": "framework: PyTorch",
+              "quality_note": "framework: PyTorch"
+            },
+            {
+              "name": "Base Model or Foundation Lineage Stated",
+              "score": 1,
+              "evidence": "base_model: westlake-repl/SaProt_650M_AF2",
+              "quality_note": "base_model: westlake-repl/SaProt_650M_AF2"
+            },
+            {
+              "name": "Supported Tasks Declared",
+              "score": 1,
+              "evidence": "pipeline_tag: text-classification",
+              "quality_note": "pipeline_tag: text-classification"
+            },
+            {
+              "name": "Reproducibility Artifacts Provided",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 4,
+          "name": "Ethical Use and Responsible AI",
+          "description": "Does the card document risks, bias, and ethical oversight?",
+          "sub_elements": [
+            {
+              "name": "Ethical Considerations Documented",
+              "score": 1,
+              "evidence": "considerations.ethical_considerations: list(1)",
+              "quality_note": "considerations.ethical_considerations: list(1)"
+            },
+            {
+              "name": "Known Model / Output Bias Disclosed",
+              "score": 1,
+              "evidence": "bias_model: Observed documentation and dataset limitations: the AF2-availability filter and uneven\ntraining label counts can affect \u2026",
+              "quality_note": "bias_model: Observed documentation and dataset limitations: the AF2-availability filter and uneven\ntraining label counts can affect \u2026"
+            },
+            {
+              "name": "Out-of-Scope / Discouraged Uses",
+              "score": 1,
+              "evidence": "considerations.out_of_scope_uses: list(2)",
+              "quality_note": "considerations.out_of_scope_uses: list(2)"
+            },
+            {
+              "name": "Sensitive Data Use Disclosed",
+              "score": 1,
+              "evidence": "Sensitive-data disclosure present on at least one dataset",
+              "quality_note": "Sensitive-data disclosure present on at least one dataset"
+            },
+            {
+              "name": "Intended Users and Stakeholder Tradeoffs",
+              "score": 1,
+              "evidence": "considerations.users: list(1)",
+              "quality_note": "considerations.users: list(1)"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 5,
+          "name": "Model Architecture and Training Composition",
+          "description": "Can the architecture and training composition be understood?",
+          "sub_elements": [
+            {
+              "name": "Architecture Described in Detail",
+              "score": 1,
+              "evidence": "model_parameters.model_architecture: SaProt_650M_AF2 is the approximately 650M-parameter, ESM-style transformer base\nusing a structure-aware amino-acid/3Di v\u2026",
+              "quality_note": "model_parameters.model_architecture: SaProt_650M_AF2 is the approximately 650M-parameter, ESM-style transformer base\nusing a structure-aware amino-acid/3Di v\u2026"
+            },
+            {
+              "name": "Training Data Documented",
+              "score": 1,
+              "evidence": "1 dataset(s), 1 with links/URIs",
+              "quality_note": "1 dataset(s), 1 with links/URIs"
+            },
+            {
+              "name": "Hyperparameters Reported",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])"
+            },
+            {
+              "name": "Compute Infrastructure Reported (Extended)",
+              "score": 0,
+              "evidence": "Missing all of: model_parameters.compute_infrastructure",
+              "quality_note": "Missing all of: model_parameters.compute_infrastructure"
+            },
+            {
+              "name": "Training / Evaluation Split Defined",
+              "score": 1,
+              "evidence": "Multiple dataset entries or model_index present",
+              "quality_note": "Multiple dataset entries or model_index present"
+            }
+          ],
+          "element_score": 4,
+          "element_max": 5
+        },
+        {
+          "id": 6,
+          "name": "Model Provenance and Versioning",
+          "description": "Can a user determine versions, owners, citations?",
+          "sub_elements": [
+            {
+              "name": "Version Number Provided",
+              "score": 1,
+              "evidence": "Version present but non-semver: ffc656cde0bbfaf4933b364036753674520663b6",
+              "quality_note": "Version present but non-semver: ffc656cde0bbfaf4933b364036753674520663b6"
+            },
+            {
+              "name": "Version Date Documented",
+              "score": 0,
+              "evidence": "Missing all of: model_details.version.date",
+              "quality_note": "Missing all of: model_details.version.date"
+            },
+            {
+              "name": "Change Description for This Version",
+              "score": 0,
+              "evidence": "Missing all of: model_details.version.diff",
+              "quality_note": "Missing all of: model_details.version.diff"
+            },
+            {
+              "name": "Owners / Contributors Identified",
+              "score": 1,
+              "evidence": "1 contributor(s)/reference(s) with role",
+              "quality_note": "1 contributor(s)/reference(s) with role"
+            },
+            {
+              "name": "Citation Provided",
+              "score": 1,
+              "evidence": "model_details.citations: list(2)",
+              "quality_note": "model_details.citations: list(2)"
+            }
+          ],
+          "element_score": 3,
+          "element_max": 5
+        },
+        {
+          "id": 7,
+          "name": "Scientific Motivation and Funding Transparency",
+          "description": "Does the metadata state why the model exists and who funded it?",
+          "sub_elements": [
+            {
+              "name": "Motivation / Use Case Rationale",
+              "score": 1,
+              "evidence": "model_details.overview: This card describes the public SaProtHub/Model-Subcellular_Localization-650M adapter,\nwith base model westlake-repl/SaPr\u2026",
+              "quality_note": "model_details.overview: This card describes the public SaProtHub/Model-Subcellular_Localization-650M adapter,\nwith base model westlake-repl/SaPr\u2026"
+            },
+            {
+              "name": "Primary Intended Use Articulated",
+              "score": 1,
+              "evidence": "considerations.use_cases: list(2)",
+              "quality_note": "considerations.use_cases: list(2)"
+            },
+            {
+              "name": "Mission Relevance Stated (Extended)",
+              "score": 0,
+              "evidence": "Missing all of: mission_relevance",
+              "quality_note": "Missing all of: mission_relevance"
+            },
+            {
+              "name": "Funding Source / Grant Agency Listed",
+              "score": 1,
+              "evidence": "Affiliations or funding_grants present (funding agency unclear)",
+              "quality_note": "Affiliations or funding_grants present (funding agency unclear)"
+            },
+            {
+              "name": "Compute / Platform Acknowledgement",
+              "score": 1,
+              "evidence": "model_details.overview: This card describes the public SaProtHub/Model-Subcellular_Localization-650M adapter,\nwith base model westlake-repl/SaPr\u2026",
+              "quality_note": "model_details.overview: This card describes the public SaProtHub/Model-Subcellular_Localization-650M adapter,\nwith base model westlake-repl/SaPr\u2026"
+            }
+          ],
+          "element_score": 4,
+          "element_max": 5
+        },
+        {
+          "id": 8,
+          "name": "Training and Evaluation Transparency",
+          "description": "Can training and evaluation procedures be replicated or understood?",
+          "sub_elements": [
+            {
+              "name": "Training Procedure Documented",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])"
+            },
+            {
+              "name": "Evaluation Procedure Documented",
+              "score": 1,
+              "evidence": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])",
+              "quality_note": "model_parameters.training_procedure: dict(keys=['description', 'methodology', 'pre_training_info', 'reproducibility_info'])"
+            },
+            {
+              "name": "Reproducibility Information (Extended)",
+              "score": 1,
+              "evidence": "usage_documentation: dict(keys=['installation_instructions', 'training_configuration', 'inference_configuration', 'code_examples'])",
+              "quality_note": "usage_documentation: dict(keys=['installation_instructions', 'training_configuration', 'inference_configuration', 'code_examples'])"
+            },
+            {
+              "name": "Open-Source Code Linked",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            },
+            {
+              "name": "External Standards or References Cited",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        },
+        {
+          "id": 9,
+          "name": "Performance Evaluation and Limitations Disclosure",
+          "description": "Does the metadata communicate performance and limitations?",
+          "sub_elements": [
+            {
+              "name": "Quantitative Performance Metrics Reported",
+              "score": 1,
+              "evidence": "1 metric(s) with numeric value",
+              "quality_note": "1 metric(s) with numeric value"
+            },
+            {
+              "name": "Performance Across Slices / Subpopulations",
+              "score": 1,
+              "evidence": "Single slice reported: {'SaProtHub DeepLoc test set; exact scored dataset revision and run are unspecified'}",
+              "quality_note": "Single slice reported: {'SaProtHub DeepLoc test set; exact scored dataset revision and run are unspecified'}"
+            },
+            {
+              "name": "Confidence Intervals or Error Bars",
+              "score": 0,
+              "evidence": "No confidence intervals or error bars",
+              "quality_note": "No confidence intervals or error bars"
+            },
+            {
+              "name": "Limitations Section Present",
+              "score": 1,
+              "evidence": "considerations.limitations: list(5)",
+              "quality_note": "considerations.limitations: list(5)"
+            },
+            {
+              "name": "Tradeoffs / Risks Acknowledged",
+              "score": 1,
+              "evidence": "considerations.tradeoffs: list(2)",
+              "quality_note": "considerations.tradeoffs: list(2)"
+            }
+          ],
+          "element_score": 4,
+          "element_max": 5
+        },
+        {
+          "id": 10,
+          "name": "Cross-Platform and Community Integration",
+          "description": "Does the card connect to wider model ecosystems and standards?",
+          "sub_elements": [
+            {
+              "name": "Published on a Recognized Platform",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            },
+            {
+              "name": "Cross-referenced DOIs or Related Model Links",
+              "score": 1,
+              "evidence": "model_details.references: list(13)",
+              "quality_note": "model_details.references: list(13)"
+            },
+            {
+              "name": "Benchmark Results (Papers with Code)",
+              "score": 1,
+              "evidence": "1 benchmark result(s)",
+              "quality_note": "1 benchmark result(s)"
+            },
+            {
+              "name": "Standards / Schema Conformance Stated",
+              "score": 1,
+              "evidence": "schema_version: 0.0.2",
+              "quality_note": "schema_version: 0.0.2"
+            },
+            {
+              "name": "Datasets Linked",
+              "score": 1,
+              "evidence": "1 dataset(s) with name+link",
+              "quality_note": "1 dataset(s) with name+link"
+            }
+          ],
+          "element_score": 5,
+          "element_max": 5
+        }
+      ],
+      "overall_score": {
+        "total_points": 45,
+        "max_points": 50,
+        "percentage": 90.0
+      },
+      "assessment": {
+        "strengths": [
+          "Strong Model Discovery and Identification (5/5)",
+          "Strong Model Access and Distribution (5/5)",
+          "Strong Model Reuse and Interoperability (5/5)",
+          "Strong Ethical Use and Responsible AI (5/5)",
+          "Strong Model Architecture and Training Composition (4/5)",
+          "Strong Scientific Motivation and Funding Transparency (4/5)",
+          "Strong Training and Evaluation Transparency (5/5)",
+          "Strong Performance Evaluation and Limitations Disclosure (4/5)",
+          "Strong Cross-Platform and Community Integration (5/5)"
+        ],
+        "weaknesses": [],
+        "recommendations": []
+      },
+      "metadata": {
+        "evaluator_id": "batch-hybrid-evaluator",
+        "model_card_hash": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af"
+      }
+    }
+  ],
+  "rubric20": [
+    {
+      "rubric": "mc_rubric20",
+      "version": "1.0",
+      "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
+      "evaluation_timestamp": "2026-09-29T00:16:10.395572+00:00",
+      "evaluator": {
+        "name": "hybrid-heuristic-evaluator",
+        "temperature": "N/A",
+        "evaluation_type": "rule_based_with_quality_heuristics"
+      },
+      "categories": [
+        {
+          "name": "Structural Completeness",
+          "category_score": 21,
+          "category_max": 21,
+          "questions": [
+            {
+              "id": 1,
+              "name": "Required Field Completeness",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "All 5 required fields populated",
+              "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+              "quality_note": "All 5 required fields populated"
+            },
+            {
+              "id": 2,
+              "name": "Overview Length Adequacy",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": ">500 chars across narrative fields",
+              "evidence": "overview=507, doc=1244, short=112",
+              "quality_note": ">500 chars across narrative fields"
+            },
+            {
+              "id": 3,
+              "name": "Tag / Keyword Diversity",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
+              "evidence": "8 tags, pipeline=image-classification, lang=None, cat=convolutional-neural-network",
+              "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
+            },
+            {
+              "id": 4,
+              "name": "Input / Output Specification",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "Both I/O specified with format_map populated",
+              "evidence": "prose + structured map",
+              "quality_note": "Both I/O specified with format_map populated"
+            },
+            {
+              "id": 5,
+              "name": "Schema Version Declared",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "schema_version populated",
+              "evidence": "schema_version=0.0.2",
+              "quality_note": "schema_version populated"
+            }
+          ]
+        },
+        {
+          "name": "Metadata Quality & Content",
+          "category_score": 17,
+          "category_max": 21,
+          "questions": [
+            {
+              "id": 6,
+              "name": "Persistent Identifier Present",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "Resolvable persistent identifier",
+              "evidence": "DOI or HF Hub URL present",
+              "quality_note": "Resolvable persistent identifier"
+            },
+            {
+              "id": 7,
+              "name": "Funding & Acknowledgements Completeness",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Funding agency mentioned, no grant number",
+              "evidence": "partial",
+              "quality_note": "Funding agency mentioned, no grant number"
+            },
+            {
+              "id": 8,
+              "name": "Ethical & Responsible-AI Documentation",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "ethics + bias + out_of_scope all populated",
+              "evidence": "comprehensive",
+              "quality_note": "ethics + bias + out_of_scope all populated"
+            },
+            {
+              "id": 9,
+              "name": "License Clarity & SPDX Compliance",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "SPDX permissive license (no additional restrictions needed)",
+              "evidence": "spdx=['Apache-2.0']",
+              "quality_note": "SPDX permissive license (no additional restrictions needed)"
+            },
+            {
+              "id": 10,
+              "name": "Framework / Library Standardization",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Framework or library declared, no version pin",
+              "evidence": "fw=PyTorch, lib=timm",
+              "quality_note": "Framework or library declared, no version pin"
+            }
+          ]
+        },
+        {
+          "name": "Technical Documentation",
+          "category_score": 14,
+          "category_max": 25,
+          "questions": [
+            {
+              "id": 11,
+              "name": "Tool & Software Transparency",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Some tool/library named",
+              "evidence": "partial",
+              "quality_note": "Some tool/library named"
+            },
+            {
+              "id": 12,
+              "name": "Training Procedure Clarity",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Training described, hyperparameters incomplete",
+              "evidence": "have 0 key(s)",
+              "quality_note": "Training described, hyperparameters incomplete"
+            },
+            {
+              "id": 13,
+              "name": "Version History Documentation",
+              "score_type": "numeric",
+              "score": 4,
+              "max_score": 5,
+              "score_label": "Version name + date present",
+              "evidence": "version=tv_in1k; Hub revision f0d0f2698a02cb133b09d48396db6e1e46fe9f3b, date=2025-01-21",
+              "quality_note": "Version name + date present"
+            },
+            {
+              "id": 14,
+              "name": "Citations & References",
+              "score_type": "numeric",
+              "score": 4,
+              "max_score": 5,
+              "score_label": "Citation(s) + reference(s), DOIs missing",
+              "evidence": "1 cites, 12 refs",
+              "quality_note": "Citation(s) + reference(s), DOIs missing"
+            },
+            {
+              "id": 15,
+              "name": "Compute Infrastructure & Energy",
+              "score_type": "numeric",
+              "score": 0,
+              "max_score": 5,
+              "score_label": "No compute_infrastructure",
+              "evidence": "absent",
+              "quality_note": "No compute_infrastructure"
+            }
+          ]
+        },
+        {
+          "name": "Performance & FAIRness",
+          "category_score": 15,
+          "category_max": 17,
+          "questions": [
+            {
+              "id": 16,
+              "name": "Findability (Persistent Landing)",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "At least one resolvable URL",
+              "evidence": "12 refs",
+              "quality_note": "At least one resolvable URL"
+            },
+            {
+              "id": 17,
+              "name": "Accessibility & Inference Path",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "Runnable code example(s) + I/O specs",
+              "evidence": "1 example(s)",
+              "quality_note": "Runnable code example(s) + I/O specs"
+            },
+            {
+              "id": 18,
+              "name": "Performance Metrics with Slices & CI",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI",
+              "evidence": "4 metrics, 3 slices; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k (ILSVRC2012)', 'ImageNet-1k (ILSVRC2012)' ~ 'imagenet-1k'",
+              "quality_note": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI"
+            },
+            {
+              "id": 19,
+              "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "All three populated with concrete enumerated items",
+              "evidence": "lim=3, tradeoffs=2, oos=4",
+              "quality_note": "All three populated with concrete enumerated items"
+            },
+            {
+              "id": 20,
+              "name": "Cross-Platform Interlinks",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "Cross-platform reference present",
+              "evidence": "benchmark=True, doi=False, dataset_link=True",
+              "quality_note": "Cross-platform reference present"
+            }
+          ]
+        }
+      ],
+      "overall_score": {
+        "total_points": 67,
+        "max_points": 84,
+        "percentage": 79.8,
+        "semantic_deductions": [
+          {
+            "question": "Q18",
+            "rule": "train_eval_leakage",
+            "raw_score": 4,
+            "capped_score": 3,
+            "reason": "Training/benchmark dataset overlap: 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k (ILSVRC2012)', 'ImageNet-1k (ILSVRC2012)' ~ 'imagenet-1k'"
+          }
+        ]
+      },
+      "assessment": {
+        "strengths": [
+          "Strong Structural Completeness (21/21)",
+          "Strong Performance & FAIRness (15/17)"
+        ],
+        "weaknesses": [],
+        "recommendations": []
+      },
+      "metadata": {
+        "evaluator_id": "batch-hybrid-rubric20",
+        "model_card_hash": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+        "evaluator_sha256": "1bf266232d4bbcc164f949b3f5c0d50aef8336cf36a4327d1593356648e83407",
+        "schema_sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788"
+      }
+    },
+    {
+      "rubric": "mc_rubric20",
+      "version": "1.0",
+      "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
+      "evaluation_timestamp": "2026-09-29T01:11:20.443308+00:00",
+      "evaluator": {
+        "name": "hybrid-heuristic-evaluator",
+        "temperature": "N/A",
+        "evaluation_type": "rule_based_with_quality_heuristics"
+      },
+      "categories": [
+        {
+          "name": "Structural Completeness",
+          "category_score": 21,
+          "category_max": 21,
+          "questions": [
+            {
+              "id": 1,
+              "name": "Required Field Completeness",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "All 5 required fields populated",
+              "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+              "quality_note": "All 5 required fields populated"
+            },
+            {
+              "id": 2,
+              "name": "Overview Length Adequacy",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": ">500 chars across narrative fields",
+              "evidence": "overview=807, doc=1846, short=157",
+              "quality_note": ">500 chars across narrative fields"
+            },
+            {
+              "id": 3,
+              "name": "Tag / Keyword Diversity",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
+              "evidence": "8 tags, pipeline=text-classification, lang=None, cat=protein-language-model",
+              "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
+            },
+            {
+              "id": 4,
+              "name": "Input / Output Specification",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "Both I/O specified with format_map populated",
+              "evidence": "prose + structured map",
+              "quality_note": "Both I/O specified with format_map populated"
+            },
+            {
+              "id": 5,
+              "name": "Schema Version Declared",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "schema_version populated",
+              "evidence": "schema_version=0.0.2",
+              "quality_note": "schema_version populated"
+            }
+          ]
+        },
+        {
+          "name": "Metadata Quality & Content",
+          "category_score": 14,
+          "category_max": 21,
+          "questions": [
+            {
+              "id": 6,
+              "name": "Persistent Identifier Present",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "Resolvable persistent identifier",
+              "evidence": "DOI or HF Hub URL present",
+              "quality_note": "Resolvable persistent identifier"
+            },
+            {
+              "id": 7,
+              "name": "Funding & Acknowledgements Completeness",
+              "score_type": "numeric",
+              "score": 0,
+              "max_score": 5,
+              "score_label": "No funding info detected",
+              "evidence": "absent",
+              "quality_note": "No funding info detected"
+            },
+            {
+              "id": 8,
+              "name": "Ethical & Responsible-AI Documentation",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "ethics + bias + out_of_scope all populated",
+              "evidence": "comprehensive",
+              "quality_note": "ethics + bias + out_of_scope all populated"
+            },
+            {
+              "id": 9,
+              "name": "License Clarity & SPDX Compliance",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "SPDX permissive license (no additional restrictions needed)",
+              "evidence": "spdx=['MIT']",
+              "quality_note": "SPDX permissive license (no additional restrictions needed)"
+            },
+            {
+              "id": 10,
+              "name": "Framework / Library Standardization",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Framework or library declared, no version pin",
+              "evidence": "fw=PyTorch, lib=transformers",
+              "quality_note": "Framework or library declared, no version pin"
+            }
+          ]
+        },
+        {
+          "name": "Technical Documentation",
+          "category_score": 14,
+          "category_max": 25,
+          "questions": [
+            {
+              "id": 11,
+              "name": "Tool & Software Transparency",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Some tool/library named",
+              "evidence": "partial",
+              "quality_note": "Some tool/library named"
+            },
+            {
+              "id": 12,
+              "name": "Training Procedure Clarity",
+              "score_type": "numeric",
+              "score": 4,
+              "max_score": 5,
+              "score_label": "Most hyperparameters present",
+              "evidence": "good",
+              "quality_note": "Most hyperparameters present"
+            },
+            {
+              "id": 13,
+              "name": "Version History Documentation",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Version name or date present",
+              "evidence": "name=ffc656cde0bbfaf4933b364036753674520663b6, date=",
+              "quality_note": "Version name or date present"
+            },
+            {
+              "id": 14,
+              "name": "Citations & References",
+              "score_type": "numeric",
+              "score": 4,
+              "max_score": 5,
+              "score_label": "Citation(s) + reference(s), DOIs missing",
+              "evidence": "2 cites, 13 refs",
+              "quality_note": "Citation(s) + reference(s), DOIs missing"
+            },
+            {
+              "id": 15,
+              "name": "Compute Infrastructure & Energy",
+              "score_type": "numeric",
+              "score": 0,
+              "max_score": 5,
+              "score_label": "No compute_infrastructure",
+              "evidence": "absent",
+              "quality_note": "No compute_infrastructure"
+            }
+          ]
+        },
+        {
+          "name": "Performance & FAIRness",
+          "category_score": 13,
+          "category_max": 17,
+          "questions": [
+            {
+              "id": 16,
+              "name": "Findability (Persistent Landing)",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "At least one resolvable URL",
+              "evidence": "13 refs",
+              "quality_note": "At least one resolvable URL"
+            },
+            {
+              "id": 17,
+              "name": "Accessibility & Inference Path",
+              "score_type": "numeric",
+              "score": 5,
+              "max_score": 5,
+              "score_label": "Runnable code example(s) + I/O specs",
+              "evidence": "1 example(s)",
+              "quality_note": "Runnable code example(s) + I/O specs"
+            },
+            {
+              "id": 18,
+              "name": "Performance Metrics with Slices & CI",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "Metrics with values, no slices",
+              "evidence": "1 metric(s)",
+              "quality_note": "Metrics with values, no slices"
+            },
+            {
+              "id": 19,
+              "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+              "score_type": "numeric",
+              "score": 3,
+              "max_score": 5,
+              "score_label": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items",
+              "evidence": "lim=5, tradeoffs=2, oos=2; semantic_rule=bias_tradeoff_gap: bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: 'LoRA permits distribution of the adapter and classifier, but inference still requires the 650M base model and structure-\u2026'",
+              "quality_note": "[capped 5->3 by bias_tradeoff_gap] All three populated with concrete enumerated items"
+            },
+            {
+              "id": 20,
+              "name": "Cross-Platform Interlinks",
+              "score_type": "pass_fail",
+              "score": 1,
+              "max_score": 1,
+              "score_label": "Cross-platform reference present",
+              "evidence": "benchmark=True, doi=False, dataset_link=True",
+              "quality_note": "Cross-platform reference present"
+            }
+          ]
+        }
+      ],
+      "overall_score": {
+        "total_points": 62,
+        "max_points": 84,
+        "percentage": 73.8,
+        "semantic_deductions": [
+          {
+            "question": "Q19",
+            "rule": "bias_tradeoff_gap",
+            "raw_score": 5,
+            "capped_score": 3,
+            "reason": "bias_model/bias_output populated but considerations.tradeoffs omits fairness/bias dimension \u2014 tradeoffs read: 'LoRA permits distribution of the adapter and classifier, but inference still requires the 650M base model and structure-\u2026'"
+          }
+        ]
+      },
+      "assessment": {
+        "strengths": [
+          "Strong Structural Completeness (21/21)"
+        ],
+        "weaknesses": [],
+        "recommendations": []
+      },
+      "metadata": {
+        "evaluator_id": "batch-hybrid-rubric20",
+        "model_card_hash": "085f4f50db4962da6d06fab19737eadba9536c12495c548498c4f157dd8668af"
+      }
+    }
+  ],
+  "validation": {
+    "all_selected_card_hashes_match": true,
+    "all_selected_results_reproduced": true,
+    "all_text_within_canvas": true,
+    "svg_contains_raster_images": false,
+    "png_dpi": 180,
+    "panel_bottoms": [
+      1155,
+      1335,
+      1349.0000000000007,
+      887,
+      1240
+    ]
+  }
+}

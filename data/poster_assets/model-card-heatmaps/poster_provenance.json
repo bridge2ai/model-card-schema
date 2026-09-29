@@ -1,7 +1,7 @@
 {
   "input": "figure_data.json",
-  "input_sha256": "a1ed979c715d0ed4887423176b40bfb18f2fcf385f00be178ee7e9547c2db3da",
-  "renderer_sha256": "b7e3485b2447f8b0bab48d4eb8b8206bccc0d8929195f06b2a985a77448391ab",
+  "input_sha256": "13b09312620fdb90e71230f1626fd3e02251c4a759d84ebe21eea3d1c1f44191",
+  "renderer_sha256": "9b90e611b4dea6eca9a23e629c23d1926b1938753b43e7942a075463606750e0",
   "fonts": {
     "normal": {
       "file": "Arial.ttf",
@@ -15,9 +15,9 @@
   "method": "Same counts and hybrid totals as detailed figure; section-level aggregation only",
   "percentage_display": "Rounded to whole percentages; exact fractions retained in every cell",
   "files": {
-    "model_cards_poster.png": "2428077c8b4b5ef757b654dee57e21662de1dd7808bd016554b3a9d2353bc06b",
-    "model_cards_poster.svg": "bf3cb428d7c3045d2863fd6e811ed2dad8cf6fc527015b52d320e2b3f210db9d",
-    "model_cards_poster.pdf": "324eafd2997ad57dea92b65731fed5637a8d602c0b722cc741c7b8c2b0d3a53e",
-    "model_cards_poster_transparent.png": "905bde6e241690835ccfe169491aeb08ce80c6b19823190161f094992baa540b"
+    "model_cards_poster.png": "68e47dc29c8f8b0415d37ce7d8a5ec511d13611ba965dae97cd1e89af074364a",
+    "model_cards_poster.svg": "1058a9ce69911bd7a9e015b641099181d10402a04d4ef3361aa8381598e69334",
+    "model_cards_poster.pdf": "e57f2fd96ae3430a418bbe6c319beddf10575ada8941fba35e7c564bf0156d4d",
+    "model_cards_poster_transparent.png": "8ede30477f37ff3d5eead33b15f462b343ecebc28b60a2070c450f5efdc1db9e"
   }
 }

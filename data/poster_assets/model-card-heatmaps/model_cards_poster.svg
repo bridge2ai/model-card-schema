@@ -382,7 +382,7 @@
     <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="345.6" y="269.424375" transform="rotate(-0 345.6 269.424375)">17/24</text>
    </g>
    <g id="text_15">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="486" y="269.424375" transform="rotate(-0 486 269.424375)">16/24</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="486" y="269.424375" transform="rotate(-0 486 269.424375)">16/24</text>
    </g>
    <g id="text_16">
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="302.271797" transform="rotate(-0 41.76 302.271797)">Architecture &amp; data</text>
@@ -397,28 +397,28 @@
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="335.507578" transform="rotate(-0 41.76 335.507578)">Compute</text>
    </g>
    <g id="text_20">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="345.6" y="335.664375" transform="rotate(-0 345.6 335.664375)">0/5</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="345.6" y="335.664375" transform="rotate(-0 345.6 335.664375)">0/5</text>
    </g>
    <g id="text_21">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="486" y="335.664375" transform="rotate(-0 486 335.664375)">0/5</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="486" y="335.664375" transform="rotate(-0 486 335.664375)">0/5</text>
    </g>
    <g id="text_22">
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="368.400469" transform="rotate(-0 41.76 368.400469)">Training</text>
    </g>
    <g id="text_23">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="345.6" y="368.784375" transform="rotate(-0 345.6 368.784375)">4/18</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="345.6" y="368.784375" transform="rotate(-0 345.6 368.784375)">4/18</text>
    </g>
    <g id="text_24">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="486" y="368.784375" transform="rotate(-0 486 368.784375)">10/18</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="486" y="368.784375" transform="rotate(-0 486 368.784375)">10/18</text>
    </g>
    <g id="text_25">
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="401.631797" transform="rotate(-0 41.76 401.631797)">Evaluation</text>
    </g>
    <g id="text_26">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="345.6" y="401.904375" transform="rotate(-0 345.6 401.904375)">7/17</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="345.6" y="401.904375" transform="rotate(-0 345.6 401.904375)">7/17</text>
    </g>
    <g id="text_27">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="486" y="401.904375" transform="rotate(-0 486 401.904375)">6/17</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="486" y="401.904375" transform="rotate(-0 486 401.904375)">6/17</text>
    </g>
    <g id="text_28">
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="434.751797" transform="rotate(-0 41.76 434.751797)">Use &amp; risks</text>
@@ -442,10 +442,10 @@
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="500.991797" transform="rotate(-0 41.76 500.991797)">Mission context</text>
    </g>
    <g id="text_35">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="345.6" y="501.264375" transform="rotate(-0 345.6 501.264375)">1/4</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="345.6" y="501.264375" transform="rotate(-0 345.6 501.264375)">1/4</text>
    </g>
    <g id="text_36">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #10263d" x="486" y="501.264375" transform="rotate(-0 486 501.264375)">0/4</text>
+    <text style="font-weight: 700; font-size: 20px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle" x="486" y="501.264375" transform="rotate(-0 486 501.264375)">0/4</text>
    </g>
    <g id="text_37">
     <text style="font-size: 19px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #10263d" x="41.76" y="534.000469" transform="rotate(-0 41.76 534.000469)">Usage</text>
@@ -502,18 +502,24 @@
     <text style="font-size: 21px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #ffffff" x="969.12" y="519.508828" transform="rotate(-0 969.12 519.508828)">62/84</text>
    </g>
    <g id="text_55">
-    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: end; fill: #506174" x="479.52" y="636.813281" transform="rotate(-0 479.52 636.813281)">Lower</text>
+    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #506174" x="887.76" y="577.773281" transform="rotate(-0 887.76 577.773281)">Scores rate the documentation,</text>
    </g>
    <g id="text_56">
-    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #506174" x="672.48" y="636.707813" transform="rotate(-0 672.48 636.707813)">Higher</text>
+    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: middle; fill: #506174" x="887.76" y="598.042969" transform="rotate(-0 887.76 598.042969)">not model performance.</text>
    </g>
    <g id="text_57">
-    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: end; fill: #506174" x="404.55" y="636.8175" transform="rotate(-0 404.55 636.8175)">Shade = fraction of maximum (both panels)</text>
+    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: end; fill: #506174" x="479.52" y="636.813281" transform="rotate(-0 479.52 636.813281)">Lower</text>
    </g>
    <g id="text_58">
-    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #eef7fd" x="41.76" y="706.6575" transform="rotate(-0 41.76 706.6575)">Presence includes optional fields; an empty field is not necessarily a defect.</text>
+    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #506174" x="672.48" y="636.707813" transform="rotate(-0 672.48 636.707813)">Higher</text>
    </g>
    <g id="text_59">
+    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: end; fill: #506174" x="404.55" y="636.8175" transform="rotate(-0 404.55 636.8175)">Shade = fraction of maximum (both panels)</text>
+   </g>
+   <g id="text_60">
+    <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #eef7fd" x="41.76" y="706.6575" transform="rotate(-0 41.76 706.6575)">Presence includes optional fields; an empty field is not necessarily a defect.</text>
+   </g>
+   <g id="text_61">
     <text style="font-size: 18px; font-family: 'Arial', 'Liberation Sans', 'Arimo', sans-serif; text-anchor: start; fill: #eef7fd" x="41.76" y="733.2975" transform="rotate(-0 41.76 733.2975)">Documentation measures, not model performance. No new semantic scoring.</text>
    </g>
   </g>

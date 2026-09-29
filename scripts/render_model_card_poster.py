@@ -14,15 +14,16 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import tempfile
 import xml.etree.ElementTree as ET
 
-os.environ.setdefault("MPLCONFIGDIR", "/private/tmp/model-card-heatmap-matplotlib")
+os.environ.setdefault("MPLCONFIGDIR", os.path.join(tempfile.gettempdir(), "model-card-heatmap-matplotlib"))
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.colors import LinearSegmentedColormap, to_rgb
+from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
 # BACKGROUND is the Model Cards panel of the Bridge2AI Standards Portfolio poster
@@ -59,15 +60,10 @@ SHORT_LABELS = {
 
 
 def contrast_color(rgb):
-    """Choose dark ink or white by actual relative-luminance contrast."""
-    def luminance(color):
-        linear = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in color[:3]]
-        return sum(weight * value for weight, value in zip((0.2126, 0.7152, 0.0722), linear))
-
-    background = luminance(rgb)
-    foreground = luminance(to_rgb(INK))
-    dark_contrast = (max(background, foreground) + 0.05) / (min(background, foreground) + 0.05)
-    return "white" if (1.05 / (background + 0.05)) > dark_contrast else INK
+    """White or black text, whichever contrasts more with the fill; one always reaches 4.58:1."""
+    linear = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in rgb[:3]]
+    luminance = sum(weight * value for weight, value in zip((0.2126, 0.7152, 0.0722), linear))
+    return "white" if 1.05 / (luminance + 0.05) > (luminance + 0.05) / 0.05 else "black"
 
 
 def render(input_path, output_dir):
@@ -168,6 +164,9 @@ def render(input_path, output_dir):
                          f"{model_labels[col]} — {name}, deterministic hybrid: {metric['score']}/{metric['max_score']}")
             label(x + 110, y + 71, f"{fraction:.0%}", 36, color, "bold", ha="center")
             label(x + 110, y + 126, f"{metric['score']}/{metric['max_score']}", 21, color, ha="center")
+    # The poster crops the footer caveats, so the scores carry their own.
+    label(1233, 796, "Scores rate the documentation,", 18, MUTED, ha="center")
+    label(1233, 824, "not model performance.", 18, MUTED, ha="center")
 
     ax.plot([872, 872], [200, 848], color=GRID, linewidth=1)
 
