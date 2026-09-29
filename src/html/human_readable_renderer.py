@@ -49,7 +49,7 @@ CSS = """
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--bg); color: var(--text);
-  margin: 0; padding: 2rem 1.5rem; line-height: 1.5;
+  margin: 0; padding: 2rem 1.5rem; line-height: 1.5; overflow-wrap: anywhere;
 }
 header, main, footer { max-width: 980px; margin: 0 auto; }
 header { padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
@@ -107,6 +107,11 @@ pre code { background: transparent; padding: 0; }
 footer { color: var(--muted); font-size: .8rem; text-align: center; margin: 2rem 0 0; }
 .tag-license { background: #d1fae5; color: #065f46; padding: .1rem .45rem; border-radius: 4px; font-size: .8rem; }
 .bias-block { background: #fff7ed; border-left: 3px solid #f97316; padding: .5rem .75rem; margin: .35rem 0; border-radius: 0 4px 4px 0; font-size: .9rem; }
+@media (max-width: 700px) {
+  body { padding: 1rem .75rem; }
+  dl.kv > div, .contrib-row { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+  table.metrics { display: block; overflow-x: auto; }
+}
 """
 
 
@@ -231,18 +236,18 @@ def render_model_details(md: dict) -> str:
     licenses = md.get("licenses") or []
     if licenses:
         parts.append("<h3>Licenses</h3>")
-        chips = []
         for lic in licenses:
             if isinstance(lic, dict):
                 ident = lic.get("identifier", "")
                 link = lic.get("license_link") or ""
-                label = esc(ident)
+                name = lic.get("license_name") or ""
+                label = esc(" — ".join(str(v) for v in (ident, name) if v) or "License")
                 if link:
                     label = f'<a href="{esc(link)}">{label}</a>'
-                chips.append(f'<span class="tag-license">{label}</span>')
+                parts.append(f'<div class="chip-row"><span class="tag-license">{label}</span></div>')
+                parts.append(render_kv_table(lic, skip={"identifier", "license_name", "license_link"}))
             else:
-                chips.append(f'<span class="tag-license">{esc(lic)}</span>')
-        parts.append(f'<div class="chip-row">{" ".join(chips)}</div>')
+                parts.append(f'<div class="chip-row"><span class="tag-license">{esc(lic)}</span></div>')
 
     # citations
     citations = md.get("citations") or []
@@ -327,6 +332,7 @@ def render_model_parameters(mp: dict) -> str:
                     inner.append(f'<div class="meta-row"><strong>Sensitive data:</strong> {sens_str}</div>')
                 if bias_input:
                     inner.append(f'<div class="bias-block"><strong>bias_input:</strong> {esc(bias_input)}</div>')
+                inner.append(render_kv_table(ds, skip={"name", "link", "description", "bias_input", "sensitive"}))
                 parts.append(f'<div style="margin-bottom: .5rem;"><strong>{title}</strong>{"".join(inner)}</div>')
 
     # training procedure
@@ -445,10 +451,10 @@ def render_bias(card: dict) -> str:
 # Top-level render
 # ---------------------------------------------------------------------------
 KNOWN_TOPLEVEL = {
-    "schema_version", "model_details", "model_parameters", "quantitative_analysis",
-    "considerations", "model_category", "bias_model", "bias_output", "framework",
-    "framework_version", "library_name", "pipeline_tag", "language", "base_model",
-    "tags", "datasets", "metrics", "model_index", "mission_relevance",
+    "model_details", "model_parameters", "quantitative_analysis",
+    "considerations", "bias_model", "bias_output", "framework",
+    "framework_version", "library_name", "pipeline_tag", "base_model",
+    "tags", "model_index", "mission_relevance",
     "usage_documentation",
 }
 
@@ -563,6 +569,7 @@ def render_card(yaml_path: Path) -> str:
     return (
         '<!doctype html><html><head>'
         '<meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{esc(name)} — Model Card</title>'
         f'<style>{CSS}</style>'
         '</head><body>'

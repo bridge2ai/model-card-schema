@@ -217,9 +217,10 @@ endif
 # =========================================================================
 # Portfolio: regenerate dashboards + badges from existing eval JSONs
 # =========================================================================
-# Re-renders portfolio.html, portfolio_compare.html, and the badges/ dir
-# from whatever eval JSONs currently exist under
-# data/evaluation/{extended,harmonized,hf_hub,fixtures}/{rubric10,rubric20}/.
+# Re-renders current dashboards and badges from hash-matching evaluations.
+# Historical JSONs and dashboards remain in place. The remediation's after/
+# results provide current evaluations for DenseNet/SubCell; newer evaluations
+# may be staged under PORTFOLIO_CURRENT_DIR without replacing any archive.
 #
 # **Does NOT re-run the evaluator** — it only renders. To refresh the
 # scoring numbers first, run the evaluator (e.g. `make evaluate-rubric20`
@@ -228,8 +229,9 @@ endif
 #
 # Override defaults if you've staged evals somewhere else:
 #   make compare-portfolio PORTFOLIO_OUT_DIR=tmp/preview-portfolio
-PORTFOLIO_OUT_DIR ?= data/evaluation/all
+PORTFOLIO_OUT_DIR ?= data/evaluation/current/portfolio
 PORTFOLIO_BADGE_DIR ?= data/evaluation/badges
+PORTFOLIO_CURRENT_DIR ?= data/evaluation/current
 PORTFOLIO_INPUTS = \
 	--input-glob 'data/evaluation/extended/rubric10/*evaluation.json' \
 	--input-glob 'data/evaluation/extended/rubric20/*evaluation.json' \
@@ -244,17 +246,20 @@ PORTFOLIO_INPUTS = \
 	--input-glob 'data/evaluation/hf_hub/rubric10_semantic/*evaluation.json' \
 	--input-glob 'data/evaluation/hf_hub/rubric20_semantic/*evaluation.json' \
 	--input-glob 'data/evaluation/fixtures/rubric10/*evaluation.json' \
-	--input-glob 'data/evaluation/fixtures/rubric20/*evaluation.json'
+	--input-glob 'data/evaluation/fixtures/rubric20/*evaluation.json' \
+	--input-glob 'data/evaluation/remediation/2026-09-28/after/*/*evaluation.json' \
+	--input-glob '$(PORTFOLIO_CURRENT_DIR)/*/rubric10/*evaluation.json' \
+	--input-glob '$(PORTFOLIO_CURRENT_DIR)/*/rubric20/*evaluation.json'
 
 compare-portfolio:
 	@mkdir -p $(PORTFOLIO_OUT_DIR) $(PORTFOLIO_BADGE_DIR)
-	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) \
+	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) --current-only \
 		--output $(PORTFOLIO_OUT_DIR)/portfolio.html \
 		--title "Model Card portfolio quality report"
-	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) \
+	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) --current-only \
 		--output $(PORTFOLIO_OUT_DIR)/portfolio_compare.html --compare \
 		--title "Model Card portfolio: hybrid vs LLM x rubric10 x rubric20"
-	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) \
+	$(RUN) python scripts/render_evaluation_html.py $(PORTFOLIO_INPUTS) --current-only \
 		--output $(PORTFOLIO_BADGE_DIR) --badge \
 		--title "Model Card portfolio quality badges"
 	@echo ""

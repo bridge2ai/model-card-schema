@@ -58,6 +58,11 @@ Color band: 🟢 ≥80% · 🟡 ≥50% · 🔴 <50%.
 
 The portfolio comparison is an archived snapshot; its DenseNet/SubCell rows predate this remediation.
 Legacy badges without a verified input hash are omitted when regenerating a card page.
+Run `make compare-portfolio` to generate hash-verified current dashboards under
+`data/evaluation/current/portfolio/` and refresh the shared badges. This command includes
+the revised two-card evaluations, preserves the archived dashboards and JSONs, and fails
+before writing reports if a requested hybrid score has no matching current YAML hash.
+See the [adversarial review](notes/model_card_remediation/adversarial/README.md) for regression checks.
 
 ### Reproduce
 

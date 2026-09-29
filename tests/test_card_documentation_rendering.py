@@ -19,11 +19,23 @@ spec.loader.exec_module(renderer)
 class DocumentationRenderingTests(unittest.TestCase):
     def test_source_and_uncertainty_documentation_survives_export(self):
         card = {
+            "schema_version": "test-schema-revision",
+            "model_category": "test-model-category",
+            "datasets": ["test-dataset-identifier"],
+            "metrics": ["test-metric-identifier"],
+            "language": ["test-language-tag"],
             "model_details": {
                 "name": "Documented model",
                 "version": {"last_updated": "2024-10-16T11:57:20Z"},
+                "licenses": [{
+                    "identifier": "LicenseRef-test",
+                    "license_name": "Test License Name",
+                    "license_link": "https://example.org/license",
+                    "custom_text": "Test license restriction must remain visible.",
+                }],
             },
             "model_parameters": {
+                "data": [{"name": "Example dataset", "unit": "test-record-unit"}],
                 "training_procedure": {
                     "description": "Original training procedure is unverified.",
                     "methodology": "Fine-tuning methodology disclosure.",
@@ -61,6 +73,10 @@ class DocumentationRenderingTests(unittest.TestCase):
             with patch.object(renderer, "find_badge_files", return_value=[]):
                 page = renderer.render_card(path)
         for required in (
+            "schema_version", "test-schema-revision", "test-model-category",
+            "test-dataset-identifier", "test-metric-identifier", "test-language-tag",
+            "LicenseRef-test", "Test License Name", "https://example.org/license",
+            "Test license restriction must remain visible.", "test-record-unit",
             "last_updated", "2024-10-16T11:57:20Z",
             "Fine-tuning methodology disclosure.", "Base checkpoint lineage disclosure.",
             "training_data_separate", "random_seed", "<code>0</code>", "<code>False</code>",

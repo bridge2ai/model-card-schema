@@ -9,6 +9,9 @@ primary sources support the completed documentation changes below; unresolved fa
 fields require upstream artifacts. No model weights, new inference or training jobs were
 used. The public SubCell dataset CSV was inspected to audit its documented splits.
 
+The subsequent [adversarial review](adversarial/README.md) records the portfolio rebuild,
+HTML metadata/layout and CI detection fixes, with regression evidence and publication drafts.
+
 ## Work and issue drafts
 
 At preparation on September 28, 2026, all six items below are local drafts for

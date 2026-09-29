@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import html
 import json
 import re
@@ -345,6 +346,73 @@ def variant_kind(report: dict) -> str:
     return "semantic" if report.get("rubric", "").endswith("_semantic") else "standard"
 
 
+def normalized_card_hash(value: Any) -> str:
+    value = value.strip().lower().removeprefix("sha256:") if isinstance(value, str) else ""
+    return value if re.fullmatch(r"[0-9a-f]{64}", value) else ""
+
+
+def select_current_reports(reports: list[dict]) -> list[dict]:
+    """Select hash-verified evaluations without mixing revisions or replacing newer scores.
+
+    Resolve archived basenames only when another input report identifies one
+    unambiguous existing file. Require a current result for every requested hybrid
+    slot; archived LLM results may be omitted without inventing a fresh judgment.
+    """
+    aliases: dict[str, set[Path]] = defaultdict(set)
+    for report in reports:
+        source = Path(report.get("model_card_file") or "")
+        if source.is_file():
+            aliases[source.name].add(source.resolve())
+
+    current = {}
+    expected_hybrid = set()
+    badge_sources = {}
+    for report in reports:
+        if "_load_error" in report or "error" in report:
+            raise ValueError(f"Cannot select current evaluation: {report.get('_path') or report.get('model_card_file')}")
+        source = Path(report.get("model_card_file") or "")
+        if not source.is_file() and len(source.parts) == 1:
+            candidates = aliases.get(source.name, set())
+            if len(candidates) == 1:
+                source = next(iter(candidates))
+        kind = evaluator_kind(report)
+        if not source.is_file():
+            if kind == "hybrid":
+                raise ValueError(f"Cannot resolve hybrid evaluation input: {source}")
+            continue
+        source = source.resolve()
+        key = (source, report.get("rubric", ""), kind)
+        if kind == "hybrid":
+            expected_hybrid.add(key)
+        declared = normalized_card_hash((report.get("metadata") or {}).get("model_card_hash"))
+        if not declared or hashlib.sha256(source.read_bytes()).hexdigest() != declared:
+            continue
+        # Badge filenames use the basename; distinct inputs must not silently collide.
+        badge_key = (source.stem, key[1], kind)
+        if badge_key in badge_sources and badge_sources[badge_key] != source:
+            raise ValueError(f"Current evaluation badge name collision: {source.name}")
+        badge_sources[badge_key] = source
+        try:
+            timestamp = datetime.fromisoformat(str(report.get("evaluation_timestamp", "")).replace("Z", "+00:00"))
+            timestamp = timestamp.replace(tzinfo=timezone.utc) if timestamp.tzinfo is None else timestamp
+        except ValueError:
+            timestamp = datetime.min.replace(tzinfo=timezone.utc)
+        if (
+            key in current and timestamp == current[key][0]
+            and report.get("overall_score") != current[key][1].get("overall_score")
+        ):
+            raise ValueError(f"Conflicting current scores at the same timestamp: {source.name} ({key[1]})")
+        if key not in current or timestamp >= current[key][0]:
+            display_path = source.relative_to(Path.cwd()) if source.is_relative_to(Path.cwd()) else source
+            selected = dict(report, model_card_file=str(display_path))
+            current[key] = (timestamp, selected)
+    missing = expected_hybrid - current.keys()
+    if missing:
+        details = ", ".join(f"{path.name} ({rubric})" for path, rubric, _ in sorted(missing))
+        raise ValueError(f"No current hybrid evaluation for {details}; rerun the evaluator before refreshing")
+    return [item[1] for item in current.values()]
+
+
 def render_compare_cell(report: dict | None, peer_report: dict | None = None) -> str:
     """Render one (rubric × evaluator) cell. If peer (the other evaluator) is
     provided, add a delta annotation."""
@@ -529,10 +597,7 @@ def render_badge_svg(
     module-level color_class() helper).
     A valid evaluation input hash binds the badge to the exact YAML bytes.
     """
-    card_hash = (
-        model_card_hash.strip().lower().removeprefix("sha256:")
-        if isinstance(model_card_hash, str) else ""
-    )
+    card_hash = normalized_card_hash(model_card_hash)
     provenance = (
         f' data-model-card-sha256="{card_hash}"'
         if re.fullmatch(r"[0-9a-f]{64}", card_hash) else ""
@@ -769,6 +834,9 @@ def main(argv: list[str] | None = None) -> int:
                    help="Emit one shields.io-style SVG quality badge per evaluation. "
                         "When set, --output is treated as a DIRECTORY (will be created) "
                         "containing per-evaluation .svg files plus an index.html.")
+    p.add_argument("--current-only", action="store_true",
+                   help="Use only evaluations matching current YAML bytes; require current hybrid "
+                        "results and prefer the newest evaluation per card/rubric/evaluator kind.")
     args = p.parse_args(argv)
 
     paths: list[Path] = []
@@ -789,6 +857,13 @@ def main(argv: list[str] | None = None) -> int:
         loaded = load_one(path)
         if loaded is not None:
             reports.append(loaded)
+
+    if args.current_only:
+        try:
+            reports = select_current_reports(reports)
+        except ValueError as error:
+            print(str(error), file=sys.stderr)
+            return 1
 
     if args.badge:
         if args.compare:
