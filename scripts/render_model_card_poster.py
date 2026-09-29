@@ -3,9 +3,9 @@
 
 The upstream builder performs card/schema/evaluation checks. This renderer keeps
 the same measurements while replacing individual fields with section totals.
-Place model_cards_poster_transparent.png on the Bridge2AI Standards Portfolio poster;
-the teal PNG, SVG and PDF are for standalone use. The layout needs Arial or a
-metric-compatible font (Liberation Sans, Arimo).
+Place model_cards_poster_transparent.png (the white box alone, on a transparent canvas) on
+the Bridge2AI Standards Portfolio poster; the teal PNG, SVG and PDF are for standalone
+use. The layout needs Arial or a metric-compatible font (Liberation Sans, Arimo).
 """
 from __future__ import annotations
 
@@ -95,11 +95,17 @@ def render(input_path, output_dir):
         "font.family": "sans-serif", "font.sans-serif": METRIC_FONTS,
         "svg.fonttype": "none", "svg.hashsalt": "model-card-poster", "pdf.fonttype": 42, "axes.unicode_minus": False,
     })
+    # Two installs of one font (e.g. Microsoft Office's Arial and macOS's) tie in findfont, and
+    # the font cache's order is random; sorting by path keeps the embedded PDF font stable.
+    font_manager.fontManager.ttflist.sort(key=lambda entry: entry.fname)
+    fonts = {}
     for weight in ("normal", "bold"):
-        font = font_manager.get_font(font_manager.findfont(font_manager.FontProperties(family="sans-serif", weight=weight)))
+        path = Path(font_manager.findfont(font_manager.FontProperties(family="sans-serif", weight=weight)))
+        font = font_manager.get_font(path)
         if font.family_name not in METRIC_FONTS or (weight == "bold") != ("Bold" in font.style_name):
             raise ValueError(f"Poster layout needs {' or '.join(METRIC_FONTS)} in regular and bold; "
                              f"found {font.family_name} {font.style_name}")
+        fonts[weight] = {"file": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     model_labels = [model["label"] for model in models]
     fig = plt.figure(figsize=(16, 10.8), facecolor=BACKGROUND)
     ax = fig.add_axes([0, 0, 1, 1])
@@ -209,7 +215,12 @@ def render(input_path, output_dir):
     fig.savefig(stem.with_suffix(".pdf"), facecolor=BACKGROUND,
                 metadata={"Title": "Model-card documentation: poster summary", "CreationDate": None})
     fig.savefig(stem.with_suffix(".png"), dpi=300, facecolor=BACKGROUND)
-    # The poster's panel gradient shows through the transparent canvas; the white box stays opaque.
+    # The poster's panel gradient shows through the transparent canvas around the opaque white
+    # box. The light title and caveats are left out: the poster crops them, and they would
+    # vanish on any light background.
+    for item in texts:
+        if item.get_color() == ON_BACKGROUND:
+            item.set_visible(False)
     fig.savefig(transparent_path, dpi=300, transparent=True)
     plt.close(fig)
     svg_path = stem.with_suffix(".svg")
@@ -226,7 +237,7 @@ def render(input_path, output_dir):
     tree.write(svg_path, encoding="utf-8", xml_declaration=True)
     metadata = {
         "input": input_path.name, "input_sha256": hashlib.sha256(data_bytes).hexdigest(),
-        "renderer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "renderer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "fonts": fonts,
         "method": "Same counts and hybrid totals as detailed figure; section-level aggregation only",
         "percentage_display": "Rounded to whole percentages; exact fractions retained in every cell",
         "files": {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
