@@ -1,0 +1,1203 @@
+{
+  "metadata": {
+    "generated_at": "2026-09-29T01:14:14.439214+00:00",
+    "manifest_sha256": "3cff9833c6b4759fdf20884d540adf8d2c6ee10d5bdae3df01804beff66b17b7",
+    "script_sha256": "91ab2c79620c1962941192bd7e832b2cbd6eecc1ef4f6e3432da7dde56ef7258",
+    "python_version": "3.13.12",
+    "python_lmdb_version": "2.3.0",
+    "lmdb_library_version": [
+      0,
+      9,
+      35
+    ],
+    "dataset_repository": "SaProtHub/Dataset-Subcellular_Localization-DeepLoc",
+    "audited_head": "78096a0eff765cf8988323ca3c21c0f19ca1ae79"
+  },
+  "method": "Exact full SA, AA characters at seq[::2], and protein identifier comparisons; no truncation, clustering, inference, or score attribution.",
+  "artifacts": {
+    "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13": {
+      "sha256": "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13",
+      "size": 9949184,
+      "path": "test/data.mdb",
+      "first_revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "first_date": "2024-05-03T15:35:02.000Z",
+      "format": "lmdb_json",
+      "rows": 1368,
+      "metadata_keys": [
+        "info",
+        "length"
+      ]
+    },
+    "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e": {
+      "sha256": "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e",
+      "size": 125423616,
+      "path": "train/data.mdb",
+      "first_revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "first_date": "2024-05-03T15:35:02.000Z",
+      "format": "lmdb_json",
+      "rows": 10414,
+      "metadata_keys": [
+        "info",
+        "length"
+      ]
+    },
+    "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141": {
+      "sha256": "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141",
+      "size": 10006528,
+      "path": "valid/data.mdb",
+      "first_revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "first_date": "2024-05-03T15:35:02.000Z",
+      "format": "lmdb_json",
+      "rows": 1368,
+      "metadata_keys": [
+        "info",
+        "length"
+      ]
+    },
+    "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae": {
+      "sha256": "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae",
+      "size": 2658304,
+      "path": "test/data.mdb",
+      "first_revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "first_date": "2024-05-06T11:28:06.000Z",
+      "format": "lmdb_json",
+      "rows": 1368,
+      "metadata_keys": [
+        "info",
+        "length"
+      ]
+    },
+    "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f": {
+      "sha256": "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f",
+      "size": 16396288,
+      "path": "train/data.mdb",
+      "first_revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "first_date": "2024-05-06T11:28:06.000Z",
+      "format": "lmdb_json",
+      "rows": 10414,
+      "metadata_keys": [
+        "info",
+        "length"
+      ]
+    },
+    "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205": {
+      "sha256": "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205",
+      "size": 2736128,
+      "path": "valid/data.mdb",
+      "first_revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "first_date": "2024-05-06T11:28:06.000Z",
+      "format": "lmdb_json",
+      "rows": 1368,
+      "metadata_keys": [
+        "info",
+        "length"
+      ]
+    },
+    "3e6000bf8dcddae3e2ab01922673f6af24ef4057": {
+      "sha256": "74592a8931b2ed2f1606063fcef489169c1cfe9c714d9f22a9da3d4806520456",
+      "size": 15418,
+      "path": "test.csv",
+      "first_revision": "d792b300d29e79105ec77311dbf7062b26cf9381",
+      "first_date": "2024-07-10T02:06:36.000Z",
+      "format": "csv",
+      "excluded": true,
+      "fields": [
+        "Sequence",
+        "label",
+        "stage"
+      ],
+      "rows": 48,
+      "reason": "Temporary artifact uses Sequence and fractional labels; it does not satisfy the audited 10-class SA record format. Task identity is not inferred.",
+      "stage_counts": {
+        "test": 5,
+        "train": 39,
+        "valid": 4
+      },
+      "fractional_label_rows": 48,
+      "label_examples": [
+        "10.15988",
+        "17.5",
+        "18.27989"
+      ]
+    },
+    "e09d250b419f2f141c611ca471d787d536cc887f": {
+      "sha256": "f445dd51d6527e697220af886de78a9750ec1a92e0deaa5d63b17fd798c48ff5",
+      "size": 1661870,
+      "path": "test/test.csv",
+      "first_revision": "f34283c6b314d0bb2e8c9cfddcbf530b32460b57",
+      "first_date": "2024-07-10T05:48:00.000Z",
+      "format": "csv",
+      "fields": [
+        "name",
+        "seq",
+        "label",
+        "stage"
+      ],
+      "rows": 1368
+    },
+    "4418ac1cb40a750a423a722bfe7c5cf1f83588d1": {
+      "sha256": "540f6fce12a820fa0f38e17982e7759e1f35f26f7a9c565427d33ef40b4248f7",
+      "size": 10213024,
+      "path": "train/train.csv",
+      "first_revision": "ad265426182fa5e6a5e384419a2a5ca340dce7fc",
+      "first_date": "2024-07-10T05:48:46.000Z",
+      "format": "csv",
+      "fields": [
+        "name",
+        "seq",
+        "label",
+        "stage"
+      ],
+      "rows": 10414
+    },
+    "e97c6ca5001b7fc7f741d37f7cdeb4b8a1ded20d": {
+      "sha256": "cd25298e48567d5299d0ac7280e710b7284dfa51a0328406e7bc9846f29aa854",
+      "size": 1686630,
+      "path": "valid/valid.csv",
+      "first_revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+      "first_date": "2024-07-10T05:51:20.000Z",
+      "format": "csv",
+      "fields": [
+        "name",
+        "seq",
+        "label",
+        "stage"
+      ],
+      "rows": 1368
+    },
+    "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9": {
+      "sha256": "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9",
+      "size": 13469406,
+      "path": "dataset.csv",
+      "first_revision": "ea88ea2785269900ed84577127fc474e7cd53319",
+      "first_date": "2024-08-08T11:04:06.000Z",
+      "format": "csv",
+      "fields": [
+        "sequence",
+        "label",
+        "stage"
+      ],
+      "rows": 13150
+    },
+    "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e": {
+      "sha256": "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e",
+      "size": 13456254,
+      "path": "dataset.csv",
+      "first_revision": "c5247cfea75c7b74e7a1b36734c3c2502317390e",
+      "first_date": "2024-10-30T08:21:11.000Z",
+      "format": "csv",
+      "fields": [
+        "protein",
+        "label",
+        "stage"
+      ],
+      "rows": 13150
+    }
+  },
+  "snapshots": {
+    "2024-05-03": {
+      "date": "2024-05-03",
+      "revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "format": "lmdb",
+      "artifact_keys": {
+        "test": "764c627aecebdafc1b7bdd87bb3538b71ea549a0803dbfc336863b771e45eb13",
+        "train": "c70ee8955bd2e00d43a784e39bc2266d07a1cbbf6b8aae39f3a7f424400a7f2e",
+        "valid": "174f25cff3aa7e76f3e4178ed31452809fc8b6e4e94b180c79e5559e681ba141"
+      },
+      "splits": {
+        "train": {
+          "rows": 10414,
+          "unique": {
+            "SA": 10410,
+            "AA": 10376,
+            "ID": 10414
+          },
+          "excess_repeated_records": {
+            "SA": 4,
+            "AA": 38,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 2641,
+            "1": 1913,
+            "2": 1498,
+            "3": 1323,
+            "4": 979,
+            "5": 745,
+            "6": 633,
+            "7": 282,
+            "8": 268,
+            "9": 132
+          }
+        },
+        "valid": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1368,
+            "AA": 1362,
+            "ID": 1368
+          },
+          "excess_repeated_records": {
+            "SA": 0,
+            "AA": 6,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 634,
+            "1": 240,
+            "2": 117,
+            "3": 74,
+            "4": 165,
+            "5": 42,
+            "6": 44,
+            "7": 33,
+            "8": 14,
+            "9": 5
+          }
+        },
+        "test": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1368,
+            "AA": 1366,
+            "ID": 1368
+          },
+          "excess_repeated_records": {
+            "SA": 0,
+            "AA": 2,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 527,
+            "1": 269,
+            "2": 195,
+            "3": 85,
+            "4": 128,
+            "5": 45,
+            "6": 48,
+            "7": 29,
+            "8": 27,
+            "9": 15
+          }
+        }
+      },
+      "overlaps": {
+        "train/valid": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "ID": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          }
+        },
+        "train/test": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 1,
+            "affected_rows": {
+              "train": 1,
+              "test": 1
+            }
+          },
+          "ID": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          }
+        },
+        "valid/test": {
+          "SA": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          },
+          "AA": {
+            "shared_unique": 233,
+            "affected_rows": {
+              "valid": 233,
+              "test": 233
+            }
+          },
+          "ID": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          }
+        }
+      }
+    },
+    "2024-05-06": {
+      "date": "2024-05-06",
+      "revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "format": "lmdb",
+      "artifact_keys": {
+        "test": "ad938697be7eaa9f1689229cf4e74ab40134103dbd826f164ad2e94e3321f0ae",
+        "train": "714938d5c93590c566ddddfe8baa9181dee4db7accc06edd31c2c8ff3f18b75f",
+        "valid": "87666c6ebd42d4d43512441f79f2b6032dd505aac31592dd06d529bf9d157205"
+      },
+      "splits": {
+        "train": {
+          "rows": 10414,
+          "unique": {
+            "SA": 10408,
+            "AA": 10376,
+            "ID": 10414
+          },
+          "excess_repeated_records": {
+            "SA": 6,
+            "AA": 38,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 2641,
+            "1": 1913,
+            "2": 1498,
+            "3": 1323,
+            "4": 979,
+            "5": 745,
+            "6": 633,
+            "7": 282,
+            "8": 268,
+            "9": 132
+          }
+        },
+        "valid": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1368,
+            "AA": 1362,
+            "ID": 1368
+          },
+          "excess_repeated_records": {
+            "SA": 0,
+            "AA": 6,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 634,
+            "1": 240,
+            "2": 117,
+            "3": 74,
+            "4": 165,
+            "5": 42,
+            "6": 44,
+            "7": 33,
+            "8": 14,
+            "9": 5
+          }
+        },
+        "test": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1367,
+            "AA": 1366,
+            "ID": 1368
+          },
+          "excess_repeated_records": {
+            "SA": 1,
+            "AA": 2,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 527,
+            "1": 269,
+            "2": 195,
+            "3": 85,
+            "4": 128,
+            "5": 45,
+            "6": 48,
+            "7": 29,
+            "8": 27,
+            "9": 15
+          }
+        }
+      },
+      "overlaps": {
+        "train/valid": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "ID": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          }
+        },
+        "train/test": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 1,
+            "affected_rows": {
+              "train": 1,
+              "test": 1
+            }
+          },
+          "ID": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          }
+        },
+        "valid/test": {
+          "SA": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          },
+          "AA": {
+            "shared_unique": 233,
+            "affected_rows": {
+              "valid": 233,
+              "test": 233
+            }
+          },
+          "ID": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          }
+        }
+      }
+    },
+    "2024-07-10": {
+      "date": "2024-07-10",
+      "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+      "format": "csv",
+      "artifact_keys": {
+        "test": "e09d250b419f2f141c611ca471d787d536cc887f",
+        "train": "4418ac1cb40a750a423a722bfe7c5cf1f83588d1",
+        "valid": "e97c6ca5001b7fc7f741d37f7cdeb4b8a1ded20d"
+      },
+      "splits": {
+        "train": {
+          "rows": 10414,
+          "unique": {
+            "SA": 10408,
+            "AA": 10376,
+            "ID": 10414
+          },
+          "excess_repeated_records": {
+            "SA": 6,
+            "AA": 38,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 2641,
+            "1": 1913,
+            "2": 1498,
+            "3": 1323,
+            "4": 979,
+            "5": 745,
+            "6": 633,
+            "7": 282,
+            "8": 268,
+            "9": 132
+          }
+        },
+        "valid": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1368,
+            "AA": 1362,
+            "ID": 1368
+          },
+          "excess_repeated_records": {
+            "SA": 0,
+            "AA": 6,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 634,
+            "1": 240,
+            "2": 117,
+            "3": 74,
+            "4": 165,
+            "5": 42,
+            "6": 44,
+            "7": 33,
+            "8": 14,
+            "9": 5
+          }
+        },
+        "test": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1367,
+            "AA": 1366,
+            "ID": 1368
+          },
+          "excess_repeated_records": {
+            "SA": 1,
+            "AA": 2,
+            "ID": 0
+          },
+          "class_counts": {
+            "0": 527,
+            "1": 269,
+            "2": 195,
+            "3": 85,
+            "4": 128,
+            "5": 45,
+            "6": 48,
+            "7": 29,
+            "8": 27,
+            "9": 15
+          }
+        }
+      },
+      "overlaps": {
+        "train/valid": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "ID": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          }
+        },
+        "train/test": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 1,
+            "affected_rows": {
+              "train": 1,
+              "test": 1
+            }
+          },
+          "ID": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          }
+        },
+        "valid/test": {
+          "SA": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          },
+          "AA": {
+            "shared_unique": 233,
+            "affected_rows": {
+              "valid": 233,
+              "test": 233
+            }
+          },
+          "ID": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          }
+        }
+      }
+    },
+    "2024-08-08": {
+      "date": "2024-08-08",
+      "revision": "ea88ea2785269900ed84577127fc474e7cd53319",
+      "format": "csv",
+      "artifact_keys": {
+        "all": "7e39b912cb1ba7c7c9557e5efebfe4cbd8af73e4fb7ae75db96298c96254c1d9"
+      },
+      "splits": {
+        "train": {
+          "rows": 10414,
+          "unique": {
+            "SA": 10408,
+            "AA": 10376,
+            "ID": null
+          },
+          "excess_repeated_records": {
+            "SA": 6,
+            "AA": 38,
+            "ID": null
+          },
+          "class_counts": {
+            "0": 2641,
+            "1": 1913,
+            "2": 1498,
+            "3": 1323,
+            "4": 979,
+            "5": 745,
+            "6": 633,
+            "7": 282,
+            "8": 268,
+            "9": 132
+          }
+        },
+        "valid": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1368,
+            "AA": 1362,
+            "ID": null
+          },
+          "excess_repeated_records": {
+            "SA": 0,
+            "AA": 6,
+            "ID": null
+          },
+          "class_counts": {
+            "0": 634,
+            "1": 240,
+            "2": 117,
+            "3": 74,
+            "4": 165,
+            "5": 42,
+            "6": 44,
+            "7": 33,
+            "8": 14,
+            "9": 5
+          }
+        },
+        "test": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1367,
+            "AA": 1366,
+            "ID": null
+          },
+          "excess_repeated_records": {
+            "SA": 1,
+            "AA": 2,
+            "ID": null
+          },
+          "class_counts": {
+            "0": 527,
+            "1": 269,
+            "2": 195,
+            "3": 85,
+            "4": 128,
+            "5": 45,
+            "6": 48,
+            "7": 29,
+            "8": 27,
+            "9": 15
+          }
+        }
+      },
+      "overlaps": {
+        "train/valid": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "ID": null
+        },
+        "train/test": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 1,
+            "affected_rows": {
+              "train": 1,
+              "test": 1
+            }
+          },
+          "ID": null
+        },
+        "valid/test": {
+          "SA": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          },
+          "AA": {
+            "shared_unique": 233,
+            "affected_rows": {
+              "valid": 233,
+              "test": 233
+            }
+          },
+          "ID": null
+        }
+      }
+    },
+    "2024-10-30": {
+      "date": "2024-10-30",
+      "revision": "c5247cfea75c7b74e7a1b36734c3c2502317390e",
+      "format": "csv",
+      "artifact_keys": {
+        "all": "cf9f02e52091739d012189a1d66aad22e0fa906d0ae2c1993e0821a4b9f3b64e"
+      },
+      "splits": {
+        "train": {
+          "rows": 10414,
+          "unique": {
+            "SA": 10408,
+            "AA": 10376,
+            "ID": null
+          },
+          "excess_repeated_records": {
+            "SA": 6,
+            "AA": 38,
+            "ID": null
+          },
+          "class_counts": {
+            "0": 2641,
+            "1": 1913,
+            "2": 1498,
+            "3": 1323,
+            "4": 979,
+            "5": 745,
+            "6": 633,
+            "7": 282,
+            "8": 268,
+            "9": 132
+          }
+        },
+        "valid": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1368,
+            "AA": 1362,
+            "ID": null
+          },
+          "excess_repeated_records": {
+            "SA": 0,
+            "AA": 6,
+            "ID": null
+          },
+          "class_counts": {
+            "0": 634,
+            "1": 240,
+            "2": 117,
+            "3": 74,
+            "4": 165,
+            "5": 42,
+            "6": 44,
+            "7": 33,
+            "8": 14,
+            "9": 5
+          }
+        },
+        "test": {
+          "rows": 1368,
+          "unique": {
+            "SA": 1367,
+            "AA": 1366,
+            "ID": null
+          },
+          "excess_repeated_records": {
+            "SA": 1,
+            "AA": 2,
+            "ID": null
+          },
+          "class_counts": {
+            "0": 527,
+            "1": 269,
+            "2": 195,
+            "3": 85,
+            "4": 128,
+            "5": 45,
+            "6": 48,
+            "7": 29,
+            "8": 27,
+            "9": 15
+          }
+        }
+      },
+      "overlaps": {
+        "train/valid": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "valid": 0
+            }
+          },
+          "ID": null
+        },
+        "train/test": {
+          "SA": {
+            "shared_unique": 0,
+            "affected_rows": {
+              "train": 0,
+              "test": 0
+            }
+          },
+          "AA": {
+            "shared_unique": 1,
+            "affected_rows": {
+              "train": 1,
+              "test": 1
+            }
+          },
+          "ID": null
+        },
+        "valid/test": {
+          "SA": {
+            "shared_unique": 232,
+            "affected_rows": {
+              "valid": 232,
+              "test": 232
+            }
+          },
+          "AA": {
+            "shared_unique": 233,
+            "affected_rows": {
+              "valid": 233,
+              "test": 233
+            }
+          },
+          "ID": null
+        }
+      }
+    }
+  },
+  "transitions": [
+    {
+      "from": "2024-05-03",
+      "to": "2024-05-06",
+      "splits": {
+        "train": {
+          "normalized_fields": [
+            "name",
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": false,
+          "multiset_equal": false,
+          "removed_records": 10242,
+          "added_records": 10242
+        },
+        "valid": {
+          "normalized_fields": [
+            "name",
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": false,
+          "multiset_equal": false,
+          "removed_records": 1361,
+          "added_records": 1361
+        },
+        "test": {
+          "normalized_fields": [
+            "name",
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": false,
+          "multiset_equal": false,
+          "removed_records": 1322,
+          "added_records": 1322
+        }
+      }
+    },
+    {
+      "from": "2024-05-06",
+      "to": "2024-07-10",
+      "splits": {
+        "train": {
+          "normalized_fields": [
+            "name",
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        },
+        "valid": {
+          "normalized_fields": [
+            "name",
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        },
+        "test": {
+          "normalized_fields": [
+            "name",
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        }
+      }
+    },
+    {
+      "from": "2024-07-10",
+      "to": "2024-08-08",
+      "splits": {
+        "train": {
+          "normalized_fields": [
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        },
+        "valid": {
+          "normalized_fields": [
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        },
+        "test": {
+          "normalized_fields": [
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        }
+      }
+    },
+    {
+      "from": "2024-08-08",
+      "to": "2024-10-30",
+      "splits": {
+        "train": {
+          "normalized_fields": [
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        },
+        "valid": {
+          "normalized_fields": [
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        },
+        "test": {
+          "normalized_fields": [
+            "seq",
+            "label",
+            "stage"
+          ],
+          "ordered_rows_equal": true,
+          "multiset_equal": true,
+          "removed_records": 0,
+          "added_records": 0
+        }
+      }
+    }
+  ],
+  "masking_proofs": [
+    {
+      "from": "2024-05-03",
+      "to": "2024-05-06",
+      "threshold": 70,
+      "rule": "Replace only the structural character with # when pLDDT < threshold",
+      "splits": {
+        "train": {
+          "rows": 10414,
+          "same_order_ID_AA_label": true,
+          "reconstructed_rows_matching": 10414,
+          "all_rows_reconstructed": true,
+          "changed_SA_rows": 10242,
+          "changed_structural_positions": 1465581,
+          "changed_plddt_range": [
+            2.71,
+            69.99
+          ]
+        },
+        "valid": {
+          "rows": 1368,
+          "same_order_ID_AA_label": true,
+          "reconstructed_rows_matching": 1368,
+          "all_rows_reconstructed": true,
+          "changed_SA_rows": 1361,
+          "changed_structural_positions": 378105,
+          "changed_plddt_range": [
+            7.51,
+            69.99
+          ]
+        },
+        "test": {
+          "rows": 1368,
+          "same_order_ID_AA_label": true,
+          "reconstructed_rows_matching": 1368,
+          "all_rows_reconstructed": true,
+          "changed_SA_rows": 1322,
+          "changed_structural_positions": 366554,
+          "changed_plddt_range": [
+            15.86,
+            69.99
+          ]
+        }
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "2024-05-03",
+      "date": "2024-05-03",
+      "revision": "f1f914e9ce4bf5ceefa33823f1a09562aac872b4",
+      "format": "lmdb"
+    },
+    {
+      "id": "2024-05-06",
+      "date": "2024-05-06",
+      "revision": "c7af324a2eb84f834895e4febe34cf55cae6da00",
+      "format": "lmdb"
+    },
+    {
+      "id": "2024-07-10",
+      "date": "2024-07-10",
+      "revision": "a2ba7f6e25cbb19130d418c86d0d27ec71233ff7",
+      "format": "csv"
+    },
+    {
+      "id": "2024-08-08",
+      "date": "2024-08-08",
+      "revision": "ea88ea2785269900ed84577127fc474e7cd53319",
+      "format": "csv"
+    },
+    {
+      "id": "2024-10-30",
+      "date": "2024-10-30",
+      "revision": "c5247cfea75c7b74e7a1b36734c3c2502317390e",
+      "format": "csv"
+    }
+  ],
+  "earliest_observed_snapshot": "2024-05-03",
+  "latest_observed_snapshot": "2024-10-30",
+  "limitations": [
+    "Observed historical dataset overlap does not bind these splits to the checkpoint's reported accuracy.",
+    "Missing identifier fields are unknown, not evidence of zero identifier overlap.",
+    "Fractional-label temporary CSV is excluded by observed format; its task identity is not inferred."
+  ],
+  "shared_ids_export": {
+    "snapshot": "2024-07-10",
+    "file": "shared_ids.csv",
+    "rows": 232
+  }
+}

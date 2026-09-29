@@ -22,13 +22,21 @@ model_details:
     dataset. This is an author-reported result, not an independently reproduced measurement.
     The dataset describes a ten-class, single-label task derived from the original 2017
     DeepLoc dataset, using AlphaFold2 structure-aware sequences. It is not identified as
-    DeepLoc 2.0. The audited dataset snapshot contains validation/test sequence overlap;
-    see the evaluation procedure for the finding and its provenance limits.
+    DeepLoc 2.0. Validation/test overlap is present in the earliest public dataset
+    snapshot (May 3, 2024) and persists through subsequent exports; see the evaluation
+    procedure for the finding and its provenance limits.
   documentation: |
     Evidence reviewed on 2026-09-28: model repository revision
     ffc656cde0bbfaf4933b364036753674520663b6 and dataset revision
     78096a0eff765cf8988323ca3c21c0f19ca1ae79. These identify the inspected artifacts;
     the model README does not bind its score to that dataset revision or a training run.
+
+    Repository history places the first adapter upload on May 7, 2024 and the first
+    85.75% accuracy statement on May 8. The weight-bearing commits advertise the same
+    LFS SHA-256, although README hyperparameters changed that morning. These are
+    publication events, not verified training dates or evidence of separate runs.
+    Historical dataset artifacts and the audit are documented at
+    https://github.com/bridge2ai/model-card-schema/tree/main/data/evaluation/subcell_split_history/2026-09-28
 
     The pinned model repository distributes adapter_model.bin (55,417,357 bytes), a
     PyTorch/PEFT .bin weight checkpoint, together with adapter_config.json. The upstream
@@ -73,6 +81,9 @@ model_details:
     - reference: "https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/adapter_model.bin"
     - reference: "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/blob/78096a0eff765cf8988323ca3c21c0f19ca1ae79/README.md"
     - reference: "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/78096a0eff765cf8988323ca3c21c0f19ca1ae79/dataset.csv"
+    - reference: "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/tree/f1f914e9ce4bf5ceefa33823f1a09562aac872b4"
+    - reference: "https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/tree/c7af324a2eb84f834895e4febe34cf55cae6da00"
+    - reference: "https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/9c36e2a1cab36ed9d119412b8806f4c3232cb33e/README.md"
     - reference: "https://huggingface.co/westlake-repl/SaProt_650M_AF2"
     - reference: "https://github.com/westlake-repl/SaProt/blob/e91e4858b55944523f1f8d385f7b96a0d3d34c1d/README.md"
     - reference: "https://github.com/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/colab/SaprotHub_v2.ipynb"
@@ -121,10 +132,13 @@ model_parameters:
         directly on the published CSV. The stage column defines subsets within one file;
         the Hugging Face dataset config is named dataset.
 
-        The model's reported score is not explicitly bound to this CSV revision. An exact
-        string audit finds 232 unique SA sequences shared by valid and test, and one
-        AA-only sequence shared by train and test. This needs investigation against the
-        original scored split manifest before asserting evaluation independence.
+        The model's reported score is not explicitly bound to this CSV revision. Audits
+        of five public snapshots from May 3 through October 30, 2024 find the same
+        cross-split counts: 232 unique SA strings shared by valid and test, 233 AA-only
+        strings shared by valid and test, and one AA-only string shared by train and
+        test. The historical May LMDBs and July CSVs retain record identifiers: 232
+        identifiers occur in both valid and test. Later combined CSVs omit these IDs.
+        A scored-run split manifest is still required to establish evaluation independence.
       unit: "protein sequence record"
       sensitive:
         sensitive_data:
@@ -132,9 +146,10 @@ model_parameters:
       bias_input: |
         The publisher's AF2-availability filter limits coverage to proteins with available
         structures. Observed training class counts in label order 0-9 are
-        [2641, 1913, 1498, 1323, 979, 745, 633, 282, 268, 132]. Species and protein-family
-        identifiers are not present in the inspected CSV, so their distributions cannot
-        be established from this artifact alone.
+        [2641, 1913, 1498, 1323, 979, 745, 633, 282, 268, 132]. The current CSV omits
+        protein record identifiers. Historical artifacts retain a name field, which
+        enables record-level overlap checks; species and family annotations have not
+        been joined to these records, so their distributions remain unestablished.
   input_format: "Structure-aware (SA) sequence: each amino-acid letter is paired with a Foldseek 3Di structural token; # denotes a masked structural token."
   input_format_map:
     - key: "type"
@@ -194,13 +209,23 @@ quantitative_analysis:
       and cross-entropy; predictions and a run-level evaluation report were not supplied
       with the model repository, so this result has not been reproduced here.
 
-      The inspected dataset revision has 1,368 rows marked test. Its valid and test
-      subsets share 232 distinct, identical SA strings. Comparing only their amino-acid
-      components gives 233 valid/test overlaps and one train/test overlap; train/test
-      SA-string overlap is zero. Counts are intersections of unique strings, not row
-      counts. This audit concerns the pinned mirror and does not prove that the original
-      scored run used these exact splits. Original split IDs, run/checkpoint provenance
-      and per-example predictions are required to assess possible contamination.
+      Each of five audited public snapshots has 10,414 train, 1,368 valid and 1,368 test
+      rows. All five have 232 distinct SA strings shared by valid and test. Comparing
+      amino-acid components gives 233 valid/test overlaps and one train/test overlap;
+      train/test SA overlap and train/valid SA and AA overlap are zero. These counts
+      are intersections of unique strings. The May 3 and May 6 LMDBs and July 10 CSVs
+      also share 232 validation/test record identifiers, with matching labels and SA
+      strings in each snapshot. Later combined CSVs omit identifiers.
+
+      All May 6 SA sequences are exactly reconstructed from the May 3 records by
+      masking structural tokens where the recorded pLDDT is below 70. Row order,
+      identifiers, amino-acid sequences and labels are preserved. The July, August
+      and October exports preserve the May 6 labelled sequences and split membership.
+      Thus overlap predates CSV conversion. This is evidence about public artifacts;
+      it does not prove that the 85.75% scored run used them. The first README reporting
+      that score links an unpinned dataset, without a run or split manifest. Obtain
+      that binding, checkpoint-selection provenance and per-example predictions before
+      assessing the score's independence or changing the reported result.
     benchmarks:
       - "Ten-class single-label subcellular localization on SaProtHub/Dataset-Subcellular_Localization-DeepLoc; the publisher cites the original 2017 DeepLoc dataset."
 
@@ -295,8 +320,9 @@ considerations:
         defaults should not be presented as the historical run's settings.
     - description: |
         The score lacks a bound evaluation manifest, per-class metrics, calibration,
-        confidence intervals and repeated-seed results. The observed current-mirror split
-        overlap must be resolved before treating validation and test data as independent.
+        confidence intervals and repeated-seed results. Split overlap in the earliest
+        public dataset and subsequent exports must be reconciled with the scored run
+        before treating its validation and test data as independent.
     - description: |
         Validation on CM4AI data, species-specific generalization and performance on
         underrepresented compartments remain unestablished by the inspected artifacts.
