@@ -12,17 +12,15 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
-os.environ.setdefault("MPLCONFIGDIR", "/private/tmp/model-card-heatmap-matplotlib")
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.colors import LinearSegmentedColormap, to_rgb
+from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
 # BACKGROUND is the Model Cards panel of the Bridge2AI Standards Portfolio poster
@@ -32,10 +30,10 @@ BACKGROUND = "#2f719a"
 ON_BACKGROUND = "#eef7fd"
 INK = "#10263d"
 MUTED = "#506174"
-BLUE = "#2a78d6"
 NAVY = "#184f95"
-PALE = "#f0efec"
 GRID = "#e0e6ed"
+# Shared with build_model_card_heatmaps.py: section fractions get the same fill in both figures.
+RAMP_STOPS = ["#f0efec", "#9ec5f4", "#2874d0", "#104281"]
 W, H = 1600, 1080
 # The poster's srcRect crops 13.465% off the top and 13.829% off the bottom; the white
 # box is centered in what remains.
@@ -59,15 +57,10 @@ SHORT_LABELS = {
 
 
 def contrast_color(rgb):
-    """Choose dark ink or white by actual relative-luminance contrast."""
-    def luminance(color):
-        linear = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in color[:3]]
-        return sum(weight * value for weight, value in zip((0.2126, 0.7152, 0.0722), linear))
-
-    background = luminance(rgb)
-    foreground = luminance(to_rgb(INK))
-    dark_contrast = (max(background, foreground) + 0.05) / (min(background, foreground) + 0.05)
-    return "white" if (1.05 / (background + 0.05)) > dark_contrast else INK
+    """White or black text, whichever contrasts more with the fill; one always reaches 4.58:1."""
+    linear = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in rgb[:3]]
+    luminance = sum(weight * value for weight, value in zip((0.2126, 0.7152, 0.0722), linear))
+    return "white" if 1.05 / (luminance + 0.05) > (luminance + 0.05) / 0.05 else "black"
 
 
 def render(input_path, output_dir):
@@ -91,6 +84,7 @@ def render(input_path, output_dir):
 
     # Matplotlib reads only the regular face of macOS's Helvetica Neue .ttc, which silently
     # rendered every bold label as regular, so it is not a fallback here.
+    matplotlib.rcdefaults()  # a personal matplotlibrc (e.g. savefig.bbox: tight) must not change the output
     plt.rcParams.update({
         "font.family": "sans-serif", "font.sans-serif": METRIC_FONTS,
         "svg.fonttype": "none", "svg.hashsalt": "model-card-poster", "pdf.fonttype": 42, "axes.unicode_minus": False,
@@ -104,7 +98,8 @@ def render(input_path, output_dir):
         font = font_manager.get_font(path)
         if font.family_name not in METRIC_FONTS or (weight == "bold") != ("Bold" in font.style_name):
             raise ValueError(f"Poster layout needs {' or '.join(METRIC_FONTS)} in regular and bold; "
-                             f"found {font.family_name} {font.style_name}")
+                             f"found {font.family_name} {font.style_name}. If you just installed one, delete "
+                             f"Matplotlib's font cache ({matplotlib.get_cachedir()}/fontlist-*.json) and rerun.")
         fonts[weight] = {"file": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     model_labels = [model["label"] for model in models]
     fig = plt.figure(figsize=(16, 10.8), facecolor=BACKGROUND)
@@ -112,7 +107,7 @@ def render(input_path, output_dir):
     ax.set(xlim=(0, W), ylim=(H, 0))
     ax.axis("off")
     texts, tips = [], {}
-    cmap = LinearSegmentedColormap.from_list("documentation_blue", [PALE, "#9ec5f4", BLUE, "#104281"])
+    cmap = LinearSegmentedColormap.from_list("documentation_blue", RAMP_STOPS)
 
     def label(x, y, text, size=19, color=INK, weight="normal", ha="left", va="center"):
         item = ax.text(x, y, text, fontsize=size, color=color, fontweight=weight, ha=ha, va=va, linespacing=1.25)
@@ -168,6 +163,9 @@ def render(input_path, output_dir):
                          f"{model_labels[col]} — {name}, deterministic hybrid: {metric['score']}/{metric['max_score']}")
             label(x + 110, y + 71, f"{fraction:.0%}", 36, color, "bold", ha="center")
             label(x + 110, y + 126, f"{metric['score']}/{metric['max_score']}", 21, color, ha="center")
+    # The poster crops the footer caveats, so the scores carry their own.
+    label(1233, 796, "Scores rate the documentation,", 20, ha="center")
+    label(1233, 827, "not model performance.", 20, ha="center")
 
     ax.plot([872, 872], [200, 848], color=GRID, linewidth=1)
 
@@ -237,7 +235,8 @@ def render(input_path, output_dir):
     tree.write(svg_path, encoding="utf-8", xml_declaration=True)
     metadata = {
         "input": input_path.name, "input_sha256": hashlib.sha256(data_bytes).hexdigest(),
-        "renderer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "fonts": fonts,
+        "renderer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "matplotlib_version": matplotlib.__version__, "fonts": fonts,
         "method": "Same counts and hybrid totals as detailed figure; section-level aggregation only",
         "percentage_display": "Rounded to whole percentages; exact fractions retained in every cell",
         "files": {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
