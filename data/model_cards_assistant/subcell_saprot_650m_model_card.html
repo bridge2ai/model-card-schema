@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><title>SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt) — Model Card</title><style>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt) — Model Card</title><style>
 :root {
   --bg: #fafafa; --card: #fff; --border: #e5e5e5;
   --text: #111; --muted: #6b7280; --accent: #2563eb;
@@ -8,7 +8,7 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--bg); color: var(--text);
-  margin: 0; padding: 2rem 1.5rem; line-height: 1.5;
+  margin: 0; padding: 2rem 1.5rem; line-height: 1.5; overflow-wrap: anywhere;
 }
 header, main, footer { max-width: 980px; margin: 0 auto; }
 header { padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
@@ -34,7 +34,7 @@ dl.kv { margin: 0; }
 dl.kv > div { display: grid; grid-template-columns: 200px 1fr; gap: .5rem 1rem; padding: .35rem 0; border-top: 1px solid var(--border); }
 dl.kv > div:first-child { border-top: 0; }
 dl.kv dt { color: var(--muted); font-weight: 500; font-size: .9rem; }
-dl.kv dd { margin: 0; word-break: break-word; }
+dl.kv dd { margin: 0; min-width: 0; word-break: break-word; }
 dl.kv code { background: #f3f4f6; padding: .05rem .3rem; border-radius: 3px; font-size: .85rem; }
 
 .chip-row { display: flex; flex-wrap: wrap; gap: .35rem; }
@@ -66,56 +66,140 @@ pre code { background: transparent; padding: 0; }
 footer { color: var(--muted); font-size: .8rem; text-align: center; margin: 2rem 0 0; }
 .tag-license { background: #d1fae5; color: #065f46; padding: .1rem .45rem; border-radius: 4px; font-size: .8rem; }
 .bias-block { background: #fff7ed; border-left: 3px solid #f97316; padding: .5rem .75rem; margin: .35rem 0; border-radius: 0 4px 4px 0; font-size: .9rem; }
-</style></head><body><header><h1>SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)</h1><p class=short>Protein-level classifier predicting subcellular localization across ten cellular compartments using a LoRA-fine-tuned 650M-parameter structure-aware protein language model.</p><div class="meta-row"><span><code>text-classification</code></span><span>PyTorch torch&gt;=2.0</span><span>library: <code>transformers</code></span><span>base: <code>westlake-repl/SaProt_650M_AF2</code></span></div><div class="chip-row" style="margin-top:.4rem;"><span class="chip">protein-language-model</span> <span class="chip">subcellular-localization</span> <span class="chip">bioinformatics</span> <span class="chip">protein-classification</span> <span class="chip">saprot</span> <span class="chip">lora</span> <span class="chip">deeploc</span> <span class="chip">structure-aware</span></div><div class="badge-row"><img src="../evaluation/badges/subcell_saprot_650m_model_card_rubric10_hybrid.svg" alt="subcell_saprot_650m_model_card_rubric10_hybrid"> <img src="../evaluation/badges/subcell_saprot_650m_model_card_rubric10_llm.svg" alt="subcell_saprot_650m_model_card_rubric10_llm"> <img src="../evaluation/badges/subcell_saprot_650m_model_card_rubric10_semantic_llm.svg" alt="subcell_saprot_650m_model_card_rubric10_semantic_llm"> <img src="../evaluation/badges/subcell_saprot_650m_model_card_rubric20_hybrid.svg" alt="subcell_saprot_650m_model_card_rubric20_hybrid"> <img src="../evaluation/badges/subcell_saprot_650m_model_card_rubric20_llm.svg" alt="subcell_saprot_650m_model_card_rubric20_llm"> <img src="../evaluation/badges/subcell_saprot_650m_model_card_rubric20_semantic_llm.svg" alt="subcell_saprot_650m_model_card_rubric20_semantic_llm"></div><div class="meta-row" style="margin-top:.5rem;">Source YAML: <code>data/model_cards_assistant/subcell_saprot_650m_model_card.yaml</code></div></header><main><section class="card"><h2>Model Details</h2><p><strong>1.0</strong> <span class="meta-row">2024-08-01</span></p><h3>Change description</h3><div class="markdown"><p>Initial release of the LoRA fine-tune on the DeepLoc subcellular-localization
-training split using AdamW for 100 epochs.
-</p></div><h3>Overview</h3><div class="markdown"><p>This model classifies protein sequences into one of ten subcellular localization classes:<br>nucleus, cytoplasm, extracellular space, mitochondrion, cell membrane, endoplasmic reticulum,<br>plastid, Golgi apparatus, lysosome/vacuole, and peroxisome.<br><br>It is a LoRA (Low-Rank Adaptation) fine-tune of westlake-repl/SaProt_650M_AF2 — a 650M-parameter<br>structure-aware protein language model that incorporates AlphaFold2 structural tokens alongside<br>the amino-acid sequence. LoRA is applied to the query/key/value attention projections and the<br>feedforward dense layers, with a small classifier head added on top.<br><br>The model achieves 85.75% test-set accuracy on the DeepLoc subcellular localization benchmark.<br></p></div><h3>Documentation</h3><pre>## Architecture
-- Base model: westlake-repl/SaProt_650M_AF2 (650M parameters)
-- Adaptation: LoRA on attention projections (Q/K/V) + FFN dense layers
-- LoRA rank: 16, alpha: 32, dropout: 0
-- Classifier head: 10-way over subcellular localization classes
-- Inherited input: structure-aware (SA) sequence — amino-acid sequence + AlphaFold2 structure tokens
+@media (max-width: 700px) {
+  body { padding: 1rem .75rem; }
+  dl.kv > div, .contrib-row { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+  table.metrics { display: block; overflow-x: auto; }
+}
+</style></head><body><header><h1>SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)</h1><p class=short>Protein-level classifier predicting one of ten subcellular localization labels from structure-aware protein sequences using a LoRA-adapted SaProt 650M model.</p><div class="meta-row"><span><code>text-classification</code></span><span>PyTorch</span><span>library: <code>transformers</code></span><span>base: <code>westlake-repl/SaProt_650M_AF2</code></span></div><div class="chip-row" style="margin-top:.4rem;"><span class="chip">protein-language-model</span> <span class="chip">subcellular-localization</span> <span class="chip">bioinformatics</span> <span class="chip">protein-classification</span> <span class="chip">saprot</span> <span class="chip">lora</span> <span class="chip">deeploc</span> <span class="chip">structure-aware</span></div><div class="badge-row"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTEiIGhlaWdodD0iMjAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0ibWMtcnVicmljMTAgKGh5YnJpZCk6IDkwLjAlICg0NS81MCkiIGRhdGEtbW9kZWwtY2FyZC1zaGEyNTY9IjlhMTlhNWViZTQ2ODY3ODBkZGJjNzMzYzI0NjhiYzJhOTgwMWEwZDlkYzc5MGJhOTNhODMyMDBjZWMyMTU3OTAiPjx0aXRsZT5tYy1ydWJyaWMxMCAoaHlicmlkKTogOTAuMCUgKDQ1LzUwKTwvdGl0bGU+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJyIj48cmVjdCB3aWR0aD0iMjUxIiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI3IpIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iMTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNGMxIi8+PHJlY3Qgd2lkdGg9IjI1MSIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+PHRleHQgeD0iNzUuMCIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPm1jLXJ1YnJpYzEwIChoeWJyaWQpPC90ZXh0Pjx0ZXh0IHg9Ijc1LjAiIHk9IjE0Ij5tYy1ydWJyaWMxMCAoaHlicmlkKTwvdGV4dD48dGV4dCB4PSIyMDAuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjkwLjAlICg0NS81MCk8L3RleHQ+PHRleHQgeD0iMjAwLjUiIHk9IjE0Ij45MC4wJSAoNDUvNTApPC90ZXh0PjwvZz48L3N2Zz4=" alt="subcell_saprot_650m_model_card_rubric10_hybrid"> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTEiIGhlaWdodD0iMjAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0ibWMtcnVicmljMjAgKGh5YnJpZCk6IDczLjglICg2Mi84NCkiIGRhdGEtbW9kZWwtY2FyZC1zaGEyNTY9IjlhMTlhNWViZTQ2ODY3ODBkZGJjNzMzYzI0NjhiYzJhOTgwMWEwZDlkYzc5MGJhOTNhODMyMDBjZWMyMTU3OTAiPjx0aXRsZT5tYy1ydWJyaWMyMCAoaHlicmlkKTogNzMuOCUgKDYyLzg0KTwvdGl0bGU+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJyIj48cmVjdCB3aWR0aD0iMjUxIiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI3IpIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iMTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZGZiMzE3Ii8+PHJlY3Qgd2lkdGg9IjI1MSIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+PHRleHQgeD0iNzUuMCIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPm1jLXJ1YnJpYzIwIChoeWJyaWQpPC90ZXh0Pjx0ZXh0IHg9Ijc1LjAiIHk9IjE0Ij5tYy1ydWJyaWMyMCAoaHlicmlkKTwvdGV4dD48dGV4dCB4PSIyMDAuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjczLjglICg2Mi84NCk8L3RleHQ+PHRleHQgeD0iMjAwLjUiIHk9IjE0Ij43My44JSAoNjIvODQpPC90ZXh0PjwvZz48L3N2Zz4=" alt="subcell_saprot_650m_model_card_rubric20_hybrid"></div><p class="meta-row">Archived or unverified evaluation badges are omitted for this card version.</p><div class="meta-row" style="margin-top:.5rem;">Source YAML: <code>data/model_cards_assistant/subcell_saprot_650m_model_card.yaml</code></div></header><main><section class="card"><h2>Model Details</h2><p><strong>ffc656cde0bbfaf4933b364036753674520663b6</strong></p><dl class="kv"><div><dt>last_updated</dt><dd>2024-10-16T11:57:20Z</dd></div></dl><h3>Overview</h3><div class="markdown"><p>This card describes the public SaProtHub/Model-Subcellular_Localization-650M adapter,<br>with base model westlake-repl/SaProt_650M_AF2. It does not establish that this checkpoint<br>is a CM4AI-trained model or that it has been validated on CM4AI data.<br><br>The upstream model README reports 85.75% test accuracy on the linked SaProtHub DeepLoc<br>dataset. This is an author-reported result, not an independently reproduced measurement.<br>The dataset describes a ten-class, single-label task derived from the original 2017<br>DeepLoc dataset, using AlphaFold2 structure-aware sequences. It is not identified as<br>DeepLoc 2.0. The audited dataset snapshot contains validation/test sequence overlap;<br>see the evaluation procedure for the finding and its provenance limits.<br></p></div><h3>Documentation</h3><pre>Evidence reviewed on 2026-09-28: model repository revision
+ffc656cde0bbfaf4933b364036753674520663b6 and dataset revision
+78096a0eff765cf8988323ca3c21c0f19ca1ae79. These identify the inspected artifacts;
+the model README does not bind its score to that dataset revision or a training run.
 
-## Usage
-```python
-from saprot_hub import load_model
-model = load_model(&quot;SaProtHub/Model-Subcellular_Localization-650M&quot;)
-# Input: SA-sequence (protein sequence with structure annotations)
-pred = model.predict(sa_sequence)  # 0-9 class label
-```
+The pinned model repository distributes adapter_model.bin (55,417,357 bytes), a
+PyTorch/PEFT .bin weight checkpoint, together with adapter_config.json. The upstream
+loader reads this format with torch.load. It contains the LoRA adapter and saved
+classifier as specified by the adapter configuration; inference also requires
+westlake-repl/SaProt_650M_AF2 base weights. The file listing and loader were inspected,
+but the weight file was not downloaded. adapter_config.json specifies SEQ_CLS,
+rank 16, alpha 32, dropout 0,
+attention query/key/value and feedforward intermediate.dense/output.dense targets,
+and modules_to_save=[classifier]. Its base-model revision is null, so the exact base
+checkpoint used for training remains unresolved.
 
-## Training Configuration
-- Optimizer: AdamW (β1=0.9, β2=0.98, weight_decay=0.01)
-- Learning rate: 5e-4
-- Epochs: 100
-- Batch size: 64
-- Precision: 16-bit mixed
-</pre><h3>Owners / Contributors</h3><div class="contrib-row"><span><strong>SaProtHub maintainers</strong> <span class="contrib-role">developed_by</span></span><span>Westlake Representation Learning Lab</span></div><div class="contrib-row"><span><strong>Westlake-repl team (base SaProt)</strong> <span class="contrib-role">contributed_by</span></span><span>Westlake University</span></div><h3>Licenses</h3><div class="chip-row"><span class="tag-license"><a href="https://opensource.org/licenses/MIT">MIT</a></span></div><h3>Citations</h3><p><span class="chip">IEEE</span> <span class="markdown">SaProtHub, &quot;SubCellular Localization 650M (LoRA fine-tune of SaProt_650M_AF2),&quot; HuggingFace Hub, 2024.
-[Online]. Available: https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M
-</span></p><p><span class="chip">IEEE</span> <span class="markdown">J. Su et al., &quot;SaProt: Protein Language Modeling with Structure-aware Vocabulary,&quot; in ICLR, 2024.
-</span></p><h3>References</h3><ul class="bullet"><li><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M</a></li><li><a href="https://huggingface.co/westlake-repl/SaProt_650M_AF2">https://huggingface.co/westlake-repl/SaProt_650M_AF2</a></li><li><a href="https://github.com/westlake-repl/SaProt">https://github.com/westlake-repl/SaProt</a></li><li><a href="https://www.uniprot.org/help/subcellular_location">https://www.uniprot.org/help/subcellular_location</a></li><li><a href="https://services.healthtech.dtu.dk/services/DeepLoc-2.0/">https://services.healthtech.dtu.dk/services/DeepLoc-2.0/</a></li></ul><h3>Path</h3><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M</a></section><section class="card"><h2>Model Parameters</h2><h3>Architecture</h3><div class="markdown"><p>Transformer-based protein language model: 650M-parameter SaProt_650M_AF2 base (ESM-style encoder<br>augmented with structure-aware vocabulary from AlphaFold2 Foldseek tokens). Fine-tuning uses<br>LoRA (rank 16, alpha 32, dropout 0) targeting attention query/key/value projections and the<br>feedforward dense layers (intermediate.dense and output.dense). A linear classifier head<br>projects pooled representations to 10 subcellular-localization classes.<br></p></div><h3>Input format</h3><p>Structure-aware (SA) protein sequence — amino-acid sequence interleaved with AlphaFold2 Foldseek structural tokens</p><dl class="kv"><div><dt><code>type</code></dt><dd>string</dd></div><div><dt><code>encoding</code></dt><dd>SA-vocabulary (amino acids + structural tokens)</dd></div><div><dt><code>max_length</code></dt><dd>model-dependent (typically 1024 SA-tokens)</dd></div></dl><h3>Output format</h3><p>Classification label (integer 0-9) corresponding to one of ten subcellular localization classes</p><dl class="kv"><div><dt><code>shape</code></dt><dd>[B, 10]</dd></div><div><dt><code>interpretation</code></dt><dd>raw logits over {nucleus, cytoplasm, extracellular, mitochondrion, cell_membrane, endoplasmic_reticulum, plastid, golgi, lysosome_vacuole, peroxisome}</dd></div></dl><h3>Datasets</h3><div style="margin-bottom: .5rem;"><strong><a href="https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc">DeepLoc subcellular localization dataset (SaProtHub mirror)</a></strong><p>DeepLoc 2.0 benchmark: SwissProt proteins with experimentally-annotated subcellular
-localizations spanning 10 classes. Train/validation/test splits provided by the SaProtHub
-mirror; structure-aware (SA) sequences are pre-computed from AlphaFold2 predictions.
-</p><div class="meta-row"><strong>Sensitive data:</strong> No human PII; SwissProt protein sequences only</div></div><h3>Training procedure</h3><p>LoRA fine-tuning of SaProt_650M_AF2 on the DeepLoc subcellular-localization train split,
-with the classifier head trained from scratch. Mixed precision (FP16) on a single GPU.
-</p><dl class="kv"><div><dt><code>optimizer</code></dt><dd>AdamW</dd></div><div><dt><code>learning_rate</code></dt><dd><code>0.0005</code></dd></div><div><dt><code>batch_size</code></dt><dd><code>64</code></dd></div><div><dt><code>training_epochs</code></dt><dd><code>100</code></dd></div><div><dt><code>loss_function</code></dt><dd>Cross-entropy over 10 classes</dd></div><div><dt><code>optimization_techniques</code></dt><dd><div class="chip-row"><span class="chip">LoRA rank=16</span> <span class="chip">LoRA alpha=32</span> <span class="chip">LoRA dropout=0</span> <span class="chip">Mixed precision FP16</span> <span class="chip">AdamW betas=(0.9, 0.98)</span> <span class="chip">weight_decay=0.01</span></div></dd></div></dl></section><section class="card"><h2>Quantitative Analysis</h2><table class="metrics"><thead><tr><th>Metric</th><th>Slice</th><th class="num">Value</th><th class="num">Unit</th><th class="num">CI</th></tr></thead><tbody><tr><td>test accuracy</td><td>DeepLoc subcellular localization test set (10-way)</td><td class="num">85.75</td><td class="num">%</td><td class="num"></td></tr></tbody></table></section><section class="card"><h2>Considerations</h2><h3>Intended users</h3><ul class="bullet"><li><strong>Structural biologists and bioinformaticians who want quick subcellular localization
-predictions for protein sequences with known or predicted structure; researchers
-building protein-annotation pipelines.
-</strong></li></ul><h3>Use cases</h3><ul class="bullet"><li><strong>Predicting subcellular localization for protein-annotation pipelines</strong></li><li><strong>Filtering proteomics candidates by compartment of interest</strong></li><li><strong>Benchmarking against DeepLoc 2.0 on the same 10-class taxonomy</strong></li><li><strong>Educational reference for LoRA fine-tuning of protein language models</strong></li></ul><h3>Limitations</h3><ul class="bullet"><li><strong>Trained on SwissProt-curated proteins with experimentally-validated subcellular labels;
-coverage of organism diversity is uneven (heavily human / E. coli / yeast biased).
-</strong></li><li><strong>Requires structure-aware input — sequences without AlphaFold2 structural tokens cannot
-be scored directly. Predictions for novel proteins without structural neighbors may be
-unreliable.
-</strong></li><li><strong>10-way classification only; many proteins localize to multiple compartments. The model
-cannot express multi-label outputs without retraining with a multi-label objective.
-</strong></li></ul><h3>Tradeoffs</h3><ul class="bullet"><li><strong>650M-parameter base provides higher accuracy than the 35M variant (85.75% vs ~80%) at
-higher inference cost. LoRA keeps trainable parameter count small (~few M) but base
-weights still need to be loaded.
-</strong></li></ul><h3>Ethical considerations</h3><ul class="bullet"><li><strong>Mis-localization in drug discovery pipelines</strong><br><em>Mitigation:</em> Treat predictions as a screening hypothesis, not ground truth. Confirm with experimental
-localization (immunofluorescence, fractionation, etc.) before acting on a prediction in
-downstream pharmacology or therapeutic targeting.
-</li></ul><h3>Out-of-scope uses</h3><ul class="bullet"><li><strong>Diagnosing localization-related diseases without experimental confirmation</strong></li><li><strong>Predicting localization in species or kingdoms underrepresented in DeepLoc</strong></li><li><strong>Multi-label localization prediction (model is single-label)</strong></li></ul></section><section class="card"><h2>Bias Disclosure</h2><div class="bias-block"><strong>bias_model:</strong> Predictions reflect the species and protein-family distribution of the DeepLoc training set
-(SwissProt-biased toward extensively-studied model organisms). Performance on understudied
-proteomes and disordered / signal-peptide-containing proteins is not characterized.
-</div><div class="bias-block"><strong>bias_output:</strong> Class prior matches the DeepLoc training distribution — rare compartments (peroxisome,
-plastid) are likely under-predicted relative to their true biological frequency.
-</div></section></main><footer>Rendered 2026-06-24T19:47:30.405623+00:00 from <code>data/model_cards_assistant/subcell_saprot_650m_model_card.yaml</code></footer></body></html>
+Use the official ColabSaprot workflow described in usage_documentation. The previous
+saprot_hub.load_model(...).predict(...) example was not grounded in the inspected
+upstream API and has been removed. Current upstream software documentation is usage
+guidance; it is not evidence of the historical environment of this adapter&#x27;s run.
+</pre><h3>Owners / Contributors</h3><div class="contrib-row"><span><strong>SaProtHub (Hugging Face repository publisher)</strong><span class=contrib-role>owner</span></span><span>https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M </span></div><div class="contrib-row"><span><strong>westlake-repl (base SaProt implementation)</strong> <span class="contrib-role">contributed_by</span></span><span></span></div><h3>Licenses</h3><div class="chip-row"><span class="tag-license"><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/README.md">MIT</a></span></div><h3>Citations</h3><p><span class="chip">IEEE</span> <span class="markdown">SaProtHub, &quot;Model-Subcellular_Localization-650M,&quot; Hugging Face model repository,
+revision ffc656cde0bbfaf4933b364036753674520663b6, accessed Sep. 28, 2026.
+https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/tree/ffc656cde0bbfaf4933b364036753674520663b6
+</span></p><p><span class="chip">IEEE</span> <span class="markdown">J. Su et al., &quot;SaProt: Protein Language Modeling with Structure-aware Vocabulary,&quot;
+ICLR, 2024. https://openreview.net/forum?id=6MRm3G4NiU
+</span></p><h3>References</h3><ul class="bullet"><li><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/README.md">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/README.md</a></li><li><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/adapter_config.json">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/adapter_config.json</a></li><li><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/adapter_model.bin">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/adapter_model.bin</a></li><li><a href="https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/blob/78096a0eff765cf8988323ca3c21c0f19ca1ae79/README.md">https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/blob/78096a0eff765cf8988323ca3c21c0f19ca1ae79/README.md</a></li><li><a href="https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/78096a0eff765cf8988323ca3c21c0f19ca1ae79/dataset.csv">https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/resolve/78096a0eff765cf8988323ca3c21c0f19ca1ae79/dataset.csv</a></li><li><a href="https://huggingface.co/westlake-repl/SaProt_650M_AF2">https://huggingface.co/westlake-repl/SaProt_650M_AF2</a></li><li><a href="https://github.com/westlake-repl/SaProt/blob/e91e4858b55944523f1f8d385f7b96a0d3d34c1d/README.md">https://github.com/westlake-repl/SaProt/blob/e91e4858b55944523f1f8d385f7b96a0d3d34c1d/README.md</a></li><li><a href="https://github.com/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/colab/SaprotHub_v2.ipynb">https://github.com/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/colab/SaprotHub_v2.ipynb</a></li><li><a href="https://github.com/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/saprot/model/saprot/saprot_classification_model.py">https://github.com/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/saprot/model/saprot/saprot_classification_model.py</a></li><li><a href="https://academic.oup.com/bioinformatics/article/33/21/3387/3931857">https://academic.oup.com/bioinformatics/article/33/21/3387/3931857</a></li></ul><h3>Path</h3><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/tree/ffc656cde0bbfaf4933b364036753674520663b6">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/tree/ffc656cde0bbfaf4933b364036753674520663b6</a></section><section class="card"><h2>Model Parameters</h2><h3>Architecture</h3><div class="markdown"><p>SaProt_650M_AF2 is the approximately 650M-parameter, ESM-style transformer base<br>using a structure-aware amino-acid/3Di vocabulary. The adapter config names that<br>base and LoRA SEQ_CLS adaptation, with rank 16, alpha 32 and dropout 0, targeting<br>query, key, value, intermediate.dense and output.dense. The classifier is saved<br>with the adapter. The upstream classification implementation uses an ESM sequence<br>classification model producing ten logits; the adapter weights were not loaded<br>or independently inspected during this documentation revision.<br></p></div><h3>Input format</h3><p>Structure-aware (SA) sequence: each amino-acid letter is paired with a Foldseek 3Di structural token; # denotes a masked structural token.</p><dl class="kv"><div><dt><code>type</code></dt><dd>string</dd></div><div><dt><code>encoding</code></dt><dd>One uppercase amino-acid letter followed by one lowercase structural letter or # per residue; for example M#Ev.</dd></div><div><dt><code>length_handling</code></dt><dd>The current upstream classification dataset implementation defaults to 1024 residue/SA tokens and truncates longer inputs. The trained adapter&#x27;s exact preprocessing limit is not recorded in its README.</dd></div></dl><h3>Output format</h3><p>Ten class logits per protein; argmax produces a single integer label 0-9. ColabSaprot exports predicted_label and softmax predicted_probabilities.</p><dl class="kv"><div><dt><code>logits_shape</code></dt><dd>[batch_size, 10]</dd></div><div><dt><code>label_mapping</code></dt><dd>0=Nucleus; 1=Cytoplasm; 2=Extracellular; 3=Mitochondrion; 4=Cell.membrane; 5=Endoplasmic.reticulum; 6=Plastid; 7=Golgi.apparatus; 8=Lysosome/Vacuole; 9=Peroxisome</dd></div><div><dt><code>interpretation</code></dt><dd>A single-label prediction; softmax values are not documented as calibrated probabilities.</dd></div></dl><h3>Datasets</h3><div style="margin-bottom: .5rem;"><strong><a href="https://huggingface.co/datasets/SaProtHub/Dataset-Subcellular_Localization-DeepLoc/tree/78096a0eff765cf8988323ca3c21c0f19ca1ae79">SaProtHub DeepLoc subcellular localization dataset</a></strong><p>The publisher links the original 2017 DeepLoc publication. Its README says proteins
+lacking AlphaFold2 structures were excluded and describes a split based on 70%
+structure similarity using ProteinShake. CSV revision
+78096a0eff765cf8988323ca3c21c0f19ca1ae79 contains 13,150 rows with columns protein,
+label and stage: 10,414 train, 1,368 valid and 1,368 test. These counts were checked
+directly on the published CSV. The stage column defines subsets within one file;
+the Hugging Face dataset config is named dataset.
+
+The model&#x27;s reported score is not explicitly bound to this CSV revision. An exact
+string audit finds 232 unique SA sequences shared by valid and test, and one
+AA-only sequence shared by train and test. This needs investigation against the
+original scored split manifest before asserting evaluation independence.
+</p><div class="meta-row"><strong>Sensitive data:</strong> The inspected CSV has protein, label and stage columns; it has no individual-level demographic or clinical metadata columns.</div><div class="bias-block"><strong>bias_input:</strong> The publisher&#x27;s AF2-availability filter limits coverage to proteins with available
+structures. Observed training class counts in label order 0-9 are
+[2641, 1913, 1498, 1323, 979, 745, 633, 282, 268, 132]. Species and protein-family
+identifiers are not present in the inspected CSV, so their distributions cannot
+be established from this artifact alone.
+</div><dl class="kv"><div><dt>unit</dt><dd>protein sequence record</dd></div></dl></div><h3>Training procedure</h3><p>The model README reports LoRA fine-tuning of SaProt_650M_AF2 on the linked DeepLoc
+mirror with the classifier saved alongside the adapter. The reported configuration
+is transcribed below; a completed training log was not supplied by these artifacts.
+</p><dl class="kv"><div><dt><code>model_initialization</code></dt><dd>Pretrained westlake-repl/SaProt_650M_AF2; adapter_config.json leaves the base revision unspecified.</dd></div><div><dt><code>optimizer</code></dt><dd>AdamW; betas=(0.9, 0.98); weight_decay=0.01 (model README)</dd></div><div><dt><code>learning_rate</code></dt><dd><code>0.0005</code></dd></div><div><dt><code>batch_size</code></dt><dd><code>64</code></dd></div><div><dt><code>training_epochs</code></dt><dd><code>100</code></dd></div><div><dt><code>fine_tuning_method</code></dt><dd>LoRA (SEQ_CLS), with classifier in modules_to_save</dd></div><div><dt><code>optimization_techniques</code></dt><dd><div class="chip-row"><span class="chip">LoRA rank=16, alpha=32, dropout=0</span> <span class="chip">Targets: query, key, value, intermediate.dense, output.dense</span> <span class="chip">16-mixed precision (reported configuration)</span></div></dd></div></dl><dl class="kv"><div><dt>methodology</dt><dd><pre>LoRA adapts attention and feedforward projections while retaining the pretrained
+backbone; the classifier is included in modules_to_save. The linked upstream
+classification implementation uses cross-entropy and selects saved checkpoints
+using validation accuracy. That implementation was inspected at SaprotHub revision
+3661c549ec48efc5a480e5e941a204e807b2e68a; it does not identify the code revision,
+checkpoint-selection decision or number of completed epochs for the historical run.
+</pre></dd></div><div><dt>pre_training_info</dt><dd><pre>The official SaProt README describes the SaProt_650M_AF2 base as pretrained on
+40 million AlphaFold2 structures. This is base-model pretraining provenance, not
+the size of the localization fine-tuning dataset.
+</pre></dd></div></dl></section><section class="card"><h2>Quantitative Analysis</h2><table class="metrics"><thead><tr><th>Metric</th><th>Slice</th><th class="num">Value</th><th class="num">Unit</th><th class="num">CI</th></tr></thead><tbody><tr><td>test accuracy (author-reported)</td><td>SaProtHub DeepLoc test set; exact scored dataset revision and run are unspecified</td><td class="num">85.75</td><td class="num">%</td><td class="num"></td></tr></tbody></table><h3>Evaluation procedure</h3><dl class="kv"><div><dt>description</dt><dd><pre>The model README reports 85.75% accuracy on the linked dataset&#x27;s test set. For a
+single-label task, accuracy is the fraction of predictions whose highest-scoring
+class matches the reference label. The current upstream classifier uses accuracy
+and cross-entropy; predictions and a run-level evaluation report were not supplied
+with the model repository, so this result has not been reproduced here.
+
+The inspected dataset revision has 1,368 rows marked test. Its valid and test
+subsets share 232 distinct, identical SA strings. Comparing only their amino-acid
+components gives 233 valid/test overlaps and one train/test overlap; train/test
+SA-string overlap is zero. Counts are intersections of unique strings, not row
+counts. This audit concerns the pinned mirror and does not prove that the original
+scored run used these exact splits. Original split IDs, run/checkpoint provenance
+and per-example predictions are required to assess possible contamination.
+</pre></dd></div><div><dt>benchmarks</dt><dd><div class="chip-row"><span class="chip">Ten-class single-label subcellular localization on SaProtHub/Dataset-Subcellular_Localization-DeepLoc; the publisher cites the original 2017 DeepLoc dataset.</span></div></dd></div></dl></section><section class="card"><h2>Considerations</h2><h3>Intended users</h3><ul class="bullet"><li><strong>Researchers studying protein localization and evaluating structure-aware protein classifiers.</strong></li></ul><h3>Use cases</h3><ul class="bullet"><li><strong>Research screening of protein subcellular localization from structure-aware inputs, followed by independent validation.</strong></li><li><strong>Evaluation of this public adapter against a documented, independently checked split and its fixed ten-class label mapping.</strong></li></ul><h3>Limitations</h3><ul class="bullet"><li><strong>The checkpoint is single-label: it returns one of ten categories and cannot
+represent multiple simultaneous localizations through its documented label output.
+</strong></li><li><strong>The model is trained on SA inputs. Generic SaProt software supports amino-acid-only
+modes, but the reported score does not establish this adapter&#x27;s performance without
+structural information; the current ColabSaprot workflow enforces structure input
+for adapters marked SA.
+</strong></li><li><strong>Exact preprocessing, long-protein truncation settings and structural-confidence
+handling for the scored run are not bound to this artifact. Current upstream
+defaults should not be presented as the historical run&#x27;s settings.
+</strong></li><li><strong>The score lacks a bound evaluation manifest, per-class metrics, calibration,
+confidence intervals and repeated-seed results. The observed current-mirror split
+overlap must be resolved before treating validation and test data as independent.
+</strong></li><li><strong>Validation on CM4AI data, species-specific generalization and performance on
+underrepresented compartments remain unestablished by the inspected artifacts.
+</strong></li></ul><h3>Tradeoffs</h3><ul class="bullet"><li><strong>LoRA permits distribution of the adapter and classifier, but inference still requires the 650M base model and structure-aware preprocessing. No measured compute or latency comparison is supplied for this checkpoint.</strong></li><li><strong>Curator recommendation: when comparing or selecting localization models, assess per-compartment recall and macro-F1 alongside aggregate accuracy. The observed class imbalance means frequent compartments contribute more to overall accuracy; prioritizing rare-compartment recall may produce a different model choice. This is a metric-selection tradeoff, not evidence that this adapter under-predicts rare compartments.</strong></li></ul><h3>Ethical considerations</h3><ul class="bullet"><li><strong>Incorrect localization used as biological evidence</strong><br><em>Mitigation:</em> Curator recommendation: treat predictions as research hypotheses and validate with appropriate experimental localization evidence before downstream biological decisions.</li></ul><h3>Out-of-scope uses</h3><ul class="bullet"><li><strong>Curator-defined scope: standalone clinical diagnosis or therapeutic decisions without task-specific clinical validation.</strong></li><li><strong>Claims of CM4AI-specific performance, multi-label localization or calibrated confidence without corresponding validation data.</strong></li></ul></section><section class="card"><h2>Bias Disclosure</h2><div class="bias-block"><strong>bias_model:</strong> Observed documentation and dataset limitations: the AF2-availability filter and uneven
+training label counts can affect the populations and compartments represented. Species
+and family composition, and their effects on model performance, are not established
+by the inspected CSV and model README.
+</div><div class="bias-block"><strong>bias_output:</strong> Per-class output bias has not been measured in the supplied artifacts. The training
+label imbalance alone does not establish under-prediction of any compartment;
+per-example predictions and class-level precision/recall are needed to assess it.
+</div></section><section class="card"><h2>Usage Documentation</h2><dl class="kv"><div><dt>installation_instructions</dt><dd><pre>The supported entry point is the official ColabSaprot notebook:
+https://colab.research.google.com/github/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/colab/SaprotHub_v2.ipynb
+Follow its environment setup. For a local runtime, follow the upstream installation guide:
+https://github.com/westlake-repl/SaprotHub/blob/3661c549ec48efc5a480e5e941a204e807b2e68a/local_server/README.md
+This card does not assert that the current notebook&#x27;s dependencies reproduce the
+original adapter training environment. No model weights were downloaded or inference
+executed during this documentation review.
+</pre></dd></div><div><dt>training_configuration</dt><dd><pre>The checkpoint README reports AdamW with learning rate 0.0005, betas (0.9, 0.98),
+weight decay 0.01, batch size 64, 100 epochs and 16-mixed precision. Use rank 16,
+alpha 32 and dropout 0 for its documented LoRA configuration. This is a partial
+recipe: obtain the original random seed, base revision, training-code commit,
+environment lockfile, preprocessing settings, split manifest and checkpoint-selection
+log before claiming reproduction of the 85.75% result.
+</pre></dd></div><div><dt>inference_configuration</dt><dd><pre>In ColabSaprot v2 choose the existing-model prediction workflow, then Protein property
+prediction. Select Protein-level Classification, set Number of categories to 10,
+choose Shared by peers on SaprotHub, and enter
+SaProtHub/Model-Subcellular_Localization-650M. For this SA-trained adapter, select
+protein structure and supply a PDB/CIF file with the intended chain. The notebook
+converts structures to the SA representation and exports a prediction CSV.
+
+Decode predicted_label using the exact 0-9 mapping in output_format_map. The notebook&#x27;s
+predicted_probabilities column contains softmax scores; calibration and abstention
+thresholds are not established for this checkpoint. Its UI loads repository defaults;
+record the resolved model, base and software revisions for any new analysis. A pinned
+notebook alone does not pin its remote model downloads or installation dependencies.
+</pre></dd></div><div><dt>code_examples</dt><dd><ul class="bullet"><li><dl class="kv"><div><dt>description</dt><dd>Decode the notebook&#x27;s exported predicted_label column into compartment names; this postprocessing example does not perform inference.</dd></div><div><dt>code_language</dt><dd>python</dd></div><div><dt>code</dt><dd><pre>import csv
+import sys
+
+labels = [
+    &quot;Nucleus&quot;, &quot;Cytoplasm&quot;, &quot;Extracellular&quot;, &quot;Mitochondrion&quot;,
+    &quot;Cell.membrane&quot;, &quot;Endoplasmic.reticulum&quot;, &quot;Plastid&quot;,
+    &quot;Golgi.apparatus&quot;, &quot;Lysosome/Vacuole&quot;, &quot;Peroxisome&quot;,
+]
+# Run: python decode_labels.py path/to/colabsaprot_output.csv
+with open(sys.argv[1], newline=&quot;&quot;) as handle:
+    reader = csv.DictReader(handle)
+    if &quot;predicted_label&quot; not in (reader.fieldnames or []):
+        raise ValueError(&quot;Expected ColabSaprot&#x27;s predicted_label column&quot;)
+    for row_number, row in enumerate(reader, start=1):
+        label = int(row[&quot;predicted_label&quot;])
+        if not 0 &lt;= label &lt; len(labels):
+            raise ValueError(f&quot;Invalid class label in row {row_number}: {label}&quot;)
+        print(row_number, label, labels[label], sep=&quot;\t&quot;)
+</pre></dd></div></dl></li></ul></dd></div></dl></section><section class="card"><h2>Benchmark Index</h2><ul class="bullet"><li><dl class="kv"><div><dt>name</dt><dd>SaProtHub/Model-Subcellular_Localization-650M</dd></div><div><dt>results</dt><dd><ul class="bullet"><li><dl class="kv"><div><dt>task</dt><dd><dl class="kv"><div><dt>type</dt><dd>text-classification</dd></div><div><dt>name</dt><dd>Protein-level subcellular localization (single-label, 10 classes)</dd></div></dl></dd></div><div><dt>dataset</dt><dd><dl class="kv"><div><dt>type</dt><dd>SaProtHub/Dataset-Subcellular_Localization-DeepLoc</dd></div><div><dt>name</dt><dd>SaProtHub DeepLoc (exact scored revision unspecified)</dd></div><div><dt>split</dt><dd>test</dd></div></dl></dd></div><div><dt>metrics</dt><dd><ul class="bullet"><li><dl class="kv"><div><dt>type</dt><dd>accuracy</dd></div><div><dt>name</dt><dd>Author-reported test accuracy (%)</dd></div><div><dt>value</dt><dd><code>85.75</code></dd></div></dl></li></ul></dd></div><div><dt>source</dt><dd><dl class="kv"><div><dt>name</dt><dd>Pinned upstream model README; result not independently reproduced</dd></div><div><dt>url</dt><dd><a href="https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/README.md">https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M/blob/ffc656cde0bbfaf4933b364036753674520663b6/README.md</a></dd></div></dl></dd></div></dl></li></ul></dd></div></dl></li></ul></section><section class="card"><h2>Other fields</h2><dl class="kv"><div><dt>schema_version</dt><dd>0.0.2</dd></div><div><dt>datasets</dt><dd><div class="chip-row"><span class="chip">SaProtHub/Dataset-Subcellular_Localization-DeepLoc</span></div></dd></div><div><dt>metrics</dt><dd><div class="chip-row"><span class="chip">accuracy</span></div></dd></div><div><dt>model_category</dt><dd>protein-language-model</dd></div></dl></section></main><footer>Rendered 2026-09-29T00:32:05.174648+00:00 from <code>data/model_cards_assistant/subcell_saprot_650m_model_card.yaml</code></footer></body></html>

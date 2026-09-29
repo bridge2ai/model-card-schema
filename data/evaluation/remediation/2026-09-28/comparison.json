@@ -1,0 +1,175 @@
+{
+  "generated_at": "2026-09-29T00:16:10.302746+00:00",
+  "baseline_commit": "c0d94d239d6b302d4b2fbb8ebd3bc9f5ebbf1e90",
+  "schema_sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788",
+  "analysis_script_sha256": "40cbead406e5b7a5e1bdb0d510be28b0450238ee31b3b995afd99089edc64667",
+  "method": "Field presence plus paired deterministic hybrid evaluations; no new semantic/LLM evaluation",
+  "cards": {
+    "densenet121_tv_in1k": {
+      "before_path": "notes/model_card_remediation/baseline/densenet121_tv_in1k_model_card.yaml",
+      "after_path": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
+      "before_sha256": "eab9295e36cc5153a53a1e95d315c1ea6d04a1ea00d40e4bdc423684d6c775c5",
+      "after_sha256": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+      "presence": {
+        "before": 53,
+        "after": 74,
+        "total": 126
+      },
+      "sections": {
+        "core": {
+          "before": 13,
+          "after": 10,
+          "total": 13
+        },
+        "model_details": {
+          "before": 17,
+          "after": 17,
+          "total": 24
+        },
+        "model_parameters": {
+          "before": 12,
+          "after": 15,
+          "total": 39
+        },
+        "quantitative_analysis": {
+          "before": 4,
+          "after": 7,
+          "total": 17
+        },
+        "considerations": {
+          "before": 7,
+          "after": 7,
+          "total": 7
+        },
+        "model_index": {
+          "before": 0,
+          "after": 11,
+          "total": 16
+        },
+        "mission_relevance": {
+          "before": 0,
+          "after": 1,
+          "total": 4
+        },
+        "usage_documentation": {
+          "before": 0,
+          "after": 6,
+          "total": 6
+        }
+      },
+      "hybrid": {
+        "rubric10": {
+          "before": {
+            "total_points": 41,
+            "max_points": 50,
+            "percentage": 82.0,
+            "evaluation": "data/evaluation/remediation/2026-09-28/before/rubric10/densenet121_tv_in1k_model_card_evaluation.json"
+          },
+          "after": {
+            "total_points": 47,
+            "max_points": 50,
+            "percentage": 94.0,
+            "evaluation": "data/evaluation/remediation/2026-09-28/after/rubric10/densenet121_tv_in1k_model_card_evaluation.json"
+          }
+        },
+        "rubric20": {
+          "before": {
+            "total_points": 58,
+            "max_points": 84,
+            "percentage": 69.0,
+            "evaluation": "data/evaluation/remediation/2026-09-28/before/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json"
+          },
+          "after": {
+            "total_points": 67,
+            "max_points": 84,
+            "percentage": 79.8,
+            "evaluation": "data/evaluation/remediation/2026-09-28/after/rubric20/densenet121_tv_in1k_model_card_rubric20_evaluation.json"
+          }
+        }
+      }
+    },
+    "subcell_saprot_650m": {
+      "before_path": "notes/model_card_remediation/baseline/subcell_saprot_650m_model_card.yaml",
+      "after_path": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
+      "before_sha256": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de",
+      "after_sha256": "9a19a5ebe4686780ddbc733c2468bc2a9801a0d9dc790ba93a83200cec215790",
+      "presence": {
+        "before": 59,
+        "after": 80,
+        "total": 126
+      },
+      "sections": {
+        "core": {
+          "before": 13,
+          "after": 11,
+          "total": 13
+        },
+        "model_details": {
+          "before": 17,
+          "after": 16,
+          "total": 24
+        },
+        "model_parameters": {
+          "before": 18,
+          "after": 23,
+          "total": 39
+        },
+        "quantitative_analysis": {
+          "before": 4,
+          "after": 6,
+          "total": 17
+        },
+        "considerations": {
+          "before": 7,
+          "after": 7,
+          "total": 7
+        },
+        "model_index": {
+          "before": 0,
+          "after": 11,
+          "total": 16
+        },
+        "mission_relevance": {
+          "before": 0,
+          "after": 0,
+          "total": 4
+        },
+        "usage_documentation": {
+          "before": 0,
+          "after": 6,
+          "total": 6
+        }
+      },
+      "hybrid": {
+        "rubric10": {
+          "before": {
+            "total_points": 44,
+            "max_points": 50,
+            "percentage": 88.0,
+            "evaluation": "data/evaluation/remediation/2026-09-28/before/rubric10/subcell_saprot_650m_model_card_evaluation.json"
+          },
+          "after": {
+            "total_points": 45,
+            "max_points": 50,
+            "percentage": 90.0,
+            "evaluation": "data/evaluation/remediation/2026-09-28/after/rubric10/subcell_saprot_650m_model_card_evaluation.json"
+          }
+        },
+        "rubric20": {
+          "before": {
+            "total_points": 63,
+            "max_points": 84,
+            "percentage": 75.0,
+            "evaluation": "data/evaluation/remediation/2026-09-28/before/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json"
+          },
+          "after": {
+            "total_points": 62,
+            "max_points": 84,
+            "percentage": 73.8,
+            "evaluation": "data/evaluation/remediation/2026-09-28/after/rubric20/subcell_saprot_650m_model_card_rubric20_evaluation.json"
+          }
+        }
+      }
+    }
+  }
+}

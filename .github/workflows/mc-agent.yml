@@ -26,6 +26,10 @@ on:
 jobs:
   check-mention:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
     outputs:
       qualified-mention: ${{ steps.detect.outputs.qualified-mention }}
       prompt: ${{ steps.detect.outputs.prompt }}
@@ -41,7 +45,7 @@ jobs:
         id: detect
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.PAT_FOR_PR }}
+          github-token: ${{ github.token }}
           script: |
             const fs = require('fs');
             let allowedUsers = [];
