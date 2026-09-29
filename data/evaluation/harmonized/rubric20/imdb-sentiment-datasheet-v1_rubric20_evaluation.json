@@ -1,0 +1,261 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/harmonized/imdb-sentiment-datasheet-v1.yaml",
+  "evaluation_timestamp": "2026-06-24T19:35:58.751508+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 0,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No required fields populated",
+          "evidence": "populated=[]",
+          "quality_note": "No required fields populated"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "<50 chars combined",
+          "evidence": "total=0",
+          "quality_note": "<50 chars combined"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No tags / pipeline tag",
+          "evidence": "no tags or pipeline",
+          "quality_note": "No tags / pipeline tag"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No I/O spec",
+          "evidence": "missing both",
+          "quality_note": "No I/O spec"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 0,
+          "max_score": 1,
+          "score_label": "schema_version missing",
+          "evidence": "absent",
+          "quality_note": "schema_version missing"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 0,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 0,
+          "max_score": 1,
+          "score_label": "No identifier",
+          "evidence": "absent",
+          "quality_note": "No identifier"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding info detected",
+          "evidence": "absent",
+          "quality_note": "No funding info detected"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No ethics fields populated",
+          "evidence": "absent",
+          "quality_note": "No ethics fields populated"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No license",
+          "evidence": "absent",
+          "quality_note": "No license"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No framework info",
+          "evidence": "absent",
+          "quality_note": "No framework info"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 0,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No software tools listed",
+          "evidence": "absent",
+          "quality_note": "No software tools listed"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No training procedure",
+          "evidence": "absent",
+          "quality_note": "No training procedure"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No version info",
+          "evidence": "absent",
+          "quality_note": "No version info"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No citations or references",
+          "evidence": "absent",
+          "quality_note": "No citations or references"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute_infrastructure",
+          "evidence": "absent",
+          "quality_note": "No compute_infrastructure"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 0,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 0,
+          "max_score": 1,
+          "score_label": "No external URLs",
+          "evidence": "absent",
+          "quality_note": "No external URLs"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No usage path documented",
+          "evidence": "absent",
+          "quality_note": "No usage path documented"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No metrics",
+          "evidence": "absent",
+          "quality_note": "No metrics"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "None populated",
+          "evidence": "absent",
+          "quality_note": "None populated"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 0,
+          "max_score": 1,
+          "score_label": "Only model's homepage referenced",
+          "evidence": "no cross-refs",
+          "quality_note": "Only model's homepage referenced"
+        }
+      ]
+    }
+  ],
+  "overall_score": {
+    "total_points": 0,
+    "max_points": 84,
+    "percentage": 0.0,
+    "semantic_deductions": []
+  },
+  "assessment": {
+    "strengths": [],
+    "weaknesses": [
+      "Weak Structural Completeness (0/21)",
+      "Weak Metadata Quality & Content (0/21)",
+      "Weak Technical Documentation (0/25)",
+      "Weak Performance & FAIRness (0/17)"
+    ],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-rubric20",
+    "model_card_hash": "ee7a70db4c07a71621cad04a99b28170cfb3e21eb35be5c0f1d7eac2205c1f78"
+  }
+}

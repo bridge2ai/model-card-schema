@@ -1,0 +1,412 @@
+# Model Card for Stable Diffusion XL Base 1.0 (stabilityai/stable-diffusion-xl-base-1.0)
+# Generation Method: Claude Code Deterministic ASSISTANT (in-session synthesis)
+# Workflow: .github/workflows/mc_assistant_create.md
+# Source: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0
+# Schema: src/model_card_schema/schema/model_card_schema.yaml
+# Temperature: 0.0
+# Generated: 2026-06-17
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "Stable Diffusion XL Base 1.0 (stabilityai/stable-diffusion-xl-base-1.0)"
+  short_description: "Latent text-to-image diffusion model (~3.5B parameters in the base UNet) from Stability AI, using a two-text-encoder conditioning stack and forming the first stage of the SDXL ensemble-of-experts pipeline."
+  overview: |
+    Stable Diffusion XL (SDXL) Base 1.0 is a diffusion-based text-to-image generative model developed
+    by Stability AI. Compared to prior Stable Diffusion versions (1.5, 2.1), SDXL substantially scales
+    up the UNet backbone (approximately 3x the parameters of SD 2.1's UNet, ~2.6B in the UNet plus
+    additional text-encoder parameters for a total ~3.5B trainable parameters in the base stage) and
+    conditions on two pretrained text encoders concurrently: OpenCLIP-ViT/G and CLIP-ViT/L.
+
+    SDXL is designed as an "ensemble of experts" pipeline for latent diffusion: the base model
+    (this checkpoint) generates noisy latents at high noise levels, and an optional separate
+    refinement model (stabilityai/stable-diffusion-xl-refiner-1.0) performs the final denoising
+    steps in a SDEdit-style image-to-image pass to improve high-frequency detail. The base model
+    can be used standalone and still produces strong results without the refiner.
+  documentation: |
+    ## Architecture
+    - Two-stage latent diffusion ensemble: base + (optional) refiner
+    - Base UNet: ~2.6B parameters (~3x the UNet of SD 2.1); ~3.5B total trainable parameters
+      including text encoders
+    - Dual text encoders: OpenCLIP-ViT/G (bigG/14) and CLIP-ViT/L concatenated along the
+      channel axis for cross-attention conditioning
+    - Latent space: VAE-encoded 4-channel latents (SDXL VAE has a higher-fidelity decoder than
+      SD 1.5/2.1)
+    - Native resolution: 1024x1024 (also supports common aspect ratios via micro-conditioning
+      on original-size and crop coordinates)
+    - Micro-conditioning inputs: original image size, crop coordinates, target size — addresses
+      training-data resolution and crop artifacts identified in the SDXL paper
+
+    ## Usage (diffusers >= 0.19.0)
+    ```python
+    from diffusers import DiffusionPipeline
+    import torch
+
+    pipe = DiffusionPipeline.from_pretrained(
+        "stabilityai/stable-diffusion-xl-base-1.0",
+        torch_dtype=torch.float16,
+        use_safetensors=True,
+        variant="fp16",
+    )
+    pipe.to("cuda")
+    image = pipe(prompt="An astronaut riding a green horse").images[0]
+    ```
+
+    For best quality the diffusers documentation recommends chaining the base with the refiner:
+    use the base for high-noise denoising steps (e.g. denoising_end=0.8) and pass the latents to
+    the refiner for the remaining steps (denoising_start=0.8).
+
+    ## Citation
+    See `model_details.citations` and `model_details.references`.
+  contributors:
+    - name: "Dustin Podell"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Zion English"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Kyle Lacey"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Andreas Blattmann"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Tim Dockhorn"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Jonas Muller"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Joe Penna"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Robin Rombach"
+      role: developed_by
+      affiliation: "Stability AI"
+    - name: "Stability AI"
+      role: funded_by
+      affiliation: "Stability AI"
+    - name: "CompVis / LMU Munich (Latent Diffusion Models)"
+      role: contributed_by
+      affiliation: "Ludwig Maximilian University of Munich"
+  version:
+    name: "1.0"
+    date: "2023-07-26"
+    diff: |
+      First public 1.0 release of the SDXL base model. Successor to SDXL 0.9 with improved
+      training data, longer training schedule, and the production-ready CreativeML Open RAIL++-M
+      license. Designed to be paired with the separately-released SDXL Refiner 1.0.
+  licenses:
+    - license_name: "CreativeML Open RAIL++-M License"
+      license_link: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md"
+      custom_text: |
+        CreativeML Open RAIL++-M License. A responsible-AI license that permits research and
+        commercial use of the model and its outputs while explicitly prohibiting certain
+        high-harm use cases (illegal content, CSAM, disinformation targeted at individuals,
+        non-consensual sexual content, etc.). See the linked LICENSE.md for the full
+        use-based restrictions in Attachment A.
+  citations:
+    - style: IEEE
+      citation: |
+        D. Podell, Z. English, K. Lacey, A. Blattmann, T. Dockhorn, J. Muller, J. Penna, and
+        R. Rombach, "SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis,"
+        arXiv:2307.01952, 2023.
+    - style: IEEE
+      citation: |
+        R. Rombach, A. Blattmann, D. Lorenz, P. Esser, and B. Ommer, "High-Resolution Image
+        Synthesis with Latent Diffusion Models," in Proceedings of the IEEE/CVF Conference on
+        Computer Vision and Pattern Recognition (CVPR), 2022, pp. 10684-10695.
+  references:
+    - reference: "https://arxiv.org/abs/2307.01952"
+    - reference: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0"
+    - reference: "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0"
+    - reference: "https://github.com/Stability-AI/generative-models"
+    - reference: "https://huggingface.co/docs/diffusers/main/en/api/pipelines/stable_diffusion/stable_diffusion_xl"
+    - reference: "https://clipdrop.co/stable-diffusion"
+    - reference: "https://stability.ai/blog/sdxl-09-stable-diffusion"
+  path: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0"
+
+# HuggingFace Hub metadata
+framework: "PyTorch"
+framework_version: "torch>=1.13"
+library_name: "diffusers"
+pipeline_tag: "text-to-image"
+language:
+  - "en"
+base_model: "stabilityai/stable-diffusion-xl-base-0.9"
+tags:
+  - "text-to-image"
+  - "stable-diffusion"
+  - "stable-diffusion-xl"
+  - "sdxl"
+  - "latent-diffusion"
+  - "diffusion"
+  - "diffusers"
+  - "generative-model"
+  - "image-generation"
+datasets:
+  - "laion-5b (filtered subset, not publicly released)"
+  - "internal aesthetic-filtered Stability AI dataset (not publicly released)"
+metrics:
+  - "FID"
+  - "CLIP score"
+  - "human preference"
+model_category: "latent-diffusion-text-to-image"
+
+model_parameters:
+  model_architecture: |
+    Latent diffusion model (LDM) with a ~2.6B-parameter UNet operating on 4-channel VAE latents,
+    conditioned via cross-attention on the concatenated hidden states of two frozen pretrained
+    text encoders: OpenCLIP-ViT/G (bigG/14) and CLIP-ViT/L. Total trainable parameter count is
+    approximately 3.5B (UNet plus learned projection layers). Compared to SD 1.5/2.1 the UNet
+    has substantially more transformer blocks at lower-resolution feature stages, a heterogeneous
+    distribution of attention blocks across stages, and added micro-conditioning inputs (original
+    image size, crop top-left coordinates, target size) that are sinusoidally embedded and
+    summed into the timestep embedding. Image decoding uses an improved VAE with a higher
+    spatial-fidelity decoder than SD 1.5/2.1.
+
+  data:
+    - name: "Filtered subset of LAION-5B (private)"
+      link: "https://laion.ai/blog/laion-5b/"
+      description: |
+        SDXL was trained on an internal Stability AI dataset built from a filtered subset of
+        LAION-5B (and additional proprietary aesthetic-filtered data). The exact filtered subset
+        is not publicly released. LAION-5B is a 5.85B-pair web-scraped image-text dataset.
+      sensitive:
+        sensitive_data:
+          - "Web-scraped image-text pairs may contain incidental PII (faces, names in captions, watermarks)"
+          - "LAION-5B has been independently documented to contain a long tail of NSFW, hateful, and illegal imagery; filtering applied by Stability AI for SDXL is not fully documented publicly"
+      bias_input: |
+        LAION-5B and similar web-scale image-text corpora are documented to over-represent
+        English-language and Western/North-American/European visual culture, light skin tones,
+        and stereotypical occupation-gender associations. See Birhane et al. 2021 ("Multimodal
+        datasets: misogyny, pornography, and malignant stereotypes") and the LAION-5B paper for
+        documented biases. The filtered SDXL subset inherits these distributional biases.
+    - name: "Internal aesthetic-filtered Stability AI dataset (private)"
+      link: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0"
+      description: |
+        Additional proprietary high-aesthetic-quality image-text pairs used to fine-tune SDXL
+        toward visually preferred outputs. Contents and curation criteria are not publicly
+        disclosed.
+
+  input_format: "UTF-8 text prompt (and optionally a negative prompt); for image-to-image variants, an init image"
+  input_format_map:
+    - key: "prompt_type"
+      value: "string (English text prompt)"
+    - key: "max_prompt_length"
+      value: "77 tokens per text encoder (CLIP-L) / 77 tokens (OpenCLIP-G); longer prompts are truncated"
+    - key: "negative_prompt"
+      value: "optional string"
+    - key: "guidance_scale"
+      value: "typical 5.0-9.0 (classifier-free guidance)"
+    - key: "native_resolution"
+      value: "1024x1024 (also 1152x896, 896x1152, 1216x832, 832x1216, 1344x768, 768x1344, 1536x640, 640x1536)"
+  output_format: "Generated RGB image at the requested resolution (default 1024x1024)"
+  output_format_map:
+    - key: "shape"
+      value: "[B, 3, H, W] with H=W=1024 by default"
+    - key: "dtype"
+      value: "uint8 (after VAE decode + clamp) or float in [0,1]"
+    - key: "color_space"
+      value: "sRGB"
+
+  training_procedure:
+    description: |
+      Latent diffusion training with the standard epsilon-prediction objective in the VAE latent
+      space. SDXL is trained in a multi-stage curriculum: (1) pretraining at 256x256 on a large
+      filtered subset of LAION-5B; (2) continued training at 512x512; (3) high-resolution
+      training at and above 1024x1024 with multi-aspect-ratio bucketing and micro-conditioning
+      on original-size, crop-coordinates, and target-size signals to prevent the model from
+      learning to produce cropped or low-resolution-looking outputs. Final fine-tuning uses the
+      internal aesthetic-filtered Stability AI dataset.
+    methodology: |
+      Classifier-free guidance is enabled by random text-conditioning dropout during training.
+      Two frozen pretrained text encoders (CLIP-ViT/L and OpenCLIP-ViT/G) provide the conditioning
+      signal; only the UNet (and small projection layers) are updated. The improved VAE decoder
+      is trained separately to reduce reconstruction artifacts versus the SD 1.5/2.1 VAE.
+    reproducibility_info:
+      hyperparameters:
+        optimizer: "AdamW"
+        loss_function: "Denoising L2 (epsilon-prediction) over noise schedule, with classifier-free guidance dropout"
+        optimization_techniques:
+          - "Mixed-precision training"
+          - "Multi-aspect-ratio bucketing"
+          - "Micro-conditioning on original-size, crop coordinates, and target size"
+          - "Classifier-free guidance with random conditioning dropout"
+          - "VAE latent caching"
+
+quantitative_analysis:
+  performance_metrics:
+    - type: "user preference (win rate vs SD 1.5)"
+      value: 79.0
+      slice: "human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SD 1.5)"
+      unit: "% preference"
+    - type: "user preference (win rate vs SD 2.1)"
+      value: 72.0
+      slice: "human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SD 2.1)"
+      unit: "% preference"
+    - type: "user preference (win rate vs SDXL Base 0.9)"
+      value: 60.0
+      slice: "human evaluation, PartiPrompts + internal prompts (SDXL Base 1.0 with refiner vs SDXL 0.9)"
+      unit: "% preference"
+    - type: "FID (zero-shot)"
+      value: 11.93
+      slice: "MS-COCO 2014 validation, 30K samples, 512x512 (reported in SDXL paper, base model)"
+      unit: "FID"
+    - type: "CLIP score"
+      value: 0.298
+      slice: "MS-COCO 2014 validation, 30K samples (OpenCLIP ViT-g/14 image-text cosine similarity)"
+      unit: "cosine similarity"
+    - type: "UNet parameter count"
+      value: 2.6
+      slice: "base UNet trainable parameters"
+      unit: "B params"
+    - type: "total trainable parameters"
+      value: 3.5
+      slice: "UNet + text-encoder projection layers"
+      unit: "B params"
+
+considerations:
+  users:
+    - description: |
+        Generative-AI researchers studying scaling, conditioning, and safety in text-to-image
+        diffusion models.
+    - description: |
+        Artists, designers, and creative practitioners using SDXL as an assistive tool for
+        artwork, concept design, and visual ideation, subject to the CreativeML Open RAIL++-M
+        use-based restrictions.
+    - description: |
+        Educators teaching about diffusion models, multimodal generation, and responsible-AI
+        considerations in generative systems.
+
+  use_cases:
+    - description: "Research on generative models (capabilities, scaling, conditioning, evaluation)"
+    - description: "Probing and analyzing the limitations, biases, and failure modes of text-to-image systems"
+    - description: "Safe deployment research — content filtering, watermarking, and provenance"
+    - description: "Generation of artworks, design assets, and creative content within the license terms"
+    - description: "Educational and creative tooling (illustration, storyboarding, concept art)"
+
+  limitations:
+    - description: |
+        Does not achieve perfect photorealism; subtle anatomy (hands, eyes, ears) and physically
+        consistent reflections, refractions, and lighting can fail in non-obvious ways.
+    - description: |
+        Cannot reliably render legible text. Words inside images frequently come out garbled,
+        especially for longer strings or non-Latin scripts.
+    - description: |
+        Struggles with compositional complexity: precise spatial relationships ("X on top of Y
+        next to Z"), counting, and rare-attribute binding (e.g. "a red cube and a green sphere"
+        where attributes are reliably bound to the correct object) remain failure modes.
+    - description: |
+        Faces and people, especially in groups or at small scale within the image, often render
+        with distortions. The optional refiner helps but does not eliminate these artifacts.
+    - description: |
+        Lossy VAE autoencoding: the latent-to-pixel decoder can introduce subtle high-frequency
+        artifacts and is the upper bound on achievable fidelity.
+    - description: |
+        Trained predominantly on English-captioned image-text pairs — generation quality and
+        prompt understanding for non-English prompts is substantially worse.
+    - description: |
+        Outputs are uncalibrated probabilistic samples — the same prompt produces different
+        images on different seeds, making reproducibility dependent on seed and scheduler.
+
+  tradeoffs:
+    - description: |
+        Accuracy vs fairness: the model's visual quality and prompt-faithfulness scale with the
+        size and diversity of training data, but increasing scale on web-scraped corpora
+        amplifies documented demographic, cultural, and aesthetic biases (Western-centric, light
+        skin tones, stereotyped occupation-gender associations). No explicit fairness-utility
+        trade-off optimization was applied during training; this is a known limitation that
+        downstream deployers must mitigate through prompt-side debiasing, output filtering, or
+        diverse fine-tuning.
+    - description: |
+        Quality vs compute: SDXL Base 1.0 requires ~10GB of VRAM for fp16 inference at 1024x1024
+        and is ~3x slower per step than SD 1.5. Pairing with the Refiner improves quality but
+        roughly doubles inference compute compared to base-only.
+    - description: |
+        Base-only vs base+refiner: base-only is faster and simpler to deploy; base+refiner
+        improves human-preference win rate by an additional ~5-10 percentage points but doubles
+        end-to-end latency.
+    - description: |
+        Resolution vs prompt fidelity: at the native 1024x1024 resolution, SDXL is well aligned
+        to its training distribution. Generating outside the trained resolution buckets degrades
+        composition and fidelity even with the micro-conditioning hints.
+
+  ethical_considerations:
+    - name: "Demographic and cultural bias amplification"
+      mitigation_strategy: |
+        Use diverse prompts and seed sweeps when evaluating downstream applications. Apply
+        post-hoc fairness audits (e.g. occupation-gender, skin-tone, age sweeps) before
+        deploying SDXL in user-facing products. Consider prompt-side debiasing libraries or
+        diverse fine-tuning datasets.
+    - name: "Non-consensual sexual content and deepfakes"
+      mitigation_strategy: |
+        The CreativeML Open RAIL++-M license explicitly prohibits these uses. Operators should
+        implement face-similarity filtering, NSFW classifiers (e.g. the diffusers safety
+        checker), and prompt-blocklists for the names of real people. Watermark generated
+        outputs (e.g. invisible watermarking) and log provenance.
+    - name: "Child sexual abuse material (CSAM)"
+      mitigation_strategy: |
+        Strictly prohibited under license and law. Maintain an up-to-date prompt blocklist,
+        deploy a CSAM-detection classifier on outputs, and follow industry reporting standards
+        (NCMEC/IWF). Audit training-data provenance: subsequent independent audits of LAION-5B
+        identified illegal content in the upstream pool; deployers should be alert to
+        residual risks.
+    - name: "Disinformation and impersonation"
+      mitigation_strategy: |
+        SDXL can synthesize photorealistic-looking imagery of fictional or real-seeming people
+        and scenes. Apply C2PA / content credentials provenance signing on outputs and clearly
+        label generated images. Block named-person prompts in news / political contexts.
+    - name: "Copyright and consent"
+      mitigation_strategy: |
+        Training data was web-scraped without per-image creator consent. Consult evolving legal
+        guidance in the deployment jurisdiction. Offer opt-out mechanisms (e.g.
+        haveibeentrained.com / spawning.ai) and respect dataset-level opt-outs in any
+        fine-tuning.
+    - name: "Environmental impact"
+      mitigation_strategy: |
+        Initial training of SDXL consumed substantial energy (large-scale multi-week GPU
+        training). Downstream deployers should batch requests, use lower-precision inference,
+        and consider distilled / accelerated variants (e.g. SDXL-Turbo, LCM-LoRA, SSD-1B)
+        when fidelity allows.
+
+  out_of_scope_uses:
+    - description: "Generating CSAM or sexual content involving minors"
+    - description: "Non-consensual sexual imagery of real or identifiable people (deepfake pornography)"
+    - description: "Impersonation or political disinformation involving real individuals"
+    - description: "Generating photorealistic representations of real people without consent"
+    - description: "Producing factual or news imagery (the model does not represent real-world events or persons accurately)"
+    - description: "Medical, legal, or safety-critical decision-making"
+    - description: "Harassment, defamation, or content intended to harm individuals or groups"
+    - description: "Generating illegal content (violence, hate speech, instructions for weapons, etc.) prohibited under the CreativeML Open RAIL++-M license"
+    - description: "Use in violation of applicable copyright, privacy, or publicity laws"
+
+bias_model: |
+  SDXL inherits and amplifies biases documented in the LAION-5B-derived training data: predominant
+  Western/Anglophone aesthetic, over-representation of light skin tones, stereotypical
+  associations between gender and occupation prompts ("CEO", "nurse", "engineer", "criminal"),
+  and culturally narrow defaults for under-specified prompts (e.g. "wedding", "food", "home"
+  default to Western/North-American-European visual signifiers). No formal fairness audit or
+  debiasing fine-tune was reported by Stability AI for the 1.0 release.
+
+  The two-text-encoder conditioning stack (CLIP-ViT/L + OpenCLIP-ViT/G) also inherits documented
+  biases of the CLIP family — including biased zero-shot associations between race/gender and
+  occupation/affect words — which propagate through cross-attention into the diffusion process.
+
+  Downstream deployers should run quantitative fairness audits (e.g. occupation-gender, skin-tone,
+  age, and geography sweeps) on their target prompt distribution before shipping SDXL in
+  user-facing or decision-supporting applications.
+bias_output: |
+  Generated images tend to default to: (a) lighter skin tones when race is not specified;
+  (b) male depictions for high-status / technical occupation prompts and female depictions for
+  caregiving / domestic prompts; (c) Western architectural and clothing styles for generic
+  "city", "home", "person" prompts; (d) thin, conventionally-attractive body types for under-
+  specified "person" prompts; (e) photorealistic styles biased toward stock-photography
+  composition.
+
+  The model also exhibits known output-level failure modes that interact with bias: text
+  rendering errors (especially for non-Latin scripts), distorted faces (more pronounced for
+  under-represented demographics), and lower prompt faithfulness for non-English prompts.
+
+  Refiner-augmented outputs do not eliminate these biases — they primarily improve high-
+  frequency detail rather than altering the conditional distribution learned by the base.

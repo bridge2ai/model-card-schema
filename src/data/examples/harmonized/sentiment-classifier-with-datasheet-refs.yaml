@@ -1,0 +1,250 @@
+# Example Model Card with Datasheets References
+# This demonstrates Pattern 1: External References to avoid schema conflicts
+# The datasets are documented separately using the Datasheets for Datasets schema
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "BERT Sentiment Classifier v1.2"
+  overview: |
+    Fine-tuned BERT-base model for binary sentiment classification.
+    Trained on IMDb movie reviews, achieves 92% accuracy on test set.
+  documentation: |
+    Complete usage guide available at: https://example.org/models/bert-sentiment/docs
+
+    This model uses BERT-base architecture with an additional dense classification layer.
+    It has been fine-tuned on movie review data for sentiment analysis tasks.
+  owners:
+    - name: "ML Research Team"
+      contact: "ml-team@example.org"
+    - name: "Jane Smith"
+      contact: "jane.smith@example.org"
+
+  version:
+    name: "1.2.0"
+    date: "2025-11-20"
+    diff: |
+      - Improved accuracy by 5% through hyperparameter tuning
+      - Added support for longer sequences (512 → 1024 tokens)
+      - Fixed bias in handling negation
+
+  licenses:
+    - identifier: "Apache-2.0"
+
+  references:
+    - reference: "https://arxiv.org/abs/1810.04805"  # BERT paper
+    - reference: "https://example.org/models/bert-sentiment"
+
+  citations:
+    - style: APA
+      citation: "Smith, J., & Team, M. (2025). BERT Sentiment Classifier v1.2. Example Organization."
+
+model_parameters:
+  model_architecture: |
+    BERT-base (110M parameters):
+    - 12 transformer layers
+    - 768 hidden dimensions
+    - 12 attention heads
+
+    Classification head:
+    - Dense layer (768 → 256)
+    - ReLU activation
+    - Dropout (0.1)
+    - Output layer (256 → 2)
+
+  # PATTERN 1: Reference to external datasheets (avoiding schema import conflicts)
+  # Each dataset is documented separately using the Datasheets for Datasets schema
+  # See: datasheets/imdb-sentiment-v1.yaml and datasheets/sst2-v1.yaml
+
+  # For backward compatibility, we include minimal dataset info here
+  data:
+    - name: "IMDb Movie Reviews"
+      link: "https://ai.stanford.edu/~amaas/data/sentiment/"
+      description: |
+        50,000 highly polar movie reviews for binary sentiment classification.
+
+        IMPORTANT: Complete dataset documentation available as a separate Datasheet:
+        - URL: https://datasheets.example.org/imdb-sentiment-v1.yaml
+        - DOI: 10.18653/v1/P11-1015
+        - Format: Datasheets for Datasets v1.0
+
+        The datasheet provides comprehensive documentation including:
+        - Motivation (purpose, tasks, creators, funding)
+        - Composition (50,000 instances, balanced positive/negative)
+        - Collection (web scraping methodology, timeframe)
+        - Preprocessing (anonymization, text cleaning)
+        - Uses (sentiment analysis, existing research usage)
+        - Distribution (licensing, availability)
+        - Maintenance (update policy, version access)
+        - Ethics (consent, privacy considerations)
+
+  input_format: |
+    Text string, maximum 1024 tokens after BERT tokenization.
+    Input is automatically tokenized using BERT WordPiece tokenizer.
+
+    Example:
+    "This movie was absolutely fantastic! Highly recommended."
+
+  input_format_map:
+    - key: "text"
+      value: "string"
+    - key: "max_length"
+      value: "1024"
+
+  output_format: |
+    Binary classification with confidence scores:
+    - Class 0: Negative sentiment
+    - Class 1: Positive sentiment
+
+    Returns both predicted class and probability distribution.
+
+  output_format_map:
+    - key: "predicted_class"
+      value: "integer (0 or 1)"
+    - key: "probabilities"
+      value: "array[2] of float"
+    - key: "confidence"
+      value: "float (max probability)"
+
+quantitative_analysis:
+  performance_metrics:
+    - type: "accuracy"
+      value: 0.92
+      confidence_interval:
+        lower_bound: 0.91
+        upper_bound: 0.93
+      slice: "test_set"
+
+    - type: "f1_score"
+      value: 0.91
+      slice: "test_set_positive"
+
+    - type: "f1_score"
+      value: 0.93
+      slice: "test_set_negative"
+
+    - type: "precision"
+      value: 0.90
+      slice: "test_set_positive"
+
+    - type: "recall"
+      value: 0.94
+      slice: "test_set_positive"
+
+considerations:
+  users:
+    - description: "Content moderators analyzing user-generated content"
+    - description: "Researchers studying sentiment in text"
+    - description: "Product teams analyzing customer feedback"
+
+  use_cases:
+    - description: "Automated sentiment analysis of product reviews"
+    - description: "Content filtering and moderation"
+    - description: "Customer feedback analysis and categorization"
+
+  limitations:
+    - description: |
+        May struggle with sarcasm and irony. Accuracy drops to ~65% on sarcastic content.
+    - description: |
+        Trained primarily on movie reviews; performance may degrade on other domains
+        (e.g., product reviews, social media posts).
+    - description: |
+        Limited to English text only. Not tested on multilingual content.
+    - description: |
+        Sequence length limited to 1024 tokens; longer texts are truncated.
+
+  tradeoffs:
+    - description: |
+        Accuracy vs. Speed: BERT-base provides good accuracy but slower inference
+        (~50ms per review) compared to simpler models. Consider DistilBERT for
+        latency-critical applications.
+
+  ethical_considerations:
+    - name: "Bias in training data"
+      mitigation_strategy: |
+        The IMDb dataset may contain demographic and cultural biases.
+        Mitigation: Tested on diverse review sources; documented known biases;
+        recommend human-in-the-loop for sensitive applications.
+
+    - name: "Potential for misuse in censorship"
+      mitigation_strategy: |
+        Model could be misused for automated content censorship.
+        Mitigation: Clear documentation of limitations; recommendation for
+        human review in moderation contexts; transparency about model capabilities.
+
+# HuggingFace/Community metadata
+framework: "PyTorch"
+framework_version: "2.0.1"
+library_name: "transformers"
+pipeline_tag: "text-classification"
+model_language:  # Renamed from 'language' to avoid conflict with datasheets schema
+  - "en"
+
+base_model: "bert-base-uncased"
+
+tags:
+  - "sentiment-analysis"
+  - "bert"
+  - "pytorch"
+  - "transformers"
+  - "text-classification"
+  - "movie-reviews"
+
+datasets:
+  - "imdb"
+
+metrics:
+  - "accuracy"
+  - "f1"
+  - "precision"
+  - "recall"
+
+# Papers with Code model-index for benchmark tracking
+model_index:
+  - name: "BERT Sentiment Classifier v1.2"
+    results:
+      - task:
+          type: "text-classification"
+          name: "Sentiment Analysis"
+        dataset:
+          type: "imdb"
+          name: "IMDb Movie Reviews"
+          split: "test"
+        metrics:
+          - type: "accuracy"
+            value: 0.92
+            name: "Accuracy"
+          - type: "f1"
+            value: 0.91
+            name: "F1 Score"
+        source:
+          name: "Internal Evaluation"
+          url: "https://example.org/models/bert-sentiment/evaluation"
+
+# Additional metadata demonstrating integration approach
+dataset_documentation:
+  # This section demonstrates how to reference external datasheets
+  # without importing the datasheets schema (avoiding naming conflicts)
+  training_datasets:
+    - id: "imdb-sentiment-v1"
+      name: "IMDb Movie Reviews Sentiment Dataset"
+      datasheet_url: "https://datasheets.example.org/imdb-sentiment-v1.yaml"
+      datasheet_format: "datasheets-for-datasets-v1.0"
+      datasheet_doi: "10.18653/v1/P11-1015"
+      description: "Complete dataset documentation following Datasheets for Datasets framework"
+
+  evaluation_datasets:
+    - id: "sst2-v1"
+      name: "Stanford Sentiment Treebank v2"
+      datasheet_url: "https://datasheets.example.org/sst2-v1.yaml"
+      datasheet_format: "datasheets-for-datasets-v1.0"
+      description: "Used for additional validation"
+
+# Model deployment information
+deployment_info:
+  inference_endpoint: "https://api.example.org/models/bert-sentiment/predict"
+  container_image: "example-org/bert-sentiment:1.2.0"
+  hardware_requirements:
+    minimum_ram: "4GB"
+    recommended_gpu: "NVIDIA T4 or better"
+    inference_time: "~50ms per review (batch size 1)"

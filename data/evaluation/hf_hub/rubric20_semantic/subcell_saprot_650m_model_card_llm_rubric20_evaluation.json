@@ -1,0 +1,519 @@
+{
+  "rubric": "mc_rubric20_semantic",
+  "version": "1.0",
+  "model_card_file": "data/model_cards_assistant/subcell_saprot_650m_model_card.yaml",
+  "model": "SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)",
+  "method": "Claude Code Deterministic ASSISTANT (in-session synthesis)",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge",
+    "rubric_layer": "semantic"
+  },
+  "overall_score": {
+    "total_points": 64,
+    "max_points": 84,
+    "percentage": 76.2,
+    "semantic_deductions": [
+      {
+        "question": "Q19",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "bias_model and bias_output are populated, but considerations.tradeoffs[] only addresses model-size vs accuracy/cost; it does not acknowledge accuracy-vs-fairness or rare-class performance tradeoffs implied by the disclosed biases."
+      }
+    ]
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 populated",
+          "evidence": "model_details.name='SaProtHub SubCell Localization 650M (LoRA-fine-tuned SaProt)'; overview ~600 chars; licenses=[{identifier: 'MIT'}]; version.name='1.0'; model_parameters.model_architecture describes 'Transformer-based protein language model: 650M-parameter SaProt_650M_AF2 base...'",
+          "quality_note": "All five required fields populated with concrete, non-trivial content.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All five required fields present with non-trivial strings.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars with structure",
+          "evidence": "model_details.overview ~600 chars covering ten-class taxonomy, LoRA fine-tune of SaProt_650M_AF2, classifier head, and 85.75% accuracy; documentation field adds Architecture/Usage/Training Configuration sections.",
+          "quality_note": "Overview + documentation combined well exceed 500 chars with clear structure.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Overview > 200 chars and documentation populated; documentation-completeness cap rule does not apply.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">=4 tags + pipeline_tag + (language or model_category)",
+          "evidence": "tags=[protein-language-model, subcellular-localization, bioinformatics, protein-classification, saprot, lora, deeploc, structure-aware] (8); pipeline_tag='text-classification'; language=['protein']; model_category='protein-language-model'.",
+          "quality_note": "Eight tags plus pipeline_tag, language, and model_category.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Tags are kebab-case strings; pipeline_tag matches HF taxonomy.",
+            "consistency_check": "pass",
+            "consistency_details": "pipeline_tag='text-classification' is consistent with output_format (classification logits over 10 classes); 'protein' as language is community convention for protein LMs.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both input AND output with shape/type AND *_format_map populated",
+          "evidence": "input_format describes 'Structure-aware (SA) protein sequence'; input_format_map has type/encoding/max_length; output_format='Classification label (integer 0-9)'; output_format_map has shape='[B, 10]' and class interpretation.",
+          "quality_note": "Both directions described with type, shape, and semantic interpretation.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "shape '[B, 10]' uses batch-first tensor convention; consistent with 10-class classifier head.",
+            "consistency_check": "pass",
+            "consistency_details": "Pipeline tag 'text-classification' ↔ output 'raw logits over {10 classes}' is consistent. Input encoded as SA-vocabulary is consistent with SaProt base model.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: '0.0.2'",
+          "quality_note": "Recognizable schema version string.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "schema_version='0.0.2' is a valid semver triple.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 13,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_details.path='https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M'; references include same HF Hub URL and base-model HF Hub URL.",
+          "quality_note": "HuggingFace Hub URL provides a resolvable persistent identifier.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "HF Hub URL matches https://huggingface.co/{org}/{model} pattern; org='SaProtHub', model='Model-Subcellular_Localization-650M'.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding/acknowledgement mention",
+          "evidence": "Contributors list affiliations (Westlake Representation Learning Lab, Westlake University) but no funding agency, grant ID, or computing-facility acknowledgement.",
+          "quality_note": "Lab affiliations are not funding/grant disclosures.",
+          "semantic_analysis": {
+            "format_check": "n/a",
+            "format_details": "Field absent; no value to format-check.",
+            "consistency_check": "pass",
+            "consistency_details": "No mission_relevance to contradict; no inconsistency to flag.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Ethical considerations + bias disclosure + out-of-scope, all concrete",
+          "evidence": "considerations.ethical_considerations: 'Mis-localization in drug discovery pipelines' with concrete mitigation. bias_model and bias_output describe DeepLoc/SwissProt species bias and class-prior effects. out_of_scope_uses lists three specific scenarios.",
+          "quality_note": "Ethics + two bias dimensions + three out-of-scope items, all model-specific.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All ethics structures well-formed (named ethical consideration with mitigation_strategy; narrative bias fields; list-of-descriptions out_of_scope_uses).",
+            "consistency_check": "pass",
+            "consistency_details": "sensitive_data_used is not flagged true (data.sensitive describes 'No human PII'), so the privacy-requirement cap rule does not trigger. The disclosed biases (species/class-prior) are concretely mirrored by out_of_scope_uses (underrepresented species; multi-label) — internal consistency holds. Model is not LLM/face/medical-imaging, so high-risk out-of-scope rule does not trigger.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "SPDX identifier present; no explicit restriction statement",
+          "evidence": "model_details.licenses=[{identifier: 'MIT', license_name: 'MIT License', license_link: 'https://opensource.org/licenses/MIT'}]",
+          "quality_note": "Clear SPDX identifier with link; no restriction statement beyond standard MIT text.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'MIT' is a valid SPDX identifier; license_link resolves to canonical opensource.org URL.",
+            "consistency_check": "pass",
+            "consistency_details": "Base model westlake-repl/SaProt_650M_AF2 is MIT-licensed upstream; downstream MIT for the LoRA fine-tune is permitted. No license incompatibility detected.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Framework declared but version not strictly pinned; no model_index",
+          "evidence": "framework='PyTorch'; framework_version='torch>=2.0'; library_name='transformers'; model_index field absent.",
+          "quality_note": "Framework and library declared, but 'torch>=2.0' is a lower bound, not an exact pin; no Papers-with-Code-style model_index.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "framework_version='torch>=2.0' is a floating lower-bound, not a pinned MAJOR.MINOR.PATCH version. Per rule: floating pins cap Q10 at 4.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": "Framework-pin format rule would cap Q10 at 4; baseline already at 3 due to missing model_index, so no additional deduction applied."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 17,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Tools/libraries named but no container/env pinning",
+          "evidence": "framework_version='torch>=2.0'; library_name='transformers'; code snippet imports 'saprot_hub'; training_procedure mentions FP16, AdamW, LoRA configuration.",
+          "quality_note": "Several libraries named, but no Dockerfile, no environment lockfile, no pinned reproducibility libs.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Framework version is a floating lower bound ('torch>=2.0') rather than a pinned release.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": "Floating-pin rule would cap Q11 at 4; baseline already at 3 due to absent container/env pinning, so no additional deduction applied."
+          }
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Optimizer + LR + batch + epochs + regularization disclosed",
+          "evidence": "hyperparameters: optimizer='AdamW', learning_rate=0.0005, batch_size=64, training_epochs=100, loss_function='Cross-entropy over 10 classes', optimization_techniques include LoRA rank/alpha/dropout, FP16, AdamW betas=(0.9, 0.98), weight_decay=0.01.",
+          "quality_note": "All required levers documented; LR schedule not stated, but regularization (weight_decay, LoRA dropout) covered.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Numeric hyperparameters typed correctly (float LR, int batch/epochs); LoRA rank/alpha/dropout values are within standard ranges.",
+            "consistency_check": "pass",
+            "consistency_details": "Hyperparameters in documentation prose match the structured hyperparameters block (AdamW, lr=5e-4, batch=64, epochs=100, FP16).",
+            "plausibility_check": "pass",
+            "plausibility_details": "LR 5e-4 with AdamW for LoRA on a 650M base, batch 64, 100 epochs is within typical regimes for protein-LM fine-tuning.",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Version name + ISO date + non-trivial diff",
+          "evidence": "version.name='1.0'; version.date='2024-08-01'; version.diff describes 'Initial release of the LoRA fine-tune on the DeepLoc subcellular-localization training split using AdamW for 100 epochs.'",
+          "quality_note": "Recognizable release tag, ISO date, meaningful change description.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "version.name='1.0' is a recognizable release tag (semver-like MAJOR.MINOR); version.date='2024-08-01' is a valid ISO 8601 date.",
+            "consistency_check": "pass",
+            "consistency_details": "version.date 2024-08-01 is not in the future (today is 2026-06-15) and does not predate the SaProt ICLR 2024 paper (which appeared earlier in 2024).",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Multiple citations and multiple references with URLs (no DOIs)",
+          "evidence": "citations: 2 IEEE-style entries (SaProtHub HF page; Su et al. ICLR 2024 SaProt paper). references: 5 URLs (HF model, HF base model, GitHub SaProt, UniProt subcellular help, DeepLoc 2.0).",
+          "quality_note": "Two citations and five references, no DOIs and citations are not BibTeX.",
+          "semantic_analysis": {
+            "format_check": "warn",
+            "format_details": "Citations are well-formed IEEE strings with required 'style' key; not BibTeX, but YAML structure parses correctly. No DOIs in references.",
+            "consistency_check": "pass",
+            "consistency_details": "The Su et al. citation acknowledges the base-model authors who are not in contributors[] but who are explicitly attributed via base_model and reference URLs — appropriate provenance.",
+            "plausibility_check": "pass",
+            "plausibility_details": "ICLR 2024 timing is plausible for SaProt; both citation strings parse and are not broken YAML.",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute infrastructure section",
+          "evidence": "No model_parameters.compute_infrastructure section. Only an incidental 'Mixed precision (FP16) on a single GPU' note in training_procedure.description.",
+          "quality_note": "Compute infrastructure block absent; no quantitative compute or energy reporting.",
+          "semantic_analysis": {
+            "format_check": "n/a",
+            "format_details": "Field absent; no value to format-check.",
+            "consistency_check": "fail",
+            "consistency_details": "model_architecture references 650M-parameter base — a non-trivial scale — yet compute reporting is reduced to 'single GPU, FP16' in prose. Cap rule (Q15 cap at 3 for trivial compute report on large model) would apply, but baseline is already 0 due to wholly missing compute_infrastructure section, so no additional deduction.",
+            "plausibility_check": "fail",
+            "plausibility_details": "LoRA fine-tuning of a 650M base for 100 epochs on a single GPU is plausible (LoRA is parameter-efficient), but the lack of total GPU-hours, GPU model, or energy figure prevents verification.",
+            "applied_cap": "Large-model compute-scale rule would cap Q15 at 3; baseline already 0, so cap is not binding."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 13,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_details.path and references both contain https://huggingface.co/SaProtHub/Model-Subcellular_Localization-650M plus GitHub and base-model HF URLs.",
+          "quality_note": "Multiple resolvable landing pages.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All URLs are well-formed and point at HF Hub or GitHub canonical hosts.",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Runnable code + I/O formats + library hook",
+          "evidence": "documentation contains a Python snippet using 'from saprot_hub import load_model' and model.predict(sa_sequence); input_format/output_format and *_format_map describe shape, encoding, and class interpretation; library_name='transformers'.",
+          "quality_note": "Concrete inference path with both API call and explicit I/O semantics.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Code snippet uses fenced Python block; import path 'saprot_hub' matches the project's documented loader package.",
+            "consistency_check": "pass",
+            "consistency_details": "library_name='transformers' is consistent with SaProt's HF Transformers architecture; saprot_hub is a thin loader on top.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "One numeric metric, one slice, no CI",
+          "evidence": "quantitative_analysis.performance_metrics=[{type: 'test accuracy', value: 85.75, slice: 'DeepLoc subcellular localization test set (10-way)', unit: '%'}]",
+          "quality_note": "Single accuracy value on a single slice; no per-class slices, no CI.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "value=85.75 with unit='%' is in the [0, 100] valid range for accuracy.",
+            "consistency_check": "pass",
+            "consistency_details": "The evaluation slice 'DeepLoc test set' is the held-out partition of the same DeepLoc dataset used for training (train split). This is standard train/test partitioning, not data leakage; the train-eval leakage cap rule does not trigger.",
+            "plausibility_check": "pass",
+            "plausibility_details": "85.75% on DeepLoc 10-way subcellular localization is plausible and consistent with published SaProt-family benchmarks; not the >99% threshold that would trigger the suspicious-source cap.",
+            "applied_cap": "Aggregate-only rule (no slice → cap at 3) is already binding; baseline Q18=3 already reflects this."
+          }
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "All three populated, but tradeoffs do not address bias-implied accuracy-vs-fairness tension (capped from 5)",
+          "evidence": "limitations: 3 concrete items. tradeoffs: 1 item comparing 650M vs 35M variant accuracy/cost and LoRA trainable-parameter footprint. out_of_scope_uses: 3 specific scenarios.",
+          "quality_note": "All three sections populated, but the lone tradeoff is about model size; bias_model and bias_output (rare-class under-prediction, species bias) are not reflected in any acknowledged accuracy-vs-fairness tradeoff.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All three considerations sub-sections present with non-empty descriptions.",
+            "consistency_check": "fail",
+            "consistency_details": "bias_model and bias_output are populated (species/class-prior bias). The semantic rule expects considerations.tradeoffs[] to acknowledge an accuracy-vs-fairness or aggregate-vs-rare-class tension. The only tradeoff documented is a parameter-count vs accuracy/inference-cost comparison between the 650M and 35M variants — it does not address the disclosed bias dimensions. Cap Q19 at 3.",
+            "plausibility_check": "pass",
+            "applied_cap": "Q19 capped at 3 because bias disclosures are not paired with an accuracy-vs-fairness tradeoff."
+          }
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "base_model='westlake-repl/SaProt_650M_AF2' links to a HF Hub record; datasets=['SaProtHub/Dataset-Subcellular_Localization-DeepLoc'] links to a sibling HF dataset; references include the SaProt GitHub repo and DeepLoc 2.0 service.",
+          "quality_note": "Multiple cross-platform references.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "base_model uses '{org}/{model}' shape; dataset id matches HF datasets convention.",
+            "consistency_check": "pass",
+            "consistency_details": "Training dataset (SaProtHub mirror of DeepLoc) and evaluation slice (DeepLoc test set) share a common dataset family; train/test partition is the standard split, not leakage.",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {
+        "field": "framework_version",
+        "issue": "Value 'torch>=2.0' is a floating lower-bound, not a pinned MAJOR.MINOR.PATCH version. Triggers Q10/Q11 cap at 4, but baseline already lower so no additional deduction.",
+        "questions_impacted": ["Q10", "Q11"]
+      }
+    ],
+    "format_warnings": [
+      {
+        "field": "model_details.citations[].style",
+        "issue": "Citations are IEEE-formatted strings rather than BibTeX entries. The rubric prefers BibTeX, but YAML structure is well-formed and citation 'style' key is populated; no cap applied.",
+        "questions_impacted": ["Q14"]
+      },
+      {
+        "field": "model_details.references[].reference",
+        "issue": "References list only URLs; no DOIs included (e.g., SaProt ICLR paper and DeepLoc 2.0 paper both have DOIs that could be cited).",
+        "questions_impacted": ["Q14"]
+      },
+      {
+        "field": "model_details.version.name",
+        "issue": "'1.0' is a recognizable release tag but not a full MAJOR.MINOR.PATCH semver triple. Accepted under the recognizable-release-tag clause; no cap applied.",
+        "questions_impacted": ["Q13"]
+      }
+    ],
+    "consistency_failures": [
+      {
+        "rule": "bias_model/bias_output populated → tradeoffs must acknowledge accuracy-vs-fairness",
+        "issue": "bias_model (species/family bias) and bias_output (rare-class under-prediction for peroxisome/plastid) are populated, but considerations.tradeoffs[] only covers model size (650M vs 35M) vs accuracy and inference cost. There is no documented tradeoff addressing aggregate accuracy vs rare-compartment performance or fairness across underrepresented species.",
+        "questions_impacted": ["Q19"]
+      },
+      {
+        "rule": "Large model scale → non-trivial compute_infrastructure expected",
+        "issue": "model_architecture describes a 650M-parameter base, but model_parameters.compute_infrastructure is absent and the only compute mention is 'single GPU, FP16' in prose. Cap rule would set Q15 at 3, but baseline already 0; cap is not the binding constraint.",
+        "questions_impacted": ["Q15"]
+      }
+    ],
+    "consistency_passes": [
+      {
+        "rule": "pipeline_tag ↔ I/O format",
+        "note": "pipeline_tag='text-classification' is consistent with output 'raw logits over 10 classes'."
+      },
+      {
+        "rule": "base_model license ↔ derived model license",
+        "note": "SaProt_650M_AF2 (MIT upstream) and MIT downstream are compatible."
+      },
+      {
+        "rule": "benchmark dataset ↔ training data",
+        "note": "DeepLoc test slice is the held-out partition of the DeepLoc training set; standard train/test split, not leakage."
+      },
+      {
+        "rule": "sensitive_data_used ↔ ethical_considerations",
+        "note": "sensitive_data field documents 'No human PII; SwissProt protein sequences only'; sensitive_data_used flag is not asserted true, so privacy-requirement rule does not trigger."
+      },
+      {
+        "rule": "high-risk model class ↔ out_of_scope_uses",
+        "note": "Protein localization classifier is not in the high-risk list (LLM/face/medical-imaging/surveillance); rule does not trigger. out_of_scope_uses is nevertheless populated."
+      }
+    ],
+    "plausibility_failures": [],
+    "plausibility_passes": [
+      {
+        "field": "quantitative_analysis.performance_metrics[0].value",
+        "note": "test accuracy 85.75% is within [0, 100] and consistent with published SaProt-family benchmarks on DeepLoc."
+      },
+      {
+        "field": "model_details.version.date",
+        "note": "2024-08-01 is not in the future (today: 2026-06-15) and does not predate the cited SaProt ICLR 2024 paper."
+      },
+      {
+        "field": "training hyperparameters",
+        "note": "AdamW lr=5e-4, batch=64, 100 epochs, FP16 with LoRA rank=16/alpha=32 is a typical regime for protein-LM LoRA fine-tuning."
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Complete structural metadata: all required fields, eight tags, pipeline_tag, language, model_category, and full I/O specification including format maps and class interpretation.",
+      "Strong responsible-AI block: concrete ethical concern with mitigation, both bias_model and bias_output narratives, three model-specific out-of-scope statements, and three concrete limitations.",
+      "Comprehensive training-procedure disclosure: optimizer, LR, batch size, epochs, loss, LoRA rank/alpha/dropout, weight decay, AdamW betas, and mixed-precision setting.",
+      "Format-correct identifiers: MIT is a valid SPDX id; HF Hub URLs follow the {org}/{model} convention; version date is valid ISO 8601; accuracy value is in the [0, 100] range.",
+      "Good cross-platform interlinking via base_model, datasets, GitHub, and DeepLoc references."
+    ],
+    "weaknesses": [
+      "Tradeoffs do not acknowledge the accuracy-vs-fairness tension implied by the disclosed bias_model and bias_output (semantic cap on Q19 from 5 to 3).",
+      "No funding/grant/computing-facility acknowledgements (Q7 = 0).",
+      "compute_infrastructure section is absent; with a 650M base, total GPU-hours and energy/carbon should be documented (Q15 = 0).",
+      "framework_version='torch>=2.0' is a floating lower bound rather than a pinned release, and no model_index is provided (Q10, Q11 = 3).",
+      "Performance reporting is thin: one accuracy on one aggregate slice, no per-class breakdown or confidence intervals (Q18 = 3).",
+      "Citations are IEEE strings rather than BibTeX, and references list URLs but no DOIs (Q14 = 4)."
+    ],
+    "recommendations": [
+      "Add a tradeoff statement that explicitly pairs the bias_model/bias_output disclosures with the accuracy-vs-rare-class or aggregate-vs-fairness tension (this alone would restore Q19 toward 5).",
+      "Add a model_parameters.compute_infrastructure section with GPU model and count, total GPU-hours, and an energy or carbon estimate.",
+      "Disclose the funder, grant ID, and any computing facility (e.g., the Westlake cluster) that supported training.",
+      "Expand performance_metrics with per-compartment accuracy / macro-F1 and bootstrap 95% confidence intervals so rare-class performance is visible.",
+      "Pin framework_version to an exact PyTorch release (e.g., torch==2.1.0) and add a Papers-with-Code-style model_index entry or Dockerfile/lockfile reference.",
+      "Promote references to DOIs where available (SaProt ICLR paper, DeepLoc 2.0 paper) and convert citations to BibTeX entries."
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "90243831-8191-4283-8054-61bf9bfd9a20",
+    "rubric_hash": "56fd93ed17d3156cca659380b4adb0bf5a43510f397e821a948e379c3f0ad30a",
+    "model_card_hash": "0884bcc7614baeaed49a1856109bc352535541a870d3246db1f3427d86a1e0de"
+  }
+}

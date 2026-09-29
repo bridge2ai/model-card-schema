@@ -1,0 +1,370 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Model Card portfolio: hybrid vs LLM x rubric10 x rubric20</title><style>
+:root {
+  --good: #16a34a; --ok: #ca8a04; --bad: #dc2626;
+  --bg: #fafafa; --card: #fff; --border: #e5e5e5; --muted: #6b7280;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: #111;
+  margin: 0; padding: 2rem 1.5rem; line-height: 1.5;
+}
+header {
+  max-width: 1200px; margin: 0 auto 2rem;
+}
+h1 { font-size: 1.75rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.35rem; margin: 2rem 0 .75rem; padding-bottom: .35rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.05rem; margin: 1.25rem 0 .5rem; }
+.meta { color: var(--muted); font-size: .9rem; }
+main { max-width: 1200px; margin: 0 auto; }
+
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem; margin-bottom: 1.5rem;
+}
+.summary-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem;
+}
+.summary-card h4 { margin: 0 0 .5rem; font-size: .95rem; font-weight: 600; }
+.summary-card .file { color: var(--muted); font-size: .8rem; word-break: break-all; }
+.score-big {
+  display: flex; align-items: baseline; gap: .5rem; margin-top: .5rem;
+}
+.score-big .pct { font-size: 1.5rem; font-weight: 700; }
+.score-big .raw { color: var(--muted); font-size: .9rem; }
+
+.bar { background: #f3f4f6; border-radius: 4px; height: 8px; overflow: hidden; margin-top: .4rem; }
+.bar > div { height: 100%; transition: width .2s; }
+.bar.good > div { background: var(--good); }
+.bar.ok   > div { background: var(--ok); }
+.bar.bad  > div { background: var(--bad); }
+
+details { margin: .75rem 0; background: var(--card); border: 1px solid var(--border); border-radius: 6px; }
+details > summary {
+  padding: .65rem .9rem; cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary { border-bottom: 1px solid var(--border); }
+.elem-name { font-weight: 600; }
+.elem-score { font-weight: 600; font-variant-numeric: tabular-nums; }
+.elem-score.good { color: var(--good); }
+.elem-score.ok   { color: var(--ok); }
+.elem-score.bad  { color: var(--bad); }
+
+table { width: 100%; border-collapse: collapse; margin: 0; }
+th, td { padding: .55rem .9rem; text-align: left; vertical-align: top; border-top: 1px solid var(--border); font-size: .9rem; }
+th { background: #f9fafb; font-weight: 600; }
+td.score, th.score { text-align: right; width: 70px; font-variant-numeric: tabular-nums; }
+td.score.good { color: var(--good); font-weight: 600; }
+td.score.bad  { color: var(--bad); font-weight: 600; }
+td.evidence { color: var(--muted); font-family: ui-monospace, "SF Mono", monospace; font-size: .8rem; }
+td .note { color: #374151; }
+
+.assessment {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.5rem 0;
+}
+@media (max-width: 800px) { .assessment { grid-template-columns: 1fr; } }
+.assessment .col {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+}
+.assessment h4 { margin: 0 0 .5rem; font-size: .95rem; }
+.assessment ul { margin: 0; padding-left: 1.25rem; font-size: .88rem; }
+.assessment li { margin-bottom: .35rem; }
+
+.section-tag {
+  display: inline-block; font-size: .75rem; font-weight: 600; padding: .15rem .5rem;
+  border-radius: 4px; background: #eff6ff; color: #1e3a8a; margin-right: .5rem;
+}
+.section-tag.semantic { background: #f3e8ff; color: #6b21a8; }
+.section-tag.r20 { background: #ecfeff; color: #155e75; }
+
+.semantic-analysis {
+  background: #faf5ff; border-left: 3px solid #a855f7;
+  margin: .35rem 0 0; padding: .5rem .75rem; font-size: .82rem; color: #4c1d95;
+  border-radius: 0 4px 4px 0;
+}
+.error {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;
+  padding: 1rem; color: #991b1b; margin: 1rem 0;
+}
+.error code { background: #fff1f2; padding: 0 .35rem; border-radius: 3px; }
+
+/* Comparison view */
+.compare-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.25rem; margin: 1.25rem 0;
+}
+.compare-card h3 { margin-top: 0; }
+.compare-matrix {
+  width: 100%; border-collapse: collapse; margin: .5rem 0 1rem;
+}
+.compare-matrix th, .compare-matrix td {
+  padding: .55rem .8rem; border: 1px solid var(--border); text-align: center;
+  font-size: .9rem; vertical-align: middle;
+}
+.compare-matrix th { background: #f9fafb; font-weight: 600; }
+.compare-matrix td.score-cell {
+  font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.compare-matrix td.score-cell .pct { font-size: 1.1rem; }
+.compare-matrix td.score-cell .raw { color: var(--muted); font-size: .75rem; display: block; }
+.compare-matrix td.empty { color: var(--muted); font-size: .8rem; background: #fafafa; }
+.delta {
+  font-size: .75rem; padding: .15rem .45rem; border-radius: 4px;
+  display: inline-block; margin-top: .2rem;
+}
+.delta.lenient { background: #fef3c7; color: #92400e; }
+.delta.strict  { background: #fce7f3; color: #9d174d; }
+.delta.match   { background: #dcfce7; color: #166534; }
+.element-diff {
+  background: #f9fafb; border: 1px solid var(--border); border-radius: 6px;
+  padding: .75rem 1rem; margin: 1rem 0;
+}
+.element-diff h4 { margin: 0 0 .5rem; font-size: .9rem; }
+.element-diff table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.element-diff th, .element-diff td {
+  padding: .35rem .6rem; border-top: 1px solid var(--border); text-align: left;
+}
+.element-diff th { background: #f3f4f6; }
+.element-diff td.score { text-align: right; font-variant-numeric: tabular-nums; }
+footer { color: var(--muted); font-size: .8rem; text-align: center; margin: 2rem 0 0; }
+</style></head><body><header><h1>Model Card portfolio: hybrid vs LLM x rubric10 x rubric20</h1><div class="meta">Generated 2026-06-24T19:36:02.279120+00:00 · comparison across 41 evaluation(s) over 11 model card(s)</div></header><main>
+<h2>Cross-Evaluator Comparison</h2>
+<p class="meta">Per-cell color shows score band (green ≥80%, yellow ≥50%, red &lt;50%). Δ pills show the gap between hybrid and LLM on the same rubric — <span class="delta lenient">+Δ</span> means hybrid is more lenient, <span class="delta strict">−Δ</span> means hybrid is stricter, <span class="delta match">≈</span> means they agree within 2pp.</p>
+<div class="compare-card">
+<h3>climate-forecasting-model-card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">96.0%</span><span class="raw">48/50</span><div class="delta strict">-2.0pp vs peer</div></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">98.0%</span><span class="raw">49.0/50</span><div class="delta lenient">+2.0pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric10 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">90.0%</span><span class="raw">45.0/50</span></td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">94.0%</span><span class="raw">79/84</span><div class="delta match">≈ peer</div></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">94.0%</span><span class="raw">79/84</span><div class="delta match">≈ peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric20 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">94.0%</span><span class="raw">79/84</span></td>
+</tr>
+</tbody></table>
+<div class="element-diff"><h4>Rubric10 element-by-element: hybrid vs LLM</h4><table><thead><tr><th>Element</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>1. Model Discovery and Identification</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>2. Model Access and Distribution</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>3. Model Reuse and Interoperability</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>4. Ethical Use and Responsible AI</td><td class="score">3/5</td><td class="score">5/5</td><td><span class="delta strict">-2</span></td></tr><tr><td>5. Model Architecture and Training Composition</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>6. Model Provenance and Versioning</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>7. Scientific Motivation and Funding Transparency</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>8. Training and Evaluation Transparency</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>9. Performance Evaluation and Limitations Disclosure</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>10. Cross-Platform and Community Integration</td><td class="score">5/5</td><td class="score">4/5</td><td><span class="delta lenient">+1</span></td></tr></tbody></table></div>
+<div class="element-diff"><h4>Rubric20 category-by-category: hybrid vs LLM</h4><table><thead><tr><th>Category</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>Metadata Quality &amp; Content</td><td class="score">19/21</td><td class="score">19/21</td><td><span class="delta match">≡</span></td></tr><tr><td>Performance &amp; FAIRness</td><td class="score">17/17</td><td class="score">17/17</td><td><span class="delta match">≡</span></td></tr><tr><td>Structural Completeness</td><td class="score">21/21</td><td class="score">20/21</td><td><span class="delta lenient">+1</span></td></tr><tr><td>Technical Documentation</td><td class="score">22/25</td><td class="score">23/25</td><td><span class="delta strict">-1</span></td></tr></tbody></table></div>
+</div>
+<div class="compare-card">
+<h3>climate-model-extended.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">94.0%</span><span class="raw">47/50</span><div class="delta lenient">+2.0pp vs peer</div></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">92.0%</span><span class="raw">46/50</span><div class="delta strict">-2.0pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric10 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">92.0%</span><span class="raw">46/50</span></td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">88.1%</span><span class="raw">74/84</span><div class="delta strict">-2.4pp vs peer</div></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">90.5%</span><span class="raw">76/84</span><div class="delta lenient">+2.4pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric20 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">88.1%</span><span class="raw">74/84</span></td>
+</tr>
+</tbody></table>
+<div class="element-diff"><h4>Rubric10 element-by-element: hybrid vs LLM</h4><table><thead><tr><th>Element</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>1. Model Discovery and Identification</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>2. Model Access and Distribution</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>3. Model Reuse and Interoperability</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>4. Ethical Use and Responsible AI</td><td class="score">3/5</td><td class="score">3/5</td><td><span class="delta match">≡</span></td></tr><tr><td>5. Model Architecture and Training Composition</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>6. Model Provenance and Versioning</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>7. Scientific Motivation and Funding Transparency</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>8. Training and Evaluation Transparency</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>9. Performance Evaluation and Limitations Disclosure</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>10. Cross-Platform and Community Integration</td><td class="score">4/5</td><td class="score">3/5</td><td><span class="delta lenient">+1</span></td></tr></tbody></table></div>
+<div class="element-diff"><h4>Rubric20 category-by-category: hybrid vs LLM</h4><table><thead><tr><th>Category</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>Metadata Quality &amp; Content</td><td class="score">17/21</td><td class="score">17/21</td><td><span class="delta match">≡</span></td></tr><tr><td>Performance &amp; FAIRness</td><td class="score">17/17</td><td class="score">17/17</td><td><span class="delta match">≡</span></td></tr><tr><td>Structural Completeness</td><td class="score">17/21</td><td class="score">19/21</td><td><span class="delta strict">-2</span></td></tr><tr><td>Technical Documentation</td><td class="score">23/25</td><td class="score">23/25</td><td><span class="delta match">≡</span></td></tr></tbody></table></div>
+</div>
+<div class="compare-card">
+<h3>clip_vit_base_patch32_model_card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">92.0%</span><span class="raw">46/50</span></td>
+<td class="empty">—</td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">76.2%</span><span class="raw">64/84</span></td>
+<td class="empty">—</td>
+</tr>
+</tbody></table>
+
+
+</div>
+<div class="compare-card">
+<h3>densenet121_tv_in1k_model_card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">82.0%</span><span class="raw">41/50</span><div class="delta lenient">+2.0pp vs peer</div></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">80.0%</span><span class="raw">40/50</span><div class="delta strict">-2.0pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric10 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">74.0%</span><span class="raw">37.0/50</span></td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">69.0%</span><span class="raw">58/84</span><div class="delta strict">-6.0pp vs peer</div></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">75.0%</span><span class="raw">63/84</span><div class="delta lenient">+6.0pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric20 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">72.6%</span><span class="raw">61/84</span></td>
+</tr>
+</tbody></table>
+<div class="element-diff"><h4>Rubric10 element-by-element: hybrid vs LLM</h4><table><thead><tr><th>Element</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>1. Model Discovery and Identification</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>2. Model Access and Distribution</td><td class="score">5/5</td><td class="score">4/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>3. Model Reuse and Interoperability</td><td class="score">4/5</td><td class="score">4/5</td><td><span class="delta match">≡</span></td></tr><tr><td>4. Ethical Use and Responsible AI</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>5. Model Architecture and Training Composition</td><td class="score">2/5</td><td class="score">3/5</td><td><span class="delta strict">-1</span></td></tr><tr><td>6. Model Provenance and Versioning</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>7. Scientific Motivation and Funding Transparency</td><td class="score">4/5</td><td class="score">2/5</td><td><span class="delta lenient">+2</span></td></tr><tr><td>8. Training and Evaluation Transparency</td><td class="score">3/5</td><td class="score">3/5</td><td><span class="delta match">≡</span></td></tr><tr><td>9. Performance Evaluation and Limitations Disclosure</td><td class="score">4/5</td><td class="score">4/5</td><td><span class="delta match">≡</span></td></tr><tr><td>10. Cross-Platform and Community Integration</td><td class="score">4/5</td><td class="score">5/5</td><td><span class="delta strict">-1</span></td></tr></tbody></table></div>
+<div class="element-diff"><h4>Rubric20 category-by-category: hybrid vs LLM</h4><table><thead><tr><th>Category</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>Metadata Quality &amp; Content</td><td class="score">15/21</td><td class="score">14/21</td><td><span class="delta lenient">+1</span></td></tr><tr><td>Performance &amp; FAIRness</td><td class="score">11/17</td><td class="score">15/17</td><td><span class="delta strict">-4</span></td></tr><tr><td>Structural Completeness</td><td class="score">21/21</td><td class="score">21/21</td><td><span class="delta match">≡</span></td></tr><tr><td>Technical Documentation</td><td class="score">11/25</td><td class="score">13/25</td><td><span class="delta strict">-2</span></td></tr></tbody></table></div>
+</div>
+<div class="compare-card">
+<h3>imdb-sentiment-datasheet-v1.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--bad)"><span class="pct">0.0%</span><span class="raw">0/84</span></td>
+<td class="empty">—</td>
+</tr>
+</tbody></table>
+
+
+</div>
+<div class="compare-card">
+<h3>llama_2_7b_hf_model_card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">90.0%</span><span class="raw">45/50</span></td>
+<td class="empty">—</td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">73.8%</span><span class="raw">62/84</span></td>
+<td class="empty">—</td>
+</tr>
+</tbody></table>
+
+
+</div>
+<div class="compare-card">
+<h3>minimal-model-card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--bad)"><span class="pct">0.0%</span><span class="raw">0/50</span></td>
+<td class="empty">—</td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--bad)"><span class="pct">1.2%</span><span class="raw">1/84</span></td>
+<td class="empty">—</td>
+</tr>
+</tbody></table>
+
+
+</div>
+<div class="compare-card">
+<h3>minimal-viable-model-card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--bad)"><span class="pct">30.0%</span><span class="raw">15/50</span></td>
+<td class="empty">—</td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--bad)"><span class="pct">28.6%</span><span class="raw">24/84</span></td>
+<td class="empty">—</td>
+</tr>
+</tbody></table>
+
+
+</div>
+<div class="compare-card">
+<h3>sentiment-classifier-with-datasheet-refs.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">82.0%</span><span class="raw">41/50</span><div class="delta lenient">+20.0pp vs peer</div></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">62.0%</span><span class="raw">31/50</span><div class="delta strict">-20.0pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric10 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">64.0%</span><span class="raw">32.0/50</span></td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">61.9%</span><span class="raw">52/84</span><div class="delta strict">-8.3pp vs peer</div></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">70.2%</span><span class="raw">59/84</span><div class="delta lenient">+8.3pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric20 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">66.7%</span><span class="raw">56/84</span></td>
+</tr>
+</tbody></table>
+<div class="element-diff"><h4>Rubric10 element-by-element: hybrid vs LLM</h4><table><thead><tr><th>Element</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>1. Model Discovery and Identification</td><td class="score">5/5</td><td class="score">3/5</td><td><span class="delta lenient">+2</span></td></tr><tr><td>2. Model Access and Distribution</td><td class="score">5/5</td><td class="score">2/5</td><td><span class="delta lenient">+3</span></td></tr><tr><td>3. Model Reuse and Interoperability</td><td class="score">4/5</td><td class="score">4/5</td><td><span class="delta match">≡</span></td></tr><tr><td>4. Ethical Use and Responsible AI</td><td class="score">3/5</td><td class="score">2/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>5. Model Architecture and Training Composition</td><td class="score">3/5</td><td class="score">3/5</td><td><span class="delta match">≡</span></td></tr><tr><td>6. Model Provenance and Versioning</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>7. Scientific Motivation and Funding Transparency</td><td class="score">3/5</td><td class="score">2/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>8. Training and Evaluation Transparency</td><td class="score">3/5</td><td class="score">1/5</td><td><span class="delta lenient">+2</span></td></tr><tr><td>9. Performance Evaluation and Limitations Disclosure</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>10. Cross-Platform and Community Integration</td><td class="score">5/5</td><td class="score">4/5</td><td><span class="delta lenient">+1</span></td></tr></tbody></table></div>
+<div class="element-diff"><h4>Rubric20 category-by-category: hybrid vs LLM</h4><table><thead><tr><th>Category</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>Metadata Quality &amp; Content</td><td class="score">12/21</td><td class="score">12/21</td><td><span class="delta match">≡</span></td></tr><tr><td>Performance &amp; FAIRness</td><td class="score">11/17</td><td class="score">13/17</td><td><span class="delta strict">-2</span></td></tr><tr><td>Structural Completeness</td><td class="score">17/21</td><td class="score">21/21</td><td><span class="delta strict">-4</span></td></tr><tr><td>Technical Documentation</td><td class="score">12/25</td><td class="score">13/25</td><td><span class="delta strict">-1</span></td></tr></tbody></table></div>
+</div>
+<div class="compare-card">
+<h3>stable_diffusion_xl_base_1_0_model_card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">90.0%</span><span class="raw">45/50</span></td>
+<td class="empty">—</td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">73.8%</span><span class="raw">62/84</span></td>
+<td class="empty">—</td>
+</tr>
+</tbody></table>
+
+
+</div>
+<div class="compare-card">
+<h3>subcell_saprot_650m_model_card.yaml</h3>
+<table class="compare-matrix"><thead><tr><th>Rubric / variant</th><th>Hybrid (heuristic)</th><th>LLM (semantic judge)</th></tr></thead><tbody>
+<tr>
+<td><strong>rubric10</strong></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">88.0%</span><span class="raw">44/50</span><div class="delta lenient">+8.0pp vs peer</div></td>
+<td class="score-cell" style="color: var(--good)"><span class="pct">80.0%</span><span class="raw">40/50</span><div class="delta strict">-8.0pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric10 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">78.0%</span><span class="raw">39.0/50</span></td>
+</tr>
+<tr>
+<td><strong>rubric20</strong></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">75.0%</span><span class="raw">63/84</span><div class="delta strict">-3.6pp vs peer</div></td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">78.6%</span><span class="raw">66/84</span><div class="delta lenient">+3.6pp vs peer</div></td>
+</tr>
+<tr>
+<td><strong>rubric20 semantic</strong></td>
+<td class="empty">—</td>
+<td class="score-cell" style="color: var(--ok)"><span class="pct">76.2%</span><span class="raw">64/84</span></td>
+</tr>
+</tbody></table>
+<div class="element-diff"><h4>Rubric10 element-by-element: hybrid vs LLM</h4><table><thead><tr><th>Element</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>1. Model Discovery and Identification</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>2. Model Access and Distribution</td><td class="score">5/5</td><td class="score">4/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>3. Model Reuse and Interoperability</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>4. Ethical Use and Responsible AI</td><td class="score">5/5</td><td class="score">5/5</td><td><span class="delta match">≡</span></td></tr><tr><td>5. Model Architecture and Training Composition</td><td class="score">3/5</td><td class="score">4/5</td><td><span class="delta strict">-1</span></td></tr><tr><td>6. Model Provenance and Versioning</td><td class="score">5/5</td><td class="score">4/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>7. Scientific Motivation and Funding Transparency</td><td class="score">4/5</td><td class="score">2/5</td><td><span class="delta lenient">+2</span></td></tr><tr><td>8. Training and Evaluation Transparency</td><td class="score">4/5</td><td class="score">3/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>9. Performance Evaluation and Limitations Disclosure</td><td class="score">4/5</td><td class="score">3/5</td><td><span class="delta lenient">+1</span></td></tr><tr><td>10. Cross-Platform and Community Integration</td><td class="score">4/5</td><td class="score">5/5</td><td><span class="delta strict">-1</span></td></tr></tbody></table></div>
+<div class="element-diff"><h4>Rubric20 category-by-category: hybrid vs LLM</h4><table><thead><tr><th>Category</th><th class="score">Hybrid</th><th class="score">LLM</th><th>Δ</th></tr></thead><tbody><tr><td>Metadata Quality &amp; Content</td><td class="score">15/21</td><td class="score">13/21</td><td><span class="delta lenient">+2</span></td></tr><tr><td>Performance &amp; FAIRness</td><td class="score">11/17</td><td class="score">15/17</td><td><span class="delta strict">-4</span></td></tr><tr><td>Structural Completeness</td><td class="score">21/21</td><td class="score">21/21</td><td><span class="delta match">≡</span></td></tr><tr><td>Technical Documentation</td><td class="score">16/25</td><td class="score">17/25</td><td><span class="delta strict">-1</span></td></tr></tbody></table></div>
+</div>
+</main>
+<footer>Model Card Schema evaluation comparison · Model Card portfolio: hybrid vs LLM x rubric10 x rubric20</footer>
+</body></html>

@@ -1,0 +1,55 @@
+# Example Datasheets for Datasets Creator instance
+# This is referenced by the model card's creator_references field
+#
+# Note: This is a simplified example showing key fields.
+# Full D4D Creator schema includes many more fields for comprehensive documentation.
+# See: https://github.com/bridge2ai/data-sheets-schema
+
+# Simulated D4D Creator structure (Person)
+creator_type: Person
+
+personal_information:
+  name: Jane Smith
+  email: jane.smith@climatelab.org
+  orcid: https://orcid.org/0000-0001-2345-6789
+
+affiliation:
+  organization: Climate AI Research Laboratory
+  department: Atmospheric Sciences
+  institution_url: https://climatelab.org
+
+roles:
+  # CRediT (Contributor Roles Taxonomy) roles
+  - role: Conceptualization
+    description: Ideas, formulation or evolution of overarching research goals and aims
+  - role: Methodology
+    description: Development or design of methodology, creation of models
+  - role: Software
+    description: Programming, software development, implementation
+  - role: Investigation
+    description: Conducting the research and investigation process
+  - role: Writing - Original Draft
+    description: Creation of the published work
+
+contact_information:
+  primary_email: jane.smith@climatelab.org
+  alternate_email: j.smith@university.edu
+  website: https://climatelab.org/people/jane-smith
+  github: https://github.com/janesmith
+
+professional_details:
+  position: Senior Research Scientist
+  expertise:
+    - Climate modeling
+    - Machine learning for Earth sciences
+    - Extreme weather prediction
+
+publications:
+  - title: "Climate Forecasting Transformer: Spatiotemporal Attention for Regional Weather Prediction"
+    doi: https://doi.org/10.1234/climate-ai-2025
+    year: 2025
+
+provenance:
+  created_on: 2025-01-15T09:00:00Z
+  modified_on: 2025-01-15T09:00:00Z
+  created_by: Jane Smith

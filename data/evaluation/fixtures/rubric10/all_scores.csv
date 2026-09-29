@@ -1,0 +1,2 @@
+model_card_file,total_score,max_score,percentage,elements_passing_3_of_5,element_1_score,element_2_score,element_3_score,element_4_score,element_5_score,element_6_score,element_7_score,element_8_score,element_9_score,element_10_score
+src/data/examples/fixtures/minimal-viable-model-card.yaml,15,50,30.0,1,2,0,2,1,2,2,3,0,1,2

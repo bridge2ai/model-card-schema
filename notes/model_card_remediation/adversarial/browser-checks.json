@@ -1,0 +1,54 @@
+[
+  {
+    "page": "densenet121_tv_in1k_model_card.html",
+    "width": 1360,
+    "overflow": 0,
+    "images": [
+      {
+        "loaded": true
+      },
+      {
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "page": "densenet121_tv_in1k_model_card.html",
+    "width": 390,
+    "overflow": 0,
+    "images": [
+      {
+        "loaded": true
+      },
+      {
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "page": "subcell_saprot_650m_model_card.html",
+    "width": 1360,
+    "overflow": 0,
+    "images": [
+      {
+        "loaded": true
+      },
+      {
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "page": "subcell_saprot_650m_model_card.html",
+    "width": 390,
+    "overflow": 0,
+    "images": [
+      {
+        "loaded": true
+      },
+      {
+        "loaded": true
+      }
+    ]
+  }
+]

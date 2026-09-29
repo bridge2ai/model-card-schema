@@ -1,0 +1,173 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Model Card portfolio quality badges</title><style>
+:root {
+  --good: #16a34a; --ok: #ca8a04; --bad: #dc2626;
+  --bg: #fafafa; --card: #fff; --border: #e5e5e5; --muted: #6b7280;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: #111;
+  margin: 0; padding: 2rem 1.5rem; line-height: 1.5;
+}
+header {
+  max-width: 1200px; margin: 0 auto 2rem;
+}
+h1 { font-size: 1.75rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.35rem; margin: 2rem 0 .75rem; padding-bottom: .35rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.05rem; margin: 1.25rem 0 .5rem; }
+.meta { color: var(--muted); font-size: .9rem; }
+main { max-width: 1200px; margin: 0 auto; }
+
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem; margin-bottom: 1.5rem;
+}
+.summary-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem;
+}
+.summary-card h4 { margin: 0 0 .5rem; font-size: .95rem; font-weight: 600; }
+.summary-card .file { color: var(--muted); font-size: .8rem; word-break: break-all; }
+.score-big {
+  display: flex; align-items: baseline; gap: .5rem; margin-top: .5rem;
+}
+.score-big .pct { font-size: 1.5rem; font-weight: 700; }
+.score-big .raw { color: var(--muted); font-size: .9rem; }
+
+.bar { background: #f3f4f6; border-radius: 4px; height: 8px; overflow: hidden; margin-top: .4rem; }
+.bar > div { height: 100%; transition: width .2s; }
+.bar.good > div { background: var(--good); }
+.bar.ok   > div { background: var(--ok); }
+.bar.bad  > div { background: var(--bad); }
+
+details { margin: .75rem 0; background: var(--card); border: 1px solid var(--border); border-radius: 6px; }
+details > summary {
+  padding: .65rem .9rem; cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary { border-bottom: 1px solid var(--border); }
+.elem-name { font-weight: 600; }
+.elem-score { font-weight: 600; font-variant-numeric: tabular-nums; }
+.elem-score.good { color: var(--good); }
+.elem-score.ok   { color: var(--ok); }
+.elem-score.bad  { color: var(--bad); }
+
+table { width: 100%; border-collapse: collapse; margin: 0; }
+th, td { padding: .55rem .9rem; text-align: left; vertical-align: top; border-top: 1px solid var(--border); font-size: .9rem; }
+th { background: #f9fafb; font-weight: 600; }
+td.score, th.score { text-align: right; width: 70px; font-variant-numeric: tabular-nums; }
+td.score.good { color: var(--good); font-weight: 600; }
+td.score.bad  { color: var(--bad); font-weight: 600; }
+td.evidence { color: var(--muted); font-family: ui-monospace, "SF Mono", monospace; font-size: .8rem; }
+td .note { color: #374151; }
+
+.assessment {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.5rem 0;
+}
+@media (max-width: 800px) { .assessment { grid-template-columns: 1fr; } }
+.assessment .col {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+}
+.assessment h4 { margin: 0 0 .5rem; font-size: .95rem; }
+.assessment ul { margin: 0; padding-left: 1.25rem; font-size: .88rem; }
+.assessment li { margin-bottom: .35rem; }
+
+.section-tag {
+  display: inline-block; font-size: .75rem; font-weight: 600; padding: .15rem .5rem;
+  border-radius: 4px; background: #eff6ff; color: #1e3a8a; margin-right: .5rem;
+}
+.section-tag.semantic { background: #f3e8ff; color: #6b21a8; }
+.section-tag.r20 { background: #ecfeff; color: #155e75; }
+
+.semantic-analysis {
+  background: #faf5ff; border-left: 3px solid #a855f7;
+  margin: .35rem 0 0; padding: .5rem .75rem; font-size: .82rem; color: #4c1d95;
+  border-radius: 0 4px 4px 0;
+}
+.error {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;
+  padding: 1rem; color: #991b1b; margin: 1rem 0;
+}
+.error code { background: #fff1f2; padding: 0 .35rem; border-radius: 3px; }
+
+/* Comparison view */
+.compare-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.25rem; margin: 1.25rem 0;
+}
+.compare-card h3 { margin-top: 0; }
+.compare-matrix {
+  width: 100%; border-collapse: collapse; margin: .5rem 0 1rem;
+}
+.compare-matrix th, .compare-matrix td {
+  padding: .55rem .8rem; border: 1px solid var(--border); text-align: center;
+  font-size: .9rem; vertical-align: middle;
+}
+.compare-matrix th { background: #f9fafb; font-weight: 600; }
+.compare-matrix td.score-cell {
+  font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.compare-matrix td.score-cell .pct { font-size: 1.1rem; }
+.compare-matrix td.score-cell .raw { color: var(--muted); font-size: .75rem; display: block; }
+.compare-matrix td.empty { color: var(--muted); font-size: .8rem; background: #fafafa; }
+.delta {
+  font-size: .75rem; padding: .15rem .45rem; border-radius: 4px;
+  display: inline-block; margin-top: .2rem;
+}
+.delta.lenient { background: #fef3c7; color: #92400e; }
+.delta.strict  { background: #fce7f3; color: #9d174d; }
+.delta.match   { background: #dcfce7; color: #166534; }
+.element-diff {
+  background: #f9fafb; border: 1px solid var(--border); border-radius: 6px;
+  padding: .75rem 1rem; margin: 1rem 0;
+}
+.element-diff h4 { margin: 0 0 .5rem; font-size: .9rem; }
+.element-diff table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.element-diff th, .element-diff td {
+  padding: .35rem .6rem; border-top: 1px solid var(--border); text-align: left;
+}
+.element-diff th { background: #f3f4f6; }
+.element-diff td.score { text-align: right; font-variant-numeric: tabular-nums; }
+footer { color: var(--muted); font-size: .8rem; text-align: center; margin: 2rem 0 0; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }th, td { padding: .55rem .9rem; border-top: 1px solid var(--border); text-align: left; vertical-align: middle; }th { background: #f9fafb; font-weight: 600; }code { font-size: .85rem; background: #f3f4f6; padding: .1rem .35rem; border-radius: 3px; }</style></head><body><header><h1>Model Card portfolio quality badges</h1><div class="meta">Generated 2026-06-24T19:36:02.911541+00:00 · 41 badge(s)</div></header><main><table><thead><tr><th>Badge</th><th>Filename</th><th>Markdown snippet</th></tr></thead><tbody><tr><td><img src="climate-forecasting-model-card_rubric10_hybrid.svg" alt="climate-forecasting-model-card_rubric10_hybrid"></td><td><code>climate-forecasting-model-card_rubric10_hybrid</code></td><td><code>![climate-forecasting-model-card_rubric10_hybrid](./climate-forecasting-model-card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="climate-forecasting-model-card_rubric10_llm.svg" alt="climate-forecasting-model-card_rubric10_llm"></td><td><code>climate-forecasting-model-card_rubric10_llm</code></td><td><code>![climate-forecasting-model-card_rubric10_llm](./climate-forecasting-model-card_rubric10_llm.svg)</code></td></tr>
+<tr><td><img src="climate-forecasting-model-card_rubric10_semantic_llm.svg" alt="climate-forecasting-model-card_rubric10_semantic_llm"></td><td><code>climate-forecasting-model-card_rubric10_semantic_llm</code></td><td><code>![climate-forecasting-model-card_rubric10_semantic_llm](./climate-forecasting-model-card_rubric10_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="climate-forecasting-model-card_rubric20_hybrid.svg" alt="climate-forecasting-model-card_rubric20_hybrid"></td><td><code>climate-forecasting-model-card_rubric20_hybrid</code></td><td><code>![climate-forecasting-model-card_rubric20_hybrid](./climate-forecasting-model-card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="climate-forecasting-model-card_rubric20_llm.svg" alt="climate-forecasting-model-card_rubric20_llm"></td><td><code>climate-forecasting-model-card_rubric20_llm</code></td><td><code>![climate-forecasting-model-card_rubric20_llm](./climate-forecasting-model-card_rubric20_llm.svg)</code></td></tr>
+<tr><td><img src="climate-forecasting-model-card_rubric20_semantic_llm.svg" alt="climate-forecasting-model-card_rubric20_semantic_llm"></td><td><code>climate-forecasting-model-card_rubric20_semantic_llm</code></td><td><code>![climate-forecasting-model-card_rubric20_semantic_llm](./climate-forecasting-model-card_rubric20_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="climate-model-extended_rubric10_hybrid.svg" alt="climate-model-extended_rubric10_hybrid"></td><td><code>climate-model-extended_rubric10_hybrid</code></td><td><code>![climate-model-extended_rubric10_hybrid](./climate-model-extended_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="climate-model-extended_rubric10_llm.svg" alt="climate-model-extended_rubric10_llm"></td><td><code>climate-model-extended_rubric10_llm</code></td><td><code>![climate-model-extended_rubric10_llm](./climate-model-extended_rubric10_llm.svg)</code></td></tr>
+<tr><td><img src="climate-model-extended_rubric10_semantic_llm.svg" alt="climate-model-extended_rubric10_semantic_llm"></td><td><code>climate-model-extended_rubric10_semantic_llm</code></td><td><code>![climate-model-extended_rubric10_semantic_llm](./climate-model-extended_rubric10_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="climate-model-extended_rubric20_hybrid.svg" alt="climate-model-extended_rubric20_hybrid"></td><td><code>climate-model-extended_rubric20_hybrid</code></td><td><code>![climate-model-extended_rubric20_hybrid](./climate-model-extended_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="climate-model-extended_rubric20_llm.svg" alt="climate-model-extended_rubric20_llm"></td><td><code>climate-model-extended_rubric20_llm</code></td><td><code>![climate-model-extended_rubric20_llm](./climate-model-extended_rubric20_llm.svg)</code></td></tr>
+<tr><td><img src="climate-model-extended_rubric20_semantic_llm.svg" alt="climate-model-extended_rubric20_semantic_llm"></td><td><code>climate-model-extended_rubric20_semantic_llm</code></td><td><code>![climate-model-extended_rubric20_semantic_llm](./climate-model-extended_rubric20_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="clip_vit_base_patch32_model_card_rubric10_hybrid.svg" alt="clip_vit_base_patch32_model_card_rubric10_hybrid"></td><td><code>clip_vit_base_patch32_model_card_rubric10_hybrid</code></td><td><code>![clip_vit_base_patch32_model_card_rubric10_hybrid](./clip_vit_base_patch32_model_card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="clip_vit_base_patch32_model_card_rubric20_hybrid.svg" alt="clip_vit_base_patch32_model_card_rubric20_hybrid"></td><td><code>clip_vit_base_patch32_model_card_rubric20_hybrid</code></td><td><code>![clip_vit_base_patch32_model_card_rubric20_hybrid](./clip_vit_base_patch32_model_card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="densenet121_tv_in1k_model_card_rubric10_hybrid.svg" alt="densenet121_tv_in1k_model_card_rubric10_hybrid"></td><td><code>densenet121_tv_in1k_model_card_rubric10_hybrid</code></td><td><code>![densenet121_tv_in1k_model_card_rubric10_hybrid](./densenet121_tv_in1k_model_card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="densenet121_tv_in1k_model_card_rubric10_llm.svg" alt="densenet121_tv_in1k_model_card_rubric10_llm"></td><td><code>densenet121_tv_in1k_model_card_rubric10_llm</code></td><td><code>![densenet121_tv_in1k_model_card_rubric10_llm](./densenet121_tv_in1k_model_card_rubric10_llm.svg)</code></td></tr>
+<tr><td><img src="densenet121_tv_in1k_model_card_rubric10_semantic_llm.svg" alt="densenet121_tv_in1k_model_card_rubric10_semantic_llm"></td><td><code>densenet121_tv_in1k_model_card_rubric10_semantic_llm</code></td><td><code>![densenet121_tv_in1k_model_card_rubric10_semantic_llm](./densenet121_tv_in1k_model_card_rubric10_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="densenet121_tv_in1k_model_card_rubric20_hybrid.svg" alt="densenet121_tv_in1k_model_card_rubric20_hybrid"></td><td><code>densenet121_tv_in1k_model_card_rubric20_hybrid</code></td><td><code>![densenet121_tv_in1k_model_card_rubric20_hybrid](./densenet121_tv_in1k_model_card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="densenet121_tv_in1k_model_card_rubric20_llm.svg" alt="densenet121_tv_in1k_model_card_rubric20_llm"></td><td><code>densenet121_tv_in1k_model_card_rubric20_llm</code></td><td><code>![densenet121_tv_in1k_model_card_rubric20_llm](./densenet121_tv_in1k_model_card_rubric20_llm.svg)</code></td></tr>
+<tr><td><img src="densenet121_tv_in1k_model_card_rubric20_semantic_llm.svg" alt="densenet121_tv_in1k_model_card_rubric20_semantic_llm"></td><td><code>densenet121_tv_in1k_model_card_rubric20_semantic_llm</code></td><td><code>![densenet121_tv_in1k_model_card_rubric20_semantic_llm](./densenet121_tv_in1k_model_card_rubric20_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="imdb-sentiment-datasheet-v1_rubric20_hybrid.svg" alt="imdb-sentiment-datasheet-v1_rubric20_hybrid"></td><td><code>imdb-sentiment-datasheet-v1_rubric20_hybrid</code></td><td><code>![imdb-sentiment-datasheet-v1_rubric20_hybrid](./imdb-sentiment-datasheet-v1_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="llama_2_7b_hf_model_card_rubric10_hybrid.svg" alt="llama_2_7b_hf_model_card_rubric10_hybrid"></td><td><code>llama_2_7b_hf_model_card_rubric10_hybrid</code></td><td><code>![llama_2_7b_hf_model_card_rubric10_hybrid](./llama_2_7b_hf_model_card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="llama_2_7b_hf_model_card_rubric20_hybrid.svg" alt="llama_2_7b_hf_model_card_rubric20_hybrid"></td><td><code>llama_2_7b_hf_model_card_rubric20_hybrid</code></td><td><code>![llama_2_7b_hf_model_card_rubric20_hybrid](./llama_2_7b_hf_model_card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="minimal-model-card_rubric10_hybrid.svg" alt="minimal-model-card_rubric10_hybrid"></td><td><code>minimal-model-card_rubric10_hybrid</code></td><td><code>![minimal-model-card_rubric10_hybrid](./minimal-model-card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="minimal-model-card_rubric20_hybrid.svg" alt="minimal-model-card_rubric20_hybrid"></td><td><code>minimal-model-card_rubric20_hybrid</code></td><td><code>![minimal-model-card_rubric20_hybrid](./minimal-model-card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="minimal-viable-model-card_rubric10_hybrid.svg" alt="minimal-viable-model-card_rubric10_hybrid"></td><td><code>minimal-viable-model-card_rubric10_hybrid</code></td><td><code>![minimal-viable-model-card_rubric10_hybrid](./minimal-viable-model-card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="minimal-viable-model-card_rubric20_hybrid.svg" alt="minimal-viable-model-card_rubric20_hybrid"></td><td><code>minimal-viable-model-card_rubric20_hybrid</code></td><td><code>![minimal-viable-model-card_rubric20_hybrid](./minimal-viable-model-card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="sentiment-classifier-with-datasheet-refs_rubric10_hybrid.svg" alt="sentiment-classifier-with-datasheet-refs_rubric10_hybrid"></td><td><code>sentiment-classifier-with-datasheet-refs_rubric10_hybrid</code></td><td><code>![sentiment-classifier-with-datasheet-refs_rubric10_hybrid](./sentiment-classifier-with-datasheet-refs_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="sentiment-classifier-with-datasheet-refs_rubric10_llm.svg" alt="sentiment-classifier-with-datasheet-refs_rubric10_llm"></td><td><code>sentiment-classifier-with-datasheet-refs_rubric10_llm</code></td><td><code>![sentiment-classifier-with-datasheet-refs_rubric10_llm](./sentiment-classifier-with-datasheet-refs_rubric10_llm.svg)</code></td></tr>
+<tr><td><img src="sentiment-classifier-with-datasheet-refs_rubric10_semantic_llm.svg" alt="sentiment-classifier-with-datasheet-refs_rubric10_semantic_llm"></td><td><code>sentiment-classifier-with-datasheet-refs_rubric10_semantic_llm</code></td><td><code>![sentiment-classifier-with-datasheet-refs_rubric10_semantic_llm](./sentiment-classifier-with-datasheet-refs_rubric10_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="sentiment-classifier-with-datasheet-refs_rubric20_hybrid.svg" alt="sentiment-classifier-with-datasheet-refs_rubric20_hybrid"></td><td><code>sentiment-classifier-with-datasheet-refs_rubric20_hybrid</code></td><td><code>![sentiment-classifier-with-datasheet-refs_rubric20_hybrid](./sentiment-classifier-with-datasheet-refs_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="sentiment-classifier-with-datasheet-refs_rubric20_llm.svg" alt="sentiment-classifier-with-datasheet-refs_rubric20_llm"></td><td><code>sentiment-classifier-with-datasheet-refs_rubric20_llm</code></td><td><code>![sentiment-classifier-with-datasheet-refs_rubric20_llm](./sentiment-classifier-with-datasheet-refs_rubric20_llm.svg)</code></td></tr>
+<tr><td><img src="sentiment-classifier-with-datasheet-refs_rubric20_semantic_llm.svg" alt="sentiment-classifier-with-datasheet-refs_rubric20_semantic_llm"></td><td><code>sentiment-classifier-with-datasheet-refs_rubric20_semantic_llm</code></td><td><code>![sentiment-classifier-with-datasheet-refs_rubric20_semantic_llm](./sentiment-classifier-with-datasheet-refs_rubric20_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="stable_diffusion_xl_base_1_0_model_card_rubric10_hybrid.svg" alt="stable_diffusion_xl_base_1_0_model_card_rubric10_hybrid"></td><td><code>stable_diffusion_xl_base_1_0_model_card_rubric10_hybrid</code></td><td><code>![stable_diffusion_xl_base_1_0_model_card_rubric10_hybrid](./stable_diffusion_xl_base_1_0_model_card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="stable_diffusion_xl_base_1_0_model_card_rubric20_hybrid.svg" alt="stable_diffusion_xl_base_1_0_model_card_rubric20_hybrid"></td><td><code>stable_diffusion_xl_base_1_0_model_card_rubric20_hybrid</code></td><td><code>![stable_diffusion_xl_base_1_0_model_card_rubric20_hybrid](./stable_diffusion_xl_base_1_0_model_card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="subcell_saprot_650m_model_card_rubric10_hybrid.svg" alt="subcell_saprot_650m_model_card_rubric10_hybrid"></td><td><code>subcell_saprot_650m_model_card_rubric10_hybrid</code></td><td><code>![subcell_saprot_650m_model_card_rubric10_hybrid](./subcell_saprot_650m_model_card_rubric10_hybrid.svg)</code></td></tr>
+<tr><td><img src="subcell_saprot_650m_model_card_rubric10_llm.svg" alt="subcell_saprot_650m_model_card_rubric10_llm"></td><td><code>subcell_saprot_650m_model_card_rubric10_llm</code></td><td><code>![subcell_saprot_650m_model_card_rubric10_llm](./subcell_saprot_650m_model_card_rubric10_llm.svg)</code></td></tr>
+<tr><td><img src="subcell_saprot_650m_model_card_rubric10_semantic_llm.svg" alt="subcell_saprot_650m_model_card_rubric10_semantic_llm"></td><td><code>subcell_saprot_650m_model_card_rubric10_semantic_llm</code></td><td><code>![subcell_saprot_650m_model_card_rubric10_semantic_llm](./subcell_saprot_650m_model_card_rubric10_semantic_llm.svg)</code></td></tr>
+<tr><td><img src="subcell_saprot_650m_model_card_rubric20_hybrid.svg" alt="subcell_saprot_650m_model_card_rubric20_hybrid"></td><td><code>subcell_saprot_650m_model_card_rubric20_hybrid</code></td><td><code>![subcell_saprot_650m_model_card_rubric20_hybrid](./subcell_saprot_650m_model_card_rubric20_hybrid.svg)</code></td></tr>
+<tr><td><img src="subcell_saprot_650m_model_card_rubric20_llm.svg" alt="subcell_saprot_650m_model_card_rubric20_llm"></td><td><code>subcell_saprot_650m_model_card_rubric20_llm</code></td><td><code>![subcell_saprot_650m_model_card_rubric20_llm](./subcell_saprot_650m_model_card_rubric20_llm.svg)</code></td></tr>
+<tr><td><img src="subcell_saprot_650m_model_card_rubric20_semantic_llm.svg" alt="subcell_saprot_650m_model_card_rubric20_semantic_llm"></td><td><code>subcell_saprot_650m_model_card_rubric20_semantic_llm</code></td><td><code>![subcell_saprot_650m_model_card_rubric20_semantic_llm](./subcell_saprot_650m_model_card_rubric20_semantic_llm.svg)</code></td></tr></tbody></table></main></body></html>

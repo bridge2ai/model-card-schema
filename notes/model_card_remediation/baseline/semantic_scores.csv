@@ -1,0 +1,71 @@
+rubric,group,item_id,item_name,max_score,densenet121_tv_in1k,subcell_saprot_650m
+rubric10_semantic,Model Discovery and Identification,E1.1,Persistent Identifier,1,1,1
+rubric10_semantic,Model Discovery and Identification,E1.2,Model Name and Description Completeness,1,1,1
+rubric10_semantic,Model Discovery and Identification,E1.3,Tags / Pipeline Tag for Searchability,1,1,1
+rubric10_semantic,Model Discovery and Identification,E1.4,Model Landing Page or Repository URL,1,1,1
+rubric10_semantic,Model Discovery and Identification,E1.5,Library / Framework Identification,1,1,1
+rubric10_semantic,Model Access and Distribution,E2.1,Weight Distribution Mechanism Defined,1,1,1
+rubric10_semantic,Model Access and Distribution,E2.2,Code Repository Available,1,1,1
+rubric10_semantic,Model Access and Distribution,E2.3,Inference API / Usage Example Provided,1,1,1
+rubric10_semantic,Model Access and Distribution,E2.4,Input / Output Specification,1,1,1
+rubric10_semantic,Model Access and Distribution,E2.5,Model File Format Specified,1,0,0
+rubric10_semantic,Model Reuse and Interoperability,E3.1,License Terms Allow Reuse,1,1,1
+rubric10_semantic,Model Reuse and Interoperability,E3.2,Standard Framework / Format Used,1,1,1
+rubric10_semantic,Model Reuse and Interoperability,E3.3,Base Model or Foundation Lineage Stated,1,1,1
+rubric10_semantic,Model Reuse and Interoperability,E3.4,Supported Tasks Declared,1,1,1
+rubric10_semantic,Model Reuse and Interoperability,E3.5,Reproducibility Artifacts Provided,1,0,1
+rubric10_semantic,Ethical Use and Responsible AI,E4.1,Ethical Considerations Documented,1,1,1
+rubric10_semantic,Ethical Use and Responsible AI,E4.2,Known Model / Output Bias Disclosed,1,1,1
+rubric10_semantic,Ethical Use and Responsible AI,E4.3,Out-of-Scope and Discouraged Uses,1,1,1
+rubric10_semantic,Ethical Use and Responsible AI,E4.4,Sensitive Data Use Disclosed,1,1,1
+rubric10_semantic,Ethical Use and Responsible AI,E4.5,Intended Users and Stakeholder Impact Statement,1,1,1
+rubric10_semantic,Model Architecture and Training Composition,E5.1,Architecture Described in Detail,1,1,1
+rubric10_semantic,Model Architecture and Training Composition,E5.2,Training Data Documented,1,1,1
+rubric10_semantic,Model Architecture and Training Composition,E5.3,Hyperparameters Reported,1,0,1
+rubric10_semantic,Model Architecture and Training Composition,E5.4,Compute Infrastructure Reported (Extended),1,0,0
+rubric10_semantic,Model Architecture and Training Composition,E5.5,Training / Evaluation Split Defined,1,1,0
+rubric10_semantic,Model Provenance and Versioning,E6.1,Version Number Provided,1,1,1
+rubric10_semantic,Model Provenance and Versioning,E6.2,Version Date Documented,1,1,1
+rubric10_semantic,Model Provenance and Versioning,E6.3,Change Description for This Version,1,1,1
+rubric10_semantic,Model Provenance and Versioning,E6.4,Owners / Contributors Identified,1,1,1
+rubric10_semantic,Model Provenance and Versioning,E6.5,Citation or BibTeX Provided,1,1,1
+rubric10_semantic,Scientific Motivation and Funding Transparency,E7.1,Motivation / Use Case Rationale,1,1,1
+rubric10_semantic,Scientific Motivation and Funding Transparency,E7.2,Primary Intended Use Articulated,1,1,1
+rubric10_semantic,Scientific Motivation and Funding Transparency,E7.3,Mission Relevance Stated (Extended),1,0,0
+rubric10_semantic,Scientific Motivation and Funding Transparency,E7.4,Funding Source / Grant Agency Listed,1,0,0
+rubric10_semantic,Scientific Motivation and Funding Transparency,E7.5,Acknowledgement of Computing / Platform Support,1,0,0
+rubric10_semantic,Training and Evaluation Transparency,E8.1,Training Procedure Documented,1,0,1
+rubric10_semantic,Training and Evaluation Transparency,E8.2,Evaluation Procedure Documented,1,0,0
+rubric10_semantic,Training and Evaluation Transparency,E8.3,Reproducibility Information (Extended),1,0,0
+rubric10_semantic,Training and Evaluation Transparency,E8.4,Open-Source Code Linked,1,1,1
+rubric10_semantic,Training and Evaluation Transparency,E8.5,External Standards or References Cited,1,1,1
+rubric10_semantic,Performance Evaluation and Limitations Disclosure,E9.1,Quantitative Performance Metrics Reported,1,1,1
+rubric10_semantic,Performance Evaluation and Limitations Disclosure,E9.2,Performance Across Sub-populations / Slices,1,0,0
+rubric10_semantic,Performance Evaluation and Limitations Disclosure,E9.3,Confidence Intervals or Error Bars,1,0,0
+rubric10_semantic,Performance Evaluation and Limitations Disclosure,E9.4,Limitations Section Present,1,1,1
+rubric10_semantic,Performance Evaluation and Limitations Disclosure,E9.5,Tradeoffs / Risks Acknowledged,1,1,1
+rubric10_semantic,Cross-Platform and Community Integration,E10.1,Published on a Recognized Platform,1,1,1
+rubric10_semantic,Cross-Platform and Community Integration,E10.2,Cross-referenced DOIs or Related Model Links,1,1,1
+rubric10_semantic,Cross-Platform and Community Integration,E10.3,Benchmark Results (Papers with Code style),1,0,0
+rubric10_semantic,Cross-Platform and Community Integration,E10.4,Standards / Schema Conformance Stated,1,1,1
+rubric10_semantic,Cross-Platform and Community Integration,E10.5,Datasets Linked to Datasheets / D4D References,1,1,1
+rubric20_semantic,Structural Completeness,Q1,Required Field Completeness,5,5,5
+rubric20_semantic,Structural Completeness,Q2,Overview Length Adequacy,5,5,5
+rubric20_semantic,Structural Completeness,Q3,Tag / Keyword Diversity,5,5,5
+rubric20_semantic,Structural Completeness,Q4,Input / Output Specification,5,5,5
+rubric20_semantic,Structural Completeness,Q5,Schema Version Declared,1,1,1
+rubric20_semantic,Metadata Quality & Content,Q6,Persistent Identifier Present,1,1,1
+rubric20_semantic,Metadata Quality & Content,Q7,Funding & Acknowledgements Completeness,5,1,0
+rubric20_semantic,Metadata Quality & Content,Q8,Ethical & Responsible-AI Documentation,5,5,5
+rubric20_semantic,Metadata Quality & Content,Q9,License Clarity & SPDX Compliance,5,4,4
+rubric20_semantic,Metadata Quality & Content,Q10,Framework / Library Standardization,5,3,3
+rubric20_semantic,Technical Documentation,Q11,Tool & Software Transparency,5,3,3
+rubric20_semantic,Technical Documentation,Q12,Training Procedure Clarity,5,1,5
+rubric20_semantic,Technical Documentation,Q13,Version History Documentation,5,4,5
+rubric20_semantic,Technical Documentation,Q14,Citations & References,5,5,4
+rubric20_semantic,Technical Documentation,Q15,Compute Infrastructure & Energy,5,0,0
+rubric20_semantic,Performance & FAIRness,Q16,Findability (Persistent Landing),1,1,1
+rubric20_semantic,Performance & FAIRness,Q17,Accessibility & Inference Path,5,5,5
+rubric20_semantic,Performance & FAIRness,Q18,Performance Metrics with Slices & CI,5,3,3
+rubric20_semantic,Performance & FAIRness,Q19,"Out-of-Scope Uses, Limitations & Tradeoffs",5,3,3
+rubric20_semantic,Performance & FAIRness,Q20,Cross-Platform Interlinks,1,1,1

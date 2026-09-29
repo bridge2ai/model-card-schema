@@ -1,0 +1,914 @@
+{
+  "rubric": "mc_rubric10_semantic",
+  "version": "1.0",
+  "model_card_file": "sentiment-classifier-with-datasheet-refs.yaml",
+  "model": "BERT Sentiment Classifier v1.2",
+  "method": "harmonized_example",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge_semantic"
+  },
+  "overall_score": {
+    "total_points": 32.0,
+    "max_points": 50,
+    "percentage": 64.0,
+    "semantic_deductions": [
+      {
+        "sub_element": "Element 1, Model Name and Description Completeness",
+        "deduction": "Overview is ~125 characters, below the 200-char semantic threshold; documentation is present but largely a URL pointer rather than substantive description."
+      },
+      {
+        "sub_element": "Element 2, Weight Distribution Mechanism",
+        "deduction": "No concrete weights URL (HF Hub/Zenodo/S3); only example.org placeholder references."
+      },
+      {
+        "sub_element": "Element 4, Out-of-Scope Uses",
+        "deduction": "considerations.out_of_scope_uses is absent; ethical risks of misuse for censorship are acknowledged but not encoded in the dedicated field."
+      },
+      {
+        "sub_element": "Element 4, Known Model / Output Bias",
+        "deduction": "Bias is mentioned narratively in ethical_considerations but bias_model / bias_output structured fields are not populated."
+      },
+      {
+        "sub_element": "Element 5, Hyperparameters",
+        "deduction": "No training_procedure or hyperparameters block; version.diff only mentions 'hyperparameter tuning' without values."
+      },
+      {
+        "sub_element": "Element 8, Training Procedure",
+        "deduction": "model_parameters.training_procedure is absent; no optimizer, schedule, loss, or epoch counts."
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.references[1].reference: https://example.org/models/bert-sentiment; base_model: bert-base-uncased",
+          "quality_note": "Stable model URL plus base-model identifier present, though no DOI for the model itself.",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Model URL is on a placeholder domain (example.org); no DOI (10.XXXX) for the model itself.",
+            "consistency_check": "pass",
+            "consistency_details": "base_model 'bert-base-uncased' is consistent with library_name 'transformers' and framework 'PyTorch'.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "example.org domain is not a real publisher; in a production card a HuggingFace Hub or Zenodo ID would be expected."
+          }
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 0,
+          "evidence": "model_details.name: 'BERT Sentiment Classifier v1.2'; overview is ~125 chars: 'Fine-tuned BERT-base model for binary sentiment classification. Trained on IMDb movie reviews, achieves 92% accuracy on test set.'",
+          "quality_note": "Overview is below the 200-char semantic completeness threshold and documentation field is mostly a URL.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Name is present and well-formed.",
+            "consistency_check": "pass",
+            "consistency_details": "Name 'BERT Sentiment Classifier v1.2' is consistent with version.name '1.2.0' and pipeline_tag 'text-classification'.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Documentation completeness ratio fails: overview <200 chars while documentation is a near-empty URL pointer."
+          }
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: [sentiment-analysis, bert, pytorch, transformers, text-classification, movie-reviews]; pipeline_tag: text-classification",
+          "quality_note": "Six tags plus a pipeline_tag — well above the >=3 threshold and meaningful.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "pipeline_tag 'text-classification' is a recognized HuggingFace task tag.",
+            "consistency_check": "pass",
+            "consistency_details": "Tags align with model architecture (bert) and pipeline_tag (text-classification).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tags are domain-appropriate for a sentiment classifier."
+          }
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references[1].reference: https://example.org/models/bert-sentiment; documentation: https://example.org/models/bert-sentiment/docs",
+          "quality_note": "Landing page URL present, though on placeholder domain.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URLs are well-formed.",
+            "consistency_check": "pass",
+            "consistency_details": "Landing page and docs URL share a coherent path under the model's namespace.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "example.org is a reserved-for-examples domain; production card would need a real URL."
+          }
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: PyTorch; framework_version: 2.0.1; library_name: transformers",
+          "quality_note": "Specific framework with pinned version and standard library name.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "framework_version '2.0.1' is a pinned semver release.",
+            "consistency_check": "pass",
+            "consistency_details": "PyTorch + transformers + bert-base-uncased + pipeline_tag 'text-classification' is a coherent stack.",
+            "plausibility_check": "pass",
+            "plausibility_details": "PyTorch 2.0.1 is a real release; transformers is a standard library."
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 0,
+          "evidence": "model_details.path is not set; references point only to the BERT paper and an example.org landing page.",
+          "quality_note": "No concrete weight-hosting mechanism (HF Hub, Zenodo, S3) is specified.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No HF Hub model ID, no Zenodo DOI, no direct weights URL.",
+            "consistency_check": "fail",
+            "consistency_details": "library_name 'transformers' implies HF Hub hosting, but no HF Hub ID is provided.",
+            "plausibility_check": "fail",
+            "plausibility_details": "A reusable model card normally points to a downloadable weights artifact."
+          }
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 0,
+          "evidence": "No GitHub or GitLab repository link in references; usage_documentation.code_examples is absent.",
+          "quality_note": "No source code repository is referenced.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No repo URL detected.",
+            "consistency_check": "n/a",
+            "consistency_details": "Cannot check consistency without a repo link.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Most production HuggingFace transformer models link to a training script or fine-tuning notebook."
+          }
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "deployment_info.inference_endpoint: 'https://api.example.org/models/bert-sentiment/predict'; container_image and hardware_requirements documented; input_format includes an example string.",
+          "quality_note": "Deployment endpoint and container image provided plus an example input.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Endpoint URL is well-formed.",
+            "consistency_check": "pass",
+            "consistency_details": "Inference time (~50ms) is consistent with the tradeoff statement about BERT-base latency.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Hosted on example.org placeholder, but the example input/output illustration is concrete and runnable."
+          }
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format describes text+1024 token limit; input_format_map keys text/max_length; output_format_map keys predicted_class/probabilities/confidence.",
+          "quality_note": "Explicit, structured input and output schemas provided.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Schemas are typed (string, integer, array, float).",
+            "consistency_check": "pass",
+            "consistency_details": "Two-class output (Class 0/1) is consistent with pipeline_tag 'text-classification' and binary sentiment task.",
+            "plausibility_check": "pass",
+            "plausibility_details": "1024-token limit is technically achievable with BERT through long-context extensions; consistent with version.diff statement extending 512 to 1024."
+          }
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 0,
+          "evidence": "No mention of safetensors, ONNX, PyTorch state_dict, or TF SavedModel.",
+          "quality_note": "File format / serialization is not specified anywhere in the card.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No file format keyword present.",
+            "consistency_check": "n/a",
+            "consistency_details": "Cannot verify consistency without a stated format.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Knowing whether the model ships as state_dict, safetensors, or ONNX matters for any downstream use."
+          }
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: 'Apache-2.0'",
+          "quality_note": "Valid SPDX identifier with permissive terms.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'Apache-2.0' is a valid SPDX identifier.",
+            "consistency_check": "marginal",
+            "consistency_details": "base_model 'bert-base-uncased' is Apache-2.0-licensed, so Apache-2.0 derivative is compatible.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Apache-2.0 is a widely-used permissive license for transformer models."
+          }
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: PyTorch (version 2.0.1); library_name: transformers",
+          "quality_note": "Standard framework with version pin.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "framework_version '2.0.1' is a pinned semver.",
+            "consistency_check": "pass",
+            "consistency_details": "PyTorch + transformers stack is standard for BERT fine-tunes.",
+            "plausibility_check": "pass",
+            "plausibility_details": "PyTorch 2.0.1 is a real release."
+          }
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "base_model: 'bert-base-uncased'; model_parameters.model_architecture explicitly describes BERT-base structure.",
+          "quality_note": "Base model identified and architecture lineage documented.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'bert-base-uncased' is the canonical HF Hub model id for the upstream checkpoint.",
+            "consistency_check": "pass",
+            "consistency_details": "Architecture (12 layers, 768 hidden, 12 heads, 110M params) is consistent with bert-base-uncased.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Lineage is plausible and accurate."
+          }
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: text-classification; considerations.use_cases lists 3 concrete uses; model_index task type: text-classification (Sentiment Analysis).",
+          "quality_note": "Tasks are declared at both the pipeline tag and use_cases level.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "pipeline_tag uses HuggingFace canonical value.",
+            "consistency_check": "pass",
+            "consistency_details": "use_cases (sentiment analysis, content moderation, customer feedback) align with text-classification pipeline.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tasks are appropriate for a sentiment binary classifier."
+          }
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 0,
+          "evidence": "No training_procedure block; no hyperparameters; no random seeds; no training code link.",
+          "quality_note": "No reproducibility artifacts beyond architecture description.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No hyperparameter fields populated.",
+            "consistency_check": "n/a",
+            "consistency_details": "Cannot check reproducibility without procedure data.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Without seeds, optimizer, and schedule, this model cannot be re-trained from the metadata alone."
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations has two named risks with mitigation strategies: 'Bias in training data' and 'Potential for misuse in censorship'.",
+          "quality_note": "Concrete risks with concrete mitigations.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each item has name + mitigation_strategy.",
+            "consistency_check": "pass",
+            "consistency_details": "Both risks are plausible for a sentiment classifier.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Mitigations (human-in-the-loop, transparency) are reasonable."
+          }
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 0,
+          "evidence": "bias_model / bias_output structured fields are absent. Bias is only mentioned narratively in ethical_considerations and version.diff (negation handling).",
+          "quality_note": "Bias is acknowledged narratively but not encoded in the dedicated bias_model / bias_output fields.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Structured bias fields not populated.",
+            "consistency_check": "fail",
+            "consistency_details": "Ethical considerations cite demographic/cultural biases yet bias_model is empty; cross-field consistency rule fails.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "A real fairness audit (e.g., across review demographics) is not reported."
+          }
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 0,
+          "evidence": "considerations.out_of_scope_uses is absent; limitations cover capability gaps (sarcasm, domain shift) but do not enumerate discouraged deployments.",
+          "quality_note": "No explicit out_of_scope_uses despite censorship-misuse risk being acknowledged in ethical_considerations.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Field absent.",
+            "consistency_check": "fail",
+            "consistency_details": "Ethical considerations name censorship misuse, but out_of_scope_uses is not populated — semantic FAIL per cross-field rule.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Sentiment models used for moderation should explicitly disallow legal/HR/medical decision use."
+          }
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 0,
+          "evidence": "model_parameters.data[].sensitive is not populated; only narrative mention of 'demographic and cultural biases' in IMDb reviews.",
+          "quality_note": "Sensitive-data structured disclosure not provided.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "sensitive_data_used flag absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "User-generated reviews typically may carry PII or offensive content; absence of explicit disclosure is a gap.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "IMDb reviews are public web content, so structured sensitive disclosure is less critical but still expected for completeness."
+          }
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users lists 3 stakeholder groups; considerations.tradeoffs documents accuracy vs speed.",
+          "quality_note": "Named users and at least one tradeoff.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "users[] and tradeoffs[] both populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Users (content moderators, researchers, product teams) align with the declared use_cases.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Tradeoff is operational (latency) rather than ethical (fairness vs accuracy) — missing the fairness tradeoff expected when bias is acknowledged."
+          }
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: 'BERT-base (110M parameters): 12 transformer layers, 768 hidden dimensions, 12 attention heads' plus classification head (Dense 768->256, ReLU, Dropout 0.1, 256->2).",
+          "quality_note": "Layer-by-layer description including parameter count and head structure.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Specific layer dims, head counts, dropout rate.",
+            "consistency_check": "pass",
+            "consistency_details": "768-dim hidden, 12 layers, 12 heads matches the canonical bert-base-uncased spec.",
+            "plausibility_check": "pass",
+            "plausibility_details": "110M parameter count is correct for BERT-base."
+          }
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.data[0]: name 'IMDb Movie Reviews', link to Stanford page, description with 50K instances, balance, datasheet pointer.",
+          "quality_note": "Named dataset with link, size, and datasheet reference.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Dataset entry well-structured.",
+            "consistency_check": "pass",
+            "consistency_details": "IMDb dataset is consistent with model purpose (movie-review sentiment).",
+            "plausibility_check": "pass",
+            "plausibility_details": "50,000 instances is the documented IMDb size; Stanford link is the canonical source."
+          }
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 0,
+          "evidence": "No training_procedure or hyperparameter fields present. version.diff merely says 'Improved accuracy by 5% through hyperparameter tuning' without values.",
+          "quality_note": "Hyperparameters not reported.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Hyperparameter block absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "Cannot verify without values.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Typical BERT fine-tuning cards report learning rate, batch size, epochs, optimizer."
+          }
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "deployment_info.hardware_requirements covers inference (4GB RAM, NVIDIA T4) but no training compute (GPU type/count/hours, energy).",
+          "quality_note": "Training compute infrastructure not reported (only inference hardware).",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "model_parameters.compute_infrastructure absent.",
+            "consistency_check": "fail",
+            "consistency_details": "Mismatch: extended template expects training-time compute, but only inference hardware is described.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "BERT-base fine-tuning would plausibly run on a single V100/T4 in ~hours, but specifics are not reported."
+          }
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_index[0].results[0].dataset.split: 'test'; dataset_documentation.training_datasets vs evaluation_datasets distinguishes IMDb training from SST-2 evaluation.",
+          "quality_note": "Distinct training and evaluation datasets named.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Split is named ('test'); training/evaluation datasets in distinct lists.",
+            "consistency_check": "pass",
+            "consistency_details": "Training (IMDb) and evaluation (SST-2) are different corpora — no leakage flag.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Using SST-2 as an external eval against IMDb training is a standard sentiment-benchmark pattern."
+          }
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: '1.2.0'",
+          "quality_note": "Valid semver string.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Matches MAJOR.MINOR.PATCH.",
+            "consistency_check": "pass",
+            "consistency_details": "Consistent with model name suffix 'v1.2'.",
+            "plausibility_check": "pass",
+            "plausibility_details": "1.2.0 is a plausible release identifier."
+          }
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2025-11-20'",
+          "quality_note": "ISO 8601 date.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "YYYY-MM-DD form.",
+            "consistency_check": "pass",
+            "consistency_details": "Date is plausible relative to citation year (2025).",
+            "plausibility_check": "pass",
+            "plausibility_details": "Date is plausible at time of evaluation."
+          }
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff lists three concrete changes (accuracy +5%, sequence length 512->1024, negation bias fix).",
+          "quality_note": "Concrete, actionable changelog.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Bullet list of changes.",
+            "consistency_check": "marginal",
+            "consistency_details": "Sequence length 1024 is consistent with input_format claim; bias fix is acknowledged but bias_model field is not populated.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Changes are plausible iterative improvements."
+          }
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.owners has 'ML Research Team' (ml-team@example.org) and 'Jane Smith' (jane.smith@example.org).",
+          "quality_note": "Named owners with contact emails.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Email addresses are RFC-5322 shaped.",
+            "consistency_check": "marginal",
+            "consistency_details": "No ORCID or affiliation supplied; emails are on example.org placeholder.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Two owners — sufficient for provenance but no role taxonomy (CRediT) is applied."
+          }
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0].style: 'APA'; citation: 'Smith, J., & Team, M. (2025). BERT Sentiment Classifier v1.2. Example Organization.'",
+          "quality_note": "Machine-readable citation in APA style.",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "APA rather than BibTeX; structurally valid.",
+            "consistency_check": "pass",
+            "consistency_details": "Author 'Smith, J.' matches owners list (Jane Smith); year 2025 matches version.date.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Publisher 'Example Organization' is a placeholder."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview names binary sentiment classification on IMDb; considerations.use_cases lists 3 specific applications.",
+          "quality_note": "Motivation present though brief.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Overview + use_cases populated.",
+            "consistency_check": "pass",
+            "consistency_details": "Use cases (sentiment analysis, moderation, feedback) are consistent with the binary classifier purpose.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Movie-review-trained binary classifier is a well-known archetype."
+          }
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases[0]: 'Automated sentiment analysis of product reviews'; pipeline_tag: 'text-classification'.",
+          "quality_note": "Specific tasks named with concrete deployment contexts.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Use cases described.",
+            "consistency_check": "marginal",
+            "consistency_details": "Primary use is 'product reviews' yet limitations note training was on movie reviews and may degrade on product reviews — inherent tension.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Use cases are plausible deployments."
+          }
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "No mission_relevance field; this is a base-schema example, not extended.",
+          "quality_note": "Mission relevance not stated.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Field absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "Not applicable for non-extended templates.",
+            "plausibility_check": "n/a",
+            "plausibility_details": "Out of scope for a generic sentiment classifier example."
+          }
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 0,
+          "evidence": "No funding agency information in owners, contributors, or overview.",
+          "quality_note": "Funding source absent.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Field absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "No grants disclosed.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Even commercial models typically acknowledge sponsoring org."
+          }
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 0,
+          "evidence": "No compute_infrastructure or acknowledgements; deployment_info covers inference hosting only.",
+          "quality_note": "No computing acknowledgements.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Field absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "Not applicable.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Even brief mention of training hardware would aid transparency."
+          }
+        }
+      ],
+      "element_score": 2,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 0,
+          "evidence": "model_parameters.training_procedure is absent.",
+          "quality_note": "No training procedure documented.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Field absent.",
+            "consistency_check": "n/a",
+            "consistency_details": "Cannot verify without data.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Critical gap — fine-tuning loss/optimizer/schedule should be reported."
+          }
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 0,
+          "evidence": "model_index[0] reports values but no evaluation protocol (metric computation, slicing strategy).",
+          "quality_note": "Evaluation protocol not described.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No evaluation_procedure field.",
+            "consistency_check": "marginal",
+            "consistency_details": "Slices 'test_set_positive' and 'test_set_negative' imply a balanced eval split but no formal definition.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Could be inferred from IMDb's standard 25k test split but is not stated."
+          }
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "No seeds, deterministic flags, container hashes (deployment container_image listed but no training container).",
+          "quality_note": "No reproducibility information.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No reproducibility block.",
+            "consistency_check": "n/a",
+            "consistency_details": "Not assessable.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Without seeds and environment pins this model cannot be reproduced."
+          }
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 0,
+          "evidence": "No GitHub or training code links in references.",
+          "quality_note": "No source code links.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No repo URL.",
+            "consistency_check": "n/a",
+            "consistency_details": "Not assessable.",
+            "plausibility_check": "fail",
+            "plausibility_details": "Open-sourcing fine-tuning code is standard."
+          }
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.references[0]: 'https://arxiv.org/abs/1810.04805' (BERT paper).",
+          "quality_note": "BERT foundational paper cited.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "arXiv URL is valid form.",
+            "consistency_check": "pass",
+            "consistency_details": "Citing BERT paper is consistent with bert-base-uncased lineage.",
+            "plausibility_check": "pass",
+            "plausibility_details": "arXiv 1810.04805 is the real Devlin et al. 2018 BERT paper."
+          }
+        }
+      ],
+      "element_score": 1,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics has 5 entries (accuracy, f1 positive, f1 negative, precision positive, recall positive) with numeric values and slices.",
+          "quality_note": "Five distinct metrics with slices.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Values in [0,1] range — appropriate for these metrics.",
+            "consistency_check": "pass",
+            "consistency_details": "Accuracy 0.92 matches the 92% claim in the overview.",
+            "plausibility_check": "pass",
+            "plausibility_details": "0.90-0.94 range is realistic for BERT-base on IMDb."
+          }
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 1,
+          "evidence": "Slices include 'test_set', 'test_set_positive', 'test_set_negative'.",
+          "quality_note": "Per-class slicing reported (positive vs negative).",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Slice strings populated.",
+            "consistency_check": "marginal",
+            "consistency_details": "Slices cover class polarity but not demographic subgroups; given the bias claim in ethical_considerations, demographic slicing would strengthen this.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Class-level slices are useful for binary classifiers."
+          }
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "performance_metrics[0].confidence_interval: lower 0.91, value 0.92, upper 0.93.",
+          "quality_note": "CI present and valid for accuracy.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "CI bounds are well-formed.",
+            "consistency_check": "pass",
+            "consistency_details": "lower (0.91) < value (0.92) < upper (0.93) — passes ordering rule.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tight CI (+/- 0.01) is plausible for a 25k-sample test set."
+          }
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations has 4 concrete failure modes (sarcasm ~65%, domain shift, English-only, 1024-token truncation).",
+          "quality_note": "Concrete and quantified limitations.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each item has a description.",
+            "consistency_check": "pass",
+            "consistency_details": "Domain-shift caveat is consistent with stating IMDb training data; English-only is consistent with model_language: en.",
+            "plausibility_check": "pass",
+            "plausibility_details": "Limitations are honest and operationally useful."
+          }
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs documents accuracy vs speed (~50ms latency vs simpler DistilBERT alternative).",
+          "quality_note": "Operational tradeoff acknowledged.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Tradeoff text is specific (50ms latency, DistilBERT alternative).",
+            "consistency_check": "marginal",
+            "consistency_details": "Only operational tradeoff; given documented bias risks, an accuracy-vs-fairness tradeoff would also be expected.",
+            "plausibility_check": "pass",
+            "plausibility_details": "~50ms inference for BERT-base on T4 is realistic."
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 0,
+          "evidence": "References include arXiv (BERT paper) and example.org URLs; no HuggingFace Hub, Papers with Code, Zenodo, or GitHub release for this fine-tune.",
+          "quality_note": "Not actually published on a recognized model platform.",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No HF Hub model ID, no Zenodo DOI for the model.",
+            "consistency_check": "fail",
+            "consistency_details": "library_name 'transformers' implies HF Hub hosting, but no Hub ID is supplied.",
+            "plausibility_check": "fail",
+            "plausibility_details": "example.org is a placeholder domain — not a real publishing platform."
+          }
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references includes arXiv link for BERT paper (1810.04805); base_model: 'bert-base-uncased'; dataset_documentation includes IMDb DOI 10.18653/v1/P11-1015.",
+          "quality_note": "Cross-references to base model and ACL Anthology DOI present.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "DOI prefix 10.18653 is ACL Anthology — plausible for an NLP dataset citation.",
+            "consistency_check": "pass",
+            "consistency_details": "base_model + arXiv paper provide a clear lineage trail.",
+            "plausibility_check": "pass",
+            "plausibility_details": "ACL DOI is a real registrant; arXiv ID is the real BERT paper."
+          }
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "model_index[0].results[0] reports task (text-classification / Sentiment Analysis), dataset (IMDb test), metrics (accuracy 0.92, F1 0.91), source URL.",
+          "quality_note": "PwC-style structured benchmark entry.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Task / dataset / metrics fields populated.",
+            "consistency_check": "marginal",
+            "consistency_details": "Benchmark dataset (IMDb test) overlaps with training corpus split — typical practice but flag as needing distinct held-out per leakage-check rule. Since split='test' is the held-out portion of IMDb, technically valid.",
+            "plausibility_check": "pass",
+            "plausibility_details": "0.92 accuracy on IMDb test is plausible for fine-tuned BERT-base."
+          }
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: '0.0.2' (Google MCT v0.0.2).",
+          "quality_note": "Schema version declared.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Recognized Google MCT version.",
+            "consistency_check": "pass",
+            "consistency_details": "Fields used align with the declared schema_version.",
+            "plausibility_check": "pass",
+            "plausibility_details": "MCT v0.0.2 is the current public schema baseline."
+          }
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 1,
+          "evidence": "dataset_documentation.training_datasets[0].datasheet_url and datasheet_doi; evaluation_datasets[0] also has datasheet_url; datasheet_format: 'datasheets-for-datasets-v1.0'.",
+          "quality_note": "Both training and evaluation datasets reference external D4D datasheets — the defining feature of this harmonized example.",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Datasheet URLs and DOI present; datasheet_format declared.",
+            "consistency_check": "pass",
+            "consistency_details": "Pattern 1 external references implemented as described in the file header.",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Datasheet URLs are on example.org placeholders, but the structural pattern is correct."
+          }
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {"field": "model_details.references", "issue": "No DOI for the model itself; landing page on example.org placeholder domain"},
+      {"field": "model_details.path", "issue": "Not set; no weights URI or file-format keyword anywhere in the card"},
+      {"field": "model_parameters.training_procedure", "issue": "Absent — no optimizer, schedule, loss, or hyperparameter fields"},
+      {"field": "model_parameters.compute_infrastructure", "issue": "Absent — only inference deployment_info.hardware_requirements is provided"},
+      {"field": "considerations.out_of_scope_uses", "issue": "Absent despite ethical_considerations naming a misuse risk (censorship)"},
+      {"field": "bias_model / bias_output", "issue": "Structured bias fields not populated although bias is acknowledged narratively"}
+    ],
+    "consistency_failures": [
+      {
+        "rule": "sensitive/bias acknowledgement -> bias_model + out_of_scope_uses populated",
+        "issue": "ethical_considerations names 'Bias in training data' and 'Potential for misuse in censorship', yet bias_model, bias_output, and out_of_scope_uses are all empty"
+      },
+      {
+        "rule": "library_name 'transformers' -> HF Hub identifier expected",
+        "issue": "library_name is 'transformers' but no HF Hub model ID is provided in references"
+      },
+      {
+        "rule": "bias acknowledged -> fairness-vs-accuracy tradeoff expected in tradeoffs[]",
+        "issue": "tradeoffs[] only documents accuracy vs latency; fairness tradeoff is missing"
+      },
+      {
+        "rule": "primary use 'product reviews' vs training data 'movie reviews'",
+        "issue": "Limitations note domain-shift drop, yet primary intended use_cases[0] is 'product reviews' — inherent tension to flag"
+      }
+    ],
+    "plausibility_failures": [
+      {
+        "field": "documentation completeness ratio",
+        "issue": "overview is ~125 chars (below 200 char semantic threshold) while documentation is essentially a URL pointer"
+      },
+      {
+        "field": "owner / landing page domains",
+        "issue": "example.org domain is reserved for examples — in a real model card these would need to resolve to actual hosts"
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Strong performance section: 5 metrics including class-sliced F1/precision/recall plus a valid confidence interval on accuracy.",
+      "Complete provenance: semver version, ISO date, concrete diff/changelog, owners with contacts, APA citation.",
+      "Clear architectural description (BERT-base + classification head dimensions) consistent with declared base_model and 110M parameter count.",
+      "Dataset documentation correctly demonstrates the harmonized Pattern 1: external D4D datasheet references for both training (IMDb, with DOI) and evaluation (SST-2).",
+      "Useful limitations section with quantified failure modes (sarcasm ~65%, English-only, 1024-token truncation)."
+    ],
+    "weaknesses": [
+      "No training_procedure block — no optimizer, learning rate, batch size, epochs, or seeds reported, blocking reproducibility.",
+      "No code repository link and no concrete weight-hosting mechanism (HF Hub ID, Zenodo DOI, or direct download URL).",
+      "Structured bias fields (bias_model, bias_output) are empty despite ethical_considerations narratively acknowledging bias.",
+      "considerations.out_of_scope_uses is absent even though censorship misuse is flagged as an ethical risk.",
+      "No model_parameters.compute_infrastructure: training-time hardware, hours, and energy are not reported (only inference hardware in deployment_info).",
+      "No funding, mission relevance, or compute platform acknowledgement.",
+      "Model file format (safetensors / state_dict / ONNX) is not specified."
+    ],
+    "semantic_concerns": [
+      "Ethical-risk acknowledgement is partial: prose mentions bias and misuse, but the dedicated structured fields (bias_model, bias_output, out_of_scope_uses, data[].sensitive) remain unpopulated — a consistency failure for an ostensibly responsible-AI model card.",
+      "Stated primary use is 'product reviews' but training data is movie reviews and the limitations themselves warn this is out-of-domain — a tension worth resolving.",
+      "Placeholder example.org domain used throughout owner emails, landing pages, and datasheet URLs — appropriate for a harmonization-pattern demonstration but would need replacement for a production card.",
+      "library_name 'transformers' without a corresponding HuggingFace Hub model ID is inconsistent with how transformer models are normally distributed.",
+      "Class-only slicing (positive/negative) does not address the demographic biases asserted in ethical_considerations — would need demographic slicing to actually substantiate the bias claim."
+    ],
+    "recommendations": [
+      "Add a model_parameters.training_procedure block with optimizer, learning rate, batch size, epoch count, random seed, and final loss to enable reproducibility.",
+      "Publish weights on HuggingFace Hub and set library_name + a real HF Hub model ID, or alternatively add a Zenodo DOI for the weights.",
+      "Populate the structured ethical-AI fields: bias_model (with concrete demographic findings), bias_output, and considerations.out_of_scope_uses (e.g., legal decisions, HR screening, surveillance).",
+      "Add a fairness-vs-accuracy entry to considerations.tradeoffs to align with the acknowledged bias risk.",
+      "Add model_parameters.compute_infrastructure (training GPU type/count, hours, framework_version pin) and acknowledge the funding agency and compute platform.",
+      "Specify the model file format (safetensors / PyTorch state_dict / ONNX) and weight-download URL.",
+      "Add demographic / source slicing in quantitative_analysis to substantiate the bias claim, or scope it down if not actually measured.",
+      "Replace example.org placeholders with real URLs before using this as a non-demonstration card."
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "mc-rubric10-semantic",
+    "rubric_hash": "883f4369f8bf90e554b4287a5c528e99cd0e955f9ef844c60e94b000c73b77b2",
+    "model_card_hash": "a6e1fe2a52c1382b10ae5ebfcff5e946a71c637bf4bad13aa84e0943d656994e"
+  }
+}

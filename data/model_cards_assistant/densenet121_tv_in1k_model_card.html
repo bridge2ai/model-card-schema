@@ -1,0 +1,197 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DenseNet-121 (timm/densenet121.tv_in1k) — Model Card</title><style>
+:root {
+  --bg: #fafafa; --card: #fff; --border: #e5e5e5;
+  --text: #111; --muted: #6b7280; --accent: #2563eb;
+  --good: #16a34a; --warn: #ca8a04; --bad: #dc2626;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--text);
+  margin: 0; padding: 2rem 1.5rem; line-height: 1.5; overflow-wrap: anywhere;
+}
+header, main, footer { max-width: 980px; margin: 0 auto; }
+header { padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+h1 { font-size: 1.85rem; margin: 0 0 .35rem; }
+h2 {
+  font-size: 1.2rem; margin: 1.5rem 0 .6rem;
+  padding-bottom: .3rem; border-bottom: 1px solid var(--border);
+}
+h3 { font-size: 1rem; margin: 1rem 0 .35rem; color: var(--accent); }
+.short { color: var(--muted); font-size: 1rem; margin: 0 0 .75rem; }
+.meta-row { color: var(--muted); font-size: .85rem; }
+.meta-row span + span::before { content: " · "; padding: 0 .2rem; }
+.badge-row { margin: .75rem 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+.badge-row img { height: 20px; }
+
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.25rem; margin: 1rem 0;
+}
+.card h2 { margin-top: 0; border-bottom: none; }
+
+dl.kv { margin: 0; }
+dl.kv > div { display: grid; grid-template-columns: 200px 1fr; gap: .5rem 1rem; padding: .35rem 0; border-top: 1px solid var(--border); }
+dl.kv > div:first-child { border-top: 0; }
+dl.kv dt { color: var(--muted); font-weight: 500; font-size: .9rem; }
+dl.kv dd { margin: 0; min-width: 0; word-break: break-word; }
+dl.kv code { background: #f3f4f6; padding: .05rem .3rem; border-radius: 3px; font-size: .85rem; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: .35rem; }
+.chip { background: #eef2ff; color: #3730a3; padding: .15rem .55rem; border-radius: 999px; font-size: .8rem; }
+
+ul.bullet { padding-left: 1.2rem; margin: .3rem 0; }
+ul.bullet li { margin: .2rem 0; }
+
+.contrib-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; padding: .35rem 0; border-top: 1px solid var(--border); font-size: .9rem; }
+.contrib-row:first-child { border-top: 0; }
+.contrib-role { display: inline-block; background: #fef3c7; color: #92400e; padding: .05rem .4rem; border-radius: 4px; font-size: .75rem; margin-left: .35rem; }
+
+table.metrics { width: 100%; border-collapse: collapse; margin: .3rem 0; font-size: .9rem; }
+table.metrics th, table.metrics td {
+  padding: .4rem .75rem; border-top: 1px solid var(--border); text-align: left; vertical-align: top;
+}
+table.metrics th { background: #f9fafb; font-weight: 600; }
+table.metrics td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+pre {
+  background: #f3f4f6; padding: .75rem 1rem; border-radius: 6px;
+  overflow-x: auto; font-size: .85rem;
+}
+pre code { background: transparent; padding: 0; }
+
+.markdown p { margin: .4rem 0; }
+.markdown code { background: #f3f4f6; padding: .05rem .3rem; border-radius: 3px; font-size: .9rem; }
+
+footer { color: var(--muted); font-size: .8rem; text-align: center; margin: 2rem 0 0; }
+.tag-license { background: #d1fae5; color: #065f46; padding: .1rem .45rem; border-radius: 4px; font-size: .8rem; }
+.bias-block { background: #fff7ed; border-left: 3px solid #f97316; padding: .5rem .75rem; margin: .35rem 0; border-radius: 0 4px 4px 0; font-size: .9rem; }
+@media (max-width: 700px) {
+  body { padding: 1rem .75rem; }
+  dl.kv > div, .contrib-row { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+  table.metrics { display: block; overflow-x: auto; }
+}
+</style></head><body><header><h1>DenseNet-121 (timm/densenet121.tv_in1k)</h1><p class=short>DenseNet image classification model trained on ImageNet-1k (original torchvision weights, distributed via timm).</p><div class="meta-row"><span><code>image-classification</code></span><span>PyTorch</span><span>library: <code>timm</code></span></div><div class="chip-row" style="margin-top:.4rem;"><span class="chip">image-classification</span> <span class="chip">densenet</span> <span class="chip">imagenet</span> <span class="chip">imagenet-1k</span> <span class="chip">computer-vision</span> <span class="chip">timm</span> <span class="chip">feature-extraction</span> <span class="chip">transfer-learning</span></div><div class="badge-row"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTEiIGhlaWdodD0iMjAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0ibWMtcnVicmljMTAgKGh5YnJpZCk6IDk0LjAlICg0Ny81MCkiIGRhdGEtbW9kZWwtY2FyZC1zaGEyNTY9IjJmMGM2YTYwNmQwODJkMDc0MGNiY2RkNzUyNjVjOGIyMzk1OWFmYzMzZjAxNzU3YzM5MDQ0ODAzNWFlMzhmYjAiPjx0aXRsZT5tYy1ydWJyaWMxMCAoaHlicmlkKTogOTQuMCUgKDQ3LzUwKTwvdGl0bGU+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJyIj48cmVjdCB3aWR0aD0iMjUxIiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI3IpIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iMTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNGMxIi8+PHJlY3Qgd2lkdGg9IjI1MSIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+PHRleHQgeD0iNzUuMCIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPm1jLXJ1YnJpYzEwIChoeWJyaWQpPC90ZXh0Pjx0ZXh0IHg9Ijc1LjAiIHk9IjE0Ij5tYy1ydWJyaWMxMCAoaHlicmlkKTwvdGV4dD48dGV4dCB4PSIyMDAuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjk0LjAlICg0Ny81MCk8L3RleHQ+PHRleHQgeD0iMjAwLjUiIHk9IjE0Ij45NC4wJSAoNDcvNTApPC90ZXh0PjwvZz48L3N2Zz4=" alt="densenet121_tv_in1k_model_card_rubric10_hybrid"> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTEiIGhlaWdodD0iMjAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0ibWMtcnVicmljMjAgKGh5YnJpZCk6IDc5LjglICg2Ny84NCkiIGRhdGEtbW9kZWwtY2FyZC1zaGEyNTY9IjJmMGM2YTYwNmQwODJkMDc0MGNiY2RkNzUyNjVjOGIyMzk1OWFmYzMzZjAxNzU3YzM5MDQ0ODAzNWFlMzhmYjAiPjx0aXRsZT5tYy1ydWJyaWMyMCAoaHlicmlkKTogNzkuOCUgKDY3Lzg0KTwvdGl0bGU+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJyIj48cmVjdCB3aWR0aD0iMjUxIiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI3IpIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iMTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZGZiMzE3Ii8+PHJlY3Qgd2lkdGg9IjI1MSIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+PHRleHQgeD0iNzUuMCIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPm1jLXJ1YnJpYzIwIChoeWJyaWQpPC90ZXh0Pjx0ZXh0IHg9Ijc1LjAiIHk9IjE0Ij5tYy1ydWJyaWMyMCAoaHlicmlkKTwvdGV4dD48dGV4dCB4PSIyMDAuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjc5LjglICg2Ny84NCk8L3RleHQ+PHRleHQgeD0iMjAwLjUiIHk9IjE0Ij43OS44JSAoNjcvODQpPC90ZXh0PjwvZz48L3N2Zz4=" alt="densenet121_tv_in1k_model_card_rubric20_hybrid"></div><p class="meta-row">Archived or unverified evaluation badges are omitted for this card version.</p><div class="meta-row" style="margin-top:.5rem;">Source YAML: <code>data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml</code></div></header><main><section class="card"><h2>Model Details</h2><p><strong>tv_in1k; Hub revision f0d0f2698a02cb133b09d48396db6e1e46fe9f3b</strong> <span class="meta-row">2025-01-21</span></p><h3>Change description</h3><div class="markdown"><p>The date is the Hub snapshot&#x27;s metadata commit date (addition of a transformers tag),
+not the checkpoint&#x27;s training date. Upstream provenance: LuaTorch -&gt; torchvision -&gt; timm.
+Card originally generated 2026-06-15; reviewed 2026-09-28 against linked primary sources.
+This review corrects checkpoint provenance and reference metrics, records the Hub revision,
+and adds structured usage, training context and evaluation provenance. No weights were changed.
+</p></div><h3>Overview</h3><div class="markdown"><p>DenseNet-121 (Huang et al., CVPR 2017) concatenates earlier feature maps within each dense block.<br>This card covers the public ImageNet-1k checkpoint `timm/densenet121.tv_in1k`.<br>Its upstream card identifies original torchvision weights; torchvision records that these were<br>ported from LuaTorch. The timm distribution provides image classification and feature extraction.<br>The relationship between this public checkpoint and any CM4AI-specific trained model has not<br>been established by the sources cited here.<br></p></div><h3>Documentation</h3><pre>## Model Architecture
+- Backbone: DenseNet-121 with four dense blocks
+- Growth rate: 32 (feature maps added per layer)
+- Total parameters: ~8.0M
+- Compute: 2.9 GMACs at 224x224
+- Activations: 6.9M
+- Input resolution: 224 x 224
+
+## Distribution and provenance
+The [Hub file tree](https://huggingface.co/timm/densenet121.tv_in1k/tree/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b)
+distributes `model.safetensors`, a PyTorch state dictionary in `pytorch_model.bin`, and `config.json`.
+The revision identifies the inspected repository snapshot, not a new training run.
+
+## License scope
+The [upstream model-card metadata](https://huggingface.co/timm/densenet121.tv_in1k/blob/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b/README.md)
+declares Apache-2.0 for this Hub distribution. This is the distributor&#x27;s declaration.
+Torchvision source is BSD-3-Clause; the timm DenseNet implementation retains that attribution.
+A library&#x27;s code license alone does not establish the rights to every training image or checkpoint.
+
+## Usage
+See usage_documentation for installation, preprocessing and complete inference code.
+Feature extraction is available through `forward_features` and `forward_head`.
+
+## Citation
+See model_details.citations and model_details.references.
+</pre><h3>Owners / Contributors</h3><div class="contrib-row"><span><strong>Gao Huang</strong> <span class="contrib-role">developed_by</span></span><span>Cornell University</span></div><div class="contrib-row"><span><strong>Zhuang Liu</strong> <span class="contrib-role">developed_by</span></span><span>Tsinghua University</span></div><div class="contrib-row"><span><strong>Laurens van der Maaten</strong> <span class="contrib-role">developed_by</span></span><span>Facebook AI Research</span></div><div class="contrib-row"><span><strong>Kilian Q. Weinberger</strong> <span class="contrib-role">developed_by</span></span><span>Cornell University</span></div><div class="contrib-row"><span><strong>PyTorch Vision Team</strong> <span class="contrib-role">contributed_by</span></span><span></span></div><div class="contrib-row"><span><strong>Ross Wightman (timm)</strong> <span class="contrib-role">contributed_by</span></span><span></span></div><h3>Licenses</h3><div class="chip-row"><span class="tag-license"><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0 — Apache License 2.0</a></span></div><h3>Citations</h3><p><span class="chip">IEEE</span> <span class="markdown">G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger, &quot;Densely connected convolutional networks,&quot;
+in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 4700–4708.
+</span></p><h3>References</h3><ul class="bullet"><li><a href="https://arxiv.org/abs/1608.06993">https://arxiv.org/abs/1608.06993</a></li><li><a href="https://arxiv.org/html/1608.06993v5">https://arxiv.org/html/1608.06993v5</a></li><li><a href="https://huggingface.co/timm/densenet121.tv_in1k/tree/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b">https://huggingface.co/timm/densenet121.tv_in1k/tree/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b</a></li><li><a href="https://huggingface.co/timm/densenet121.tv_in1k/blob/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b/config.json">https://huggingface.co/timm/densenet121.tv_in1k/blob/f0d0f2698a02cb133b09d48396db6e1e46fe9f3b/config.json</a></li><li><a href="https://github.com/huggingface/pytorch-image-models">https://github.com/huggingface/pytorch-image-models</a></li><li><a href="https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html">https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html</a></li><li><a href="https://github.com/pytorch/vision/pull/116">https://github.com/pytorch/vision/pull/116</a></li><li><a href="https://github.com/liuzhuang13/DenseNet">https://github.com/liuzhuang13/DenseNet</a></li><li><a href="https://image-net.org/challenges/LSVRC/2012/index.php">https://image-net.org/challenges/LSVRC/2012/index.php</a></li><li><a href="https://github.com/pytorch/vision/blob/main/LICENSE">https://github.com/pytorch/vision/blob/main/LICENSE</a></li><li><a href="https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/densenet.py">https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/densenet.py</a></li><li><a href="https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/_hub.py">https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/_hub.py</a></li></ul><h3>Path</h3><a href="https://huggingface.co/timm/densenet121.tv_in1k">https://huggingface.co/timm/densenet121.tv_in1k</a></section><section class="card"><h2>Model Parameters</h2><h3>Architecture</h3><div class="markdown"><p>DenseNet-121 architecture with 4 dense blocks (each with growth rate 32) interleaved with<br>transition layers (1x1 conv + 2x2 average pool). Total ~8.0M parameters, ~2.9 GMACs at 224x224.<br>Final 1000-way classifier head trained on ImageNet-1k.<br></p></div><h3>Input format</h3><p>RGB images; timm config specifies bicubic resize, center crop to 224x224, and ImageNet normalization</p><dl class="kv"><div><dt><code>shape</code></dt><dd>[B, 3, 224, 224]</dd></div><div><dt><code>dtype</code></dt><dd>float32</dd></div><div><dt><code>normalization</code></dt><dd>mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]</dd></div><div><dt><code>preprocessing</code></dt><dd>timm Hub config: bicubic interpolation, crop_pct=0.875, center crop; use resolve_model_data_config/create_transform</dd></div></dl><h3>Output format</h3><p>1000-way classification logits</p><dl class="kv"><div><dt><code>shape</code></dt><dd>[B, 1000]</dd></div><div><dt><code>interpretation</code></dt><dd>raw logits over ImageNet-1k classes; apply softmax for probabilities</dd></div></dl><h3>Datasets</h3><div style="margin-bottom: .5rem;"><strong><a href="https://www.image-net.org/">ImageNet-1k (ILSVRC2012)</a></strong><p>The ILSVRC2012 organizers describe approximately 1.2 million training images and
+50,000 labeled validation images across 1000 object categories. Training and validation
+are distinct benchmark splits; the listed accuracy results use validation, not the
+hidden-label challenge test set. The dataset is obtained separately from the weights.
+Source: https://image-net.org/challenges/LSVRC/2012/index.php
+</p><div class="bias-block"><strong>bias_input:</strong> The training label space is restricted to ImageNet-1k object categories. Aggregate
+ImageNet accuracy does not establish coverage of a deployment population or microscopy
+domain; an application-specific dataset audit and evaluation are still needed.
+</div></div><h3>Training procedure</h3><p>Supervised ImageNet-1k classification. Torchvision identifies the supplied weights as a
+LuaTorch port (https://github.com/pytorch/vision/pull/116); timm redistributes them.
+A current torchvision reference training script is not evidence of this checkpoint&#x27;s run.
+</p><dl class="kv"><div><dt>methodology</dt><dd><pre>The original paper&#x27;s ImageNet recipe uses SGD with Nesterov momentum 0.9, weight decay
+1e-4, batch size 256 and 90 epochs. Initial learning rate 0.1 is reduced tenfold at
+epochs 30 and 60 (https://arxiv.org/html/1608.06993v5#S4.SS2).
+These are paper-level settings, not a recovered run manifest for the Hub artifact.
+Exact seed, software versions, checkpoint selection and run-specific configuration
+remain unverified; numeric hyperparameter fields are therefore left unset.
+</pre></dd></div><div><dt>training_data_separate</dt><dd><code>True</code></dd></div></dl><h3>Training reproducibility</h3><dl class="kv"><div><dt>pipeline_url</dt><dd><a href="https://github.com/liuzhuang13/DenseNet">https://github.com/liuzhuang13/DenseNet</a></dd></div></dl></section><section class="card"><h2>Quantitative Analysis</h2><table class="metrics"><thead><tr><th>Metric</th><th>Slice</th><th class="num">Value</th><th class="num">Unit</th><th class="num">CI</th></tr></thead><tbody><tr><td>top-1 accuracy</td><td>ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing</td><td class="num">74.434</td><td class="num">%</td><td class="num"></td></tr><tr><td>top-5 accuracy</td><td>ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing</td><td class="num">91.972</td><td class="num">%</td><td class="num"></td></tr><tr><td>parameters</td><td>model size</td><td class="num">8.0</td><td class="num">M params</td><td class="num"></td></tr><tr><td>GMACs</td><td>224x224 input</td><td class="num">2.9</td><td class="num">GMACs</td><td class="num"></td></tr></tbody></table><h3>Evaluation procedure</h3><dl class="kv"><div><dt>description</dt><dd><pre>Accuracy values are quoted from torchvision&#x27;s DenseNet121_Weights.IMAGENET1K_V1 metadata,
+not measured by this card&#x27;s authors: https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html
+Torchvision documents bilinear resize to a short edge of 256, then a 224x224 center crop
+and ImageNet normalization. Top-1/top-5 accuracy is the percentage of validation examples
+whose target is among the one/five highest-ranked classes.
+The timm Hub config instead specifies bicubic interpolation. The quoted torchvision
+scores must not be treated as a fresh measurement of the pinned Hub model using timm&#x27;s
+default transforms. The timm-reported 8.0M parameters and 2.9 GMACs are architecture
+descriptors, not accuracy measurements or training compute estimates.
+</pre></dd></div><div><dt>benchmarks</dt><dd><div class="chip-row"><span class="chip">ILSVRC2012 / ImageNet-1k classification, validation split (50,000 images; 1000 classes)</span></div></dd></div><div><dt>evaluation_data_separate</dt><dd><code>True</code></dd></div></dl></section><section class="card"><h2>Considerations</h2><h3>Intended users</h3><ul class="bullet"><li><strong>ML researchers and engineers using DenseNet-121 as a baseline for image-classification
+benchmarks, a feature backbone for transfer learning, or a building block in detection
+and segmentation pipelines.
+</strong></li></ul><h3>Use cases</h3><ul class="bullet"><li><strong>ImageNet-1k image classification baseline</strong></li><li><strong>Transfer learning backbone for downstream computer-vision tasks</strong></li><li><strong>Feature extraction (forward_features) for use in detection / segmentation</strong></li><li><strong>Educational reference implementation of densely-connected architectures</strong></li></ul><h3>Limitations</h3><ul class="bullet"><li><strong>Trained on ImageNet-1k only; out-of-distribution performance on non-ImageNet domains
+(medical imaging, satellite imagery, microscopy) is unknown without further fine-tuning.
+</strong></li><li><strong>The reviewed model card and torchvision metadata provide aggregate accuracy. Per-class,
+demographic, microscopy and CM4AI-specific results are not established by those sources.
+</strong></li><li><strong>Confidence intervals, repeated-run estimates, calibration results, original training
+hardware, wall time and energy consumption are not established by the reviewed sources.
+No confidence bounds or compute estimates are inferred from rounded aggregate scores.
+</strong></li></ul><h3>Tradeoffs</h3><ul class="bullet"><li><strong>Dense connectivity reuses feature maps, but parameter count alone does not predict
+deployment latency or memory consumption. Benchmark the implementation on target hardware.
+</strong></li><li><strong>For downstream model selection, compare aggregate accuracy with per-class recall and
+worst-subgroup error on relevant, adequately sized evaluation slices. A gain in average
+accuracy can coexist with worse performance for a particular class or subgroup.
+Set acceptance criteria according to the consequences of those errors and report
+sample sizes and uncertainty. This is a recommendation by this card&#x27;s maintainers;
+no observed disparity or quantified accuracy-versus-fairness tradeoff is claimed here.
+</strong></li></ul><h3>Ethical considerations</h3><ul class="bullet"><li><strong>Deployment outside the documented benchmark</strong><br><em>Mitigation:</em> Evaluate error rates and calibration on representative target data and relevant
+subgroups before relying on predictions. Review data rights, privacy and category
+suitability for the intended application. These are recommendations by this card&#x27;s
+maintainers, not a claim that the original developers performed those audits.
+</li></ul><h3>Out-of-scope uses</h3><ul class="bullet"><li><strong>Face recognition / identification</strong></li><li><strong>Demographic classification (age, gender, ethnicity)</strong></li><li><strong>Surveillance applications</strong></li><li><strong>Clinical / medical diagnosis without dedicated retraining and regulatory clearance</strong></li></ul></section><section class="card"><h2>Bias Disclosure</h2><div class="bias-block"><strong>bias_model:</strong> The cited aggregate benchmark does not establish equitable performance across populations
+or suitability for biomedical images. This card makes no claim that a fairness audit has
+or has not been performed elsewhere; deployment-specific evidence is needed.
+</div><div class="bias-block"><strong>bias_output:</strong> Predictions rank the fixed ImageNet-1k classes. Softmax scores are not evidence of calibrated
+confidence, and the classifier has no explicit unknown-class output. Calibration and
+out-of-distribution behavior require evaluation on the intended application.
+</div></section><section class="card"><h2>Usage Documentation</h2><dl class="kv"><div><dt>installation_instructions</dt><dd><pre>Install a compatible PyTorch/torchvision pair using https://pytorch.org/get-started/locally/,
+then install `timm`, `huggingface_hub`, `safetensors` and `Pillow` in that environment.
+These instructions describe inference dependencies, not the original LuaTorch training
+environment. An exact tested dependency lock has not been established for this card.
+</pre></dd></div><div><dt>training_configuration</dt><dd><pre>The original authors provide this ImageNet training example in their repository README:
+`th main.lua -netType densenet -dataset imagenet -data [dataFolder] -batchSize 256 -nEpochs 90 -depth 121 -growthRate 32 -nGPU 4 -nThreads 16 -optMemory 3`
+Source: https://github.com/liuzhuang13/DenseNet#usage
+This is a documented reproduction example. In particular, its GPU count and later memory
+optimization options do not establish the hardware or exact command used for the ported weights.
+</pre></dd></div><div><dt>inference_configuration</dt><dd><pre>The example below loads a fixed Hub revision on CPU and preprocesses a local RGB image
+using that model&#x27;s timm configuration. It returns five zero-based ImageNet class indices
+and softmax scores. Match indices to the ImageNet-1k category mapping before displaying labels.
+The weights download on first use. This example has not been executed with model weights
+during this documentation review, and its scores are not an evaluation result.
+</pre></dd></div><div><dt>code_examples</dt><dd><ul class="bullet"><li><dl class="kv"><div><dt>description</dt><dd>Classify a local image with the pinned Hub model and timm preprocessing</dd></div><div><dt>code_language</dt><dd>python</dd></div><div><dt>code</dt><dd><pre>from PIL import Image
+import torch
+import timm
+
+revision = &quot;f0d0f2698a02cb133b09d48396db6e1e46fe9f3b&quot;
+model = timm.create_model(
+    f&quot;hf-hub:timm/densenet121.tv_in1k@{revision}&quot;,
+    pretrained=True,
+).eval()
+data_config = timm.data.resolve_model_data_config(model)
+transform = timm.data.create_transform(**data_config, is_training=False)
+image = Image.open(&quot;image.jpg&quot;).convert(&quot;RGB&quot;)
+with torch.inference_mode():
+    logits = model(transform(image).unsqueeze(0))
+    scores, class_indices = logits.softmax(dim=-1).topk(5, dim=-1)
+print(class_indices[0].tolist(), scores[0].tolist())
+</pre></dd></div></dl></li></ul></dd></div></dl></section><section class="card"><h2>Benchmark Index</h2><ul class="bullet"><li><dl class="kv"><div><dt>name</dt><dd>DenseNet-121 torchvision IMAGENET1K_V1 (upstream reference for timm/densenet121.tv_in1k)</dd></div><div><dt>results</dt><dd><ul class="bullet"><li><dl class="kv"><div><dt>task</dt><dd><dl class="kv"><div><dt>type</dt><dd>image-classification</dd></div><div><dt>name</dt><dd>Image classification</dd></div></dl></dd></div><div><dt>dataset</dt><dd><dl class="kv"><div><dt>type</dt><dd>imagenet-1k</dd></div><div><dt>name</dt><dd>ImageNet-1k (ILSVRC2012)</dd></div><div><dt>split</dt><dd>validation</dd></div></dl></dd></div><div><dt>metrics</dt><dd><ul class="bullet"><li><dl class="kv"><div><dt>type</dt><dd>accuracy</dd></div><div><dt>name</dt><dd>Top-1 accuracy (%)</dd></div><div><dt>value</dt><dd><code>74.434</code></dd></div></dl></li><li><dl class="kv"><div><dt>type</dt><dd>top_k_accuracy</dd></div><div><dt>name</dt><dd>Top-5 accuracy (%)</dd></div><div><dt>value</dt><dd><code>91.972</code></dd></div></dl></li></ul></dd></div><div><dt>source</dt><dd><dl class="kv"><div><dt>name</dt><dd>Torchvision DenseNet121_Weights.IMAGENET1K_V1; bilinear reference preprocessing</dd></div><div><dt>url</dt><dd><a href="https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html">https://docs.pytorch.org/vision/main/models/generated/torchvision.models.densenet121.html</a></dd></div></dl></dd></div></dl></li></ul></dd></div></dl></li></ul></section><section class="card"><h2>Mission Relevance</h2><dl class="kv"><div><dt>funding_source</dt><dd><pre>Original DenseNet paper acknowledgements: NSF (III-1618134, III-1526012, IIS-1149882),
+Office of Naval Research (N00014-17-1-2175), Bill and Melinda Gates Foundation,
+China Postdoctoral Council (20150015), National Basic Research Program of China
+(2011CBA00300, 2011CBA00301), and NSFC (61361136003).
+Source: https://arxiv.org/html/1608.06993v5 (Acknowledgements)
+These are research-level acknowledgements, not verified funding for the torchvision port,
+timm distribution or CM4AI. No DOE association is asserted.
+</pre></dd></div></dl></section><section class="card"><h2>Other fields</h2><dl class="kv"><div><dt>schema_version</dt><dd>0.0.2</dd></div><div><dt>datasets</dt><dd><div class="chip-row"><span class="chip">imagenet-1k</span></div></dd></div><div><dt>metrics</dt><dd><div class="chip-row"><span class="chip">accuracy</span></div></dd></div><div><dt>model_category</dt><dd>convolutional-neural-network</dd></div></dl></section></main><footer>Rendered 2026-09-29T00:32:05.134195+00:00 from <code>data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml</code></footer></body></html>

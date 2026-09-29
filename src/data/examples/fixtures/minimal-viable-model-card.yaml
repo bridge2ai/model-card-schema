@@ -1,0 +1,46 @@
+# Minimal-viable Model Card fixture
+#
+# Purpose: a card that satisfies basic discoverability — name, a short
+# description, a license, a pipeline tag, and a single dataset — but does
+# NOT populate training procedure, compute infrastructure, ethical
+# considerations, performance metrics, citations, etc.
+#
+# Sets the middle anchor between minimal-model-card.yaml (everything-empty
+# floor) and the curated cards under src/data/examples/extended/.
+
+schema_version: "0.0.2"
+
+model_details:
+  name: "minimal-viable-fixture"
+  short_description: "Toy classification model used as a rubric floor fixture."
+  overview: |
+    This model card intentionally populates only the basics — name, short
+    description, overview, license, and a pipeline tag. It is not a real
+    model; it exists to set the lower-middle anchor on the rubric scale.
+  version:
+    name: "0.1.0"
+    date: "2026-06-15"
+  licenses:
+    - identifier: "MIT"
+      license_name: "MIT License"
+      license_link: "https://opensource.org/licenses/MIT"
+
+pipeline_tag: "text-classification"
+language:
+  - "en"
+tags:
+  - "fixture"
+  - "minimal"
+
+model_parameters:
+  model_architecture: "Logistic regression on bag-of-words features (placeholder)."
+  data:
+    - name: "placeholder-dataset"
+      link: "https://example.org/placeholder"
+      description: "Placeholder dataset; not a real corpus."
+
+considerations:
+  use_cases:
+    - description: "Smoke-testing rubric evaluators."
+  limitations:
+    - description: "Not a real model; do not deploy."

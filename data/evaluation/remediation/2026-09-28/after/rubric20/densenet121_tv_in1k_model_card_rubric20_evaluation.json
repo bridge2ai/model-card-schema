@@ -1,0 +1,269 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml",
+  "evaluation_timestamp": "2026-09-29T00:16:10.395572+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 required fields populated",
+          "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+          "quality_note": "All 5 required fields populated"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars across narrative fields",
+          "evidence": "overview=507, doc=1244, short=112",
+          "quality_note": ">500 chars across narrative fields"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
+          "evidence": "8 tags, pipeline=image-classification, lang=None, cat=convolutional-neural-network",
+          "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both I/O specified with format_map populated",
+          "evidence": "prose + structured map",
+          "quality_note": "Both I/O specified with format_map populated"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "schema_version populated",
+          "evidence": "schema_version=0.0.2",
+          "quality_note": "schema_version populated"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 17,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Resolvable persistent identifier",
+          "evidence": "DOI or HF Hub URL present",
+          "quality_note": "Resolvable persistent identifier"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Funding agency mentioned, no grant number",
+          "evidence": "partial",
+          "quality_note": "Funding agency mentioned, no grant number"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "ethics + bias + out_of_scope all populated",
+          "evidence": "comprehensive",
+          "quality_note": "ethics + bias + out_of_scope all populated"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "SPDX permissive license (no additional restrictions needed)",
+          "evidence": "spdx=['Apache-2.0']",
+          "quality_note": "SPDX permissive license (no additional restrictions needed)"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Framework or library declared, no version pin",
+          "evidence": "fw=PyTorch, lib=timm",
+          "quality_note": "Framework or library declared, no version pin"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 14,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Some tool/library named",
+          "evidence": "partial",
+          "quality_note": "Some tool/library named"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Training described, hyperparameters incomplete",
+          "evidence": "have 0 key(s)",
+          "quality_note": "Training described, hyperparameters incomplete"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Version name + date present",
+          "evidence": "version=tv_in1k; Hub revision f0d0f2698a02cb133b09d48396db6e1e46fe9f3b, date=2025-01-21",
+          "quality_note": "Version name + date present"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Citation(s) + reference(s), DOIs missing",
+          "evidence": "1 cites, 12 refs",
+          "quality_note": "Citation(s) + reference(s), DOIs missing"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute_infrastructure",
+          "evidence": "absent",
+          "quality_note": "No compute_infrastructure"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 15,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "At least one resolvable URL",
+          "evidence": "12 refs",
+          "quality_note": "At least one resolvable URL"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Runnable code example(s) + I/O specs",
+          "evidence": "1 example(s)",
+          "quality_note": "Runnable code example(s) + I/O specs"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI",
+          "evidence": "4 metrics, 3 slices; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k (ILSVRC2012)', 'ImageNet-1k (ILSVRC2012)' ~ 'imagenet-1k'",
+          "quality_note": "[capped 4->3 by train_eval_leakage] Metrics across multiple slices, no CI"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All three populated with concrete enumerated items",
+          "evidence": "lim=3, tradeoffs=2, oos=4",
+          "quality_note": "All three populated with concrete enumerated items"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Cross-platform reference present",
+          "evidence": "benchmark=True, doi=False, dataset_link=True",
+          "quality_note": "Cross-platform reference present"
+        }
+      ]
+    }
+  ],
+  "overall_score": {
+    "total_points": 67,
+    "max_points": 84,
+    "percentage": 79.8,
+    "semantic_deductions": [
+      {
+        "question": "Q18",
+        "rule": "train_eval_leakage",
+        "raw_score": 4,
+        "capped_score": 3,
+        "reason": "Training/benchmark dataset overlap: 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation; torchvision IMAGENET1K_V1 reference with bilinear preprocessing', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k (ILSVRC2012)', 'ImageNet-1k (ILSVRC2012)' ~ 'imagenet-1k'"
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Strong Structural Completeness (21/21)",
+      "Strong Performance & FAIRness (15/17)"
+    ],
+    "weaknesses": [],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-rubric20",
+    "model_card_hash": "2f0c6a606d082d0740cbcdd75265c8b23959afc33f01757c390448035ae38fb0",
+    "evaluator_sha256": "1bf266232d4bbcc164f949b3f5c0d50aef8336cf36a4327d1593356648e83407",
+    "schema_sha256": "8125de898dae94333c277844090557ecb49eeb098a94724b43c1ffee1ac8d788"
+  }
+}

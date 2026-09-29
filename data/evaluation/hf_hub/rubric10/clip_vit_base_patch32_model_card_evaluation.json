@@ -1,0 +1,428 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "data/model_cards_assistant/clip_vit_base_patch32_model_card.yaml",
+  "evaluation_timestamp": "2026-06-18T02:48:02.940667+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "Resolvable identifier present (model_details.references: list(5))",
+          "quality_note": "Resolvable identifier present (model_details.references: list(5))"
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "Name + comprehensive overview (1177 chars)",
+          "quality_note": "Name + comprehensive overview (1177 chars)"
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "9 tags + pipeline_tag/category",
+          "quality_note": "9 tags + pipeline_tag/category"
+        },
+        {
+          "name": "Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "Framework PyTorch pinned to version torch>=1.7",
+          "quality_note": "Framework PyTorch pinned to version torch>=1.7"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "Inference / Usage Example Provided",
+          "score": 1,
+          "evidence": "model_parameters.input_format: RGB image plus one or more text strings (class prompts or captions)",
+          "quality_note": "model_parameters.input_format: RGB image plus one or more text strings (class prompts or captions)"
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format: RGB image plus one or more text strings (class prompts or captions)",
+          "quality_note": "model_parameters.input_format: RGB image plus one or more text strings (class prompts or captions)"
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 1,
+          "evidence": "model_details.path: https://huggingface.co/openai/clip-vit-base-patch32",
+          "quality_note": "model_details.path: https://huggingface.co/openai/clip-vit-base-patch32"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "SPDX license identified: ['MIT']",
+          "quality_note": "SPDX license identified: ['MIT']"
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: PyTorch",
+          "quality_note": "framework: PyTorch"
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: zero-shot-image-classification",
+          "quality_note": "pipeline_tag: zero-shot-image-classification"
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the card document risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations: list(4)",
+          "quality_note": "considerations.ethical_considerations: list(4)"
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 1,
+          "evidence": "bias_model: Inherits the geographic, demographic, linguistic, and cultural biases of its WIT training\ncorpus, which skews Western, E\u2026",
+          "quality_note": "bias_model: Inherits the geographic, demographic, linguistic, and cultural biases of its WIT training\ncorpus, which skews Western, E\u2026"
+        },
+        {
+          "name": "Out-of-Scope / Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses: list(7)",
+          "quality_note": "considerations.out_of_scope_uses: list(7)"
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 1,
+          "evidence": "Sensitive-data disclosure present on at least one dataset",
+          "quality_note": "Sensitive-data disclosure present on at least one dataset"
+        },
+        {
+          "name": "Intended Users and Stakeholder Tradeoffs",
+          "score": 1,
+          "evidence": "considerations.users: list(2)",
+          "quality_note": "considerations.users: list(2)"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the architecture and training composition be understood?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: Dual-encoder contrastive vision-language model.\n  - Image encoder: Vision Transformer (ViT-B/32) \u2014 12 layers, hidden siz\u2026",
+          "quality_note": "model_parameters.model_architecture: Dual-encoder contrastive vision-language model.\n  - Image encoder: Vision Transformer (ViT-B/32) \u2014 12 layers, hidden siz\u2026"
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "5 dataset(s), 4 with links/URIs",
+          "quality_note": "5 dataset(s), 4 with links/URIs"
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])"
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: model_parameters.compute_infrastructure",
+          "quality_note": "Missing all of: model_parameters.compute_infrastructure"
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "Multiple dataset entries or model_index present",
+          "quality_note": "Multiple dataset entries or model_index present"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine versions, owners, citations?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "Version present but non-semver: vit-base-patch32",
+          "quality_note": "Version present but non-semver: vit-base-patch32"
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "ISO date: 2021-01-05",
+          "quality_note": "ISO date: 2021-01-05"
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: Initial OpenAI CLIP release. Vision encoder is ViT-B/32 (patch size 32, 224x224 input).\nDistributed on the HuggingFace H\u2026",
+          "quality_note": "model_details.version.diff: Initial OpenAI CLIP release. Vision encoder is ViT-B/32 (patch size 32, 224x224 input).\nDistributed on the HuggingFace H\u2026"
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "13 contributor(s)/reference(s) with role",
+          "quality_note": "13 contributor(s)/reference(s) with role"
+        },
+        {
+          "name": "Citation Provided",
+          "score": 1,
+          "evidence": "model_details.citations: list(1)",
+          "quality_note": "model_details.citations: list(1)"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: CLIP (Contrastive Language-Image Pre-training) is a dual-encoder multimodal model from OpenAI\n(Radford et al., 2021). A \u2026",
+          "quality_note": "model_details.overview: CLIP (Contrastive Language-Image Pre-training) is a dual-encoder multimodal model from OpenAI\n(Radford et al., 2021). A \u2026"
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases: list(5)",
+          "quality_note": "considerations.use_cases: list(5)"
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: mission_relevance",
+          "quality_note": "Missing all of: mission_relevance"
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 1,
+          "evidence": "Affiliations or funding_grants present (funding agency unclear)",
+          "quality_note": "Affiliations or funding_grants present (funding agency unclear)"
+        },
+        {
+          "name": "Compute / Platform Acknowledgement",
+          "score": 1,
+          "evidence": "model_details.overview: CLIP (Contrastive Language-Image Pre-training) is a dual-encoder multimodal model from OpenAI\n(Radford et al., 2021). A \u2026",
+          "quality_note": "model_details.overview: CLIP (Contrastive Language-Image Pre-training) is a dual-encoder multimodal model from OpenAI\n(Radford et al., 2021). A \u2026"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])"
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])",
+          "quality_note": "model_parameters.training_procedure: dict(keys=['methodology', 'hyperparameters'])"
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 0,
+          "evidence": "Missing all of: mission_relevance, usage_documentation",
+          "quality_note": "Missing all of: mission_relevance, usage_documentation"
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "11 metric(s) with numeric value",
+          "quality_note": "11 metric(s) with numeric value"
+        },
+        {
+          "name": "Performance Across Slices / Subpopulations",
+          "score": 1,
+          "evidence": "11 distinct slice(s) reported",
+          "quality_note": "11 distinct slice(s) reported"
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "Confidence interval or value_error present",
+          "quality_note": "Confidence interval or value_error present"
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: list(5)",
+          "quality_note": "considerations.limitations: list(5)"
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs: list(3)",
+          "quality_note": "considerations.tradeoffs: list(3)"
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the card connect to wider model ecosystems and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references: list(5)",
+          "quality_note": "model_details.references: list(5)"
+        },
+        {
+          "name": "Benchmark Results (Papers with Code)",
+          "score": 0,
+          "evidence": "Missing all of: model_index",
+          "quality_note": "Missing all of: model_index"
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: 0.0.2",
+          "quality_note": "schema_version: 0.0.2"
+        },
+        {
+          "name": "Datasets Linked",
+          "score": 1,
+          "evidence": "4 dataset(s) with name+link",
+          "quality_note": "4 dataset(s) with name+link"
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    }
+  ],
+  "overall_score": {
+    "total_points": 46,
+    "max_points": 50,
+    "percentage": 92.0
+  },
+  "assessment": {
+    "strengths": [
+      "Strong Model Discovery and Identification (5/5)",
+      "Strong Model Access and Distribution (5/5)",
+      "Strong Model Reuse and Interoperability (5/5)",
+      "Strong Ethical Use and Responsible AI (5/5)",
+      "Strong Model Architecture and Training Composition (4/5)",
+      "Strong Model Provenance and Versioning (5/5)",
+      "Strong Scientific Motivation and Funding Transparency (4/5)",
+      "Strong Training and Evaluation Transparency (4/5)",
+      "Strong Performance Evaluation and Limitations Disclosure (5/5)",
+      "Strong Cross-Platform and Community Integration (4/5)"
+    ],
+    "weaknesses": [],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-evaluator",
+    "model_card_hash": "db4cf98b791d03bfb8c32e6cb75d4f037954d8fadc816fb87414b1cbdec80091"
+  }
+}

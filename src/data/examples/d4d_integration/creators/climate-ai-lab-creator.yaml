@@ -1,0 +1,60 @@
+# Example Datasheets for Datasets Creator instance (Organization)
+# This is referenced by the model card's creator_references field
+
+# Simulated D4D Creator structure (Organization)
+creator_type: Organization
+
+organization_information:
+  name: Climate AI Research Laboratory
+  short_name: Climate AI Lab
+  url: https://climatelab.org
+  ror_id: https://ror.org/example123456
+  established: 2018
+
+location:
+  address: 1234 Research Drive
+  city: Berkeley
+  state: CA
+  postal_code: "94720"
+  country: United States
+
+organization_type: Research Laboratory
+
+parent_organization:
+  name: National Center for Atmospheric Research
+  url: https://ncar.ucar.edu
+
+research_focus:
+  - Climate modeling and prediction
+  - Machine learning for Earth sciences
+  - Extreme weather forecasting
+  - Climate change adaptation
+
+contact_information:
+  primary_email: contact@climatelab.org
+  website: https://climatelab.org
+  github: https://github.com/climate-ai-lab
+  twitter: "@ClimateAILab"
+
+key_personnel:
+  - name: Dr. Jane Smith
+    role: Director
+    orcid: https://orcid.org/0000-0001-2345-6789
+  - name: Dr. John Doe
+    role: Senior Researcher
+    orcid: https://orcid.org/0000-0002-3456-7890
+
+funding_sources:
+  - DOE Office of Science
+  - NSF Climate and Large-Scale Dynamics Program
+  - NOAA Climate Program Office
+
+collaborations:
+  - NOAA National Weather Service
+  - DOE National Laboratories
+  - University climate research groups
+
+provenance:
+  created_on: 2025-01-15T09:00:00Z
+  modified_on: 2025-01-15T09:00:00Z
+  created_by: Climate AI Lab

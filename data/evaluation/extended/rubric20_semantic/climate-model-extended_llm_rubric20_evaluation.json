@@ -1,0 +1,491 @@
+{
+  "rubric": "mc_rubric20_semantic",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
+  "model": "ClimateNet-v2",
+  "method": "llm_as_judge",
+  "evaluation_timestamp": "2026-06-15T23:20:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge_semantic"
+  },
+  "overall_score": {
+    "total_points": 74,
+    "max_points": 84,
+    "percentage": 88.1,
+    "semantic_deductions": [
+      {
+        "question": "Q18",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "Benchmark dataset overlap with training data: 'Test set (E3SM v2)' references the same model family used in training (E3SM v2 High-Resolution, MPAS-A). Train/eval separation is claimed by simulation year but the dataset-name match triggers the train/eval leakage rule."
+      }
+    ]
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 19,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 populated",
+          "evidence": "model_details.name='ClimateNet-v2'; overview ~600 chars describing CNN for extreme weather; licenses=[{identifier:'BSD-3-Clause'}]; version.name='v2.0.0'; model_parameters.model_architecture describes ResNet-50 FPN with dual-head, 38.5M params",
+          "quality_note": "All five required fields populated with concrete, non-trivial content",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All required fields have well-formed, non-trivial string content",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars with meaningful structure",
+          "evidence": "overview is ~600 chars covering purpose, inputs, outputs, and DOE mission; documentation block adds architecture sections, training details, citation pointers; short_description present too",
+          "quality_note": "Overview + documentation comfortably exceed 500 chars and are well-structured",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "overview is structured Markdown-style prose; documentation uses headings",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": ">=4 tags AND pipeline_tag but no language/model_category",
+          "evidence": "tags=[climate, extreme-weather, segmentation, object-detection, scientific-ml, doe, nersc] (7 tags); pipeline_tag='image-segmentation'; no top-level language or model_category field",
+          "quality_note": "Strong tag set and pipeline_tag, but neither language nor model_category present so full 5 not awarded",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Tags are lowercase, hyphenated, HuggingFace-style",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Shape/type given but no *_format_map",
+          "evidence": "input_format: shape (768,768,16), 16 channels enumerated (T,U,V,Q,Z,PSL,TMQ,PRECT), Z-score normalization, HDF5 format; output_format: segmentation mask (768,768) uint8 with class labels + bbox tuples + HDF5/GeoTIFF; no input_format_map or output_format_map populated",
+          "quality_note": "Inputs and outputs specified with shapes and types but the structured *_format_map fields are not provided",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Shapes and dtypes well-specified in prose",
+            "consistency_check": "pass",
+            "consistency_details": "pipeline_tag='image-segmentation' is consistent with described image-tensor input and per-pixel class mask output",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: '2.0.0-extended'",
+          "quality_note": "Recognizable schema version string at top level",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Recognizable semver-with-tag format",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 17,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include 'https://github.com/lbnl-climate/climatenet-v2' (GitHub repo) and 'https://climatenet.lbl.gov' project site; installation also points to GHCR container 'ghcr.io/lbnl-climate/climatenet-v2:latest' and weights URL 'https://climatenet.lbl.gov/models/climatenet-v2.0.0.pth'",
+          "quality_note": "Multiple resolvable URIs that act as model identifiers; no DOI but GitHub release / project landing satisfy criterion",
+          "semantic_analysis": {
+            "format_check": "partial",
+            "format_details": "URLs well-formed but no DOI (10.XXXX/...) and no HuggingFace Hub model ID — only project URLs",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Agency + grant ID + computing facility",
+          "evidence": "mission_relevance.funding_source: 'DOE Office of Science, Biological and Environmental Research (BER), Grant: DE-AC02-05CH11231'; doe_facility: 'NERSC Perlmutter'; contributor entry 'DOE Office of Science' with role funded_by",
+          "quality_note": "Agency, specific grant number, and computing facility all explicitly named",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Grant identifier (DE-AC02-05CH11231) is the canonical LBNL contract number used by DOE",
+            "consistency_check": "pass",
+            "consistency_details": "mission_relevance.doe_project and model_details.overview both consistently invoke DOE climate science / E3SM context",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Ethical considerations + out_of_scope_uses, no explicit bias_* fields",
+          "evidence": "considerations.ethical_considerations has two named items ('Climate justice implications', 'Model uncertainty communication') each with mitigation_strategy; out_of_scope_uses lists three concrete uses to avoid; however bias_model / bias_output / bias_input fields are not populated",
+          "quality_note": "Strong ethics + out-of-scope content but no dedicated bias disclosure field, so falls short of the 5 criterion",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "ethical_considerations entries have name + mitigation_strategy fields filled",
+            "consistency_check": "pass",
+            "consistency_details": "Model is not in a flagged high-risk category (LLM/face/medical/surveillance); out_of_scope_uses populated; no sensitive_data_used flag set, so privacy rule not triggered",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "SPDX identifier present, no explicit restrictions",
+          "evidence": "model_details.licenses[0].identifier='BSD-3-Clause' with license_name and OSI link; no custom_text describing restrictions",
+          "quality_note": "Clean SPDX identifier but explicit restriction/usage text not stated",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "BSD-3-Clause is a recognized SPDX identifier",
+            "consistency_check": "pass",
+            "consistency_details": "ResNet-50 ImageNet pretrained weights carry permissive licenses compatible with BSD-3-Clause; no LLaMA-style license inheritance issue",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Framework + version pinned + library_name, no model_index",
+          "evidence": "framework='PyTorch', framework_version='2.1.0', library_name='climatenet'; no Papers-with-Code-shaped model_index block present",
+          "quality_note": "Framework standardization strong but model_index field missing for full 5",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "PyTorch 2.1.0 is a fully pinned framework version (not floating)",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 23,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Framework_version + reproducibility libs + container reference",
+          "evidence": "compute_infrastructure.software lists PyTorch 2.1.0+CUDA 12.1, Horovod 0.28.1, NVIDIA Apex, Python 3.10; software_dependencies pins exact conda versions for h5py, xarray, dask, pandas, numpy, scikit-learn; usage_documentation references Docker image 'ghcr.io/lbnl-climate/climatenet-v2:latest' and environment.yml",
+          "quality_note": "Comprehensive: pinned framework, full env list, Docker image, and conda recipe",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All library versions use exact pin syntax (=X.Y.Z); GHCR container reference is well-formed",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Optimizer + LR + batch + epochs + schedule + regularization",
+          "evidence": "hyperparameters: optimizer='AdamW', learning_rate=0.0001, batch_size=2 per GPU (effective 512), training_epochs=40, training_steps=24000; optimization_techniques include mixed precision, gradient clipping max_norm=1.0, cosine annealing schedule (T_max=40), 2-epoch warmup; regularization: weight_decay 1e-4, dropout 0.1, label smoothing 0.1",
+          "quality_note": "All elements of the rubric criterion explicitly disclosed",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Numeric hyperparameters are typed; training_steps=24000 is internally consistent with 600 steps/epoch x 40 epochs",
+            "consistency_check": "pass",
+            "consistency_details": "training_procedure.description mentions SGD but hyperparameters.optimizer is AdamW — minor narrative/structured-field mismatch worth noting but does not change score (AdamW is in the formal field)",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver + ISO date + non-trivial diff",
+          "evidence": "version.name='v2.0.0' (semver); version.date='2024-11-15' (ISO); diff enumerates four substantive changes (ResNet-34 to ResNet-50, atmospheric-river capability, +15% TC boundary accuracy, 3x more training data)",
+          "quality_note": "All three required version elements meaningfully populated",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "version.name 'v2.0.0' is valid semver with leading v; version.date '2024-11-15' is ISO YYYY-MM-DD; last_updated '2024-11-20T14:30:00Z' is ISO 8601",
+            "consistency_check": "pass",
+            "consistency_details": "Dates not in future relative to today (2026-06-15); last_updated > version.date as expected",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "One citation + multiple references with URLs (no DOIs)",
+          "evidence": "citations has one IEEE-style citation to SC24 proceedings (no BibTeX, no DOI); references lists 2 URLs (GitHub repo, project site); baselines text mentions Prabhat et al. 2021 inline",
+          "quality_note": "Solid but only a single formal citation and no DOIs, so not full 5",
+          "semantic_analysis": {
+            "format_check": "partial",
+            "format_details": "Citation has 'style: IEEE' and parses as a free-text IEEE string. No BibTeX block, no DOI (10.XXXX/...). Cited author J. Doe matches contributors[0].name 'Jane Doe' and J. Smith matches contributors[1].name 'John Smith' — provenance consistent",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Hardware + software + total compute, no carbon/energy estimate",
+          "evidence": "hardware: 64 nodes x 4 A100 40GB (256 GPUs total), AMD EPYC 7763, Slingshot-11; software stack pinned; training_speed reports 32,768 GPU-hours total and per-epoch throughput; no kWh or CO2 estimate",
+          "quality_note": "GPU-hours quantified but no explicit energy or carbon footprint reported",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "32,768 GPU-hours = 256 GPUs x 128 hours — arithmetic checks out",
+            "consistency_check": "pass",
+            "consistency_details": "Model is 38.5M parameters (sub-billion scale); 256-GPU multi-day training is consistent with this scale (not flagged as 'trivial compute on large model')",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 15,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include GitHub repo and project landing page; usage docs provide GHCR container URL and direct weights download URL",
+          "quality_note": "Multiple resolvable landing URLs documented",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All landing URLs are well-formed https:// addresses",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Runnable code + I/O formats + library hooks",
+          "evidence": "Three runnable code_examples: Python inference (ClimateNetV2.from_pretrained, model(patch), outputs['segmentation']), Python evaluation (compute_metrics), bash SLURM batch script; installation_instructions cover conda, Docker, NERSC module; input_format and output_format documented",
+          "quality_note": "Full reproducible inference path with multiple entry points",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "code_examples have code_language tags and descriptions; code is syntactically plausible Python/Bash",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Multiple metrics with CIs but train/eval dataset overlap flagged",
+          "evidence": "performance_metrics has 5 entries with numeric values: IoU TC 0.847 [0.841,0.853] slice 'Test set (E3SM v2)'; IoU AR 0.782 [0.774,0.790] same slice; IoU Fronts 0.691 [0.681,0.701]; mAP@0.5 0.823 slice 'Test set (all events)'; throughput 125.3. Multiple slices and bootstrap CIs on three metrics; ensemble sigma=0.012 reported",
+          "quality_note": "Presence-only scoring would award 5 (multiple metrics + slices + CIs), but semantic train/eval leakage rule downgrades the result",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All IoU/mAP values lie in [0,1]; CIs satisfy lower_bound < value < upper_bound for all three IoU rows (0.841<0.847<0.853; 0.774<0.782<0.790; 0.681<0.691<0.701)",
+            "consistency_check": "fail",
+            "consistency_details": "Training data list (model_parameters.data) contains 'E3SM v2 High-Resolution' and 'MPAS-A 15km'; evaluation_procedure.benchmarks names 'Test set: 3 climate models (E3SM v2, MPAS-A, GFDL CM4)'. The slice 'Test set (E3SM v2)' uses a climate-model family that also appears in training. evaluation_data_separate=true and the training_procedure.methodology claims a by-simulation-year split, which mitigates but does not eliminate the cross-field match",
+            "plausibility_check": "pass",
+            "plausibility_details": "Reported IoU values (0.69–0.85) are in a plausible range for this task; no >99% red flag",
+            "applied_cap": "Q18 capped at 3 due to benchmark dataset family matching training dataset family (potential train/eval leakage rule)"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All three populated with concrete, model-specific content",
+          "evidence": "limitations: 3 entries (coarse-resolution training, atmospheric-only scope, polar accuracy degradation >70 deg); tradeoffs: 2 entries (resolution vs throughput; backbone vs IoU); out_of_scope_uses: 3 entries (real-time forecasting, satellite imagery, attribution)",
+          "quality_note": "All three fields contain specific, non-boilerplate, model-relevant statements",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each entry is a structured description with concrete numeric/scope detail",
+            "consistency_check": "pass",
+            "consistency_details": "bias_model/bias_output/bias_input not populated, so the 'bias disclosure -> tradeoffs' rule is not triggered. Model is not in a flagged high-risk category so the high-risk consistency rule is N/A",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_parameters.data links three external dataset projects (CAM5.1, E3SM v2, MPAS-A) with URLs; references link to GitHub repo and project site; citations point to SC24 proceedings",
+          "quality_note": "Cross-platform links to external dataset records and external publication present",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "External dataset link URLs are well-formed https:// references",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {
+        "field": "model_details.references[].reference",
+        "issue": "No DOI (10.XXXX/...) and no HuggingFace Hub model ID present — only generic GitHub and project-site URLs",
+        "severity": "low",
+        "questions_impacted": ["Q6", "Q14"]
+      },
+      {
+        "field": "model_details.citations[0]",
+        "issue": "Citation provided only as free-text IEEE style; no BibTeX block and no DOI",
+        "severity": "low",
+        "questions_impacted": ["Q14"]
+      },
+      {
+        "field": "model_parameters.input_format / output_format",
+        "issue": "*_format_map structured fields are unused; format information is prose-only",
+        "severity": "low",
+        "questions_impacted": ["Q4"]
+      }
+    ],
+    "consistency_failures": [
+      {
+        "rule": "training_procedure.description ↔ hyperparameters.optimizer",
+        "issue": "training_procedure.description states 'standard SGD optimization' but hyperparameters.optimizer is 'AdamW'. Structured field is authoritative; narrative should be corrected to AdamW for internal consistency",
+        "severity": "low",
+        "questions_impacted": ["Q12"]
+      },
+      {
+        "rule": "benchmark dataset ↔ training data (train/eval leakage)",
+        "issue": "model_parameters.data lists 'E3SM v2 High-Resolution' and 'MPAS-A 15km' as training data; quantitative_analysis.performance_metrics[*].slice='Test set (E3SM v2)' and evaluation_procedure.benchmarks names 'Test set: 3 climate models (E3SM v2, MPAS-A, GFDL CM4)'. Same climate-model families appear in both. The methodology claims a by-simulation-year split (mitigating control), but the dataset-name match still triggers the leakage rule",
+        "severity": "medium",
+        "questions_impacted": ["Q18"]
+      },
+      {
+        "rule": "bias_* fields ↔ ethical_considerations",
+        "issue": "bias_model / bias_output / bias_input are not populated; ethical_considerations names 'Climate justice implications' which implies geographic / coverage bias. Concrete bias fields should be populated to match the ethical claim",
+        "severity": "medium",
+        "questions_impacted": ["Q8"]
+      }
+    ],
+    "plausibility_failures": [],
+    "passes": {
+      "spdx_license": "BSD-3-Clause is a valid SPDX identifier",
+      "semver_version": "v2.0.0 is valid semver; version.date 2024-11-15 is ISO YYYY-MM-DD; last_updated is ISO 8601",
+      "orcid_format": "Both contributor ORCIDs match https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+      "framework_pinning": "PyTorch 2.1.0 with CUDA 12.1, plus exact conda pins for h5py/xarray/dask/numpy/etc — no floating version constraints",
+      "metric_value_ranges": "All IoU and mAP values lie within [0,1]; throughput is positive",
+      "confidence_interval_ordering": "All three IoU rows satisfy lower_bound < value < upper_bound",
+      "compute_arithmetic": "32,768 GPU-hours = 256 GPUs × 128 hours — internally consistent",
+      "pipeline_tag_io_match": "pipeline_tag='image-segmentation' is consistent with the 16-channel image-tensor input and pixel-wise class-mask output",
+      "temporal_consistency": "version.date 2024-11-15 is in the past relative to today (2026-06-15); base model (ResNet-50, 2015) predates this release",
+      "citation_provenance": "Citation authors J. Doe / J. Smith map to contributors Jane Doe / John Smith",
+      "high_risk_category": "Climate-science image segmentation is not in the flagged high-risk-model categories (LLM/face/medical/surveillance)"
+    }
+  },
+  "assessment": {
+    "strengths": [
+      "Comprehensive training-procedure disclosure: optimizer, schedule, regularization, distributed-training topology, and random seed all explicit",
+      "Strong reproducibility surface: pinned framework / library versions, conda environment, Docker image, and SLURM launch script",
+      "Rich performance reporting with multiple metrics and bootstrap confidence intervals on the three IoU values",
+      "All three responsible-AI considerations populated (limitations, tradeoffs, out_of_scope_uses) with model-specific content",
+      "Clear funding attribution with DOE office, BER program, grant number (DE-AC02-05CH11231), and NERSC facility"
+    ],
+    "weaknesses": [
+      "Train/eval dataset family overlap (E3SM v2, MPAS-A appear in both training and test) — split is by simulation year but the cross-field match flags potential leakage",
+      "No bias_model / bias_output / bias_input fields populated — bias disclosure happens only obliquely through ethical_considerations.name 'Climate justice implications'",
+      "Compute reporting lacks an energy or carbon estimate despite 32,768 GPU-hours being available",
+      "Citations have no DOIs and no BibTeX entries; no Papers-with-Code-shaped model_index for cross-platform discovery",
+      "training_procedure.description narrative says 'SGD optimization' while hyperparameters.optimizer is 'AdamW' — minor internal inconsistency"
+    ],
+    "recommendations": [
+      "Disambiguate the train/eval split: name the test simulation-year ranges explicitly and use distinct dataset names (e.g., 'E3SM v2 (years 2090-2099)') so the dataset identifiers no longer collide with training data",
+      "Populate bias_model / bias_output / bias_input with concrete statements (geographic bias > 70° latitude, seasonal bias, resolution bias) — limitations[2] already documents the polar bias and could be lifted verbatim",
+      "Estimate energy (kWh) and CO2-equivalent from the reported 32,768 GPU-hours on NERSC Perlmutter",
+      "Add a DOI for the SC24 paper and include a BibTeX block alongside the IEEE-style citation",
+      "Populate model_index with Papers-with-Code task/dataset/metric triples to expose the benchmark results for machine-readable discovery",
+      "Correct training_procedure.description to say AdamW (matches the authoritative hyperparameters.optimizer field)"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "rubric20-semantic-climate-extended-2026-06-15",
+    "rubric_hash": "56fd93ed17d3156cca659380b4adb0bf5a43510f397e821a948e379c3f0ad30a",
+    "model_card_hash": "2bf73e9b356746c67d842053941a02ec8fe2b8d90aa8017839f487b5b9dd21de"
+  }
+}

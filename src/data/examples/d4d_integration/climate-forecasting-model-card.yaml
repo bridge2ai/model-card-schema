@@ -1,0 +1,449 @@
+# Example Model Card Using D4D Harmonized Schema
+# This demonstrates the external reference pattern for Datasheets integration
+
+schema_version: d4d-1.0
+
+# Provenance metadata (NEW in D4D harmonized schema)
+created_by: Jane Smith
+modified_by: Jane Smith
+created_on: 2025-01-15T10:00:00Z
+modified_on: 2025-01-20T14:30:00Z
+
+model_details:
+  name: Climate Forecasting Transformer v2.1
+  short_description: Transformer-based model for regional climate pattern prediction
+
+  overview: |-
+    A transformer-based deep learning model for predicting regional climate patterns
+    including temperature, precipitation, and extreme weather events. Trained on 50 years
+    of historical climate data from NOAA and optimized for 7-day forecasting windows.
+
+  documentation: |-
+    This model uses a custom transformer architecture with spatiotemporal attention
+    mechanisms to capture both spatial correlations across geographic regions and
+    temporal dependencies in climate variables. See training configuration for details.
+
+  # NEW: References to D4D Creator instances (replaces owners/contributors)
+  creator_references:
+    - url: file://./creators/jane-smith-creator.yaml
+      description: Principal Investigator and Lead Developer
+    - url: file://./creators/climate-ai-lab-creator.yaml
+      description: Research organization
+    - url: https://orcid.org/0000-0002-1234-5678
+      description: Co-investigator (via ORCID)
+
+  version:
+    name: v2.1.0
+    date: 2025-01-15
+    diff: |-
+      - Improved extreme weather detection accuracy by 15%
+      - Added uncertainty quantification for precipitation forecasts
+      - Reduced inference time by 30% through model pruning
+    last_updated: 2025-01-20T14:30:00Z
+
+  licenses:
+    - identifier: Apache-2.0
+
+  citations:
+    - style: APA
+      citation: |-
+        Smith, J., et al. (2025). Climate Forecasting Transformer: Spatiotemporal
+        Attention for Regional Weather Prediction. Journal of Climate AI, 12(3), 45-67.
+        https://doi.org/10.1234/climate-ai-2025
+
+  references:
+    - reference: https://github.com/climate-ai-lab/climate-transformer
+    - reference: https://doi.org/10.1234/climate-ai-2025
+
+  path: s3://climate-models/forecasting-transformer-v2.1/
+
+  # Provenance metadata (inherited from modelCard root)
+  created_by: Jane Smith
+  modified_by: Jane Smith
+  created_on: 2025-01-15T10:00:00Z
+  modified_on: 2025-01-20T14:30:00Z
+
+model_parameters:
+  model_architecture: |-
+    Custom Transformer with Spatiotemporal Attention:
+    - 12 encoder layers, 8 attention heads
+    - Hidden dimension: 512
+    - Spatial attention: 16x16 grid over North America
+    - Temporal attention: 168-hour (7-day) window
+    - Total parameters: 85M (after pruning from 120M)
+
+  # NEW: References to D4D Dataset instances (replaces simple 'data' field)
+  training_datasets:
+    - url: file://./datasets/noaa-historical-climate-dataset.yaml
+      description: Primary training data - 50 years of NOAA climate observations
+    - url: https://datasheets.example.org/datasets/era5-reanalysis
+      description: Auxiliary training data - ERA5 reanalysis data
+
+  evaluation_datasets:
+    - url: file://./datasets/noaa-test-dataset.yaml
+      description: Held-out test set - 2020-2024 observations
+    - url: https://datasheets.example.org/datasets/extreme-weather-benchmark
+      description: Extreme weather event benchmark
+
+  input_format: |-
+    3D tensor: [time_steps, lat_grid, lon_grid, variables]
+    - time_steps: 168 (hourly data for 7 days)
+    - lat_grid: 16 (covering 25°N to 50°N)
+    - lon_grid: 16 (covering 125°W to 65°W)
+    - variables: 5 (temperature, pressure, humidity, wind_u, wind_v)
+
+  input_format_map:
+    - key: temperature
+      value: "2m surface temperature (Kelvin)"
+    - key: pressure
+      value: "Sea level pressure (Pa)"
+    - key: humidity
+      value: "Relative humidity (%)"
+    - key: wind_u
+      value: "U-component of wind (m/s)"
+    - key: wind_v
+      value: "V-component of wind (m/s)"
+
+  output_format: |-
+    Probabilistic forecast: [time_steps, lat_grid, lon_grid, variables, quantiles]
+    - time_steps: 168 (7-day forecast)
+    - quantiles: [0.1, 0.25, 0.5, 0.75, 0.9] for uncertainty quantification
+
+  compute_infrastructure:
+    hardware: 8x NVIDIA A100 80GB GPUs
+    hardware_list:
+      - OLCF Frontier AMD MI250X nodes
+      - ALCF Polaris NVIDIA A100 nodes
+    software: PyTorch 2.1, CUDA 12.1
+    software_dependencies: |-
+      # pip freeze output
+      torch==2.1.0
+      transformers==4.35.0
+      numpy==1.24.3
+      xarray==2023.8.0
+      netCDF4==1.6.4
+      dask==2023.9.0
+    training_speed: "~2500 samples/sec on 8x A100"
+
+  training_procedure:
+    description: |-
+      Multi-stage training with curriculum learning:
+      1. Pre-training on historical data (1970-2010)
+      2. Fine-tuning on recent data (2010-2019)
+      3. Adversarial training for extreme events
+
+    methodology: |-
+      - Distributed data parallel training across 8 GPUs
+      - Mixed precision training (fp16)
+      - Gradient checkpointing for memory efficiency
+      - Early stopping based on validation MSE
+
+    reproducibility_info:
+      random_seed: 42
+      environment_config: |-
+        See software_dependencies above and:
+        CUDA_VERSION=12.1
+        NCCL_VERSION=2.18
+        PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+      pipeline_url: https://github.com/climate-ai-lab/climate-transformer/tree/v2.1/training
+
+      hyperparameters:
+        model_initialization: Xavier uniform
+        optimizer: AdamW
+        loss_function: Weighted MSE + quantile loss
+        stopping_criterion: No improvement in validation MSE for 10 epochs
+        training_epochs: 50
+        training_steps: 125000
+        batch_size: 32
+        learning_rate: 0.0001
+        optimization_techniques:
+          - Mixed precision (fp16)
+          - Gradient checkpointing
+          - Gradient clipping (max_norm=1.0)
+          - Learning rate warmup (5000 steps)
+          - Cosine annealing schedule
+        fine_tuning_method: Full fine-tuning with layer-wise learning rates
+
+quantitative_analysis:
+  performance_metrics:
+    - type: RMSE_temperature
+      value: 1.23
+      value_error: 0.05
+      confidence_interval:
+        lower_bound: 1.18
+        upper_bound: 1.28
+      unit: Kelvin
+      slice: 7-day forecast
+
+    - type: RMSE_precipitation
+      value: 2.45
+      value_error: 0.12
+      confidence_interval:
+        lower_bound: 2.33
+        upper_bound: 2.57
+      unit: mm/day
+      slice: 7-day forecast
+
+    - type: F1_extreme_events
+      value: 0.78
+      confidence_interval:
+        lower_bound: 0.74
+        upper_bound: 0.82
+      threshold: 0.5
+      slice: Extreme heat/cold events
+
+  graphics:
+    description: Performance visualization suite
+    collection:
+      - name: forecast_accuracy_by_day
+        image: "[Base64 encoded PNG would go here]"
+      - name: spatial_error_heatmap
+        image: "[Base64 encoded PNG would go here]"
+      - name: uncertainty_calibration_plot
+        image: "[Base64 encoded PNG would go here]"
+
+  evaluation_procedure:
+    description: |-
+      Comprehensive evaluation on held-out test set (2020-2024) plus
+      extreme weather benchmark focusing on heat waves, cold snaps,
+      and heavy precipitation events.
+
+    benchmarks:
+      - NOAA Climate Prediction Benchmark v3
+      - WMO Extreme Weather Detection Challenge
+
+    baselines:
+      - Persistence model (climatology)
+      - Linear regression on reanalysis
+      - ResNet-50 baseline
+      - LSTM seq2seq baseline
+
+    sota_comparison: |-
+      Our model achieves 15% better RMSE than the previous SOTA
+      (ConvLSTM-Attention, Wang et al. 2024) and 40% better F1
+      score on extreme event detection.
+
+    uncertainty_quantification: |-
+      Quantile regression for probabilistic forecasts. Calibration
+      assessed via reliability diagrams and continuous ranked
+      probability score (CRPS).
+
+considerations:
+  users:
+    - description: Climate scientists and meteorologists
+    - description: Emergency management agencies
+    - description: Agricultural planners
+
+  use_cases:
+    - description: 7-day regional weather forecasting for North America
+    - description: Extreme weather event early warning systems
+    - description: Climate adaptation planning and risk assessment
+
+  limitations:
+    - description: Limited to 7-day forecasting horizon (accuracy degrades beyond)
+    - description: Trained only on North America; not validated for other regions
+    - description: Requires high-quality input data; performance degrades with missing observations
+    - description: Extreme events outside training distribution may not be well-captured
+
+  tradeoffs:
+    - description: Higher spatial resolution (32x32 grid) would improve accuracy but 3x increase in compute
+    - description: Ensemble forecasts would improve uncertainty estimates but 10x inference cost
+
+  ethical_considerations:
+    - name: Climate_justice
+      mitigation_strategy: |-
+        Ensure model performance is evaluated across all regions, not just
+        high-population areas, to avoid bias against rural and underserved communities.
+
+    - name: Over_reliance_risk
+      mitigation_strategy: |-
+        Always communicate uncertainty estimates. Model should augment, not replace,
+        expert meteorological judgment, especially for extreme events.
+
+  out_of_scope_uses:
+    - description: Long-term climate change projections (use climate models instead)
+    - description: Forecasting outside North America (model not validated for other regions)
+    - description: Single-point forecasts without uncertainty (always use probabilistic outputs)
+    - description: Emergency response decisions without expert verification
+
+# HuggingFace/Community metadata
+framework: PyTorch
+framework_version: 2.1.0
+library_name: climate-forecasting
+pipeline_tag: climate-forecasting
+language:
+  - en
+tags:
+  - climate
+  - weather
+  - forecasting
+  - transformer
+  - spatiotemporal
+  - extreme-events
+  - project:genesis
+  - science:climate
+  - risk:reviewed
+datasets:
+  - noaa-climate-observations
+  - era5-reanalysis
+metrics:
+  - rmse
+  - mae
+  - f1
+  - crps
+
+# Benchmark integration (Papers with Code)
+model_index:
+  - name: Climate Forecasting Transformer v2.1
+    results:
+      - task:
+          type: climate-forecasting
+          name: Regional Climate Prediction
+        dataset:
+          type: benchmark
+          name: NOAA Climate Prediction Benchmark v3
+          split: test
+        metrics:
+          - type: rmse_temperature
+            value: 1.23
+            name: Temperature RMSE
+          - type: rmse_precipitation
+            value: 2.45
+            name: Precipitation RMSE
+          - type: f1_extreme
+            value: 0.78
+            name: Extreme Event F1
+        source:
+          name: NOAA Climate Benchmark
+          url: https://benchmark.noaa.gov/climate-v3
+
+# Extended template fields (DOE/KOGUT)
+mission_relevance:
+  doe_project: GENESIS Climate AI Initiative
+  doe_facility: OLCF Frontier, ALCF Polaris
+
+  # NEW: References to D4D Grant instances (replaces simple funding_source string)
+  funding_grants:
+    - url: file://./grants/doe-scidac-grant.yaml
+      description: Primary funding - DOE SciDAC Climate Modeling
+    - url: https://grants.example.org/nsf-ai-climate
+      description: Supplemental funding - NSF AI for Climate
+
+  description: |-
+    This model supports DOE's mission in climate science and extreme weather
+    prediction. Trained on DOE Leadership Computing Facilities (Frontier, Polaris),
+    it demonstrates the value of exascale computing for climate AI applications.
+
+usage_documentation:
+  installation_instructions: |-
+    ```bash
+    # Clone repository
+    git clone https://github.com/climate-ai-lab/climate-transformer
+    cd climate-transformer
+
+    # Create environment
+    conda create -n climate-forecast python=3.10
+    conda activate climate-forecast
+
+    # Install dependencies
+    pip install -r requirements.txt
+
+    # Download model weights
+    aws s3 cp s3://climate-models/forecasting-transformer-v2.1/ ./weights/ --recursive
+    ```
+
+  training_configuration: |-
+    ```python
+    # Training configuration
+    from climate_transformer import ClimateTransformer, Trainer
+
+    model = ClimateTransformer(
+        spatial_dim=16,
+        temporal_dim=168,
+        hidden_dim=512,
+        num_layers=12,
+        num_heads=8,
+        num_variables=5
+    )
+
+    trainer = Trainer(
+        model=model,
+        batch_size=32,
+        learning_rate=1e-4,
+        num_epochs=50,
+        devices=[0,1,2,3,4,5,6,7],  # 8 GPUs
+        precision='fp16',
+        gradient_checkpointing=True
+    )
+
+    trainer.fit(train_dataloader, val_dataloader)
+    ```
+
+  inference_configuration: |-
+    ```python
+    # Inference configuration
+    from climate_transformer import ClimateTransformer
+    import torch
+
+    # Load model
+    model = ClimateTransformer.from_pretrained('./weights/')
+    model.eval()
+    model = model.to('cuda')
+
+    # Run inference
+    with torch.no_grad():
+        forecast = model(
+            input_tensor,  # [batch, time, lat, lon, vars]
+            return_quantiles=True  # Get probabilistic forecast
+        )
+
+    # forecast shape: [batch, 168, 16, 16, 5, 5]
+    # Last dimension: quantiles [0.1, 0.25, 0.5, 0.75, 0.9]
+    ```
+
+  code_examples:
+    - code: |-
+        # Example: Load data and make 7-day forecast
+        from climate_transformer import ClimateTransformer, load_noaa_data
+
+        # Load historical data
+        historical_data = load_noaa_data(
+            start='2024-01-01',
+            end='2024-01-07',
+            region='north_america'
+        )
+
+        # Load model
+        model = ClimateTransformer.from_pretrained('./weights/')
+
+        # Generate forecast
+        forecast = model.forecast(
+            historical_data,
+            forecast_days=7,
+            uncertainty=True
+        )
+
+        # Access results
+        median_temp = forecast['temperature']['quantile_0.5']
+        upper_bound = forecast['temperature']['quantile_0.9']
+        lower_bound = forecast['temperature']['quantile_0.1']
+      code_language: python
+      description: Basic usage example for 7-day climate forecasting
+
+    - code: |-
+        # Example: Detect extreme weather events
+        from climate_transformer import ClimateTransformer, ExtremeDetector
+
+        model = ClimateTransformer.from_pretrained('./weights/')
+        detector = ExtremeDetector(model, threshold=0.5)
+
+        # Detect extreme events in forecast
+        forecast = model.forecast(historical_data, forecast_days=7)
+        events = detector.detect_extremes(forecast)
+
+        # Print detected events
+        for event in events:
+            print(f"{event['type']}: {event['location']} on {event['day']}")
+            print(f"  Confidence: {event['confidence']:.2f}")
+      code_language: python
+      description: Extreme weather event detection example

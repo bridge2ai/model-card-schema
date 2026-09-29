@@ -1,0 +1,438 @@
+{
+  "rubric": "mc_rubric10",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/d4d_integration/climate-forecasting-model-card.yaml",
+  "model": "Climate Forecasting Transformer v2.1",
+  "method": "d4d_harmonized",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 49.0,
+    "max_points": 50,
+    "percentage": 98.0
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.path: s3://climate-models/forecasting-transformer-v2.1/; model_details.references[0]: https://github.com/climate-ai-lab/climate-transformer; model_details.references[1]: https://doi.org/10.1234/climate-ai-2025",
+          "quality_note": "Multiple persistent identifiers: DOI, GitHub repo, and S3 path for model weights. All resolvable and actionable."
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: Climate Forecasting Transformer v2.1; short_description: Transformer-based model for regional climate pattern prediction; overview: 232 chars with comprehensive detail",
+          "quality_note": "Clear name, concise short description, and comprehensive overview explaining architecture, training data, and forecasting capability."
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: [climate, weather, forecasting, transformer, spatiotemporal, extreme-events, project:genesis, science:climate, risk:reviewed] (9 tags); pipeline_tag: climate-forecasting",
+          "quality_note": "Excellent tag coverage with 9 relevant tags covering domain, architecture, task, and project metadata. Clear pipeline_tag."
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references[0].reference: https://github.com/climate-ai-lab/climate-transformer",
+          "quality_note": "GitHub repository URL provided with code, training pipeline, and documentation."
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: PyTorch; framework_version: 2.1.0; library_name: climate-forecasting",
+          "quality_note": "Specific framework with exact version (PyTorch 2.1.0) and custom library name."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "model_details.path: s3://climate-models/forecasting-transformer-v2.1/; usage_documentation.installation_instructions includes: aws s3 cp s3://climate-models/forecasting-transformer-v2.1/ ./weights/ --recursive",
+          "quality_note": "S3 bucket path provided with explicit download command in installation instructions."
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references[0]: https://github.com/climate-ai-lab/climate-transformer; usage_documentation.installation_instructions: git clone https://github.com/climate-ai-lab/climate-transformer",
+          "quality_note": "GitHub repository with training and inference code. Clone command provided in installation instructions."
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "usage_documentation.inference_configuration: Full Python code with model loading and inference. usage_documentation.code_examples: Two complete runnable examples (forecasting and extreme event detection)",
+          "quality_note": "Comprehensive inference examples with exact API calls, input handling, and output interpretation."
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format: 3D tensor [time_steps, lat_grid, lon_grid, variables] with explicit dimensions; input_format_map: 5 variables with units; output_format: Probabilistic forecast with quantiles [0.1, 0.25, 0.5, 0.75, 0.9]",
+          "quality_note": "Explicit input shape (168, 16, 16, 5), variable definitions with units, and output schema with uncertainty quantification."
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 1,
+          "evidence": "model_details.path: s3://climate-models/forecasting-transformer-v2.1/ (PyTorch checkpoints implied by framework); usage_documentation shows .from_pretrained() method",
+          "quality_note": "PyTorch checkpoint format implied by framework specification and loading API."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: Apache-2.0",
+          "quality_note": "Apache 2.0 SPDX license explicitly permits commercial and research reuse with attribution."
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: PyTorch; framework_version: 2.1.0",
+          "quality_note": "Standard deep learning framework (PyTorch 2.1.0) with version pinning."
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: Custom Transformer with Spatiotemporal Attention (12 encoder layers, 8 attention heads); training_procedure: Multi-stage training with curriculum learning starting from scratch",
+          "quality_note": "Custom architecture trained from scratch. No base model dependency. Architecture clearly described for potential fine-tuning."
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: climate-forecasting; considerations.use_cases: [7-day regional weather forecasting, Extreme weather event early warning, Climate adaptation planning]; model_index[0].results[0].task.type: climate-forecasting",
+          "quality_note": "Primary task (climate-forecasting) and three concrete use cases with specific applications."
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.reproducibility_info: random_seed=42, environment_config, pipeline_url; hyperparameters: complete training config; compute_infrastructure.software_dependencies: pip freeze output; usage_documentation.training_configuration: full training script",
+          "quality_note": "Comprehensive reproducibility: seed, environment config, hyperparameters, dependencies, and training pipeline URL."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations[0]: Climate_justice with mitigation_strategy (evaluate across all regions, not just high-population areas); ethical_considerations[1]: Over_reliance_risk with mitigation_strategy (communicate uncertainty, augment not replace expert judgment)",
+          "quality_note": "Two concrete ethical risks with detailed mitigation strategies addressing fairness and human-AI interaction."
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 1,
+          "evidence": "considerations.limitations[1]: Trained only on North America; not validated for other regions. considerations.limitations[3]: Extreme events outside training distribution may not be well-captured. ethical_considerations[0]: Climate_justice mitigation addresses potential geographic bias",
+          "quality_note": "Geographic bias explicitly disclosed (North America only) with acknowledgment of distribution shift risks for extreme events."
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses: [Long-term climate change projections, Forecasting outside North America, Single-point forecasts without uncertainty, Emergency response decisions without expert verification]",
+          "quality_note": "Four specific out-of-scope uses with clear boundaries (geographic, temporal, use-case, and decision-making context)."
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 1,
+          "evidence": "model_parameters.training_datasets[0]: NOAA historical climate data (public, non-sensitive); training_datasets[1]: ERA5 reanalysis (public, non-sensitive). No PII or protected attributes in climate observation data.",
+          "quality_note": "Training data consists of public climate observations with no sensitive personal or demographic information."
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users: [Climate scientists and meteorologists, Emergency management agencies, Agricultural planners]; tradeoffs: [Higher spatial resolution trade-off (3x compute), Ensemble forecasts trade-off (10x inference cost)]",
+          "quality_note": "Three user groups identified with specific tradeoffs between accuracy/resolution and computational cost."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: Custom Transformer with Spatiotemporal Attention - 12 encoder layers, 8 attention heads, hidden dimension 512, spatial attention 16x16 grid, temporal attention 168-hour window, 85M parameters (after pruning from 120M)",
+          "quality_note": "Detailed architecture specification with layer count, attention configuration, dimensions, and parameter count."
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.training_datasets[0]: file://./datasets/noaa-historical-climate-dataset.yaml (50 years NOAA climate observations); training_datasets[1]: ERA5 reanalysis; evaluation_datasets[0]: file://./datasets/noaa-test-dataset.yaml (2020-2024); evaluation_datasets[1]: extreme-weather-benchmark",
+          "quality_note": "D4D harmonized pattern: datasets referenced via external URLs with descriptions. Training data: 50 years NOAA + ERA5. Evaluation: held-out test set + benchmark."
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.hyperparameters: optimizer AdamW, learning_rate 0.0001, batch_size 32, training_epochs 50, training_steps 125000, loss_function Weighted MSE + quantile loss, optimization_techniques [Mixed precision fp16, Gradient checkpointing, Gradient clipping max_norm=1.0, Learning rate warmup 5000 steps, Cosine annealing]",
+          "quality_note": "Comprehensive hyperparameters: optimizer, learning rate, batch size, epochs, loss function, and advanced optimization techniques."
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 1,
+          "evidence": "model_parameters.compute_infrastructure: hardware 8x NVIDIA A100 80GB GPUs, hardware_list [OLCF Frontier AMD MI250X, ALCF Polaris NVIDIA A100], software PyTorch 2.1 CUDA 12.1, software_dependencies (pip freeze), training_speed ~2500 samples/sec on 8x A100",
+          "quality_note": "Detailed compute infrastructure: specific GPU types, DOE facilities (Frontier, Polaris), software versions, dependencies, and training throughput."
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "model_parameters.training_datasets: [noaa-historical-climate-dataset (1970-2019), era5-reanalysis]; evaluation_datasets: [noaa-test-dataset (2020-2024 held-out), extreme-weather-benchmark]; training_procedure: Pre-training 1970-2010, fine-tuning 2010-2019, held-out test 2020-2024",
+          "quality_note": "Clear train/eval split: training (1970-2019), validation (implicit in early stopping), test (2020-2024 held-out + benchmark)."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: v2.1.0",
+          "quality_note": "Semantic version number (v2.1.0) following standard versioning convention."
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: 2025-01-15; version.last_updated: 2025-01-20T14:30:00Z",
+          "quality_note": "ISO 8601 release date (2025-01-15) and last update timestamp."
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: Improved extreme weather detection accuracy by 15%, Added uncertainty quantification for precipitation forecasts, Reduced inference time by 30% through model pruning",
+          "quality_note": "Specific changes in v2.1: accuracy improvement, new uncertainty quantification, and performance optimization with quantified impacts."
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.creator_references[0]: file://./creators/jane-smith-creator.yaml (Principal Investigator and Lead Developer); creator_references[1]: file://./creators/climate-ai-lab-creator.yaml (Research organization); creator_references[2]: https://orcid.org/0000-0002-1234-5678 (Co-investigator). Root-level: created_by: Jane Smith, modified_by: Jane Smith",
+          "quality_note": "D4D harmonized pattern: three creator references (individual PI, organization, co-investigator via ORCID) with roles. Provenance fields at root and model_details."
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0].style: APA; citation: Smith, J., et al. (2025). Climate Forecasting Transformer: Spatiotemporal Attention for Regional Weather Prediction. Journal of Climate AI, 12(3), 45-67. https://doi.org/10.1234/climate-ai-2025",
+          "quality_note": "Complete APA citation with journal, volume, pages, and DOI. Easily convertible to BibTeX."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: A transformer-based deep learning model for predicting regional climate patterns including temperature, precipitation, and extreme weather events. considerations.use_cases: 7-day regional weather forecasting, Extreme weather event early warning, Climate adaptation planning",
+          "quality_note": "Clear motivation: address climate prediction challenge with transformer architecture. Three specific use cases with societal impact."
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases[0]: 7-day regional weather forecasting for North America; pipeline_tag: climate-forecasting; model_details.overview: optimized for 7-day forecasting windows",
+          "quality_note": "Primary use: 7-day regional weather forecasting for North America with specific temporal and geographic scope."
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 1,
+          "evidence": "mission_relevance.doe_project: GENESIS Climate AI Initiative; doe_facility: OLCF Frontier, ALCF Polaris; description: This model supports DOE's mission in climate science and extreme weather prediction. Trained on DOE Leadership Computing Facilities (Frontier, Polaris), it demonstrates the value of exascale computing for climate AI applications.",
+          "quality_note": "Explicit DOE mission alignment with GENESIS Climate AI Initiative and demonstration of exascale computing value."
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 1,
+          "evidence": "mission_relevance.funding_grants[0]: file://./grants/doe-scidac-grant.yaml (Primary funding - DOE SciDAC Climate Modeling); funding_grants[1]: https://grants.example.org/nsf-ai-climate (Supplemental funding - NSF AI for Climate)",
+          "quality_note": "D4D harmonized pattern: two grant references (DOE SciDAC primary, NSF AI supplemental) via external Grant instances."
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 1,
+          "evidence": "mission_relevance.doe_facility: OLCF Frontier, ALCF Polaris; model_parameters.compute_infrastructure.hardware_list: [OLCF Frontier AMD MI250X nodes, ALCF Polaris NVIDIA A100 nodes]; mission_relevance.description: Trained on DOE Leadership Computing Facilities (Frontier, Polaris)",
+          "quality_note": "Explicit acknowledgment of DOE Leadership Computing Facilities (Frontier, Polaris) with specific hardware details."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.description: Multi-stage training with curriculum learning (Pre-training 1970-2010, Fine-tuning 2010-2019, Adversarial training for extreme events); methodology: Distributed data parallel, Mixed precision fp16, Gradient checkpointing, Early stopping; hyperparameters: complete config with loss, optimizer, schedule",
+          "quality_note": "Comprehensive training procedure: multi-stage curriculum, distributed training strategy, mixed precision, early stopping, and full hyperparameters."
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 1,
+          "evidence": "quantitative_analysis.evaluation_procedure.description: Comprehensive evaluation on held-out test set (2020-2024) plus extreme weather benchmark; benchmarks: [NOAA Climate Prediction Benchmark v3, WMO Extreme Weather Detection Challenge]; baselines: [Persistence, Linear regression, ResNet-50, LSTM seq2seq]; uncertainty_quantification: Quantile regression with reliability diagrams and CRPS",
+          "quality_note": "Detailed evaluation protocol: held-out test set, two benchmarks, four baselines, and uncertainty calibration assessment."
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 1,
+          "evidence": "model_parameters.training_procedure.reproducibility_info: random_seed=42, environment_config (CUDA_VERSION=12.1, NCCL_VERSION=2.18, PYTORCH_CUDA_ALLOC_CONF), pipeline_url: https://github.com/climate-ai-lab/climate-transformer/tree/v2.1/training",
+          "quality_note": "Complete reproducibility info: seed, environment variables, CUDA/NCCL versions, memory allocation config, and pipeline URL."
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references[0]: https://github.com/climate-ai-lab/climate-transformer; model_parameters.training_procedure.reproducibility_info.pipeline_url: https://github.com/climate-ai-lab/climate-transformer/tree/v2.1/training; usage_documentation: full training and inference code examples",
+          "quality_note": "GitHub repository with versioned training pipeline (v2.1) and comprehensive code examples in usage_documentation."
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.citations[0]: Smith, J., et al. (2025) journal paper; model_details.references[1]: https://doi.org/10.1234/climate-ai-2025; quantitative_analysis.evaluation_procedure.benchmarks: [NOAA Climate Prediction Benchmark v3, WMO Extreme Weather Detection Challenge]; sota_comparison: Wang et al. 2024 ConvLSTM-Attention baseline",
+          "quality_note": "Academic citations, DOI, two standard benchmarks (NOAA v3, WMO), and comparison to published SOTA (Wang et al. 2024)."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics[0]: RMSE_temperature=1.23K, slice=7-day forecast; metrics[1]: RMSE_precipitation=2.45mm/day, slice=7-day forecast; metrics[2]: F1_extreme_events=0.78, slice=Extreme heat/cold events",
+          "quality_note": "Three metrics with numeric values, units, and slices: temperature RMSE, precipitation RMSE, and extreme event F1."
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: slice=7-day forecast (for RMSE metrics), slice=Extreme heat/cold events (for F1); considerations.limitations: performance across different regions mentioned in out-of-scope; ethical_considerations: Climate_justice addresses evaluation across all regions",
+          "quality_note": "Metrics reported per forecast horizon (7-day) and event type (extreme heat/cold). Ethical considerations note regional performance equity."
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics[0]: value_error=0.05, confidence_interval [1.18, 1.28]; metrics[1]: value_error=0.12, confidence_interval [2.33, 2.57]; metrics[2]: confidence_interval [0.74, 0.82]",
+          "quality_note": "All three metrics include confidence intervals and/or standard errors, enabling statistical significance assessment."
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: [Limited to 7-day forecasting horizon (accuracy degrades beyond), Trained only on North America (not validated for other regions), Requires high-quality input data (performance degrades with missing observations), Extreme events outside training distribution may not be well-captured]",
+          "quality_note": "Four concrete limitations with specific failure modes: temporal scope, geographic scope, data quality dependency, and distribution shift."
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs: [Higher spatial resolution (32x32) would improve accuracy but 3x compute increase, Ensemble forecasts would improve uncertainty estimates but 10x inference cost]; ethical_considerations: Over_reliance_risk (model should augment not replace expert judgment)",
+          "quality_note": "Two quantified tradeoffs (resolution vs compute 3x, ensemble vs inference 10x) and acknowledgment of automation risk."
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "library_name: climate-forecasting; model_details.path: s3://climate-models/forecasting-transformer-v2.1/; model_details.references[0]: https://github.com/climate-ai-lab/climate-transformer (GitHub Releases-style); schema_version: d4d-1.0",
+          "quality_note": "GitHub repository for code/documentation, S3 for model weights. D4D harmonized schema (recognized LinkML-based standard)."
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 1,
+          "evidence": "model_details.references[1]: https://doi.org/10.1234/climate-ai-2025; model_details.citations[0]: journal paper with DOI; quantitative_analysis.evaluation_procedure.baselines: comparison to Wang et al. 2024 ConvLSTM-Attention",
+          "quality_note": "DOI for model paper, citation with DOI, and reference to related model (Wang et al. 2024 baseline)."
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "model_index[0].results: task climate-forecasting, dataset NOAA Climate Prediction Benchmark v3 split test, metrics [rmse_temperature=1.23, rmse_precipitation=2.45, f1_extreme=0.78], source NOAA Climate Benchmark https://benchmark.noaa.gov/climate-v3",
+          "quality_note": "Complete Papers with Code model_index entry with task, benchmark dataset (NOAA v3), three metrics, and leaderboard URL."
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: d4d-1.0 (D4D harmonized LinkML schema conformance)",
+          "quality_note": "Explicit conformance to D4D harmonized schema version 1.0 (LinkML-based Model Card + Datasheets integration standard)."
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 0,
+          "evidence": "model_parameters.training_datasets[0]: file://./datasets/noaa-historical-climate-dataset.yaml; training_datasets[1]: https://datasheets.example.org/datasets/era5-reanalysis; evaluation_datasets[0]: file://./datasets/noaa-test-dataset.yaml; evaluation_datasets[1]: https://datasheets.example.org/datasets/extreme-weather-benchmark; datasets (top-level): [noaa-climate-observations, era5-reanalysis]",
+          "quality_note": "D4D harmonized pattern with external dataset references. However, the file:// references point to local YAML files (not verified as complete D4D Datasheets), and the https://datasheets.example.org URLs are example placeholders (not resolvable). Top-level datasets list lacks links. Score 0 because the datasheet links are not resolvable/verified."
+        }
+      ],
+      "element_score": 4,
+      "element_max": 5
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Exemplary D4D harmonized schema usage with external references for creators (ORCID, D4D Creator instances), datasets (D4D Dataset instances), and grants (D4D Grant instances)",
+      "Comprehensive provenance metadata with created_by/modified_by/created_on/modified_on at root and model_details levels",
+      "Outstanding performance reporting with confidence intervals for all metrics and sliced evaluation across forecast horizons and event types",
+      "Detailed compute infrastructure documentation including DOE Leadership Computing Facilities (Frontier, Polaris) with specific hardware and throughput metrics",
+      "Complete reproducibility artifacts: seed, environment config, hyperparameters, dependencies, and versioned training pipeline URL",
+      "Strong ethical considerations with concrete mitigation strategies for climate justice and over-reliance risks",
+      "Comprehensive usage documentation with installation, training, and inference code examples",
+      "Papers with Code model_index integration with benchmark results ready for leaderboard submission",
+      "Clear out-of-scope uses and limitations with specific failure modes",
+      "Quantified tradeoffs (3x compute for higher resolution, 10x inference cost for ensemble forecasts)"
+    ],
+    "weaknesses": [
+      "Dataset references use file:// local paths and https://datasheets.example.org placeholder URLs that are not resolvable or verified as complete D4D Datasheets (Element 10 sub-element 5)"
+    ],
+    "recommendations": [
+      "Replace file://./datasets/*.yaml references with publicly accessible URLs (e.g., Zenodo DOIs, permanent repository links) and verify that referenced datasheets conform to the D4D schema",
+      "Replace https://datasheets.example.org placeholder URLs with production datasheet repositories or registries",
+      "Add DOI or persistent identifier for the NOAA test dataset and extreme weather benchmark to enable reproducible evaluation",
+      "Consider publishing the referenced D4D Creator, Dataset, and Grant instances to a public registry (e.g., Zenodo, institutional repository) to make the external reference pattern fully resolvable"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "claude-sonnet-4-5-20250929",
+    "rubric_hash": "rubric10-v1.0",
+    "model_card_hash": "sha256-placeholder"
+  }
+}

@@ -1,0 +1,314 @@
+# Example Datasheet for IMDb Sentiment Dataset
+# This file demonstrates how datasets would be documented using the
+# Datasheets for Datasets schema, separate from model cards.
+#
+# This datasheet is referenced by the model card:
+# sentiment-classifier-with-datasheet-refs.yaml
+#
+# Schema: https://w3id.org/bridge2ai/data-sheets-schema
+# Format: Datasheets for Datasets v1.0
+
+id: "imdb-sentiment-v1"
+name: "IMDb Movie Reviews Sentiment Dataset"
+description: |
+  A dataset of 50,000 highly polar movie reviews from IMDb, evenly split between
+  training (25,000) and test (25,000) sets. Each review is labeled as positive
+  or negative based on the star rating given by the reviewer.
+
+# Basic metadata
+download_url: "https://ai.stanford.edu/~amaas/data/sentiment/"
+page: "https://ai.stanford.edu/~amaas/data/sentiment/"
+doi: "10.18653/v1/P11-1015"
+version: "1.0"
+created_on: "2011-06-19"
+
+# License
+license: "Free for research and educational use"
+
+# File format
+format: CSV
+encoding: UTF-8
+is_tabular: true
+bytes: 84125825
+
+# ========== MOTIVATION ==========
+# Why was the dataset created?
+
+motivation:
+  purposes:
+    - description: |
+        Enable sentiment analysis research with highly polar reviews to train
+        and evaluate sentiment classification models.
+
+    - description: |
+        Address the need for larger-scale sentiment analysis datasets beyond
+        the previously available smaller corpora.
+
+  tasks:
+    - description: "Binary sentiment classification (positive/negative)"
+    - description: "Document-level sentiment analysis"
+    - description: "Polarity detection in user-generated content"
+
+  creators:
+    - principal_investigator:
+        name: "Andrew L. Maas"
+        email: "amaas@cs.stanford.edu"
+        orcid: "0000-0002-xxxx-xxxx"  # Example ORCID
+        affiliation:
+          name: "Stanford University, Computer Science Department"
+
+    - principal_investigator:
+        name: "Raymond E. Daly"
+        affiliation:
+          name: "Stanford University"
+
+    - principal_investigator:
+        name: "Peter T. Pham"
+        affiliation:
+          name: "Stanford University"
+
+    - principal_investigator:
+        name: "Dan Huang"
+        affiliation:
+          name: "Stanford University"
+
+    - principal_investigator:
+        name: "Andrew Y. Ng"
+        email: "ang@cs.stanford.edu"
+        affiliation:
+          name: "Stanford University, Computer Science Department"
+
+  funders:
+    - funding_mechanism:
+        grant_number: "Example-NSF-12345"
+        funder:
+          name: "National Science Foundation"
+
+# ========== COMPOSITION ==========
+# What is in the dataset?
+
+composition:
+  instances:
+    - description: "Individual movie reviews from IMDb"
+      instance_count: 50000
+      instance_type: "Text review with binary sentiment label"
+
+    - description: "Each review is a single document (no sentence-level annotations)"
+
+  subsets:
+    - name: "train"
+      description: "Training set"
+      instance_count: 25000
+      composition: "12,500 positive + 12,500 negative reviews"
+
+    - name: "test"
+      description: "Test set"
+      instance_count: 25000
+      composition: "12,500 positive + 12,500 negative reviews"
+
+  missing_info:
+    - description: |
+        No demographic information about reviewers (age, gender, location).
+        Reviews are anonymous.
+
+  relationships:
+    - description: |
+        No explicit relationships between instances. Each review is independent.
+
+  splits:
+    - split_name: "train"
+      description: "50% of data for training"
+    - split_name: "test"
+      description: "50% of data for testing"
+
+  anomalies:
+    - description: |
+        Some reviews may contain HTML artifacts or encoding issues from the
+        web scraping process.
+
+  confidentiality:
+    - description: |
+        Reviews are publicly available on IMDb. No confidential information.
+
+  sensitive_elements:
+    - description: |
+        Reviews may contain offensive language or sensitive topics (violence,
+        adult content) as they discuss movie content.
+    - description: "No PII (personally identifiable information) present"
+
+# ========== COLLECTION ==========
+# How was the data collected?
+
+collection:
+  acquisition_methods:
+    - description: |
+        Web scraping from the IMDb website using automated tools to extract
+        movie reviews and ratings.
+
+  collection_mechanisms:
+    - description: "Automated web scraping scripts"
+    - description: "Filtered for highly polar reviews (ratings ≤4 or ≥7 out of 10)"
+
+  sampling_strategies:
+    - description: |
+        Random selection of reviews with extreme ratings to ensure high polarity.
+        Equal numbers of positive and negative reviews selected.
+
+  data_collectors:
+    - description: "Stanford University research team"
+      collector_type: "Academic researchers"
+
+  collection_timeframes:
+    - start_date: "2010-01-01"
+      end_date: "2011-03-31"
+      description: "Reviews collected over ~15-month period"
+
+# ========== ETHICS ==========
+# Ethical considerations
+
+ethics:
+  ethical_reviews:
+    - description: |
+        Dataset uses publicly available reviews. No IRB review required as data
+        is already public and contains no PII.
+
+  data_protection_impacts:
+    - description: |
+        No personal data collected. Reviews are anonymous and publicly available.
+        GDPR not applicable as data predates regulation and contains no PII.
+
+# ========== PREPROCESSING ==========
+# How was the data processed?
+
+preprocessing:
+  preprocessing_strategies:
+    - description: "HTML tag removal and text normalization"
+    - description: "Character encoding standardization to UTF-8"
+
+  cleaning_strategies:
+    - description: |
+        Removed reviews with neutral ratings (5-6 out of 10) to ensure polarity.
+    - description: "Deduplication of identical reviews"
+
+  labeling_strategies:
+    - description: |
+        Binary labels derived from IMDb star ratings:
+        - Positive: ratings ≥ 7 out of 10
+        - Negative: ratings ≤ 4 out of 10
+
+  raw_sources:
+    - description: "Raw HTML pages from IMDb website"
+    - description: "Original data not publicly available; only processed dataset released"
+
+# ========== USES ==========
+# How has the dataset been used?
+
+uses:
+  existing_uses:
+    - description: |
+        Widely used in sentiment analysis research. Cited in 1000+ papers.
+    - description: "Benchmark dataset for text classification models"
+    - description: "Training data for commercial sentiment analysis tools"
+
+  other_tasks:
+    - description: "Transfer learning for domain adaptation"
+    - description: "Studying bias in sentiment models"
+
+  future_use_impacts:
+    - description: |
+        Models trained on movie reviews may not generalize well to other domains
+        (product reviews, social media, etc.). Users should validate on their
+        target domain.
+
+  discouraged_uses:
+    - description: |
+        Not suitable for fine-grained sentiment analysis (only binary labels).
+    - description: |
+        Should not be used for demographic-specific sentiment analysis without
+        additional validation, as demographic info is not available.
+
+# ========== DISTRIBUTION ==========
+# How is the dataset distributed?
+
+distribution:
+  distribution_formats:
+    - format: "TAR.GZ archive containing text files"
+
+  distribution_dates:
+    - date: "2011-06-19"
+      description: "Initial public release"
+
+  license_and_use_terms:
+    - description: |
+        Free for research and educational use. Commercial use may require
+        permission. See website for details.
+
+# ========== MAINTENANCE ==========
+# How is the dataset maintained?
+
+maintenance:
+  maintainers:
+    - maintainer:
+        name: "Stanford NLP Group"
+        email: "nlp@cs.stanford.edu"
+
+  updates:
+    - description: "No planned updates; dataset is static"
+
+  retention_limit:
+    - description: "Dataset will be maintained indefinitely"
+
+  version_access:
+    - description: "Only version 1.0 exists; no version history"
+
+# ========== DATA GOVERNANCE ==========
+# Additional governance information
+
+data_governance:
+  # Note: This section would be expanded in a real datasheet
+  # to include detailed IP restrictions, export controls, etc.
+
+  licensing_ip:
+    description: "Dataset license permits research and educational use"
+
+  regulatory_restrictions:
+    description: "No known export control or regulatory restrictions"
+
+# ========== VARIABLES ==========
+# Description of variables/fields in the dataset
+
+variables:
+  - variable_name: "review_text"
+    variable_type: "text"
+    description: "Full text of the movie review"
+    example: "This movie was absolutely fantastic! The acting was superb..."
+
+  - variable_name: "sentiment"
+    variable_type: "categorical"
+    description: "Binary sentiment label"
+    categories:
+      - "positive"
+      - "negative"
+
+  - variable_name: "review_id"
+    variable_type: "string"
+    description: "Unique identifier for each review"
+
+# ========== NOTES ==========
+
+notes: |
+  This is a widely-used benchmark dataset for sentiment analysis. It has been
+  cited in numerous papers and used to train many commercial sentiment analysis
+  systems.
+
+  Key characteristics:
+  - High polarity (extreme ratings only)
+  - Balanced classes (50% positive, 50% negative)
+  - Document-level labels (not sentence-level)
+  - Movie review domain (may not generalize to other domains)
+
+  Recommended citation:
+  Maas, A. L., Daly, R. E., Pham, P. T., Huang, D., Ng, A. Y., & Potts, C. (2011).
+  Learning word vectors for sentiment analysis. In Proceedings of the 49th Annual
+  Meeting of the Association for Computational Linguistics: Human Language
+  Technologies (pp. 142-150).

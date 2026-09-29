@@ -1,0 +1,105 @@
+name: rubric20 portfolio audit
+
+# Weekly audit job:
+#   1. Re-runs the hybrid rubric20 evaluator across the entire portfolio
+#      (extended + harmonized + hf_hub examples).
+#   2. Rebuilds portfolio.html / portfolio_compare.html / badges.
+#   3. Regenerates common_issues.md from any existing semantic JSONs.
+#   4. Opens a PR with the regenerated artifacts if anything changed.
+#
+# This is the deterministic half of the rubric20 gate (see also
+# mc-rubric20-gate.yml which runs the same hybrid on PR diffs).
+#
+# The full LLM rubric20-semantic re-run is intentionally NOT in CI — it's an
+# Anthropic API call per card, run on demand via the mc-rubric20-semantic
+# agent inside Claude Code. When re-run, commit the regenerated JSONs and
+# this audit will pick them up via the rubric-report step.
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'  # Monday 12:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+
+      - name: Re-run rubric20 hybrid on full portfolio
+        run: |
+          # Each invocation is its own gate — if any of the four fails (YAML
+          # parse error, schema regression, missing file), the audit step
+          # exits non-zero loud, instead of silently opening an all-green PR.
+          poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+            --input-glob 'src/data/examples/extended/*.yaml' \
+            --output-dir data/evaluation/extended/rubric20
+          poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+            --input-glob 'src/data/examples/harmonized/*.yaml' \
+            --output-dir data/evaluation/harmonized/rubric20
+          poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+            --input-glob 'src/data/examples/d4d_integration/*.yaml' \
+            --output-dir data/evaluation/harmonized/rubric20
+          poetry run python scripts/batch_evaluate_mc_rubric20_hybrid.py \
+            --input-glob 'data/model_cards_assistant/*.yaml' \
+            --output-dir data/evaluation/hf_hub/rubric20
+
+      - name: Regenerate portfolio + badges
+        run: make compare-portfolio
+
+      - name: Regenerate common-issues report
+        run: make rubric-report
+
+      - name: Open PR if anything changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          # Use a PAT so the resulting PR triggers downstream workflows
+          # (notably mc-rubric20-gate.yml). PRs opened with the default
+          # GITHUB_TOKEN do NOT trigger workflows by GitHub design.
+          token: ${{ secrets.PAT_FOR_PR }}
+          commit-message: 'chore(audit): refresh rubric20 portfolio artifacts'
+          title: 'Weekly rubric20 portfolio audit'
+          body: |
+            Automated weekly refresh of the rubric20 hybrid portfolio:
+
+            * Re-ran `scripts/batch_evaluate_mc_rubric20_hybrid.py` against the
+              full portfolio (extended + harmonized + hf_hub).
+            * Regenerated `data/evaluation/all/portfolio.html`,
+              `portfolio_compare.html`, and badge SVGs via `make compare-portfolio`.
+            * Regenerated `data/evaluation/all/common_issues.md` via
+              `make rubric-report`.
+
+            If this PR shows score deltas, inspect the per-card JSON diffs to
+            understand which semantic rule fired (or stopped firing). The full
+            LLM r20-semantic re-run is run manually via the
+            `mc-rubric20-semantic` agent — commit those JSONs separately and
+            the next audit will pick them up in `common_issues.md`.
+          branch: audit/rubric20-portfolio
+          delete-branch: true

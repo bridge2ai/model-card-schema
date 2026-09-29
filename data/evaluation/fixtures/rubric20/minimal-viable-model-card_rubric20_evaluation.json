@@ -1,0 +1,259 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/fixtures/minimal-viable-model-card.yaml",
+  "evaluation_timestamp": "2026-06-15T20:58:33.727472+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 12,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 required fields populated",
+          "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+          "quality_note": "All 5 required fields populated"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "50\u2013500 chars combined",
+          "evidence": "overview=208, doc=0, short=56",
+          "quality_note": "50\u2013500 chars combined"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Some tags or pipeline tag only",
+          "evidence": "2 tags, pipeline=text-classification, lang=['en'], cat=None",
+          "quality_note": "Some tags or pipeline tag only"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No I/O spec",
+          "evidence": "missing both",
+          "quality_note": "No I/O spec"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "schema_version populated",
+          "evidence": "schema_version=0.0.2",
+          "quality_note": "schema_version populated"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 4,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 0,
+          "max_score": 1,
+          "score_label": "No identifier",
+          "evidence": "absent",
+          "quality_note": "No identifier"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding info detected",
+          "evidence": "absent",
+          "quality_note": "No funding info detected"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No ethics fields populated",
+          "evidence": "absent",
+          "quality_note": "No ethics fields populated"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "SPDX identifier, no explicit restrictions text",
+          "evidence": "spdx=['MIT']",
+          "quality_note": "SPDX identifier, no explicit restrictions text"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No framework info",
+          "evidence": "absent",
+          "quality_note": "No framework info"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 4,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No software tools listed",
+          "evidence": "absent",
+          "quality_note": "No software tools listed"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No training procedure",
+          "evidence": "absent",
+          "quality_note": "No training procedure"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Version name + date present",
+          "evidence": "version=0.1.0, date=2026-06-15",
+          "quality_note": "Version name + date present"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No citations or references",
+          "evidence": "absent",
+          "quality_note": "No citations or references"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute_infrastructure",
+          "evidence": "absent",
+          "quality_note": "No compute_infrastructure"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 4,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 0,
+          "max_score": 1,
+          "score_label": "No external URLs",
+          "evidence": "absent",
+          "quality_note": "No external URLs"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No usage path documented",
+          "evidence": "absent",
+          "quality_note": "No usage path documented"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No metrics",
+          "evidence": "absent",
+          "quality_note": "No metrics"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "1 of 3 populated",
+          "evidence": "lim=1, tradeoffs=0, oos=0",
+          "quality_note": "1 of 3 populated"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Cross-platform reference present",
+          "evidence": "benchmark=False, doi=False, dataset_link=True",
+          "quality_note": "Cross-platform reference present"
+        }
+      ]
+    }
+  ],
+  "overall_score": {
+    "total_points": 24,
+    "max_points": 84,
+    "percentage": 28.6
+  },
+  "assessment": {
+    "strengths": [],
+    "weaknesses": [
+      "Weak Metadata Quality & Content (4/21)",
+      "Weak Technical Documentation (4/25)",
+      "Weak Performance & FAIRness (4/17)"
+    ],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-rubric20",
+    "model_card_hash": "a7a071242f0459fe7a491bd900266e9f1e57c6aef0e0255b5bcbdeb8249017b3"
+  }
+}

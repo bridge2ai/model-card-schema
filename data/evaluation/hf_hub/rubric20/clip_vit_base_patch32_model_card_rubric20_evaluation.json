@@ -1,0 +1,266 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "data/model_cards_assistant/clip_vit_base_patch32_model_card.yaml",
+  "evaluation_timestamp": "2026-06-24T19:36:00.240685+00:00",
+  "evaluator": {
+    "name": "hybrid-heuristic-evaluator",
+    "temperature": "N/A",
+    "evaluation_type": "rule_based_with_quality_heuristics"
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 required fields populated",
+          "evidence": "populated=['model_details.name', 'model_details.overview', 'model_details.licenses', 'model_details.version', 'model_parameters.model_architecture']",
+          "quality_note": "All 5 required fields populated"
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars across narrative fields",
+          "evidence": "overview=1177, doc=1578, short=206",
+          "quality_note": ">500 chars across narrative fields"
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "\u22654 tags + pipeline_tag + (language or model_category)",
+          "evidence": "9 tags, pipeline=zero-shot-image-classification, lang=['en'], cat=vision-language-multimodal-transformer",
+          "quality_note": "\u22654 tags + pipeline_tag + (language or model_category)"
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both I/O specified with format_map populated",
+          "evidence": "prose + structured map",
+          "quality_note": "Both I/O specified with format_map populated"
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "schema_version populated",
+          "evidence": "schema_version=0.0.2",
+          "quality_note": "schema_version populated"
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 15,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Resolvable persistent identifier",
+          "evidence": "DOI or HF Hub URL present",
+          "quality_note": "Resolvable persistent identifier"
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding info detected",
+          "evidence": "absent",
+          "quality_note": "No funding info detected"
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "ethics + bias + out_of_scope all populated",
+          "evidence": "comprehensive",
+          "quality_note": "ethics + bias + out_of_scope all populated"
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "SPDX permissive license (no additional restrictions needed)",
+          "evidence": "spdx=['MIT']",
+          "quality_note": "SPDX permissive license (no additional restrictions needed)"
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Framework + version + library, no model_index",
+          "evidence": "PyTorch torch>=1.7, lib=transformers",
+          "quality_note": "Framework + version + library, no model_index"
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 15,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Some tool/library named",
+          "evidence": "partial",
+          "quality_note": "Some tool/library named"
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Most hyperparameters present",
+          "evidence": "good",
+          "quality_note": "Most hyperparameters present"
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Version name + date present",
+          "evidence": "version=vit-base-patch32, date=2021-01-05",
+          "quality_note": "Version name + date present"
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Citation(s) + reference(s), DOIs missing",
+          "evidence": "1 cites, 5 refs",
+          "quality_note": "Citation(s) + reference(s), DOIs missing"
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute_infrastructure",
+          "evidence": "absent",
+          "quality_note": "No compute_infrastructure"
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 13,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "At least one resolvable URL",
+          "evidence": "5 refs",
+          "quality_note": "At least one resolvable URL"
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Partial usage docs",
+          "evidence": "examples=0, io=True",
+          "quality_note": "Partial usage docs"
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "[capped 5->3 by train_eval_leakage] \u22652 metrics, \u22652 slices, CI on \u22651",
+          "evidence": "11 metrics, 11 slices, CI=True; semantic_rule=train_eval_leakage: Training/benchmark dataset overlap: 'WIT (WebImageText)' ~ 'WIT (WebImageText, 400M image-text pairs, OpenAI internal)', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation (zero-shot, 80-prompt ensemble)', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation (zero-shot)'",
+          "quality_note": "[capped 5->3 by train_eval_leakage] \u22652 metrics, \u22652 slices, CI on \u22651"
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All three populated with concrete enumerated items",
+          "evidence": "lim=5, tradeoffs=3, oos=7",
+          "quality_note": "All three populated with concrete enumerated items"
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Cross-platform reference present",
+          "evidence": "benchmark=False, doi=False, dataset_link=True",
+          "quality_note": "Cross-platform reference present"
+        }
+      ]
+    }
+  ],
+  "overall_score": {
+    "total_points": 64,
+    "max_points": 84,
+    "percentage": 76.2,
+    "semantic_deductions": [
+      {
+        "question": "Q18",
+        "rule": "train_eval_leakage",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "Training/benchmark dataset overlap: 'WIT (WebImageText)' ~ 'WIT (WebImageText, 400M image-text pairs, OpenAI internal)', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation (zero-shot, 80-prompt ensemble)', 'ImageNet-1k (ILSVRC2012)' ~ 'ImageNet-1k validation (zero-shot)'"
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Strong Structural Completeness (21/21)"
+    ],
+    "weaknesses": [],
+    "recommendations": []
+  },
+  "metadata": {
+    "evaluator_id": "batch-hybrid-rubric20",
+    "model_card_hash": "db4cf98b791d03bfb8c32e6cb75d4f037954d8fadc816fb87414b1cbdec80091"
+  }
+}

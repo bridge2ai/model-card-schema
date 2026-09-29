@@ -1,0 +1,508 @@
+{
+  "rubric": "mc_rubric20_semantic",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
+  "model": "BERT Sentiment Classifier v1.2",
+  "method": "harmonized_external_reference_pattern",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 56,
+    "max_points": 84,
+    "percentage": 66.7,
+    "semantic_deductions": [
+      {
+        "question": "Q8",
+        "raw_score": 3,
+        "capped_score": 3,
+        "reason": "out_of_scope_uses empty for a moderation/content-filtering model; ethical considerations partial. Base score already at cap."
+      },
+      {
+        "question": "Q18",
+        "raw_score": 5,
+        "capped_score": 3,
+        "reason": "Benchmark dataset (IMDb) overlaps with training dataset (IMDb) — potential train/eval leakage"
+      },
+      {
+        "question": "Q19",
+        "raw_score": 4,
+        "capped_score": 3,
+        "reason": "out_of_scope_uses empty (one of three sub-fields missing entirely)"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 19,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 required fields populated with non-trivial content",
+          "evidence": "model_details.name='BERT Sentiment Classifier v1.2'; overview present; licenses=[{identifier: 'Apache-2.0'}]; version.name='1.2.0' date='2025-11-20'; model_architecture details BERT-base 110M params with classification head",
+          "quality_note": "All required fields populated with concrete content",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Name, version semver, ISO date, SPDX license, concrete architecture description",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Combined narrative ~380 chars, in 50-500 range",
+          "evidence": "model_details.overview ~130 chars ('Fine-tuned BERT-base model...92% accuracy on test set.') + documentation ~250 chars (usage guide link + architecture summary)",
+          "quality_note": "Adequate but lacks intended-use depth and dataset-card-level narrative",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Multi-line YAML literals well-formed",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">=4 tags AND pipeline_tag AND model_language",
+          "evidence": "tags=6 ('sentiment-analysis','bert','pytorch','transformers','text-classification','movie-reviews'); pipeline_tag='text-classification'; model_language=['en']",
+          "quality_note": "Rich tag set covering task, framework, base model, and domain",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All tags lowercase hyphenated, HF-conventional",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both I/O specified in prose AND *_format_map populated",
+          "evidence": "input_format describes text+1024 token cap; input_format_map=[{text:string},{max_length:1024}]; output_format describes binary classes; output_format_map=[predicted_class, probabilities, confidence]",
+          "quality_note": "I/O fully specified with shape and example",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "pipeline_tag=text-classification consistent with text input and class-probability output",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: '0.0.2'",
+          "quality_note": "Recognizable Google MCT-style version string",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Quoted string '0.0.2'",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 14,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_details.references[0].reference='https://arxiv.org/abs/1810.04805' (BERT paper, resolvable arxiv ID); base_model='bert-base-uncased' resolves on HuggingFace Hub",
+          "quality_note": "Arxiv URL and HF base_model identifier are persistent; no direct DOI for the fine-tuned model itself",
+          "semantic_analysis": {
+            "format_check": "partial",
+            "format_details": "arxiv URL ok; base_model uses HF shorthand; no DOI assigned to this model (example.org placeholder for own page)",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding/acknowledgement mention",
+          "evidence": "No mission_relevance, no funding agency in overview, contributors lack affiliation. owners=['ML Research Team','Jane Smith'] only with contact emails.",
+          "quality_note": "Absent funding/grant/computing-facility acknowledgement",
+          "semantic_analysis": {
+            "format_check": "n/a",
+            "format_details": "Field absent",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Ethical considerations present but missing out_of_scope_uses and bias_* fields",
+          "evidence": "considerations.ethical_considerations has 2 concrete items ('Bias in training data' with mitigation; 'Potential for misuse in censorship' with mitigation). NO bias_model/bias_output/bias_input fields. NO out_of_scope_uses.",
+          "quality_note": "Ethical considerations meaningful; missing explicit bias disclosure and out-of-scope statement",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "ethical_considerations follow schema (name + mitigation_strategy)",
+            "consistency_check": "fail",
+            "plausibility_check": "pass",
+            "applied_cap": "Q8 cap at 3 due to out_of_scope_uses empty for a content-moderation-adjacent model"
+          }
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "SPDX identifier present (Apache-2.0)",
+          "evidence": "model_details.licenses=[{identifier: 'Apache-2.0'}]",
+          "quality_note": "Valid SPDX identifier; Apache-2.0 is compatible with bert-base-uncased (Apache-2.0) derivation",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Apache-2.0 is a recognized SPDX identifier",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Framework + version pinned + library_name + PwC-shape model_index",
+          "evidence": "framework='PyTorch'; framework_version='2.0.1'; library_name='transformers'; model_index[0].results[0] has task/dataset/metrics conforming to Papers-with-Code shape",
+          "quality_note": "Fully PwC-conformant",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Exact semver pin on framework_version; model_index conforms",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 12,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Framework + library + container image named, no full reproducibility stack",
+          "evidence": "framework='PyTorch'; framework_version='2.0.1'; library_name='transformers'; deployment_info.container_image='example-org/bert-sentiment:1.2.0'. No training-time reproducibility-relevant libs (e.g., transformers version, tokenizers), no Dockerfile reference for training env.",
+          "quality_note": "Inference container pinned but training environment opaque",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Container image tag specified",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 1,
+          "max_score": 5,
+          "score_label": "Only mentions training in overview, no procedure",
+          "evidence": "No model_parameters.training_procedure section. Overview says 'Trained on IMDb movie reviews'; version.diff says 'Improved accuracy by 5% through hyperparameter tuning' (no values). No optimizer, LR, batch size, epochs, schedule.",
+          "quality_note": "Training procedure essentially undocumented",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "training_procedure field absent",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver name + ISO date + non-trivial diff",
+          "evidence": "version.name='1.2.0' (semver); version.date='2025-11-20' (ISO); version.diff lists 3 concrete changes (accuracy +5%, sequence 512->1024, negation bias fix)",
+          "quality_note": "Strong version history",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Semver and ISO date well-formed",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "One APA citation + two references (one arxiv, one project URL)",
+          "evidence": "citations=[{style:APA, citation:'Smith, J., & Team, M. (2025). BERT Sentiment Classifier v1.2...'}]; references=[arxiv 1810.04805, example.org project URL]",
+          "quality_note": "Has a citation and external refs but only one of each kind with substantive identifier",
+          "semantic_analysis": {
+            "format_check": "partial",
+            "format_details": "APA citation parses; arxiv URL valid; no BibTeX; no DOI for this model",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No compute infrastructure section",
+          "evidence": "No model_parameters.compute_infrastructure. deployment_info.hardware_requirements lists inference RAM/GPU only, not training compute, GPU-hours, FLOPs, energy, or carbon.",
+          "quality_note": "Training compute and energy reporting absent",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "compute_infrastructure field absent",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 11,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include arxiv URL and project landing URL; deployment_info.inference_endpoint and container_image present",
+          "quality_note": "Resolvable URLs present",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URLs well-formed",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Input/output formats specified, no runnable code example",
+          "evidence": "input_format and output_format present with example string; input_format_map and output_format_map populated; deployment_info.inference_endpoint URL given. NO usage_documentation.code_examples block.",
+          "quality_note": "Endpoint and I/O schema given but no Python/curl code snippet",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "I/O maps consistent with prose",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Multiple metrics with slices and one CI, but train/eval dataset overlap",
+          "evidence": "quantitative_analysis.performance_metrics=5 entries: accuracy=0.92 (CI [0.91,0.93], slice=test_set); f1=0.91 (test_set_positive); f1=0.93 (test_set_negative); precision=0.90 (test_set_positive); recall=0.94 (test_set_positive). All values in [0,1]; CI lower<value<upper holds.",
+          "quality_note": "Strong reporting on its face (raw score 5), but capped due to benchmark/training overlap",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All metric values in [0,1]; CI 0.91<0.92<0.93 well-formed",
+            "consistency_check": "fail",
+            "plausibility_check": "pass",
+            "applied_cap": "Q18 cap at 3: model_index results dataset='imdb' is the SAME as training data[0]='IMDb Movie Reviews' (potential train/eval leakage; no held-out benchmark)"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Limitations and tradeoffs present, out_of_scope_uses absent",
+          "evidence": "limitations=4 concrete entries (sarcasm 65% accuracy, domain shift, English-only, 1024 token cap); tradeoffs=1 entry (accuracy vs. speed, mentions DistilBERT alternative). NO considerations.out_of_scope_uses.",
+          "quality_note": "Two of three sub-fields well-populated; capped because out_of_scope_uses required for moderation-adjacent model",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "limitations and tradeoffs concrete and model-specific",
+            "consistency_check": "fail",
+            "plausibility_check": "pass",
+            "applied_cap": "Q19 cap at 3: considerations.out_of_scope_uses empty despite content-moderation use case"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_index in Papers-with-Code shape; base_model='bert-base-uncased' (HF Hub); dataset_documentation.training_datasets[0].datasheet_url + datasheet_doi='10.18653/v1/P11-1015'; references include arxiv DOI-bearing publication",
+          "quality_note": "Multiple cross-platform interlinks: PwC, HF base model, D4D datasheet, arxiv",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "DOI 10.18653/... matches ACL Anthology prefix; datasheet_url present",
+            "consistency_check": "pass",
+            "plausibility_check": "pass",
+            "applied_cap": null
+          }
+        }
+      ]
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {
+        "field": "model_parameters.training_procedure",
+        "issue": "Field absent; training procedure not documented in any structured form"
+      },
+      {
+        "field": "model_parameters.compute_infrastructure",
+        "issue": "Field absent; no training-time hardware, software stack, GPU-hours, FLOPs, or energy report"
+      },
+      {
+        "field": "model_details.references",
+        "issue": "No DOI assigned to this fine-tuned model; only an arxiv URL for the underlying BERT paper and a project URL"
+      },
+      {
+        "field": "usage_documentation.code_examples",
+        "issue": "No runnable code example; inference path is only described in prose plus an endpoint URL"
+      }
+    ],
+    "consistency_failures": [
+      {
+        "rule": "high-risk / moderation model -> considerations.out_of_scope_uses populated",
+        "issue": "Stated use cases include 'Content filtering and moderation' but considerations.out_of_scope_uses is empty",
+        "questions_impacted": ["Q8", "Q19"]
+      },
+      {
+        "rule": "benchmark dataset != training dataset (no train/eval leakage)",
+        "issue": "model_index[0].results[0].dataset.type='imdb' matches model_parameters.data[0].name='IMDb Movie Reviews' (the training dataset); accuracy=0.92 reported on the same dataset family used for training",
+        "questions_impacted": ["Q18"]
+      },
+      {
+        "rule": "ethical_considerations mention bias -> bias_model/bias_input/bias_output fields populated",
+        "issue": "ethical_considerations[0] discusses dataset bias and version.diff mentions 'Fixed bias in handling negation', yet bias_model/bias_input/bias_output structured fields are empty",
+        "questions_impacted": ["Q8"]
+      },
+      {
+        "rule": "funding / acknowledgement disclosure",
+        "issue": "No mission_relevance, no funding agency, no grant ID, contributors lack affiliation",
+        "questions_impacted": ["Q7"]
+      }
+    ],
+    "plausibility_failures": [
+      {
+        "field": "quantitative_analysis.performance_metrics",
+        "issue": "92% accuracy on IMDb is plausible for BERT-base, but reporting on the training-data family without a held-out external benchmark (e.g., SST-2 numbers, which is mentioned as an evaluation_dataset but has no metrics) limits credibility"
+      },
+      {
+        "field": "evaluation_datasets vs. quantitative_analysis",
+        "issue": "dataset_documentation.evaluation_datasets lists SST-2 ('Used for additional validation') but no SST-2 metrics appear in quantitative_analysis.performance_metrics or model_index"
+      }
+    ],
+    "temporal_checks": {
+      "version_date": "2025-11-20",
+      "today": "2026-06-15",
+      "future_dated": false,
+      "predates_base_model": false,
+      "note": "Date is in the past relative to today; bert-base-uncased predates 2025; no temporal inconsistency"
+    },
+    "documentation_ratio": {
+      "overview_chars_approx": 130,
+      "documentation_chars_approx": 250,
+      "combined_chars_approx": 380,
+      "note": "Combined narrative falls in the 50-500 char band -> Q2=3 (not capped lower)"
+    }
+  },
+  "assessment": {
+    "strengths": [
+      "Strong structural completeness: all required fields, semver+ISO date+meaningful diff, rich tag set, Papers-with-Code-shaped model_index",
+      "Apache-2.0 SPDX license cleanly declared and compatible with bert-base-uncased base",
+      "Concrete, model-specific limitations and accuracy-vs-speed tradeoff",
+      "Cross-platform interlinks: PwC, HF base_model, ACL Anthology DOI for the dataset datasheet, arxiv reference",
+      "Full I/O specification including *_format_map structured maps",
+      "Performance metrics include multiple slices and a confidence interval on the headline accuracy"
+    ],
+    "weaknesses": [
+      "Benchmark dataset overlaps with the training dataset (IMDb), undermining the reported 92% accuracy as an external benchmark",
+      "No training_procedure: no optimizer, LR, batch size, epochs, or schedule",
+      "No compute_infrastructure: no GPU-hours, FLOPs, energy or carbon estimate",
+      "No funding / grant / acknowledgement information",
+      "No considerations.out_of_scope_uses despite a moderation-adjacent use case",
+      "Ethical considerations are present but bias_model / bias_input / bias_output structured fields are empty",
+      "No runnable code example in usage_documentation.code_examples",
+      "Evaluation dataset SST-2 is listed but has no associated metrics"
+    ],
+    "recommendations": [
+      "Add training_procedure with optimizer (AdamW), learning rate, batch size, epochs, scheduler, weight decay, and seed",
+      "Add compute_infrastructure with hardware, training duration, GPU-hours, and an energy / carbon estimate (e.g., via codecarbon)",
+      "Populate considerations.out_of_scope_uses (e.g., 'not for legal, medical, or high-stakes moderation decisions without human review')",
+      "Report SST-2 metrics in quantitative_analysis to provide an out-of-distribution-ish benchmark, or replace IMDb metrics with a held-out non-training benchmark",
+      "Populate bias_input / bias_model / bias_output structured fields with the demographic and dataset-bias notes already discussed in ethical_considerations",
+      "Add a Zenodo or HF Hub DOI for the fine-tuned model itself (currently only the underlying BERT paper has a stable identifier)",
+      "Add a funding / mission_relevance / acknowledgement block",
+      "Add a runnable usage_documentation.code_examples snippet (transformers pipeline call or curl to the inference endpoint)"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "mc-rubric20-semantic-2026-06-15",
+    "rubric_hash": "mc_rubric20_semantic@v1.0",
+    "model_card_hash": "sentiment-classifier-with-datasheet-refs.yaml"
+  }
+}

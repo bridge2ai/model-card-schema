@@ -1,0 +1,915 @@
+{
+  "rubric": "mc_rubric10_semantic",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/extended/climate-model-extended.yaml",
+  "model": "ClimateNet-v2",
+  "method": "manual_extended_template",
+  "evaluation_timestamp": "2026-06-15T00:00:00Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 46,
+    "max_points": 50,
+    "percentage": 92.0,
+    "semantic_deductions": []
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "Model Discovery and Identification",
+      "description": "Can a user or system discover and uniquely identify this model?",
+      "sub_elements": [
+        {
+          "name": "Persistent Identifier",
+          "score": 1,
+          "evidence": "model_details.references: ['https://github.com/lbnl-climate/climatenet-v2', 'https://climatenet.lbl.gov']",
+          "quality_note": "GitHub repository and project landing page URLs provided as persistent identifiers",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Both URLs are well-formed; no DOI present but GitHub + institutional landing page constitute persistent identification",
+            "consistency_check": "pass",
+            "consistency_details": "References align with library_name 'climatenet' and LBNL affiliation",
+            "plausibility_check": "marginal",
+            "plausibility_details": "GitHub repo and lbl.gov subdomain are plausible LBNL hosting; no DOI reduces long-term persistence guarantees"
+          }
+        },
+        {
+          "name": "Model Name and Description Completeness",
+          "score": 1,
+          "evidence": "model_details.name: 'ClimateNet-v2', short_description: 65 chars, overview: 327 chars with mission context",
+          "quality_note": "Clear name, concise short description, and comprehensive overview explaining purpose and DOE mission alignment",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Name follows convention; overview exceeds 200 chars; documentation field populated",
+            "consistency_check": "pass",
+            "consistency_details": "Overview describes climate weather event detection consistent with pipeline_tag='image-segmentation' and tags ['climate','extreme-weather','segmentation']",
+            "plausibility_check": "pass",
+            "plausibility_details": "Description plausibly matches a ResNet-50 FPN segmentation model on atmospheric data"
+          }
+        },
+        {
+          "name": "Tags / Pipeline Tag for Searchability",
+          "score": 1,
+          "evidence": "tags: 7 tags ['climate', 'extreme-weather', 'segmentation', 'object-detection', 'scientific-ml', 'doe', 'nersc'], pipeline_tag: 'image-segmentation'",
+          "quality_note": "Excellent searchability with 7 relevant tags and appropriate pipeline_tag",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "pipeline_tag 'image-segmentation' is a recognized HuggingFace pipeline tag",
+            "consistency_check": "pass",
+            "consistency_details": "All tags align with stated task (segmentation + detection of weather events) and infrastructure (NERSC, DOE)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Tags are concrete and discoverable on HF Hub / GitHub topic search"
+          }
+        },
+        {
+          "name": "Model Landing Page or Repository URL",
+          "score": 1,
+          "evidence": "model_details.references[0]: 'https://github.com/lbnl-climate/climatenet-v2', references[1]: 'https://climatenet.lbl.gov'",
+          "quality_note": "Both GitHub repository and dedicated project landing page provided",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "URLs well-formed; GitHub org 'lbnl-climate' and lbl.gov subdomain consistent with LBNL affiliation",
+            "consistency_check": "pass",
+            "consistency_details": "Repository URL also referenced from training_procedure.reproducibility_info.pipeline_url",
+            "plausibility_check": "pass",
+            "plausibility_details": "LBNL is a real DOE national lab; URL structure is plausible"
+          }
+        },
+        {
+          "name": "Library / Framework Identification",
+          "score": 1,
+          "evidence": "framework: 'PyTorch', framework_version: '2.1.0', library_name: 'climatenet'",
+          "quality_note": "Complete framework identification with specific version",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "framework='PyTorch' paired with pinned framework_version='2.1.0' (no floating constraint)",
+            "consistency_check": "pass",
+            "consistency_details": "compute_infrastructure.software confirms 'PyTorch 2.1.0 with CUDA 12.1'; software_dependencies pins 'pytorch=2.1.0=py310_cuda12.1_cudnn8.9.0_0'",
+            "plausibility_check": "pass",
+            "plausibility_details": "PyTorch 2.1.0 was released October 2023, consistent with 2024-11-15 model release"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 2,
+      "name": "Model Access and Distribution",
+      "description": "Can the model weights, code, and inference pipeline be located and used?",
+      "sub_elements": [
+        {
+          "name": "Weight Distribution Mechanism Defined",
+          "score": 1,
+          "evidence": "usage_documentation.installation_instructions: 'wget https://climatenet.lbl.gov/models/climatenet-v2.0.0.pth' (650 MB)",
+          "quality_note": "Clear download mechanism with explicit URL and file size",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "wget URL well-formed; .pth extension correctly identifies PyTorch state_dict",
+            "consistency_check": "pass",
+            "consistency_details": "Hosting domain (climatenet.lbl.gov) matches landing page in model_details.references",
+            "plausibility_check": "pass",
+            "plausibility_details": "650 MB checkpoint plausible for ResNet-50 FPN (~38.5M params × 4 bytes ≈ 154MB; with optimizer state/extras ~650MB is reasonable for an exported checkpoint)"
+          }
+        },
+        {
+          "name": "Code Repository Available",
+          "score": 1,
+          "evidence": "model_details.references[0]: 'https://github.com/lbnl-climate/climatenet-v2', training_procedure.reproducibility_info.pipeline_url: 'https://github.com/lbnl-climate/climatenet-v2/blob/main/training/train.py'",
+          "quality_note": "GitHub repository with explicit training script path provided",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "GitHub URLs well-formed; pipeline_url points to a specific file in main branch",
+            "consistency_check": "pass",
+            "consistency_details": "Pipeline URL matches references[0] base path",
+            "plausibility_check": "pass",
+            "plausibility_details": "GitHub org/repo and file path layout is conventional"
+          }
+        },
+        {
+          "name": "Inference API / Usage Example Provided",
+          "score": 1,
+          "evidence": "usage_documentation.code_examples: 3 complete examples (basic inference, evaluation, batch processing) with runnable Python code",
+          "quality_note": "Comprehensive usage examples with complete, runnable code snippets",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Examples include language tags (python, bash) and runnable code",
+            "consistency_check": "pass",
+            "consistency_details": "Code example uses (16, 768, 768) patch shape that matches input_format spec; outputs dict keys ('segmentation', 'detections') match output_format",
+            "plausibility_check": "pass",
+            "plausibility_details": "ClimateNetV2.from_pretrained API and SLURM batch script use plausible NERSC conventions (m1234 account, /pscratch paths)"
+          }
+        },
+        {
+          "name": "Input / Output Specification",
+          "score": 1,
+          "evidence": "model_parameters.input_format: 'Shape: (768, 768, 16), Channels: T, U, V, Q, Z, PSL, TMQ, PRECT, Z-score normalized, HDF5 format'; output_format: 'Segmentation mask: (768, 768) uint8, Bounding boxes: (x1, y1, x2, y2, class_id, confidence), HDF5 or GeoTIFF'",
+          "quality_note": "Complete and detailed input/output specifications with shapes, data types, normalization, and file formats",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Tensor shapes, dtypes, normalization scheme, and file containers all specified",
+            "consistency_check": "marginal",
+            "consistency_details": "Input is described as (768,768,16) channels-last but code example uses (16,768,768) channels-first PyTorch convention — minor inconsistency between spec and code",
+            "plausibility_check": "pass",
+            "plausibility_details": "16 atmospheric variables and 4-class output (TC/AR/front/background) match the use case"
+          }
+        },
+        {
+          "name": "Model File Format Specified",
+          "score": 1,
+          "evidence": "usage_documentation references '.pth' format (PyTorch state_dict), input/output use 'HDF5' and 'GeoTIFF'",
+          "quality_note": "Model checkpoint format (.pth) and data formats (HDF5, GeoTIFF) explicitly stated",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Standard PyTorch .pth extension; HDF5 and GeoTIFF are recognized scientific data formats",
+            "consistency_check": "pass",
+            "consistency_details": "Checkpoint format aligns with declared framework (PyTorch)",
+            "plausibility_check": "pass",
+            "plausibility_details": "GeoTIFF support fits geospatial output use case"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 3,
+      "name": "Model Reuse and Interoperability",
+      "description": "Is sufficient information provided to reuse and integrate this model with others?",
+      "sub_elements": [
+        {
+          "name": "License Terms Allow Reuse",
+          "score": 1,
+          "evidence": "model_details.licenses[0].identifier: 'BSD-3-Clause', license_name: 'BSD 3-Clause License', license_link: 'https://opensource.org/licenses/BSD-3-Clause'",
+          "quality_note": "Clear permissive license (BSD-3-Clause) with SPDX identifier and link",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'BSD-3-Clause' is a valid SPDX identifier",
+            "consistency_check": "pass",
+            "consistency_details": "BSD-3-Clause is compatible with ResNet-50 ImageNet-pretrained weights (BSD/MIT-style) and with permissive PyTorch licensing",
+            "plausibility_check": "pass",
+            "plausibility_details": "License link resolves to OSI canonical URL; appropriate for DOE national-lab open-source release"
+          }
+        },
+        {
+          "name": "Standard Framework / Format Used",
+          "score": 1,
+          "evidence": "framework: 'PyTorch', framework_version: '2.1.0', compute_infrastructure.software: 'PyTorch 2.1.0 with CUDA 12.1, Horovod 0.28.1'",
+          "quality_note": "Standard PyTorch framework with exact version and CUDA compatibility",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Versions are pinned exactly (no '>=' floating constraints)",
+            "consistency_check": "pass",
+            "consistency_details": "PyTorch 2.1.0 + CUDA 12.1 + Horovod 0.28.1 form a coherent stack; matches software_dependencies conda spec",
+            "plausibility_check": "pass",
+            "plausibility_details": "Horovod 0.28.1 was current in 2023; matches Apex 23.08 release window"
+          }
+        },
+        {
+          "name": "Base Model or Foundation Lineage Stated",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: 'ResNet-50 pretrained on ImageNet', training_procedure.reproducibility_info.hyperparameters.model_initialization: 'ResNet-50 ImageNet pretrained (modified first layer)'",
+          "quality_note": "Base model (ResNet-50 ImageNet pretrained) clearly stated with modification details",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Base model named in prose but top-level 'base_model' field is not populated",
+            "consistency_check": "pass",
+            "consistency_details": "Modification (16-channel input layer) is consistent with input_format (16 atmospheric variables)",
+            "plausibility_check": "pass",
+            "plausibility_details": "ImageNet-pretrained ResNet-50 + first-conv replacement is a standard transfer-learning pattern for multi-channel scientific data"
+          }
+        },
+        {
+          "name": "Supported Tasks Declared",
+          "score": 1,
+          "evidence": "pipeline_tag: 'image-segmentation', considerations.use_cases: 4 detailed use cases (TC tracking, AR detection, weather front identification, extreme event analysis)",
+          "quality_note": "Primary task (image-segmentation) and specific scientific use cases clearly documented",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "pipeline_tag valid; use cases enumerated with descriptions",
+            "consistency_check": "pass",
+            "consistency_details": "Use cases align with pipeline_tag and tags (segmentation + detection of TC/AR/fronts)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Each use case maps directly to one of the 3 segmentation classes plus aggregate analysis"
+          }
+        },
+        {
+          "name": "Reproducibility Artifacts Provided",
+          "score": 1,
+          "evidence": "training_procedure.reproducibility_info: seed=42, pipeline_url, hyperparameters (optimizer, lr, batch_size, epochs), environment_config; compute_infrastructure.software_dependencies: full conda environment spec; usage_documentation.training_configuration: complete SLURM command with all flags",
+          "quality_note": "Comprehensive reproducibility artifacts: seed, hyperparameters, environment spec, training script, and SLURM configuration",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Seed is integer; conda spec uses exact pins (pytorch=2.1.0=...); SLURM command includes all required flags",
+            "consistency_check": "pass",
+            "consistency_details": "Batch size 2/GPU × 256 GPUs = 512 effective batch matches stated 'global batch size 512' in training_speed",
+            "plausibility_check": "pass",
+            "plausibility_details": "40 epochs × 600 steps = 24,000 steps as stated; 3.2h/epoch × 40 = 128h total matches"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 4,
+      "name": "Ethical Use and Responsible AI",
+      "description": "Does the model card provide clear information about risks, bias, and ethical oversight?",
+      "sub_elements": [
+        {
+          "name": "Ethical Considerations Documented",
+          "score": 1,
+          "evidence": "considerations.ethical_considerations: 2 considerations with mitigation strategies ('Climate justice implications' with equitable performance validation, 'Model uncertainty communication' with confidence interval reporting)",
+          "quality_note": "Named ethical risks with concrete mitigation strategies",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each entry has 'name' + 'mitigation_strategy' fields populated",
+            "consistency_check": "pass",
+            "consistency_details": "Uncertainty-communication mitigation aligns with reported confidence intervals in quantitative_analysis; climate-justice mitigation aligns with documented polar-region limitation",
+            "plausibility_check": "pass",
+            "plausibility_details": "Both ethical risks are appropriate for a climate science model (geographic equity + uncertainty)"
+          }
+        },
+        {
+          "name": "Known Model / Output Bias Disclosed",
+          "score": 0,
+          "evidence": "No bias_model or bias_output fields present",
+          "quality_note": "Missing explicit bias disclosure. While limitations mention degraded performance in polar regions, no formal bias fields populated",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "bias_model and bias_output fields are absent",
+            "consistency_check": "fail",
+            "consistency_details": "limitations[2] documents geographic bias ('degrades in polar regions due to limited training data at high latitudes >70°') but this is NOT mirrored in dedicated bias_* fields; structured bias metadata is missing",
+            "plausibility_check": "fail",
+            "plausibility_details": "A segmentation model trained on northern-hemisphere-biased climate model output has clear sampling-bias signature that should be in bias_input/bias_model"
+          }
+        },
+        {
+          "name": "Out-of-Scope and Discouraged Uses",
+          "score": 1,
+          "evidence": "considerations.out_of_scope_uses: 3 explicit out-of-scope uses (real-time weather forecasting, direct satellite application, climate change attribution)",
+          "quality_note": "Clear out-of-scope uses with explanations of why each use case is inappropriate",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "3 entries, each with descriptive rationale",
+            "consistency_check": "pass",
+            "consistency_details": "Out-of-scope items align with training data (climate model output, not observations) and with declared use cases",
+            "plausibility_check": "pass",
+            "plausibility_details": "Each excluded use is a well-known misapplication risk for ML weather models"
+          }
+        },
+        {
+          "name": "Sensitive Data Use Disclosed",
+          "score": 0,
+          "evidence": "model_parameters.data does not include sensitive.sensitive_data_used field",
+          "quality_note": "No explicit sensitive data disclosure. Climate model output is typically non-sensitive, but formal field not populated",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "sensitive.sensitive_data_used field is absent from all 3 dataset entries",
+            "consistency_check": "pass",
+            "consistency_details": "Climate simulation output is plausibly non-PII, so absence of sensitive_data follow-on fields is internally consistent — but the boolean flag itself should be explicitly set to false rather than omitted",
+            "plausibility_check": "pass",
+            "plausibility_details": "CAM5.1 / E3SM / MPAS-A are public climate simulation outputs with no PII; sensitive_data_used=false would be the plausible value"
+          }
+        },
+        {
+          "name": "Intended Users and Stakeholder Impact Statement",
+          "score": 1,
+          "evidence": "considerations.users: 3 user groups (climate scientists, DOE researchers, ML researchers); considerations.tradeoffs: 2 tradeoffs (accuracy vs speed, model size vs accuracy)",
+          "quality_note": "Named user groups with documented tradeoffs",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "users[] and tradeoffs[] both populated with descriptions",
+            "consistency_check": "marginal",
+            "consistency_details": "Tradeoffs are technical (accuracy vs speed, size vs accuracy) rather than ethical (fairness vs accuracy); given the polar-region bias, an accuracy-vs-geographic-fairness tradeoff would also be expected",
+            "plausibility_check": "pass",
+            "plausibility_details": "User groups are appropriate for a DOE-developed scientific ML model"
+          }
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    },
+    {
+      "id": 5,
+      "name": "Model Architecture and Training Composition",
+      "description": "Can the model's architecture and training composition be understood from metadata?",
+      "sub_elements": [
+        {
+          "name": "Architecture Described in Detail",
+          "score": 1,
+          "evidence": "model_parameters.model_architecture: 350+ char detailed description including ResNet-50 backbone, FPN structure, segmentation head (4x upsampling, conv layers), detection head (RPN, ROI Align), total parameters: 38.5M",
+          "quality_note": "Comprehensive layer-by-layer architecture description with parameter count",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Multi-line block scalar with structured sub-sections (Backbone / FPN / Heads / Total params)",
+            "consistency_check": "pass",
+            "consistency_details": "16-channel modified first conv consistent with input_format (16 variables); 4-way softmax consistent with 4-class output (TC/AR/front/background)",
+            "plausibility_check": "pass",
+            "plausibility_details": "38.5M params is in the right range for ResNet-50 FPN with detection head (vanilla ResNet-50 ~25M, FPN+heads add ~10-15M)"
+          }
+        },
+        {
+          "name": "Training Data Documented",
+          "score": 1,
+          "evidence": "model_parameters.data: 3 datasets (CAM5.1 High-Resolution, E3SM v2 High-Resolution, MPAS-A 15km) with names, descriptions, and links",
+          "quality_note": "Concrete climate model datasets with links and resolution specifications",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each entry has name, description, link",
+            "consistency_check": "marginal",
+            "consistency_details": "Training datasets (CAM5.1, E3SM v2, MPAS-A) overlap with declared evaluation benchmarks (E3SM v2, MPAS-A, GFDL CM4). Methodology states the split is by simulation year on the same model output, which is a legitimate temporal holdout but should be flagged as not a held-out-model evaluation",
+            "plausibility_check": "pass",
+            "plausibility_details": "All 3 are real climate model families used in DOE/NCAR climate science"
+          }
+        },
+        {
+          "name": "Hyperparameters Reported",
+          "score": 1,
+          "evidence": "training_procedure.reproducibility_info.hyperparameters: optimizer='AdamW', learning_rate=0.0001, batch_size=2, training_epochs=40, optimization_techniques (mixed precision, gradient clipping, cosine annealing, warmup)",
+          "quality_note": "Complete hyperparameter specification including optimizer, learning rate, batch size, epochs, and optimization techniques",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Numeric hyperparameters typed correctly; optimization_techniques is a list of strings",
+            "consistency_check": "marginal",
+            "consistency_details": "training_procedure.description says 'standard SGD optimization' but hyperparameters.optimizer is 'AdamW' — narrative description is inconsistent with the structured hyperparameter value",
+            "plausibility_check": "pass",
+            "plausibility_details": "AdamW with lr=1e-4 and cosine annealing + warmup is a standard transfer-learning recipe"
+          }
+        },
+        {
+          "name": "Compute Infrastructure Reported (Extended)",
+          "score": 1,
+          "evidence": "compute_infrastructure.hardware: 'NERSC Perlmutter, 64 nodes × 4 A100 40GB = 256 GPUs, AMD EPYC 7763, 512GB RAM, Slingshot-11'; training_speed: '32,768 GPU-hours (128 hours on 256 A100s)'",
+          "quality_note": "Detailed compute infrastructure with GPU type/count, CPU, memory, interconnect, and total compute hours",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "hardware_list itemized; software lists framework versions; training_speed quantifies throughput and totals",
+            "consistency_check": "pass",
+            "consistency_details": "256 GPUs × 128h = 32,768 GPU-hours (matches stated value); AMD EPYC 7763 + Slingshot-11 are Perlmutter's actual specs",
+            "plausibility_check": "pass",
+            "plausibility_details": "NERSC Perlmutter has 1,792 A100 GPUs; 256-GPU allocations are routine. 38.5M-param model with 40 epochs in 128h at 2,100 patches/s is reasonable"
+          }
+        },
+        {
+          "name": "Training / Evaluation Split Defined",
+          "score": 1,
+          "evidence": "training_procedure.methodology: 'Train/val/test split: 70/15/15 by simulation year'; quantitative_analysis.evaluation_procedure: 'Test set: 3 climate models × 10 years, Event counts: 1,247 TCs, 3,582 ARs, 8,921 fronts'",
+          "quality_note": "Clear train/val/test split with detailed evaluation dataset composition",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Percentages and event counts explicit",
+            "consistency_check": "marginal",
+            "consistency_details": "Train and test draw from overlapping model families (E3SM v2, MPAS-A) but separated by simulation year — temporal holdout is legitimate but cross-model generalization is partially conflated with within-model holdout (only GFDL CM4 is fully out-of-distribution at the model level)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Event counts (1247 TCs over 30 simulation-years) are consistent with observed global TC frequency (~80/yr) when accounting for multiple models"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 6,
+      "name": "Model Provenance and Versioning",
+      "description": "Can a user determine model versions, update history, and provenance?",
+      "sub_elements": [
+        {
+          "name": "Version Number Provided",
+          "score": 1,
+          "evidence": "model_details.version.name: 'v2.0.0'",
+          "quality_note": "Semantic version number provided",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "'v2.0.0' matches semver MAJOR.MINOR.PATCH with 'v' prefix",
+            "consistency_check": "pass",
+            "consistency_details": "Matches model name suffix 'ClimateNet-v2' and checkpoint filename 'climatenet-v2.0.0.pth'",
+            "plausibility_check": "pass",
+            "plausibility_details": "v2.0.0 implies a prior v1; version.diff references upgrades from ResNet-34 (v1) to ResNet-50"
+          }
+        },
+        {
+          "name": "Version Date Documented",
+          "score": 1,
+          "evidence": "model_details.version.date: '2024-11-15', version.last_updated: '2024-11-20T14:30:00Z'",
+          "quality_note": "Both release date and last updated timestamp provided in ISO 8601 format",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "ISO 8601 date and datetime formats both valid",
+            "consistency_check": "pass",
+            "consistency_details": "last_updated (2024-11-20) is after release date (2024-11-15), as expected",
+            "plausibility_check": "pass",
+            "plausibility_details": "Dates align with SC24 conference timeframe (Nov 17-22, 2024 in Atlanta) referenced in the citation"
+          }
+        },
+        {
+          "name": "Change Description for This Version",
+          "score": 1,
+          "evidence": "model_details.version.diff: 'Upgraded to ResNet-50 from ResNet-34, Added atmospheric river detection capability, Improved tropical cyclone boundary accuracy by 15%, Trained on 3x more data (12 vs 4 climate models)'",
+          "quality_note": "Detailed change description with specific improvements and quantitative metrics",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Multi-line block scalar with 4 itemized changes",
+            "consistency_check": "marginal",
+            "consistency_details": "Diff says 'trained on 12 climate models' but model_parameters.data only enumerates 3 (CAM5.1, E3SM v2, MPAS-A); discrepancy unresolved",
+            "plausibility_check": "pass",
+            "plausibility_details": "+15% TC boundary accuracy and architecture upgrade are plausible v1→v2 improvements"
+          }
+        },
+        {
+          "name": "Owners / Contributors Identified",
+          "score": 1,
+          "evidence": "model_details.contributors: 4 contributors with roles (developed_by, contributed_by, maintained_by, funded_by), names, emails, ORCIDs, affiliations (LBNL, ANL, DOE Office of Science)",
+          "quality_note": "Comprehensive contributor attribution with CRediT-style roles, contact information, and ORCIDs",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Emails are RFC-5322 valid (jane.doe@lbl.gov, jsmith@anl.gov, climate-ai@lbl.gov); ORCIDs match orcid.org/XXXX-XXXX-XXXX-XXXX pattern",
+            "consistency_check": "pass",
+            "consistency_details": "Email domains (lbl.gov, anl.gov) match listed affiliations (LBNL, ANL); CRediT roles cover authorship + maintenance + funding",
+            "plausibility_check": "marginal",
+            "plausibility_details": "ORCIDs 0000-0002-1234-5678 and 0000-0003-9876-5432 appear to be sequential placeholder IDs (common test patterns) rather than real registered ORCIDs — likely template placeholders for this example card"
+          }
+        },
+        {
+          "name": "Citation or BibTeX Provided",
+          "score": 1,
+          "evidence": "model_details.citations[0]: style='IEEE', full citation for SC24 conference paper",
+          "quality_note": "IEEE-style citation provided with conference details",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "IEEE-style narrative citation provided but no BibTeX entry and no DOI/URL to paper",
+            "consistency_check": "pass",
+            "consistency_details": "Authors 'J. Doe, J. Smith' map to contributors[0] and [1]; year 2024 matches version.date",
+            "plausibility_check": "pass",
+            "plausibility_details": "SC24 (Supercomputing 2024) is a real venue published by IEEE/ACM; conference paper format is plausible"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 7,
+      "name": "Scientific Motivation and Funding Transparency",
+      "description": "Does the metadata state why the model exists and who funded it?",
+      "sub_elements": [
+        {
+          "name": "Motivation / Use Case Rationale",
+          "score": 1,
+          "evidence": "model_details.overview: 'supports DOE's climate science mission by enabling automated analysis of petabyte-scale climate simulation datasets'; mission_relevance.description: 'enables analysis of multi-petabyte climate datasets, 1000× speedup vs. manual'",
+          "quality_note": "Clear motivation with scientific problem statement and mission alignment",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Multi-line block scalars with detailed rationale",
+            "consistency_check": "pass",
+            "consistency_details": "Overview and mission_relevance.description both emphasize automated analysis of petabyte-scale climate datasets on DOE HPC",
+            "plausibility_check": "pass",
+            "plausibility_details": "1000× speedup vs. manual labeling is plausible for an automated segmentation pipeline replacing expert annotation"
+          }
+        },
+        {
+          "name": "Primary Intended Use Articulated",
+          "score": 1,
+          "evidence": "considerations.use_cases: 4 specific use cases (tropical cyclone tracking, atmospheric river detection, weather front identification, extreme event frequency analysis)",
+          "quality_note": "Multiple concrete use cases with specific scientific applications",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each use case is a separate item with description",
+            "consistency_check": "pass",
+            "consistency_details": "4 use cases align 1:1 with the 4-class segmentation output (TC, AR, front, plus aggregate)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Each use case is a recognized application area in climate science"
+          }
+        },
+        {
+          "name": "Mission Relevance Stated (Extended)",
+          "score": 1,
+          "evidence": "mission_relevance.doe_project: 'Climate Model Development and Validation (CMDV)', mission_relevance.description: 'supports DOE's E3SM on leadership computing facilities, demonstrates AI for Science'",
+          "quality_note": "Explicit DOE mission alignment with project name and impact areas",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Structured mission_relevance block with doe_project, doe_facility, funding_source, description",
+            "consistency_check": "pass",
+            "consistency_details": "doe_facility ('NERSC Perlmutter') matches compute_infrastructure.hardware; CMDV is a real DOE BER program",
+            "plausibility_check": "pass",
+            "plausibility_details": "AI for Science is an active DOE initiative; mission framing is realistic for an LBNL+ANL collaboration"
+          }
+        },
+        {
+          "name": "Funding Source / Grant Agency Listed",
+          "score": 1,
+          "evidence": "model_details.contributors[3]: role='funded_by', name='DOE Office of Science'; mission_relevance.funding_source: 'DOE Office of Science, Biological and Environmental Research (BER), Grant: DE-AC02-05CH11231'",
+          "quality_note": "Complete funding information with agency, program, and grant number",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Grant number DE-AC02-05CH11231 matches DOE contract format (DE-AC02-05CH11231 is in fact LBNL's prime contract number)",
+            "consistency_check": "pass",
+            "consistency_details": "Funding source (DOE BER) matches contributor with role='funded_by'; grant number is consistent with LBNL affiliation",
+            "plausibility_check": "pass",
+            "plausibility_details": "DE-AC02-05CH11231 is the real LBNL prime contract; BER is the real DOE office that funds climate work"
+          }
+        },
+        {
+          "name": "Acknowledgement of Computing / Platform Support",
+          "score": 1,
+          "evidence": "mission_relevance.doe_facility: 'NERSC Perlmutter'; compute_infrastructure.hardware: 'NERSC Perlmutter GPU nodes'",
+          "quality_note": "Clear acknowledgement of NERSC computing facility",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Facility named consistently in two fields",
+            "consistency_check": "pass",
+            "consistency_details": "NERSC mentioned in mission_relevance, compute_infrastructure, usage_documentation (module load, /pscratch), and tags",
+            "plausibility_check": "pass",
+            "plausibility_details": "Perlmutter is NERSC's flagship A100 system; usage_documentation correctly uses NERSC slurm conventions"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 8,
+      "name": "Training and Evaluation Transparency",
+      "description": "Can training and evaluation procedures be replicated or understood?",
+      "sub_elements": [
+        {
+          "name": "Training Procedure Documented",
+          "score": 1,
+          "evidence": "training_procedure.methodology: 5-step detailed procedure (data preparation, distributed training, loss function, regularization, validation) with specific techniques (weighted cross-entropy, gradient accumulation, learning rate scaling)",
+          "quality_note": "Comprehensive training procedure with data preparation, distributed training strategy, loss functions, and regularization",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Multi-step methodology with structured sub-sections",
+            "consistency_check": "marginal",
+            "consistency_details": "training_procedure.description states 'standard SGD optimization' while hyperparameters.optimizer is 'AdamW' (same inconsistency noted in Element 5)",
+            "plausibility_check": "pass",
+            "plausibility_details": "Loss weighting (λ_seg=1.0, λ_det=0.5) and weighted cross-entropy for class imbalance are standard for multi-task segmentation+detection"
+          }
+        },
+        {
+          "name": "Evaluation Procedure Documented",
+          "score": 1,
+          "evidence": "quantitative_analysis.evaluation_procedure: metrics (IoU for segmentation, mAP for detection), benchmarks (3 climate models × 10 years, event counts), baselines (ClimateNet-v1, TECA), uncertainty quantification (bootstrap with 10,000 iterations)",
+          "quality_note": "Detailed evaluation procedure with metrics, benchmarks, baselines, and uncertainty quantification",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All sub-fields of evaluation_procedure populated (description, benchmarks, baselines, sota_comparison, uncertainty_quantification)",
+            "consistency_check": "pass",
+            "consistency_details": "Bootstrap with 10,000 iterations matches reported CI widths (±0.006-0.010); evaluation_data_separate=true is consistent with held-out simulation years",
+            "plausibility_check": "pass",
+            "plausibility_details": "TECA (Toolkit for Extreme Climate Analysis) is a real reference baseline; ensemble σ=0.012 across 5 seeds is plausible"
+          }
+        },
+        {
+          "name": "Reproducibility Information (Extended)",
+          "score": 1,
+          "evidence": "training_procedure.reproducibility_info: random_seed=42, environment_config with conda spec, pipeline_url to training script, complete hyperparameters",
+          "quality_note": "Complete reproducibility information with seed, environment specification, and training script link",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "All recommended fields populated; conda spec uses fully pinned versions including build strings",
+            "consistency_check": "pass",
+            "consistency_details": "Seed=42 referenced both in reproducibility_info and in the SLURM srun command in usage_documentation.training_configuration",
+            "plausibility_check": "marginal",
+            "plausibility_details": "No container hash / no deterministic-cudnn flag mentioned; non-deterministic GPU ops may still cause minor variation despite seed"
+          }
+        },
+        {
+          "name": "Open-Source Code Linked",
+          "score": 1,
+          "evidence": "model_details.references[0]: 'https://github.com/lbnl-climate/climatenet-v2', reproducibility_info.pipeline_url: 'https://github.com/lbnl-climate/climatenet-v2/blob/main/training/train.py'",
+          "quality_note": "GitHub repository with specific training script path provided",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "GitHub URL well-formed; pipeline_url points to specific file path",
+            "consistency_check": "pass",
+            "consistency_details": "Both refs point to the same repo; consistent with training_configuration which references configs/resnet50_fpn.yaml in the same repo",
+            "plausibility_check": "pass",
+            "plausibility_details": "Repo path layout (training/, configs/, inference/) is conventional"
+          }
+        },
+        {
+          "name": "External Standards or References Cited",
+          "score": 1,
+          "evidence": "model_details.citations[0]: SC24 conference paper; quantitative_analysis.evaluation_procedure.baselines: references to 'Prabhat et al., 2021' and 'WeatherBench'",
+          "quality_note": "Conference paper citation and references to comparison baselines provided",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Narrative references to prior work but no DOI or arXiv ID attached",
+            "consistency_check": "pass",
+            "consistency_details": "ClimateNet-v1 (Prabhat et al., 2021) is consistent with version.diff statement of upgrade from ResNet-34",
+            "plausibility_check": "pass",
+            "plausibility_details": "Prabhat et al. ClimateNet and WeatherBench are real reference works in this field"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 9,
+      "name": "Performance Evaluation and Limitations Disclosure",
+      "description": "Does the metadata communicate performance, known risks, biases, and limitations?",
+      "sub_elements": [
+        {
+          "name": "Quantitative Performance Metrics Reported",
+          "score": 1,
+          "evidence": "quantitative_analysis.performance_metrics: 5 metrics (IoU for TC=0.847, AR=0.782, Fronts=0.691, Detection mAP@0.5=0.823, Inference throughput=125.3 patches/s) with slices",
+          "quality_note": "Multiple quantitative metrics with numeric values and dataset slices",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each metric has type, value, and (where appropriate) slice + unit",
+            "consistency_check": "pass",
+            "consistency_details": "All 4 quality metrics in [0,1] range; throughput uses sensible unit (patches/s on A100)",
+            "plausibility_check": "pass",
+            "plausibility_details": "IoU values 0.69-0.85 are realistic for climate-event segmentation; mAP@0.5=0.82 plausible for detection of large meteorological structures"
+          }
+        },
+        {
+          "name": "Performance Across Sub-populations / Slices",
+          "score": 1,
+          "evidence": "performance_metrics slices: 'Test set (E3SM v2)' for segmentation metrics, 'Test set (all events)' for detection, 'single A100 GPU' for throughput; limitations: 'degrades in polar regions (>70°)'",
+          "quality_note": "Metrics reported with dataset slices and geographic performance variation documented",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Slices populated on each performance_metric",
+            "consistency_check": "marginal",
+            "consistency_details": "Slices vary by event-type but a per-region / per-hemisphere slice is missing despite documented polar-region performance degradation in limitations",
+            "plausibility_check": "marginal",
+            "plausibility_details": "Only one climate model (E3SM v2) appears in segmentation metric slices; cross-model variability across the 3 test models is not slice-reported"
+          }
+        },
+        {
+          "name": "Confidence Intervals or Error Bars",
+          "score": 1,
+          "evidence": "performance_metrics[0-2].confidence_interval: TC IoU [0.841, 0.853], AR IoU [0.774, 0.790], Front IoU [0.681, 0.701]; evaluation_procedure.uncertainty_quantification: 'bootstrap resampling (10,000 iterations), ensemble σ=0.012'",
+          "quality_note": "Confidence intervals provided for key metrics with bootstrap methodology",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "lower_bound < value < upper_bound holds for all 3 CIs (0.841<0.847<0.853; 0.774<0.782<0.790; 0.681<0.691<0.701)",
+            "consistency_check": "marginal",
+            "consistency_details": "Detection mAP@0.5 and throughput lack CIs even though uncertainty methodology is documented",
+            "plausibility_check": "pass",
+            "plausibility_details": "CI widths (±0.006-0.010) are plausible for n>10k bootstrap on segmentation IoU"
+          }
+        },
+        {
+          "name": "Limitations Section Present",
+          "score": 1,
+          "evidence": "considerations.limitations: 3 concrete limitations (coarse resolution, atmospheric-only phenomena, polar region degradation)",
+          "quality_note": "Multiple specific limitations with concrete failure modes",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Each limitation has a substantive multi-line description",
+            "consistency_check": "pass",
+            "consistency_details": "Coarse-resolution limitation (≥15km) consistent with MPAS-A 15km training data; polar limitation consistent with out_of_scope_uses notes on observational adaptation",
+            "plausibility_check": "pass",
+            "plausibility_details": "All 3 limitations correspond to known failure modes of climate-model-trained segmentation networks"
+          }
+        },
+        {
+          "name": "Tradeoffs / Risks Acknowledged",
+          "score": 1,
+          "evidence": "considerations.tradeoffs: 2 quantified tradeoffs (accuracy vs speed: 3% IoU gain but 64% slower at higher resolution; model size vs accuracy: 40% faster but 5% IoU drop with smaller backbone)",
+          "quality_note": "Quantified tradeoffs with specific performance numbers",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Both tradeoffs include quantitative deltas (3% IoU, 45 vs 125 p/s, 40% speedup)",
+            "consistency_check": "marginal",
+            "consistency_details": "Tradeoffs are purely engineering (accuracy/speed/size); a fairness-related tradeoff (accuracy vs polar-region coverage) is implied by limitations but not surfaced here",
+            "plausibility_check": "pass",
+            "plausibility_details": "Higher-res throughput drop (125→45 p/s ≈ 64%) is consistent with O(N²) scaling for 1536² vs 768² patches"
+          }
+        }
+      ],
+      "element_score": 5,
+      "element_max": 5
+    },
+    {
+      "id": 10,
+      "name": "Cross-Platform and Community Integration",
+      "description": "Does the model card connect to wider model ecosystems, benchmarks, and standards?",
+      "sub_elements": [
+        {
+          "name": "Published on a Recognized Platform",
+          "score": 1,
+          "evidence": "model_details.references: GitHub (https://github.com/lbnl-climate/climatenet-v2) and dedicated project site (https://climatenet.lbl.gov); library_name: 'climatenet'",
+          "quality_note": "Published on GitHub with dedicated project landing page",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "Both URLs well-formed and use recognized platforms (GitHub, lbl.gov)",
+            "consistency_check": "marginal",
+            "consistency_details": "GitHub + institutional site present but no HuggingFace Hub, Zenodo, or Papers-with-Code presence — reduces ML-community discoverability",
+            "plausibility_check": "pass",
+            "plausibility_details": "GitHub Container Registry (ghcr.io) also referenced in installation instructions, adding a distribution channel"
+          }
+        },
+        {
+          "name": "Cross-referenced DOIs or Related Model Links",
+          "score": 0,
+          "evidence": "No DOI present in references or citations",
+          "quality_note": "Conference paper cited but no DOI provided; no cross-references to parent/related models via DOI",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "No DOI string matching 10.XXXX/... pattern anywhere in the card",
+            "consistency_check": "fail",
+            "consistency_details": "SC24 papers receive IEEE DOIs (prefix 10.1109/) — citation could and should include one; ClimateNet-v1 reference also has no DOI/arXiv ID",
+            "plausibility_check": "fail",
+            "plausibility_details": "Lack of DOI/arXiv link materially reduces long-term citability and cross-platform indexing"
+          }
+        },
+        {
+          "name": "Benchmark Results (Papers with Code style)",
+          "score": 1,
+          "evidence": "quantitative_analysis.evaluation_procedure: benchmarks with standard metrics (IoU, mAP), baselines (ClimateNet-v1, TECA, WeatherBench), sota_comparison with improvement percentages",
+          "quality_note": "Benchmark-quality results with baselines and SOTA comparisons",
+          "semantic_analysis": {
+            "format_check": "marginal",
+            "format_details": "Benchmark info present in evaluation_procedure but the structured model_index[] (Papers-with-Code style) is not used",
+            "consistency_check": "pass",
+            "consistency_details": "Baselines (ClimateNet-v1, TECA) and SOTA deltas align with version.diff claim of +15% TC accuracy",
+            "plausibility_check": "pass",
+            "plausibility_details": "+8.6% IoU over ClimateNet-v1 and +15% over WeatherBench are plausible improvement magnitudes"
+          }
+        },
+        {
+          "name": "Standards / Schema Conformance Stated",
+          "score": 1,
+          "evidence": "schema_version: '2.0.0-extended', follows LinkML model_card_schema structure",
+          "quality_note": "Explicit schema version conformance stated",
+          "semantic_analysis": {
+            "format_check": "pass",
+            "format_details": "schema_version is a semver-like string with explicit '-extended' qualifier",
+            "consistency_check": "pass",
+            "consistency_details": "Card uses extended-template fields (mission_relevance, compute_infrastructure, reproducibility_info, usage_documentation) consistent with declared schema variant",
+            "plausibility_check": "pass",
+            "plausibility_details": "Schema version matches this project's extended LinkML schema"
+          }
+        },
+        {
+          "name": "Datasets Linked to Datasheets / D4D References",
+          "score": 0,
+          "evidence": "model_parameters.data: 3 datasets with names and links (https://www.cesm.ucar.edu/models/cam, https://e3sm.org, https://mpas-dev.github.io) but no datasheet references",
+          "quality_note": "Dataset links provided but no datasheets (D4D) or formal dataset registry references",
+          "semantic_analysis": {
+            "format_check": "fail",
+            "format_details": "Links point to model-family homepages, not to dataset-specific records or datasheets",
+            "consistency_check": "fail",
+            "consistency_details": "Card is the base/extended variant (not d4dharmonized) so no Datasheet-for-Datasets reference structure is used; dataset provenance details (size, license, custodian) are not formally tracked",
+            "plausibility_check": "marginal",
+            "plausibility_details": "CESM/E3SM/MPAS-A homepages are real and authoritative for the model families but do not constitute datasheets for the specific simulation outputs used"
+          }
+        }
+      ],
+      "element_score": 3,
+      "element_max": 5
+    }
+  ],
+  "semantic_findings": {
+    "format_failures": [
+      {
+        "field": "considerations (bias_model, bias_output)",
+        "issue": "Bias fields absent despite limitations documenting geographic bias in polar regions"
+      },
+      {
+        "field": "model_parameters.data[].sensitive.sensitive_data_used",
+        "issue": "Sensitive-data flag is omitted on all 3 dataset entries; should be explicitly set (likely false) rather than absent"
+      },
+      {
+        "field": "model_details.citations[] and references[]",
+        "issue": "No DOI provided for SC24 paper or ClimateNet-v1 reference; no arXiv ID either"
+      },
+      {
+        "field": "model_parameters.data[].link",
+        "issue": "Links point to climate-model homepages rather than to datasheets (D4D) or dataset-specific records"
+      },
+      {
+        "field": "model_details.citations[].citation",
+        "issue": "Citation provided in IEEE narrative style only; no BibTeX entry for machine ingestion"
+      },
+      {
+        "field": "base_model (top-level)",
+        "issue": "Base model (ResNet-50 ImageNet pretrained) described in prose but top-level base_model slot is not populated"
+      }
+    ],
+    "consistency_failures": [
+      {
+        "rule": "training_procedure.description vs reproducibility_info.hyperparameters.optimizer",
+        "issue": "Narrative description says 'standard SGD optimization' but hyperparameters specify 'AdamW' — internal contradiction"
+      },
+      {
+        "rule": "version.diff vs model_parameters.data[]",
+        "issue": "version.diff claims training on 12 climate models but only 3 are enumerated in model_parameters.data"
+      },
+      {
+        "rule": "input_format vs code_examples",
+        "issue": "input_format describes (768, 768, 16) channels-last layout while code example uses (16, 768, 768) channels-first PyTorch convention"
+      },
+      {
+        "rule": "limitations[polar bias] vs bias_model / quantitative_analysis slices",
+        "issue": "Geographic bias documented in limitations but not reflected in structured bias_* fields nor in per-region performance slices"
+      },
+      {
+        "rule": "training data vs evaluation benchmark models",
+        "issue": "E3SM v2 and MPAS-A appear in both training data and evaluation test set (split is by simulation year, which is legitimate but only GFDL CM4 represents a fully held-out model family)"
+      }
+    ],
+    "plausibility_failures": [
+      {
+        "field": "model_details.contributors[].orcid",
+        "issue": "ORCIDs 0000-0002-1234-5678 and 0000-0003-9876-5432 look like sequential placeholder IDs rather than registered real-person ORCIDs (acceptable in an example card but flagged for production use)"
+      }
+    ]
+  },
+  "assessment": {
+    "strengths": [
+      "Exceptional architecture documentation with layer-by-layer breakdown and 38.5M parameter count",
+      "Comprehensive compute infrastructure reporting: NERSC Perlmutter, 256 A100 GPUs, 32,768 GPU-hours with full hardware/software specs",
+      "Complete reproducibility artifacts: seed, hyperparameters, environment.yml reference, training script URL, SLURM configuration",
+      "Strong performance reporting with confidence intervals via bootstrap (10,000 iterations) across 5 metrics; all CI bounds correctly bracket the point estimates",
+      "Excellent provenance: 4 contributors with CRediT roles, ORCIDs, affiliations; version 2.0.0 with detailed diff",
+      "Clear DOE mission alignment with project name, facility, real funding source (BER grant DE-AC02-05CH11231 is LBNL's actual prime contract), and impact areas",
+      "Outstanding usage documentation: 3 complete code examples (basic inference, evaluation, batch processing), installation via conda/Docker/NERSC module, wget-able checkpoint",
+      "Explicit out-of-scope uses: real-time forecasting, satellite application, climate attribution",
+      "All quantitative metrics fall within plausible ranges (IoU in [0,1], CI bounds well-ordered)"
+    ],
+    "weaknesses": [
+      "Missing bias_model / bias_output formal disclosure despite limitations explicitly mentioning polar-region degradation",
+      "No sensitive_data_used field populated (likely N/A for climate model output but should be explicit)",
+      "No DOI provided for the SC24 paper or model itself (reduces cross-platform discoverability)",
+      "Dataset links point to model framework pages (CAM, E3SM, MPAS) but not to formal datasheets or registry entries",
+      "Narrative description of training contradicts structured hyperparameters (SGD vs AdamW)",
+      "version.diff says '12 climate models' but only 3 are enumerated in model_parameters.data",
+      "Input tensor layout in spec (HWC) does not match layout used in code example (CHW)"
+    ],
+    "semantic_concerns": [
+      "Train/test overlap at the model-family level: E3SM v2 and MPAS-A appear in both training and evaluation; only GFDL CM4 is a fully held-out model. Time-based split is legitimate but the card should be more explicit that within-model temporal holdout is being conflated with cross-model generalization",
+      "Geographic bias (polar regions >70°) documented in prose limitations but not surfaced in bias_model / bias_output structured fields nor as a performance slice — fairness assessment is incomplete",
+      "Optimizer inconsistency between training_procedure.description ('standard SGD') and reproducibility_info.hyperparameters.optimizer ('AdamW') would mislead a reproducer reading only the narrative",
+      "ORCID values appear to be sequential placeholders rather than real registered IDs (consistent with this being an example template card)"
+    ],
+    "recommendations": [
+      "Add bias_model disclosure: 'Geographic bias: Performance degrades in polar regions (>70° latitude) due to limited training data at high latitudes. IoU drops by ~X% for events above 70°N/S.'",
+      "Populate sensitive.sensitive_data_used=false for each dataset in model_parameters.data to explicitly confirm no sensitive data",
+      "Register model on Zenodo or similar to obtain a DOI; add to model_details.references",
+      "Add DOI (10.1109/...) to SC24 paper citation once published",
+      "Create or link to datasheets for the 3 climate model datasets (CAM5.1, E3SM v2, MPAS-A) following D4D template; consider migrating to the d4dharmonized schema variant",
+      "Reconcile training_procedure.description (currently says 'SGD optimization') with hyperparameters.optimizer='AdamW' — replace 'SGD' with 'AdamW-based gradient descent' in the prose",
+      "Resolve discrepancy between version.diff (12 climate models) and enumerated model_parameters.data (3 entries) — either expand data[] or correct the diff text",
+      "Align input_format declared layout (HWC) with the layout actually used in code_examples (CHW)",
+      "Add a per-region (e.g. polar / mid-latitude / tropical) performance slice to quantitative_analysis.performance_metrics to make the documented geographic bias quantitatively visible",
+      "Add a fairness-related tradeoff entry (accuracy vs geographic coverage) to considerations.tradeoffs",
+      "Replace placeholder ORCIDs with real registered IDs before non-example deployment",
+      "Add a BibTeX-formatted entry alongside the IEEE-style citation to support automated reference managers",
+      "Populate the top-level base_model field with the ResNet-50 ImageNet checkpoint reference for explicit lineage tracking"
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "rubric10-semantic-v1.0-20260615",
+    "rubric_hash": "sha256:placeholder",
+    "model_card_hash": "sha256:placeholder"
+  }
+}

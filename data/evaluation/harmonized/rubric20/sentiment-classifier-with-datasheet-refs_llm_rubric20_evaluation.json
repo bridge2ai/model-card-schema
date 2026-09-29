@@ -1,0 +1,277 @@
+{
+  "rubric": "mc_rubric20",
+  "version": "1.0",
+  "model_card_file": "src/data/examples/harmonized/sentiment-classifier-with-datasheet-refs.yaml",
+  "model": "BERT Sentiment Classifier v1.2",
+  "method": "harmonized_d4d_external_reference",
+  "evaluation_timestamp": "2026-06-16T02:08:44Z",
+  "evaluator": {
+    "name": "claude-sonnet-4-5-20250929",
+    "temperature": 0.0,
+    "evaluation_type": "llm_as_judge"
+  },
+  "overall_score": {
+    "total_points": 59,
+    "max_points": 84,
+    "percentage": 70.2
+  },
+  "categories": [
+    {
+      "name": "Structural Completeness",
+      "category_score": 21,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 1,
+          "name": "Required Field Completeness",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "All 5 populated",
+          "evidence": "model_details.name='BERT Sentiment Classifier v1.2'; overview populated; licenses=[{identifier:'Apache-2.0'}]; version.name='1.2.0'; model_architecture describes BERT-base with 12 layers, 768 hidden dims, classification head",
+          "quality_note": "All five required fields present with concrete, non-trivial content."
+        },
+        {
+          "id": 2,
+          "name": "Overview Length Adequacy",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">500 chars with meaningful structure",
+          "evidence": "overview (~130 chars) plus documentation block describing architecture and fine-tuning purpose; combined narrative across overview + documentation exceeds 500 chars",
+          "quality_note": "Two narrative fields together provide adequate context including architecture and task framing."
+        },
+        {
+          "id": 3,
+          "name": "Tag / Keyword Diversity",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">=4 tags AND pipeline_tag AND language",
+          "evidence": "tags: ['sentiment-analysis','bert','pytorch','transformers','text-classification','movie-reviews'] (6); pipeline_tag='text-classification'; model_language=['en']",
+          "quality_note": "Six tags, pipeline_tag, and language all present."
+        },
+        {
+          "id": 4,
+          "name": "Input / Output Specification",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Both formats + both maps populated",
+          "evidence": "input_format prose + input_format_map [{text:string},{max_length:1024}]; output_format prose + output_format_map [{predicted_class:integer},{probabilities:array[2] float},{confidence:float}]",
+          "quality_note": "Comprehensive shape/type spec with structured maps."
+        },
+        {
+          "id": 5,
+          "name": "Schema Version Declared",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "schema_version: '0.0.2'",
+          "quality_note": "Recognizable MCT-style version string."
+        }
+      ]
+    },
+    {
+      "name": "Metadata Quality & Content",
+      "category_score": 12,
+      "category_max": 21,
+      "questions": [
+        {
+          "id": 6,
+          "name": "Persistent Identifier Present",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include 'https://arxiv.org/abs/1810.04805' (arXiv ID); base_model='bert-base-uncased' (HuggingFace Hub resolvable)",
+          "quality_note": "arXiv reference and HF base_model both qualify as persistent identifiers."
+        },
+        {
+          "id": 7,
+          "name": "Funding & Acknowledgements Completeness",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No funding/acknowledgement mention",
+          "evidence": "owners list ML Research Team and Jane Smith with contact emails only; no funding agency, grant ID, or compute facility acknowledged anywhere in the card",
+          "quality_note": "Funding and acknowledgement information is entirely absent."
+        },
+        {
+          "id": 8,
+          "name": "Ethical & Responsible-AI Documentation",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Ethics present, no explicit bias_* / out_of_scope fields",
+          "evidence": "considerations.ethical_considerations covers 'Bias in training data' and 'Potential for misuse in censorship' with mitigation strategies; bias_model/bias_output/bias_input fields not used; out_of_scope_uses field absent (limitations field used instead)",
+          "quality_note": "Ethical considerations are concrete and include mitigations, but the rubric's explicit bias_* and out_of_scope_uses slots are not populated."
+        },
+        {
+          "id": 9,
+          "name": "License Clarity & SPDX Compliance",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "SPDX identifier without explicit restriction statement",
+          "evidence": "licenses: [{identifier: 'Apache-2.0'}]",
+          "quality_note": "Valid SPDX identifier; no custom_text or explicit restriction statement to reach a perfect 5."
+        },
+        {
+          "id": 10,
+          "name": "Framework / Library Standardization",
+          "score_type": "numeric",
+          "score": 4,
+          "max_score": 5,
+          "score_label": "Framework + version + library_name + PwC-shape model_index",
+          "evidence": "framework='PyTorch'; framework_version='2.0.1'; library_name='transformers'; model_index has Papers-with-Code structure (task, dataset, metrics, source)",
+          "quality_note": "All four signals present and consistent; transformers library version is not pinned separately, kept at 4."
+        }
+      ]
+    },
+    {
+      "name": "Technical Documentation",
+      "category_score": 13,
+      "category_max": 25,
+      "questions": [
+        {
+          "id": 11,
+          "name": "Tool & Software Transparency",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Tools named; not comprehensive",
+          "evidence": "framework='PyTorch', framework_version='2.0.1', library_name='transformers'; deployment_info.container_image='example-org/bert-sentiment:1.2.0'; no Dockerfile reference, no usage_documentation.code_examples, no pinned dependency lockfile",
+          "quality_note": "Several tools and a container image are listed, but reproducibility-relevant pinning (lockfile, full env) is missing."
+        },
+        {
+          "id": 12,
+          "name": "Training Procedure Clarity",
+          "score_type": "numeric",
+          "score": 0,
+          "max_score": 5,
+          "score_label": "No training procedure",
+          "evidence": "model_parameters.training_procedure field is absent; no optimizer, learning rate, batch size, epochs, or schedule disclosed anywhere",
+          "quality_note": "Training procedure is entirely omitted in this harmonized card."
+        },
+        {
+          "id": 13,
+          "name": "Version History Documentation",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": "Semver name + ISO date + non-trivial diff",
+          "evidence": "version.name='1.2.0'; version.date='2025-11-20'; version.diff lists three concrete changes (accuracy improvement, longer sequences, negation bias fix)",
+          "quality_note": "All three version sub-fields populated with meaningful, model-specific content."
+        },
+        {
+          "id": 14,
+          "name": "Citations & References",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "One citation + multiple references",
+          "evidence": "citations: 1 APA citation; references: arxiv.org/abs/1810.04805 and example.org/models/bert-sentiment",
+          "quality_note": "A single APA citation and two references; no BibTeX, only one external citation."
+        },
+        {
+          "id": 15,
+          "name": "Compute Infrastructure & Energy",
+          "score_type": "numeric",
+          "score": 2,
+          "max_score": 5,
+          "score_label": "Inference hardware listed only; no training compute, no energy",
+          "evidence": "model_parameters.compute_infrastructure absent; deployment_info.hardware_requirements (4GB RAM, NVIDIA T4, ~50ms latency) describes inference only; no training GPU-hours, FLOPs, or energy/carbon estimate",
+          "quality_note": "Some inference-side hardware notes exist, but the required compute_infrastructure section and training-compute/energy reporting are absent."
+        }
+      ]
+    },
+    {
+      "name": "Performance & FAIRness",
+      "category_score": 13,
+      "category_max": 17,
+      "questions": [
+        {
+          "id": 16,
+          "name": "Findability (Persistent Landing)",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "references include arxiv.org/abs/1810.04805 and example.org/models/bert-sentiment; deployment_info.inference_endpoint also present",
+          "quality_note": "At least one resolvable landing URL provided."
+        },
+        {
+          "id": 17,
+          "name": "Accessibility & Inference Path",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Format specs + endpoint, no runnable code example",
+          "evidence": "input_format/output_format prose + input_format_map/output_format_map; deployment_info.inference_endpoint='https://api.example.org/models/bert-sentiment/predict'; no usage_documentation.code_examples block",
+          "quality_note": "Structured I/O and an API endpoint are documented, but no runnable code snippet or library hook example is provided."
+        },
+        {
+          "id": 18,
+          "name": "Performance Metrics with Slices & CI",
+          "score_type": "numeric",
+          "score": 5,
+          "max_score": 5,
+          "score_label": ">=2 metrics, >=2 slices, CI on at least one",
+          "evidence": "5 metrics: accuracy=0.92 (CI [0.91,0.93]) on test_set; f1=0.91 on test_set_positive; f1=0.93 on test_set_negative; precision=0.90 on test_set_positive; recall=0.94 on test_set_positive; 3 distinct slices",
+          "quality_note": "Multiple metrics across multiple slices, with a confidence interval on accuracy."
+        },
+        {
+          "id": 19,
+          "name": "Out-of-Scope Uses, Limitations & Tradeoffs",
+          "score_type": "numeric",
+          "score": 3,
+          "max_score": 5,
+          "score_label": "Limitations + tradeoffs populated; out_of_scope_uses absent",
+          "evidence": "considerations.limitations: 4 concrete entries (sarcasm, domain shift, English-only, 1024-token cap); considerations.tradeoffs: accuracy vs. speed discussion with DistilBERT alternative; considerations.out_of_scope_uses field not used",
+          "quality_note": "Two of three target fields are populated with concrete, model-specific content; the explicit out_of_scope_uses slot is missing."
+        },
+        {
+          "id": 20,
+          "name": "Cross-Platform Interlinks",
+          "score_type": "pass_fail",
+          "score": 1,
+          "max_score": 1,
+          "score_label": "Pass",
+          "evidence": "model_index in Papers-with-Code shape; base_model='bert-base-uncased' (HF Hub link); dataset_documentation.training_datasets points to D4D datasheet URLs (imdb-sentiment-v1, sst2-v1) with datasheet_doi='10.18653/v1/P11-1015'",
+          "quality_note": "Multiple cross-platform interlinks verified: base_model, PwC model_index, and external D4D datasheet references."
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "strengths": [
+      "Complete structural completeness across all five Q1-Q5 items (21/21).",
+      "Strong cross-platform interlinking via base_model, PwC model_index, and external D4D datasheet references aligned with the harmonized pattern.",
+      "Performance reporting includes 5 metrics across 3 slices with a confidence interval on accuracy.",
+      "Version history is exemplary: semver, ISO date, and a concrete change diff.",
+      "Structured input/output format maps in addition to prose."
+    ],
+    "weaknesses": [
+      "No training_procedure section at all - no optimizer, LR, batch size, epochs, or schedule.",
+      "No compute_infrastructure or energy/carbon reporting; only inference hardware mentioned.",
+      "No funding or acknowledgements information.",
+      "considerations.out_of_scope_uses and bias_model/bias_output/bias_input slots are not populated; relevant content is folded into limitations and ethical_considerations.",
+      "No runnable code example under usage_documentation.code_examples."
+    ],
+    "recommendations": [
+      "Add a model_parameters.training_procedure block with optimizer, learning rate, batch size, epochs, scheduler, and regularization to recover Q12 points.",
+      "Add model_parameters.compute_infrastructure with training hardware, GPU-hours or FLOPs, and an energy/carbon estimate.",
+      "Populate considerations.out_of_scope_uses explicitly (e.g., medical, legal, non-English domains) to lift Q8 and Q19.",
+      "Use bias_model/bias_output/bias_input slots to make bias disclosures machine-discoverable, in addition to ethical_considerations narrative.",
+      "Add a usage_documentation.code_examples block (e.g., a minimal transformers pipeline snippet) to reach a 5 on Q17.",
+      "If applicable, record funding source, grant ID, and compute facility under model_details.contributors[].affiliation or mission_relevance."
+    ]
+  },
+  "metadata": {
+    "evaluator_id": "39cab686-183a-4342-9da5-be1d7ed488b8",
+    "rubric_hash": "c81c94a03409d6248286ee69e0affb72d5d1bb6cd4f845d3e2fd9dcfbcba2ae0",
+    "model_card_hash": "a6e1fe2a52c1382b10ae5ebfcff5e946a71c637bf4bad13aa84e0943d656994e"
+  }
+}
