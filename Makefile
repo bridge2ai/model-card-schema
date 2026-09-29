@@ -218,9 +218,11 @@ endif
 # Portfolio: regenerate dashboards + badges from existing eval JSONs
 # =========================================================================
 # Re-renders current dashboards and badges from hash-matching evaluations.
-# Historical JSONs and dashboards remain in place. The remediation's after/
-# results provide current evaluations for DenseNet/SubCell; newer evaluations
-# may be staged under PORTFOLIO_CURRENT_DIR without replacing any archive.
+# Historical JSONs and dashboards remain in place. Current means the stored
+# results matching each card's SHA-256: DenseNet's are in the remediation's
+# after/ folder, and SubCell's in PORTFOLIO_CURRENT_DIR/hf_hub (since the
+# 2026-09-28 split-history audit). Stage newer evaluations under
+# PORTFOLIO_CURRENT_DIR without replacing any archive.
 #
 # **Does NOT re-run the evaluator** — it only renders. To refresh the
 # scoring numbers first, run the evaluator (e.g. `make evaluate-rubric20`

@@ -30,7 +30,7 @@ Every snapshot contains 10,414 train, 1,368 validation and 1,368 test records. D
 
 Equivalence checks compare both ordered records and multisets, after normalizing column names and accounting explicitly for dropped identifiers. They do not compare CSV byte hashes across changed formats.
 
-A separate, short-lived July 10 root `test.csv` has 48 rows, columns `Sequence,label,stage`, and continuous labels such as `10.15988` and `17.5`. It is retained in the source manifest and reported as excluded from ten-class SA comparisons. Its filename does not establish that it is a localization test set; this audit does not assign it another task identity.
+A separate, short-lived 48-row file (git blob `3e6000bf`) appeared on July 10. It has columns `Sequence,label,stage`, stages train 39 / valid 4 / test 5, and continuous labels such as `10.15988` and `17.5`. From 02:06 UTC it sat at root `test.csv`, then also at `train.csv`, `valid.csv` and `validation.csv`. From about 02:20 UTC it sat at `train/train.csv`, `valid/valid.csv` and `test/test.csv`. It was removed from all of them by 04:37 UTC, before the ten-class CSVs were uploaded at 05:48–05:51 UTC. Every path and revision is in the source manifest. The file is excluded from the ten-class SA comparisons. Its filenames do not establish that it is localization data; this audit does not assign it another task identity.
 
 ## Split intersections
 
@@ -45,6 +45,8 @@ SA comparisons use the complete structure-aware strings; AA comparisons take eve
 The 232 shared identifiers have matching labels and SA strings within each historical snapshot and occur in 232 rows of each split (16.96% of validation and of test). Later combined CSVs lack identifiers: their identifier counts are **unknown (`null`), not zero**.
 
 The extra AA-only overlaps have distinct record identifiers: train `P69243` and test `P69242` share a 977-residue AA string with label 6; validation `Q9XH37` and test `Q6K498` share a 277-residue AA string with label 0. These checks establish exact sequence identity, not species or family annotations.
+
+The audit script records every count above, and `shared_ids.csv` lists the 232 shared July identifiers with their labels and sequence hashes. Two statements come from a supplementary check that the script does not yet write out: the named AA-only pairs in the previous paragraph, and per-identifier label and SA agreement in the May snapshots. Both were re-verified independently against the same cached artifacts; issue #58 tracks adding them to `audit.json`.
 
 ## Confidence masking explains the May change
 

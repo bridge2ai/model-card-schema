@@ -93,7 +93,10 @@ each evaluator read the same YAML revision as the presence calculation. It write
 hybrid JSONs, input/evaluator hashes, the detailed CSV and a separate presence figure.
 It does not modify or reuse the supplied heatmap as a new semantic evaluation.
 
-Regenerate only the four current hybrid badges, retaining all archived artifacts:
+Regenerate only the four current hybrid badges, retaining all archived artifacts. Current
+means whichever stored results match each card's SHA-256. Since the SubCell split-history
+audit (2026-09-28), SubCell's current results are in `data/evaluation/current/hf_hub/`,
+not in the remediation's `after/` folder, so select across both:
 
 ```bash
 python - <<'PY'
@@ -103,8 +106,10 @@ from pathlib import Path
 spec = importlib.util.spec_from_file_location('renderer', 'scripts/render_evaluation_html.py')
 renderer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(renderer)
-reports = [json.loads(p.read_text()) for p in sorted(Path('data/evaluation/remediation/2026-09-28/after').glob('*/*.json'))]
-renderer.write_badges(reports, Path('data/evaluation/badges'))
+paths = sorted(Path('data/evaluation/remediation/2026-09-28/after').glob('*/*.json'))
+paths += sorted(Path('data/evaluation/current').glob('*/rubric*/*.json'))
+reports = [json.loads(p.read_text()) for p in paths]
+renderer.write_badges(renderer.select_current_reports(reports), Path('data/evaluation/badges'))
 PY
 python src/html/human_readable_renderer.py data/model_cards_assistant/densenet121_tv_in1k_model_card.yaml data/model_cards_assistant/subcell_saprot_650m_model_card.yaml
 ```
