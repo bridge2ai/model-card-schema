@@ -46,7 +46,7 @@ The 232 shared identifiers have matching labels and SA strings within each histo
 
 The extra AA-only overlaps have distinct record identifiers: train `P69243` and test `P69242` share a 977-residue AA string with label 6; validation `Q9XH37` and test `Q6K498` share a 277-residue AA string with label 0. These checks establish exact sequence identity, not species or family annotations.
 
-The audit script records every count above, and `shared_ids.csv` lists the 232 shared July identifiers with their labels and sequence hashes. Two statements come from a supplementary check that the script does not yet write out: the named AA-only pairs in the previous paragraph, and per-identifier label and SA agreement in the May snapshots. Both were re-verified independently against the same cached artifacts; issue #58 tracks adding them to `audit.json`.
+`audit.json`, written by the audit script, records every snapshot, split and intersection count in the two sections above, and `shared_ids.csv` lists the 232 shared July identifiers with their labels and sequence hashes. The retrieval counts under Scope and evidence (26 dataset commits, 43 source responses) come from `dataset_history.json` and `model_sources.json`. Two statements come from a supplementary check that the script does not yet write out: the named AA-only pairs in the previous paragraph, and per-identifier label and SA agreement in the May snapshots. Both were re-verified independently against the same cached artifacts; issue #58 tracks adding them to `audit.json`.
 
 ## Confidence masking explains the May change
 
